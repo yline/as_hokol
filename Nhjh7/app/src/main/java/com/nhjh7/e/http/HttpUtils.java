@@ -66,7 +66,8 @@ public class HttpUtils
 					int responseCode = httpURLConnection.getResponseCode();
 					LogFileUtil.i(TAG, "doGetAsyn -> responseCode = " + responseCode);
 
-					if (HTTPCONNECT_SUCCESS_CODE == responseCode || responseCode == 201) // 连接成功
+					// responseCode == 201
+					if (HTTPCONNECT_SUCCESS_CODE == responseCode) // 连接成功
 					{
 						bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(), "utf-8"));
 						String line = null;
@@ -177,11 +178,11 @@ public class HttpUtils
 	private static void initHttpConnection(HttpURLConnection connection)
 	{
 		// 用setRequestProperty方法设置多个自定义的请求头:action，用于后端判断
-		connection.setRequestProperty("accept", "*/*");
+		// connection.setRequestProperty("accept", "*/*");
 		connection.setRequestProperty("connection", "Keep-Alive");
-		connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+		connection.setRequestProperty("Content-Type", "application/json");
 		connection.setRequestProperty("charset", "utf-8");
-		connection.setRequestProperty("action", "post");
+		// connection.setRequestProperty("action", "post");
 
 		// 禁用网络缓存
 		connection.setUseCaches(false);

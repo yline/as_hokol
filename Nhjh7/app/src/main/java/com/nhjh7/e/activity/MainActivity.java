@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity
 		String code = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 		LogFileUtil.v("code = " + code);
 
-		final String url = "192.168.0.104/crest/index.php/api/example/users/" + code; // key=
+		// final String url = "192.168.0.104/crest/index.php/api/example/users/" + code; // key=
+		final String url = "120.92.77.154/crest/index.php/api/example/users/N#887a19d10a6601b2";
 
 		findViewById(R.id.btn_request).setOnClickListener(new View.OnClickListener()
 		{
