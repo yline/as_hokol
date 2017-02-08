@@ -6,30 +6,26 @@
     android:layout_height="match_parent">
 
     <!-- 对应MainTitleFragment -->
-    <LinearLayout
-        android:id="@+id/ll_main_title"
-        android:orientation="horizontal"
+    <fragment
+        android:id="@+id/fragment_main_title"
+        android:name="com.hokol.fragment.MainTitleFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true">
-    </LinearLayout>
+        android:layout_height="40dp"/>
 
     <!-- 对应多个Fragment, -->
     <FrameLayout
         android:id="@+id/fl_main_content"
-        android:layout_below="@+id/ll_main_title"
-        android:layout_above="@+id/ll_main_tab"
+        android:layout_below="@+id/fragment_main_title"
+        android:layout_above="@+id/fragment_main_tab"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </FrameLayout>
 
     <!-- 对应MainTabFragment -->
-    <LinearLayout
-        android:id="@+id/ll_main_tab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_main_tab"
+    <fragment
+        android:id="@+id/fragment_main_tab"
+        android:name="com.hokol.fragment.MainTabFragment"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
-    </LinearLayout>
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
 </RelativeLayout>

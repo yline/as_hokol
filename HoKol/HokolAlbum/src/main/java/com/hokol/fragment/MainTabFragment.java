@@ -139,6 +139,10 @@ public class MainTabFragment extends BaseFragment
 
 	public interface OnTabClickListener
 	{
+		/**
+		 * tab点击回调
+		 * @param position 点击的位置
+		 */
 		void onTabClick(int position);
 	}
 }

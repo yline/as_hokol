@@ -6,4 +6,8 @@
 
 2，Activity作用
 WelcomeActivity --> 首个进入界面
-MainActivity --> 主要的界面,包含(MainTabFragment[底部栏]、MainTitleFragment[标题栏])
+MainActivity --> 主要的界面,
+包含(MainTabFragment[底部栏]、MainTitleFragment[标题栏]、MainNewsFragment[新闻][关注][首页][联系][我])
+
+3,二级Fragment分布
+MainNewsFragment --> 新闻界面,包含(NewsTitleFragment[二级小新闻])
