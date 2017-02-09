@@ -4,38 +4,51 @@
     android:layout_width="match_parent"
     android:layout_height="30dp"
     android:background="@android:color/holo_red_light"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/ll_news_one"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
 
-        <TextView
-            android:id="@+id/tv_news_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textColor="@android:color/white"/>
+        <LinearLayout
+            android:id="@+id/ll_news_one"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_news_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_news_two"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_news_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_news_two"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_news_two"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textColor="@android:color/white"/>
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/iv_news_line"
+        android:layout_width="80dp"
+        android:layout_height="3dp"
+        android:background="@android:color/white"/>
 
 </LinearLayout>

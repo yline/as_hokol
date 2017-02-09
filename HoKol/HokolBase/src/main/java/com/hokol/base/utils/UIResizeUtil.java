@@ -1,304 +1,356 @@
 package com.hokol.base.utils;
 
-import android.content.Context;
-import android.graphics.Point;
-import android.os.Build;
-import android.util.DisplayMetrics;
-import android.view.Display;
+import android.util.SparseArray;
 import android.view.View;
-import android.view.WindowManager;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.Gallery;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.hokol.base.application.BaseApplication;
 import com.hokol.base.log.LogFileUtil;
 
-import java.lang.reflect.InvocationTargetException;
-
 /**
  * 调整 UI 视图大小, 选择那个方法依据的是 其对应的上一层框体
- * 比例为系统参数
+ * 1,采用连缀的写法
+ * 2,默认自动适配传入的View的父布局
+ * 3,使用Apply作为结束方法
+ * 4,默认适配宽度,不适配高度【都是按照设计比例适配】
+ * @author yline 2017/2/9 --> 18:39
+ * @version 1.0.0
  */
 public class UIResizeUtil
 {
-	public static final int designWidth = 640; // 设计图宽度
+	// key of array
+	private static final int WIDTH = 0;
 
-	private static int AppWidth = 0; // 宽度适配
+	private static final int HEIGHT = 1;
 
-	// private static int AppHeight = 0;	// 高度适配
+	private static final int LEFT_MARGIN = 2;
 
-	public UIResizeUtil()
+	private static final int RIGHT_MARGIN = 3;
+
+	private static final int TOP_MARGIN = 4;
+
+	private static final int BOTTOM_MARGIN = 5;
+
+	// type of parent view
+	private static final int LINEAR_LAYOUT = 10;
+
+	private static final int FRAME_LAYOUT = 11;
+
+	private static final int RELATIVE_LAYOUT = 12;
+
+	private static final int GALLERY_LAYOUT = 13;
+
+	private static final int OTHERS_LAYOUT = 14;
+
+	// 设计图 宽度和高度
+	private static final int designWidth = 720; // 设计图宽度
+
+	private static final int designHeight = 1080; // 设计图高度
+
+	private static int appWidth = 0; // 宽度适配
+
+	private static int appHeight = 0;    // 高度适配
+
+	private static boolean isWidthAdapter = true;
+
+	private static boolean isHeightAdapter = false;
+
+	private static SparseArray<Integer> array = new SparseArray<>();
+
+	private UIResizeUtil()
 	{
 		/** 实例化失败 */
-		throw new UnsupportedOperationException("cannot be instantiated");
+		// throw new UnsupportedOperationException("cannot be instantiated");
 	}
 
-	public static void setLayout(View view, int width, int height)
+	public static UIResizeUtil build()
 	{
-		if (view.getParent() instanceof FrameLayout)
+		UIResizeUtil util = UIResizeHold.sInstance;
+		array.clear();
+		isWidthAdapter = true;
+		isHeightAdapter = false;
+		return util;
+	}
+
+	private static class UIResizeHold
+	{
+		private final static UIResizeUtil sInstance = new UIResizeUtil();
+	}
+
+	public UIResizeUtil setIsWidthAdapter(boolean isWidthAdapter)
+	{
+		UIResizeUtil.isWidthAdapter = isWidthAdapter;
+		return this;
+	}
+
+	public UIResizeUtil setIsHeightAdapter(boolean isHeightAdapter)
+	{
+		UIResizeUtil.isHeightAdapter = isHeightAdapter;
+		return this;
+	}
+
+	public UIResizeUtil setWidth(int value)
+	{
+		array.put(WIDTH, value);
+		return this;
+	}
+
+	public UIResizeUtil setHeight(int value)
+	{
+		array.put(HEIGHT, value);
+		return this;
+	}
+
+	public UIResizeUtil setLeftMargin(int value)
+	{
+		array.put(LEFT_MARGIN, value);
+		return this;
+	}
+
+	public UIResizeUtil setRightMargin(int value)
+	{
+		array.put(RIGHT_MARGIN, value);
+		return this;
+	}
+
+	public UIResizeUtil setTopMargin(int value)
+	{
+		array.put(TOP_MARGIN, value);
+		return this;
+	}
+
+	public UIResizeUtil setBottomMargin(int value)
+	{
+		array.put(BOTTOM_MARGIN, value);
+		return this;
+	}
+
+	/**
+	 * 实现 view 控制
+	 * @param view
+	 */
+	public void commit(View view)
+	{
+		if (null != view)
 		{
-			setFrame(view, width, height);
-		}
-		else if (view.getParent() instanceof LinearLayout)
-		{
-			setLinear(view, width, height);
-		}
-		else if (view.getParent() instanceof RelativeLayout)
-		{
-			setRelative(view, width, height);
-		}
-		else
-		{
-			LogFileUtil.e(BaseApplication.TAG, "UILayoutUtils -> setLayoutAll parent window error");
+			ViewGroup.LayoutParams param = view.getLayoutParams();
+
+			// 配置 type 和 param
+			int type;
+			if (view.getParent() instanceof FrameLayout)
+			{
+				type = FRAME_LAYOUT;
+				if (null == param)
+				{
+					param = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+				}
+			}
+			else if (view.getParent() instanceof LinearLayout) // RadioGroup
+			{
+				type = LINEAR_LAYOUT;
+				if (null == param)
+				{
+					param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+				}
+			}
+			else if (view.getParent() instanceof RelativeLayout)
+			{
+				type = RELATIVE_LAYOUT;
+				if (null == param)
+				{
+					param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+				}
+			}
+			else if (view.getParent() instanceof Gallery.LayoutParams)
+			{
+				type = GALLERY_LAYOUT;
+				if (null == param)
+				{
+					param = new Gallery.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+				}
+			}
+			else // ViewGroup, Gallery
+			{
+				LogFileUtil.e(BaseApplication.TAG, "UILayoutUtils -> setLayoutAll parent window error");
+				type = OTHERS_LAYOUT;
+				if (null == param)
+				{
+					param = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+				}
+			}
+
+			apply(view, param, type);
 		}
 	}
 
-	public static void setMargin(View view, int top, int bottom, int left, int right)
+	private void apply(View view, ViewGroup.LayoutParams param, int type)
 	{
-		if (view.getParent() instanceof FrameLayout)
+		// 设置值
+		for (int i = 0; i < array.size(); i++)
 		{
-			setFrameMargin(view, top, bottom, left, right);
+			switch (array.keyAt(i))
+			{
+				case WIDTH:
+					setWidth(param, array.get(WIDTH));
+					break;
+				case HEIGHT:
+					setHeight(param, array.get(HEIGHT));
+					break;
+				case LEFT_MARGIN:
+					setLeftMargin(type, param, array.get(LEFT_MARGIN));
+					break;
+				case RIGHT_MARGIN:
+					setRightMargin(type, param, array.get(RIGHT_MARGIN));
+					break;
+				case TOP_MARGIN:
+					setTopMargin(type, param, array.get(TOP_MARGIN));
+					break;
+				case BOTTOM_MARGIN:
+					setBottomMargin(type, param, array.get(BOTTOM_MARGIN));
+					break;
+			}
 		}
-		else if (view.getParent() instanceof LinearLayout)
+
+		view.setLayoutParams(param);
+	}
+
+	private void setWidth(ViewGroup.LayoutParams param, int value)
+	{
+		if (isWidthAdapter)
 		{
-			setLinearMargin(view, top, bottom, left, right);
+			value = value * getAppWidth() / designWidth;
 		}
-		else if (view.getParent() instanceof RelativeLayout)
+		param.width = value;
+	}
+
+	private void setHeight(ViewGroup.LayoutParams param, int value)
+	{
+		if (isHeightAdapter)
 		{
-			setRelativeMargin(view, top, bottom, left, right);
+			value = value * getAppHeight() / designHeight;
 		}
-		else
+		param.height = value;
+	}
+
+	private void setLeftMargin(int type, ViewGroup.LayoutParams param, int value)
+	{
+		if (isWidthAdapter)
 		{
-			LogFileUtil.e(BaseApplication.TAG, "UILayoutUtils -> setMarginAll parent window error");
+			value = value * getAppWidth() / designWidth;
+		}
+
+		switch (type)
+		{
+			case FRAME_LAYOUT:
+				((FrameLayout.LayoutParams) param).leftMargin = value;
+				break;
+			case LINEAR_LAYOUT:
+				((LinearLayout.LayoutParams) param).leftMargin = value;
+				break;
+			case RELATIVE_LAYOUT:
+				((RelativeLayout.LayoutParams) param).leftMargin = value;
+				break;
 		}
 	}
 
-	public static void setLinear(View view, int width, int height)
+	private void setRightMargin(int type, ViewGroup.LayoutParams param, int value)
 	{
-		LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) view.getLayoutParams();
-
-		if (null == lp)
+		if (isWidthAdapter)
 		{
-			lp = new LinearLayout.LayoutParams(1, 1);
+			value = value * getAppWidth() / designWidth;
 		}
 
-		lp.width = width * getAppWidth() / designWidth;
-		lp.height = height * getAppWidth() / designWidth;
-
-		view.setLayoutParams(lp);
+		switch (type)
+		{
+			case FRAME_LAYOUT:
+				((FrameLayout.LayoutParams) param).rightMargin = value;
+				break;
+			case LINEAR_LAYOUT:
+				((LinearLayout.LayoutParams) param).rightMargin = value;
+				break;
+			case RELATIVE_LAYOUT:
+				((RelativeLayout.LayoutParams) param).rightMargin = value;
+				break;
+		}
 	}
 
-	public static void setLinearMargin(View view, int top, int bottom, int left, int right)
+	private void setTopMargin(int type, ViewGroup.LayoutParams param, int value)
 	{
-		LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) view.getLayoutParams();
-
-		if (null == lp)
+		if (isHeightAdapter)
 		{
-			LogFileUtil.e(BaseApplication.TAG, "UILayoutUtils -> setLinearMargin lp is null");
-			return;
+			value = value * getAppHeight() / designHeight;
 		}
 
-		lp.topMargin = top * getAppWidth() / designWidth;
-		lp.bottomMargin = bottom * getAppWidth() / designWidth;
-		lp.leftMargin = left * getAppWidth() / designWidth;
-		lp.rightMargin = right * getAppWidth() / designWidth;
-
-		view.setLayoutParams(lp);
+		switch (type)
+		{
+			case FRAME_LAYOUT:
+				((FrameLayout.LayoutParams) param).topMargin = value;
+				break;
+			case LINEAR_LAYOUT:
+				((LinearLayout.LayoutParams) param).topMargin = value;
+				break;
+			case RELATIVE_LAYOUT:
+				((RelativeLayout.LayoutParams) param).topMargin = value;
+				break;
+		}
 	}
 
-	public static void setRelative(View view, int width, int height)
+	private void setBottomMargin(int type, ViewGroup.LayoutParams param, int value)
 	{
-		RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) view.getLayoutParams();
-
-		if (null == lp)
+		if (isHeightAdapter)
 		{
-			lp = new RelativeLayout.LayoutParams(1, 1);
+			value = value * getAppHeight() / designHeight;
 		}
 
-		lp.width = width * getAppWidth() / designWidth;
-		lp.height = height * getAppWidth() / designWidth;
-
-		view.setLayoutParams(lp);
+		switch (type)
+		{
+			case FRAME_LAYOUT:
+				((FrameLayout.LayoutParams) param).bottomMargin = value;
+				break;
+			case LINEAR_LAYOUT:
+				((LinearLayout.LayoutParams) param).bottomMargin = value;
+				break;
+			case RELATIVE_LAYOUT:
+				((RelativeLayout.LayoutParams) param).bottomMargin = value;
+				break;
+		}
 	}
 
-	public static void setRelativeMargin(View view, int top, int bottom, int left, int right)
+	public static int getDesignHeight()
 	{
-		RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) view.getLayoutParams();
-
-		if (null == lp)
-		{
-			LogFileUtil.e(BaseApplication.TAG, "UILayoutUtils -> setRelativeMargin lp is null");
-			return;
-		}
-
-		lp.topMargin = top * getAppWidth() / designWidth;
-		lp.bottomMargin = bottom * getAppWidth() / designWidth;
-		lp.leftMargin = left * getAppWidth() / designWidth;
-		lp.rightMargin = right * getAppWidth() / designWidth;
-
-		view.setLayoutParams(lp);
+		return designHeight;
 	}
 
-	public static void setFrame(View view, int width, int height)
+	public static int getDesignWidth()
 	{
-		FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) view.getLayoutParams();
-
-		if (null == lp)
-		{
-			lp = new FrameLayout.LayoutParams(1, 1);
-		}
-
-		lp.width = width * getAppWidth() / designWidth;
-		lp.height = height * getAppWidth() / designWidth;
-
-		view.setLayoutParams(lp);
-	}
-
-	public static void setFrameMargin(View view, int top, int bottom, int left, int right)
-	{
-		FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) view.getLayoutParams();
-
-		if (null == lp)
-		{
-			LogFileUtil.e(BaseApplication.TAG, "UILayoutUtils -> setFrameMargin lp is null");
-			return;
-		}
-
-		lp.topMargin = top * getAppWidth() / designWidth;
-		lp.bottomMargin = bottom * getAppWidth() / designWidth;
-		lp.leftMargin = left * getAppWidth() / designWidth;
-		lp.rightMargin = right * getAppWidth() / designWidth;
-
-		view.setLayoutParams(lp);
-	}
-
-	public static void setViewGroup(View view, int width, int height)
-	{
-		android.view.ViewGroup.LayoutParams lp = view.getLayoutParams();
-
-		if (null == lp)
-		{
-			lp = new android.view.ViewGroup.LayoutParams(1, 1);
-		}
-
-		lp.width = width * getAppWidth() / designWidth;
-		lp.height = height * getAppWidth() / designWidth;
-
-		view.setLayoutParams(lp);
-	}
-
-	public static void setRadioGroup(View view, int width, int height)
-	{
-		android.widget.RadioGroup.LayoutParams lp = (android.widget.RadioGroup.LayoutParams) view.getLayoutParams();
-
-		if (null == lp)
-		{
-			lp = new android.widget.RadioGroup.LayoutParams(1, 1);
-		}
-
-		lp.width = width * getAppWidth() / designWidth;
-		lp.height = height * getAppWidth() / designWidth;
-
-		view.setLayoutParams(lp);
-	}
-
-	@SuppressWarnings("deprecation")
-	public static void setGallery(View view, int width, int height)
-	{
-		android.widget.Gallery.LayoutParams lp = (android.widget.Gallery.LayoutParams) view.getLayoutParams();
-
-		if (null == lp)
-		{
-			lp = new android.widget.Gallery.LayoutParams(1, 1);
-		}
-
-		lp.width = width * getAppWidth() / designWidth;
-		lp.height = height * getAppWidth() / designWidth;
-
-		view.setLayoutParams(lp);
+		return designWidth;
 	}
 
 	/**
 	 * 获取屏幕宽度,策略为先从缓存中获取
 	 * @return
 	 */
-	private static int getAppWidth()
+	public int getAppWidth()
 	{
-		if (AppWidth == 0)
+		if (appWidth == 0)
 		{
-			AppWidth = getAbsoluteScreenWidth(BaseApplication.getApplication());
-			LogFileUtil.i(BaseApplication.TAG, "UIResizeUtils -> getAppWidth width = " + AppWidth);
+			appWidth = ScreenUtil.getAbsoluteScreenWidth(BaseApplication.getApplication());
+			LogFileUtil.i(BaseApplication.TAG, "UIResizeUtils -> getAppWidth width = " + appWidth);
 		}
-		return AppWidth;
+		return appWidth;
 	}
 
-	/**
-	 * 获取当前屏幕的绝对宽度,(排除状态栏、底部栏、横竖屏等因素)
-	 * @return
-	 */
-	public static int getAbsoluteScreenWidth(Context context)
+	public int getAppHeight()
 	{
-		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-		Display display = wm.getDefaultDisplay();
-		DisplayMetrics displayMetrics = new DisplayMetrics();
-		int widthPixels = displayMetrics.widthPixels;
-		int heightPixels = displayMetrics.heightPixels;
-
-		// includes window decorations (statusbar bar/menu bar)
-		if (Build.VERSION.SDK_INT >= 14 && Build.VERSION.SDK_INT < 17)
+		if (0 == appHeight)
 		{
-			try
-			{
-				widthPixels = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
-				heightPixels = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
-			}
-			catch (IllegalAccessException e)
-			{
-				LogFileUtil.e(BaseApplication.TAG, "UIResizeUtil getAbsoluteScreenWidth<17 IllegalAccessException", e);
-			}
-			catch (IllegalArgumentException e)
-			{
-				LogFileUtil.e(BaseApplication.TAG, "UIResizeUtil getAbsoluteScreenWidth<17 IllegalArgumentException", e);
-			}
-			catch (InvocationTargetException e)
-			{
-				LogFileUtil.e(BaseApplication.TAG, "UIResizeUtil getAbsoluteScreenWidth<17 InvocationTargetException", e);
-			}
-			catch (NoSuchMethodException e)
-			{
-				LogFileUtil.e(BaseApplication.TAG, "UIResizeUtil getAbsoluteScreenWidth<17 NoSuchMethodException", e);
-			}
+			appHeight = ScreenUtil.getAbsoluteScreenHeight(BaseApplication.getApplication());
+			LogFileUtil.i(BaseApplication.TAG, "UIResizeUtils -> getAppHeight height = " + appHeight);
 		}
-
-		// includes window decorations (statusbar bar/menu bar)
-		if (Build.VERSION.SDK_INT >= 17)
-		{
-			try
-			{
-				Point realSize = new Point();
-				Display.class.getMethod("getRealSize", Point.class).invoke(display, realSize);
-				widthPixels = realSize.x;
-				heightPixels = realSize.y;
-			}
-			catch (IllegalAccessException e)
-			{
-				LogFileUtil.e(BaseApplication.TAG, "UIResizeUtil getAbsoluteScreenWidth>=17 IllegalAccessException", e);
-			}
-			catch (IllegalArgumentException e)
-			{
-				LogFileUtil.e(BaseApplication.TAG, "UIResizeUtil getAbsoluteScreenWidth>=17 IllegalArgumentException", e);
-			}
-			catch (InvocationTargetException e)
-			{
-				LogFileUtil.e(BaseApplication.TAG, "UIResizeUtil getAbsoluteScreenWidth>=17 InvocationTargetException", e);
-			}
-			catch (NoSuchMethodException e)
-			{
-				LogFileUtil.e(BaseApplication.TAG, "UIResizeUtil getAbsoluteScreenWidth>=17 NoSuchMethodException", e);
-			}
-		}
-
-		return Math.min(widthPixels, heightPixels);
+		return appHeight;
 	}
 }

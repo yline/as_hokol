@@ -2,9 +2,11 @@ package com.hokol.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.hokol.R;
 import com.hokol.base.common.BaseAppCompatActivity;
+import com.hokol.base.utils.UIResizeUtil;
 
 /**
  * 首个欢迎界面
@@ -13,6 +15,8 @@ import com.hokol.base.common.BaseAppCompatActivity;
  */
 public class WelcomeActivity extends BaseAppCompatActivity
 {
+	private Button btnActionMain;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -24,7 +28,8 @@ public class WelcomeActivity extends BaseAppCompatActivity
 
 	private void initView()
 	{
-		findViewById(R.id.btn_action_main).setOnClickListener(new View.OnClickListener()
+		btnActionMain = (Button) findViewById(R.id.btn_action_main);
+		btnActionMain.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -32,5 +37,7 @@ public class WelcomeActivity extends BaseAppCompatActivity
 				MainActivity.actionStart(WelcomeActivity.this);
 			}
 		});
+
+		UIResizeUtil.build().setIsWidthAdapter(false).setWidth(300).setHeight(300).setRightMargin(300).setTopMargin(300).commit(btnActionMain);
 	}
 }
