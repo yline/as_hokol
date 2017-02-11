@@ -10,4 +10,10 @@
     <string name="main_title_left">左</string>
     <string name="main_title_center">红客</string>
     <string name="main_title_right">右</string>
+
+    <string name="news_title_one">热门</string>
+    <string name="news_title_two">最新</string>
+    <string name="news_title_three">附近</string>
+    <string name="news_title_four">浙江</string>
+    <string name="news_title_five">小视频</string>
 </resources>

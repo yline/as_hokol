@@ -24,8 +24,7 @@
                 android:id="@+id/tv_news_one"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:textColor="@android:color/white"/>
+                android:text="@string/news_title_one"/>
         </LinearLayout>
 
         <LinearLayout
@@ -40,14 +39,58 @@
                 android:id="@+id/tv_news_two"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:textColor="@android:color/white"/>
+                android:text="@string/news_title_two"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_news_three"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_news_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/news_title_three"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_news_four"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_news_four"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/news_title_four"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_news_five"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_news_five"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/news_title_five"/>
         </LinearLayout>
     </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_news_line"
-        android:layout_width="80dp"
+        android:layout_width="72dp"
         android:layout_height="3dp"
         android:background="@android:color/white"/>
 

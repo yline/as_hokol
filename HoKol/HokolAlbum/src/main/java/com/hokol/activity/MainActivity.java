@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.hokol.R;
 import com.hokol.base.common.BaseAppCompatActivity;
-import com.hokol.fragment.MainDeleteFragment;
+import com.hokol.fragment.DeleteFragment;
 import com.hokol.fragment.MainNewsFragment;
 import com.hokol.fragment.MainTabFragment;
 import com.hokol.fragment.MainTitleFragment;
@@ -23,7 +23,7 @@ public class MainActivity extends BaseAppCompatActivity implements MainTabFragme
 
 	private MainNewsFragment mainNewsFragment;
 
-	private MainDeleteFragment mainDeleteFragment;
+	private DeleteFragment mainDeleteFragment;
 
 	private int lastTabPosition;
 
@@ -39,10 +39,13 @@ public class MainActivity extends BaseAppCompatActivity implements MainTabFragme
 	private void initData()
 	{
 		mainNewsFragment = new MainNewsFragment();
-		mainDeleteFragment = new MainDeleteFragment();
+		mainDeleteFragment = new DeleteFragment();
 
 		lastTabPosition = 0;
-		fragmentManager.beginTransaction().add(R.id.fl_main_content, mainNewsFragment).commit();
+		fragmentManager.beginTransaction()
+				.add(R.id.fl_main_content, mainDeleteFragment).hide(mainDeleteFragment)
+				.add(R.id.fl_main_content, mainNewsFragment)
+				.commit();
 	}
 
 	public static void actionStart(Context context)
@@ -74,15 +77,19 @@ public class MainActivity extends BaseAppCompatActivity implements MainTabFragme
 				fragment = mainNewsFragment;
 				break;
 			case 1:
+				mainDeleteFragment.setText(getResources().getString(R.string.main_tab_two));
 				fragment = mainDeleteFragment;
 				break;
 			case 2:
+				mainDeleteFragment.setText(getResources().getString(R.string.main_tab_three));
 				fragment = mainDeleteFragment;
 				break;
 			case 3:
+				mainDeleteFragment.setText(getResources().getString(R.string.main_tab_four));
 				fragment = mainDeleteFragment;
 				break;
 			case 4:
+				mainDeleteFragment.setText(getResources().getString(R.string.main_tab_five));
 				fragment = mainDeleteFragment;
 				break;
 		}
