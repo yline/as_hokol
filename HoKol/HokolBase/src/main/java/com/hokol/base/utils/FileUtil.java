@@ -233,7 +233,10 @@ public class FileUtil
 		}
 		finally
 		{
-			printStream.close();
+			if (null != printStream)
+			{
+				printStream.close();
+			}
 		}
 		return true;
 	}

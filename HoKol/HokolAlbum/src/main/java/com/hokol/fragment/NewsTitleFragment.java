@@ -39,7 +39,7 @@ public class NewsTitleFragment extends BaseFragment
 
 		initView(view);
 		setTabsClick();
-
+		
 		initData();
 	}
 
@@ -130,10 +130,12 @@ public class NewsTitleFragment extends BaseFragment
 			case 4:
 				viewHolder.tvFive.setTextColor(COLOR_AFTER);
 				break;
+			default:
+				break;
 		}
 	}
 
-	private class ViewHolder
+	private static class ViewHolder
 	{
 		private TextView tvOne, tvTwo, tvThree, tvFour, tvFive;
 

@@ -74,7 +74,7 @@ public class DensityUtil
 	 * @param imageContentUri content:// 路径
 	 * @return String类型的的file路径
 	 */
-	public static String Uri2Path(Context context, Uri imageContentUri)
+	public static String uri2Path(Context context, Uri imageContentUri)
 	{
 		String imagePath = "";
 

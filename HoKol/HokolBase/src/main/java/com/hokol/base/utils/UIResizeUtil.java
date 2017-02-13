@@ -22,6 +22,11 @@ import com.hokol.base.log.LogFileUtil;
  */
 public class UIResizeUtil
 {
+	// 常量 boolean 值
+	private static final int TRUE = 1;
+
+	private static final int FALSE = 0;
+
 	// key of array
 	private static final int WIDTH = 0;
 
@@ -34,6 +39,10 @@ public class UIResizeUtil
 	private static final int TOP_MARGIN = 4;
 
 	private static final int BOTTOM_MARGIN = 5;
+
+	private static final int IS_WIDTH_ADAPTER = 6;
+
+	private static final int IS_HEIGHT_ADAPTER = 7;
 
 	// type of parent view
 	private static final int LINEAR_LAYOUT = 10;
@@ -51,15 +60,15 @@ public class UIResizeUtil
 
 	private static final int designHeight = 1080; // 设计图高度
 
-	private static int appWidth = 0; // 宽度适配
+	private int appWidth = 0; // 宽度适配
 
-	private static int appHeight = 0;    // 高度适配
-
-	private static boolean isWidthAdapter = true;
-
-	private static boolean isHeightAdapter = false;
+	private int appHeight = 0;    // 高度适配
 
 	private static SparseArray<Integer> array = new SparseArray<>();
+
+	private boolean isWidthAdapter;
+
+	private boolean isHeightAdapter;
 
 	private UIResizeUtil()
 	{
@@ -71,8 +80,8 @@ public class UIResizeUtil
 	{
 		UIResizeUtil util = UIResizeHold.sInstance;
 		array.clear();
-		isWidthAdapter = true;
-		isHeightAdapter = false;
+		array.put(IS_WIDTH_ADAPTER, TRUE);
+		array.put(IS_HEIGHT_ADAPTER, FALSE);
 		return util;
 	}
 
@@ -83,13 +92,27 @@ public class UIResizeUtil
 
 	public UIResizeUtil setIsWidthAdapter(boolean isWidthAdapter)
 	{
-		UIResizeUtil.isWidthAdapter = isWidthAdapter;
+		if (isWidthAdapter)
+		{
+			array.put(IS_WIDTH_ADAPTER, TRUE);
+		}
+		else
+		{
+			array.put(IS_WIDTH_ADAPTER, FALSE);
+		}
 		return this;
 	}
 
 	public UIResizeUtil setIsHeightAdapter(boolean isHeightAdapter)
 	{
-		UIResizeUtil.isHeightAdapter = isHeightAdapter;
+		if (isHeightAdapter)
+		{
+			array.put(IS_HEIGHT_ADAPTER, TRUE);
+		}
+		else
+		{
+			array.put(IS_HEIGHT_ADAPTER, FALSE);
+		}
 		return this;
 	}
 
@@ -183,6 +206,9 @@ public class UIResizeUtil
 				}
 			}
 
+			isWidthAdapter = array.get(IS_WIDTH_ADAPTER) == TRUE ? true : false;
+			isHeightAdapter = array.get(IS_HEIGHT_ADAPTER) == TRUE ? true : false;
+
 			apply(view, param, type);
 		}
 	}
@@ -211,6 +237,8 @@ public class UIResizeUtil
 					break;
 				case BOTTOM_MARGIN:
 					setBottomMargin(type, param, array.get(BOTTOM_MARGIN));
+					break;
+				default:
 					break;
 			}
 		}
@@ -254,6 +282,8 @@ public class UIResizeUtil
 			case RELATIVE_LAYOUT:
 				((RelativeLayout.LayoutParams) param).leftMargin = value;
 				break;
+			default:
+				break;
 		}
 	}
 
@@ -274,6 +304,8 @@ public class UIResizeUtil
 				break;
 			case RELATIVE_LAYOUT:
 				((RelativeLayout.LayoutParams) param).rightMargin = value;
+				break;
+			default:
 				break;
 		}
 	}
@@ -296,6 +328,8 @@ public class UIResizeUtil
 			case RELATIVE_LAYOUT:
 				((RelativeLayout.LayoutParams) param).topMargin = value;
 				break;
+			default:
+				break;
 		}
 	}
 
@@ -316,6 +350,8 @@ public class UIResizeUtil
 				break;
 			case RELATIVE_LAYOUT:
 				((RelativeLayout.LayoutParams) param).bottomMargin = value;
+				break;
+			default:
 				break;
 		}
 	}

@@ -111,6 +111,8 @@ public class MainTabFragment extends BaseFragment
 			case 4:
 				viewHolder.tvFive.setTextColor(COLOR_AFTER);
 				break;
+			default:
+				break;
 		}
 	}
 
@@ -130,7 +132,7 @@ public class MainTabFragment extends BaseFragment
 		}
 	}
 
-	private class ViewHolder
+	private static class ViewHolder
 	{
 		private TextView tvOne, tvTwo, tvThree, tvFour, tvFive;
 

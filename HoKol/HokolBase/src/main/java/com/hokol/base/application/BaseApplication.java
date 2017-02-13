@@ -54,12 +54,31 @@ public abstract class BaseApplication extends Application
 	private static Application mApplication;
 
 	// handler相关
-	private static Handler handler;
+	private static Handler handler = new Handler()
+	{
+		@Override
+		public void handleMessage(Message msg)
+		{
+			super.handleMessage(msg);
+			switch (msg.what)
+			{
+				case SDKConstant.HANDLER_PALPITATION:
+					LogFileUtil.v(TAG, "this time = " + System.currentTimeMillis() + ",this thread = " + Thread.currentThread().getId());
+					handler.sendEmptyMessageDelayed(SDKConstant.HANDLER_PALPITATION, SDKConstant.APPLICATION_TIME);
+					break;
+				case SDKConstant.HANDLER_TOAST:
+					showToast(getApplication(), (String) msg.obj);
+					break;
+				default:
+					break;
+			}
+		}
+	};
 
 	/** Toast 工具 */
-	private Toast mToast;
+	private static Toast mToast;
 
-	private TextView mTvToast;
+	private static TextView mTvToast;
 
 	/**
 	 * @return 当前application, 因为onCreate为应用入口, 因此不用担心为null
@@ -201,26 +220,6 @@ public abstract class BaseApplication extends Application
 		// 异常崩溃日志
 		CrashHandler.getInstance().init(this);
 
-		handler = new Handler()
-		{
-			@Override
-			public void handleMessage(Message msg)
-			{
-				super.handleMessage(msg);
-				switch (msg.what)
-				{
-					case SDKConstant.HANDLER_PALPITATION:
-						LogFileUtil.v(TAG, "this time = " + System.currentTimeMillis() + ",this thread = " + Thread.currentThread().getId());
-						handler.sendEmptyMessageDelayed(SDKConstant.HANDLER_PALPITATION, SDKConstant.APPLICATION_TIME);
-						break;
-					case SDKConstant.HANDLER_TOAST:
-						showToast(BaseApplication.this, (String) msg.obj);
-						break;
-					default:
-						break;
-				}
-			}
-		};
 		handler.sendEmptyMessageDelayed(SDKConstant.HANDLER_PALPITATION, SDKConstant.APPLICATION_TIME);
 	}
 
@@ -229,7 +228,7 @@ public abstract class BaseApplication extends Application
 	 * @param context
 	 * @param msg     内容
 	 */
-	private void showToast(Context context, String msg)
+	private static void showToast(Context context, String msg)
 	{
 		if (null == mToast)
 		{

@@ -148,16 +148,22 @@ public class FileSizeUtil
 	public static long getDirSize(File file)
 	{
 		long size = 0;
-		File fileList[] = file.listFiles();
-		for (int i = 0; i < fileList.length; i++)
+		if (null != file)
 		{
-			if (fileList[i].isDirectory())
+			File fileList[] = file.listFiles();
+			if (null != fileList)
 			{
-				size += getDirSize(fileList[i]);
-			}
-			else
-			{
-				size += getFileSize(fileList[i]);
+				for (int i = 0; i < fileList.length; i++)
+				{
+					if (fileList[i].isDirectory())
+					{
+						size += getDirSize(fileList[i]);
+					}
+					else
+					{
+						size += getFileSize(fileList[i]);
+					}
+				}
 			}
 		}
 		return size;

@@ -62,7 +62,7 @@ public class MainTitleFragment extends BaseFragment
 		}
 	}
 
-	private class ViewHolder
+	private static class ViewHolder
 	{
 		private TextView tvLeft, tvCenter, tvRight;
 	}

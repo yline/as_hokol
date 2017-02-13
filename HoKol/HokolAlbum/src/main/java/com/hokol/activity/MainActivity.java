@@ -92,6 +92,8 @@ public class MainActivity extends BaseAppCompatActivity implements MainTabFragme
 				mainDeleteFragment.setText(getResources().getString(R.string.main_tab_five));
 				fragment = mainDeleteFragment;
 				break;
+			default:
+				break;
 		}
 		return fragment;
 	}
@@ -115,6 +117,8 @@ public class MainActivity extends BaseAppCompatActivity implements MainTabFragme
 				break;
 			case 4:
 				fragmentTransaction.hide(mainDeleteFragment);
+				break;
+			default:
 				break;
 		}
 		return fragmentTransaction;
