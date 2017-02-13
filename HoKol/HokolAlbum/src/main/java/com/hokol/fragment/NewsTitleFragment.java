@@ -16,7 +16,7 @@ import com.hokol.base.utils.UIResizeUtil;
 
 public class NewsTitleFragment extends BaseFragment
 {
-	private static final int COLOR_BEFORE = Color.GRAY;
+	private static final int COLOR_BEFORE = Color.LTGRAY;
 
 	private static final int COLOR_AFTER = Color.WHITE;
 
@@ -89,11 +89,20 @@ public class NewsTitleFragment extends BaseFragment
 		{
 			int position = (int) v.getTag();
 
-			if (getActivity() instanceof OnNewsTabClickListener)
+			if (getActivity() instanceof OnTabClickListener)
 			{
-				((OnNewsTabClickListener) getActivity()).onTabClick(position);
+				((OnTabClickListener) getActivity()).onTabClick(position);
 			}
 		}
+	}
+
+	/**
+	 * @param position       滑动时,位置(采取的是退一法)
+	 * @param positionOffset 滑动时,偏移量
+	 */
+	public void moveTabLine(int position, float positionOffset)
+	{
+		UIResizeUtil.build().setLeftMargin((int) (LINE_WIDTH * (position + positionOffset))).commit(viewHolder.ivLine);
 	}
 
 	/**
@@ -144,7 +153,7 @@ public class NewsTitleFragment extends BaseFragment
 		private ImageView ivLine;
 	}
 
-	public interface OnNewsTabClickListener
+	public interface OnTabClickListener
 	{
 		/**
 		 * tab点击回调

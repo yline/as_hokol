@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hokol.base.common.BaseFragment;
+import com.hokol.base.log.LogFileUtil;
 
 /**
  * 用于测试
@@ -35,6 +36,7 @@ public class DeleteFragment extends BaseFragment
 	private void initView(View view)
 	{
 		tvShow = (TextView) view.findViewById(android.R.id.text1);
+		tvShow.setText("tvShow");
 	}
 
 	public void setText(String content)
@@ -42,6 +44,22 @@ public class DeleteFragment extends BaseFragment
 		if (null != tvShow)
 		{
 			tvShow.setText(content);
+		}
+		else
+		{
+			LogFileUtil.v("tvShow is null");
+		}
+	}
+
+	public void setText(int id)
+	{
+		if (null != tvShow)
+		{
+			tvShow.setText(id);
+		}
+		else
+		{
+			LogFileUtil.v("tvShow is null");
 		}
 	}
 }

@@ -120,6 +120,8 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		// 收集设备参数信息
 		collectDeviceInfo(mApplication);
 		
+		LogUtil.e(android.util.Log.getStackTraceString(ex));
+
 		// 保存日志文件
 		saveCrashInfo2File(ex);
 
