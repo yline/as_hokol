@@ -39,7 +39,7 @@ public class MainNewsFragment extends BaseFragment implements NewsTitleFragment.
 		initView(view);
 		initData();
 	}
-
+	
 	private void initView(View view)
 	{
 		viewPager = (ViewPager) view.findViewById(R.id.viewpager_main_news);
@@ -50,8 +50,8 @@ public class MainNewsFragment extends BaseFragment implements NewsTitleFragment.
 	{
 		fragmentList = new ArrayList<>();
 
-		DeleteFragment deleteFragment1 = new DeleteFragment();
-		fragmentList.add(deleteFragment1);
+		MainNewsHotFragment newsHotFragment = new MainNewsHotFragment();
+		fragmentList.add(newsHotFragment);
 
 		DeleteFragment deleteFragment2 = new DeleteFragment();
 		fragmentList.add(deleteFragment2);
@@ -65,6 +65,7 @@ public class MainNewsFragment extends BaseFragment implements NewsTitleFragment.
 		DeleteFragment deleteFragment5 = new DeleteFragment();
 		fragmentList.add(deleteFragment5);
 
+		viewPager.setOffscreenPageLimit(5);
 		viewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager())
 		{
 			@Override
@@ -91,7 +92,10 @@ public class MainNewsFragment extends BaseFragment implements NewsTitleFragment.
 			public void onPageSelected(int position)
 			{
 				newsTitleFragment.setTextColor(position);
-				((DeleteFragment) fragmentList.get(position)).setText(IDS[position]);
+				if (fragmentList.get(position) instanceof DeleteFragment)
+				{
+					((DeleteFragment) fragmentList.get(position)).setText(IDS[position]);
+				}
 			}
 
 			@Override

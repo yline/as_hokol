@@ -11,13 +11,13 @@ import com.hokol.R;
 import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.fragment.DeleteFragment;
 import com.hokol.fragment.MainNewsFragment;
-import com.hokol.fragment.MainTabFragment;
-import com.hokol.fragment.MainTitleFragment;
+import com.hokol.viewhelper.MainTabHelper;
+import com.hokol.viewhelper.MainTitleHelper;
 
 /**
  * Created by yline on 2017/2/8.
  */
-public class MainActivity extends BaseAppCompatActivity implements MainTabFragment.OnTabClickListener, MainTitleFragment.OnTitleClickListener
+public class MainActivity extends BaseAppCompatActivity implements MainTabHelper.OnTabClickListener, MainTitleHelper.OnTitleClickListener
 {
 	private FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -33,7 +33,19 @@ public class MainActivity extends BaseAppCompatActivity implements MainTabFragme
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		initView();
 		initData();
+	}
+	
+	private void initView()
+	{
+		MainTabHelper mainTabHelper = new MainTabHelper();
+		mainTabHelper.initTabView(findViewById(R.id.include_main_tab));
+		mainTabHelper.setListener(this);
+
+		MainTitleHelper mainTitleHelper = new MainTitleHelper();
+		mainTitleHelper.initTitleView(findViewById(R.id.include_main_title));
+		mainTitleHelper.setListener(this);
 	}
 
 	private void initData()
@@ -46,11 +58,6 @@ public class MainActivity extends BaseAppCompatActivity implements MainTabFragme
 				.add(R.id.fl_main_content, mainDeleteFragment).hide(mainDeleteFragment)
 				.add(R.id.fl_main_content, mainNewsFragment)
 				.commit();
-	}
-
-	public static void actionStart(Context context)
-	{
-		context.startActivity(new Intent(context, MainActivity.class));
 	}
 
 	@Override
@@ -66,6 +73,12 @@ public class MainActivity extends BaseAppCompatActivity implements MainTabFragme
 
 			lastTabPosition = position;
 		}
+	}
+
+	@Override
+	public void onTitleClick(MainTitleHelper.TITLE_TYPE type)
+	{
+
 	}
 
 	private Fragment getFragmentByPosition(int newPosition)
@@ -124,9 +137,8 @@ public class MainActivity extends BaseAppCompatActivity implements MainTabFragme
 		return fragmentTransaction;
 	}
 
-	@Override
-	public void onTitleClick(MainTitleFragment.TITLE_TYPE type)
+	public static void actionStart(Context context)
 	{
-
+		context.startActivity(new Intent(context, MainActivity.class));
 	}
 }

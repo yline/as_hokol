@@ -120,8 +120,6 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		// 收集设备参数信息
 		collectDeviceInfo(mApplication);
 		
-		LogUtil.e(android.util.Log.getStackTraceString(ex));
-
 		// 保存日志文件
 		saveCrashInfo2File(ex);
 
@@ -168,7 +166,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		}
 		catch (NameNotFoundException e)
 		{
-			LogUtil.e(TAG + " collectDeviceInfo -> NameNotFoundException error happened");
+			LogUtil.e(TAG + " collectDeviceInfo -> NameNotFoundException error happened", e);
 		}
 		
 		// 记录设备信息
@@ -183,11 +181,11 @@ public final class CrashHandler implements UncaughtExceptionHandler
 			}
 			catch (IllegalArgumentException e)
 			{
-				LogUtil.e(TAG + " getDeclaredFields -> IllegalArgumentException  error happened");
+				LogUtil.e(TAG + " getDeclaredFields -> IllegalArgumentException  error happened", e);
 			}
 			catch (IllegalAccessException e)
 			{
-				LogUtil.e(TAG + " getDeclaredFields -> IllegalAccessException  error happened");
+				LogUtil.e(TAG + " getDeclaredFields -> IllegalAccessException  error happened", e);
 			}
 		}
 	}

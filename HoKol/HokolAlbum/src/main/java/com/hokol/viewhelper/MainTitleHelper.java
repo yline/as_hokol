@@ -1,32 +1,33 @@
-package com.hokol.fragment;
+package com.hokol.viewhelper;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hokol.R;
-import com.hokol.base.common.BaseFragment;
 
-public class MainTitleFragment extends BaseFragment
+/**
+ * @author yline 2017/2/14 --> 14:29
+ * @version 1.0.0
+ */
+public class MainTitleHelper
 {
 	private ViewHolder viewHolder = new ViewHolder();
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+	private OnTitleClickListener listener;
+
+	public MainTitleHelper()
 	{
-		return inflater.inflate(R.layout.fragment_main_title, container, false);
 	}
 
-	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
+	public void initTitleView(View parentView)
 	{
-		super.onViewCreated(view, savedInstanceState);
-
-		initView(view);
+		initView(parentView);
 		setViewClick();
+	}
+
+	public void setListener(OnTitleClickListener listener)
+	{
+		this.listener = listener;
 	}
 
 	private void initView(View view)
@@ -55,9 +56,9 @@ public class MainTitleFragment extends BaseFragment
 		public void onClick(View v)
 		{
 			TITLE_TYPE type = (TITLE_TYPE) v.getTag();
-			if (getActivity() instanceof OnTitleClickListener)
+			if (null != listener)
 			{
-				((OnTitleClickListener) getActivity()).onTitleClick(type);
+				listener.onTitleClick(type);
 			}
 		}
 	}

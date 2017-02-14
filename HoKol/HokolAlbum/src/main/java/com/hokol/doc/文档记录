@@ -11,6 +11,10 @@ MainActivity --> 主要的界面,
 
 3,二级Fragment分布
 MainNewsFragment --> 新闻界面,包含(NewsTitleFragment[二级小新闻])
+包含ViewPager[NewsHotFragment[热点]]
+
+4,三级Fragment分布
+NewsHotFragments --> 广告页面
 
 4,DeleteFragment
 待删除的文件

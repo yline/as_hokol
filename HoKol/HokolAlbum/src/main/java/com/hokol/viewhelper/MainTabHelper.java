@@ -1,18 +1,18 @@
-package com.hokol.fragment;
+package com.hokol.viewhelper;
 
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hokol.R;
-import com.hokol.base.common.BaseFragment;
 
-public class MainTabFragment extends BaseFragment
+/**
+ * 初始化 MainActivity 的 底部栏
+ * @author yline 2017/2/14 --> 14:25
+ * @version 1.0.0
+ */
+public class MainTabHelper
 {
 	private static final int COLOR_BEFORE = Color.BLACK;
 
@@ -22,22 +22,23 @@ public class MainTabFragment extends BaseFragment
 
 	private ViewHolder viewHolder = new ViewHolder();
 
-	@Nullable
-	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+	private OnTabClickListener listener;
+
+	public MainTabHelper()
 	{
-		return inflater.inflate(R.layout.fragment_main_tab, container, false);
 	}
 
-	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
+	public void initTabView(View parentView)
 	{
-		super.onViewCreated(view, savedInstanceState);
-
-		initView(view);
+		initView(parentView);
 		initData();
 
 		setTabsClick();
+	}
+
+	public void setListener(OnTabClickListener listener)
+	{
+		this.listener = listener;
 	}
 
 	private void initView(View view)
@@ -81,7 +82,7 @@ public class MainTabFragment extends BaseFragment
 	 * 设置标签字体颜色
 	 * @param position 滑动结束,位置
 	 */
-	public void setTextColor(int position)
+	private void setTextColor(int position)
 	{
 		if (position < 0 || position >= NUMBER_OF_TAB)
 		{
@@ -125,9 +126,9 @@ public class MainTabFragment extends BaseFragment
 			int position = (Integer) v.getTag();
 			setTextColor(position); // 改变字体颜色
 
-			if (getActivity() instanceof OnTabClickListener)
+			if (null != listener)
 			{
-				((OnTabClickListener) getActivity()).onTabClick(position);
+				listener.onTabClick(position);
 			}
 		}
 	}
