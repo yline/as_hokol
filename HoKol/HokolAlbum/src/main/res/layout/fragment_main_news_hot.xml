@@ -10,8 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:name="com.hokol.fragment.NewsADFragment">
-        </fragment>
-        -->
+        </fragment>-->
 
     <LinearLayout
         android:id="@+id/ll_news_hot_ad"
@@ -19,6 +18,4 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
     </LinearLayout>
-
-
 </LinearLayout>

@@ -1,20 +1,19 @@
-package com.hokol.fragment;
+package com.hokol.viewhelper;
 
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
+import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hokol.R;
-import com.hokol.base.common.BaseFragment;
 import com.hokol.base.utils.UIResizeUtil;
 
-public class NewsTitleFragment extends BaseFragment
+/**
+ * Created by yline on 2017/2/14.
+ */
+public class MainNewsTitleHelper
 {
 	private static final int COLOR_BEFORE = Color.LTGRAY;
 
@@ -26,21 +25,56 @@ public class NewsTitleFragment extends BaseFragment
 
 	private final static int LINE_WIDTH = UIResizeUtil.getDesignWidth() / NUMBER_OF_TAB;
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+	private OnTabClickListener listener;
+
+	private ViewPager viewPager;
+
+	public MainNewsTitleHelper()
 	{
-		return inflater.inflate(R.layout.fragment_news_title, container, false);
 	}
 
-	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
+	public void initViewPagerView(ViewPager viewPager)
 	{
-		super.onViewCreated(view, savedInstanceState);
+		this.viewPager = viewPager;
 
-		initView(view);
+		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+		{
+			@Override
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+			{
+				moveTabLine(position, positionOffset);
+			}
+
+			@Override
+			public void onPageSelected(int position)
+			{
+				setTextColor(position);
+
+				if (null != listener)
+				{
+					listener.onTabClick(position);
+				}
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int state)
+			{
+
+			}
+		});
+	}
+
+	public void initTabView(View parentView)
+	{
+		initView(parentView);
 		setTabsClick();
-		
+
 		initData();
+	}
+
+	public void setListener(OnTabClickListener listener)
+	{
+		this.listener = listener;
 	}
 
 	private void initView(View view)
@@ -89,10 +123,7 @@ public class NewsTitleFragment extends BaseFragment
 		{
 			int position = (int) v.getTag();
 
-			if (getActivity() instanceof OnTabClickListener)
-			{
-				((OnTabClickListener) getActivity()).onTabClick(position);
-			}
+			viewPager.setCurrentItem(position);
 		}
 	}
 
@@ -100,7 +131,7 @@ public class NewsTitleFragment extends BaseFragment
 	 * @param position       滑动时,位置(采取的是退一法)
 	 * @param positionOffset 滑动时,偏移量
 	 */
-	public void moveTabLine(int position, float positionOffset)
+	private void moveTabLine(int position, float positionOffset)
 	{
 		UIResizeUtil.build().setLeftMargin((int) (LINE_WIDTH * (position + positionOffset))).commit(viewHolder.ivLine);
 	}
@@ -109,7 +140,7 @@ public class NewsTitleFragment extends BaseFragment
 	 * 设置标签字体颜色
 	 * @param position 滑动结束,位置
 	 */
-	public void setTextColor(int position)
+	private void setTextColor(int position)
 	{
 		if (position < 0 || position >= NUMBER_OF_TAB)
 		{

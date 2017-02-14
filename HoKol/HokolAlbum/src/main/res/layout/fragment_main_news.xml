@@ -5,17 +5,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <fragment
+    <include
+        android:id="@+id/include_main_news_title"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:name="com.hokol.fragment.NewsTitleFragment"
-        android:id="@+id/fragment_news_title">
-    </fragment>
+        layout="@layout/activity_main_news_title">
+    </include>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager_main_news"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/fragment_news_title">
+        android:layout_below="@+id/include_main_news_title">
     </android.support.v4.view.ViewPager>
 </RelativeLayout>

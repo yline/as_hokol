@@ -11,17 +11,16 @@ import android.view.ViewGroup;
 
 import com.hokol.R;
 import com.hokol.base.common.BaseFragment;
+import com.hokol.viewhelper.MainNewsTitleHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainNewsFragment extends BaseFragment implements NewsTitleFragment.OnTabClickListener
+public class MainNewsFragment extends BaseFragment implements MainNewsTitleHelper.OnTabClickListener
 {
 	private List<Fragment> fragmentList;
 
 	private ViewPager viewPager;
-
-	private NewsTitleFragment newsTitleFragment;
 
 	private static final int[] IDS = new int[]{R.string.news_title_one, R.string.news_title_two, R.string.news_title_three, R.string.news_title_four, R.string.news_title_five};
 
@@ -39,11 +38,15 @@ public class MainNewsFragment extends BaseFragment implements NewsTitleFragment.
 		initView(view);
 		initData();
 	}
-	
+
 	private void initView(View view)
 	{
 		viewPager = (ViewPager) view.findViewById(R.id.viewpager_main_news);
-		newsTitleFragment = (NewsTitleFragment) getChildFragmentManager().findFragmentById(R.id.fragment_news_title);
+
+		MainNewsTitleHelper mainNewsTitleHelper = new MainNewsTitleHelper();
+		mainNewsTitleHelper.initTabView(view.findViewById(R.id.include_main_news_title));
+		mainNewsTitleHelper.initViewPagerView(viewPager);
+		mainNewsTitleHelper.setListener(this);
 	}
 
 	private void initData()
@@ -80,35 +83,15 @@ public class MainNewsFragment extends BaseFragment implements NewsTitleFragment.
 				return fragmentList.size();
 			}
 		});
-		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
-		{
-			@Override
-			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
-			{
-				newsTitleFragment.moveTabLine(position, positionOffset);
-			}
 
-			@Override
-			public void onPageSelected(int position)
-			{
-				newsTitleFragment.setTextColor(position);
-				if (fragmentList.get(position) instanceof DeleteFragment)
-				{
-					((DeleteFragment) fragmentList.get(position)).setText(IDS[position]);
-				}
-			}
-
-			@Override
-			public void onPageScrollStateChanged(int state)
-			{
-
-			}
-		});
 	}
 
 	@Override
 	public void onTabClick(int position)
 	{
-		viewPager.setCurrentItem(position);
+		if (fragmentList.get(position) instanceof DeleteFragment)
+		{
+			((DeleteFragment) fragmentList.get(position)).setText(IDS[position]);
+		}
 	}
 }

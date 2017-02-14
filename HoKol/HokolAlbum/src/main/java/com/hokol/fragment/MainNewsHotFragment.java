@@ -16,31 +16,15 @@ import com.hokol.base.common.BaseFragment;
  */
 public class MainNewsHotFragment extends BaseFragment
 {
-	private View view;
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
-		if (view != null)
-		{
-			ViewGroup parent = (ViewGroup) view.getParent();
-			if (parent != null)
-			{
-				parent.removeView(view);
-			}
-			return view;
-		}
-		view = inflater.inflate(R.layout.fragment_news_hot, container, false);
-		return view;
+		return inflater.inflate(R.layout.fragment_main_news_hot, container, false);
 	}
 	
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
 	{
-		if (null != view)
-		{
-
-		}
 		super.onViewCreated(view, savedInstanceState);
 		initView();
 	}
