@@ -4,18 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <!--
-        <fragment
-            android:id="@+id/fragment_news_ad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:name="com.hokol.fragment.NewsADFragment">
-        </fragment>-->
 
-    <LinearLayout
-        android:id="@+id/ll_news_hot_ad"
+    <include
+        android:id="@+id/include_main_news_hot_ad"
+        layout="@layout/fragment_main_news_hot_ad"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-    </LinearLayout>
+        android:layout_height="wrap_content">
+    </include>
 </LinearLayout>
