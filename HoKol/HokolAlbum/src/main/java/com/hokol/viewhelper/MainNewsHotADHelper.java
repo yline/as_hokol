@@ -15,8 +15,8 @@ import android.widget.LinearLayout;
 import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.base.log.LogFileUtil;
-import com.hokol.base.utils.DensityUtil;
 import com.hokol.base.utils.UIResizeUtil;
+import com.hokol.base.utils.UIScreenUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -378,7 +378,7 @@ public class MainNewsHotADHelper
 
 		private void init()
 		{
-			viewPagerHeight = DensityUtil.dp2px(IApplication.getApplication(), 180);
+			viewPagerHeight = UIScreenUtil.dp2px(IApplication.getApplication(), 180);
 
 			resource = new ArrayList<>();
 			resource.add(R.mipmap.ic_launcher);

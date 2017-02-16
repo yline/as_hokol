@@ -374,7 +374,7 @@ public class UIResizeUtil
 	{
 		if (appWidth == 0)
 		{
-			appWidth = ScreenUtil.getAbsoluteScreenWidth(BaseApplication.getApplication());
+			appWidth = UIScreenUtil.getAbsoluteScreenWidth(BaseApplication.getApplication());
 			LogFileUtil.i(BaseApplication.TAG, "UIResizeUtils -> getAppWidth width = " + appWidth);
 		}
 		return appWidth;
@@ -384,7 +384,7 @@ public class UIResizeUtil
 	{
 		if (0 == appHeight)
 		{
-			appHeight = ScreenUtil.getAbsoluteScreenHeight(BaseApplication.getApplication());
+			appHeight = UIScreenUtil.getAbsoluteScreenHeight(BaseApplication.getApplication());
 			LogFileUtil.i(BaseApplication.TAG, "UIResizeUtils -> getAppHeight height = " + appHeight);
 		}
 		return appHeight;

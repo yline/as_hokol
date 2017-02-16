@@ -7,6 +7,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -17,15 +18,65 @@ import com.hokol.base.log.LogFileUtil;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * 获得屏幕相关的辅助类
+ * 功能一、获得屏幕相关的辅助类
+ * 功能二、单位转换
  */
-public class ScreenUtil
+public class UIScreenUtil
 {
 
-	public ScreenUtil()
+	public UIScreenUtil()
 	{
 		/** 实例化失败 */
 		throw new UnsupportedOperationException("cannot be instantiated");
+	}
+
+	/**
+	 * dp to px
+	 * @param context
+	 * @param dpValue
+	 * @return
+	 */
+	public static int dp2px(Context context, float dpValue)
+	{
+		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+				dpValue,
+				context.getResources().getDisplayMetrics());
+	}
+
+	/**
+	 * sp to px
+	 * @param context
+	 * @param spValue
+	 * @return
+	 */
+	public static int sp2px(Context context, float spValue)
+	{
+		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
+				spValue,
+				context.getResources().getDisplayMetrics());
+	}
+
+	/**
+	 * px to dp
+	 * @param context
+	 * @param pxValue
+	 * @return
+	 */
+	public static float px2dp(Context context, float pxValue)
+	{
+		final float scale = context.getResources().getDisplayMetrics().density;
+		return (pxValue / scale);
+	}
+
+	/**
+	 * px to sp
+	 * @param context
+	 * @param pxValue
+	 * @return
+	 */
+	public static float px2sp(Context context, float pxValue)
+	{
+		return (pxValue / context.getResources().getDisplayMetrics().scaledDensity);
 	}
 
 	/**

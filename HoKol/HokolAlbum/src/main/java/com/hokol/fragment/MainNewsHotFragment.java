@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.hokol.R;
+import com.hokol.application.IApplication;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.viewhelper.MainNewsHotADHelper;
+import com.hokol.viewhelper.MainNewsHotPointHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,7 @@ import java.util.List;
  * @author yline 2017/2/13 --> 17:36
  * @version 1.0.0
  */
-public class MainNewsHotFragment extends BaseFragment
+public class MainNewsHotFragment extends BaseFragment implements MainNewsHotADHelper.OnPageClickListener, MainNewsHotPointHelper.OnItemClickListener
 {
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -49,5 +51,22 @@ public class MainNewsHotFragment extends BaseFragment
 		mainNewsHotADHelper.initPoint((LinearLayout) view.findViewById(R.id.ll_main_hot_news_ad));
 		mainNewsHotADHelper.initViewPagerView((ViewPager) view.findViewById(R.id.viewpager_main_hot_news_ad));
 		mainNewsHotADHelper.startAutoRecycle();
+		mainNewsHotADHelper.setListener(this);
+
+		MainNewsHotPointHelper mainNewsHotPointHelper = new MainNewsHotPointHelper();
+		mainNewsHotPointHelper.init(view.findViewById(R.id.include_main_news_hot_point));
+		mainNewsHotPointHelper.setListener(this);
+	}
+
+	@Override
+	public void onPagerClick(View v, int position)
+	{
+		IApplication.toast("ad position = " + position);
+	}
+
+	@Override
+	public void onItemClick(int position)
+	{
+		IApplication.toast("point position = " + position);
 	}
 }
