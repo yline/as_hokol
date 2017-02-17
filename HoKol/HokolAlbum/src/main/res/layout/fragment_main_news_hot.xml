@@ -1,29 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v4.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_main_news_hot_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <!-- 广告位 -->
-    <include
-        android:id="@+id/include_main_news_hot_ad"
-        layout="@layout/fragment_main_news_hot_ad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </include>
-
-    <!-- 中间横向滑动的view -->
-    <include
-        android:id="@+id/include_main_news_hot_point"
-        layout="@layout/fragment_main_news_hot_point"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </include>
-
-    <ListView
-        android:id="@+id/lv_main_news_hot"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_main_news_hot_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </ListView>
-</LinearLayout>
+    </android.support.v7.widget.RecyclerView>
+</android.support.v4.widget.SwipeRefreshLayout>

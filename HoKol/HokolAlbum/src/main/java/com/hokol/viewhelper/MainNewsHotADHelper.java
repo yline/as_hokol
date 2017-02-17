@@ -118,7 +118,7 @@ public class MainNewsHotADHelper
 	 */
 	private void initIndicatorPoint(Context context, LinearLayout parentLayout, int count)
 	{
-		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-2, -2);
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
 		layoutParams.width = param.pointSizeBefore;
 		layoutParams.height = param.pointSizeBefore;
@@ -141,9 +141,9 @@ public class MainNewsHotADHelper
 
 		for (int i = 0; i < count; i++)
 		{
-			View view = new View(context);
-			view.setBackgroundResource(param.pointResource);
-			parentLayout.addView(view, layoutParams);
+			ImageView imageView = new ImageView(context);
+			imageView.setBackgroundResource(param.pointResource);
+			parentLayout.addView(imageView, layoutParams);
 		}
 	}
 
@@ -159,17 +159,17 @@ public class MainNewsHotADHelper
 		{
 			if (i == position)
 			{
-				parentLayout.getChildAt(i).setSelected(true);
 				UIResizeUtil.build().setIsWidthAdapter(false)
 						.setWidth(param.pointSizeAfter).setHeight(param.pointSizeAfter)
 						.commit(parentLayout.getChildAt(i));
+				parentLayout.getChildAt(i).setSelected(true);
 			}
 			else
 			{
-				parentLayout.getChildAt(i).setSelected(false);
 				UIResizeUtil.build().setIsWidthAdapter(false)
 						.setWidth(param.pointSizeBefore).setHeight(param.pointSizeBefore)
 						.commit(parentLayout.getChildAt(i));
+				parentLayout.getChildAt(i).setSelected(false);
 			}
 		}
 	}
@@ -351,8 +351,8 @@ public class MainNewsHotADHelper
 
 		private int pointSizeAfter = 15;
 
-		private int pointLeftMargin = 15;
-
+		private int pointLeftMargin = 10;
+		
 		private int pointRightMargin = 0;
 
 		private int pointTopMargin = 0;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_main_news_hot_ad"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -12,10 +13,11 @@
 
     <LinearLayout
         android:id="@+id/ll_main_hot_news_ad"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/viewpager_main_hot_news_ad"
         android:layout_gravity="center_horizontal|bottom"
+        android:layout_centerHorizontal="true"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingBottom="10dp">
