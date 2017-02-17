@@ -33,6 +33,11 @@ public class LivePersonInfo
 	/** 人物标签 */
 	private List<String> personTag = new ArrayList<>();
 
+	public LivePersonInfo(Drawable personImage)
+	{
+		this.personImage = personImage;
+	}
+
 	public Drawable getPersonImage()
 	{
 		return personImage;

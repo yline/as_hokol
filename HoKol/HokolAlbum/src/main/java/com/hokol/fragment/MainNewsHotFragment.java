@@ -3,6 +3,7 @@ package com.hokol.fragment;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.hokol.R;
@@ -18,6 +20,7 @@ import com.hokol.application.IApplication;
 import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
+import com.hokol.base.utils.UIResizeUtil;
 import com.hokol.bean.LivePersonInfo;
 import com.hokol.viewhelper.MainNewsHotADHelper;
 import com.hokol.viewhelper.MainNewsHotPointHelper;
@@ -33,6 +36,14 @@ import java.util.List;
  */
 public class MainNewsHotFragment extends BaseFragment implements MainNewsHotADHelper.OnPageClickListener, MainNewsHotPointHelper.OnItemClickListener
 {
+	private final static int[] res = new int[]{
+			R.drawable.delete_ad_img1,
+			R.drawable.delete_ad_img2,
+			R.drawable.delete_ad_img3,
+			R.drawable.delete_ad_img4,
+			R.drawable.delete_ad_img5,
+	};
+
 	private HeadFootWrapperAdapter recycleAdapter;
 
 	@Override
@@ -52,14 +63,22 @@ public class MainNewsHotFragment extends BaseFragment implements MainNewsHotADHe
 	{
 		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_main_news_hot_container);
 		recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-
+		
 		CommonRecyclerAdapter tempAdapter = new MainNewsHotAdapter();
 		recycleAdapter = new HeadFootWrapperAdapter(tempAdapter);
 
 		// RecycleView
 		initRecycleView(recycleAdapter);
+
+		List<LivePersonInfo> dataList = new ArrayList<>();
+		for (int i = 0; i < 40; i++)
+		{
+			dataList.add(new LivePersonInfo(ContextCompat.getDrawable(getContext(), res[i % res.length])));
+		}
+		recycleAdapter.addAll(dataList);
+
 		recyclerView.setAdapter(recycleAdapter);
-		
+
 		// SwipeRefreshLayout
 		MainNewsHotRefreshHelper mainNewsHotRefreshHelper = new MainNewsHotRefreshHelper();
 		mainNewsHotRefreshHelper.init((SwipeRefreshLayout) view.findViewById(R.id.swipe_main_news_hot_container));
@@ -111,16 +130,22 @@ public class MainNewsHotFragment extends BaseFragment implements MainNewsHotADHe
 			String state = sList.get(position).isLiving() ? "直播中" : "稍后直播";
 			item.setText(R.id.tv_main_news_hot_state, state);
 
+			ImageView ivPic = item.get(R.id.iv_main_news_hot_pic);
+			resize(ivPic, sList.get(position).getPersonImage().getMinimumWidth(), sList.get(position).getPersonImage().getMinimumHeight());
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
 			{
-				item.get(R.id.ll_main_news_hot_recycle).setBackground(sList.get(position).getPersonImage());
+				ivPic.setBackground(sList.get(position).getPersonImage());
 			}
 			else
 			{
-
-				item.get(R.id.ll_main_news_hot_recycle).setBackgroundDrawable(sList.get(position).getPersonImage());
+				ivPic.setBackgroundDrawable(sList.get(position).getPersonImage());
 			}
 		}
+	}
+
+	private void resize(View view, int beforeWidth, int beforeHeight)
+	{
+		UIResizeUtil.build().setIsHeightAdapter(true).setWidth(360).setHeight(360 * beforeHeight / beforeWidth).commit(view);
 	}
 
 	@Override
