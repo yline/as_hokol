@@ -72,7 +72,7 @@ public class MainNewsHotPointHelper
 		}
 	}
 
-	private class ViewHolder
+	private static class ViewHolder
 	{
 		private LinearLayout llOne, llTwo, llThree, llFour, llFive, llSix, llSeven;
 	}
