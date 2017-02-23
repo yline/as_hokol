@@ -87,6 +87,7 @@ public class WelcomeActivity extends BaseAppCompatActivity
 			@Override
 			public void onSuccess(ResponseDeleteBean bean)
 			{
+				LogFileUtil.v(bean.toString());
 				Toast.makeText(WelcomeActivity.this, bean.toString(), Toast.LENGTH_SHORT).show();
 			}
 
