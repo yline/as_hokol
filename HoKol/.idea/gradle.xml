@@ -11,15 +11,10 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/HokolAlbum" />
             <option value="$PROJECT_DIR$/HokolBase" />
+            <option value="$PROJECT_DIR$/HokolHttp" />
           </set>
         </option>
-        <option name="myModules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/HokolAlbum" />
-            <option value="$PROJECT_DIR$/HokolBase" />
-          </set>
-        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

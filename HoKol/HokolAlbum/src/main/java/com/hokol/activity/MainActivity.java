@@ -54,10 +54,7 @@ public class MainActivity extends BaseAppCompatActivity implements MainTabHelper
 		mainDeleteFragment = new DeleteFragment();
 
 		lastTabPosition = 0;
-		fragmentManager.beginTransaction()
-				.add(R.id.fl_main_content, mainDeleteFragment).hide(mainDeleteFragment)
-				.add(R.id.fl_main_content, mainNewsFragment)
-				.commit();
+		fragmentManager.beginTransaction().add(R.id.fl_main_content, mainDeleteFragment).hide(mainDeleteFragment).add(R.id.fl_main_content, mainNewsFragment).commit();
 	}
 
 	@Override

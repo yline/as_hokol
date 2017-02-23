@@ -35,7 +35,9 @@ public final class CrashHandler implements UncaughtExceptionHandler
 	
 	private static final String CRASH_TXT_FILE = "-CrashHandler.txt";
 	
-	/** 时间 */
+	/**
+	 * 时间
+	 */
 	private static String crash_txt_time = "1994-08-25 12-00-00-000";
 	
 	private Application mApplication;
@@ -107,6 +109,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 	
 	/**
 	 * 处理此时的异常
+	 *
 	 * @param ex 异常信息
 	 * @return 是否处理成功
 	 */
@@ -119,7 +122,8 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		
 		// 收集设备参数信息
 		collectDeviceInfo(mApplication);
-		
+		LogUtil.e("", ex);
+
 		// 保存日志文件
 		saveCrashInfo2File(ex);
 
@@ -141,6 +145,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 	
 	/**
 	 * 收集设备参数信息，并没有打印任何信息
+	 *
 	 * @param context
 	 */
 	private void collectDeviceInfo(Context context)
@@ -163,8 +168,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 				infoMap.put("versionName", versionName);
 				infoMap.put("versionCode", versionCode);
 			}
-		}
-		catch (NameNotFoundException e)
+		} catch (NameNotFoundException e)
 		{
 			LogUtil.e(TAG + " collectDeviceInfo -> NameNotFoundException error happened", e);
 		}
@@ -178,12 +182,10 @@ public final class CrashHandler implements UncaughtExceptionHandler
 				field.setAccessible(true);
 				infoMap.put(field.getName(), field.get("").toString());
 				LogUtil.v(TAG + " " + field.getName() + ":" + field.get(""));
-			}
-			catch (IllegalArgumentException e)
+			} catch (IllegalArgumentException e)
 			{
 				LogUtil.e(TAG + " getDeclaredFields -> IllegalArgumentException  error happened", e);
-			}
-			catch (IllegalAccessException e)
+			} catch (IllegalAccessException e)
 			{
 				LogUtil.e(TAG + " getDeclaredFields -> IllegalAccessException  error happened", e);
 			}
@@ -192,6 +194,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 	
 	/**
 	 * 保存信息到文件中
+	 *
 	 * @param ex
 	 * @return
 	 */
@@ -230,6 +233,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 	
 	/**
 	 * 写日志入文件，打印日志
+	 *
 	 * @param content 日志内容
 	 */
 	private synchronized static void writeLogToFile(String content)
