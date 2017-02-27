@@ -2,7 +2,9 @@ package com.hokol.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,19 +13,23 @@ import com.hokol.R;
 import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.fragment.DeleteFragment;
 import com.hokol.fragment.MainNewsFragment;
-import com.hokol.viewhelper.MainTabHelper;
 import com.hokol.viewhelper.MainTitleHelper;
 
-/**
- * Created by yline on 2017/2/8.
- */
-public class MainActivity extends BaseAppCompatActivity implements MainTabHelper.OnTabClickListener, MainTitleHelper.OnTitleClickListener
+public class MainActivity extends BaseAppCompatActivity implements MainTitleHelper.OnTitleClickListener
 {
 	private FragmentManager fragmentManager = getSupportFragmentManager();
 
 	private MainNewsFragment mainNewsFragment;
 
 	private DeleteFragment mainDeleteFragment;
+
+	private TabLayout tabLayout;
+
+	private static final int[] RES = {R.string.main_tab_one, R.string.main_tab_two, R.string.main_tab_three, R.string.main_tab_four, R.string.main_tab_five};
+
+	private static final int COLOR_BEFORE = Color.BLACK;
+
+	private static final int COLOR_AFTER = Color.GREEN;
 
 	private int lastTabPosition;
 
@@ -39,9 +45,45 @@ public class MainActivity extends BaseAppCompatActivity implements MainTabHelper
 	
 	private void initView()
 	{
-		MainTabHelper mainTabHelper = new MainTabHelper();
-		mainTabHelper.initTabView(findViewById(R.id.include_main_tab));
-		mainTabHelper.setListener(this);
+		tabLayout = (TabLayout) findViewById(R.id.tab_layout_main);
+		tabLayout.addTab(tabLayout.newTab().setText(RES[0]));
+		tabLayout.addTab(tabLayout.newTab().setText(RES[1]));
+		tabLayout.addTab(tabLayout.newTab().setText(RES[2]));
+		tabLayout.addTab(tabLayout.newTab().setText(RES[3]));
+		tabLayout.addTab(tabLayout.newTab().setText(RES[4]));
+		tabLayout.setSelectedTabIndicatorHeight(0);
+		tabLayout.setTabTextColors(COLOR_BEFORE, COLOR_AFTER);
+
+		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
+		{
+			@Override
+			public void onTabSelected(TabLayout.Tab tab)
+			{
+				int position = tab.getPosition();
+				if (lastTabPosition != position)
+				{
+					Fragment showFragment = getFragmentByPosition(position);
+					if (null != showFragment)
+					{
+						hide(lastTabPosition).show(showFragment).commit();
+					}
+
+					lastTabPosition = position;
+				}
+			}
+
+			@Override
+			public void onTabUnselected(TabLayout.Tab tab)
+			{
+
+			}
+
+			@Override
+			public void onTabReselected(TabLayout.Tab tab)
+			{
+
+			}
+		});
 
 		MainTitleHelper mainTitleHelper = new MainTitleHelper();
 		mainTitleHelper.initTitleView(findViewById(R.id.include_main_title));
@@ -55,21 +97,6 @@ public class MainActivity extends BaseAppCompatActivity implements MainTabHelper
 
 		lastTabPosition = 0;
 		fragmentManager.beginTransaction().add(R.id.fl_main_content, mainDeleteFragment).hide(mainDeleteFragment).add(R.id.fl_main_content, mainNewsFragment).commit();
-	}
-
-	@Override
-	public void onTabClick(int position)
-	{
-		if (lastTabPosition != position)
-		{
-			Fragment showFragment = getFragmentByPosition(position);
-			if (null != showFragment)
-			{
-				hide(lastTabPosition).show(showFragment).commit();
-			}
-
-			lastTabPosition = position;
-		}
 	}
 
 	@Override
