@@ -5,7 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/HoKol.iml" filepath="$PROJECT_DIR$/HoKol.iml" />
       <module fileurl="file://$PROJECT_DIR$/HokolAlbum/HokolAlbum.iml" filepath="$PROJECT_DIR$/HokolAlbum/HokolAlbum.iml" />
       <module fileurl="file://$PROJECT_DIR$/HokolBase/HokolBase.iml" filepath="$PROJECT_DIR$/HokolBase/HokolBase.iml" />
-      <module fileurl="file://$PROJECT_DIR$/HokolHttp/HokolHttp.iml" filepath="$PROJECT_DIR$/HokolHttp/HokolHttp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HokolMedium/HokolMedium.iml" filepath="$PROJECT_DIR$/HokolMedium/HokolMedium.iml" />
     </modules>
   </component>
 </project>
