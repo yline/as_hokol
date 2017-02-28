@@ -1,8 +1,11 @@
-package com.hokol.http;
+package com.hokol.medium.http;
 
-import com.hokol.http.helper.HttpNullDispose;
-import com.hokol.http.helper.HttpNullRequest;
-import com.hokol.http.helper.IHttpResponse;
+import com.google.gson.Gson;
+import com.hokol.medium.http.helper.HttpJsonDispose;
+import com.hokol.medium.http.helper.HttpJsonRequest;
+import com.hokol.medium.http.helper.HttpNullDispose;
+import com.hokol.medium.http.helper.HttpNullRequest;
+import com.hokol.medium.http.helper.IHttpResponse;
 
 /**
  * Http使用类,不断地复写doRequest方法即可统一使用
@@ -27,7 +30,6 @@ public abstract class xHttp<Result> implements IHttpResponse<Result>
 		httpHandler = HttpHandler.build();
 	}
 
-
 	/**
 	 * 这个就是做 Get请求,不带参数
 	 *
@@ -37,6 +39,19 @@ public abstract class xHttp<Result> implements IHttpResponse<Result>
 	{
 		HttpNullRequest httpNullRequest = new HttpNullRequest(new HttpNullDispose(httpHandler, this));
 		httpNullRequest.doRequest(httpUrl, clazz);
+	}
+
+	/**
+	 * 这个就是做Post请求,带参数(Json)
+	 *
+	 * @param httpUrl
+	 * @param param   可转换成Json的数据类型
+	 * @param clazz
+	 */
+	public void doRequest(String httpUrl, Object param, Class<Result> clazz)
+	{
+		HttpJsonRequest httpJsonRequest = new HttpJsonRequest(new HttpJsonDispose(httpHandler, this));
+		httpJsonRequest.doRequest(httpUrl, new Gson().toJson(param), clazz);
 	}
 
 	@Override

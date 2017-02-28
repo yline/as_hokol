@@ -1,4 +1,4 @@
-package com.hokol.http.helper;
+package com.hokol.medium.http.helper;
 
 /**
  * Http请求回调

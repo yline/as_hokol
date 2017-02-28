@@ -8,6 +8,7 @@ import com.hokol.base.application.BaseApplication;
 
 /**
  * simple introduction
+ *
  * @author YLine 2016-5-25 -> 上午7:32:43
  */
 public class BaseFragment extends Fragment
@@ -16,13 +17,13 @@ public class BaseFragment extends Fragment
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		BaseApplication.addFragmentForRecord(this);
+		BaseApplication.addFragmentForRecordV4(this);
 	}
 
 	@Override
 	public void onDestroy()
 	{
 		super.onDestroy();
-		BaseApplication.removeFragmentForRecord(this);
+		BaseApplication.removeFragmentForRecordV4(this);
 	}
 }

@@ -1,14 +1,17 @@
-package com.hokol.http.helper;
+package com.hokol.medium.http.helper;
 
 import com.hokol.base.log.LogFileUtil;
-import com.hokol.http.xHttp;
+import com.hokol.medium.http.HttpClient;
+import com.hokol.medium.http.xHttp;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -17,13 +20,13 @@ import okhttp3.Response;
  * @author yline 2017/2/23 --> 9:57
  * @version 1.0.0
  */
-public class HttpNullRequest
+public class HttpJsonRequest
 {
 	private OkHttpClient okHttpClient;
 
 	private IHttpDispose iHttpDispose;
 
-	public HttpNullRequest(IHttpDispose iHttpDispose)
+	public HttpJsonRequest(IHttpDispose iHttpDispose)
 	{
 		this.iHttpDispose = iHttpDispose;
 	}
@@ -33,7 +36,7 @@ public class HttpNullRequest
 	 */
 	private void preRequest()
 	{
-		okHttpClient = new OkHttpClient();
+		okHttpClient = HttpClient.getInstance();
 
 		okHttpClient.newBuilder().connectTimeout(xHttp.CONNECT_TIME_OUT, TimeUnit.SECONDS).build();
 
@@ -43,11 +46,12 @@ public class HttpNullRequest
 		}
 	}
 
-	public void doRequest(String httpUrl, final Class clazz)
+	public void doRequest(String httpUrl, String json, final Class clazz)
 	{
 		preRequest();
 
-		final Request request = new Request.Builder().url(httpUrl).build();
+		RequestBody requestBody = RequestBody.create(MediaType.parse(xHttp.MEDIA_TYPE_JSON), json);
+		final Request request = new Request.Builder().url(httpUrl).post(requestBody).build();
 
 		okHttpClient.newCall(request).enqueue(new okhttp3.Callback()
 		{

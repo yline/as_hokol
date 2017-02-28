@@ -1,14 +1,16 @@
-package com.hokol.http.bean;
+package com.hokol.medium.http.bean;
 
-/**
- * Created by yline on 2017/2/22.
- */
-
-public class ResponseDeleteBean
+public class RequestPhoneLoginBean
 {
 	private String user_tel;
 
 	private String user_pwd;
+
+	public RequestPhoneLoginBean(String user_tel, String user_pwd)
+	{
+		this.user_tel = user_tel;
+		this.user_pwd = user_pwd;
+	}
 
 	public String getUser_tel()
 	{
@@ -33,7 +35,7 @@ public class ResponseDeleteBean
 	@Override
 	public String toString()
 	{
-		return "ResponseDeleteBean{" +
+		return "RequestPhoneLoginBean{" +
 				"user_tel='" + user_tel + '\'' +
 				", user_pwd='" + user_pwd + '\'' +
 				'}';

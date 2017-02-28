@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * simple introduction
+ *
  * @author YLine 2016-5-25 -> 上午7:32:33
  */
 public class BaseActivity extends Activity

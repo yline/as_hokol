@@ -1,9 +1,11 @@
-package com.hokol.http.bean;
+package com.hokol.medium.http.bean;
 
 /**
- * Created by yline on 2017/2/22.
+ * 这是所有Http请求的父类
+ *
+ * @author yline 2017/2/28 --> 17:08
+ * @version 1.0.0
  */
-
 public class ResponseXBean<T>
 {
 	private int code;

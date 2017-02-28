@@ -1,7 +1,8 @@
-package com.hokol.http.helper;
+package com.hokol.medium.http.helper;
 
 import com.hokol.base.log.LogFileUtil;
-import com.hokol.http.xHttp;
+import com.hokol.medium.http.HttpClient;
+import com.hokol.medium.http.xHttp;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -17,13 +18,13 @@ import okhttp3.Response;
  * @author yline 2017/2/23 --> 9:57
  * @version 1.0.0
  */
-public class HttpJsonRequest
+public class HttpNullRequest
 {
 	private OkHttpClient okHttpClient;
 
 	private IHttpDispose iHttpDispose;
 
-	public HttpJsonRequest(IHttpDispose iHttpDispose)
+	public HttpNullRequest(IHttpDispose iHttpDispose)
 	{
 		this.iHttpDispose = iHttpDispose;
 	}
@@ -33,7 +34,7 @@ public class HttpJsonRequest
 	 */
 	private void preRequest()
 	{
-		okHttpClient = new OkHttpClient();
+		okHttpClient = HttpClient.getInstance();
 
 		okHttpClient.newBuilder().connectTimeout(xHttp.CONNECT_TIME_OUT, TimeUnit.SECONDS).build();
 

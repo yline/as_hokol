@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * simple introduction
+ *
  * @author YLine 2016-5-25 -> 上午7:32:58
  */
 public class BaseFragmentActivity extends FragmentActivity

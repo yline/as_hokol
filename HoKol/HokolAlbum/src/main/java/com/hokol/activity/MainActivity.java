@@ -23,7 +23,8 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 
 	private DeleteFragment mainDeleteFragment;
 
-	private TabLayout tabLayout;
+	// @BindView(R.id.tab_layout_main)
+	public TabLayout tabLayout;
 
 	private static final int[] RES = {R.string.main_tab_one, R.string.main_tab_two, R.string.main_tab_three, R.string.main_tab_four, R.string.main_tab_five};
 

@@ -1,12 +1,12 @@
-package com.hokol.http.helper;
+package com.hokol.medium.http.helper;
 
 import android.os.Handler;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hokol.base.log.LogFileUtil;
-import com.hokol.http.bean.ResponseXBean;
-import com.hokol.http.xHttp;
+import com.hokol.medium.http.bean.ResponseXBean;
+import com.hokol.medium.http.xHttp;
 
 import okhttp3.Call;
 
@@ -33,9 +33,16 @@ public class HttpNullDispose<Result> implements IHttpDispose<Result>
 			}.getType());
 
 			final int code = responseXBean.getCode();
-			preResponse("onNetSuccess code -> " + code);
-			final Result result = gson.fromJson(responseXBean.getData().toString(), clazz);
+			preResponse("onNetSuccess code -> " + code + ",data -> " + responseXBean.getData());
 
+			// 为了放到子线程进行Gson解析
+			Result result = null;
+			if (xHttp.REQUEST_SUCCESS_CODE == code)
+			{
+				result = gson.fromJson(responseXBean.getData().toString(), clazz);
+			}
+
+			final Result finalResult = result;
 			handler.post(new Runnable()
 			{
 				@Override
@@ -43,7 +50,7 @@ public class HttpNullDispose<Result> implements IHttpDispose<Result>
 				{
 					if (xHttp.REQUEST_SUCCESS_CODE == code)
 					{
-						iHttpResponse.onSuccess(result);
+						iHttpResponse.onSuccess(finalResult);
 					}
 					else
 					{
