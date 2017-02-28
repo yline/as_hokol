@@ -2,7 +2,7 @@ package com.hokol.medium.http.helper;
 
 import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.HttpClient;
-import com.hokol.medium.http.xHttp;
+import com.hokol.medium.http.HttpConstant;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -38,9 +38,9 @@ public class HttpJsonRequest
 	{
 		okHttpClient = HttpClient.getInstance();
 
-		okHttpClient.newBuilder().connectTimeout(xHttp.CONNECT_TIME_OUT, TimeUnit.SECONDS).build();
+		okHttpClient.newBuilder().connectTimeout(HttpConstant.CONNECT_TIME_OUT, TimeUnit.SECONDS).build();
 
-		if (xHttp.isDebug)
+		if (HttpConstant.isDebug)
 		{
 			LogFileUtil.v("OkHttpClient preRequest over");
 		}
@@ -50,7 +50,7 @@ public class HttpJsonRequest
 	{
 		preRequest();
 
-		RequestBody requestBody = RequestBody.create(MediaType.parse(xHttp.MEDIA_TYPE_JSON), json);
+		RequestBody requestBody = RequestBody.create(MediaType.parse(HttpConstant.MEDIA_TYPE_JSON), json);
 		final Request request = new Request.Builder().url(httpUrl).post(requestBody).build();
 
 		okHttpClient.newCall(request).enqueue(new okhttp3.Callback()
@@ -91,7 +91,7 @@ public class HttpJsonRequest
 
 	private void preResponse(String msg)
 	{
-		if (xHttp.isDebug)
+		if (HttpConstant.isDebug)
 		{
 			LogFileUtil.v(msg);
 		}
@@ -99,7 +99,7 @@ public class HttpJsonRequest
 
 	private void preResponse(String msg, IOException e)
 	{
-		if (xHttp.isDebug)
+		if (HttpConstant.isDebug)
 		{
 			LogFileUtil.e("", msg, e);
 		}

@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import com.hokol.R;
 import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.base.log.LogFileUtil;
+import com.hokol.medium.http.HttpConstant;
 import com.hokol.medium.http.bean.RequestPhoneLoginBean;
 import com.hokol.medium.http.bean.ResponsePhoneLoginBean;
 import com.hokol.medium.http.xHttp;
@@ -48,14 +49,13 @@ public class WelcomeActivity extends BaseAppCompatActivity
 		String username = etUserName.getText().toString().trim();
 		String password = etPassWord.getText().toString().trim();
 
-		String httpHead = "http://192.168.1.100/index.php/Back/Api/";
-		String httpParam = "login";
+		String httpUrl = HttpConstant.HTTP_PHONE_LOGIN_URL;
 
 		LogFileUtil.v("username = " + username + ",password = " + password);
-		LogFileUtil.v("httpUrl = " + httpHead + httpParam);
+		LogFileUtil.v("httpUrl = " + httpUrl);
 
-		doGet(httpHead + httpParam);
-		doPost(httpHead + httpParam, new RequestPhoneLoginBean(username, password));
+		doGet(httpUrl);
+		doPost(httpUrl, new RequestPhoneLoginBean(username, password));
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class WelcomeActivity extends BaseAppCompatActivity
 		}.doRequest(httpUrl, ResponsePhoneLoginBean.class);
 	}
 
-	private void doPost(String httpUrl, RequestPhoneLoginBean param)
+	private void doPost(String httpUrl, RequestPhoneLoginBean requestBean)
 	{
 		new xHttp<ResponsePhoneLoginBean>()
 		{
@@ -116,7 +116,7 @@ public class WelcomeActivity extends BaseAppCompatActivity
 				super.onFailure(ex);
 				Toast.makeText(WelcomeActivity.this, "ex = " + Log.getStackTraceString(ex), Toast.LENGTH_SHORT).show();
 			}
-		}.doRequest(httpUrl, param, ResponsePhoneLoginBean.class);
+		}.doRequest(httpUrl, requestBean, ResponsePhoneLoginBean.class);
 	}
 
 	@OnClick(R.id.btn_test)

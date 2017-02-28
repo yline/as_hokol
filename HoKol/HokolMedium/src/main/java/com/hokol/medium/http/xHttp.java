@@ -17,14 +17,6 @@ public abstract class xHttp<Result> implements IHttpResponse<Result>
 {
 	private final HttpHandler httpHandler;
 
-	public static final boolean isDebug = true;
-
-	public static final int REQUEST_SUCCESS_CODE = 0;
-
-	public static final int CONNECT_TIME_OUT = 10;
-
-	public static final String MEDIA_TYPE_JSON = "application/json; charset=utf-8";
-
 	public xHttp()
 	{
 		httpHandler = HttpHandler.build();
@@ -34,29 +26,30 @@ public abstract class xHttp<Result> implements IHttpResponse<Result>
 	 * 这个就是做 Get请求,不带参数
 	 *
 	 * @param httpUrl
+	 * @param resultClass
 	 */
-	public void doRequest(String httpUrl, Class<Result> clazz)
+	public void doRequest(String httpUrl, Class<Result> resultClass)
 	{
 		HttpNullRequest httpNullRequest = new HttpNullRequest(new HttpNullDispose(httpHandler, this));
-		httpNullRequest.doRequest(httpUrl, clazz);
+		httpNullRequest.doRequest(httpUrl, resultClass);
 	}
 
 	/**
 	 * 这个就是做Post请求,带参数(Json)
 	 *
 	 * @param httpUrl
-	 * @param param   可转换成Json的数据类型
-	 * @param clazz
+	 * @param requestParam 可转换成Json的数据类型
+	 * @param resultClass
 	 */
-	public void doRequest(String httpUrl, Object param, Class<Result> clazz)
+	public void doRequest(String httpUrl, Object requestParam, Class<Result> resultClass)
 	{
 		HttpJsonRequest httpJsonRequest = new HttpJsonRequest(new HttpJsonDispose(httpHandler, this));
-		httpJsonRequest.doRequest(httpUrl, new Gson().toJson(param), clazz);
+		httpJsonRequest.doRequest(httpUrl, new Gson().toJson(requestParam), resultClass);
 	}
 
 	@Override
 	public abstract void onSuccess(Result result);
-	
+
 	@Override
 	public void onFailureCode(int code)
 	{

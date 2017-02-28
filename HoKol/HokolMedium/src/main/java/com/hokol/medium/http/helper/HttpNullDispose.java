@@ -5,8 +5,8 @@ import android.os.Handler;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hokol.base.log.LogFileUtil;
+import com.hokol.medium.http.HttpConstant;
 import com.hokol.medium.http.bean.ResponseXBean;
-import com.hokol.medium.http.xHttp;
 
 import okhttp3.Call;
 
@@ -37,7 +37,7 @@ public class HttpNullDispose<Result> implements IHttpDispose<Result>
 
 			// 为了放到子线程进行Gson解析
 			Result result = null;
-			if (xHttp.REQUEST_SUCCESS_CODE == code)
+			if (HttpConstant.REQUEST_SUCCESS_CODE == code)
 			{
 				result = gson.fromJson(responseXBean.getData().toString(), clazz);
 			}
@@ -48,7 +48,7 @@ public class HttpNullDispose<Result> implements IHttpDispose<Result>
 				@Override
 				public void run()
 				{
-					if (xHttp.REQUEST_SUCCESS_CODE == code)
+					if (HttpConstant.REQUEST_SUCCESS_CODE == code)
 					{
 						iHttpResponse.onSuccess(finalResult);
 					}
@@ -80,7 +80,7 @@ public class HttpNullDispose<Result> implements IHttpDispose<Result>
 
 	private void preResponse(String msg)
 	{
-		if (xHttp.isDebug)
+		if (HttpConstant.isDebug)
 		{
 			LogFileUtil.v(msg);
 		}
