@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hokol.R;
@@ -24,13 +22,13 @@ public class WelcomeActivity extends BaseAppCompatActivity
 {
 	// 跳转
 	private Button btnActionMain;
-	
+	/*
 	// Http
 	private Button btnTestHttp;
 	
 	private TextView tvHttpHead, tvHttpUrl;
 	
-	private EditText etHttpInput;
+	private EditText etHttpInput;*/
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -45,11 +43,12 @@ public class WelcomeActivity extends BaseAppCompatActivity
 	private void initView()
 	{
 		btnActionMain = (Button) findViewById(R.id.btn_action_main);
-		
+		/*
 		btnTestHttp = (Button) findViewById(R.id.btn_main_http_request);
 		tvHttpHead = (TextView) findViewById(R.id.tv_main_http_head);
 		tvHttpUrl = (TextView) findViewById(R.id.tv_main_http_url);
 		etHttpInput = (EditText) findViewById(R.id.et_main_http_input);
+		*/
 	}
 	
 	private void setClickListener()
@@ -62,7 +61,7 @@ public class WelcomeActivity extends BaseAppCompatActivity
 				MainActivity.actionStart(WelcomeActivity.this);
 			}
 		});
-		
+		/*
 		btnTestHttp.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -77,7 +76,7 @@ public class WelcomeActivity extends BaseAppCompatActivity
 				
 				doGet(headUrl);
 			}
-		});
+		});*/
 	}
 
 	private void doGet(String httpUrl)
