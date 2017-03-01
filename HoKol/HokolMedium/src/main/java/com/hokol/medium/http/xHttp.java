@@ -56,6 +56,8 @@ public abstract class xHttp<Result> implements IHttpResponse<Result>
 		}
 		Request request = builder.build();
 
+		LogFileUtil.v("xHttp -> doGet, requestParam -> " + request.url().toString());
+
 		httpNullRequest.doRequest(request, resultClass);
 	}
 
@@ -68,6 +70,8 @@ public abstract class xHttp<Result> implements IHttpResponse<Result>
 	 */
 	public void doPost(String httpUrl, Object requestParam, Class<Result> resultClass)
 	{
+		LogFileUtil.v("xHttp -> doPost, requestParam -> " + requestParam.toString());
+
 		HttpJsonRequest httpJsonRequest = new HttpJsonRequest(new HttpJsonDispose(httpHandler, this));
 		httpJsonRequest.doRequest(httpUrl, new Gson().toJson(requestParam), resultClass);
 	}

@@ -6,8 +6,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.hokol.R;
+import com.hokol.application.IApplication;
 import com.hokol.base.common.BaseAppCompatActivity;
-import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.HttpConstant;
 import com.hokol.medium.http.bean.RequestPhoneLoginBean;
 import com.hokol.medium.http.bean.ResponsePhoneLoginBean;
@@ -38,6 +38,7 @@ public class WelcomeActivity extends BaseAppCompatActivity
 	@BindView(R.id.et_main_password)
 	public EditText etPassWord;
 
+	// 网络登陆请求
 	@OnClick(R.id.btn_main_login)
 	public void btnActionLogin()
 	{
@@ -46,10 +47,6 @@ public class WelcomeActivity extends BaseAppCompatActivity
 
 		String httpUrl = HttpConstant.HTTP_PHONE_LOGIN_URL;
 
-		LogFileUtil.v("username = " + username + ",password = " + password);
-		LogFileUtil.v("httpUrl = " + httpUrl);
-
-		// doGet(httpUrl, new String[]{"user_tel", "user_pwd"}, new String[]{username, password});
 		doPost(httpUrl, new RequestPhoneLoginBean(username, password));
 	}
 
@@ -62,31 +59,6 @@ public class WelcomeActivity extends BaseAppCompatActivity
 		ButterKnife.bind(this);
 	}
 	
-	private void doGet(String httpUrl, String[] key, String[] value)
-	{
-		new xHttp<ResponsePhoneLoginBean>()
-		{
-			@Override
-			public void onSuccess(ResponsePhoneLoginBean bean)
-			{
-				LogFileUtil.v(bean.toString());
-				Toast.makeText(WelcomeActivity.this, bean.toString(), Toast.LENGTH_SHORT).show();
-			}
-
-			@Override
-			public void onFailureCode(int code)
-			{
-				Toast.makeText(WelcomeActivity.this, "code = " + code, Toast.LENGTH_SHORT).show();
-			}
-
-			@Override
-			public void onFailure(Exception ex)
-			{
-				Toast.makeText(WelcomeActivity.this, "ex = " + Log.getStackTraceString(ex), Toast.LENGTH_SHORT).show();
-			}
-		}.doGet(httpUrl, key, value, ResponsePhoneLoginBean.class);
-	}
-
 	private void doPost(String httpUrl, RequestPhoneLoginBean requestBean)
 	{
 		new xHttp<ResponsePhoneLoginBean>()
@@ -95,8 +67,9 @@ public class WelcomeActivity extends BaseAppCompatActivity
 			@Override
 			public void onSuccess(ResponsePhoneLoginBean responsePhoneLoginBean)
 			{
-				LogFileUtil.v(responsePhoneLoginBean.toString());
-				Toast.makeText(WelcomeActivity.this, responsePhoneLoginBean.toString(), Toast.LENGTH_SHORT).show();
+				super.onSuccess(responsePhoneLoginBean);
+				MainActivity.actionStart(WelcomeActivity.this);
+				IApplication.finishActivity();
 			}
 
 			@Override

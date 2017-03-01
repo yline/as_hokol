@@ -39,7 +39,7 @@ public class HttpJsonDispose<Result> implements IHttpDispose<Result>
 				Gson gson = new Gson();
 				final ResponseXBean responseXBean = HttpConstant.getResponseXBean(jsonResult);
 
-				preResponse("onNetSuccess responseXBean -> " + (null == responseXBean ? "null" : responseXBean.toString()));
+				preResponse("onNetSuccess responseXBean -> " + (null == responseXBean ? "null" : "code -> " + responseXBean.getCode()));
 				// 为了放到子线程进行Gson解析
 				Result result = null;
 				if (HttpConstant.REQUEST_SUCCESS_CODE == responseXBean.getCode())
