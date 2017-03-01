@@ -6,11 +6,17 @@ package com.hokol.medium.http.bean;
  * @author yline 2017/2/28 --> 17:08
  * @version 1.0.0
  */
-public class ResponseXBean<T>
+public class ResponseXBean
 {
 	private int code;
 
-	private T data;
+	private String data;
+
+	public ResponseXBean(int code, String data)
+	{
+		this.code = code;
+		this.data = data;
+	}
 
 	public int getCode()
 	{
@@ -22,13 +28,22 @@ public class ResponseXBean<T>
 		this.code = code;
 	}
 
-	public T getData()
+	public String getData()
 	{
 		return data;
 	}
 
-	public void setData(T data)
+	public void setData(String data)
 	{
 		this.data = data;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "ResponseXBean{" +
+				"code=" + code +
+				", data='" + data + '\'' +
+				'}';
 	}
 }

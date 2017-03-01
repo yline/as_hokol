@@ -1,6 +1,7 @@
 package com.hokol.medium.http;
 
 import com.google.gson.Gson;
+import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.helper.HttpJsonDispose;
 import com.hokol.medium.http.helper.HttpJsonRequest;
 import com.hokol.medium.http.helper.HttpNullDispose;
@@ -48,17 +49,20 @@ public abstract class xHttp<Result> implements IHttpResponse<Result>
 	}
 
 	@Override
-	public abstract void onSuccess(Result result);
+	public void onSuccess(Result result)
+	{
+		LogFileUtil.v("xHttp onSuccess result -> " + result.toString());
+	}
 
 	@Override
 	public void onFailureCode(int code)
 	{
-
+		LogFileUtil.v("xHttp onFailureCode code -> " + code);
 	}
 
 	@Override
 	public void onFailure(Exception ex)
 	{
-
+		LogFileUtil.e("", "xHttp onFailure ex ", ex);
 	}
 }

@@ -3,13 +3,20 @@ package com.hokol.medium.http.helper;
 import android.os.Handler;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.HttpConstant;
 import com.hokol.medium.http.bean.ResponseXBean;
 
+import org.json.JSONException;
+
 import okhttp3.Call;
 
+/**
+ * Get网络请求 处理接口
+ *
+ * @author yline 2017/3/1 --> 10:25
+ * @version 1.0.0
+ */
 public class HttpNullDispose<Result> implements IHttpDispose<Result>
 {
 	private Handler handler;
@@ -27,37 +34,39 @@ public class HttpNullDispose<Result> implements IHttpDispose<Result>
 	{
 		if (null != iHttpResponse && null != handler)
 		{
-			Gson gson = new Gson();
-			ResponseXBean<Result> responseXBean = gson.fromJson(jsonResult, new TypeToken<ResponseXBean<Result>>()
+			try
 			{
-			}.getType());
+				Gson gson = new Gson();
+				final ResponseXBean responseXBean = HttpConstant.getResponseXBean(jsonResult);
 
-			final int code = responseXBean.getCode();
-			preResponse("onNetSuccess code -> " + code + ",data -> " + responseXBean.getData());
-
-			// 为了放到子线程进行Gson解析
-			Result result = null;
-			if (HttpConstant.REQUEST_SUCCESS_CODE == code)
-			{
-				result = gson.fromJson(responseXBean.getData().toString(), clazz);
-			}
-
-			final Result finalResult = result;
-			handler.post(new Runnable()
-			{
-				@Override
-				public void run()
+				preResponse("onNetSuccess responseXBean -> " + (null == responseXBean ? "null" : responseXBean.toString()));
+				// 为了放到子线程进行Gson解析
+				Result result = null;
+				if (HttpConstant.REQUEST_SUCCESS_CODE == responseXBean.getCode())
 				{
-					if (HttpConstant.REQUEST_SUCCESS_CODE == code)
-					{
-						iHttpResponse.onSuccess(finalResult);
-					}
-					else
-					{
-						iHttpResponse.onFailureCode(code);
-					}
+					result = gson.fromJson(responseXBean.getData(), clazz);
 				}
-			});
+
+				final Result finalResult = result;
+				handler.post(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						if (HttpConstant.REQUEST_SUCCESS_CODE == responseXBean.getCode())
+						{
+							iHttpResponse.onSuccess(finalResult);
+						}
+						else
+						{
+							iHttpResponse.onFailureCode(responseXBean.getCode());
+						}
+					}
+				});
+			} catch (JSONException e)
+			{
+				onFailure(call, e, true);
+			}
 		}
 	}
 
