@@ -49,8 +49,8 @@ public class WelcomeActivity extends BaseAppCompatActivity
 		LogFileUtil.v("username = " + username + ",password = " + password);
 		LogFileUtil.v("httpUrl = " + httpUrl);
 
-		doGet(httpUrl);
-		// doPost(httpUrl, new RequestPhoneLoginBean(username, password));
+		// doGet(httpUrl, new String[]{"user_tel", "user_pwd"}, new String[]{username, password});
+		doPost(httpUrl, new RequestPhoneLoginBean(username, password));
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class WelcomeActivity extends BaseAppCompatActivity
 		ButterKnife.bind(this);
 	}
 	
-	private void doGet(String httpUrl)
+	private void doGet(String httpUrl, String[] key, String[] value)
 	{
 		new xHttp<ResponsePhoneLoginBean>()
 		{
@@ -84,7 +84,7 @@ public class WelcomeActivity extends BaseAppCompatActivity
 			{
 				Toast.makeText(WelcomeActivity.this, "ex = " + Log.getStackTraceString(ex), Toast.LENGTH_SHORT).show();
 			}
-		}.doRequest(httpUrl, ResponsePhoneLoginBean.class);
+		}.doGet(httpUrl, key, value, ResponsePhoneLoginBean.class);
 	}
 
 	private void doPost(String httpUrl, RequestPhoneLoginBean requestBean)
@@ -112,12 +112,12 @@ public class WelcomeActivity extends BaseAppCompatActivity
 				super.onFailure(ex);
 				Toast.makeText(WelcomeActivity.this, "ex = " + Log.getStackTraceString(ex), Toast.LENGTH_SHORT).show();
 			}
-		}.doRequest(httpUrl, requestBean, ResponsePhoneLoginBean.class);
+		}.doPost(httpUrl, requestBean, ResponsePhoneLoginBean.class);
 	}
 
 	@OnClick(R.id.btn_test)
 	public void btnTest()
 	{
-		
+
 	}
 }

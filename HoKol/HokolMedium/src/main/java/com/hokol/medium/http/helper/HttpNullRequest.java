@@ -44,11 +44,9 @@ public class HttpNullRequest
 		}
 	}
 
-	public void doRequest(String httpUrl, final Class clazz)
+	public void doRequest(final Request request, final Class clazz)
 	{
 		preRequest();
-
-		final Request request = new Request.Builder().url(httpUrl).build();
 
 		okHttpClient.newCall(request).enqueue(new okhttp3.Callback()
 		{

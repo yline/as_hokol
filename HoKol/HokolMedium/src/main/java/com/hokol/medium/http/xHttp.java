@@ -8,6 +8,8 @@ import com.hokol.medium.http.helper.HttpNullDispose;
 import com.hokol.medium.http.helper.HttpNullRequest;
 import com.hokol.medium.http.helper.IHttpResponse;
 
+import okhttp3.Request;
+
 /**
  * Http使用类,不断地复写doRequest方法即可统一使用
  *
@@ -24,15 +26,37 @@ public abstract class xHttp<Result> implements IHttpResponse<Result>
 	}
 
 	/**
-	 * 这个就是做 Get请求,不带参数
-	 *
 	 * @param httpUrl
 	 * @param resultClass
 	 */
-	public void doRequest(String httpUrl, Class<Result> resultClass)
+	public void doGet(String httpUrl, Class<Result> resultClass)
+	{
+		doGet(httpUrl, null, null, resultClass);
+	}
+
+	/**
+	 * 这个就是做 Get请求
+	 *
+	 * @param httpUrl     请求链接
+	 * @param key         请求的key
+	 * @param value       请求的value
+	 * @param resultClass 返回数据类型
+	 */
+	public void doGet(String httpUrl, String[] key, String[] value, Class<Result> resultClass)
 	{
 		HttpNullRequest httpNullRequest = new HttpNullRequest(new HttpNullDispose(httpHandler, this));
-		httpNullRequest.doRequest(httpUrl, resultClass);
+
+		Request.Builder builder = new Request.Builder().url(httpUrl);
+		if (null != key)
+		{
+			for (int i = 0; i < key.length; i++)
+			{
+				builder.addHeader(key[i], value[i]);
+			}
+		}
+		Request request = builder.build();
+
+		httpNullRequest.doRequest(request, resultClass);
 	}
 
 	/**
@@ -42,7 +66,7 @@ public abstract class xHttp<Result> implements IHttpResponse<Result>
 	 * @param requestParam 可转换成Json的数据类型
 	 * @param resultClass
 	 */
-	public void doRequest(String httpUrl, Object requestParam, Class<Result> resultClass)
+	public void doPost(String httpUrl, Object requestParam, Class<Result> resultClass)
 	{
 		HttpJsonRequest httpJsonRequest = new HttpJsonRequest(new HttpJsonDispose(httpHandler, this));
 		httpJsonRequest.doRequest(httpUrl, new Gson().toJson(requestParam), resultClass);
