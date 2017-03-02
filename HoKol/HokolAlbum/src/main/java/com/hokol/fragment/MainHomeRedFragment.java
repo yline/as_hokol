@@ -31,10 +31,11 @@ import java.util.List;
 
 /**
  * 热点
+ *
  * @author yline 2017/2/13 --> 17:36
  * @version 1.0.0
  */
-public class MainNewsHotFragment extends BaseFragment implements MainNewsHotADHelper.OnPageClickListener, MainNewsHotPointHelper.OnItemClickListener
+public class MainHomeRedFragment extends BaseFragment implements MainNewsHotADHelper.OnPageClickListener, MainNewsHotPointHelper.OnItemClickListener
 {
 	private final static int[] res = new int[]{
 			R.drawable.delete_ad_img1,
@@ -49,7 +50,7 @@ public class MainNewsHotFragment extends BaseFragment implements MainNewsHotADHe
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
-		return inflater.inflate(R.layout.fragment_main_news_hot, container, false);
+		return inflater.inflate(R.layout.fragment_main_home_hot, container, false);
 	}
 	
 	@Override
@@ -84,7 +85,9 @@ public class MainNewsHotFragment extends BaseFragment implements MainNewsHotADHe
 		mainNewsHotRefreshHelper.init((SwipeRefreshLayout) view.findViewById(R.id.swipe_main_news_hot_container));
 	}
 
-	/** RecycleView 添加头部 */
+	/**
+	 * RecycleView 添加头部
+	 */
 	private void initRecycleView(HeadFootWrapperAdapter wrapperAdapter)
 	{
 		// AD
@@ -95,7 +98,7 @@ public class MainNewsHotFragment extends BaseFragment implements MainNewsHotADHe
 		data.add(R.drawable.delete_ad_img4);
 		data.add(R.drawable.delete_ad_img5);
 
-		View adHeadParentView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_news_hot_ad, null);
+		View adHeadParentView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_home_hot_ad, null);
 		MainNewsHotADHelper mainNewsHotADHelper = new MainNewsHotADHelper();
 		mainNewsHotADHelper.build().setResource(data).commit(getContext());
 		mainNewsHotADHelper.initPoint((LinearLayout) adHeadParentView.findViewById(R.id.ll_main_hot_news_ad));
@@ -104,7 +107,7 @@ public class MainNewsHotFragment extends BaseFragment implements MainNewsHotADHe
 		mainNewsHotADHelper.setListener(this);
 
 		// 横向滑动
-		View pointHeadParentView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_news_hot_point, null);
+		View pointHeadParentView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_home_hot_point, null);
 		MainNewsHotPointHelper mainNewsHotPointHelper = new MainNewsHotPointHelper();
 		mainNewsHotPointHelper.init(pointHeadParentView);
 		mainNewsHotPointHelper.setListener(this);
@@ -118,7 +121,7 @@ public class MainNewsHotFragment extends BaseFragment implements MainNewsHotADHe
 		@Override
 		public int getItemRes()
 		{
-			return R.layout.item_main_news_hot;
+			return R.layout.item_main_home_hot;
 		}
 
 		@Override

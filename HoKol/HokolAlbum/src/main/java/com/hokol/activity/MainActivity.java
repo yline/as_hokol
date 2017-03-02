@@ -7,23 +7,41 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 
 import com.hokol.R;
 import com.hokol.base.common.BaseAppCompatActivity;
-import com.hokol.fragment.DeleteFragment;
+import com.hokol.base.common.BaseFragment;
+import com.hokol.fragment.MainCareFragment;
+import com.hokol.fragment.MainHomeFragment;
+import com.hokol.fragment.MainMineFragment;
 import com.hokol.fragment.MainNewsFragment;
+import com.hokol.fragment.MainTaskFragment;
 import com.hokol.viewhelper.MainTitleHelper;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+/**
+ * 主页面
+ *
+ * @author yline 2017/3/2 --> 10:01
+ * @version 1.0.0
+ */
 public class MainActivity extends BaseAppCompatActivity implements MainTitleHelper.OnTitleClickListener
 {
 	private FragmentManager fragmentManager = getSupportFragmentManager();
 
 	private MainNewsFragment mainNewsFragment;
 
-	private DeleteFragment mainDeleteFragment;
+	private MainCareFragment mainCareFragment;
 
-	// @BindView(R.id.tab_layout_main)
+	private MainHomeFragment mainHomeFragment;
+
+	private MainTaskFragment mainTaskFragment;
+
+	private MainMineFragment mainMineFragment;
+
+	@BindView(R.id.tab_layout_main)
 	public TabLayout tabLayout;
 
 	private static final int[] RES = {R.string.main_tab_one, R.string.main_tab_two, R.string.main_tab_three, R.string.main_tab_four, R.string.main_tab_five};
@@ -40,13 +58,15 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		ButterKnife.bind(this);
+
 		initView();
 		initData();
 	}
 	
 	private void initView()
 	{
-		tabLayout = (TabLayout) findViewById(R.id.tab_layout_main);
+		// tabLayout = (TabLayout) findViewById(R.id.tab_layout_main);
 		tabLayout.addTab(tabLayout.newTab().setText(RES[0]));
 		tabLayout.addTab(tabLayout.newTab().setText(RES[1]));
 		tabLayout.addTab(tabLayout.newTab().setText(RES[2]));
@@ -59,7 +79,7 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 		{
 			@Override
 			public void onTabSelected(TabLayout.Tab tab)
-			{
+			{/*
 				int position = tab.getPosition();
 				if (lastTabPosition != position)
 				{
@@ -70,13 +90,16 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 					}
 
 					lastTabPosition = position;
-				}
+				}*/
+				int position = tab.getPosition();
+				fragmentManager.beginTransaction().show(getFragmentByPosition(position)).commit();
 			}
 
 			@Override
 			public void onTabUnselected(TabLayout.Tab tab)
 			{
-
+				int position = tab.getPosition();
+				fragmentManager.beginTransaction().hide(getFragmentByPosition(position)).commit();
 			}
 
 			@Override
@@ -94,10 +117,18 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 	private void initData()
 	{
 		mainNewsFragment = new MainNewsFragment();
-		mainDeleteFragment = new DeleteFragment();
+		mainCareFragment = new MainCareFragment();
+		mainHomeFragment = new MainHomeFragment();
+		mainTaskFragment = new MainTaskFragment();
+		mainMineFragment = new MainMineFragment();
 
 		lastTabPosition = 0;
-		fragmentManager.beginTransaction().add(R.id.fl_main_content, mainDeleteFragment).hide(mainDeleteFragment).add(R.id.fl_main_content, mainNewsFragment).commit();
+
+		fragmentManager.beginTransaction().add(R.id.fl_main_content, mainNewsFragment).hide(mainNewsFragment)
+				.add(R.id.fl_main_content, mainCareFragment).hide(mainCareFragment)
+				.add(R.id.fl_main_content, mainHomeFragment).hide(mainHomeFragment)
+				.add(R.id.fl_main_content, mainTaskFragment).hide(mainTaskFragment)
+				.add(R.id.fl_main_content, mainMineFragment).hide(mainMineFragment).commit();
 	}
 
 	@Override
@@ -106,36 +137,38 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 
 	}
 
+	/**
+	 * 依据位置，获取到相应的 Fragment
+	 *
+	 * @param newPosition
+	 * @return
+	 */
 	private Fragment getFragmentByPosition(int newPosition)
 	{
-		Fragment fragment = null;
+		BaseFragment fragment = null;
 		switch (newPosition)
 		{
 			case 0:
 				fragment = mainNewsFragment;
 				break;
 			case 1:
-				mainDeleteFragment.setText(getResources().getString(R.string.main_tab_two));
-				fragment = mainDeleteFragment;
+				fragment = mainCareFragment;
 				break;
 			case 2:
-				mainDeleteFragment.setText(getResources().getString(R.string.main_tab_three));
-				fragment = mainDeleteFragment;
+				fragment = mainHomeFragment;
 				break;
 			case 3:
-				mainDeleteFragment.setText(getResources().getString(R.string.main_tab_four));
-				fragment = mainDeleteFragment;
+				fragment = mainTaskFragment;
 				break;
 			case 4:
-				mainDeleteFragment.setText(getResources().getString(R.string.main_tab_five));
-				fragment = mainDeleteFragment;
+				fragment = mainMineFragment;
 				break;
 			default:
 				break;
 		}
 		return fragment;
 	}
-
+	/*
 	private FragmentTransaction hide(int oldPosition)
 	{
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -160,7 +193,7 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 				break;
 		}
 		return fragmentTransaction;
-	}
+	}*/
 
 	public static void actionStart(Context context)
 	{

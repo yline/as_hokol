@@ -10,16 +10,19 @@
     <string name="main_tab_one">新闻</string>
     <string name="main_tab_two">关注</string>
     <string name="main_tab_three">首页</string>
-    <string name="main_tab_four">联系</string>
+    <string name="main_tab_four">任务</string>
     <string name="main_tab_five">我</string>
 
+    <!--主页面，首页，内容-->
+    <string name="main_home_title_one">网红</string>
+    <string name="main_home_title_two">主播</string>
+    <string name="main_home_title_three">演员</string>
+    <string name="main_home_title_four">模特</string>
+    <string name="main_home_title_five">歌手</string>
+    <string name="main_home_title_six">体育</string>
+
+    <!--主页面，标题内容-->
     <string name="main_title_left">左</string>
     <string name="main_title_center">红客</string>
     <string name="main_title_right">右</string>
-
-    <string name="news_title_one">热门</string>
-    <string name="news_title_two">最新</string>
-    <string name="news_title_three">附近</string>
-    <string name="news_title_four">浙江</string>
-    <string name="news_title_five">小视频</string>
 </resources>
