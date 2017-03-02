@@ -27,7 +27,7 @@ public class MainHomeFragment extends BaseFragment
 	@BindView(R.id.viewpager_main_news)
 	public ViewPager viewPager;
 
-	@BindView(R.id.tab_layout_main_news)
+	@BindView(R.id.tab_layout_main_home)
 	public TabLayout tabLayout;
 
 	@BindArray(R.array.main_home_tab)
@@ -76,26 +76,6 @@ public class MainHomeFragment extends BaseFragment
 			public CharSequence getPageTitle(int position)
 			{
 				return RES_MAIN_HOME_TAB[position];
-			}
-		});
-		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
-		{
-			@Override
-			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
-			{
-
-			}
-
-			@Override
-			public void onPageSelected(int position)
-			{
-
-			}
-
-			@Override
-			public void onPageScrollStateChanged(int state)
-			{
-
 			}
 		});
 

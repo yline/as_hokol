@@ -25,7 +25,7 @@ import java.util.List;
  * @author yline 2017/2/14 --> 15:08
  * @version 1.0.0
  */
-public class MainHomeHotADHelper
+public class MainHomeRedADHelper
 {
 	private Context context;
 
