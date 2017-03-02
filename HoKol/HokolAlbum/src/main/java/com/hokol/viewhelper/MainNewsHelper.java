@@ -1,10 +1,19 @@
 package com.hokol.viewhelper;
 
+import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.hokol.R;
+import com.hokol.adapter.HeadFootWrapperAdapter;
+import com.hokol.base.adapter.CommonRecyclerAdapter;
+import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.adapter.ViewHolder;
+import com.hokol.medium.http.bean.ResponseMainMultiplexNewsBean;
 import com.hokol.medium.http.bean.ResponseMainSingleNewsBean;
+
+import java.util.List;
 
 /**
  * 新闻页面的,view帮助类
@@ -16,16 +25,76 @@ public class MainNewsHelper
 {
 	private ViewHolder recommendViewHolder;
 
-	public void initRecommendView(View view)
+	private HeadFootWrapperAdapter recyclerAdapter;
+
+	/**
+	 * 初始化Recycle控件
+	 *
+	 * @param context
+	 * @param parentView
+	 */
+	public void initView(Context context, View parentView)
 	{
-		recommendViewHolder = new ViewHolder(view);
+		RecyclerView recyclerView = (RecyclerView) parentView.findViewById(R.id.recycle_main_news);
+		recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+		CommonRecyclerAdapter commonListAdapter = new CommonNewsAdapter();
+		recyclerAdapter = new HeadFootWrapperAdapter(commonListAdapter);
+
+		recyclerView.setAdapter(recyclerAdapter);
 	}
 
-	public void setRecommendData(ResponseMainSingleNewsBean singleNewsBean)
+	/**
+	 * 初始化推荐控件
+	 *
+	 * @param recommendView
+	 */
+	public void initRecommendView(View recommendView)
+	{
+		recommendViewHolder = new ViewHolder(recommendView);
+
+		recyclerAdapter.addHeaderView(recommendView);
+	}
+
+	/**
+	 * 更新推荐显示内容
+	 *
+	 * @param singleNewsBean
+	 */
+	public void updateRecommendData(ResponseMainSingleNewsBean singleNewsBean)
 	{
 		recommendViewHolder.setImageBackgroundResource(R.id.iv_main_news_recommend, R.drawable.delete_ad_img1);
 		recommendViewHolder.setText(R.id.tv_main_news_recommend_title, singleNewsBean.getNews_title());
 		recommendViewHolder.setText(R.id.tv_main_news_recommend_origin, singleNewsBean.getNews_source());
 		recommendViewHolder.setText(R.id.tv_main_news_recommend_time, singleNewsBean.getNews_time());
+	}
+
+	/**
+	 * 更新Recycle数据
+	 *
+	 * @param dataList
+	 */
+	public void setRecycleData(List<ResponseMainMultiplexNewsBean> dataList)
+	{
+		recyclerAdapter.addAll(dataList);
+	}
+
+	private class CommonNewsAdapter extends CommonRecyclerAdapter<ResponseMainMultiplexNewsBean>
+	{
+
+		@Override
+		public int getItemRes()
+		{
+			return R.layout.item_main_news;
+		}
+
+		@Override
+		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
+		{
+			viewHolder.setImageBackground(R.id.iv_main_news, R.mipmap.ic_launcher);
+			viewHolder.setText(R.id.tv_main_news_title, sList.get(position).getNews_title());
+			viewHolder.setText(R.id.tv_main_news_origin, sList.get(position).getNews_source());
+			viewHolder.setText(R.id.tv_main_news_time, sList.get(position).getNews_time());
+		}
 	}
 }

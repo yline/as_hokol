@@ -16,6 +16,9 @@ import com.hokol.base.common.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindArray;
+import butterknife.ButterKnife;
+
 public class MainHomeFragment extends BaseFragment
 {
 	private List<BaseFragment> fragmentList;
@@ -24,14 +27,8 @@ public class MainHomeFragment extends BaseFragment
 
 	private TabLayout tabLayout;
 
-	private static final int[] IDS = new int[]{
-			R.string.main_home_title_one,
-			R.string.main_home_title_two,
-			R.string.main_home_title_three,
-			R.string.main_home_title_four,
-			R.string.main_home_title_five,
-			R.string.main_home_title_six
-	};
+	@BindArray(R.array.main_home_tab)
+	public String[] RES_MAIN_HOME_TAB;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -42,7 +39,7 @@ public class MainHomeFragment extends BaseFragment
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
 	{
-		super.onViewCreated(view, savedInstanceState);
+		ButterKnife.bind(this, view);
 
 		initView(view);
 		initData();
@@ -58,7 +55,7 @@ public class MainHomeFragment extends BaseFragment
 	{
 		fragmentList = new ArrayList<>();
 		fragmentList.add(new MainHomeRedFragment());
-		fragmentList.add(new MainHomeAuchorFragment());
+		fragmentList.add(new MainHomeAuthorFragment());
 		fragmentList.add(new MainHomePerformerFragment());
 		fragmentList.add(new MainHomeModelFragment());
 		fragmentList.add(new MainHomeSingerFragment());
@@ -82,7 +79,7 @@ public class MainHomeFragment extends BaseFragment
 			@Override
 			public CharSequence getPageTitle(int position)
 			{
-				return getResources().getString(IDS[position]);
+				return RES_MAIN_HOME_TAB[position];
 			}
 		});
 		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()

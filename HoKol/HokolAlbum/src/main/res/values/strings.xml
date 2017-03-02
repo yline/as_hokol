@@ -7,12 +7,6 @@
     <string name="login_action_start">确定</string>
 
     <!--主页面内容-->
-    <string name="main_tab_one">新闻</string>
-    <string name="main_tab_two">关注</string>
-    <string name="main_tab_three">首页</string>
-    <string name="main_tab_four">任务</string>
-    <string name="main_tab_five">我</string>
-
     <array name="main_tab">
         <item name="news">新闻</item>
         <item name="care">关注</item>
@@ -22,12 +16,14 @@
     </array>
 
     <!--主页面，首页，内容-->
-    <string name="main_home_title_one">网红</string>
-    <string name="main_home_title_two">主播</string>
-    <string name="main_home_title_three">演员</string>
-    <string name="main_home_title_four">模特</string>
-    <string name="main_home_title_five">歌手</string>
-    <string name="main_home_title_six">体育</string>
+    <array name="main_home_tab">
+        <item name="red">网红</item>
+        <item name="author">主播</item>
+        <item name="performer">演员</item>
+        <item name="model">模特</item>
+        <item name="singer">歌手</item>
+        <item name="sport">体育</item>
+    </array>
 
     <!--主页面，标题内容-->
     <string name="main_title_left">左</string>
