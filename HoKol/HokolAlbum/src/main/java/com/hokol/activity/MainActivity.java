@@ -18,6 +18,7 @@ import com.hokol.fragment.MainNewsFragment;
 import com.hokol.fragment.MainTaskFragment;
 import com.hokol.viewhelper.MainTitleHelper;
 
+import butterknife.BindArray;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -44,12 +45,13 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 	@BindView(R.id.tab_layout_main)
 	public TabLayout tabLayout;
 
-	private static final int[] RES = {R.string.main_tab_one, R.string.main_tab_two, R.string.main_tab_three, R.string.main_tab_four, R.string.main_tab_five};
+	@BindArray(R.array.main_tab)
+	public String[] RES_MAIN_TAB;
 
 	private static final int COLOR_BEFORE = Color.BLACK;
 
 	private static final int COLOR_AFTER = Color.GREEN;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -64,11 +66,11 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 	
 	private void initView()
 	{
-		tabLayout.addTab(tabLayout.newTab().setText(RES[0]));
-		tabLayout.addTab(tabLayout.newTab().setText(RES[1]));
-		tabLayout.addTab(tabLayout.newTab().setText(RES[2]));
-		tabLayout.addTab(tabLayout.newTab().setText(RES[3]));
-		tabLayout.addTab(tabLayout.newTab().setText(RES[4]));
+		tabLayout.addTab(tabLayout.newTab().setText(RES_MAIN_TAB[0]));
+		tabLayout.addTab(tabLayout.newTab().setText(RES_MAIN_TAB[1]));
+		tabLayout.addTab(tabLayout.newTab().setText(RES_MAIN_TAB[2]));
+		tabLayout.addTab(tabLayout.newTab().setText(RES_MAIN_TAB[3]));
+		tabLayout.addTab(tabLayout.newTab().setText(RES_MAIN_TAB[4]));
 		tabLayout.setSelectedTabIndicatorHeight(0);
 		tabLayout.setTabTextColors(COLOR_BEFORE, COLOR_AFTER);
 

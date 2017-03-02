@@ -22,9 +22,9 @@ import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.base.utils.UIResizeUtil;
 import com.hokol.bean.LivePersonInfo;
-import com.hokol.viewhelper.MainNewsHotADHelper;
-import com.hokol.viewhelper.MainNewsHotPointHelper;
-import com.hokol.viewhelper.MainNewsHotRefreshHelper;
+import com.hokol.viewhelper.MainHomeHotADHelper;
+import com.hokol.viewhelper.MainHomeHotPointHelper;
+import com.hokol.viewhelper.MainHomeHotRefreshHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ import java.util.List;
  * @author yline 2017/2/13 --> 17:36
  * @version 1.0.0
  */
-public class MainHomeRedFragment extends BaseFragment implements MainNewsHotADHelper.OnPageClickListener, MainNewsHotPointHelper.OnItemClickListener
+public class MainHomeRedFragment extends BaseFragment implements MainHomeHotADHelper.OnPageClickListener, MainHomeHotPointHelper.OnItemClickListener
 {
 	private final static int[] res = new int[]{
 			R.drawable.delete_ad_img1,
@@ -81,7 +81,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainNewsHotADHe
 		recyclerView.setAdapter(recycleAdapter);
 
 		// SwipeRefreshLayout
-		MainNewsHotRefreshHelper mainNewsHotRefreshHelper = new MainNewsHotRefreshHelper();
+		MainHomeHotRefreshHelper mainNewsHotRefreshHelper = new MainHomeHotRefreshHelper();
 		mainNewsHotRefreshHelper.init((SwipeRefreshLayout) view.findViewById(R.id.swipe_main_news_hot_container));
 	}
 
@@ -99,7 +99,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainNewsHotADHe
 		data.add(R.drawable.delete_ad_img5);
 
 		View adHeadParentView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_home_hot_ad, null);
-		MainNewsHotADHelper mainNewsHotADHelper = new MainNewsHotADHelper();
+		MainHomeHotADHelper mainNewsHotADHelper = new MainHomeHotADHelper();
 		mainNewsHotADHelper.build().setResource(data).commit(getContext());
 		mainNewsHotADHelper.initPoint((LinearLayout) adHeadParentView.findViewById(R.id.ll_main_hot_news_ad));
 		mainNewsHotADHelper.initViewPagerView((ViewPager) adHeadParentView.findViewById(R.id.viewpager_main_hot_news_ad));
@@ -108,7 +108,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainNewsHotADHe
 
 		// 横向滑动
 		View pointHeadParentView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_home_hot_point, null);
-		MainNewsHotPointHelper mainNewsHotPointHelper = new MainNewsHotPointHelper();
+		MainHomeHotPointHelper mainNewsHotPointHelper = new MainHomeHotPointHelper();
 		mainNewsHotPointHelper.init(pointHeadParentView);
 		mainNewsHotPointHelper.setListener(this);
 

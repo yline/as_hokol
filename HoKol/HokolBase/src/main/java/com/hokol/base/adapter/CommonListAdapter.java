@@ -1,13 +1,10 @@
 package com.hokol.base.adapter;
 
 import android.content.Context;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,6 +12,7 @@ import java.util.List;
 
 /**
  * T -> 数据类型
+ *
  * @author YLine
  *         2016年8月1日 下午11:16:12
  */
@@ -80,66 +78,12 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommo
 
 	/**
 	 * 对内容设置
+	 *
 	 * @param position 当前item位置
 	 * @param parent   副控件(一般不用)
 	 * @param item     ViewHolder
 	 */
 	protected abstract void setViewContent(int position, ViewGroup parent, ViewHolder item);
-
-
-	protected class ViewHolder
-	{
-		private SparseArray<View> sArray;
-
-		private View sView;
-
-		public ViewHolder(View view)
-		{
-			this.sView = view;
-			sArray = new SparseArray<View>();
-		}
-
-		/**
-		 * 获取到相应的资源
-		 * @param viewId
-		 * @return
-		 */
-		public <T extends View> T get(int viewId)
-		{
-			if (sArray.get(viewId) == null)
-			{
-				View view = sView.findViewById(viewId);
-				sArray.put(viewId, view);
-			}
-			return (T) sArray.get(viewId);
-		}
-
-		/**
-		 * 要求是TextView;   这样的方法就可以多写几个,然后就可以作死的连缀了
-		 * @param viewId  资源
-		 * @param content 内容
-		 * @return 为了连缀写法, 返回自身
-		 */
-		public ViewHolder setText(int viewId, String content)
-		{
-			TextView textView = this.get(viewId);
-			textView.setText(content);
-			return this;
-		}
-
-		/**
-		 * 要求是ImageView;
-		 * @param viewId 资源id
-		 * @param resId  图片背景id
-		 * @return
-		 */
-		public ViewHolder setImage(int viewId, int resId)
-		{
-			ImageView imageView = this.get(viewId);
-			imageView.setBackgroundResource(resId);
-			return this;
-		}
-	}
 
 	public void set(List<T> tList)
 	{

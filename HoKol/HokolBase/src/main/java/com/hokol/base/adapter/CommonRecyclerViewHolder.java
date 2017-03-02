@@ -3,87 +3,42 @@ package com.hokol.base.adapter;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * Created by yline on 2016/11/14.
+ * RecyclerView 公共适配器
+ *
+ * @author yline 2017/3/2 --> 14:15
+ * @version 1.0.0
  */
 public class CommonRecyclerViewHolder extends RecyclerView.ViewHolder
 {
 	private SparseArray<View> sArray;
-
+	
 	public CommonRecyclerViewHolder(View itemView)
 	{
 		super(itemView);
 		sArray = new SparseArray<View>();
 	}
-
+	
 	public CommonRecyclerViewHolder setText(int viewId, String content)
 	{
 		TextView textView = this.get(viewId);
 		textView.setText(content);
 		return this;
 	}
-
-	public CommonRecyclerViewHolder setLayoutMargins(int viewId, int left, int top, int right, int bottom)
+	
+	public CommonRecyclerViewHolder setImageBackground(int viewId, int resId)
 	{
-		ViewGroup viewGroup = this.get(viewId);
-		if (viewGroup.getParent() instanceof LinearLayout)
-		{
-			LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewGroup.getLayoutParams();
-			params.setMargins(left, top, right, bottom);
-			viewGroup.setLayoutParams(params);
-		}
-		else if (viewGroup.getParent() instanceof FrameLayout)
-		{
-			FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) viewGroup.getLayoutParams();
-			params.setMargins(left, top, right, bottom);
-			viewGroup.setLayoutParams(params);
-		}
-		else if (viewGroup.getParent() instanceof RelativeLayout)
-		{
-			RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) viewGroup.getLayoutParams();
-			params.setMargins(left, top, right, bottom);
-			viewGroup.setLayoutParams(params);
-		}
-		else
-		{
-			throw new IllegalArgumentException("invalid parent layout");
-		}
+		ImageView imageView = this.get(viewId);
+		imageView.setBackgroundResource(resId);
 		return this;
 	}
-
-	/**
-	 * 瀑布流效果,可以使用
-	 * @param viewId
-	 * @param width
-	 * @param height
-	 * @return
-	 */
-	public CommonRecyclerViewHolder setLayout(int viewId, int width, int height)
-	{
-		ViewGroup viewGroup = this.get(viewId);
-		ViewGroup.LayoutParams params = viewGroup.getLayoutParams();
-		if (-1 != width)
-		{
-			params.width = width;
-		}
-
-		if (-1 != height)
-		{
-			params.height = height;
-		}
-
-		viewGroup.setLayoutParams(params);
-		return this;
-	}
-
+	
 	/**
 	 * 获取到相应的资源
+	 *
 	 * @param viewId
 	 * @return
 	 */

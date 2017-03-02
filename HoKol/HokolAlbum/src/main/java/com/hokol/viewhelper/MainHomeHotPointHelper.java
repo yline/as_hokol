@@ -8,10 +8,11 @@ import com.hokol.base.utils.UIResizeUtil;
 
 /**
  * Hot页面的Item
+ *
  * @author yline 2017/2/15 --> 10:49
  * @version 1.0.0
  */
-public class MainNewsHotPointHelper
+public class MainHomeHotPointHelper
 {
 	private ViewHolder viewHolder = new ViewHolder();
 

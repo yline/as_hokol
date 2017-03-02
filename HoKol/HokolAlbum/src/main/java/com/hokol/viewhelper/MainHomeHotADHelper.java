@@ -25,7 +25,7 @@ import java.util.List;
  * @author yline 2017/2/14 --> 15:08
  * @version 1.0.0
  */
-public class MainNewsHotADHelper
+public class MainHomeHotADHelper
 {
 	private Context context;
 
@@ -112,6 +112,7 @@ public class MainNewsHotADHelper
 
 	/**
 	 * 添加指示点
+	 *
 	 * @param context      本Activity
 	 * @param parentLayout 指示点父框体(此处LinearLayout)
 	 * @param count        指示点个数
@@ -149,6 +150,7 @@ public class MainNewsHotADHelper
 
 	/**
 	 * 指示点状态
+	 *
 	 * @param parentLayout 指示点父框体(此处LinearLayout)
 	 * @param position     当前的指示点
 	 */
@@ -272,7 +274,9 @@ public class MainNewsHotADHelper
 		}
 	}
 
-	/** 这个必须在ViewPager等初始化完成之后,才能开始 */
+	/**
+	 * 这个必须在ViewPager等初始化完成之后,才能开始
+	 */
 	private void startRecycle()
 	{
 
@@ -461,6 +465,7 @@ public class MainNewsHotADHelper
 
 		/**
 		 * 如果设置成false,则将起始点设置为:Integer.MAX_VALUE;
+		 *
 		 * @param recycleRight
 		 * @return
 		 */
@@ -499,11 +504,17 @@ public class MainNewsHotADHelper
 
 	private enum UserTouchState
 	{
-		/** 用户滑动 */
+		/**
+		 * 用户滑动
+		 */
 		OnMove,
-		/** 用户松手 */
+		/**
+		 * 用户松手
+		 */
 		OnUp,
-		/** 自动播放 */
+		/**
+		 * 自动播放
+		 */
 		OnAuto
 	}
 
