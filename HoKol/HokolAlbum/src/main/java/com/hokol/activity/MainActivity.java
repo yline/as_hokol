@@ -50,8 +50,6 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 
 	private static final int COLOR_AFTER = Color.GREEN;
 
-	private int lastTabPosition;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -66,7 +64,6 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 	
 	private void initView()
 	{
-		// tabLayout = (TabLayout) findViewById(R.id.tab_layout_main);
 		tabLayout.addTab(tabLayout.newTab().setText(RES[0]));
 		tabLayout.addTab(tabLayout.newTab().setText(RES[1]));
 		tabLayout.addTab(tabLayout.newTab().setText(RES[2]));
@@ -79,18 +76,7 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 		{
 			@Override
 			public void onTabSelected(TabLayout.Tab tab)
-			{/*
-				int position = tab.getPosition();
-				if (lastTabPosition != position)
-				{
-					Fragment showFragment = getFragmentByPosition(position);
-					if (null != showFragment)
-					{
-						hide(lastTabPosition).show(showFragment).commit();
-					}
-
-					lastTabPosition = position;
-				}*/
+			{
 				int position = tab.getPosition();
 				fragmentManager.beginTransaction().show(getFragmentByPosition(position)).commit();
 			}
@@ -122,9 +108,7 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 		mainTaskFragment = new MainTaskFragment();
 		mainMineFragment = new MainMineFragment();
 
-		lastTabPosition = 0;
-
-		fragmentManager.beginTransaction().add(R.id.fl_main_content, mainNewsFragment).hide(mainNewsFragment)
+		fragmentManager.beginTransaction().add(R.id.fl_main_content, mainNewsFragment)// .hide(mainNewsFragment)
 				.add(R.id.fl_main_content, mainCareFragment).hide(mainCareFragment)
 				.add(R.id.fl_main_content, mainHomeFragment).hide(mainHomeFragment)
 				.add(R.id.fl_main_content, mainTaskFragment).hide(mainTaskFragment)
@@ -168,32 +152,6 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 		}
 		return fragment;
 	}
-	/*
-	private FragmentTransaction hide(int oldPosition)
-	{
-		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		switch (oldPosition)
-		{
-			case 0:
-				fragmentTransaction.hide(mainNewsFragment);
-				break;
-			case 1:
-				fragmentTransaction.hide(mainDeleteFragment);
-				break;
-			case 2:
-				fragmentTransaction.hide(mainDeleteFragment);
-				break;
-			case 3:
-				fragmentTransaction.hide(mainDeleteFragment);
-				break;
-			case 4:
-				fragmentTransaction.hide(mainDeleteFragment);
-				break;
-			default:
-				break;
-		}
-		return fragmentTransaction;
-	}*/
 
 	public static void actionStart(Context context)
 	{
