@@ -23,6 +23,7 @@
         <activity
             android:name=".activity.MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".activity.NewsInfoActivity"></activity>
     </application>
 
 </manifest>

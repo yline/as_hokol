@@ -15,9 +15,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.hokol.R;
-import com.hokol.adapter.HeadFootWrapperAdapter;
+import com.hokol.adapter.HeadFootRecycleAdapter;
 import com.hokol.application.IApplication;
-import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.base.utils.UIResizeUtil;
@@ -45,7 +44,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeHotADHe
 			R.drawable.delete_ad_img5,
 	};
 
-	private HeadFootWrapperAdapter recycleAdapter;
+	private HeadFootRecycleAdapter recycleAdapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -65,8 +64,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeHotADHe
 		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_main_news_hot_container);
 		recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 		
-		CommonRecyclerAdapter tempAdapter = new MainNewsHotAdapter();
-		recycleAdapter = new HeadFootWrapperAdapter(tempAdapter);
+		recycleAdapter = new MainNewsHotAdapter();
 
 		// RecycleView
 		initRecycleView(recycleAdapter);
@@ -88,7 +86,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeHotADHe
 	/**
 	 * RecycleView 添加头部
 	 */
-	private void initRecycleView(HeadFootWrapperAdapter wrapperAdapter)
+	private void initRecycleView(HeadFootRecycleAdapter wrapperAdapter)
 	{
 		// AD
 		List<Integer> data = new ArrayList<>();
@@ -116,7 +114,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeHotADHe
 		wrapperAdapter.addHeaderView(pointHeadParentView);
 	}
 
-	private class MainNewsHotAdapter extends CommonRecyclerAdapter<LivePersonInfo>
+	private class MainNewsHotAdapter extends HeadFootRecycleAdapter<LivePersonInfo>
 	{
 		@Override
 		public int getItemRes()

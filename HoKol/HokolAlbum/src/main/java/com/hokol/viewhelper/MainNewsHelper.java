@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.hokol.R;
-import com.hokol.adapter.HeadFootWrapperAdapter;
+import com.hokol.adapter.HeadFootRecycleAdapter;
 import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.adapter.ViewHolder;
@@ -25,7 +25,7 @@ public class MainNewsHelper
 {
 	private ViewHolder recommendViewHolder;
 
-	private HeadFootWrapperAdapter recyclerAdapter;
+	private HeadFootRecycleAdapter recyclerAdapter;
 
 	/**
 	 * 初始化Recycle控件
@@ -38,8 +38,7 @@ public class MainNewsHelper
 		RecyclerView recyclerView = (RecyclerView) parentView.findViewById(R.id.recycle_main_news);
 		recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-		CommonRecyclerAdapter commonListAdapter = new CommonNewsAdapter();
-		recyclerAdapter = new HeadFootWrapperAdapter(commonListAdapter);
+		recyclerAdapter = new CommonNewsAdapter();
 
 		recyclerView.setAdapter(recyclerAdapter);
 	}
@@ -79,7 +78,17 @@ public class MainNewsHelper
 		recyclerAdapter.addAll(dataList);
 	}
 
-	private class CommonNewsAdapter extends CommonRecyclerAdapter<ResponseMainMultiplexNewsBean>
+	public void setOnRecycleItemClickListener(CommonRecyclerAdapter.OnClickListener listener)
+	{
+		recyclerAdapter.setOnClickListener(listener);
+	}
+
+	public void setOnRecommendClickListener(View.OnClickListener listener)
+	{
+		recommendViewHolder.get(R.id.rl_main_news_recommend).setOnClickListener(listener);
+	}
+
+	private class CommonNewsAdapter extends HeadFootRecycleAdapter<ResponseMainMultiplexNewsBean>
 	{
 
 		@Override

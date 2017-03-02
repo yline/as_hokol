@@ -24,7 +24,7 @@ public class HttpConstant
 	public static final String MEDIA_TYPE_JSON = "application/json; charset=utf-8";
 
 	// Http Url 信息
-	private static final String HTTP_URL_HEAD = "http://192.168.0.112/index.php/Back/Api/";
+	private static final String HTTP_URL_HEAD = "http://120.92.35.211/wanghong/wh/index.php/Back/Api/";
 
 	public static final String HTTP_PHONE_LOGIN_URL = HTTP_URL_HEAD + "login";
 

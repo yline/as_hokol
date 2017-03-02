@@ -7,7 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
+import com.hokol.activity.NewsInfoActivity;
+import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.common.BaseFragment;
+import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.bean.ResponseMainMultiplexNewsBean;
 import com.hokol.medium.http.bean.ResponseMainSingleNewsBean;
 import com.hokol.viewhelper.MainNewsHelper;
@@ -38,7 +41,25 @@ public class MainNewsFragment extends BaseFragment
 		View recommendView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_news_recommend, null);
 		mainNewsHelper = new MainNewsHelper();
 		mainNewsHelper.initView(getContext(), view);
+		mainNewsHelper.setOnRecycleItemClickListener(new CommonRecyclerAdapter.OnClickListener()
+		{
+			@Override
+			public void onClick(View view, int position)
+			{
+				LogFileUtil.v("setOnRecycleItemClickListener position -> " + position);
+				NewsInfoActivity.actionStart(getContext());
+			}
+		});
 		mainNewsHelper.initRecommendView(recommendView); // 初始化控件
+		mainNewsHelper.setOnRecommendClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				LogFileUtil.v("setOnRecommendClickListener");
+				NewsInfoActivity.actionStart(getContext());
+			}
+		});
 	}
 
 	private void initData()

@@ -17,15 +17,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindArray;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainHomeFragment extends BaseFragment
 {
 	private List<BaseFragment> fragmentList;
 
-	private ViewPager viewPager;
+	@BindView(R.id.viewpager_main_news)
+	public ViewPager viewPager;
 
-	private TabLayout tabLayout;
+	@BindView(R.id.tab_layout_main_news)
+	public TabLayout tabLayout;
 
 	@BindArray(R.array.main_home_tab)
 	public String[] RES_MAIN_HOME_TAB;
@@ -41,14 +44,7 @@ public class MainHomeFragment extends BaseFragment
 	{
 		ButterKnife.bind(this, view);
 
-		initView(view);
 		initData();
-	}
-
-	private void initView(View view)
-	{
-		viewPager = (ViewPager) view.findViewById(R.id.viewpager_main_news);
-		tabLayout = (TabLayout) view.findViewById(R.id.tab_layout_main_news);
 	}
 
 	private void initData()

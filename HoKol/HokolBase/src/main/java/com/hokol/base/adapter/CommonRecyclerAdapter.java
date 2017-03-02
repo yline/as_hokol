@@ -42,7 +42,22 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 	{
 		this.onLongClickListener = listener;
 	}
-	
+
+	public OnClickListener getOnClickListener()
+	{
+		return onClickListener;
+	}
+
+	public OnTouchListener getOnTouchListener()
+	{
+		return onTouchListener;
+	}
+
+	public OnLongClickListener getOnLongClickListener()
+	{
+		return onLongClickListener;
+	}
+
 	public CommonRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
 	{
 		return new CommonRecyclerViewHolder(LayoutInflater.from(parent.getContext()).inflate(this.getItemRes(), parent, false));
@@ -190,16 +205,16 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 	
 	public interface OnTouchListener
 	{
-		boolean onClick(View var1, int var2);
+		boolean onClick(View view, int position);
 	}
 	
 	public interface OnLongClickListener
 	{
-		boolean onClick(View var1, int var2);
+		boolean onClick(View view, int position);
 	}
 	
 	public interface OnClickListener
 	{
-		void onClick(View var1, int var2);
+		void onClick(View view, int position);
 	}
 }
