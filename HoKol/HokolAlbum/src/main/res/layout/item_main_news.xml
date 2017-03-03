@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/fragment_main_news_item_margin_out"
     android:layout_marginBottom="@dimen/fragment_main_news_item_margin_out"
     android:layout_marginRight="@dimen/fragment_main_news_item_margin_out"
     android:layout_marginTop="@dimen/fragment_main_news_item_margin_out">
@@ -11,7 +12,7 @@
         android:id="@+id/iv_main_news"
         android:layout_width="120dp"
         android:layout_height="90dp"
-        android:background="@mipmap/ic_launcher"/>
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/tv_main_news_title"

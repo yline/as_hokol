@@ -4,13 +4,17 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.RequestManager;
 import com.hokol.R;
 import com.hokol.adapter.HeadFootRecycleAdapter;
 import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.adapter.ViewHolder;
-import com.hokol.medium.http.bean.ResponseMultiplexNewsBean;
+import com.hokol.custom.DefaultLinearItemDecoration;
 import com.hokol.medium.http.bean.ResponseSingleNewsBean;
 
 import java.util.List;
@@ -27,6 +31,8 @@ public class MainNewsHelper
 
 	private HeadFootRecycleAdapter recyclerAdapter;
 
+	private RequestManager glideManager;
+
 	/**
 	 * 初始化Recycle控件
 	 *
@@ -37,6 +43,9 @@ public class MainNewsHelper
 	{
 		RecyclerView recyclerView = (RecyclerView) parentView.findViewById(R.id.recycle_main_news);
 		recyclerView.setLayoutManager(new LinearLayoutManager(context));
+		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(context, DefaultLinearItemDecoration.VERTICAL_LIST));
+
+		this.glideManager = Glide.with(context);
 
 		recyclerAdapter = new CommonNewsAdapter();
 
@@ -62,7 +71,9 @@ public class MainNewsHelper
 	 */
 	public void updateRecommendData(ResponseSingleNewsBean singleNewsBean)
 	{
-		recommendViewHolder.setImageBackgroundResource(R.id.iv_main_news_recommend, R.drawable.delete_ad_img1);
+		ImageView imageView = recommendViewHolder.get(R.id.iv_main_news_recommend);
+		glideManager.load(singleNewsBean.getNews_img()).placeholder(R.drawable.load_failed).priority(Priority.HIGH).into(imageView);
+
 		recommendViewHolder.setText(R.id.tv_main_news_recommend_title, singleNewsBean.getNews_title());
 		recommendViewHolder.setText(R.id.tv_main_news_recommend_origin, singleNewsBean.getNews_source());
 		recommendViewHolder.setText(R.id.tv_main_news_recommend_time, singleNewsBean.getNews_time());
@@ -73,7 +84,7 @@ public class MainNewsHelper
 	 *
 	 * @param dataList
 	 */
-	public void setRecycleData(List<ResponseMultiplexNewsBean.ResponseMultiplexNews> dataList)
+	public void setRecycleData(List<ResponseSingleNewsBean> dataList)
 	{
 		recyclerAdapter.addAll(dataList);
 	}
@@ -88,7 +99,7 @@ public class MainNewsHelper
 		recommendViewHolder.get(R.id.rl_main_news_recommend).setOnClickListener(listener);
 	}
 	
-	private class CommonNewsAdapter extends HeadFootRecycleAdapter<ResponseMultiplexNewsBean.ResponseMultiplexNews>
+	private class CommonNewsAdapter extends HeadFootRecycleAdapter<ResponseSingleNewsBean>
 	{
 
 		@Override
@@ -100,7 +111,10 @@ public class MainNewsHelper
 		@Override
 		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
 		{
-			viewHolder.setImageBackground(R.id.iv_main_news, R.mipmap.ic_launcher);
+			ImageView imageView = viewHolder.get(R.id.iv_main_news);
+
+			glideManager.load(sList.get(position).getNews_img()).placeholder(R.drawable.load_failed).into(imageView);
+
 			viewHolder.setText(R.id.tv_main_news_title, sList.get(position).getNews_title());
 			viewHolder.setText(R.id.tv_main_news_origin, sList.get(position).getNews_source());
 			viewHolder.setText(R.id.tv_main_news_time, sList.get(position).getNews_time());

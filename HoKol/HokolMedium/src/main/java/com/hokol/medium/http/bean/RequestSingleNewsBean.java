@@ -5,33 +5,25 @@ import android.os.Parcelable;
 
 public class RequestSingleNewsBean implements Parcelable
 {
-	private String new_id;
+	private String news_id;
 
 	public RequestSingleNewsBean()
 	{
 	}
 
-	public RequestSingleNewsBean(String new_id)
+	public RequestSingleNewsBean(String news_id)
 	{
-		this.new_id = new_id;
+		this.news_id = news_id;
 	}
 
-	public String getNew_id()
+	public String getNews_id()
 	{
-		return new_id;
+		return news_id;
 	}
 
-	public void setNew_id(String new_id)
+	public void setNews_id(String news_id)
 	{
-		this.new_id = new_id;
-	}
-
-	@Override
-	public String toString()
-	{
-		return "RequestSingleNewsBean{" +
-				"new_id='" + new_id + '\'' +
-				'}';
+		this.news_id = news_id;
 	}
 
 	@Override
@@ -43,7 +35,7 @@ public class RequestSingleNewsBean implements Parcelable
 	@Override
 	public void writeToParcel(Parcel dest, int flags)
 	{
-		dest.writeString(new_id);
+		dest.writeString(news_id);
 	}
 
 	public static final Parcelable.Creator<RequestSingleNewsBean> CREATOR = new Parcelable.Creator<RequestSingleNewsBean>()
@@ -53,7 +45,7 @@ public class RequestSingleNewsBean implements Parcelable
 		public RequestSingleNewsBean createFromParcel(Parcel source)
 		{
 			RequestSingleNewsBean bean = new RequestSingleNewsBean();
-			bean.new_id = source.readString(); // 读取name
+			bean.news_id = source.readString(); // 读取name
 			return bean;
 		}
 

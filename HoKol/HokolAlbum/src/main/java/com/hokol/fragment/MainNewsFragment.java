@@ -47,10 +47,10 @@ public class MainNewsFragment extends BaseFragment
 		View recommendView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_news_recommend, null);
 		mainNewsHelper = new MainNewsHelper();
 		mainNewsHelper.initView(getContext(), view);
-		mainNewsHelper.setOnRecycleItemClickListener(new CommonRecyclerAdapter.OnClickListener<ResponseMultiplexNewsBean.ResponseMultiplexNews>()
+		mainNewsHelper.setOnRecycleItemClickListener(new CommonRecyclerAdapter.OnClickListener<ResponseSingleNewsBean>()
 		{
 			@Override
-			public void onClick(View view, ResponseMultiplexNewsBean.ResponseMultiplexNews responseMultiplexNews, int position)
+			public void onClick(View view, ResponseSingleNewsBean responseMultiplexNews, int position)
 			{
 				LogFileUtil.v("setOnRecycleItemClickListener position -> " + position);
 				NewsInfoActivity.actionStart(getContext(), new RequestSingleNewsBean(responseMultiplexNews.getNews_id()));
@@ -73,13 +73,26 @@ public class MainNewsFragment extends BaseFragment
 
 	private void initData()
 	{
+		// 推荐
+		new xHttp<ResponseSingleNewsBean>()
+		{
+			@Override
+			public void onSuccess(ResponseSingleNewsBean responseSingleNewsBean)
+			{
+				super.onSuccess(responseSingleNewsBean);
+				recommendId = responseSingleNewsBean.getNews_id();
+				mainNewsHelper.updateRecommendData(responseSingleNewsBean);
+			}
+		}.doPost(HttpConstant.HTTP_MAIN_RECOMMEND_NEWS_URL, "", ResponseSingleNewsBean.class);
+
+		// 多条新闻
 		new xHttp<ResponseMultiplexNewsBean>()
 		{
 			@Override
 			public void onSuccess(ResponseMultiplexNewsBean multiplexNewsBeen)
 			{
 				super.onSuccess(multiplexNewsBeen);
-				List<ResponseMultiplexNewsBean.ResponseMultiplexNews> result = multiplexNewsBeen.getList();
+				List<ResponseSingleNewsBean> result = multiplexNewsBeen.getList();
 				mainNewsHelper.setRecycleData(result);
 			}
 
@@ -94,22 +107,6 @@ public class MainNewsFragment extends BaseFragment
 			{
 				super.onFailure(ex);
 			}
-		}.doPost(HttpConstant.HTTP_MAIN_MULTIPLEX_NEWS_URL, new RequestMultiplexNewsBean("1", "14"), ResponseMultiplexNewsBean.class);
-
-		new xHttp<ResponseSingleNewsBean>()
-		{
-			@Override
-			public void onSuccess(ResponseSingleNewsBean responseSingleNewsBean)
-			{
-				super.onSuccess(responseSingleNewsBean);
-				recommendId = responseSingleNewsBean.getNews_id();
-				mainNewsHelper.updateRecommendData(responseSingleNewsBean);
-			}
-		}.doPost(HttpConstant.HTTP_MAIN_RECOMMEND_NEWS_URL, "", ResponseSingleNewsBean.class);
-	}
-
-	private class Test
-	{
-		private List<ResponseMultiplexNewsBean> list;
+		}.doPost(HttpConstant.HTTP_MAIN_MULTIPLEX_NEWS_URL, new RequestMultiplexNewsBean(1, 14), ResponseMultiplexNewsBean.class);
 	}
 }

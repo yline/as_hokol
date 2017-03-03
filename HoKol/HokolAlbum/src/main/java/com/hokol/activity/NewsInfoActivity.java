@@ -4,8 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.ImageView;
 
-import com.hokol.application.IApplication;
+import com.bumptech.glide.Glide;
+import com.hokol.R;
+import com.hokol.base.adapter.ViewHolder;
 import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.HttpConstant;
@@ -21,11 +25,17 @@ import com.hokol.medium.http.xHttp;
  */
 public class NewsInfoActivity extends BaseAppCompatActivity
 {
+	private ViewHolder newsInfoViewHolder;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_news_info);
 		setTitle("新闻详情页面");
+
+		View parentView = findViewById(R.id.ll_news_info);
+		newsInfoViewHolder = new ViewHolder(parentView);
 
 		initData();
 	}
@@ -34,7 +44,7 @@ public class NewsInfoActivity extends BaseAppCompatActivity
 	{
 		RequestSingleNewsBean bean = getIntentData();
 
-		if (null != bean && !TextUtils.isEmpty(bean.getNew_id()))
+		if (null != bean && !TextUtils.isEmpty(bean.getNews_id()))
 		{
 			new xHttp<ResponseSingleNewsBean>()
 			{
@@ -42,7 +52,12 @@ public class NewsInfoActivity extends BaseAppCompatActivity
 				public void onSuccess(ResponseSingleNewsBean responseSingleNewsBean)
 				{
 					super.onSuccess(responseSingleNewsBean);
-					IApplication.toast(responseSingleNewsBean.toString());
+					newsInfoViewHolder.setText(R.id.tv_news_info_title, responseSingleNewsBean.getNews_title());
+					newsInfoViewHolder.setText(R.id.tv_news_info_sub, responseSingleNewsBean.getNews_source() + "  " + responseSingleNewsBean.getNews_time());
+					newsInfoViewHolder.setText(R.id.tv_news_info_content, responseSingleNewsBean.getNews_content());
+
+					ImageView imageView = newsInfoViewHolder.get(R.id.iv_news_info);
+					Glide.with(NewsInfoActivity.this).load(responseSingleNewsBean.getNews_img()).placeholder(R.drawable.load_failed).into(imageView);
 				}
 			}.doPost(HttpConstant.HTTP_MAIN_SINGLE_NEWS_URL, bean, ResponseSingleNewsBean.class);
 		}

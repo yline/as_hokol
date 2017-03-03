@@ -1,5 +1,6 @@
 package com.hokol.base.adapter;
 
+import android.app.Activity;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,7 +21,12 @@ public class ViewHolder
 	public ViewHolder(View view)
 	{
 		this.sView = view;
-		sArray = new SparseArray<View>();
+		sArray = new SparseArray<>();
+	}
+
+	public ViewHolder(Activity activity)
+	{
+		
 	}
 
 	/**

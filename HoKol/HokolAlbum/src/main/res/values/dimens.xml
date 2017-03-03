@@ -5,5 +5,5 @@
 
     <!--MainNewsFragment-->
     <dimen name="fragment_main_news_item_margin_in">5dp</dimen>
-    <dimen name="fragment_main_news_item_margin_out">6dp</dimen>
+    <dimen name="fragment_main_news_item_margin_out">8dp</dimen>
 </resources>

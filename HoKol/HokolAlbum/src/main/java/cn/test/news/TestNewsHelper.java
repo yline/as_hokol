@@ -38,7 +38,7 @@ public class TestNewsHelper
 			{
 				super.onFailure(ex);
 			}
-		}.doPost(HttpConstant.HTTP_MAIN_MULTIPLEX_NEWS_URL, new RequestMultiplexNewsBean("1", "14"), ResponseMultiplexNewsBean.class);
+		}.doPost(HttpConstant.HTTP_MAIN_MULTIPLEX_NEWS_URL, new RequestMultiplexNewsBean(15, 19), ResponseMultiplexNewsBean.class);
 	}
 
 	public void doRecommendNews()
