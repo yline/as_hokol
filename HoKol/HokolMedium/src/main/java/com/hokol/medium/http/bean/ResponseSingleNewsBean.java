@@ -1,12 +1,12 @@
 package com.hokol.medium.http.bean;
 
 /**
- * 多条新闻请求时,使用
+ * 单条新闻
  *
- * @author yline 2017/3/2 --> 14:10
+ * @author yline 2017/3/2 --> 14:09
  * @version 1.0.0
  */
-public class ResponseMainMultiplexNewsBean
+public class ResponseSingleNewsBean
 {
 	/**
 	 * 新闻ID标识
@@ -14,9 +14,9 @@ public class ResponseMainMultiplexNewsBean
 	private String news_id;
 
 	/**
-	 * 新闻图片;缩略图
+	 * 新闻图片(大图片)
 	 */
-	private String news_small_img;
+	private String news_img;
 
 	/**
 	 * 新闻来源
@@ -33,16 +33,6 @@ public class ResponseMainMultiplexNewsBean
 	 */
 	private String news_title;
 
-	public ResponseMainMultiplexNewsBean(String news_id, String news_small_img, String news_source, String news_time, String news_title, String news_content)
-	{
-		this.news_id = news_id;
-		this.news_small_img = news_small_img;
-		this.news_source = news_source;
-		this.news_time = news_time;
-		this.news_title = news_title;
-		this.news_content = news_content;
-	}
-
 	/**
 	 * 新闻内容
 	 */
@@ -58,14 +48,14 @@ public class ResponseMainMultiplexNewsBean
 		this.news_id = news_id;
 	}
 
-	public String getNews_small_img()
+	public String getNews_img()
 	{
-		return news_small_img;
+		return news_img;
 	}
 
-	public void setNews_small_img(String news_small_img)
+	public void setNews_img(String news_img)
 	{
-		this.news_small_img = news_small_img;
+		this.news_img = news_img;
 	}
 
 	public String getNews_source()
@@ -111,9 +101,9 @@ public class ResponseMainMultiplexNewsBean
 	@Override
 	public String toString()
 	{
-		return "ResponseMainMultiplexNewsBean{" +
+		return "ResponseSingleNewsBean{" +
 				"news_id='" + news_id + '\'' +
-				", news_small_img='" + news_small_img + '\'' +
+				", news_img='" + news_img + '\'' +
 				", news_source='" + news_source + '\'' +
 				", news_time='" + news_time + '\'' +
 				", news_title='" + news_title + '\'' +

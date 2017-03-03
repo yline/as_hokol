@@ -16,8 +16,8 @@ public class IApplication extends BaseApplication
 	{
 		SDKConfig sdkConfig = new SDKConfig();
 		sdkConfig.setLogFilePath(TAG);
-		sdkConfig.setLogSystem(true);
-		sdkConfig.setLog(false);
+		/*sdkConfig.setLogSystem(true);
+		sdkConfig.setLog(false);*/
 		return sdkConfig;
 	}
 	

@@ -75,7 +75,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 			{
 				public void onClick(View v)
 				{
-					CommonRecyclerAdapter.this.onClickListener.onClick(v, position);
+					CommonRecyclerAdapter.this.onClickListener.onClick(v, sList.get(position), position);
 				}
 			});
 		}
@@ -86,7 +86,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 			{
 				public boolean onLongClick(View v)
 				{
-					return CommonRecyclerAdapter.this.onLongClickListener.onClick(v, position);
+					return CommonRecyclerAdapter.this.onLongClickListener.onClick(v, sList.get(position), position);
 				}
 			});
 		}
@@ -97,7 +97,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 			{
 				public boolean onTouch(View v, MotionEvent event)
 				{
-					return CommonRecyclerAdapter.this.onTouchListener.onClick(v, position);
+					return CommonRecyclerAdapter.this.onTouchListener.onClick(v, sList.get(position), position);
 				}
 			});
 		}
@@ -203,18 +203,18 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 		return result;
 	}
 	
-	public interface OnTouchListener
+	public interface OnTouchListener<T>
 	{
-		boolean onClick(View view, int position);
+		boolean onClick(View view, T t, int position);
 	}
 	
-	public interface OnLongClickListener
+	public interface OnLongClickListener<T>
 	{
-		boolean onClick(View view, int position);
+		boolean onClick(View view, T t, int position);
 	}
 	
-	public interface OnClickListener
+	public interface OnClickListener<T>
 	{
-		void onClick(View view, int position);
+		void onClick(View view, T t, int position);
 	}
 }

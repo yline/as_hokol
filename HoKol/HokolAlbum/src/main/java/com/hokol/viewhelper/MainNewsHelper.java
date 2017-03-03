@@ -10,8 +10,8 @@ import com.hokol.adapter.HeadFootRecycleAdapter;
 import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.adapter.ViewHolder;
-import com.hokol.medium.http.bean.ResponseMainMultiplexNewsBean;
-import com.hokol.medium.http.bean.ResponseMainSingleNewsBean;
+import com.hokol.medium.http.bean.ResponseMultiplexNewsBean;
+import com.hokol.medium.http.bean.ResponseSingleNewsBean;
 
 import java.util.List;
 
@@ -60,7 +60,7 @@ public class MainNewsHelper
 	 *
 	 * @param singleNewsBean
 	 */
-	public void updateRecommendData(ResponseMainSingleNewsBean singleNewsBean)
+	public void updateRecommendData(ResponseSingleNewsBean singleNewsBean)
 	{
 		recommendViewHolder.setImageBackgroundResource(R.id.iv_main_news_recommend, R.drawable.delete_ad_img1);
 		recommendViewHolder.setText(R.id.tv_main_news_recommend_title, singleNewsBean.getNews_title());
@@ -73,7 +73,7 @@ public class MainNewsHelper
 	 *
 	 * @param dataList
 	 */
-	public void setRecycleData(List<ResponseMainMultiplexNewsBean> dataList)
+	public void setRecycleData(List<ResponseMultiplexNewsBean.ResponseMultiplexNews> dataList)
 	{
 		recyclerAdapter.addAll(dataList);
 	}
@@ -87,8 +87,8 @@ public class MainNewsHelper
 	{
 		recommendViewHolder.get(R.id.rl_main_news_recommend).setOnClickListener(listener);
 	}
-
-	private class CommonNewsAdapter extends HeadFootRecycleAdapter<ResponseMainMultiplexNewsBean>
+	
+	private class CommonNewsAdapter extends HeadFootRecycleAdapter<ResponseMultiplexNewsBean.ResponseMultiplexNews>
 	{
 
 		@Override

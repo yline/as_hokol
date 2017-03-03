@@ -2,6 +2,7 @@ package com.hokol.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +12,21 @@ import com.hokol.activity.NewsInfoActivity;
 import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.base.log.LogFileUtil;
-import com.hokol.medium.http.bean.ResponseMainMultiplexNewsBean;
-import com.hokol.medium.http.bean.ResponseMainSingleNewsBean;
+import com.hokol.medium.http.HttpConstant;
+import com.hokol.medium.http.bean.RequestMultiplexNewsBean;
+import com.hokol.medium.http.bean.RequestSingleNewsBean;
+import com.hokol.medium.http.bean.ResponseMultiplexNewsBean;
+import com.hokol.medium.http.bean.ResponseSingleNewsBean;
+import com.hokol.medium.http.xHttp;
 import com.hokol.viewhelper.MainNewsHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainNewsFragment extends BaseFragment
 {
 	private MainNewsHelper mainNewsHelper;
+
+	private String recommendId;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -41,13 +47,13 @@ public class MainNewsFragment extends BaseFragment
 		View recommendView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_news_recommend, null);
 		mainNewsHelper = new MainNewsHelper();
 		mainNewsHelper.initView(getContext(), view);
-		mainNewsHelper.setOnRecycleItemClickListener(new CommonRecyclerAdapter.OnClickListener()
+		mainNewsHelper.setOnRecycleItemClickListener(new CommonRecyclerAdapter.OnClickListener<ResponseMultiplexNewsBean.ResponseMultiplexNews>()
 		{
 			@Override
-			public void onClick(View view, int position)
+			public void onClick(View view, ResponseMultiplexNewsBean.ResponseMultiplexNews responseMultiplexNews, int position)
 			{
 				LogFileUtil.v("setOnRecycleItemClickListener position -> " + position);
-				NewsInfoActivity.actionStart(getContext());
+				NewsInfoActivity.actionStart(getContext(), new RequestSingleNewsBean(responseMultiplexNews.getNews_id()));
 			}
 		});
 		mainNewsHelper.initRecommendView(recommendView); // 初始化控件
@@ -57,25 +63,53 @@ public class MainNewsFragment extends BaseFragment
 			public void onClick(View v)
 			{
 				LogFileUtil.v("setOnRecommendClickListener");
-				NewsInfoActivity.actionStart(getContext());
+				if (!TextUtils.isEmpty(recommendId))
+				{
+					NewsInfoActivity.actionStart(getContext(), new RequestSingleNewsBean(recommendId));
+				}
 			}
 		});
 	}
 
 	private void initData()
 	{
-		List<ResponseMainMultiplexNewsBean> dataList = new ArrayList<>();
-		for (int i = 0; i < 40; i++)
+		new xHttp<ResponseMultiplexNewsBean>()
 		{
-			dataList.add(new ResponseMainMultiplexNewsBean("", "", "origin " + i, "time " + i, "title " + i, ""));
-		}
-		mainNewsHelper.setRecycleData(dataList);
+			@Override
+			public void onSuccess(ResponseMultiplexNewsBean multiplexNewsBeen)
+			{
+				super.onSuccess(multiplexNewsBeen);
+				List<ResponseMultiplexNewsBean.ResponseMultiplexNews> result = multiplexNewsBeen.getList();
+				mainNewsHelper.setRecycleData(result);
+			}
 
-		// 设置数据
-		ResponseMainSingleNewsBean singleNewsBean = new ResponseMainSingleNewsBean();
-		singleNewsBean.setNews_source("origin");
-		singleNewsBean.setNews_time("time");
-		singleNewsBean.setNews_title("title");
-		mainNewsHelper.updateRecommendData(singleNewsBean);
+			@Override
+			public void onFailureCode(int code)
+			{
+				super.onFailureCode(code);
+			}
+
+			@Override
+			public void onFailure(Exception ex)
+			{
+				super.onFailure(ex);
+			}
+		}.doPost(HttpConstant.HTTP_MAIN_MULTIPLEX_NEWS_URL, new RequestMultiplexNewsBean("1", "14"), ResponseMultiplexNewsBean.class);
+
+		new xHttp<ResponseSingleNewsBean>()
+		{
+			@Override
+			public void onSuccess(ResponseSingleNewsBean responseSingleNewsBean)
+			{
+				super.onSuccess(responseSingleNewsBean);
+				recommendId = responseSingleNewsBean.getNews_id();
+				mainNewsHelper.updateRecommendData(responseSingleNewsBean);
+			}
+		}.doPost(HttpConstant.HTTP_MAIN_RECOMMEND_NEWS_URL, "", ResponseSingleNewsBean.class);
+	}
+
+	private class Test
+	{
+		private List<ResponseMultiplexNewsBean> list;
 	}
 }

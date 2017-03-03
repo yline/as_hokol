@@ -85,9 +85,9 @@ public abstract class xHttp<Result> implements IHttpResponse<Result>
 	@Override
 	public void onFailureCode(int code)
 	{
-		LogFileUtil.v("xHttp onFailureCode code -> " + code);
+		LogFileUtil.e("", "xHttp onFailureCode code -> " + code);
 	}
-
+	
 	@Override
 	public void onFailure(Exception ex)
 	{

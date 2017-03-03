@@ -13,6 +13,18 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!--Test-->
+        <activity
+            android:name="cn.test.TestInnerActivity"
+            android:label="HoKol测试">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!--功能-->
         <activity android:name=".activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -24,6 +36,11 @@
             android:name=".activity.MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity android:name=".activity.NewsInfoActivity"></activity>
+
+        <!--Test-->
+        <activity android:name="cn.test.login.TestLoginActivity">
+        </activity>
+        <activity android:name="cn.test.news.TestNewsActivity"></activity>
     </application>
 
 </manifest>
