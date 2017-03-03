@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -34,8 +33,7 @@ public class NewsInfoActivity extends BaseAppCompatActivity
 		setContentView(R.layout.activity_news_info);
 		setTitle("新闻详情页面");
 
-		View parentView = findViewById(R.id.ll_news_info);
-		newsInfoViewHolder = new ViewHolder(parentView);
+		newsInfoViewHolder = new ViewHolder(getWindow().getDecorView());
 
 		initData();
 	}

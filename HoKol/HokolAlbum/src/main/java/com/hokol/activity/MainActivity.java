@@ -1,5 +1,7 @@
 package com.hokol.activity;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -7,6 +9,8 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.hokol.R;
 import com.hokol.base.common.BaseAppCompatActivity;
@@ -30,6 +34,8 @@ import butterknife.ButterKnife;
  */
 public class MainActivity extends BaseAppCompatActivity implements MainTitleHelper.OnTitleClickListener
 {
+	private static final int DURATION_FLASH = 2500;
+
 	private FragmentManager fragmentManager = getSupportFragmentManager();
 
 	private MainNewsFragment mainNewsFragment;
@@ -48,6 +54,9 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 	@BindArray(R.array.main_tab)
 	public String[] RES_MAIN_TAB;
 
+	@BindView(R.id.iv_main_logo)
+	public ImageView imageView;
+
 	private static final int COLOR_BEFORE = Color.BLACK;
 
 	private static final int COLOR_AFTER = Color.GREEN;
@@ -57,8 +66,39 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
 		ButterKnife.bind(this);
+
+		imageView.setVisibility(View.VISIBLE);
+		imageView.setBackgroundResource(R.drawable.app_flash);
+		ObjectAnimator animator = ObjectAnimator.ofFloat(imageView, "alpha", 1f, 1f);
+		animator.setDuration(DURATION_FLASH);
+		animator.addListener(new Animator.AnimatorListener()
+		{
+			@Override
+			public void onAnimationStart(Animator animation)
+			{
+
+			}
+
+			@Override
+			public void onAnimationEnd(Animator animation)
+			{
+				imageView.setVisibility(View.GONE);
+			}
+
+			@Override
+			public void onAnimationCancel(Animator animation)
+			{
+
+			}
+
+			@Override
+			public void onAnimationRepeat(Animator animation)
+			{
+
+			}
+		});
+		animator.start();
 
 		initView();
 		initData();
