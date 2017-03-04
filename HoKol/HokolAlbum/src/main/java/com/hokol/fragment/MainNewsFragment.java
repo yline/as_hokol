@@ -46,7 +46,7 @@ public class MainNewsFragment extends BaseFragment
 	{
 		View recommendView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_news_recommend, null);
 		mainNewsHelper = new MainNewsHelper();
-		mainNewsHelper.initView(getContext(), view);
+		mainNewsHelper.initRecycleView(getContext(), view);
 		mainNewsHelper.setOnRecycleItemClickListener(new CommonRecyclerAdapter.OnClickListener<ResponseSingleNewsBean>()
 		{
 			@Override

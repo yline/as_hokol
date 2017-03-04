@@ -39,7 +39,7 @@ public class MainNewsHelper
 	 * @param context
 	 * @param parentView
 	 */
-	public void initView(Context context, View parentView)
+	public void initRecycleView(Context context, View parentView)
 	{
 		RecyclerView recyclerView = (RecyclerView) parentView.findViewById(R.id.recycle_main_news);
 		recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -111,13 +111,13 @@ public class MainNewsHelper
 		@Override
 		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
 		{
-			ImageView imageView = viewHolder.get(R.id.iv_main_news);
+			ImageView imageView = viewHolder.get(R.id.iv_item_main_news);
 
 			glideManager.load(sList.get(position).getNews_img()).placeholder(R.drawable.load_failed).into(imageView);
 
-			viewHolder.setText(R.id.tv_main_news_title, sList.get(position).getNews_title());
-			viewHolder.setText(R.id.tv_main_news_origin, sList.get(position).getNews_source());
-			viewHolder.setText(R.id.tv_main_news_time, sList.get(position).getNews_time());
+			viewHolder.setText(R.id.tv_item_main_news_title, sList.get(position).getNews_title());
+			viewHolder.setText(R.id.tv_item_main_news_origin, sList.get(position).getNews_source());
+			viewHolder.setText(R.id.tv_item_main_news_time, sList.get(position).getNews_time());
 		}
 	}
 }

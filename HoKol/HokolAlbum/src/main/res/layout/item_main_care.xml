@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="5dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="10dp"
+    android:paddingTop="5dp">
+
+    <RelativeLayout
+        android:id="@+id/rl_item_main_care"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_item_main_care_avatar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/tv_item_main_care_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/iv_item_main_care_avatar"
+            android:layout_toRightOf="@+id/iv_item_main_care_avatar"
+            android:text="昵称 贪狼"/>
+
+        <TextView
+            android:id="@+id/tv_item_main_care_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_item_main_care_name"
+            android:layout_toEndOf="@+id/iv_item_main_care_avatar"
+            android:layout_toRightOf="@+id/iv_item_main_care_avatar"
+            android:text="1个世纪前"/>
+
+        <TextView
+            android:id="@+id/tv_item_main_care_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="浙江-杭州"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_item_main_care_content"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/delete_ad_img5"/>
+
+    <TextView
+        android:id="@+id/tv_item_main_care_scrap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="We do talk anymore，like we used to do; I just heard you found the one you have been looking for"/>
+
+    <LinearLayout
+        android:id="@+id/ll_item_main_care_label"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@android:color/holo_red_light"
+        android:orientation="horizontal">
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_item_main_care_laud"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="点赞：yline，f21，fatenliyerF"/>
+
+    <TextView
+        android:id="@+id/tv_item_main_care_coin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="红豆：1000"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@android:color/darker_gray">
+    </LinearLayout>
+</LinearLayout>
