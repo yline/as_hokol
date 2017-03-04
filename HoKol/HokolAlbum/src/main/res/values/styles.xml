@@ -1,11 +1,24 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme.Default" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--配置父类,待被覆盖的-->
+    <style name="AppTheme.Delete" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <!--子类-->
+    <style name="AppTheme.Main" parent="AppTheme.Default">
+        <!--子布局的,字体颜色-->
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <!--自身的,返回键颜色-->
+        <item name="colorControlNormal">@android:color/white</item>
     </style>
 
 </resources>

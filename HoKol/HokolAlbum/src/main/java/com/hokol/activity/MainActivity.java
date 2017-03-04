@@ -1,15 +1,13 @@
 package com.hokol.activity;
 
-import android.animation.Animator;
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.hokol.R;
@@ -20,7 +18,7 @@ import com.hokol.fragment.MainHomeFragment;
 import com.hokol.fragment.MainMineFragment;
 import com.hokol.fragment.MainNewsFragment;
 import com.hokol.fragment.MainTaskFragment;
-import com.hokol.viewhelper.MainTitleHelper;
+import com.hokol.viewhelper.MainHelper;
 
 import butterknife.BindArray;
 import butterknife.BindView;
@@ -32,9 +30,9 @@ import butterknife.ButterKnife;
  * @author yline 2017/3/2 --> 10:01
  * @version 1.0.0
  */
-public class MainActivity extends BaseAppCompatActivity implements MainTitleHelper.OnTitleClickListener
+public class MainActivity extends BaseAppCompatActivity
 {
-	private static final int DURATION_FLASH = 2500;
+	private MainHelper mainHelper = new MainHelper();
 
 	private FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -54,65 +52,31 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 	@BindArray(R.array.main_tab)
 	public String[] RES_MAIN_TAB;
 
+	public int[] RES_MAIN_TAB_ICON = {R.drawable.main_tab_news, R.drawable.main_tab_care, R.drawable.main_tab_home, R.drawable.main_tab_task, R.drawable.main_tab_me};
+
 	@BindView(R.id.iv_main_logo)
 	public ImageView imageView;
 
-	private static final int COLOR_BEFORE = Color.BLACK;
-
-	private static final int COLOR_AFTER = Color.GREEN;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar_main_title);
+		mainHelper.initToolbar(this, toolbar);
+
 		ButterKnife.bind(this);
 
-		imageView.setVisibility(View.VISIBLE);
-		imageView.setBackgroundResource(R.drawable.app_flash);
-		ObjectAnimator animator = ObjectAnimator.ofFloat(imageView, "alpha", 1f, 1f);
-		animator.setDuration(DURATION_FLASH);
-		animator.addListener(new Animator.AnimatorListener()
-		{
-			@Override
-			public void onAnimationStart(Animator animation)
-			{
-
-			}
-
-			@Override
-			public void onAnimationEnd(Animator animation)
-			{
-				imageView.setVisibility(View.GONE);
-			}
-
-			@Override
-			public void onAnimationCancel(Animator animation)
-			{
-
-			}
-
-			@Override
-			public void onAnimationRepeat(Animator animation)
-			{
-
-			}
-		});
-		animator.start();
+		mainHelper.initFlashAnimator(imageView);
 
 		initView();
 		initData();
 	}
-	
+
 	private void initView()
 	{
-		tabLayout.addTab(tabLayout.newTab().setText(RES_MAIN_TAB[0]));
-		tabLayout.addTab(tabLayout.newTab().setText(RES_MAIN_TAB[1]));
-		tabLayout.addTab(tabLayout.newTab().setText(RES_MAIN_TAB[2]));
-		tabLayout.addTab(tabLayout.newTab().setText(RES_MAIN_TAB[3]));
-		tabLayout.addTab(tabLayout.newTab().setText(RES_MAIN_TAB[4]));
-		tabLayout.setSelectedTabIndicatorHeight(0);
-		tabLayout.setTabTextColors(COLOR_BEFORE, COLOR_AFTER);
+		mainHelper.initTabLayout(this, tabLayout, RES_MAIN_TAB_ICON, RES_MAIN_TAB);
 
 		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
 		{
@@ -136,10 +100,6 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 
 			}
 		});
-
-		MainTitleHelper mainTitleHelper = new MainTitleHelper();
-		mainTitleHelper.initTitleView(findViewById(R.id.include_main_title));
-		mainTitleHelper.setListener(this);
 	}
 
 	private void initData()
@@ -158,9 +118,13 @@ public class MainActivity extends BaseAppCompatActivity implements MainTitleHelp
 	}
 
 	@Override
-	public void onTitleClick(MainTitleHelper.TITLE_TYPE type)
+	public boolean onOptionsItemSelected(MenuItem item)
 	{
-
+		if (item.getItemId() == android.R.id.home)
+		{
+			finish();
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	/**

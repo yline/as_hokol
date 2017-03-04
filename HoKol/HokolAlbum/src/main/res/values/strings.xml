@@ -7,26 +7,21 @@
     <string name="login_action_start">确定</string>
 
     <!--主页面内容-->
-    <array name="main_tab">
+    <string-array name="main_tab">
         <item name="news">新闻</item>
         <item name="care">关注</item>
         <item name="home">首页</item>
         <item name="task">任务</item>
         <item name="mine">我</item>
-    </array>
+    </string-array>
 
     <!--主页面，首页，内容-->
-    <array name="main_home_tab">
+    <string-array name="main_home_tab">
         <item name="red">网红</item>
         <item name="author">主播</item>
         <item name="performer">演员</item>
         <item name="model">模特</item>
         <item name="singer">歌手</item>
         <item name="sport">体育</item>
-    </array>
-
-    <!--主页面，标题内容-->
-    <string name="main_title_left">左</string>
-    <string name="main_title_center">红客</string>
-    <string name="main_title_right">右</string>
+    </string-array>
 </resources>
