@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.hokol">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"/>
     <!-- 写入文件权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Default">
 
-        <!--功能-->
+        <!-- 功能 -->
         <activity android:name=".activity.WelcomeActivity">
         </activity>
         <activity
@@ -26,9 +26,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.NewsInfoActivity"></activity>
-
-        <!--Test-->
+        <activity android:name=".activity.NewsInfoActivity"/>
+        <activity android:name=".activity.DynamicInfoActivity">
+        </activity>
+        <activity android:name=".activity.UserInfoActivity">
+        </activity>
+        
+        <!-- Test -->
         <activity
             android:name="cn.test.TestInnerActivity"
             android:label="HoKol测试">
@@ -38,10 +42,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <!--Test-->
+        <!-- Test -->
         <activity android:name="cn.test.login.TestLoginActivity">
         </activity>
-        <activity android:name="cn.test.news.TestNewsActivity"></activity>
+        <activity android:name="cn.test.news.TestNewsActivity"/>
     </application>
 
 </manifest>

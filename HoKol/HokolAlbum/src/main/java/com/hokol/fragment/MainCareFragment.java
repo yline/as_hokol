@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
-import com.hokol.base.adapter.CommonRecyclerAdapter;
+import com.hokol.activity.DynamicInfoActivity;
+import com.hokol.activity.UserInfoActivity;
 import com.hokol.base.common.BaseFragment;
-import com.hokol.base.log.LogFileUtil;
 import com.hokol.viewhelper.MainCareHelper;
 
 import java.util.ArrayList;
@@ -38,12 +38,18 @@ public class MainCareFragment extends BaseFragment
 	{
 		mainCareHelper = new MainCareHelper();
 		mainCareHelper.initRecycleView(getContext(), view);
-		mainCareHelper.setOnRecycleItemClickListener(new CommonRecyclerAdapter.OnClickListener()
+		mainCareHelper.setOnRecycleItemClickListener(new MainCareHelper.OnCareRecycleClickListener()
 		{
 			@Override
-			public void onClick(View view, Object o, int position)
+			public void onAvatarClick()
 			{
-				LogFileUtil.v("mainCareHelper setOnRecycleItemClickListener");
+				UserInfoActivity.actionStart(getContext());
+			}
+
+			@Override
+			public void onPictureClick()
+			{
+				DynamicInfoActivity.actionStart(getContext());
 			}
 		});
 	}

@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.hokol.R;
 import com.hokol.adapter.HeadFootRecycleAdapter;
-import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.custom.DefaultLinearItemDecoration;
 import com.hokol.medium.http.bean.ResponseSingleNewsBean;
@@ -24,6 +23,8 @@ import java.util.List;
 public class MainCareHelper
 {
 	private HeadFootRecycleAdapter recyclerAdapter;
+
+	private OnCareRecycleClickListener careRecycleClickListener;
 
 	private RequestManager glideManager;
 
@@ -49,9 +50,9 @@ public class MainCareHelper
 		recyclerView.setAdapter(recyclerAdapter);
 	}
 
-	public void setOnRecycleItemClickListener(CommonRecyclerAdapter.OnClickListener listener)
+	public void setOnRecycleItemClickListener(OnCareRecycleClickListener listener)
 	{
-		recyclerAdapter.setOnClickListener(listener);
+		this.careRecycleClickListener = listener;
 	}
 
 	public void setRecycleData(List<Object> dataList)
@@ -82,9 +83,29 @@ public class MainCareHelper
 			viewHolder.setText(R.id.tv_main_news_origin, sList.get(position).getNews_source());
 			viewHolder.setText(R.id.tv_main_news_time, sList.get(position).getNews_time());
 			*/
+			if (null != careRecycleClickListener)
+			{
+				viewHolder.get(R.id.iv_item_main_care_avatar).setOnClickListener(new View.OnClickListener()
+				{
+					@Override
+					public void onClick(View v)
+					{
+						careRecycleClickListener.onAvatarClick();
+					}
+				});
+
+				viewHolder.get(R.id.iv_item_main_care_content).setOnClickListener(new View.OnClickListener()
+				{
+					@Override
+					public void onClick(View v)
+					{
+						careRecycleClickListener.onPictureClick();
+					}
+				});
+			}
 		}
 	}
-	
+
 	private class CareLabelAdapter extends com.hokol.view.labellayout.LabelAdapter<String>
 	{
 		public CareLabelAdapter(List<String> data)
@@ -99,5 +120,12 @@ public class MainCareHelper
 			tvItem.setText(slist.get(position));
 			return tvItem;
 		}
+	}
+
+	public interface OnCareRecycleClickListener
+	{
+		void onAvatarClick();
+
+		void onPictureClick();
 	}
 }
