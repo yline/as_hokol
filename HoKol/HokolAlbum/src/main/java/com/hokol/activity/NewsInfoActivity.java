@@ -55,7 +55,7 @@ public class NewsInfoActivity extends BaseAppCompatActivity
 					newsInfoViewHolder.setText(R.id.tv_news_info_content, responseSingleNewsBean.getNews_content());
 
 					ImageView imageView = newsInfoViewHolder.get(R.id.iv_news_info);
-					Glide.with(NewsInfoActivity.this).load(responseSingleNewsBean.getNews_img()).placeholder(R.drawable.load_failed).into(imageView);
+					Glide.with(NewsInfoActivity.this).load(responseSingleNewsBean.getNews_img()).placeholder(R.drawable.global_load_failed).into(imageView);
 				}
 			}.doPost(HttpConstant.HTTP_MAIN_SINGLE_NEWS_URL, bean, ResponseSingleNewsBean.class);
 		}
