@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--view label layout-->
     <declare-styleable name="LabelFlowLayout">
         <attr name="auto_select_effect" format="boolean"></attr>
         <attr name="max_select" format="integer"></attr>
@@ -8,5 +9,17 @@
             <enum name="center" value="0"/>
             <enum name="right" value="1"/>
         </attr>
+    </declare-styleable>
+    <!--menu-->
+    <declare-styleable name="DropDownMenu">
+        <attr name="xUnderlineColor" format="color"/>
+        <attr name="xDividerColor" format="color"/>
+        <attr name="xTextSelectedColor" format="color"/>
+        <attr name="xTextUnselectedColor" format="color"/>
+        <attr name="xMenuBackgroundColor" format="color"/>
+        <attr name="xMaskColor" format="color"/>
+        <attr name="xMenuTextSize" format="dimension"/>
+        <attr name="xMenuSelectedIcon" format="reference"/>
+        <attr name="xMenuUnselectedIcon" format="reference"/>
     </declare-styleable>
 </resources>

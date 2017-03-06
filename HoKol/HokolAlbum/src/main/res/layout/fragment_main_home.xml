@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -11,19 +12,11 @@
         android:layout_height="wrap_content">
     </android.support.design.widget.TabLayout>
 
-    <TextView
-        android:id="@+id/tv_main_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/app_name"/>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager_main_news"
+    <com.hokol.view.menu.DropDownMenu
+        android:id="@+id/drop_menu_main_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-    </android.support.v4.view.ViewPager>
+        app:xMenuSelectedIcon="@drawable/global_drop_down_menu_selected"
+        app:xMenuUnselectedIcon="@drawable/global_drop_down_menu_unselected">
+    </com.hokol.view.menu.DropDownMenu>
 </LinearLayout>
