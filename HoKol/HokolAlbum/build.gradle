@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 24
@@ -26,6 +25,5 @@ dependencies {
     })
     // third
     compile project(':HokolMediumHttp')
-    // apt
-    apt 'com.jakewharton:butterknife-compiler:8.5.1'
+    compile project(':HokolMediumWidget')
 }

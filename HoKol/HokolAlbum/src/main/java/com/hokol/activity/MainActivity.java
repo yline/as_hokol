@@ -20,9 +20,6 @@ import com.hokol.fragment.MainNewsFragment;
 import com.hokol.fragment.MainTaskFragment;
 import com.hokol.viewhelper.MainHelper;
 
-import butterknife.BindArray;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 主页面
@@ -46,16 +43,13 @@ public class MainActivity extends BaseAppCompatActivity
 
 	private MainMineFragment mainMineFragment;
 
-	@BindView(R.id.tab_layout_main)
-	public TabLayout tabLayout;
+	private TabLayout tabLayout;
 
-	@BindArray(R.array.main_tab)
-	public String[] RES_MAIN_TAB;
+	private String[] RES_MAIN_TAB;
 
-	public int[] RES_MAIN_TAB_ICON = {R.drawable.main_tab_news, R.drawable.main_tab_care, R.drawable.main_tab_home, R.drawable.main_tab_task, R.drawable.main_tab_me};
+	private int[] RES_MAIN_TAB_ICON = {R.drawable.main_tab_news, R.drawable.main_tab_care, R.drawable.main_tab_home, R.drawable.main_tab_task, R.drawable.main_tab_me};
 
-	@BindView(R.id.iv_main_logo)
-	public ImageView imageView;
+	private ImageView imageView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -66,7 +60,11 @@ public class MainActivity extends BaseAppCompatActivity
 		Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar_main_title);
 		mainHelper.initToolbar(this, toolbar);
 
-		ButterKnife.bind(this);
+		imageView = (ImageView) findViewById(R.id.iv_main_logo);
+
+		tabLayout = (TabLayout) findViewById(R.id.tab_layout_main);
+
+		RES_MAIN_TAB = getResources().getStringArray(R.array.main_tab);
 
 		mainHelper.initFlashAnimator(imageView);
 

@@ -2,6 +2,7 @@ package com.hokol.activity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -13,10 +14,6 @@ import com.hokol.medium.http.bean.RequestPhoneLoginBean;
 import com.hokol.medium.http.bean.ResponsePhoneLoginBean;
 import com.hokol.medium.http.xHttp;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 /**
  * 首个欢迎界面
  *
@@ -25,30 +22,9 @@ import butterknife.OnClick;
  */
 public class WelcomeActivity extends BaseAppCompatActivity
 {
-	// 跳转
-	@OnClick(R.id.btn_action_main)
-	public void btnActionMain()
-	{
-		MainActivity.actionStart(WelcomeActivity.this);
-	}
+	private EditText etUserName;
 
-	@BindView(R.id.et_main_username)
-	public EditText etUserName;
-
-	@BindView(R.id.et_main_password)
-	public EditText etPassWord;
-
-	// 网络登陆请求
-	@OnClick(R.id.btn_main_login)
-	public void btnActionLogin()
-	{
-		String username = etUserName.getText().toString().trim();
-		String password = etPassWord.getText().toString().trim();
-
-		String httpUrl = HttpConstant.HTTP_PHONE_LOGIN_URL;
-
-		doPost(httpUrl, new RequestPhoneLoginBean(username, password));
-	}
+	private EditText etPassWord;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -56,7 +32,44 @@ public class WelcomeActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
 
-		ButterKnife.bind(this);
+		initView();
+	}
+
+	private void initView()
+	{
+		etUserName = (EditText) findViewById(R.id.et_main_username);
+		etPassWord = (EditText) findViewById(R.id.et_main_password);
+		findViewById(R.id.btn_action_main).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				MainActivity.actionStart(WelcomeActivity.this);
+			}
+		});
+
+		findViewById(R.id.btn_main_login).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				String username = etUserName.getText().toString().trim();
+				String password = etPassWord.getText().toString().trim();
+
+				String httpUrl = HttpConstant.HTTP_PHONE_LOGIN_URL;
+
+				doPost(httpUrl, new RequestPhoneLoginBean(username, password));
+			}
+		});
+
+		findViewById(R.id.btn_test).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+
+			}
+		});
 	}
 	
 	private void doPost(String httpUrl, RequestPhoneLoginBean requestBean)
@@ -86,11 +99,5 @@ public class WelcomeActivity extends BaseAppCompatActivity
 				Toast.makeText(WelcomeActivity.this, "ex = " + Log.getStackTraceString(ex), Toast.LENGTH_SHORT).show();
 			}
 		}.doPost(httpUrl, requestBean, ResponsePhoneLoginBean.class);
-	}
-
-	@OnClick(R.id.btn_test)
-	public void btnTest()
-	{
-
 	}
 }

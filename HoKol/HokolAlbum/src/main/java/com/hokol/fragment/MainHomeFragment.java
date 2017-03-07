@@ -17,10 +17,6 @@ import com.hokol.viewhelper.MainHomeHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindArray;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class MainHomeFragment extends BaseFragment
 {
 	private MainHomeHelper mainHomeHelper;
@@ -28,18 +24,14 @@ public class MainHomeFragment extends BaseFragment
 	private List<BaseFragment> fragmentList;
 
 	// 主页 tab栏目
-	@BindView(R.id.tab_layout_main_home)
-	public TabLayout tabLayout;
+	private TabLayout tabLayout;
 
-	@BindView(R.id.viewpager_main_home)
-	public ViewPager viewPager;
+	private ViewPager viewPager;
 
 	// 下拉菜单栏
-	@BindView(R.id.tab_layout_main_home_menu)
-	public TabLayout tabMenuLayout;
+	private TabLayout tabMenuLayout;
 
-	@BindArray(R.array.main_home_tab)
-	public String[] RES_MAIN_HOME_TAB;
+	private String[] RES_MAIN_HOME_TAB;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -50,7 +42,11 @@ public class MainHomeFragment extends BaseFragment
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
 	{
-		ButterKnife.bind(this, view);
+		tabLayout = (TabLayout) view.findViewById(R.id.tab_layout_main_home);
+		viewPager = (ViewPager) view.findViewById(R.id.viewpager_main_home);
+		tabMenuLayout = (TabLayout) view.findViewById(R.id.tab_layout_main_home_menu);
+
+		RES_MAIN_HOME_TAB = view.getResources().getStringArray(R.array.main_home_tab);
 		
 		initView(view);
 		initData();
