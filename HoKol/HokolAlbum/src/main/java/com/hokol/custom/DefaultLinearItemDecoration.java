@@ -52,8 +52,10 @@ public class DefaultLinearItemDecoration extends RecyclerView.ItemDecoration
 	}
 
 	@Override
-	public void onDraw(Canvas c, RecyclerView parent)
+	public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state)
 	{
+		super.onDraw(c, parent, state);
+
 		if (mOrientation == VERTICAL_LIST)
 		{
 			drawVertical(c, parent);
@@ -92,8 +94,7 @@ public class DefaultLinearItemDecoration extends RecyclerView.ItemDecoration
 		for (int i = 0; i < childCount; i++)
 		{
 			final View child = parent.getChildAt(i);
-			final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
-					.getLayoutParams();
+			final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
 			final int left = child.getRight() + params.rightMargin;
 			final int right = left + mDivider.getIntrinsicHeight();
 			mDivider.setBounds(left, top, right, bottom);

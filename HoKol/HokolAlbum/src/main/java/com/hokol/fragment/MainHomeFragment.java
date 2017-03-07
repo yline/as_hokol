@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import com.hokol.R;
 import com.hokol.base.common.BaseFragment;
-import com.hokol.view.menu.DropDownMenu;
 import com.hokol.viewhelper.MainHomeHelper;
 
 import java.util.ArrayList;
@@ -27,14 +26,17 @@ public class MainHomeFragment extends BaseFragment
 	private MainHomeHelper mainHomeHelper;
 
 	private List<BaseFragment> fragmentList;
-	
-	public ViewPager viewPager;
-	
+
+	// 主页 tab栏目
 	@BindView(R.id.tab_layout_main_home)
 	public TabLayout tabLayout;
-	
-	@BindView(R.id.drop_menu_main_home)
-	public DropDownMenu dropDownMenu;
+
+	@BindView(R.id.viewpager_main_home)
+	public ViewPager viewPager;
+
+	// 下拉菜单栏
+	@BindView(R.id.tab_layout_main_home_menu)
+	public TabLayout tabMenuLayout;
 
 	@BindArray(R.array.main_home_tab)
 	public String[] RES_MAIN_HOME_TAB;
@@ -57,18 +59,12 @@ public class MainHomeFragment extends BaseFragment
 	private void initView(View view)
 	{
 		mainHomeHelper = new MainHomeHelper();
-		dropDownMenu = (DropDownMenu) view.findViewById(R.id.drop_menu_main_home);
-
-		View contentView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_home_container, null);
-		mainHomeHelper.initMenuView(getContext(), dropDownMenu, contentView);
-
-		viewPager = (ViewPager) contentView.findViewById(R.id.viewpager_main_home);
+		mainHomeHelper.initTabDownMenuView(getContext(), tabMenuLayout);
+		mainHomeHelper.setProvinceData();
 	}
 	
 	private void initData()
 	{
-		mainHomeHelper.initMenuData();
-
 		fragmentList = new ArrayList<>();
 		fragmentList.add(new MainHomeRedFragment());
 		fragmentList.add(new MainHomeAuthorFragment());
