@@ -387,7 +387,7 @@ public class ADHelper
 			resource = new ArrayList<>();
 			resource.add(R.mipmap.ic_launcher);
 			resource.add(R.mipmap.ic_launcher);
-			pointResource = R.drawable.delete_ad_point;
+			pointResource = R.drawable.widget_ad_point;
 		}
 
 		public ParamHolder setViewPagerWidth(int viewPagerWidth)
