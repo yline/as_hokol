@@ -1,11 +1,11 @@
-package com.hokol.test.login;
+package com.hokol.test.http.login;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import cn.test.BaseTestActivity;
+import com.hokol.test.BaseTestActivity;
 
 public class TestLoginActivity extends BaseTestActivity
 {

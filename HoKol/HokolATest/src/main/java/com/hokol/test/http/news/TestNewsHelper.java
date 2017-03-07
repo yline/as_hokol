@@ -1,4 +1,4 @@
-package cn.test.news;
+package com.hokol.test.http.news;
 
 import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.HttpConstant;

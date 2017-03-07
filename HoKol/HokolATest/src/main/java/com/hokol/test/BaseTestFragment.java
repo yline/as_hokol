@@ -1,38 +1,48 @@
-package cn.test;
+package com.hokol.test;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.hokol.base.common.BaseAppCompatActivity;
+import com.hokol.base.common.BaseFragment;
 import com.hokol.base.utils.UIResizeUtil;
 
-public class BaseTestActivity extends BaseAppCompatActivity
+public abstract class BaseTestFragment extends BaseFragment
 {
 	private LinearLayout linearLayout;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
-		super.onCreate(savedInstanceState);
-
 		initContentView();
-		setContentView(linearLayout);
+
+		return linearLayout;
 	}
+
+	@Override
+	public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
+	{
+		super.onViewCreated(view, savedInstanceState);
+		test();
+	}
+
+	protected abstract void test();
 
 	private void initContentView()
 	{
-		linearLayout = new LinearLayout(this);
+		linearLayout = new LinearLayout(getContext());
 		linearLayout.setOrientation(LinearLayout.VERTICAL);
 		linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
 	}
 
 	protected void addButton(String content, View.OnClickListener listener)
 	{
-		Button button = new Button(this);
+		Button button = new Button(getContext());
 		button.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		UIResizeUtil.build().setBottomMargin(20).commit(button);
 		button.setText(content);
@@ -42,7 +52,7 @@ public class BaseTestActivity extends BaseAppCompatActivity
 
 	protected EditText addEditText(String hintContent)
 	{
-		EditText editText = new EditText(this);
+		EditText editText = new EditText(getContext());
 		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		editText.setHint(hintContent);
 		linearLayout.addView(editText);

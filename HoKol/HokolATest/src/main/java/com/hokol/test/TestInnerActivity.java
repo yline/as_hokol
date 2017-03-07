@@ -2,10 +2,15 @@ package com.hokol.test;
 
 
 import android.os.Bundle;
-import android.view.View;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 
-import cn.test.login.TestLoginActivity;
-import cn.test.news.TestNewsActivity;
+import com.hokol.base.common.BaseAppCompatActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 测试入口程序
@@ -13,28 +18,51 @@ import cn.test.news.TestNewsActivity;
  * @author yline 2017/3/3 --> 15:19
  * @version 1.0.0
  */
-public class TestInnerActivity extends BaseTestActivity
+public class TestInnerActivity extends BaseAppCompatActivity
 {
+	private List<BaseTestFragment> fragmentList = new ArrayList<>();
+
+	private HttpFragment httpFragment;
+
+	private WidgetFragment widgetFragment;
+
+	private static final String[] titles = {"Http", "Widget"};
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_test_inner);
 
-		addButton("Login 测试", new View.OnClickListener()
+		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout_test_inner);
+		ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager_test_inner);
+
+		tabLayout.setupWithViewPager(viewPager);
+
+		httpFragment = new HttpFragment();
+		widgetFragment = new WidgetFragment();
+
+		fragmentList.add(httpFragment);
+		fragmentList.add(widgetFragment);
+
+		viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager())
 		{
 			@Override
-			public void onClick(View v)
+			public Fragment getItem(int position)
 			{
-				TestLoginActivity.actionStart(TestInnerActivity.this);
+				return fragmentList.get(position);
 			}
-		});
 
-		addButton("News 测试", new View.OnClickListener()
-		{
 			@Override
-			public void onClick(View v)
+			public int getCount()
 			{
-				TestNewsActivity.actionStart(TestInnerActivity.this);
+				return fragmentList.size();
+			}
+
+			@Override
+			public CharSequence getPageTitle(int position)
+			{
+				return titles[position];
 			}
 		});
 	}

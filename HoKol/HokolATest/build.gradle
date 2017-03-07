@@ -29,4 +29,5 @@ dependencies {
     // third
     compile project(':HokolMediumHttp')
     compile project(':HokolMediumWidget')
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }

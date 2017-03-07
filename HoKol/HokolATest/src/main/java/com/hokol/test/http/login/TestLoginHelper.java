@@ -1,4 +1,4 @@
-package com.hokol.test.login;
+package com.hokol.test.http.login;
 
 import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.HttpConstant;

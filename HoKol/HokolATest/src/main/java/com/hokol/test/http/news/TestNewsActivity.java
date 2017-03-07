@@ -1,4 +1,4 @@
-package com.hokol.test.news;
+package com.hokol.test.http.news;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import cn.test.BaseTestActivity;
+import com.hokol.test.BaseTestActivity;
 
 public class TestNewsActivity extends BaseTestActivity
 {
