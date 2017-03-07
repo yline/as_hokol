@@ -2,7 +2,7 @@ package com.hokol.viewhelper;
 
 import android.content.Context;
 import android.support.design.widget.TabLayout;
-import android.support.v4.content.ContextCompat;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,9 +20,7 @@ import java.util.List;
 
 public class MainHomeHelper
 {
-	private static final int DOWN_MENU_BACKGROUND_COLOR = android.R.color.white;
-
-	private String headers[] = {"城市"};
+	private String headers[] = {"城市", "筛选"};
 
 	private String provinceList[] = {"不限", "武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州",
 			"武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州",
@@ -37,8 +35,11 @@ public class MainHomeHelper
 		tabDownMenuHelper = new TabDownMenuHelper();
 
 		List<View> contentViewList = new ArrayList<>();
-		View provinceView = initProvinceView(context);
+		View provinceView = initAreaView(context);
 		contentViewList.add(provinceView);
+
+		View areaView = initFilterView(context);
+		contentViewList.add(areaView);
 
 		tabDownMenuHelper.setDropDownMenu(context, tabLayout, Arrays.asList(headers), contentViewList);
 	}
@@ -48,19 +49,13 @@ public class MainHomeHelper
 		provinceListAdapter.set(Arrays.asList(provinceList));
 	}
 
-	private View initProvinceView(Context context)
+	private View initAreaView(Context context)
 	{
-		final ListView provinceView = new ListView(context)
-		{
-			@Override
-			protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
-			{
-				heightMeasureSpec = MeasureSpec.makeMeasureSpec(500, MeasureSpec.AT_MOST);
-				super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-			}
-		};
+		View areaView = LayoutInflater.from(context).inflate(R.layout.fragment_main_home__menu_area, null);
+
+		final ListView provinceView = (ListView) areaView.findViewById(R.id.lv_main_home_menu_area_province);
+
 		provinceView.setDividerHeight(0);
-		provinceView.setBackgroundColor(ContextCompat.getColor(context, DOWN_MENU_BACKGROUND_COLOR));
 		provinceListAdapter = new ProvinceListAdapter(context);
 		provinceView.setAdapter(provinceListAdapter);
 		provinceView.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -72,7 +67,14 @@ public class MainHomeHelper
 			}
 		});
 
-		return provinceView;
+		return areaView;
+	}
+
+	private View initFilterView(Context context)
+	{
+		View filterView = LayoutInflater.from(context).inflate(R.layout.fragment_main_home__menu_filter, null);
+
+		return filterView;
 	}
 
 	private class ProvinceListAdapter extends CommonListAdapter<String>
