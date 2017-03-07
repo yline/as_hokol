@@ -14,6 +14,12 @@ import com.hokol.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 实现下拉菜单 的基础工具类
+ *
+ * @author yline 2017/3/7 --> 15:33
+ * @version 1.0.0
+ */
 public class TabDownMenuHelper
 {
 	// 默认位置

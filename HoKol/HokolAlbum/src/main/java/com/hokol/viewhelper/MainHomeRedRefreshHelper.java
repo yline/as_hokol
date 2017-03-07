@@ -4,9 +4,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.hokol.application.IApplication;
 
-/**
- * Created by yline on 2017/2/17.
- */
 public class MainHomeRedRefreshHelper
 {
 	private static final int[] COLOR = new int[]{android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light};

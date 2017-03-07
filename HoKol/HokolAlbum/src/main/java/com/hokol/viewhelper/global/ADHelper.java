@@ -1,4 +1,4 @@
-package com.hokol.viewhelper;
+package com.hokol.viewhelper.global;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -25,7 +25,7 @@ import java.util.List;
  * @author yline 2017/2/14 --> 15:08
  * @version 1.0.0
  */
-public class MainHomeRedADHelper
+public class ADHelper
 {
 	private Context context;
 

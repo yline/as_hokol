@@ -21,8 +21,8 @@ import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.base.utils.UIResizeUtil;
 import com.hokol.bean.LivePersonInfo;
-import com.hokol.viewhelper.MainHomeRedADHelper;
 import com.hokol.viewhelper.MainHomeRedRefreshHelper;
+import com.hokol.viewhelper.global.ADHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ import java.util.List;
  * @author yline 2017/2/13 --> 17:36
  * @version 1.0.0
  */
-public class MainHomeRedFragment extends BaseFragment implements MainHomeRedADHelper.OnPageClickListener
+public class MainHomeRedFragment extends BaseFragment implements ADHelper.OnPageClickListener
 {
 	private final static int[] res = new int[]{
 			R.drawable.delete_ad_img1,
@@ -96,12 +96,12 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeRedADHe
 		data.add(R.drawable.delete_ad_img5);
 
 		View adHeadParentView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_home_red_ad, null);
-		MainHomeRedADHelper mainNewsHotADHelper = new MainHomeRedADHelper();
-		mainNewsHotADHelper.build().setResource(data).commit(getContext());
-		mainNewsHotADHelper.initPoint((LinearLayout) adHeadParentView.findViewById(R.id.ll_main_hot_news_ad));
-		mainNewsHotADHelper.initViewPagerView((ViewPager) adHeadParentView.findViewById(R.id.viewpager_main_hot_news_ad));
-		mainNewsHotADHelper.startAutoRecycle();
-		mainNewsHotADHelper.setListener(this);
+		ADHelper adHelper = new ADHelper();
+		adHelper.build().setResource(data).commit(getContext());
+		adHelper.initPoint((LinearLayout) adHeadParentView.findViewById(R.id.ll_main_hot_news_ad));
+		adHelper.initViewPagerView((ViewPager) adHeadParentView.findViewById(R.id.viewpager_main_hot_news_ad));
+		adHelper.startAutoRecycle();
+		adHelper.setListener(this);
 
 		wrapperAdapter.addHeaderView(adHeadParentView);
 	}
