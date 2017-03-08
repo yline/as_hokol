@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <include
+        android:id="@+id/include_main_mine_head"
         layout="@layout/fragment_main_mine_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

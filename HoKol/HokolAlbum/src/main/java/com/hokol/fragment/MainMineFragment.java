@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
+import com.hokol.activity.MineInfoActivity;
 import com.hokol.base.common.BaseFragment;
 
 import java.util.ArrayList;
@@ -34,6 +35,15 @@ public class MainMineFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 		
 		initView(view);
+
+		view.findViewById(R.id.include_main_mine_head).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				MineInfoActivity.actionStart(getContext());
+			}
+		});
 	}
 	
 	private void initView(View view)

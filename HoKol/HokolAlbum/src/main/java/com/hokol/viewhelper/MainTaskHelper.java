@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class MainTaskHelper
 {
-	private String headers[] = {"城市", "筛选"};
+	private String headers[] = {"分类", "金额", "地区"};
 
 	private String provinceList[] = {"不限", "武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州",
 			"武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州",
@@ -40,8 +40,12 @@ public class MainTaskHelper
 		dropMenuWidget = new DropMenuWidget();
 
 		List<View> contentViewList = new ArrayList<>();
+
 		View classifyView = initClassifyView(context);
 		contentViewList.add(classifyView);
+
+		View moneyView = initClassifyView(context);
+		contentViewList.add(moneyView);
 
 		View areaView = initFilterView(context);
 		contentViewList.add(areaView);
@@ -72,8 +76,7 @@ public class MainTaskHelper
 	private View initClassifyView(Context context)
 	{
 		View areaView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_classify, null);
-
-
+		
 		return areaView;
 	}
 

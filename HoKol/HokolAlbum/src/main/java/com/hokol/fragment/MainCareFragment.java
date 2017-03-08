@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.hokol.R;
 import com.hokol.activity.DynamicInfoActivity;
-import com.hokol.activity.UserInfoActivity;
+import com.hokol.activity.StartInfoActivity;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.viewhelper.MainCareHelper;
 
@@ -43,7 +43,7 @@ public class MainCareFragment extends BaseFragment
 			@Override
 			public void onAvatarClick()
 			{
-				UserInfoActivity.actionStart(getContext());
+				StartInfoActivity.actionStart(getContext());
 			}
 
 			@Override
