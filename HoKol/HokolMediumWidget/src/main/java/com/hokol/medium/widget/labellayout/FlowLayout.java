@@ -1,4 +1,4 @@
-package com.hokol.view.labellayout;
+package com.hokol.medium.widget.labellayout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hokol.R;
+import com.hokol.medium.widget.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +21,11 @@ public class FlowLayout extends ViewGroup
 
 	private static final int RIGHT = 1;
 
-	protected List<List<View>> mAllViews = new ArrayList<List<View>>();
+	protected List<List<View>> mAllViews = new ArrayList<>();
 
-	protected List<Integer> mLineHeight = new ArrayList<Integer>();
+	protected List<Integer> mLineHeight = new ArrayList<>();
 
-	protected List<Integer> mLineWidth = new ArrayList<Integer>();
+	protected List<Integer> mLineWidth = new ArrayList<>();
 
 	private int mGravity;
 
@@ -34,8 +34,8 @@ public class FlowLayout extends ViewGroup
 	public FlowLayout(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
-		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.LabelFlowLayout);
-		mGravity = ta.getInt(R.styleable.LabelFlowLayout_gravity, LEFT);
+		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.WidgetLabelLayout);
+		mGravity = ta.getInt(R.styleable.WidgetLabelLayout_gravity, LEFT);
 		ta.recycle();
 	}
 

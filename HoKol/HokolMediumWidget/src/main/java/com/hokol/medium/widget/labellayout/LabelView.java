@@ -1,4 +1,4 @@
-package com.hokol.view.labellayout;
+package com.hokol.medium.widget.labellayout;
 
 import android.content.Context;
 import android.view.View;

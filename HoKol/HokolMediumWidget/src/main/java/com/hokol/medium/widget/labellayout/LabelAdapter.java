@@ -1,4 +1,4 @@
-package com.hokol.view.labellayout;
+package com.hokol.medium.widget.labellayout;
 
 import android.view.View;
 
@@ -75,6 +75,4 @@ public abstract class LabelAdapter<T>
 	{
 		return false;
 	}
-
-
 }

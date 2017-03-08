@@ -68,11 +68,11 @@
             android:layout_height="wrap_content"
             android:text="We do talk anymore，like we used to do; I just heard you found the one you have been looking for"/>
 
-        <com.hokol.view.labellayout.LabelFlowLayout
+        <com.hokol.medium.widget.labellayout.LabelFlowLayout
             android:id="@+id/label_item_main_care_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        </com.hokol.view.labellayout.LabelFlowLayout>
+        </com.hokol.medium.widget.labellayout.LabelFlowLayout>
     </LinearLayout>
 
     <View

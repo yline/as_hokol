@@ -4,7 +4,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:background="@drawable/global_item_label_bg"
-    android:text="Helloworld"
+    android:background="@drawable/widget_item_label_layout"
     android:textColor="@android:color/holo_red_light">
 </TextView>

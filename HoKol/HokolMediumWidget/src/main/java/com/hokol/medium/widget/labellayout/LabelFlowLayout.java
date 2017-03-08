@@ -1,4 +1,4 @@
-package com.hokol.view.labellayout;
+package com.hokol.medium.widget.labellayout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,8 +10,9 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 
-import com.hokol.R;
+import com.hokol.medium.widget.R;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -34,9 +35,9 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataCh
 	public LabelFlowLayout(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
-		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.LabelFlowLayout);
-		mAutoSelectEffect = ta.getBoolean(R.styleable.LabelFlowLayout_auto_select_effect, true);
-		mSelectedMax = ta.getInt(R.styleable.LabelFlowLayout_max_select, -1);
+		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.WidgetLabelLayout);
+		mAutoSelectEffect = ta.getBoolean(R.styleable.WidgetLabelLayout_auto_select_effect, true);
+		mSelectedMax = ta.getInt(R.styleable.WidgetLabelLayout_max_select, -1);
 		ta.recycle();
 
 		if (mAutoSelectEffect)
@@ -144,7 +145,7 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataCh
 			}
 			else
 			{
-				MarginLayoutParams lp = new MarginLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+				ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 				lp.setMargins(dip2px(getContext(), 5), dip2px(getContext(), 5), dip2px(getContext(), 5), dip2px(getContext(), 5));
 				tagViewContainer.setLayoutParams(lp);
 			}
