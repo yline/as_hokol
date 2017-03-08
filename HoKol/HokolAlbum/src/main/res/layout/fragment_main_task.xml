@@ -8,16 +8,17 @@
     <!-- 广告 -->
     <LinearLayout
         android:id="@+id/ll_main_task_ad"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     </LinearLayout>
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab_layout_main_task_menu"
+    <LinearLayout
+        android:id="@+id/ll_main_task_menu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.design.widget.TabLayout>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle_main_task"

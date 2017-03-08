@@ -1,17 +1,17 @@
 package com.hokol.viewhelper;
 
 import android.content.Context;
-import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.hokol.R;
 import com.hokol.adapter.HeadFootRecycleAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.custom.DefaultLinearItemDecoration;
-import com.hokol.viewhelper.global.TabDownMenuHelper;
+import com.hokol.medium.widget.DropMenuWidget;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,13 +31,13 @@ public class MainTaskHelper
 			"武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州",
 			"武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州"};
 
-	private TabDownMenuHelper tabDownMenuHelper;
+	private DropMenuWidget dropMenuWidget;
 
 	private TaskRecycleAdapter taskRecycleAdapter;
 
-	public void initTabDownMenuView(Context context, TabLayout tabLayout)
+	public void initTabDownMenuView(Context context, LinearLayout linearLayout)
 	{
-		tabDownMenuHelper = new TabDownMenuHelper();
+		dropMenuWidget = new DropMenuWidget();
 
 		List<View> contentViewList = new ArrayList<>();
 		View classifyView = initClassifyView(context);
@@ -46,7 +46,8 @@ public class MainTaskHelper
 		View areaView = initFilterView(context);
 		contentViewList.add(areaView);
 
-		tabDownMenuHelper.setDropDownMenu(context, tabLayout, Arrays.asList(headers), contentViewList);
+		dropMenuWidget.start(context, Arrays.asList(headers), contentViewList);
+		dropMenuWidget.attach(linearLayout);
 	}
 
 	public void initRecycleView(Context context, RecyclerView recycleView)

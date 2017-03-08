@@ -2,7 +2,6 @@ package com.hokol.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,9 +74,9 @@ public class MainTaskFragment extends BaseFragment
 		});
 		adWidget.attach(linearLayout);
 
-		TabLayout tabLayout = (TabLayout) parentView.findViewById(R.id.tab_layout_main_task_menu);
+		LinearLayout linearLayout1 = (LinearLayout) parentView.findViewById(R.id.ll_main_task_menu);
 		mainTaskHelper = new MainTaskHelper();
-		mainTaskHelper.initTabDownMenuView(getContext(), tabLayout);
+		mainTaskHelper.initTabDownMenuView(getContext(), linearLayout1);
 
 		RecyclerView recycleView = (RecyclerView) parentView.findViewById(R.id.recycle_main_task);
 		mainTaskHelper.initRecycleView(getContext(), recycleView);

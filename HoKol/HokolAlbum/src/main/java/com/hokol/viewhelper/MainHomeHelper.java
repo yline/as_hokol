@@ -1,18 +1,18 @@
 package com.hokol.viewhelper;
 
 import android.content.Context;
-import android.support.design.widget.TabLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hokol.R;
 import com.hokol.base.adapter.CommonListAdapter;
 import com.hokol.base.adapter.ViewHolder;
-import com.hokol.viewhelper.global.TabDownMenuHelper;
+import com.hokol.medium.widget.DropMenuWidget;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,13 +26,13 @@ public class MainHomeHelper
 			"武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州",
 			"武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州"};
 
-	private TabDownMenuHelper tabDownMenuHelper;
+	private DropMenuWidget dropMenuWidget;
 
 	private ProvinceListAdapter provinceListAdapter;
 
-	public void initTabDownMenuView(Context context, TabLayout tabLayout)
+	public void initTabDownMenuView(Context context, LinearLayout linearLayout)
 	{
-		tabDownMenuHelper = new TabDownMenuHelper();
+		dropMenuWidget = new DropMenuWidget();
 
 		List<View> contentViewList = new ArrayList<>();
 		View provinceView = initAreaView(context);
@@ -41,7 +41,8 @@ public class MainHomeHelper
 		View areaView = initFilterView(context);
 		contentViewList.add(areaView);
 
-		tabDownMenuHelper.setDropDownMenu(context, tabLayout, Arrays.asList(headers), contentViewList);
+		dropMenuWidget.start(context, Arrays.asList(headers), contentViewList);
+		dropMenuWidget.attach(linearLayout);
 	}
 
 	public void setProvinceData()

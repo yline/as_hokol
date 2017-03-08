@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.hokol.R;
 import com.hokol.base.common.BaseFragment;
@@ -29,7 +30,7 @@ public class MainHomeFragment extends BaseFragment
 	private ViewPager viewPager;
 
 	// 下拉菜单栏
-	private TabLayout tabMenuLayout;
+	private LinearLayout linearLayout;
 
 	private String[] RES_MAIN_HOME_TAB;
 	
@@ -44,7 +45,7 @@ public class MainHomeFragment extends BaseFragment
 	{
 		tabLayout = (TabLayout) view.findViewById(R.id.tab_layout_main_home);
 		viewPager = (ViewPager) view.findViewById(R.id.viewpager_main_home);
-		tabMenuLayout = (TabLayout) view.findViewById(R.id.tab_layout_main_home_menu);
+		linearLayout = (LinearLayout) view.findViewById(R.id.ll_main_home_menu);
 
 		RES_MAIN_HOME_TAB = view.getResources().getStringArray(R.array.main_home_tab);
 		
@@ -55,7 +56,7 @@ public class MainHomeFragment extends BaseFragment
 	private void initView(View view)
 	{
 		mainHomeHelper = new MainHomeHelper();
-		mainHomeHelper.initTabDownMenuView(getContext(), tabMenuLayout);
+		mainHomeHelper.initTabDownMenuView(getContext(), linearLayout);
 		mainHomeHelper.setProvinceData();
 	}
 	
