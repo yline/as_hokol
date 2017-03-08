@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.hokol.test.widget.ADActivity;
 import com.hokol.test.widget.DropMenuActivity;
+import com.hokol.test.widget.LabelLayoutActivity;
 
 public class WidgetFragment extends BaseTestFragment
 {
@@ -25,6 +26,15 @@ public class WidgetFragment extends BaseTestFragment
 			public void onClick(View v)
 			{
 				DropMenuActivity.actionStart(getContext());
+			}
+		});
+
+		addButton("多个标签", new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				LabelLayoutActivity.actionStart(getContext());
 			}
 		});
 	}
