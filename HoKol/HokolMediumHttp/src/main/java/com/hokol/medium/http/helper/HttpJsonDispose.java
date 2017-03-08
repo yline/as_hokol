@@ -5,7 +5,7 @@ import android.os.Handler;
 import com.google.gson.Gson;
 import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.HttpConstant;
-import com.hokol.medium.http.bean.ResponseXBean;
+import com.hokol.medium.http.bean.VXBean;
 
 import org.json.JSONException;
 
@@ -37,7 +37,7 @@ public class HttpJsonDispose<Result> implements IHttpDispose<Result>
 			try
 			{
 				Gson gson = new Gson();
-				final ResponseXBean responseXBean = HttpConstant.getResponseXBean(jsonResult);
+				final VXBean responseXBean = HttpConstant.getResponseXBean(jsonResult);
 
 				preResponse("onNetSuccess responseXBean -> " + (null == responseXBean ? "null" : "code -> " + responseXBean.getCode()));
 				// 为了放到子线程进行Gson解析

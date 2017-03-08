@@ -1,6 +1,6 @@
 package com.hokol.medium.http;
 
-import com.hokol.medium.http.bean.ResponseXBean;
+import com.hokol.medium.http.bean.VXBean;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,18 +53,18 @@ public class HttpConstant
 	 * @param json
 	 * @return null if code is not 0
 	 */
-	public static final ResponseXBean getResponseXBean(String json) throws JSONException
+	public static final VXBean getResponseXBean(String json) throws JSONException
 	{
 		JSONObject jsonObject = new JSONObject(json);
 		int code = jsonObject.getInt("code");
 		if (REQUEST_SUCCESS_CODE == code)
 		{
 			String data = jsonObject.getString("data");
-			return new ResponseXBean(code, data);
+			return new VXBean(code, data);
 		}
 		else
 		{
-			return new ResponseXBean(code, null);
+			return new VXBean(code, null);
 		}
 	}
 }

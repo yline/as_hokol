@@ -3,15 +3,15 @@ package com.hokol.medium.http.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class RequestSingleNewsBean implements Parcelable
+public class WNewsSingleBean implements Parcelable
 {
 	private String news_id;
 
-	public RequestSingleNewsBean()
+	public WNewsSingleBean()
 	{
 	}
 
-	public RequestSingleNewsBean(String news_id)
+	public WNewsSingleBean(String news_id)
 	{
 		this.news_id = news_id;
 	}
@@ -38,21 +38,21 @@ public class RequestSingleNewsBean implements Parcelable
 		dest.writeString(news_id);
 	}
 
-	public static final Parcelable.Creator<RequestSingleNewsBean> CREATOR = new Parcelable.Creator<RequestSingleNewsBean>()
+	public static final Parcelable.Creator<WNewsSingleBean> CREATOR = new Parcelable.Creator<WNewsSingleBean>()
 	{
 
 		@Override
-		public RequestSingleNewsBean createFromParcel(Parcel source)
+		public WNewsSingleBean createFromParcel(Parcel source)
 		{
-			RequestSingleNewsBean bean = new RequestSingleNewsBean();
+			WNewsSingleBean bean = new WNewsSingleBean();
 			bean.news_id = source.readString(); // 读取name
 			return bean;
 		}
 
 		@Override
-		public RequestSingleNewsBean[] newArray(int size)
+		public WNewsSingleBean[] newArray(int size)
 		{
-			return new RequestSingleNewsBean[size];
+			return new WNewsSingleBean[size];
 		}
 	};
 }

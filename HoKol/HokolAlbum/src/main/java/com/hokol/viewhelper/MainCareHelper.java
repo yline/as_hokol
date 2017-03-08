@@ -11,7 +11,7 @@ import com.hokol.R;
 import com.hokol.adapter.HeadFootRecycleAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.custom.DefaultLinearItemDecoration;
-import com.hokol.medium.http.bean.ResponseSingleNewsBean;
+import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.widget.LabelWidget;
 import com.hokol.medium.widget.labellayout.LabelFlowLayout;
 
@@ -58,7 +58,7 @@ public class MainCareHelper
 		recyclerAdapter.setDataList(dataList);
 	}
 
-	private class RecycleAdapter extends HeadFootRecycleAdapter<ResponseSingleNewsBean>
+	private class RecycleAdapter extends HeadFootRecycleAdapter<VNewsSingleBean>
 	{
 
 		@Override

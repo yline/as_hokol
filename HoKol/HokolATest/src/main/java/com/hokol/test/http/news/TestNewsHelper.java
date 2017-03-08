@@ -2,10 +2,10 @@ package com.hokol.test.http.news;
 
 import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.HttpConstant;
-import com.hokol.medium.http.bean.RequestMultiplexNewsBean;
-import com.hokol.medium.http.bean.RequestSingleNewsBean;
-import com.hokol.medium.http.bean.ResponseMultiplexNewsBean;
-import com.hokol.medium.http.bean.ResponseSingleNewsBean;
+import com.hokol.medium.http.bean.VNewsMultiplexBean;
+import com.hokol.medium.http.bean.VNewsSingleBean;
+import com.hokol.medium.http.bean.WNewsMultiplexBean;
+import com.hokol.medium.http.bean.WNewsSingleBean;
 import com.hokol.medium.http.xHttp;
 
 /**
@@ -18,10 +18,10 @@ public class TestNewsHelper
 {
 	public void doMultiplexNews(int start, int end)
 	{
-		new xHttp<ResponseMultiplexNewsBean>()
+		new xHttp<VNewsMultiplexBean>()
 		{
 			@Override
-			public void onSuccess(ResponseMultiplexNewsBean multiplexNewsBeen)
+			public void onSuccess(VNewsMultiplexBean multiplexNewsBeen)
 			{
 				super.onSuccess(multiplexNewsBeen);
 				LogFileUtil.e("doMultiplexNews", "multiplexNewsBeen size -> " + multiplexNewsBeen.getList().size());
@@ -38,32 +38,32 @@ public class TestNewsHelper
 			{
 				super.onFailure(ex);
 			}
-		}.doPost(HttpConstant.HTTP_MAIN_MULTIPLEX_NEWS_URL, new RequestMultiplexNewsBean(start, end), ResponseMultiplexNewsBean.class);
+		}.doPost(HttpConstant.HTTP_MAIN_MULTIPLEX_NEWS_URL, new WNewsMultiplexBean(start, end), VNewsMultiplexBean.class);
 	}
 
 	public void doRecommendNews()
 	{
-		new xHttp<ResponseSingleNewsBean>()
+		new xHttp<VNewsSingleBean>()
 		{
 			@Override
-			public void onSuccess(ResponseSingleNewsBean responseSingleNewsBean)
+			public void onSuccess(VNewsSingleBean responseSingleNewsBean)
 			{
 				super.onSuccess(responseSingleNewsBean);
 				LogFileUtil.e("doRecommendNews", "responseSingleNewsBean -> " + responseSingleNewsBean.toString());
 			}
-		}.doPost(HttpConstant.HTTP_MAIN_RECOMMEND_NEWS_URL, "", ResponseSingleNewsBean.class);
+		}.doPost(HttpConstant.HTTP_MAIN_RECOMMEND_NEWS_URL, "", VNewsSingleBean.class);
 	}
 
 	public void doSingleNews(String news_Id)
 	{
-		new xHttp<ResponseSingleNewsBean>()
+		new xHttp<VNewsSingleBean>()
 		{
 			@Override
-			public void onSuccess(ResponseSingleNewsBean responseSingleNewsBean)
+			public void onSuccess(VNewsSingleBean responseSingleNewsBean)
 			{
 				super.onSuccess(responseSingleNewsBean);
 				LogFileUtil.e("doSingleNews", "responseSingleNewsBean -> " + responseSingleNewsBean.toString());
 			}
-		}.doPost(HttpConstant.HTTP_MAIN_SINGLE_NEWS_URL, new RequestSingleNewsBean(news_Id), ResponseSingleNewsBean.class);
+		}.doPost(HttpConstant.HTTP_MAIN_SINGLE_NEWS_URL, new WNewsSingleBean(news_Id), VNewsSingleBean.class);
 	}
 }

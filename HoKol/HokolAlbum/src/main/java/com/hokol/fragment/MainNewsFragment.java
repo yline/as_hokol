@@ -13,10 +13,10 @@ import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.HttpConstant;
-import com.hokol.medium.http.bean.RequestMultiplexNewsBean;
-import com.hokol.medium.http.bean.RequestSingleNewsBean;
-import com.hokol.medium.http.bean.ResponseMultiplexNewsBean;
-import com.hokol.medium.http.bean.ResponseSingleNewsBean;
+import com.hokol.medium.http.bean.VNewsMultiplexBean;
+import com.hokol.medium.http.bean.VNewsSingleBean;
+import com.hokol.medium.http.bean.WNewsMultiplexBean;
+import com.hokol.medium.http.bean.WNewsSingleBean;
 import com.hokol.medium.http.xHttp;
 import com.hokol.viewhelper.MainNewsHelper;
 
@@ -47,13 +47,13 @@ public class MainNewsFragment extends BaseFragment
 		View recommendView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_news_recommend, null);
 		mainNewsHelper = new MainNewsHelper();
 		mainNewsHelper.initRecycleView(getContext(), view);
-		mainNewsHelper.setOnRecycleItemClickListener(new CommonRecyclerAdapter.OnClickListener<ResponseSingleNewsBean>()
+		mainNewsHelper.setOnRecycleItemClickListener(new CommonRecyclerAdapter.OnClickListener<VNewsSingleBean>()
 		{
 			@Override
-			public void onClick(View view, ResponseSingleNewsBean responseMultiplexNews, int position)
+			public void onClick(View view, VNewsSingleBean responseMultiplexNews, int position)
 			{
 				LogFileUtil.v("setOnRecycleItemClickListener position -> " + position);
-				NewsInfoActivity.actionStart(getContext(), new RequestSingleNewsBean(responseMultiplexNews.getNews_id()));
+				NewsInfoActivity.actionStart(getContext(), new WNewsSingleBean(responseMultiplexNews.getNews_id()));
 			}
 		});
 		mainNewsHelper.initRecommendView(recommendView); // 初始化控件
@@ -65,7 +65,7 @@ public class MainNewsFragment extends BaseFragment
 				LogFileUtil.v("setOnRecommendClickListener");
 				if (!TextUtils.isEmpty(recommendId))
 				{
-					NewsInfoActivity.actionStart(getContext(), new RequestSingleNewsBean(recommendId));
+					NewsInfoActivity.actionStart(getContext(), new WNewsSingleBean(recommendId));
 				}
 			}
 		});
@@ -74,25 +74,25 @@ public class MainNewsFragment extends BaseFragment
 	private void initData()
 	{
 		// 推荐
-		new xHttp<ResponseSingleNewsBean>()
+		new xHttp<VNewsSingleBean>()
 		{
 			@Override
-			public void onSuccess(ResponseSingleNewsBean responseSingleNewsBean)
+			public void onSuccess(VNewsSingleBean responseSingleNewsBean)
 			{
 				super.onSuccess(responseSingleNewsBean);
 				recommendId = responseSingleNewsBean.getNews_id();
 				mainNewsHelper.updateRecommendData(responseSingleNewsBean);
 			}
-		}.doPost(HttpConstant.HTTP_MAIN_RECOMMEND_NEWS_URL, "", ResponseSingleNewsBean.class);
+		}.doPost(HttpConstant.HTTP_MAIN_RECOMMEND_NEWS_URL, "", VNewsSingleBean.class);
 
 		// 多条新闻
-		new xHttp<ResponseMultiplexNewsBean>()
+		new xHttp<VNewsMultiplexBean>()
 		{
 			@Override
-			public void onSuccess(ResponseMultiplexNewsBean multiplexNewsBeen)
+			public void onSuccess(VNewsMultiplexBean multiplexNewsBeen)
 			{
 				super.onSuccess(multiplexNewsBeen);
-				List<ResponseSingleNewsBean> result = multiplexNewsBeen.getList();
+				List<VNewsSingleBean> result = multiplexNewsBeen.getList();
 				mainNewsHelper.setRecycleData(result);
 			}
 
@@ -107,6 +107,6 @@ public class MainNewsFragment extends BaseFragment
 			{
 				super.onFailure(ex);
 			}
-		}.doPost(HttpConstant.HTTP_MAIN_MULTIPLEX_NEWS_URL, new RequestMultiplexNewsBean(1, 14), ResponseMultiplexNewsBean.class);
+		}.doPost(HttpConstant.HTTP_MAIN_MULTIPLEX_NEWS_URL, new WNewsMultiplexBean(1, 14), VNewsMultiplexBean.class);
 	}
 }

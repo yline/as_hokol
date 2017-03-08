@@ -6,13 +6,13 @@ package com.hokol.medium.http.bean;
  * @author yline 2017/2/28 --> 17:08
  * @version 1.0.0
  */
-public class ResponseXBean
+public class VXBean
 {
 	private int code;
 
 	private String data;
 
-	public ResponseXBean(int code, String data)
+	public VXBean(int code, String data)
 	{
 		this.code = code;
 		this.data = data;
@@ -41,7 +41,7 @@ public class ResponseXBean
 	@Override
 	public String toString()
 	{
-		return "ResponseXBean{" +
+		return "VXBean{" +
 				"code=" + code +
 				", data='" + data + '\'' +
 				'}';

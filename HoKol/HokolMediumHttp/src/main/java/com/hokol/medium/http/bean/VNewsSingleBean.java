@@ -6,7 +6,7 @@ package com.hokol.medium.http.bean;
  * @author yline 2017/3/2 --> 14:09
  * @version 1.0.0
  */
-public class ResponseSingleNewsBean
+public class VNewsSingleBean
 {
 	/**
 	 * 新闻ID标识
@@ -101,7 +101,7 @@ public class ResponseSingleNewsBean
 	@Override
 	public String toString()
 	{
-		return "ResponseSingleNewsBean{" +
+		return "VNewsSingleBean{" +
 				"news_id='" + news_id + '\'' +
 				", news_img='" + news_img + '\'' +
 				", news_source='" + news_source + '\'' +

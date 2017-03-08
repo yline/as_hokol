@@ -8,19 +8,19 @@ import java.util.List;
  * @author yline 2017/3/2 --> 14:10
  * @version 1.0.0
  */
-public class ResponseMultiplexNewsBean
+public class VNewsMultiplexBean
 {
 	/**
 	 * 多条新闻
 	 */
-	private List<ResponseSingleNewsBean> list;
+	private List<VNewsSingleBean> list;
 
-	public List<ResponseSingleNewsBean> getList()
+	public List<VNewsSingleBean> getList()
 	{
 		return list;
 	}
 	
-	public void setList(List<ResponseSingleNewsBean> list)
+	public void setList(List<VNewsSingleBean> list)
 	{
 		this.list = list;
 	}

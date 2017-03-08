@@ -10,8 +10,8 @@ import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.medium.http.HttpConstant;
-import com.hokol.medium.http.bean.RequestPhoneLoginBean;
-import com.hokol.medium.http.bean.ResponsePhoneLoginBean;
+import com.hokol.medium.http.bean.VLoginPhonePasswordBean;
+import com.hokol.medium.http.bean.WLoginPhonePasswordBean;
 import com.hokol.medium.http.xHttp;
 
 /**
@@ -58,7 +58,7 @@ public class WelcomeActivity extends BaseAppCompatActivity
 
 				String httpUrl = HttpConstant.HTTP_PHONE_LOGIN_URL;
 
-				doPost(httpUrl, new RequestPhoneLoginBean(username, password));
+				doPost(httpUrl, new WLoginPhonePasswordBean(username, password));
 			}
 		});
 
@@ -72,13 +72,13 @@ public class WelcomeActivity extends BaseAppCompatActivity
 		});
 	}
 	
-	private void doPost(String httpUrl, RequestPhoneLoginBean requestBean)
+	private void doPost(String httpUrl, WLoginPhonePasswordBean requestBean)
 	{
-		new xHttp<ResponsePhoneLoginBean>()
+		new xHttp<VLoginPhonePasswordBean>()
 		{
 
 			@Override
-			public void onSuccess(ResponsePhoneLoginBean responsePhoneLoginBean)
+			public void onSuccess(VLoginPhonePasswordBean responsePhoneLoginBean)
 			{
 				super.onSuccess(responsePhoneLoginBean);
 				MainActivity.actionStart(WelcomeActivity.this);
@@ -98,6 +98,6 @@ public class WelcomeActivity extends BaseAppCompatActivity
 				super.onFailure(ex);
 				Toast.makeText(WelcomeActivity.this, "ex = " + Log.getStackTraceString(ex), Toast.LENGTH_SHORT).show();
 			}
-		}.doPost(httpUrl, requestBean, ResponsePhoneLoginBean.class);
+		}.doPost(httpUrl, requestBean, VLoginPhonePasswordBean.class);
 	}
 }

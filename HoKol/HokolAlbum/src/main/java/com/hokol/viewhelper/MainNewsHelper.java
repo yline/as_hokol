@@ -15,7 +15,7 @@ import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.adapter.ViewHolder;
 import com.hokol.custom.DefaultLinearItemDecoration;
-import com.hokol.medium.http.bean.ResponseSingleNewsBean;
+import com.hokol.medium.http.bean.VNewsSingleBean;
 
 import java.util.List;
 
@@ -69,7 +69,7 @@ public class MainNewsHelper
 	 *
 	 * @param singleNewsBean
 	 */
-	public void updateRecommendData(ResponseSingleNewsBean singleNewsBean)
+	public void updateRecommendData(VNewsSingleBean singleNewsBean)
 	{
 		ImageView imageView = recommendViewHolder.get(R.id.iv_main_news_recommend);
 		glideManager.load(singleNewsBean.getNews_img()).placeholder(R.drawable.global_load_failed).priority(Priority.HIGH).into(imageView);
@@ -84,7 +84,7 @@ public class MainNewsHelper
 	 *
 	 * @param dataList
 	 */
-	public void setRecycleData(List<ResponseSingleNewsBean> dataList)
+	public void setRecycleData(List<VNewsSingleBean> dataList)
 	{
 		recyclerAdapter.addAll(dataList);
 	}
@@ -99,7 +99,7 @@ public class MainNewsHelper
 		recommendViewHolder.get(R.id.rl_main_news_recommend).setOnClickListener(listener);
 	}
 	
-	private class CommonNewsAdapter extends HeadFootRecycleAdapter<ResponseSingleNewsBean>
+	private class CommonNewsAdapter extends HeadFootRecycleAdapter<VNewsSingleBean>
 	{
 
 		@Override

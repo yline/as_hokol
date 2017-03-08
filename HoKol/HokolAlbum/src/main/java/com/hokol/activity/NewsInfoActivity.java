@@ -12,8 +12,8 @@ import com.hokol.base.adapter.ViewHolder;
 import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.HttpConstant;
-import com.hokol.medium.http.bean.RequestSingleNewsBean;
-import com.hokol.medium.http.bean.ResponseSingleNewsBean;
+import com.hokol.medium.http.bean.VNewsSingleBean;
+import com.hokol.medium.http.bean.WNewsSingleBean;
 import com.hokol.medium.http.xHttp;
 
 /**
@@ -40,14 +40,14 @@ public class NewsInfoActivity extends BaseAppCompatActivity
 
 	private void initData()
 	{
-		RequestSingleNewsBean bean = getIntentData();
+		WNewsSingleBean bean = getIntentData();
 
 		if (null != bean && !TextUtils.isEmpty(bean.getNews_id()))
 		{
-			new xHttp<ResponseSingleNewsBean>()
+			new xHttp<VNewsSingleBean>()
 			{
 				@Override
-				public void onSuccess(ResponseSingleNewsBean responseSingleNewsBean)
+				public void onSuccess(VNewsSingleBean responseSingleNewsBean)
 				{
 					super.onSuccess(responseSingleNewsBean);
 					newsInfoViewHolder.setText(R.id.tv_news_info_title, responseSingleNewsBean.getNews_title());
@@ -57,7 +57,7 @@ public class NewsInfoActivity extends BaseAppCompatActivity
 					ImageView imageView = newsInfoViewHolder.get(R.id.iv_news_info);
 					Glide.with(NewsInfoActivity.this).load(responseSingleNewsBean.getNews_img()).placeholder(R.drawable.global_load_failed).into(imageView);
 				}
-			}.doPost(HttpConstant.HTTP_MAIN_SINGLE_NEWS_URL, bean, ResponseSingleNewsBean.class);
+			}.doPost(HttpConstant.HTTP_MAIN_SINGLE_NEWS_URL, bean, VNewsSingleBean.class);
 		}
 		else
 		{
@@ -65,20 +65,20 @@ public class NewsInfoActivity extends BaseAppCompatActivity
 		}
 	}
 
-	public static void actionStart(Context context, RequestSingleNewsBean bean)
+	public static void actionStart(Context context, WNewsSingleBean bean)
 	{
 		Intent intent = new Intent(context, NewsInfoActivity.class);
 		Bundle bundle = new Bundle();
-		bundle.putParcelable("RequestSingleNewsBean", bean);
+		bundle.putParcelable("WNewsSingleBean", bean);
 		intent.putExtras(bundle);
 		context.startActivity(intent);
 	}
 
-	private RequestSingleNewsBean getIntentData()
+	private WNewsSingleBean getIntentData()
 	{
 		Intent intent = this.getIntent();
 		Bundle bundle = intent.getExtras();
-		RequestSingleNewsBean bean = bundle.getParcelable("RequestSingleNewsBean");
+		WNewsSingleBean bean = bundle.getParcelable("WNewsSingleBean");
 		return bean;
 	}
 }
