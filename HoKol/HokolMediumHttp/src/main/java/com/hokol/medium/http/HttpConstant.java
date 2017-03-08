@@ -26,9 +26,11 @@ public class HttpConstant
 	// Http Url 信息
 	private static final String HTTP_URL_HEAD = "http://120.92.35.211/wanghong/wh/index.php/Back/Api/";
 
+	/* --------------------------- 注册、登录、忘记密码 --------------------------- */
 	// 手机+密码登陆
 	public static final String HTTP_PHONE_LOGIN_URL = HTTP_URL_HEAD + "login";
 
+	/* --------------------------- 新闻 --------------------------- */
 	// 多条新闻获取
 	public static final String HTTP_MAIN_MULTIPLEX_NEWS_URL = HTTP_URL_HEAD + "news";
 
@@ -37,6 +39,13 @@ public class HttpConstant
 
 	// 推荐新闻
 	public static final String HTTP_MAIN_RECOMMEND_NEWS_URL = HTTP_URL_HEAD + "new_tui";
+
+	/* --------------------------- 关注 --------------------------- */
+	// 关注主页面
+	public static final String HTTP_MAIN_CARE_STAR_URL = HTTP_URL_HEAD + "dongtai";
+
+	// 单条动态(取消)点赞
+	public static final String HTTP_MAIN_DYNAMIC_PRAISE_URL = HTTP_URL_HEAD + "dt_zan";
 	
 	/**
 	 * 解析最外层Json

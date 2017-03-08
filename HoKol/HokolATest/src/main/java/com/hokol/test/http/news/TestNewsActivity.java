@@ -16,13 +16,18 @@ public class TestNewsActivity extends BaseTestActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		
+
+		final EditText editTextMuch1 = addEditNumber("输入开始号");
+		final EditText editTextMuch2 = addEditNumber("输入结束号");
 		addButton("多条新闻测试", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				testNewsHelper.doMultiplexNews();
+				int start = Integer.parseInt(editTextMuch1.getText().toString().trim());
+				int end = Integer.parseInt(editTextMuch2.getText().toString().trim());
+
+				testNewsHelper.doMultiplexNews(start, end);
 			}
 		});
 		

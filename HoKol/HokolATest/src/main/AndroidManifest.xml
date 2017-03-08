@@ -27,6 +27,7 @@
         <activity android:name=".widget.ADActivity"></activity>
         <activity android:name=".widget.DropMenuActivity"></activity>
         <activity android:name=".widget.LabelLayoutActivity"></activity>
+        <activity android:name=".http.dynamic.TestDynamicActivity"></activity>
     </application>
 
 </manifest>

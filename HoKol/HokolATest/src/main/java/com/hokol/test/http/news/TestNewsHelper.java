@@ -16,7 +16,7 @@ import com.hokol.medium.http.xHttp;
  */
 public class TestNewsHelper
 {
-	public void doMultiplexNews()
+	public void doMultiplexNews(int start, int end)
 	{
 		new xHttp<ResponseMultiplexNewsBean>()
 		{
@@ -38,7 +38,7 @@ public class TestNewsHelper
 			{
 				super.onFailure(ex);
 			}
-		}.doPost(HttpConstant.HTTP_MAIN_MULTIPLEX_NEWS_URL, new RequestMultiplexNewsBean(15, 19), ResponseMultiplexNewsBean.class);
+		}.doPost(HttpConstant.HTTP_MAIN_MULTIPLEX_NEWS_URL, new RequestMultiplexNewsBean(start, end), ResponseMultiplexNewsBean.class);
 	}
 
 	public void doRecommendNews()

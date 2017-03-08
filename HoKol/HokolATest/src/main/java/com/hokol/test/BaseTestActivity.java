@@ -1,6 +1,7 @@
 package com.hokol.test;
 
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -45,6 +46,16 @@ public class BaseTestActivity extends BaseAppCompatActivity
 		EditText editText = new EditText(this);
 		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		editText.setHint(hintContent);
+		linearLayout.addView(editText);
+		return editText;
+	}
+
+	protected EditText addEditNumber(String hintContent)
+	{
+		EditText editText = new EditText(this);
+		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		editText.setHint(hintContent);
+		editText.setInputType(InputType.TYPE_CLASS_NUMBER);
 		linearLayout.addView(editText);
 		return editText;
 	}
