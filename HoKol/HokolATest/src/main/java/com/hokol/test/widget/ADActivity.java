@@ -37,7 +37,7 @@ public class ADActivity extends BaseAppCompatActivity
 				return 360;
 			}
 		};
-		adWidget.start(this, 5);
+		adWidget.start(this, 8);
 		adWidget.attach(linearLayout);
 		adWidget.setListener(new ADWidget.OnPageListener()
 		{
