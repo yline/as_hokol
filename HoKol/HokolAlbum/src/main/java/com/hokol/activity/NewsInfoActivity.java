@@ -12,9 +12,9 @@ import com.hokol.base.adapter.ViewHolder;
 import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.HttpConstant;
+import com.hokol.medium.http.XHttp;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.http.bean.WNewsSingleBean;
-import com.hokol.medium.http.xHttp;
 
 /**
  * 新闻详情界面
@@ -44,7 +44,7 @@ public class NewsInfoActivity extends BaseAppCompatActivity
 
 		if (null != bean && !TextUtils.isEmpty(bean.getNews_id()))
 		{
-			new xHttp<VNewsSingleBean>()
+			new XHttp<VNewsSingleBean>()
 			{
 				@Override
 				public void onSuccess(VNewsSingleBean responseSingleNewsBean)

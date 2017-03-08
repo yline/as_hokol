@@ -13,11 +13,11 @@ import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.HttpConstant;
+import com.hokol.medium.http.XHttp;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
 import com.hokol.medium.http.bean.WNewsSingleBean;
-import com.hokol.medium.http.xHttp;
 import com.hokol.viewhelper.MainNewsHelper;
 
 import java.util.List;
@@ -74,7 +74,7 @@ public class MainNewsFragment extends BaseFragment
 	private void initData()
 	{
 		// 推荐
-		new xHttp<VNewsSingleBean>()
+		new XHttp<VNewsSingleBean>()
 		{
 			@Override
 			public void onSuccess(VNewsSingleBean responseSingleNewsBean)
@@ -86,7 +86,7 @@ public class MainNewsFragment extends BaseFragment
 		}.doPost(HttpConstant.HTTP_MAIN_RECOMMEND_NEWS_URL, "", VNewsSingleBean.class);
 
 		// 多条新闻
-		new xHttp<VNewsMultiplexBean>()
+		new XHttp<VNewsMultiplexBean>()
 		{
 			@Override
 			public void onSuccess(VNewsMultiplexBean multiplexNewsBeen)

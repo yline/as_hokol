@@ -16,11 +16,11 @@ import okhttp3.Request;
  * @author yline 2017/2/22 --> 23:23
  * @version 1.0.0
  */
-public abstract class xHttp<Result> implements IHttpResponse<Result>
+public abstract class XHttp<Result> implements IHttpResponse<Result>
 {
 	private final HttpHandler httpHandler;
 
-	public xHttp()
+	public XHttp()
 	{
 		httpHandler = HttpHandler.build();
 	}
@@ -56,7 +56,7 @@ public abstract class xHttp<Result> implements IHttpResponse<Result>
 		}
 		Request request = builder.build();
 
-		LogFileUtil.v("xHttp -> doGet, requestParam -> " + request.url().toString());
+		LogFileUtil.v("XHttp -> doGet, requestParam -> " + request.url().toString());
 
 		httpNullRequest.doRequest(request, resultClass);
 	}
@@ -70,7 +70,7 @@ public abstract class xHttp<Result> implements IHttpResponse<Result>
 	 */
 	public void doPost(String httpUrl, Object requestParam, Class<Result> resultClass)
 	{
-		LogFileUtil.v("xHttp -> doPost, requestParam -> " + requestParam.toString());
+		LogFileUtil.v("XHttp -> doPost, requestParam -> " + requestParam.toString());
 
 		HttpJsonRequest httpJsonRequest = new HttpJsonRequest(new HttpJsonDispose(httpHandler, this));
 		httpJsonRequest.doRequest(httpUrl, new Gson().toJson(requestParam), resultClass);
@@ -79,18 +79,18 @@ public abstract class xHttp<Result> implements IHttpResponse<Result>
 	@Override
 	public void onSuccess(Result result)
 	{
-		LogFileUtil.v("xHttp onSuccess result -> " + result.toString());
+		LogFileUtil.v("XHttp onSuccess result -> " + result.toString());
 	}
 
 	@Override
 	public void onFailureCode(int code)
 	{
-		LogFileUtil.e("", "xHttp onFailureCode code -> " + code);
+		LogFileUtil.e("", "XHttp onFailureCode code -> " + code);
 	}
 	
 	@Override
 	public void onFailure(Exception ex)
 	{
-		LogFileUtil.e("", "xHttp onFailure ex ", ex);
+		LogFileUtil.e("", "XHttp onFailure ex ", ex);
 	}
 }

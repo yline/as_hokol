@@ -10,9 +10,9 @@ import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.medium.http.HttpConstant;
+import com.hokol.medium.http.XHttp;
 import com.hokol.medium.http.bean.VLoginPhonePasswordBean;
 import com.hokol.medium.http.bean.WLoginPhonePasswordBean;
-import com.hokol.medium.http.xHttp;
 
 /**
  * 首个欢迎界面
@@ -74,7 +74,7 @@ public class WelcomeActivity extends BaseAppCompatActivity
 	
 	private void doPost(String httpUrl, WLoginPhonePasswordBean requestBean)
 	{
-		new xHttp<VLoginPhonePasswordBean>()
+		new XHttp<VLoginPhonePasswordBean>()
 		{
 
 			@Override

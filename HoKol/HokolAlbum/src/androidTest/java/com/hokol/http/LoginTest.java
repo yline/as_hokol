@@ -4,9 +4,9 @@ import android.test.ActivityTestCase;
 
 import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.HttpConstant;
+import com.hokol.medium.http.XHttp;
 import com.hokol.medium.http.bean.VLoginPhonePasswordBean;
 import com.hokol.medium.http.bean.WLoginPhonePasswordBean;
-import com.hokol.medium.http.xHttp;
 
 public class LoginTest extends ActivityTestCase
 {
@@ -27,7 +27,7 @@ public class LoginTest extends ActivityTestCase
 		String httpUrl = HttpConstant.HTTP_PHONE_LOGIN_URL;
 		WLoginPhonePasswordBean requestBean = new WLoginPhonePasswordBean(username, password);
 		// 这样的方法,并不会被执行
-		new xHttp<VLoginPhonePasswordBean>()
+		new XHttp<VLoginPhonePasswordBean>()
 		{
 
 			@Override

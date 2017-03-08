@@ -1,6 +1,11 @@
 package com.hokol.test.http.dynamic;
 
 import com.hokol.medium.http.HttpConstant;
+import com.hokol.medium.http.XHttp;
+import com.hokol.medium.http.bean.VUserDynamicCareBean;
+import com.hokol.medium.http.bean.VUserDynamicPraiseBean;
+import com.hokol.medium.http.bean.WUserDynamicCareBean;
+import com.hokol.medium.http.bean.WUserDynamicPraiseBean;
 
 public class TestDynamicHelper
 {
@@ -11,22 +16,40 @@ public class TestDynamicHelper
 	 * @param start
 	 * @param end
 	 */
-	public void doCareStartInfo(String userId, int start, int end)
+	public void doDynamicCare(String userId, int start, int end)
 	{
 		String httpUrl = HttpConstant.HTTP_MAIN_CARE_STAR_URL;
 
-		/*
-		new xHttp()
+		new XHttp<VUserDynamicCareBean>()
 		{
-
-		}.doPost(httpUrl, );*/
+			@Override
+			public void onSuccess(VUserDynamicCareBean vUserDynamicCareBean)
+			{
+				super.onSuccess(vUserDynamicCareBean);
+			}
+		}.doPost(httpUrl, new WUserDynamicCareBean(userId, start, end), VUserDynamicCareBean.class);
 	}
 
-	public void doActionPraise(String userId, String dynamicId, boolean action)
+	/**
+	 * 给用户点赞
+	 *
+	 * @param userId
+	 * @param dynamicId
+	 * @param action
+	 */
+	public void doDynamicPraise(String userId, String dynamicId, boolean action)
 	{
 		String httpUrl = HttpConstant.HTTP_MAIN_DYNAMIC_PRAISE_URL;
 
-		int actionPraise = action ? 1 : 0;
+		int dynamicPraise = action ? 1 : 0;
 
+		new XHttp<VUserDynamicPraiseBean>()
+		{
+			@Override
+			public void onSuccess(VUserDynamicPraiseBean vUserDynamicPraiseBean)
+			{
+				super.onSuccess(vUserDynamicPraiseBean);
+			}
+		}.doPost(httpUrl, new WUserDynamicPraiseBean(userId, dynamicId, dynamicPraise), VUserDynamicPraiseBean.class);
 	}
 }

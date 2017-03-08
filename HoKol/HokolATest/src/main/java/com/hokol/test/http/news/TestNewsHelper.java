@@ -2,11 +2,11 @@ package com.hokol.test.http.news;
 
 import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.HttpConstant;
+import com.hokol.medium.http.XHttp;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
 import com.hokol.medium.http.bean.WNewsSingleBean;
-import com.hokol.medium.http.xHttp;
 
 /**
  * 新闻接口测试
@@ -18,7 +18,7 @@ public class TestNewsHelper
 {
 	public void doMultiplexNews(int start, int end)
 	{
-		new xHttp<VNewsMultiplexBean>()
+		new XHttp<VNewsMultiplexBean>()
 		{
 			@Override
 			public void onSuccess(VNewsMultiplexBean multiplexNewsBeen)
@@ -43,7 +43,7 @@ public class TestNewsHelper
 
 	public void doRecommendNews()
 	{
-		new xHttp<VNewsSingleBean>()
+		new XHttp<VNewsSingleBean>()
 		{
 			@Override
 			public void onSuccess(VNewsSingleBean responseSingleNewsBean)
@@ -56,7 +56,7 @@ public class TestNewsHelper
 
 	public void doSingleNews(String news_Id)
 	{
-		new xHttp<VNewsSingleBean>()
+		new XHttp<VNewsSingleBean>()
 		{
 			@Override
 			public void onSuccess(VNewsSingleBean responseSingleNewsBean)
