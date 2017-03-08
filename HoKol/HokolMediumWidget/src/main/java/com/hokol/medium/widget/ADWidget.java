@@ -70,6 +70,11 @@ public class ADWidget
 		this.listener = listener;
 	}
 
+	public View getParentView()
+	{
+		return parentView;
+	}
+
 	private void initPoint(Context context, LinearLayout parentLayout)
 	{
 		this.linearLayout = parentLayout;
@@ -351,87 +356,87 @@ public class ADWidget
 	}
 
 	// 从这里开始设置参数；这些参数都是可以被重写的
-	public boolean isRecycle()
+	protected boolean isRecycle()
 	{
 		return true;
 	}
 
-	public boolean isRecycleRight()
+	protected boolean isRecycleRight()
 	{
 		return true;
 	}
 
-	public boolean isAutoRecycle()
+	protected boolean isAutoRecycle()
 	{
 		return true;
 	}
 
-	public int getRecycleAutoTime()
+	protected int getRecycleAutoTime()
 	{
 		return 4500;
 	}
 
-	public int getPointSizeAfter()
+	protected int getPointSizeAfter()
 	{
 		return 15;
 	}
 
-	public int getPointSizeBefore()
+	protected int getPointSizeBefore()
 	{
 		return 15;
 	}
 
-	public int getPointLeftMargin()
+	protected int getPointLeftMargin()
 	{
 		return 10;
 	}
 
-	public int getPointRightMargin()
+	protected int getPointRightMargin()
 	{
 		return 0;
 	}
 
-	public int getPointTopMargin()
+	protected int getPointTopMargin()
 	{
 		return 0;
 	}
 
-	public int getPointBottomMargin()
+	protected int getPointBottomMargin()
 	{
 		return 0;
 	}
 
-	public int getStartPosition()
+	protected int getStartPosition()
 	{
 		return 0;
 	}
 
-	public int getViewPagerWidth()
+	protected int getViewPagerWidth()
 	{
 		return ViewGroup.LayoutParams.MATCH_PARENT;
 	}
 
-	public int getViewPagerHeight()
+	protected int getViewPagerHeight()
 	{
 		return ViewGroup.LayoutParams.WRAP_CONTENT;
 	}
 
-	public int getPointResource()
+	protected int getPointResource()
 	{
 		return R.drawable.widget_ad_point;
 	}
 
-	public int getLayoutResource()
+	protected int getLayoutResource()
 	{
 		return R.layout.widget_ad;
 	}
 
-	public int getViewPagerId()
+	protected int getViewPagerId()
 	{
 		return R.id.viewpager_widget_ad;
 	}
 
-	public int getPointId()
+	protected int getPointId()
 	{
 		return R.id.ll_widget_ad;
 	}
@@ -472,6 +477,4 @@ public class ADWidget
 		 */
 		void onPageInstance(ImageView imageView, int position);
 	}
-
-
 }

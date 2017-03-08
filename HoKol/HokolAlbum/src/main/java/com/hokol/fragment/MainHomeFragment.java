@@ -95,17 +95,4 @@ public class MainHomeFragment extends BaseFragment
 		tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 		tabLayout.setTabMode(TabLayout.MODE_FIXED);
 	}
-	/*
-	public void onBackPressed()
-	{
-		//退出activity前关闭菜单
-		if (dropDownMenu.isShowing())
-		{
-			dropDownMenu.closeMenu();
-		}
-		else
-		{
-			super.onBackPressed();
-		}
-	}*/
 }

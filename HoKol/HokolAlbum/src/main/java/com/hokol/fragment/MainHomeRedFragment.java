@@ -4,7 +4,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -12,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.hokol.R;
 import com.hokol.adapter.HeadFootRecycleAdapter;
@@ -21,8 +19,8 @@ import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.base.utils.UIResizeUtil;
 import com.hokol.bean.LivePersonInfo;
+import com.hokol.medium.widget.ADWidget;
 import com.hokol.viewhelper.MainHomeRedRefreshHelper;
-import com.hokol.viewhelper.global.ADHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +31,7 @@ import java.util.List;
  * @author yline 2017/2/13 --> 17:36
  * @version 1.0.0
  */
-public class MainHomeRedFragment extends BaseFragment implements ADHelper.OnPageClickListener
+public class MainHomeRedFragment extends BaseFragment
 {
 	private final static int[] res = new int[]{
 			R.drawable.delete_ad_img1,
@@ -88,22 +86,37 @@ public class MainHomeRedFragment extends BaseFragment implements ADHelper.OnPage
 	private void initRecycleView(HeadFootRecycleAdapter wrapperAdapter)
 	{
 		// AD
-		List<Integer> data = new ArrayList<>();
+		final List<Integer> data = new ArrayList<>();
 		data.add(R.drawable.delete_ad_img1);
 		data.add(R.drawable.delete_ad_img2);
 		data.add(R.drawable.delete_ad_img3);
 		data.add(R.drawable.delete_ad_img4);
 		data.add(R.drawable.delete_ad_img5);
 
-		View adHeadParentView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_home_red_ad, null);
-		ADHelper adHelper = new ADHelper();
-		adHelper.build().setResource(data).commit(getContext());
-		adHelper.initPoint((LinearLayout) adHeadParentView.findViewById(R.id.ll_main_hot_news_ad));
-		adHelper.initViewPagerView((ViewPager) adHeadParentView.findViewById(R.id.viewpager_main_hot_news_ad));
-		adHelper.startAutoRecycle();
-		adHelper.setListener(this);
+		ADWidget adWidget = new ADWidget()
+		{
+			@Override
+			protected int getViewPagerHeight()
+			{
+				return 300;
+			}
+		};
+		adWidget.start(getContext(), 5);
+		adWidget.setListener(new ADWidget.OnPageListener()
+		{
+			@Override
+			public void onPageClick(View v, int position)
+			{
+				IApplication.toast("position = " + position);
+			}
 
-		wrapperAdapter.addHeaderView(adHeadParentView);
+			@Override
+			public void onPageInstance(ImageView imageView, int position)
+			{
+				imageView.setImageResource(data.get(position));
+			}
+		});
+		wrapperAdapter.addHeaderView(adWidget.getParentView());
 	}
 
 	private class MainNewsHotAdapter extends HeadFootRecycleAdapter<LivePersonInfo>
@@ -139,11 +152,5 @@ public class MainHomeRedFragment extends BaseFragment implements ADHelper.OnPage
 	private void resize(View view, int beforeWidth, int beforeHeight)
 	{
 		UIResizeUtil.build().setIsHeightAdapter(true).setWidth(360).setHeight(360 * beforeHeight / beforeWidth).commit(view);
-	}
-
-	@Override
-	public void onPagerClick(View v, int position)
-	{
-		IApplication.toast("ad position = " + position);
 	}
 }
