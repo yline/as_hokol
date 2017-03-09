@@ -19,16 +19,8 @@ public class BaseTestActivity extends BaseAppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-
-		initContentView();
-		setContentView(linearLayout);
-	}
-
-	private void initContentView()
-	{
-		linearLayout = new LinearLayout(this);
-		linearLayout.setOrientation(LinearLayout.VERTICAL);
-		linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+		setContentView(R.layout.activity_test_base);
+		linearLayout = (LinearLayout) findViewById(R.id.ll_base_content);
 	}
 
 	protected void addButton(String content, View.OnClickListener listener)
