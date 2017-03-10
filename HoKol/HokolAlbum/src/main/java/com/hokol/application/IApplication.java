@@ -9,21 +9,9 @@ import com.hokol.base.application.SDKConfig;
  */
 public class IApplication extends BaseApplication
 {
-	public static final String TAG = "DebugLog";
-	
 	@Override
-	protected SDKConfig initConfig()
+	public SDKConfig initConfig()
 	{
-		SDKConfig sdkConfig = new SDKConfig();
-		sdkConfig.setLogFilePath(TAG);
-		/*sdkConfig.setLogSystem(true);
-		sdkConfig.setLog(false);*/
-		return sdkConfig;
-	}
-	
-	@Override
-	public void onCreate()
-	{
-		super.onCreate();
+		return super.initConfig();
 	}
 }

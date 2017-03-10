@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +15,7 @@ import android.widget.Toast;
 import com.hokol.base.R;
 import com.hokol.base.log.CrashHandler;
 import com.hokol.base.log.LogFileUtil;
-import com.hokol.base.utils.FileUtil;
+import com.hokol.base.log.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -215,7 +214,7 @@ public abstract class BaseApplication extends Application
 	 *
 	 * @return
 	 */
-	protected SDKConfig initConfig()
+	public SDKConfig initConfig()
 	{
 		return new SDKConfig();
 	}
@@ -238,16 +237,16 @@ public abstract class BaseApplication extends Application
 		super.onCreate();
 		setApplication(this); // 初始化全局变量
 
-		// 配置,定制基础信息
-		setBaseConfig(initConfig());
+		// 异常崩溃日志
+		CrashHandler.getInstance().init(this);
+		// 打印日志工具
+		LogUtil.init(initConfig());
+		LogFileUtil.init(this, initConfig());
 
 		// 设立一个程序入口的log
 		LogFileUtil.v(mBaseConfig.toString());
 		LogFileUtil.m("****** application start id = " + Thread.currentThread().getId());
 		LogFileUtil.m("****** application start id = " + Thread.currentThread().getId());
-
-		// 异常崩溃日志
-		CrashHandler.getInstance().init(this);
 
 		handler.sendEmptyMessageDelayed(SDKConstant.HANDLER_PALPITATION, SDKConstant.APPLICATION_TIME);
 	}
@@ -286,24 +285,5 @@ public abstract class BaseApplication extends Application
 	public static void toast(String content)
 	{
 		handler.obtainMessage(SDKConstant.HANDLER_TOAST, content).sendToTarget();
-	}
-
-	/**
-	 * 要求在BaseApplication的super.onCreate()方法执行完成后,调用
-	 * 获取本工程文件目录; such as "/sdcard/_yline/LibSdk/"
-	 *
-	 * @return null if failed
-	 */
-	public static String getProjectFilePath()
-	{
-		String path = FileUtil.getPath();
-		if (TextUtils.isEmpty(path))
-		{
-			LogFileUtil.e(TAG, "SDCard not support, getProjectFilePath failed");
-			return null;
-		}
-
-		path += (mBaseConfig.getFileParentPath() + mBaseConfig.getLogFilePath());
-		return path;
 	}
 }

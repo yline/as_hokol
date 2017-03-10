@@ -1,141 +1,98 @@
 package com.hokol.base.application;
 
-import java.io.File;
-
 /**
  * 在Application中配置父类所需要的配置选项
  * simple introduction
+ *
  * @author YLine 2016-5-27 -> 上午7:28:17
  */
 public class SDKConfig
 {
-	/** 文件保存父路径 */
-	private String fileParentPath = "_hokol" + File.separator;
-
-	/** 是否打印日志 */
-	private boolean isLog = true;
-
-	/** 日志是否打印到文件中 */
-	private boolean isLogToFile = true;
-
-	/** 日志文件是否定位 */
-	private boolean isLogLocation = true;
-
-	/** 文件保存具体路径 */
-	private String logFilePath = "libsdk" + File.separator;
-
-	/** 正常的LogCat失效时，使用sysOut */
-	private boolean isLogSystem = false;
-
-	/** LogFileUtil.m后缀的是否输出 */
-	private boolean isLogLib = true;
-
-	public boolean isLogLib()
-	{
-		return isLogLib;
-	}
-
-	public void setLogLib(boolean logLib)
-	{
-		isLogLib = logLib;
-	}
-
-	public boolean isLogSystem()
-	{
-		return isLogSystem;
-	}
-
-	public void setLogSystem(boolean logSystem)
-	{
-		isLogSystem = logSystem;
-	}
-
-	public String getFileParentPath()
-	{
-		return fileParentPath;
-	}
-
-	/** 文件保存父路径 */
-	public void setFileParentPath(String fileParentPath)
-	{
-		if (fileParentPath.endsWith(File.separator))
-		{
-			this.fileParentPath = fileParentPath;
-		}
-		else
-		{
-			this.fileParentPath = fileParentPath + File.separator;
-		}
-	}
-
-
-	public String getLogFilePath()
-	{
-		return logFilePath;
-	}
+	/**
+	 * 打印日志工具,是否打印日志
+	 */
+	private boolean isUtilLog = true;
 
 	/**
-	 * @param logFilePath 日志目录,default is "libsdk"
+	 * 打印日志工具,是否打印日志到文件
 	 */
-	public void setLogFilePath(String logFilePath)
-	{
-		if (logFilePath.endsWith(File.separator))
-		{
-			this.logFilePath = logFilePath;
-		}
-		else
-		{
-			this.logFilePath = logFilePath + File.separator;
-		}
-	}
-
-	public boolean isLog()
-	{
-		return isLog;
-	}
+	private boolean isUtilLogToFile = true;
 
 	/**
-	 * @param isLog 日志开关, default is true
+	 * 打印日志工具,日志内容是否提供定位功能
 	 */
-	public void setLog(boolean isLog)
-	{
-		this.isLog = isLog;
-	}
-
-	public boolean isLogToFile()
-	{
-		return isLogToFile;
-	}
+	private boolean isUtilLogLocation = true;
 
 	/**
-	 * @param isLogToFile 日志是否写到文件, default is true
+	 * 打印日志工具,是否使用System.out.print打印日志
+	 * 正常的LogCat失效时，使用
 	 */
-	public void setLogToFile(boolean isLogToFile)
-	{
-		this.isLogToFile = isLogToFile;
-	}
-
-	public boolean isLogLocation()
-	{
-		return isLogLocation;
-	}
+	private boolean isUtilLogBySystem = false;
 
 	/**
-	 * @param isLogLocation 日志是否包含定位信息,default is true
+	 * SDK库工程(该工程)是否打印日志
 	 */
-	public void setLogLocation(boolean isLogLocation)
+	private boolean isSDKLog = true;
+
+	public boolean isUtilLog()
 	{
-		this.isLogLocation = isLogLocation;
+		return isUtilLog;
 	}
-	
+
+	public void setUtilLog(boolean utilLog)
+	{
+		isUtilLog = utilLog;
+	}
+
+	public boolean isUtilLogToFile()
+	{
+		return isUtilLogToFile;
+	}
+
+	public void setUtilLogToFile(boolean utilLogToFile)
+	{
+		isUtilLogToFile = utilLogToFile;
+	}
+
+	public boolean isUtilLogLocation()
+	{
+		return isUtilLogLocation;
+	}
+
+	public void setUtilLogLocation(boolean utilLogLocation)
+	{
+		isUtilLogLocation = utilLogLocation;
+	}
+
+	public boolean isUtilLogBySystem()
+	{
+		return isUtilLogBySystem;
+	}
+
+	public void setUtilLogBySystem(boolean utilLogBySystem)
+	{
+		isUtilLogBySystem = utilLogBySystem;
+	}
+
+	public boolean isSDKLog()
+	{
+		return isSDKLog;
+	}
+
+	public void setSDKLog(boolean SDKLog)
+	{
+		isSDKLog = SDKLog;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "SDKConfig{" +
-				", isLog=" + isLog +
-				", isLogToFile=" + isLogToFile +
-				", isLogLocation=" + isLogLocation +
-				", logFilePath='" + logFilePath + '\'' +
+				"isUtilLog=" + isUtilLog +
+				", isUtilLogToFile=" + isUtilLogToFile +
+				", isUtilLogLocation=" + isUtilLogLocation +
+				", isUtilLogBySystem=" + isUtilLogBySystem +
+				", isSDKLog=" + isSDKLog +
 				'}';
 	}
 }
