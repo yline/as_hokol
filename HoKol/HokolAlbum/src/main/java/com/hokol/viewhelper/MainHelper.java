@@ -5,8 +5,6 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,20 +21,6 @@ import com.hokol.R;
 public class MainHelper
 {
 	private static final int DURATION_FLASH = 1500;
-
-	/**
-	 * 初始化Toolbar
-	 *
-	 * @param tempCompat
-	 * @param toolbar
-	 */
-	public void initToolbar(AppCompatActivity tempCompat, Toolbar toolbar)
-	{
-		toolbar.setTitle("");
-		tempCompat.setSupportActionBar(toolbar);
-		tempCompat.getSupportActionBar().setDisplayShowHomeEnabled(false);// 去掉 默认标题;无效
-		// tempCompat.getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 开启返回按钮
-	}
 
 	/**
 	 * 初始化进入动画

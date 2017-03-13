@@ -35,6 +35,8 @@ public class MainTaskHelper
 
 	private TaskRecycleAdapter taskRecycleAdapter;
 
+	private OnTaskClickListener onRecycleClickListener;
+
 	public void initTabDownMenuView(Context context, LinearLayout linearLayout)
 	{
 		dropMenuWidget = new DropMenuWidget();
@@ -61,6 +63,11 @@ public class MainTaskHelper
 		taskRecycleAdapter = new TaskRecycleAdapter();
 		
 		recycleView.setAdapter(taskRecycleAdapter);
+	}
+
+	public void setOnRecycleClickListener(OnTaskClickListener onTaskClickListener)
+	{
+		this.onRecycleClickListener = onTaskClickListener;
 	}
 
 	public void setRecycleData()
@@ -97,9 +104,30 @@ public class MainTaskHelper
 		}
 
 		@Override
-		public void setViewContent(CommonRecyclerViewHolder var1, int var2)
+		public void setViewContent(CommonRecyclerViewHolder viewHolder, final int position)
 		{
-			// do nothing
+			// 设置点击时间
+			viewHolder.get(R.id.ll_main_task_container).setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					if (null != onRecycleClickListener)
+					{
+						onRecycleClickListener.onTaskClick(position);
+					}
+				}
+			});
 		}
+	}
+
+	public interface OnTaskClickListener
+	{
+		/**
+		 * Recycle item 被点击时，相应
+		 *
+		 * @param position
+		 */
+		void onTaskClick(int position);
 	}
 }

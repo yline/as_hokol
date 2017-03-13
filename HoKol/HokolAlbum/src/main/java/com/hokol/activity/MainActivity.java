@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.hokol.R;
 import com.hokol.base.common.BaseAppCompatActivity;
@@ -49,7 +51,9 @@ public class MainActivity extends BaseAppCompatActivity
 
 	private int[] RES_MAIN_TAB_ICON = {R.drawable.main_tab_news, R.drawable.main_tab_care, R.drawable.main_tab_home, R.drawable.main_tab_task, R.drawable.main_tab_me};
 
-	private ImageView imageView;
+	private ImageView imageFlashView;
+
+	private LinearLayout taskMenu;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -57,19 +61,21 @@ public class MainActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar_main_title);
-		mainHelper.initToolbar(this, toolbar);
-
-		imageView = (ImageView) findViewById(R.id.iv_main_logo);
+		imageFlashView = (ImageView) findViewById(R.id.iv_main_logo);
 
 		tabLayout = (TabLayout) findViewById(R.id.tab_layout_main);
 
 		RES_MAIN_TAB = getResources().getStringArray(R.array.main_tab);
 
-		mainHelper.initFlashAnimator(imageView);
+		mainHelper.initFlashAnimator(imageFlashView);
 
 		initView();
 		initData();
+
+		Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar_main_title);
+		taskMenu = (LinearLayout) toolbar.findViewById(R.id.ll_main_action_task);
+		taskMenu.setVisibility(View.GONE);
+		mainTaskFragment.setTaskMenu(taskMenu);
 	}
 
 	private void initView()
@@ -83,6 +89,10 @@ public class MainActivity extends BaseAppCompatActivity
 			{
 				int position = tab.getPosition();
 				fragmentManager.beginTransaction().show(getFragmentByPosition(position)).commit();
+				if (position == 3)
+				{
+					taskMenu.setVisibility(View.VISIBLE);
+				}
 			}
 
 			@Override
@@ -90,6 +100,10 @@ public class MainActivity extends BaseAppCompatActivity
 			{
 				int position = tab.getPosition();
 				fragmentManager.beginTransaction().hide(getFragmentByPosition(position)).commit();
+				if (position == 3)
+				{
+					taskMenu.setVisibility(View.GONE);
+				}
 			}
 
 			@Override
