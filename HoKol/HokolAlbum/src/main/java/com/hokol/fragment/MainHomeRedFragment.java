@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +59,7 @@ public class MainHomeRedFragment extends BaseFragment
 	private void initView(View view)
 	{
 		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_main_news_hot_container);
-		recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+		recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 		
 		recycleAdapter = new MainNewsHotAdapter();
 
@@ -137,7 +137,8 @@ public class MainHomeRedFragment extends BaseFragment
 			item.setText(R.id.tv_main_news_hot_state, state);
 
 			ImageView ivPic = item.get(R.id.iv_main_news_hot_pic);
-			resize(ivPic, sList.get(position).getPersonImage().getMinimumWidth(), sList.get(position).getPersonImage().getMinimumHeight());
+			UIResizeUtil.build().setIsHeightAdapter(true).setHeight(256).commit(ivPic);
+
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
 			{
 				ivPic.setBackground(sList.get(position).getPersonImage());
@@ -149,8 +150,4 @@ public class MainHomeRedFragment extends BaseFragment
 		}
 	}
 
-	private void resize(View view, int beforeWidth, int beforeHeight)
-	{
-		UIResizeUtil.build().setIsHeightAdapter(true).setWidth(360).setHeight(360 * beforeHeight / beforeWidth).commit(view);
-	}
 }
