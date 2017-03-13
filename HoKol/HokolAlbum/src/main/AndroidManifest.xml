@@ -29,7 +29,9 @@
         <activity android:name=".activity.NewsInfoActivity"/>
         <activity android:name=".activity.DynamicInfoActivity">
         </activity>
-        <activity android:name=".activity.StartInfoActivity">
+        <activity
+            android:name=".activity.StarInfoActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity android:name=".activity.MineInfoActivity">
         </activity>

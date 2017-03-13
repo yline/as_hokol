@@ -26,4 +26,5 @@ dependencies {
     // third
     compile project(':HokolMediumHttp')
     compile project(':HokolMediumWidget')
+    compile 'com.android.support:support-v4:24.2.1'
 }
