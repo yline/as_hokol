@@ -16,7 +16,7 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_task_publish);
 	}
-	
+
 	public static void actionStart(Context context)
 	{
 		context.startActivity(new Intent(context, TaskPublishActivity.class));

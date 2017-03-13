@@ -37,9 +37,13 @@
         </activity>
         <activity android:name=".activity.MineInfoActivity">
         </activity>
-        <activity android:name=".activity.TaskPublishActivity">
+        <activity
+            android:name=".activity.TaskPublishActivity"
+            android:theme="@style/AppTheme.Delete">
         </activity>
-        <activity android:name=".activity.TaskDetailActivity">
+        <activity
+            android:name=".activity.TaskDetailActivity"
+            android:theme="@style/AppTheme.Delete">
         </activity>
     </application>
 
