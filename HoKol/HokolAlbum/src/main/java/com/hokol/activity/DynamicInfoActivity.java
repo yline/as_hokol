@@ -22,7 +22,8 @@ public class DynamicInfoActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dynamic_info);
 	}
-	
+
+
 	public static void actionStart(Context context)
 	{
 		context.startActivity(new Intent(context, DynamicInfoActivity.class));

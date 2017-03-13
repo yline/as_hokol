@@ -13,7 +13,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Default">
-
         <!-- 功能 -->
         <activity android:name=".activity.WelcomeActivity">
         </activity>
@@ -27,13 +26,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.NewsInfoActivity"/>
-        <activity android:name=".activity.DynamicInfoActivity">
+        <activity
+            android:name=".activity.DynamicInfoActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
             android:name=".activity.StarInfoActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <activity android:name=".activity.MineInfoActivity">
+        <activity
+            android:name=".activity.MineInfoActivity">
         </activity>
     </application>
 
