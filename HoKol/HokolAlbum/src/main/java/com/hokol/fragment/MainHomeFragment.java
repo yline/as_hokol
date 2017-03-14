@@ -24,16 +24,6 @@ public class MainHomeFragment extends BaseFragment
 
 	private List<BaseFragment> fragmentList;
 
-	// 主页 tab栏目
-	private TabLayout tabLayout;
-
-	private ViewPager viewPager;
-
-	// 下拉菜单栏
-	private LinearLayout linearLayout;
-
-	private String[] RES_MAIN_HOME_TAB;
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
@@ -43,24 +33,46 @@ public class MainHomeFragment extends BaseFragment
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
 	{
-		tabLayout = (TabLayout) view.findViewById(R.id.tab_layout_main_home);
-		viewPager = (ViewPager) view.findViewById(R.id.viewpager_main_home);
-		linearLayout = (LinearLayout) view.findViewById(R.id.ll_main_home_menu);
+		mainHomeHelper = new MainHomeHelper();
 
-		RES_MAIN_HOME_TAB = view.getResources().getStringArray(R.array.main_home_tab);
-		
+		// 主页 tab栏目
+		TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout_main_home);
+		ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager_main_home);
+		tabLayout.setupWithViewPager(viewPager);
+		tabLayout.setTabTextColors(getResources().getColor(android.R.color.black), getResources().getColor(android.R.color.holo_red_light));
+		tabLayout.setSelectedTabIndicatorColor(getResources().getColor(android.R.color.holo_red_light));
+
+		// 下拉菜单栏
+		LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.ll_main_home_menu);
+		mainHomeHelper.initTabDownMenuView(getContext(), linearLayout);
+		mainHomeHelper.setProvinceData();
+
 		initView(view);
-		initData();
+
+		final String[] RES_MAIN_HOME_TAB = view.getResources().getStringArray(R.array.main_home_tab);
+		viewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager())
+		{
+			@Override
+			public Fragment getItem(int position)
+			{
+				return fragmentList.get(position);
+			}
+
+			@Override
+			public int getCount()
+			{
+				return fragmentList.size();
+			}
+
+			@Override
+			public CharSequence getPageTitle(int position)
+			{
+				return RES_MAIN_HOME_TAB[position];
+			}
+		});
 	}
 	
 	private void initView(View view)
-	{
-		mainHomeHelper = new MainHomeHelper();
-		mainHomeHelper.initTabDownMenuView(getContext(), linearLayout);
-		mainHomeHelper.setProvinceData();
-	}
-	
-	private void initData()
 	{
 		fragmentList = new ArrayList<>();
 		fragmentList.add(new MainHomeRedFragment());
@@ -69,31 +81,5 @@ public class MainHomeFragment extends BaseFragment
 		fragmentList.add(new MainHomeModelFragment());
 		fragmentList.add(new MainHomeSingerFragment());
 		fragmentList.add(new MainHomeSportFragment());
-		
-		// viewPager.setOffscreenPageLimit(fragmentList.size());
-		viewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager())
-		{
-			@Override
-			public Fragment getItem(int position)
-			{
-				return fragmentList.get(position);
-			}
-			
-			@Override
-			public int getCount()
-			{
-				return fragmentList.size();
-			}
-			
-			@Override
-			public CharSequence getPageTitle(int position)
-			{
-				return RES_MAIN_HOME_TAB[position];
-			}
-		});
-		
-		tabLayout.setupWithViewPager(viewPager);
-		tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-		tabLayout.setTabMode(TabLayout.MODE_FIXED);
 	}
 }

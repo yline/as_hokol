@@ -20,6 +20,9 @@ import java.util.List;
 
 public class MainHomeHelper
 {
+	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%% TabLayout + ViewPager %%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+
+	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%% 下拉菜单 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 	private String headers[] = {"城市", "筛选"};
 
 	private String provinceList[] = {"不限", "武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州",

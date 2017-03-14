@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hokol.R;
+import com.hokol.base.utils.UIResizeUtil;
+import com.hokol.base.utils.UIScreenUtil;
 
 /**
  * MainActivity helper; 最好全部都用装饰模式
@@ -117,10 +119,10 @@ public class MainHelper
 	 *
 	 * @param color
 	 */
-	public Toolbar setBarBgColor(int color)
+	public void setBarBackground(Context context, int color, int height)
 	{
 		toolbar.setBackgroundResource(color);
-		return toolbar;
+		UIResizeUtil.build().setHeight(UIScreenUtil.dp2px(context, height)).commit(toolbar);
 	}
 
 	/**

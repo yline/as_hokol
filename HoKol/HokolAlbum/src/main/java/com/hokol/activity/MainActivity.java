@@ -141,8 +141,8 @@ public class MainActivity extends BaseAppCompatActivity
 		LogFileUtil.v("position = " + TITLE.News.position + " " + TITLE.News.title + " " + TITLE.Care.titleBgColor);
 		LogFileUtil.v("position = " + TITLE.Care.position + " " + TITLE.Care.title + " " + TITLE.Care.titleBgColor);
 		LogFileUtil.v("position = " + TITLE.Home.position + " " + TITLE.Home.title + " " + TITLE.Home.titleBgColor);
-		mainHelper.setBarTextContent(R.string.main_title_mine).setTextColor(getResources().getColor(android.R.color.white));
-		mainHelper.setBarBgColor(android.R.color.holo_red_light);
+		mainHelper.setBarTextContent(TITLE.News.title).setTextColor(getResources().getColor(TITLE.News.titleColor));
+		mainHelper.setBarBackground(MainActivity.this, TITLE.News.titleBgColor, 56);
 	}
 
 	private void initView()
@@ -161,32 +161,32 @@ public class MainActivity extends BaseAppCompatActivity
 				{
 					fragmentManager.beginTransaction().show(mainNewsFragment).commit();
 					mainHelper.setBarTextContent(TITLE.News.title).setTextColor(getResources().getColor(TITLE.News.titleColor));
-					mainHelper.setBarBgColor(TITLE.News.titleBgColor);
+					mainHelper.setBarBackground(MainActivity.this, TITLE.News.titleBgColor, 56);
 				}
 				else if (position == TAB.Care.position)
 				{
 					fragmentManager.beginTransaction().show(mainCareFragment).commit();
 					mainHelper.setBarTextContent(TITLE.Care.title).setTextColor(getResources().getColor(TITLE.Care.titleColor));
-					mainHelper.setBarBgColor(TITLE.Care.titleBgColor);
+					mainHelper.setBarBackground(MainActivity.this, TITLE.Care.titleBgColor, 40);
 				}
 				else if (position == TAB.Home.position)
 				{
 					fragmentManager.beginTransaction().show(mainHomeFragment).commit();
 					mainHelper.setBarTextContent(TITLE.Home.title).setTextColor(getResources().getColor(TITLE.Home.titleColor));
-					mainHelper.setBarBgColor(TITLE.Home.titleBgColor);
+					mainHelper.setBarBackground(MainActivity.this, TITLE.Home.titleBgColor, 40);
 				}
 				else if (position == TAB.Task.position)
 				{
 					fragmentManager.beginTransaction().show(mainTaskFragment).commit();
 					mainHelper.setBarTextContent(TITLE.Task.title).setTextColor(getResources().getColor(TITLE.Task.titleColor));
-					mainHelper.setBarBgColor(TITLE.Task.titleBgColor);
+					mainHelper.setBarBackground(MainActivity.this, TITLE.Task.titleBgColor, 56);
 					mainHelper.setBarTaskMenuVisibility(View.VISIBLE);
 				}
 				else if (position == TAB.Mine.position)
 				{
 					fragmentManager.beginTransaction().show(mainMineFragment).commit();
 					mainHelper.setBarTextContent(TITLE.Mine.title).setTextColor(getResources().getColor(TITLE.Mine.titleColor));
-					mainHelper.setBarBgColor(TITLE.Mine.titleBgColor);
+					mainHelper.setBarBackground(MainActivity.this, TITLE.Mine.titleBgColor, 40);
 				}
 			}
 
