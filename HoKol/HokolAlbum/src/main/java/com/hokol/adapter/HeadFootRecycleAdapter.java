@@ -52,7 +52,6 @@ public abstract class HeadFootRecycleAdapter<T> extends CommonRecyclerAdapter<T>
 		return super.onCreateViewHolder(parent, viewType);
 	}
 
-
 	@Override
 	public int getItemViewType(int position)
 	{

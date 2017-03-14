@@ -43,7 +43,7 @@ public class MainNewsHelper
 	{
 		RecyclerView recyclerView = (RecyclerView) parentView.findViewById(R.id.recycle_main_news);
 		recyclerView.setLayoutManager(new LinearLayoutManager(context));
-		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(context, DefaultLinearItemDecoration.VERTICAL_LIST));
+		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(context));
 
 		this.glideManager = Glide.with(context);
 

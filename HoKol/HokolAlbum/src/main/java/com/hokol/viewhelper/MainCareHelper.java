@@ -37,9 +37,17 @@ public class MainCareHelper
 	public void initRecycleView(Context context, View parentView)
 	{
 		RecyclerView recyclerView = (RecyclerView) parentView.findViewById(R.id.recycle_main_care);
-		recyclerView.setLayoutManager(new LinearLayoutManager(context));
-		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(context, DefaultLinearItemDecoration.VERTICAL_LIST, R.drawable.main_care_divider));
 
+		recyclerView.setLayoutManager(new LinearLayoutManager(context));
+		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(context)
+		{
+			@Override
+			protected int getDividerResourceId()
+			{
+				return R.drawable.main_care_divider;
+			}
+		});
+		
 		this.glideManager = Glide.with(context);
 		this.context = context;
 

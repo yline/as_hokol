@@ -11,7 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- * 自定义 线性分割线
+ * 1,自定义 线性分割线
+ * 2,自定义最后一个是否绘制
  *
  * @author yline 2017/3/3 --> 18:30
  * @version 1.0.0
@@ -20,35 +21,20 @@ public class DefaultLinearItemDecoration extends RecyclerView.ItemDecoration
 {
 	private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
 
-	public static final int HORIZONTAL_LIST = LinearLayoutManager.HORIZONTAL;
-
-	public static final int VERTICAL_LIST = LinearLayoutManager.VERTICAL;
-
 	private Drawable mDivider;
 
-	private int mOrientation;
-
-	public DefaultLinearItemDecoration(Context context, int orientation)
+	public DefaultLinearItemDecoration(Context context)
 	{
-		final TypedArray a = context.obtainStyledAttributes(ATTRS);
-		mDivider = a.getDrawable(0);
-		a.recycle();
-		setOrientation(orientation);
-	}
-
-	public DefaultLinearItemDecoration(Context context, int orientation, int resId)
-	{
-		mDivider = ContextCompat.getDrawable(context, resId);
-		setOrientation(orientation);
-	}
-	
-	public void setOrientation(int orientation)
-	{
-		if (orientation != HORIZONTAL_LIST && orientation != VERTICAL_LIST)
+		if (-1 != getDividerResourceId())
 		{
-			throw new IllegalArgumentException("invalid orientation");
+			mDivider = ContextCompat.getDrawable(context, getDividerResourceId());
 		}
-		mOrientation = orientation;
+		else
+		{
+			final TypedArray a = context.obtainStyledAttributes(ATTRS);
+			mDivider = a.getDrawable(0);
+			a.recycle();
+		}
 	}
 
 	@Override
@@ -56,11 +42,11 @@ public class DefaultLinearItemDecoration extends RecyclerView.ItemDecoration
 	{
 		super.onDraw(c, parent, state);
 
-		if (mOrientation == VERTICAL_LIST)
+		if (getOrientation() == LinearLayoutManager.VERTICAL)
 		{
 			drawVertical(c, parent);
 		}
-		else
+		else if (getOrientation() == LinearLayoutManager.HORIZONTAL)
 		{
 			drawHorizontal(c, parent);
 		}
@@ -70,18 +56,23 @@ public class DefaultLinearItemDecoration extends RecyclerView.ItemDecoration
 	{
 		final int left = parent.getPaddingLeft();
 		final int right = parent.getWidth() - parent.getPaddingRight();
-
+		final int childTotalCount = parent.getAdapter().getItemCount();
 		final int childCount = parent.getChildCount();
+
+		int currentPosition;
 		for (int i = 0; i < childCount; i++)
 		{
 			final View child = parent.getChildAt(i);
-			RecyclerView v = new RecyclerView(parent.getContext());
-			final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
-					.getLayoutParams();
-			final int top = child.getBottom() + params.bottomMargin;
-			final int bottom = top + mDivider.getIntrinsicHeight();
-			mDivider.setBounds(left, top, right, bottom);
-			mDivider.draw(c);
+			currentPosition = parent.getChildAdapterPosition(child);
+
+			if (isDrawDivider(childTotalCount, currentPosition))
+			{
+				final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
+				final int top = child.getBottom() + params.bottomMargin;
+				final int bottom = top + mDivider.getIntrinsicHeight();
+				mDivider.setBounds(left, top, right, bottom);
+				mDivider.draw(c);
+			}
 		}
 	}
 
@@ -89,29 +80,109 @@ public class DefaultLinearItemDecoration extends RecyclerView.ItemDecoration
 	{
 		final int top = parent.getPaddingTop();
 		final int bottom = parent.getHeight() - parent.getPaddingBottom();
-
 		final int childCount = parent.getChildCount();
+		final int childTotalCount = parent.getAdapter().getItemCount();
+
+		int currentPosition;
 		for (int i = 0; i < childCount; i++)
 		{
 			final View child = parent.getChildAt(i);
-			final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
-			final int left = child.getRight() + params.rightMargin;
-			final int right = left + mDivider.getIntrinsicHeight();
-			mDivider.setBounds(left, top, right, bottom);
-			mDivider.draw(c);
+			currentPosition = parent.getChildAdapterPosition(child);
+
+			if (isDrawDivider(childTotalCount, currentPosition))
+			{
+				final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
+				final int left = child.getRight() + params.rightMargin;
+				final int right = left + mDivider.getIntrinsicHeight();
+				mDivider.setBounds(left, top, right, bottom);
+				mDivider.draw(c);
+			}
 		}
 	}
 
 	@Override
-	public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent)
+	public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state)
 	{
-		if (mOrientation == VERTICAL_LIST)
+		super.getItemOffsets(outRect, view, parent, state);
+
+		final int currentPosition = parent.getChildAdapterPosition(view);
+		final int totalCount = parent.getAdapter().getItemCount();
+		if (isDrawDivider(totalCount, currentPosition))
 		{
-			outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
-		}
-		else
-		{
-			outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
+			if (getOrientation() == LinearLayoutManager.VERTICAL)
+			{
+				outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
+			}
+			else if (getOrientation() == LinearLayoutManager.HORIZONTAL)
+			{
+				outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
+			}
 		}
 	}
+
+	/**
+	 * 判断是否绘制分割线
+	 *
+	 * @param totalCount
+	 * @param currentPosition
+	 * @return
+	 */
+	private boolean isDrawDivider(int totalCount, int currentPosition)
+	{
+		if (getHeadNumber() > currentPosition)
+		{
+			return false;
+		}
+
+		if (isLastDivideDisappear() && (currentPosition == totalCount - 1))
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+	/* ------------------------------------ 提供重写的参数 ---------------------------------------- */
+
+	/**
+	 * 方向
+	 *
+	 * @return
+	 */
+	protected int getOrientation()
+	{
+		return LinearLayoutManager.VERTICAL;
+	}
+
+	/**
+	 * 最后一个分割线是否绘制
+	 *
+	 * @return
+	 */
+	protected boolean isLastDivideDisappear()
+	{
+		return true;
+	}
+
+	/**
+	 * 分割线资源
+	 *
+	 * @return
+	 */
+	protected int getDividerResourceId()
+	{
+		return -1;
+	}
+
+	/**
+	 * 添加的头部的数量
+	 *
+	 * @return
+	 */
+	protected int getHeadNumber()
+	{
+		return 0;
+	}
+
+
 }

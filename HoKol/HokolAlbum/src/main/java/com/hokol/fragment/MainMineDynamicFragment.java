@@ -35,7 +35,7 @@ public class MainMineDynamicFragment extends BaseFragment
 
 		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_main_mine_dynamic);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(getContext(), DefaultLinearItemDecoration.VERTICAL_LIST));
+		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(getContext()));
 
 		recyclerAdapter = new DynamicRecycleAdapter();
 		recyclerView.setAdapter(recyclerAdapter);

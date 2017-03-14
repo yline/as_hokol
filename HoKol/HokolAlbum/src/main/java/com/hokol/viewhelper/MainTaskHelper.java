@@ -59,7 +59,7 @@ public class MainTaskHelper
 	public void initRecycleView(Context context, RecyclerView recycleView)
 	{
 		recycleView.setLayoutManager(new LinearLayoutManager(context));
-		recycleView.addItemDecoration(new DefaultLinearItemDecoration(context, LinearLayoutManager.VERTICAL));
+		recycleView.addItemDecoration(new DefaultLinearItemDecoration(context));
 		taskRecycleAdapter = new TaskRecycleAdapter();
 		
 		recycleView.setAdapter(taskRecycleAdapter);

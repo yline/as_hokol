@@ -1,9 +1,7 @@
 package com.hokol.fragment;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,13 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.adapter.HeadFootRecycleAdapter;
+import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
-import com.hokol.base.utils.UIResizeUtil;
-import com.hokol.bean.LivePersonInfo;
+import com.hokol.base.utils.UIScreenUtil;
+import com.hokol.custom.DefaultGridItemDecoration;
 import com.hokol.medium.widget.ADWidget;
 import com.hokol.viewhelper.MainHomeRedRefreshHelper;
 
@@ -60,20 +60,34 @@ public class MainHomeRedFragment extends BaseFragment
 	{
 		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_main_news_hot_container);
 		recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-		
+		recyclerView.addItemDecoration(new DefaultGridItemDecoration(getContext())
+		{
+
+			@Override
+			protected int getDividerResourceId()
+			{
+				return R.drawable.recycle_divider_white_little;
+			}
+
+			@Override
+			protected int getHeadNumber()
+			{
+				return 2;
+			}
+		});
+
 		recycleAdapter = new MainNewsHotAdapter();
+		recyclerView.setAdapter(recycleAdapter);
 
 		// RecycleView
-		initRecycleView(recycleAdapter);
+		initRecycleViewHead(recycleAdapter);
 
-		List<LivePersonInfo> dataList = new ArrayList<>();
+		List<String> dataList = new ArrayList<>();
 		for (int i = 0; i < 40; i++)
 		{
-			dataList.add(new LivePersonInfo(ContextCompat.getDrawable(getContext(), res[i % res.length])));
+			dataList.add("i");
 		}
-		recycleAdapter.addAll(dataList);
-
-		recyclerView.setAdapter(recycleAdapter);
+		recycleAdapter.setDataList(dataList);
 
 		// SwipeRefreshLayout
 		MainHomeRedRefreshHelper mainNewsHotRefreshHelper = new MainHomeRedRefreshHelper();
@@ -83,22 +97,15 @@ public class MainHomeRedFragment extends BaseFragment
 	/**
 	 * RecycleView 添加头部
 	 */
-	private void initRecycleView(HeadFootRecycleAdapter wrapperAdapter)
+	private void initRecycleViewHead(HeadFootRecycleAdapter wrapperAdapter)
 	{
 		// AD
-		final List<Integer> data = new ArrayList<>();
-		data.add(R.drawable.delete_ad_img1);
-		data.add(R.drawable.delete_ad_img2);
-		data.add(R.drawable.delete_ad_img3);
-		data.add(R.drawable.delete_ad_img4);
-		data.add(R.drawable.delete_ad_img5);
-
 		ADWidget adWidget = new ADWidget()
 		{
 			@Override
 			protected int getViewPagerHeight()
 			{
-				return 300;
+				return UIScreenUtil.dp2px(getContext(), 150);
 			}
 		};
 		adWidget.start(getContext(), 5);
@@ -113,13 +120,19 @@ public class MainHomeRedFragment extends BaseFragment
 			@Override
 			public void onPageInstance(ImageView imageView, int position)
 			{
-				imageView.setImageResource(data.get(position));
+				Glide.with(getContext()).load(DeleteConstant.getUrlRec()).centerCrop().placeholder(R.drawable.global_load_failed).into(imageView);
 			}
 		});
 		wrapperAdapter.addHeaderView(adWidget.getParentView());
+
+		// 分割线
+		View divideView = new View(getContext());
+		divideView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 10)));
+		divideView.setBackgroundResource(android.R.color.darker_gray);
+		wrapperAdapter.addHeaderView(divideView);
 	}
 
-	private class MainNewsHotAdapter extends HeadFootRecycleAdapter<LivePersonInfo>
+	private class MainNewsHotAdapter extends HeadFootRecycleAdapter<String>
 	{
 		@Override
 		public int getItemRes()
@@ -130,23 +143,10 @@ public class MainHomeRedFragment extends BaseFragment
 		@Override
 		public void setViewContent(CommonRecyclerViewHolder item, int position)
 		{
-			item.setText(R.id.tv_main_news_hot_name, sList.get(position).getPersonName());
-			item.setText(R.id.tv_main_news_hot_number, sList.get(position).getWatchingNumber() + "人");
-
-			String state = sList.get(position).isLiving() ? "直播中" : "稍后直播";
-			item.setText(R.id.tv_main_news_hot_state, state);
-
 			ImageView ivPic = item.get(R.id.iv_main_news_hot_pic);
-			UIResizeUtil.build().setIsHeightAdapter(true).setHeight(256).commit(ivPic);
-
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
-			{
-				ivPic.setBackground(sList.get(position).getPersonImage());
-			}
-			else
-			{
-				ivPic.setBackgroundDrawable(sList.get(position).getPersonImage());
-			}
+			Glide.with(getContext()).load(DeleteConstant.getUrlSquare()).centerCrop()
+					.placeholder(R.mipmap.ic_launcher)
+					.into(ivPic);
 		}
 	}
 
