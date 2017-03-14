@@ -14,11 +14,8 @@ import com.hokol.application.IApplication;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.custom.DefaultLinearItemDecoration;
-import com.hokol.medium.widget.LabelWidget;
-import com.hokol.medium.widget.labellayout.LabelFlowLayout;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainMineDynamicFragment extends BaseFragment
@@ -63,17 +60,6 @@ public class MainMineDynamicFragment extends BaseFragment
 		@Override
 		public void setViewContent(CommonRecyclerViewHolder viewHolder, final int position)
 		{
-			final LabelFlowLayout labelFlowLayout = viewHolder.get(R.id.label_item_main_care_label);
-			LabelWidget labelWidget = new LabelWidget()
-			{
-				@Override
-				protected LabelFlowLayout getLabelFlowLayout()
-				{
-					return labelFlowLayout;
-				}
-			};
-			labelWidget.start(getContext(), Arrays.asList("标签 -> ", "网红", "模特", "歌手"));
-
 			viewHolder.get(R.id.iv_item_main_care_content).setOnClickListener(new View.OnClickListener()
 			{
 				@Override

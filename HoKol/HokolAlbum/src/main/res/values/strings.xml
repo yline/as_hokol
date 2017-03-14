@@ -1,19 +1,24 @@
 <resources>
-    <string name="app_name">HoKol</string>
+    <string name="app_name">红客</string>
 
     <!--App登录-->
     <string name="login_hint_username">手机号</string>
     <string name="login_hint_password">密码</string>
     <string name="login_action_start">确定</string>
 
-    <!--主页面内容-->
-    <string-array name="main_tab">
-        <item name="news">新闻</item>
-        <item name="care">关注</item>
-        <item name="home">首页</item>
-        <item name="task">任务</item>
-        <item name="mine">我</item>
-    </string-array>
+    <!-- 首页内容 -->
+    <string name="main_tab_news">新闻</string>
+    <string name="main_tab_care">关注</string>
+    <string name="main_tab_home">首页</string>
+    <string name="main_tab_task">任务</string>
+    <string name="main_tab_mine">我的</string>
+
+    <!-- 首页标题 -->
+    <string name="main_title_news">红客头条</string>
+    <string name="main_title_care">关注</string>
+    <string name="main_title_home">红客</string>
+    <string name="main_title_task">任务大厅</string>
+    <string name="main_title_mine">我的</string>
 
     <!--主页面，首页，内容-->
     <string-array name="main_home_tab">

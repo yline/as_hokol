@@ -1,24 +1,18 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- 默认有头部布局的风格 -->
     <style name="AppTheme.Default" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!-- 状态栏高度 -->
+        <item name="colorPrimary">@android:color/holo_red_light</item>
+        <item name="colorPrimaryDark">@android:color/holo_red_dark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <!--配置父类,待被覆盖的-->
-    <style name="AppTheme.Delete" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <!--子类-->
-    <style name="AppTheme.Main" parent="AppTheme.Default">
         <!--子布局的,字体颜色-->
         <item name="android:textColorPrimary">@android:color/white</item>
         <!--自身的,返回键颜色-->
         <item name="colorControlNormal">@android:color/white</item>
     </style>
 
+    <!--配置父类,待被覆盖的-->
+    <style name="AppTheme.Default.NoActionBar" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    </style>
 </resources>

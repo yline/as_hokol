@@ -12,14 +12,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.Default">
-
+        android:theme="@style/AppTheme.Default.NoActionBar">
         <!-- 功能 -->
-        <activity android:name=".activity.WelcomeActivity">
-        </activity>
+        <activity android:name=".activity.WelcomeActivity"/>
         <activity
-            android:name=".activity.MainActivity"
-            android:theme="@style/AppTheme.Delete">
+            android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -27,24 +24,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.NewsInfoActivity"/>
-        <activity
-            android:name=".activity.DynamicInfoActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-        <activity
-            android:name=".activity.StarInfoActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-        <activity android:name=".activity.MineInfoActivity">
-        </activity>
-        <activity
-            android:name=".activity.TaskPublishActivity"
-            android:theme="@style/AppTheme.Delete">
-        </activity>
-        <activity
-            android:name=".activity.TaskDetailActivity"
-            android:theme="@style/AppTheme.Delete">
-        </activity>
+        <activity android:name=".activity.DynamicInfoActivity"/>
+        <activity android:name=".activity.StarInfoActivity"/>
+        <activity android:name=".activity.MineInfoActivity"/>
+        <activity android:name=".activity.TaskPublishActivity"/>
+        <activity android:name=".activity.TaskDetailActivity"/>
     </application>
 
 </manifest>

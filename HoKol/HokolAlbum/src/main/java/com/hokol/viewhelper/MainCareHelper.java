@@ -4,18 +4,18 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.hokol.R;
 import com.hokol.adapter.HeadFootRecycleAdapter;
+import com.hokol.application.DeleteConstant;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.custom.DefaultLinearItemDecoration;
 import com.hokol.medium.http.bean.VNewsSingleBean;
-import com.hokol.medium.widget.LabelWidget;
-import com.hokol.medium.widget.labellayout.LabelFlowLayout;
+import com.hokol.medium.widget.transform.CircleTransform;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class MainCareHelper
@@ -60,7 +60,6 @@ public class MainCareHelper
 
 	private class RecycleAdapter extends HeadFootRecycleAdapter<VNewsSingleBean>
 	{
-
 		@Override
 		public int getItemRes()
 		{
@@ -70,17 +69,12 @@ public class MainCareHelper
 		@Override
 		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
 		{
-			final LabelFlowLayout labelFlowLayout = viewHolder.get(R.id.label_item_main_care_label);
-			LabelWidget labelWidget = new LabelWidget()
-			{
-				@Override
-				protected LabelFlowLayout getLabelFlowLayout()
-				{
-					return labelFlowLayout;
-				}
-			};
-			labelWidget.start(context, Arrays.asList("标签 -> ", "网红", "模特", "歌手"));
+			ImageView avatarView = viewHolder.get(R.id.iv_item_main_care_avatar);
 
+			glideManager.load(DeleteConstant.url_default_avatar).centerCrop()
+					.transform(new CircleTransform(context)).placeholder(R.mipmap.ic_launcher)
+					.into(avatarView);
+			
 			if (null != careRecycleClickListener)
 			{
 				viewHolder.get(R.id.iv_item_main_care_avatar).setOnClickListener(new View.OnClickListener()
