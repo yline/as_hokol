@@ -6,7 +6,9 @@ public class DeleteConstant
 {
 	public static final String url_default_avatar = "http://imgsrc.baidu.com/forum/w=580/sign=d07e03955ddf8db1bc2e7c6c3923dddb/33c254f40ad162d97ecd601112dfa9ec8b13cde2.jpg";
 
-	public static Random random = new Random();
+	public static final String url_icon_camera = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1489573801544&di=1198b31d287352ddaad03e7c31da354f&imgtype=0&src=http%3A%2F%2Fimg2.web07.cn%2FUpPic%2FPng%2F201501%2F05%2F3948530516530511.png";
+
+	private static Random random = new Random();
 
 	public static String getUrlRec()
 	{

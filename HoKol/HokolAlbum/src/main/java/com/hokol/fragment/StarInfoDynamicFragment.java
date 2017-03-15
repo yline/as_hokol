@@ -59,9 +59,8 @@ public class StarInfoDynamicFragment extends BaseFragment
 		}
 
 		@Override
-		public void setViewContent(CommonRecyclerViewHolder var1, int var2)
+		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
 		{
-
 		}
 	}
 }

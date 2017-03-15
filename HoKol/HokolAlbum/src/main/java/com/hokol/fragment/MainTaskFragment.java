@@ -2,6 +2,7 @@ package com.hokol.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +11,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.hokol.R;
+import com.hokol.activity.TaskDetailActivity;
 import com.hokol.activity.TaskPublishActivity;
 import com.hokol.application.IApplication;
+import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.common.BaseFragment;
+import com.hokol.base.utils.UIScreenUtil;
 import com.hokol.medium.widget.ADWidget;
 import com.hokol.viewhelper.MainTaskHelper;
 
@@ -36,6 +40,7 @@ public class MainTaskFragment extends BaseFragment
 	{
 		super.onViewCreated(view, savedInstanceState);
 
+		mainTaskHelper = new MainTaskHelper(getContext());
 		initView(view);
 	}
 
@@ -55,7 +60,7 @@ public class MainTaskFragment extends BaseFragment
 			@Override
 			protected int getViewPagerHeight()
 			{
-				return 300;
+				return UIScreenUtil.dp2px(getContext(), 150);
 			}
 		};
 		adWidget.start(getContext(), 5);
@@ -76,11 +81,21 @@ public class MainTaskFragment extends BaseFragment
 		adWidget.attach(linearLayout);
 
 		LinearLayout linearLayout1 = (LinearLayout) parentView.findViewById(R.id.ll_main_task_menu);
-		mainTaskHelper = new MainTaskHelper();
-		mainTaskHelper.initTabDownMenuView(getContext(), linearLayout1);
+		mainTaskHelper.initTabDownMenuView(linearLayout1);
+
+		SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) parentView.findViewById(R.id.swipe_main_task);
+		mainTaskHelper.initRefreshLayout(swipeRefreshLayout);
 
 		RecyclerView recycleView = (RecyclerView) parentView.findViewById(R.id.recycle_main_task);
-		mainTaskHelper.initRecycleView(getContext(), recycleView);
+		mainTaskHelper.initRecycleView(recycleView);
+		mainTaskHelper.setOnRecyclerClickListener(new CommonRecyclerAdapter.OnClickListener()
+		{
+			@Override
+			public void onClick(View view, Object o, int position)
+			{
+				TaskDetailActivity.actionStart(getContext());
+			}
+		});
 		mainTaskHelper.setRecycleData();
 	}
 

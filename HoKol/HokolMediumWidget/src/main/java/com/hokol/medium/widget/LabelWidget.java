@@ -38,6 +38,11 @@ public class LabelWidget
 		labelFlowLayout.setAdapter(new WidgetLabelAdapter(context, strList));
 	}
 
+	/**
+	 * 要求,必须在start之后,才能调用
+	 *
+	 * @param viewGroup
+	 */
 	public void attach(ViewGroup viewGroup)
 	{
 		// 如果 LabelFlowLayout 被设定了,则 view为空,不能被添加

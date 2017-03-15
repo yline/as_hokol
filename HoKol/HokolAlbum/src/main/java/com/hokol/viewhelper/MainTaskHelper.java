@@ -1,17 +1,24 @@
 package com.hokol.viewhelper;
 
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.adapter.HeadFootRecycleAdapter;
+import com.hokol.application.DeleteConstant;
+import com.hokol.application.IApplication;
+import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.custom.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.DropMenuWidget;
+import com.hokol.medium.widget.transform.CircleTransform;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +32,13 @@ import java.util.List;
  */
 public class MainTaskHelper
 {
+	private Context context;
+
+	public MainTaskHelper(Context context)
+	{
+		this.context = context;
+	}
+
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 下拉菜单 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 	private String headers[] = {"分类", "金额", "地区"};
 
@@ -34,50 +48,77 @@ public class MainTaskHelper
 
 	private DropMenuWidget dropMenuWidget;
 
-	public void initTabDownMenuView(Context context, LinearLayout linearLayout)
+	public void initTabDownMenuView(LinearLayout linearLayout)
 	{
 		dropMenuWidget = new DropMenuWidget();
 
 		List<View> contentViewList = new ArrayList<>();
 
-		View classifyView = initClassifyView(context);
+		View classifyView = initClassifyView();
 		contentViewList.add(classifyView);
 
-		View moneyView = initClassifyView(context);
+		View moneyView = initClassifyView();
 		contentViewList.add(moneyView);
 
-		View areaView = initFilterView(context);
+		View areaView = initFilterView();
 		contentViewList.add(areaView);
 
 		dropMenuWidget.start(context, Arrays.asList(headers), contentViewList);
 		dropMenuWidget.attach(linearLayout);
 	}
 
-	private View initClassifyView(Context context)
+	private View initClassifyView()
 	{
 		View areaView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_classify, null);
 
 		return areaView;
 	}
 
-	private View initFilterView(Context context)
+	private View initFilterView()
 	{
 		View filterView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_filter, null);
 
 		return filterView;
 	}
 
+	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Refresh %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+	public void initRefreshLayout(final SwipeRefreshLayout swipeRefreshLayout)
+	{
+		swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+		{
+			@Override
+			public void onRefresh()
+			{
+				IApplication.toast("正在加载");
+				IApplication.getHandler().postDelayed(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						IApplication.toast("刷新结束");
+						swipeRefreshLayout.setRefreshing(false);
+					}
+				}, 3000);
+			}
+		});
+	}
+
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% RecyclerView %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 
 	private TaskRecycleAdapter taskRecycleAdapter;
 
-	public void initRecycleView(Context context, RecyclerView recycleView)
+	public void initRecycleView(RecyclerView recycleView)
 	{
 		recycleView.setLayoutManager(new LinearLayoutManager(context));
 		recycleView.addItemDecoration(new DefaultLinearItemDecoration(context));
 		taskRecycleAdapter = new TaskRecycleAdapter();
 		
 		recycleView.setAdapter(taskRecycleAdapter);
+	}
+
+	public void setOnRecyclerClickListener(CommonRecyclerAdapter.OnClickListener listener)
+	{
+		taskRecycleAdapter.setOnClickListener(listener);
 	}
 
 	public void setRecycleData()
@@ -103,14 +144,10 @@ public class MainTaskHelper
 		public void setViewContent(CommonRecyclerViewHolder viewHolder, final int position)
 		{
 			// 设置点击时间
-			viewHolder.get(R.id.ll_main_task_container).setOnClickListener(new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
-				{
-
-				}
-			});
+			ImageView imageView = viewHolder.get(R.id.iv_item_main_task_avatar);
+			Glide.with(context).load(DeleteConstant.url_default_avatar).centerCrop()
+					.transform(new CircleTransform(context)).placeholder(R.mipmap.ic_launcher)
+					.into(imageView);
 		}
 	}
 }
