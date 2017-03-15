@@ -2,6 +2,7 @@ package com.hokol.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,16 +38,16 @@ public class MainNewsFragment extends BaseFragment
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
 	{
-		initView(view);
+		mainNewsHelper = new MainNewsHelper(getContext());
 
+		initView(view);
 		initData();
 	}
 
 	private void initView(View view)
 	{
 		View recommendView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_news_recommend, null);
-		mainNewsHelper = new MainNewsHelper();
-		mainNewsHelper.initRecycleView(getContext(), view);
+		mainNewsHelper.initRecycleView(view);
 		mainNewsHelper.setOnRecycleItemClickListener(new CommonRecyclerAdapter.OnClickListener<VNewsSingleBean>()
 		{
 			@Override
@@ -56,6 +57,7 @@ public class MainNewsFragment extends BaseFragment
 				NewsInfoActivity.actionStart(getContext(), new WNewsSingleBean(responseMultiplexNews.getNews_id()));
 			}
 		});
+
 		mainNewsHelper.initRecommendView(recommendView); // 初始化控件
 		mainNewsHelper.setOnRecommendClickListener(new View.OnClickListener()
 		{
@@ -69,6 +71,9 @@ public class MainNewsFragment extends BaseFragment
 				}
 			}
 		});
+
+		SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_main_news);
+		mainNewsHelper.initRefreshLayout(swipeRefreshLayout);
 	}
 
 	private void initData()
