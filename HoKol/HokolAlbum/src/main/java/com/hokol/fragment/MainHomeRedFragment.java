@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
+import com.hokol.activity.DynamicInfoActivity;
 import com.hokol.adapter.HeadFootRecycleAdapter;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
@@ -26,8 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 热点
- *
  * @author yline 2017/2/13 --> 17:36
  * @version 1.0.0
  */
@@ -41,7 +40,7 @@ public class MainHomeRedFragment extends BaseFragment
 			R.drawable.delete_ad_img5,
 	};
 
-	private HeadFootRecycleAdapter recycleAdapter;
+	private MainNewsHotAdapter recycleAdapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -58,7 +57,7 @@ public class MainHomeRedFragment extends BaseFragment
 	
 	private void initView(View view)
 	{
-		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_main_news_hot_container);
+		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_main_home_red);
 		recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 		recyclerView.addItemDecoration(new DefaultGridItemDecoration(getContext())
 		{
@@ -78,20 +77,29 @@ public class MainHomeRedFragment extends BaseFragment
 
 		recycleAdapter = new MainNewsHotAdapter();
 		recyclerView.setAdapter(recycleAdapter);
+		recycleAdapter.setOnClickListener(new MainNewsHotAdapter.OnClickListener<String>()
+		{
+			@Override
+			public void onClick(View view, String string, int position)
+			{
+				IApplication.toast("string = " + string);
+				DynamicInfoActivity.actionStart(getContext());
+			}
+		});
 
 		// RecycleView
 		initRecycleViewHead(recycleAdapter);
 
 		List<String> dataList = new ArrayList<>();
-		for (int i = 0; i < 40; i++)
+		for (int i = 0; i < 35; i++)
 		{
-			dataList.add("i");
+			dataList.add(DeleteConstant.getUrlSquare());
 		}
 		recycleAdapter.setDataList(dataList);
 
 		// SwipeRefreshLayout
 		MainHomeRedRefreshHelper mainNewsHotRefreshHelper = new MainHomeRedRefreshHelper();
-		mainNewsHotRefreshHelper.init((SwipeRefreshLayout) view.findViewById(R.id.swipe_main_news_hot_container));
+		mainNewsHotRefreshHelper.init((SwipeRefreshLayout) view.findViewById(R.id.swipe_main_home_red));
 	}
 
 	/**
@@ -114,7 +122,7 @@ public class MainHomeRedFragment extends BaseFragment
 			@Override
 			public void onPageClick(View v, int position)
 			{
-				IApplication.toast("position = " + position);
+				IApplication.toast("AD position = " + position);
 			}
 
 			@Override
@@ -137,14 +145,14 @@ public class MainHomeRedFragment extends BaseFragment
 		@Override
 		public int getItemRes()
 		{
-			return R.layout.item_main_home_hot;
+			return R.layout.item_main_home_red;
 		}
 
 		@Override
 		public void setViewContent(CommonRecyclerViewHolder item, int position)
 		{
 			ImageView ivPic = item.get(R.id.iv_main_news_hot_pic);
-			Glide.with(getContext()).load(DeleteConstant.getUrlSquare()).centerCrop()
+			Glide.with(getContext()).load(sList.get(position)).centerCrop()
 					.placeholder(R.mipmap.ic_launcher)
 					.into(ivPic);
 		}

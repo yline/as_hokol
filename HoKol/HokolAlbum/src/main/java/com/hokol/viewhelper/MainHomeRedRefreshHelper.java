@@ -25,7 +25,7 @@ public class MainHomeRedRefreshHelper
 						IApplication.toast("刷新结束");
 						swipeRefreshLayout.setRefreshing(false);
 					}
-				}, 6000);
+				}, 3000);
 			}
 		});
 	}
