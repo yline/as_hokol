@@ -9,7 +9,7 @@ public class TestLoginHelper
 {
 	public void doPhoneLogin(String username, String password)
 	{
-		String httpUrl = HttpConstant.HTTP_PHONE_LOGIN_URL;
+		String httpUrl = HttpConstant.url_login_pwd;
 		final WLoginPhonePasswordBean requestBean = new WLoginPhonePasswordBean(username, password);
 		// 这样的方法,并不会被执行
 		new XHttp<VLoginPhonePasswordBean>()

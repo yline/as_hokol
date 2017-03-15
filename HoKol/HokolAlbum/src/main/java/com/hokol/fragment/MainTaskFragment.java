@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.hokol.R;
-import com.hokol.activity.TaskDetailActivity;
 import com.hokol.activity.TaskPublishActivity;
 import com.hokol.application.IApplication;
 import com.hokol.base.common.BaseFragment;
@@ -20,7 +19,7 @@ import com.hokol.viewhelper.MainTaskHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainTaskFragment extends BaseFragment implements MainTaskHelper.OnTaskClickListener
+public class MainTaskFragment extends BaseFragment
 {
 	private MainTaskHelper mainTaskHelper;
 
@@ -82,7 +81,6 @@ public class MainTaskFragment extends BaseFragment implements MainTaskHelper.OnT
 
 		RecyclerView recycleView = (RecyclerView) parentView.findViewById(R.id.recycle_main_task);
 		mainTaskHelper.initRecycleView(getContext(), recycleView);
-		mainTaskHelper.setOnRecycleClickListener(this);
 		mainTaskHelper.setRecycleData();
 	}
 
@@ -96,11 +94,5 @@ public class MainTaskFragment extends BaseFragment implements MainTaskHelper.OnT
 				TaskPublishActivity.actionStart(getContext());
 			}
 		});
-	}
-
-	@Override
-	public void onTaskClick(int position)
-	{
-		TaskDetailActivity.actionStart(getContext());
 	}
 }

@@ -82,7 +82,7 @@ public class MainNewsFragment extends BaseFragment
 				recommendId = vNewsSingleBean.getNews_id();
 				mainNewsHelper.updateRecommendData(vNewsSingleBean);
 			}
-		}.doRequest(HttpConstant.HTTP_MAIN_RECOMMEND_NEWS_URL, VNewsSingleBean.class);
+		}.doRequest(HttpConstant.url_news_recommend, VNewsSingleBean.class);
 
 		// 多条新闻
 		new XHttp<VNewsMultiplexBean>()
@@ -99,6 +99,6 @@ public class MainNewsFragment extends BaseFragment
 				List<VNewsSingleBean> result = vNewsMultiplexBean.getList();
 				mainNewsHelper.setRecycleData(result);
 			}
-		}.doRequest(HttpConstant.HTTP_MAIN_MULTIPLEX_NEWS_URL, VNewsMultiplexBean.class);
+		}.doRequest(HttpConstant.url_news_multiplex, VNewsMultiplexBean.class);
 	}
 }

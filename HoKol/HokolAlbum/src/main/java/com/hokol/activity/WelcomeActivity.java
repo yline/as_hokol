@@ -54,7 +54,7 @@ public class WelcomeActivity extends BaseAppCompatActivity
 				String username = etUserName.getText().toString().trim();
 				String password = etPassWord.getText().toString().trim();
 
-				String httpUrl = HttpConstant.HTTP_PHONE_LOGIN_URL;
+				String httpUrl = HttpConstant.url_login_pwd;
 
 				doPost(httpUrl, new WLoginPhonePasswordBean(username, password));
 			}

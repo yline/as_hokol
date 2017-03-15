@@ -30,7 +30,7 @@ public class TestNewsHelper
 			{
 
 			}
-		}.doRequest(HttpConstant.HTTP_MAIN_MULTIPLEX_NEWS_URL, VNewsMultiplexBean.class);
+		}.doRequest(HttpConstant.url_news_multiplex, VNewsMultiplexBean.class);
 	}
 
 	public void doRecommendNews()
@@ -42,7 +42,7 @@ public class TestNewsHelper
 			{
 
 			}
-		}.doRequest(HttpConstant.HTTP_MAIN_RECOMMEND_NEWS_URL, VNewsSingleBean.class);
+		}.doRequest(HttpConstant.url_news_recommend, VNewsSingleBean.class);
 	}
 
 	public void doSingleNews(final String news_Id)
@@ -59,6 +59,6 @@ public class TestNewsHelper
 			public void onSuccess(VNewsSingleBean vNewsSingleBean)
 			{
 			}
-		}.doRequest(HttpConstant.HTTP_MAIN_SINGLE_NEWS_URL, VNewsSingleBean.class);
+		}.doRequest(HttpConstant.url_news_single, VNewsSingleBean.class);
 	}
 }

@@ -18,7 +18,7 @@ public class TestDynamicHelper
 	 */
 	public void doDynamicCare(final String userId, final int start, final int end)
 	{
-		String httpUrl = HttpConstant.HTTP_MAIN_CARE_STAR_URL;
+		String httpUrl = HttpConstant.url_care_dynamic_multiplex;
 
 		new XHttp<VUserDynamicCareBean>()
 		{
@@ -45,7 +45,7 @@ public class TestDynamicHelper
 	 */
 	public void doDynamicPraise(final String userId, final String dynamicId, boolean action)
 	{
-		String httpUrl = HttpConstant.HTTP_MAIN_DYNAMIC_PRAISE_URL;
+		String httpUrl = HttpConstant.url_care_dynamic_praise;
 
 		final int dynamicPraise = action ? 1 : 0;
 

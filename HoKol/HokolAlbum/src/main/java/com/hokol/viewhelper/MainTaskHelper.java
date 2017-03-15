@@ -25,6 +25,7 @@ import java.util.List;
  */
 public class MainTaskHelper
 {
+	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 下拉菜单 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 	private String headers[] = {"分类", "金额", "地区"};
 
 	private String provinceList[] = {"不限", "武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州",
@@ -32,10 +33,6 @@ public class MainTaskHelper
 			"武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州"};
 
 	private DropMenuWidget dropMenuWidget;
-
-	private TaskRecycleAdapter taskRecycleAdapter;
-
-	private OnTaskClickListener onRecycleClickListener;
 
 	public void initTabDownMenuView(Context context, LinearLayout linearLayout)
 	{
@@ -56,6 +53,24 @@ public class MainTaskHelper
 		dropMenuWidget.attach(linearLayout);
 	}
 
+	private View initClassifyView(Context context)
+	{
+		View areaView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_classify, null);
+
+		return areaView;
+	}
+
+	private View initFilterView(Context context)
+	{
+		View filterView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_filter, null);
+
+		return filterView;
+	}
+
+	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% RecyclerView %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+
+	private TaskRecycleAdapter taskRecycleAdapter;
+
 	public void initRecycleView(Context context, RecyclerView recycleView)
 	{
 		recycleView.setLayoutManager(new LinearLayoutManager(context));
@@ -63,11 +78,6 @@ public class MainTaskHelper
 		taskRecycleAdapter = new TaskRecycleAdapter();
 		
 		recycleView.setAdapter(taskRecycleAdapter);
-	}
-
-	public void setOnRecycleClickListener(OnTaskClickListener onTaskClickListener)
-	{
-		this.onRecycleClickListener = onTaskClickListener;
 	}
 
 	public void setRecycleData()
@@ -78,20 +88,6 @@ public class MainTaskHelper
 			list.add("i");
 		}
 		taskRecycleAdapter.setDataList(list);
-	}
-
-	private View initClassifyView(Context context)
-	{
-		View areaView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_classify, null);
-		
-		return areaView;
-	}
-
-	private View initFilterView(Context context)
-	{
-		View filterView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_filter, null);
-
-		return filterView;
 	}
 
 	private class TaskRecycleAdapter extends HeadFootRecycleAdapter
@@ -112,22 +108,9 @@ public class MainTaskHelper
 				@Override
 				public void onClick(View v)
 				{
-					if (null != onRecycleClickListener)
-					{
-						onRecycleClickListener.onTaskClick(position);
-					}
+
 				}
 			});
 		}
-	}
-
-	public interface OnTaskClickListener
-	{
-		/**
-		 * Recycle item 被点击时，相应
-		 *
-		 * @param position
-		 */
-		void onTaskClick(int position);
 	}
 }

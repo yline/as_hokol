@@ -165,14 +165,20 @@ public abstract class XHttp<Result> implements IHttpResponse<Result>
 
 	private void handleResponse(Response response, Class<Result> clazz) throws IOException
 	{
-		// 先进行code处理一次
-		String jsonResult;
+		String jsonResult = response.body().string();
+
+		// 入口日志
+		if (isDebug())
+		{
+			LogFileUtil.v("response", (null == jsonResult ? "null" : jsonResult.toString()));
+		}
+
+		// 进行code处理一次
 		if (isResponseCodeHandler())
 		{
-			String data = response.body().string();
 			try
 			{
-				JSONObject jsonObject = new JSONObject(data);
+				JSONObject jsonObject = new JSONObject(jsonResult);
 
 				int code = jsonObject.getInt("code");
 				if (getResponseDefaultCode() == code)
@@ -190,16 +196,8 @@ public abstract class XHttp<Result> implements IHttpResponse<Result>
 				return;
 			}
 		}
-		else
-		{
-			jsonResult = response.body().string();
-		}
 
-		if (isDebug())
-		{
-			LogFileUtil.v("onSuccess", (null == jsonResult ? "null" : jsonResult.toString()));
-		}
-
+		// 响应是否 Gson 解析
 		if (isResponseParse())
 		{
 			// 解析
@@ -320,14 +318,14 @@ public abstract class XHttp<Result> implements IHttpResponse<Result>
 	}
 
 	/**
-	 * 设置请求,头Url:例如
+	 * 设置请求,头Url:例如：工程未确定之前,就不要弄前缀在这里了
 	 * http://120.92.35.211/wanghong/wh/index.php/Back/Api/:
 	 *
 	 * @return
 	 */
 	protected String getRequestUrlBase()
 	{
-		return "http://120.92.35.211/wanghong/wh/index.php/Back/Api/";
+		return "";
 	}
 
 	/**

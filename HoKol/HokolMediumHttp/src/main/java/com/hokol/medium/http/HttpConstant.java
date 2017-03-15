@@ -21,28 +21,40 @@ public class HttpConstant
 	public static final String MEDIA_TYPE_JSON = "application/json; charset=utf-8";
 
 	// Http Url 信息
-	private static final String HTTP_URL_HEAD = "http://120.92.35.211/wanghong/wh/index.php/Back/Api/";
+	private static final String url_head = "http://120.92.35.211/wanghong/wh/index.php/Back/";
 
 	/* --------------------------- 注册、登录、忘记密码 --------------------------- */
 	// 手机+密码登陆
-	public static final String HTTP_PHONE_LOGIN_URL = HTTP_URL_HEAD + "login";
+	public static final String url_login_pwd = url_head + "ApiLogin/login";
 
 	/* --------------------------- 新闻 --------------------------- */
 	// 多条新闻获取
-	public static final String HTTP_MAIN_MULTIPLEX_NEWS_URL = HTTP_URL_HEAD + "news";
+	public static final String url_news_multiplex = url_head + "ApiNews/news";
 
 	// 单条新闻获取
-	public static final String HTTP_MAIN_SINGLE_NEWS_URL = HTTP_URL_HEAD + "new_1";
+	public static final String url_news_single = url_head + "ApiNews/new_one";
 
 	// 推荐新闻
-	public static final String HTTP_MAIN_RECOMMEND_NEWS_URL = HTTP_URL_HEAD + "new_tui";
+	public static final String url_news_recommend = url_head + "ApiNews/new_tui";
 
 	/* --------------------------- 关注 --------------------------- */
 	// 关注主页面
-	public static final String HTTP_MAIN_CARE_STAR_URL = HTTP_URL_HEAD + "dongtai";
+	public static final String url_care_dynamic_multiplex = url_head + "ApiDongtai/dongtai";
 
 	// 单条动态(取消)点赞
-	public static final String HTTP_MAIN_DYNAMIC_PRAISE_URL = HTTP_URL_HEAD + "dt_zan";
+	public static final String url_care_dynamic_praise = url_head + "ApiDongtai/dt_zan";
+
+	// 请求单条动态信息
+	public static final String url_care_dynamic_single = url_head + "ApiDongtai/dt_one";
+
+	// 请求用户自己的，多条动态信息
+	public static final String url_care_dynamic_self = url_head + "ApiDongtai/dt_nums";
+
+	// 请求用户详情信息；点击关注的人头像
+	public static final String url_care_user_detail = url_head + "ApiDongtai/user_info";
+
+	// 请求关注的人的信息; 我的界面查看我关注的人
+	public static final String url_care_user_cared = url_head + "ApiDongtai/care_peo_info";
 
 	/* ------------------------------ 控制 -------------------------------- */
 	// 是否 输出日志
