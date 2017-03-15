@@ -13,9 +13,6 @@ import org.json.JSONObject;
  */
 public class HttpConstant
 {
-	// 是否 输出日志
-	public static final boolean isDebug = true;
-
 	// HttpClient设置
 	public static final int REQUEST_SUCCESS_CODE = 0;
 
@@ -46,7 +43,21 @@ public class HttpConstant
 
 	// 单条动态(取消)点赞
 	public static final String HTTP_MAIN_DYNAMIC_PRAISE_URL = HTTP_URL_HEAD + "dt_zan";
-	
+
+	/* ------------------------------ 控制 -------------------------------- */
+	// 是否 输出日志
+	private static boolean isDefaultDebug = true;
+
+	public static boolean isDefaultDebug()
+	{
+		return isDefaultDebug;
+	}
+
+	public static void setIsDefaultDebug(boolean isDefaultDebug)
+	{
+		HttpConstant.isDefaultDebug = isDefaultDebug;
+	}
+
 	/**
 	 * 解析最外层Json
 	 *

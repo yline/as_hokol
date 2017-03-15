@@ -1,6 +1,5 @@
 package com.hokol.test.http.login;
 
-import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.HttpConstant;
 import com.hokol.medium.http.XHttp;
 import com.hokol.medium.http.bean.VLoginPhonePasswordBean;
@@ -15,28 +14,17 @@ public class TestLoginHelper
 		// 这样的方法,并不会被执行
 		new XHttp<VLoginPhonePasswordBean>()
 		{
+			@Override
+			protected Object getRequestPostParam()
+			{
+				return requestBean;
+			}
 
 			@Override
 			public void onSuccess(VLoginPhonePasswordBean responsePhoneLoginBean)
 			{
-				super.onSuccess(responsePhoneLoginBean);
-				if (null != responsePhoneLoginBean)
-				{
-					LogFileUtil.e("doPhoneLogin", "success");
-				}
-			}
 
-			@Override
-			public void onFailureCode(int code)
-			{
-				super.onFailureCode(code);
 			}
-
-			@Override
-			public void onFailure(Exception ex)
-			{
-				super.onFailure(ex);
-			}
-		}.doPost(httpUrl, requestBean, VLoginPhonePasswordBean.class);
+		}.doRequest(httpUrl, VLoginPhonePasswordBean.class);
 	}
 }

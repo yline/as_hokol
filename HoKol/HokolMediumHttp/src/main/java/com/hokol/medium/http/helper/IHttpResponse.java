@@ -16,7 +16,7 @@ public interface IHttpResponse<T>
 	void onSuccess(T t);
 
 	/**
-	 * 返回错误码
+	 * 返回错误码;只有在code的情况下,才有返回
 	 *
 	 * @param code 错误类型
 	 */

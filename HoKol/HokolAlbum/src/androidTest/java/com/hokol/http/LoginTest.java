@@ -25,33 +25,21 @@ public class LoginTest extends ActivityTestCase
 		LogFileUtil.v(TAG, "phoneLogin start");
 
 		String httpUrl = HttpConstant.HTTP_PHONE_LOGIN_URL;
-		WLoginPhonePasswordBean requestBean = new WLoginPhonePasswordBean(username, password);
+		final WLoginPhonePasswordBean requestBean = new WLoginPhonePasswordBean(username, password);
 		// 这样的方法,并不会被执行
 		new XHttp<VLoginPhonePasswordBean>()
 		{
-
 			@Override
-			public void onSuccess(VLoginPhonePasswordBean responsePhoneLoginBean)
+			protected Object getRequestPostParam()
 			{
-				super.onSuccess(responsePhoneLoginBean);
-				assertNotNull(responsePhoneLoginBean);
-
-				LogFileUtil.v(TAG, responsePhoneLoginBean.toString());
+				return requestBean;
 			}
 
 			@Override
-			public void onFailureCode(int code)
+			public void onSuccess(VLoginPhonePasswordBean vLoginPhonePasswordBean)
 			{
-				super.onFailureCode(code);
-				LogFileUtil.v(TAG, "onFailureCode");
+				assertNotNull(vLoginPhonePasswordBean);
 			}
-
-			@Override
-			public void onFailure(Exception ex)
-			{
-				super.onFailure(ex);
-				LogFileUtil.v(TAG, "onFailure");
-			}
-		}.doPost(httpUrl, requestBean, VLoginPhonePasswordBean.class);
+		}.doRequest(httpUrl, VLoginPhonePasswordBean.class);
 	}
 }

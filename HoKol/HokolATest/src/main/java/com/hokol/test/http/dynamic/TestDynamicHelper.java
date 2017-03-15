@@ -16,18 +16,24 @@ public class TestDynamicHelper
 	 * @param start
 	 * @param end
 	 */
-	public void doDynamicCare(String userId, int start, int end)
+	public void doDynamicCare(final String userId, final int start, final int end)
 	{
 		String httpUrl = HttpConstant.HTTP_MAIN_CARE_STAR_URL;
 
 		new XHttp<VUserDynamicCareBean>()
 		{
 			@Override
+			protected Object getRequestPostParam()
+			{
+				return new WUserDynamicCareBean(userId, start, end);
+			}
+
+			@Override
 			public void onSuccess(VUserDynamicCareBean vUserDynamicCareBean)
 			{
-				super.onSuccess(vUserDynamicCareBean);
+
 			}
-		}.doPost(httpUrl, new WUserDynamicCareBean(userId, start, end), VUserDynamicCareBean.class);
+		}.doRequest(httpUrl, VUserDynamicCareBean.class);
 	}
 
 	/**
@@ -37,19 +43,25 @@ public class TestDynamicHelper
 	 * @param dynamicId
 	 * @param action
 	 */
-	public void doDynamicPraise(String userId, String dynamicId, boolean action)
+	public void doDynamicPraise(final String userId, final String dynamicId, boolean action)
 	{
 		String httpUrl = HttpConstant.HTTP_MAIN_DYNAMIC_PRAISE_URL;
 
-		int dynamicPraise = action ? 1 : 0;
+		final int dynamicPraise = action ? 1 : 0;
 
 		new XHttp<VUserDynamicPraiseBean>()
 		{
 			@Override
+			protected Object getRequestPostParam()
+			{
+				return new WUserDynamicPraiseBean(userId, dynamicId, dynamicPraise);
+			}
+
+			@Override
 			public void onSuccess(VUserDynamicPraiseBean vUserDynamicPraiseBean)
 			{
-				super.onSuccess(vUserDynamicPraiseBean);
+
 			}
-		}.doPost(httpUrl, new WUserDynamicPraiseBean(userId, dynamicId, dynamicPraise), VUserDynamicPraiseBean.class);
+		}.doRequest(httpUrl, VUserDynamicPraiseBean.class);
 	}
 }

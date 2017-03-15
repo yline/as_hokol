@@ -40,24 +40,29 @@ public class NewsInfoActivity extends BaseAppCompatActivity
 
 	private void initData()
 	{
-		WNewsSingleBean bean = getIntentData();
+		final WNewsSingleBean bean = getIntentData();
 
 		if (null != bean && !TextUtils.isEmpty(bean.getNews_id()))
 		{
 			new XHttp<VNewsSingleBean>()
 			{
 				@Override
-				public void onSuccess(VNewsSingleBean responseSingleNewsBean)
+				protected Object getRequestPostParam()
 				{
-					super.onSuccess(responseSingleNewsBean);
-					newsInfoViewHolder.setText(R.id.tv_news_info_title, responseSingleNewsBean.getNews_title());
-					newsInfoViewHolder.setText(R.id.tv_news_info_sub, responseSingleNewsBean.getNews_source() + "  " + responseSingleNewsBean.getNews_time());
-					newsInfoViewHolder.setText(R.id.tv_news_info_content, responseSingleNewsBean.getNews_content());
+					return bean;
+				}
+
+				@Override
+				public void onSuccess(VNewsSingleBean vNewsSingleBean)
+				{
+					newsInfoViewHolder.setText(R.id.tv_news_info_title, vNewsSingleBean.getNews_title());
+					newsInfoViewHolder.setText(R.id.tv_news_info_sub, vNewsSingleBean.getNews_source() + "  " + vNewsSingleBean.getNews_time());
+					newsInfoViewHolder.setText(R.id.tv_news_info_content, vNewsSingleBean.getNews_content());
 
 					ImageView imageView = newsInfoViewHolder.get(R.id.iv_news_info);
-					Glide.with(NewsInfoActivity.this).load(responseSingleNewsBean.getNews_img()).placeholder(R.drawable.global_load_failed).into(imageView);
+					Glide.with(NewsInfoActivity.this).load(vNewsSingleBean.getNews_img()).placeholder(R.drawable.global_load_failed).into(imageView);
 				}
-			}.doPost(HttpConstant.HTTP_MAIN_SINGLE_NEWS_URL, bean, VNewsSingleBean.class);
+			}.doRequest(HttpConstant.HTTP_MAIN_SINGLE_NEWS_URL, VNewsSingleBean.class);
 		}
 		else
 		{

@@ -77,36 +77,28 @@ public class MainNewsFragment extends BaseFragment
 		new XHttp<VNewsSingleBean>()
 		{
 			@Override
-			public void onSuccess(VNewsSingleBean responseSingleNewsBean)
+			public void onSuccess(VNewsSingleBean vNewsSingleBean)
 			{
-				super.onSuccess(responseSingleNewsBean);
-				recommendId = responseSingleNewsBean.getNews_id();
-				mainNewsHelper.updateRecommendData(responseSingleNewsBean);
+				recommendId = vNewsSingleBean.getNews_id();
+				mainNewsHelper.updateRecommendData(vNewsSingleBean);
 			}
-		}.doPost(HttpConstant.HTTP_MAIN_RECOMMEND_NEWS_URL, "", VNewsSingleBean.class);
+		}.doRequest(HttpConstant.HTTP_MAIN_RECOMMEND_NEWS_URL, VNewsSingleBean.class);
 
 		// 多条新闻
 		new XHttp<VNewsMultiplexBean>()
 		{
 			@Override
-			public void onSuccess(VNewsMultiplexBean multiplexNewsBeen)
+			protected Object getRequestPostParam()
 			{
-				super.onSuccess(multiplexNewsBeen);
-				List<VNewsSingleBean> result = multiplexNewsBeen.getList();
+				return new WNewsMultiplexBean(1, 14);
+			}
+
+			@Override
+			public void onSuccess(VNewsMultiplexBean vNewsMultiplexBean)
+			{
+				List<VNewsSingleBean> result = vNewsMultiplexBean.getList();
 				mainNewsHelper.setRecycleData(result);
 			}
-
-			@Override
-			public void onFailureCode(int code)
-			{
-				super.onFailureCode(code);
-			}
-
-			@Override
-			public void onFailure(Exception ex)
-			{
-				super.onFailure(ex);
-			}
-		}.doPost(HttpConstant.HTTP_MAIN_MULTIPLEX_NEWS_URL, new WNewsMultiplexBean(1, 14), VNewsMultiplexBean.class);
+		}.doRequest(HttpConstant.HTTP_MAIN_MULTIPLEX_NEWS_URL, VNewsMultiplexBean.class);
 	}
 }

@@ -1,10 +1,8 @@
 package com.hokol.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
@@ -72,32 +70,22 @@ public class WelcomeActivity extends BaseAppCompatActivity
 		});
 	}
 	
-	private void doPost(String httpUrl, WLoginPhonePasswordBean requestBean)
+	private void doPost(String httpUrl, final WLoginPhonePasswordBean requestBean)
 	{
 		new XHttp<VLoginPhonePasswordBean>()
 		{
+			@Override
+			protected Object getRequestPostParam()
+			{
+				return requestBean;
+			}
 
 			@Override
-			public void onSuccess(VLoginPhonePasswordBean responsePhoneLoginBean)
+			public void onSuccess(VLoginPhonePasswordBean vLoginPhonePasswordBean)
 			{
-				super.onSuccess(responsePhoneLoginBean);
 				MainActivity.actionStart(WelcomeActivity.this);
 				IApplication.finishActivity();
 			}
-
-			@Override
-			public void onFailureCode(int code)
-			{
-				super.onFailureCode(code);
-				Toast.makeText(WelcomeActivity.this, "code = " + code, Toast.LENGTH_SHORT).show();
-			}
-
-			@Override
-			public void onFailure(Exception ex)
-			{
-				super.onFailure(ex);
-				Toast.makeText(WelcomeActivity.this, "ex = " + Log.getStackTraceString(ex), Toast.LENGTH_SHORT).show();
-			}
-		}.doPost(httpUrl, requestBean, VLoginPhonePasswordBean.class);
+		}.doRequest(httpUrl, VLoginPhonePasswordBean.class);
 	}
 }

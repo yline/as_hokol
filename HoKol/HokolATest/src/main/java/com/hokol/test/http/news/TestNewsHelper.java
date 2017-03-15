@@ -1,6 +1,5 @@
 package com.hokol.test.http.news;
 
-import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.HttpConstant;
 import com.hokol.medium.http.XHttp;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
@@ -16,29 +15,22 @@ import com.hokol.medium.http.bean.WNewsSingleBean;
  */
 public class TestNewsHelper
 {
-	public void doMultiplexNews(int start, int end)
+	public void doMultiplexNews(final int start, final int end)
 	{
 		new XHttp<VNewsMultiplexBean>()
 		{
 			@Override
+			protected Object getRequestPostParam()
+			{
+				return new WNewsMultiplexBean(start, end);
+			}
+
+			@Override
 			public void onSuccess(VNewsMultiplexBean multiplexNewsBeen)
 			{
-				super.onSuccess(multiplexNewsBeen);
-				LogFileUtil.e("doMultiplexNews", "multiplexNewsBeen size -> " + multiplexNewsBeen.getList().size());
-			}
 
-			@Override
-			public void onFailureCode(int code)
-			{
-				super.onFailureCode(code);
 			}
-
-			@Override
-			public void onFailure(Exception ex)
-			{
-				super.onFailure(ex);
-			}
-		}.doPost(HttpConstant.HTTP_MAIN_MULTIPLEX_NEWS_URL, new WNewsMultiplexBean(start, end), VNewsMultiplexBean.class);
+		}.doRequest(HttpConstant.HTTP_MAIN_MULTIPLEX_NEWS_URL, VNewsMultiplexBean.class);
 	}
 
 	public void doRecommendNews()
@@ -46,24 +38,27 @@ public class TestNewsHelper
 		new XHttp<VNewsSingleBean>()
 		{
 			@Override
-			public void onSuccess(VNewsSingleBean responseSingleNewsBean)
+			public void onSuccess(VNewsSingleBean vNewsSingleBean)
 			{
-				super.onSuccess(responseSingleNewsBean);
-				LogFileUtil.e("doRecommendNews", "responseSingleNewsBean -> " + responseSingleNewsBean.toString());
+
 			}
-		}.doPost(HttpConstant.HTTP_MAIN_RECOMMEND_NEWS_URL, "", VNewsSingleBean.class);
+		}.doRequest(HttpConstant.HTTP_MAIN_RECOMMEND_NEWS_URL, VNewsSingleBean.class);
 	}
 
-	public void doSingleNews(String news_Id)
+	public void doSingleNews(final String news_Id)
 	{
 		new XHttp<VNewsSingleBean>()
 		{
 			@Override
-			public void onSuccess(VNewsSingleBean responseSingleNewsBean)
+			protected Object getRequestPostParam()
 			{
-				super.onSuccess(responseSingleNewsBean);
-				LogFileUtil.e("doSingleNews", "responseSingleNewsBean -> " + responseSingleNewsBean.toString());
+				return new WNewsSingleBean(news_Id);
 			}
-		}.doPost(HttpConstant.HTTP_MAIN_SINGLE_NEWS_URL, new WNewsSingleBean(news_Id), VNewsSingleBean.class);
+
+			@Override
+			public void onSuccess(VNewsSingleBean vNewsSingleBean)
+			{
+			}
+		}.doRequest(HttpConstant.HTTP_MAIN_SINGLE_NEWS_URL, VNewsSingleBean.class);
 	}
 }

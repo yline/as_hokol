@@ -1,4 +1,4 @@
-package com.hokol.medium.http;
+package com.hokol.medium.http.helper;
 
 
 import android.os.Handler;
