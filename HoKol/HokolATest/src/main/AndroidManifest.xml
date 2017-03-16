@@ -9,6 +9,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <!-- Test -->
         <activity
             android:name=".TestInnerActivity"
@@ -23,11 +24,12 @@
         <activity android:name=".http.login.TestLoginActivity">
         </activity>
         <activity android:name=".http.news.TestNewsActivity"/>
-
-        <activity android:name=".widget.ADActivity"></activity>
-        <activity android:name=".widget.DropMenuActivity"></activity>
-        <activity android:name=".widget.LabelLayoutActivity"></activity>
-        <activity android:name=".http.dynamic.TestDynamicActivity"></activity>
+        <activity android:name=".widget.ADActivity"/>
+        <activity android:name=".widget.DropMenuActivity"/>
+        <activity android:name=".widget.LabelLayoutActivity"/>
+        <activity android:name=".http.dynamic.TestDynamicActivity"/>
+        <activity android:name=".widget.RecycleActivity">
+        </activity>
     </application>
 
 </manifest>

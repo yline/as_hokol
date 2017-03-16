@@ -65,7 +65,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 	
 	public abstract int getItemRes();
 	
-	public abstract void setViewContent(CommonRecyclerViewHolder var1, int var2);
+	public abstract void setViewContent(CommonRecyclerViewHolder viewHolder, int position);
 	
 	public void onBindViewHolder(CommonRecyclerViewHolder holder, final int position)
 	{

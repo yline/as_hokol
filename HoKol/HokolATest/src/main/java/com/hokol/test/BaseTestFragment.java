@@ -2,6 +2,7 @@ package com.hokol.test;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,19 +10,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.hokol.base.adapter.CommonRecyclerAdapter;
+import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.base.utils.UIResizeUtil;
 
 public abstract class BaseTestFragment extends BaseFragment
 {
-	private LinearLayout linearLayout;
+	protected LinearLayout linearLayout;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
-		initContentView();
-
-		return linearLayout;
+		View view = inflater.inflate(getResourceId(), container, false);
+		linearLayout = (LinearLayout) view.findViewById(R.id.ll_fragment_base);
+		return view;
 	}
 
 	@Override
@@ -31,14 +34,17 @@ public abstract class BaseTestFragment extends BaseFragment
 		test();
 	}
 
-	protected abstract void test();
-
-	private void initContentView()
+	/**
+	 * 需要按照规定，包含ll_fragment_base控件
+	 *
+	 * @return
+	 */
+	protected int getResourceId()
 	{
-		linearLayout = new LinearLayout(getContext());
-		linearLayout.setOrientation(LinearLayout.VERTICAL);
-		linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+		return R.layout.fragment_test_base;
 	}
+
+	protected abstract void test();
 
 	protected void addButton(String content, View.OnClickListener listener)
 	{
@@ -57,5 +63,39 @@ public abstract class BaseTestFragment extends BaseFragment
 		editText.setHint(hintContent);
 		linearLayout.addView(editText);
 		return editText;
+	}
+
+	private CommonRecyclerAdapter recycleAdapter;
+
+	protected RecyclerView addRecycleView()
+	{
+		RecyclerView recycleView = new RecyclerView(getContext());
+		recycleAdapter = new RecycleAdapter();
+		recycleView.setAdapter(recycleAdapter);
+
+		linearLayout.addView(recycleView);
+
+		return recycleView;
+	}
+
+	protected CommonRecyclerAdapter getRecycleAdapter()
+	{
+		return recycleAdapter;
+	}
+
+	private class RecycleAdapter extends CommonRecyclerAdapter<String>
+	{
+
+		@Override
+		public int getItemRes()
+		{
+			return android.R.layout.simple_list_item_1;
+		}
+
+		@Override
+		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
+		{
+			viewHolder.setText(android.R.id.text1, sList.get(position));
+		}
 	}
 }
