@@ -241,6 +241,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		// 记得关闭
 		pw.close();
 		String result = writer.toString();
+		LogFileUtil.e(TAG, result);
 		sb.append(result);
 
 		// 保存文件

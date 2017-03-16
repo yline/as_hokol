@@ -3,6 +3,7 @@ package com.hokol.test.widget;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -22,9 +23,9 @@ public class LabelLayoutActivity extends BaseAppCompatActivity
 		linearLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		
 		LabelWidget labelWidget = new LabelWidget();
-		labelWidget.start(this, Arrays.asList("标签 -> ", "网红", "模特", "歌手"));
-		labelWidget.attach(linearLayout);
-		
+		View labelView = labelWidget.start(this, Arrays.asList("标签 -> ", "网红", "模特", "歌手"));
+		linearLayout.addView(labelView);
+
 		setContentView(linearLayout);
 	}
 	

@@ -40,7 +40,7 @@ public class ADWidget
 	/**
 	 * 唯一的一 个方法
 	 */
-	public void start(Context context, int count)
+	public View start(Context context, int count)
 	{
 		this.count = count;
 
@@ -53,26 +53,13 @@ public class ADWidget
 		initViewPagerView(context, viewPager);
 
 		startAutoRecycle();
-	}
 
-	/**
-	 * 将当前布局加载到某个布局中
-	 *
-	 * @param viewGroup
-	 */
-	public void attach(ViewGroup viewGroup)
-	{
-		viewGroup.addView(parentView);
+		return parentView;
 	}
 
 	public void setListener(OnPageListener listener)
 	{
 		this.listener = listener;
-	}
-
-	public View getParentView()
-	{
-		return parentView;
 	}
 
 	private void initPoint(Context context, LinearLayout parentLayout)
@@ -355,7 +342,7 @@ public class ADWidget
 		}
 	}
 
-	// 从这里开始设置参数；这些参数都是可以被重写的
+	/* ---------------------------------------------------- 从这里开始设置参数；这些参数都是可以被重写的 ---------------------------------------------------- */
 	protected boolean isRecycle()
 	{
 		return true;

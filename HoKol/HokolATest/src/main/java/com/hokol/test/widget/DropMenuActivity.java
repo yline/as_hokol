@@ -49,9 +49,9 @@ public class DropMenuActivity extends BaseAppCompatActivity
 		contentViewList.add(areaView);
 		
 		dropMenuWidget = new DropMenuWidget();
-		dropMenuWidget.start(this, Arrays.asList(headers), contentViewList);
-		dropMenuWidget.attach(linearLayout);
-		
+		View dropMenuView = dropMenuWidget.start(this, Arrays.asList(headers), contentViewList);
+		linearLayout.addView(dropMenuView);
+
 		provinceListAdapter.set(Arrays.asList(provinceList));
 	}
 	

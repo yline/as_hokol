@@ -44,16 +44,13 @@ public class DropMenuWidget
 
 	private View view;
 
-	public void start(Context context, List<String> header, List<View> viewList)
+	public View start(Context context, List<String> header, List<View> viewList)
 	{
 		view = LayoutInflater.from(context).inflate(getResourceId(), null);
 		tabLayout = (TabLayout) view.findViewById(getTabLayoutId());
 		setDropDownMenu(context, tabLayout, header, viewList);
-	}
 
-	public void attach(ViewGroup viewGroup)
-	{
-		viewGroup.addView(view);
+		return view;
 	}
 
 	public boolean isOpened()

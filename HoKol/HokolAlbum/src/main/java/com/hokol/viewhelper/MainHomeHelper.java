@@ -33,11 +33,18 @@ public class MainHomeHelper
 
 	private ProvinceListAdapter provinceListAdapter;
 
+	private List<View> contentViewList = new ArrayList<>();
+
+	public void initSecondaryView()
+	{
+		/*SecondaryWidget secondaryWidget = new SecondaryWidget();
+		secondaryWidget.start()*/
+	}
+
 	public void initTabDownMenuView(Context context, LinearLayout linearLayout)
 	{
 		dropMenuWidget = new DropMenuWidget();
 
-		List<View> contentViewList = new ArrayList<>();
 		View provinceView = initAreaView(context);
 		contentViewList.add(provinceView);
 

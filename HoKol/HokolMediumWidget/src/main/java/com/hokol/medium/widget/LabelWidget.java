@@ -3,7 +3,6 @@ package com.hokol.medium.widget;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hokol.medium.widget.labellayout.FlowLayout;
@@ -22,7 +21,7 @@ public class LabelWidget
 {
 	private View view;
 
-	public void start(Context context, List<String> strList)
+	public View start(Context context, List<String> strList)
 	{
 		LabelFlowLayout labelFlowLayout;
 		if (null != getLabelFlowLayout())
@@ -36,20 +35,8 @@ public class LabelWidget
 		}
 
 		labelFlowLayout.setAdapter(new WidgetLabelAdapter(context, strList));
-	}
 
-	/**
-	 * 要求,必须在start之后,才能调用
-	 *
-	 * @param viewGroup
-	 */
-	public void attach(ViewGroup viewGroup)
-	{
-		// 如果 LabelFlowLayout 被设定了,则 view为空,不能被添加
-		if (null == getLabelFlowLayout())
-		{
-			viewGroup.addView(view);
-		}
+		return view;
 	}
 
 	private class WidgetLabelAdapter extends LabelAdapter<String>
