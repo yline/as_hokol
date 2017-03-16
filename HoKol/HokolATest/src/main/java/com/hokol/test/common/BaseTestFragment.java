@@ -1,4 +1,4 @@
-package com.hokol.test;
+package com.hokol.test.common;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.base.utils.UIResizeUtil;
+import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
+import com.hokol.test.R;
 
 public abstract class BaseTestFragment extends BaseFragment
 {
@@ -65,25 +67,19 @@ public abstract class BaseTestFragment extends BaseFragment
 		return editText;
 	}
 
-	private CommonRecyclerAdapter recycleAdapter;
-
 	protected RecyclerView addRecycleView()
 	{
 		RecyclerView recycleView = new RecyclerView(getContext());
-		recycleAdapter = new RecycleAdapter();
-		recycleView.setAdapter(recycleAdapter);
-
 		linearLayout.addView(recycleView);
-
 		return recycleView;
 	}
 
-	protected CommonRecyclerAdapter getRecycleAdapter()
+	protected HeadFootRecycleAdapter getRecycleAdapter()
 	{
-		return recycleAdapter;
+		return new RecycleAdapter();
 	}
 
-	private class RecycleAdapter extends CommonRecyclerAdapter<String>
+	private class RecycleAdapter extends HeadFootRecycleAdapter<String>
 	{
 
 		@Override
@@ -95,7 +91,9 @@ public abstract class BaseTestFragment extends BaseFragment
 		@Override
 		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
 		{
-			viewHolder.setText(android.R.id.text1, sList.get(position));
+			TextView textView = viewHolder.get(android.R.id.text1);
+			textView.setText(sList.get(position));
+			textView.setBackgroundResource(android.R.color.holo_blue_light);
 		}
 	}
 }

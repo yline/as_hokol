@@ -6,7 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.hokol.test.BaseTestActivity;
+import com.hokol.test.common.BaseTestActivity;
+
 
 public class TestDynamicActivity extends BaseTestActivity
 {

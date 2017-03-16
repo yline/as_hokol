@@ -1,4 +1,4 @@
-package com.hokol.test;
+package com.hokol.test.common;
 
 import android.os.Bundle;
 import android.text.InputType;
@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 
 import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.base.utils.UIResizeUtil;
+import com.hokol.test.R;
 
 public class BaseTestActivity extends BaseAppCompatActivity
 {

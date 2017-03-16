@@ -1,4 +1,4 @@
-package com.hokol.custom;
+package com.hokol.medium.widget.recycler;
 
 import android.content.Context;
 import android.content.res.TypedArray;

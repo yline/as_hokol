@@ -2,8 +2,10 @@ package com.hokol.test;
 
 import android.view.View;
 
+import com.hokol.test.common.BaseTestFragment;
 import com.hokol.test.widget.ADActivity;
 import com.hokol.test.widget.DropMenuActivity;
+import com.hokol.test.widget.GlideActivity;
 import com.hokol.test.widget.LabelLayoutActivity;
 import com.hokol.test.widget.RecycleActivity;
 
@@ -45,6 +47,15 @@ public class WidgetFragment extends BaseTestFragment
 			public void onClick(View v)
 			{
 				RecycleActivity.actionStart(getContext());
+			}
+		});
+
+		addButton("Glide", new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				GlideActivity.actionStart(getContext());
 			}
 		});
 	}

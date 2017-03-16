@@ -5,7 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.hokol.test.BaseTestActivity;
+import com.hokol.test.common.BaseTestActivity;
+
 
 public class TestLoginActivity extends BaseTestActivity
 {

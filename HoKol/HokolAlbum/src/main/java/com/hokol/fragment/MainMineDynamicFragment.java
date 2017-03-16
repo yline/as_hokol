@@ -12,14 +12,14 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
-import com.hokol.adapter.HeadFootRecycleAdapter;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.base.utils.UIScreenUtil;
-import com.hokol.custom.DefaultLinearItemDecoration;
+import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
+import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
 import com.hokol.medium.widget.transform.CircleTransform;
 
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class MainMineDynamicFragment extends BaseFragment
 			@Override
 			protected int getDividerResourceId()
 			{
-				return R.drawable.recycle_divider_white_little;
+				return R.drawable.widget_recycler_divider_white_small;
 			}
 		});
 

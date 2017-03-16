@@ -9,11 +9,11 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.hokol.R;
-import com.hokol.adapter.HeadFootRecycleAdapter;
 import com.hokol.application.DeleteConstant;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
-import com.hokol.custom.DefaultLinearItemDecoration;
 import com.hokol.medium.http.bean.VNewsSingleBean;
+import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
+import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
 import com.hokol.medium.widget.transform.CircleTransform;
 
 import java.util.List;
@@ -44,7 +44,7 @@ public class MainCareHelper
 			@Override
 			protected int getDividerResourceId()
 			{
-				return R.drawable.main_care_divider;
+				return R.drawable.widget_recycler_divider_gray_normal;
 			}
 		});
 		

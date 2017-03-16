@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
-import com.hokol.adapter.HeadFootRecycleAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
+import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

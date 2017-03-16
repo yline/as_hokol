@@ -2,6 +2,7 @@ package com.hokol.test;
 
 import android.view.View;
 
+import com.hokol.test.common.BaseTestFragment;
 import com.hokol.test.http.dynamic.TestDynamicActivity;
 import com.hokol.test.http.login.TestLoginActivity;
 import com.hokol.test.http.news.TestNewsActivity;

@@ -10,13 +10,13 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.hokol.R;
-import com.hokol.adapter.HeadFootRecycleAdapter;
 import com.hokol.application.IApplication;
 import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.adapter.ViewHolder;
-import com.hokol.custom.DefaultLinearItemDecoration;
 import com.hokol.medium.http.bean.VNewsSingleBean;
+import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
+import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
 
 import java.util.List;
 
