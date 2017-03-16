@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.widget.SecondaryWidget;
 import com.hokol.test.R;
+import com.hokol.test.common.IApplication;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -30,8 +31,8 @@ public class SecondaryActivity extends AppCompatActivity
 
 		LinearLayout linearLayout = (LinearLayout) findViewById(R.id.ll_secondary_container);
 
-		SecondaryWidget secondaryWidget = new SecondaryWidget();
-		View view = secondaryWidget.start(this, provinceMap, new SecondaryWidget.OnSecondaryCallback()
+		final SecondaryWidget secondaryWidget = new SecondaryWidget();
+		View view = secondaryWidget.start(this, new SecondaryWidget.OnSecondaryCallback()
 		{
 			@Override
 			public void onSecondarySelected(String first, String second)
@@ -39,6 +40,16 @@ public class SecondaryActivity extends AppCompatActivity
 				LogFileUtil.v("fist = " + first + ", second = " + second);
 			}
 		});
+
+		IApplication.getHandler().postDelayed(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				secondaryWidget.setDataMap(provinceMap);
+			}
+		}, 3000);
+
 		linearLayout.addView(view);
 	}
 

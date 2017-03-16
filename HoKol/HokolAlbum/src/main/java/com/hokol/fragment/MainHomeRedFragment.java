@@ -116,7 +116,7 @@ public class MainHomeRedFragment extends BaseFragment
 				return UIScreenUtil.dp2px(getContext(), 150);
 			}
 		};
-		adWidget.start(getContext(), 5);
+		View adView = adWidget.start(getContext(), 5);
 		adWidget.setListener(new ADWidget.OnPageListener()
 		{
 			@Override
@@ -131,7 +131,7 @@ public class MainHomeRedFragment extends BaseFragment
 				Glide.with(getContext()).load(DeleteConstant.getUrlRec()).centerCrop().placeholder(R.drawable.global_load_failed).into(imageView);
 			}
 		});
-		wrapperAdapter.addHeaderView(adWidget.getParentView());
+		wrapperAdapter.addHeaderView(adView);
 
 		// 分割线
 		View divideView = new View(getContext());

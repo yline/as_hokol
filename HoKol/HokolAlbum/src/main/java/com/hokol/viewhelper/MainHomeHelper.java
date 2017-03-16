@@ -13,6 +13,7 @@ import com.hokol.R;
 import com.hokol.base.adapter.CommonListAdapter;
 import com.hokol.base.adapter.ViewHolder;
 import com.hokol.medium.widget.DropMenuWidget;
+import com.hokol.medium.widget.SecondaryWidget;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +21,12 @@ import java.util.List;
 
 public class MainHomeHelper
 {
+	private Context context;
+
+	public MainHomeHelper(Context context)
+	{
+		this.context = context;
+	}
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%% TabLayout + ViewPager %%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%% 下拉菜单 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
@@ -35,24 +42,25 @@ public class MainHomeHelper
 
 	private List<View> contentViewList = new ArrayList<>();
 
-	public void initSecondaryView()
+	public void initSecondaryView(SecondaryWidget.OnSecondaryCallback listener)
 	{
-		/*SecondaryWidget secondaryWidget = new SecondaryWidget();
-		secondaryWidget.start()*/
+		SecondaryWidget secondaryWidget = new SecondaryWidget();
+		View provinceView = secondaryWidget.start(context, listener);
+		contentViewList.add(provinceView);
 	}
 
-	public void initTabDownMenuView(Context context, LinearLayout linearLayout)
+	public void initTabDownMenuView(LinearLayout linearLayout)
 	{
 		dropMenuWidget = new DropMenuWidget();
 
-		View provinceView = initAreaView(context);
+		View provinceView = initAreaView();
 		contentViewList.add(provinceView);
 
-		View areaView = initFilterView(context);
+		View areaView = initFilterView();
 		contentViewList.add(areaView);
 
-		dropMenuWidget.start(context, Arrays.asList(headers), contentViewList);
-		dropMenuWidget.attach(linearLayout);
+		View dropView = dropMenuWidget.start(context, Arrays.asList(headers), contentViewList);
+		linearLayout.addView(dropView);
 	}
 
 	public void setProvinceData()
@@ -60,7 +68,7 @@ public class MainHomeHelper
 		provinceListAdapter.set(Arrays.asList(provinceList));
 	}
 
-	private View initAreaView(Context context)
+	private View initAreaView()
 	{
 		View areaView = LayoutInflater.from(context).inflate(R.layout.fragment_main_home__menu_area, null);
 
@@ -81,7 +89,7 @@ public class MainHomeHelper
 		return areaView;
 	}
 
-	private View initFilterView(Context context)
+	private View initFilterView()
 	{
 		View filterView = LayoutInflater.from(context).inflate(R.layout.fragment_main_home__menu_filter, null);
 

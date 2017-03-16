@@ -33,7 +33,7 @@ public class MainHomeFragment extends BaseFragment
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
 	{
-		mainHomeHelper = new MainHomeHelper();
+		mainHomeHelper = new MainHomeHelper(getContext());
 
 		// 主页 tab栏目
 		TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout_main_home);
@@ -44,7 +44,7 @@ public class MainHomeFragment extends BaseFragment
 
 		// 下拉菜单栏
 		LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.ll_main_home_menu);
-		mainHomeHelper.initTabDownMenuView(getContext(), linearLayout);
+		mainHomeHelper.initTabDownMenuView(linearLayout);
 		mainHomeHelper.setProvinceData();
 
 		initView(view);

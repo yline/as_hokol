@@ -63,7 +63,7 @@ public class MainTaskFragment extends BaseFragment
 				return UIScreenUtil.dp2px(getContext(), 150);
 			}
 		};
-		adWidget.start(getContext(), 5);
+		View adView = adWidget.start(getContext(), 5);
 		adWidget.setListener(new ADWidget.OnPageListener()
 		{
 			@Override
@@ -78,7 +78,7 @@ public class MainTaskFragment extends BaseFragment
 				imageView.setImageResource(data.get(position));
 			}
 		});
-		adWidget.attach(linearLayout);
+		linearLayout.addView(adView);
 
 		LinearLayout linearLayout1 = (LinearLayout) parentView.findViewById(R.id.ll_main_task_menu);
 		mainTaskHelper.initTabDownMenuView(linearLayout1);

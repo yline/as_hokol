@@ -98,7 +98,7 @@ public class MainMineFragment extends BaseFragment
 
 		LinearLayout labelLayout = (LinearLayout) parentView.findViewById(R.id.ll_main_mine_label);
 		LabelWidget labelWidget = new LabelWidget();
-		labelWidget.start(getContext(), Arrays.asList("网红", "模特"));
-		labelWidget.attach(labelLayout);
+		View labelView = labelWidget.start(getContext(), Arrays.asList("网红", "模特"));
+		labelLayout.addView(labelView);
 	}
 }

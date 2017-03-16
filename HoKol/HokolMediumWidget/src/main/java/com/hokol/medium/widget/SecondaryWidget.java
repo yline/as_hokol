@@ -20,6 +20,7 @@ import java.util.Set;
 
 /**
  * 二级列表
+ * 数据后驱动型
  *
  * @author yline 2017/3/16 --> 17:05
  * @version 1.0.0
@@ -34,43 +35,61 @@ public class SecondaryWidget
 
 	private Map<String, List<String>> dataMap;
 
-	private CommonListAdapter secondListAdapter;
+	private CommonListAdapter firstListAdapter, secondListAdapter;
+
+	private Button btnSure;
 
 	private String firstString, secondString;
 
-	public View start(Context context, Map<String, List<String>> map, final OnSecondaryCallback listener)
+	public View start(Context context, final OnSecondaryCallback listener)
 	{
-		this.dataMap = map;
 		this.parentView = LayoutInflater.from(context).inflate(getResourceId(), null);
 
-		initFirstList(context, map.keySet());
-		initSecondList(context);
+		initListView(context);
 
-		Button btnSure = (Button) parentView.findViewById(getSureBtnId());
+		btnSure = (Button) parentView.findViewById(getSureBtnId());
+		btnSure.setVisibility(View.GONE);
 		btnSure.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				listener.onSecondarySelected(firstString, secondString);
+				if (null != listener)
+				{
+					listener.onSecondarySelected(firstString, secondString);
+				}
 			}
 		});
 
 		return parentView;
 	}
 
-	private void initFirstList(Context context, Set<String> firstSet)
+	public void setDataMap(Map<String, List<String>> map)
+	{
+		this.dataMap = map;
+		initListData(dataMap.keySet());
+		btnSure.setVisibility(View.VISIBLE);
+	}
+
+	private void initListView(Context context)
 	{
 		ListView firstListView = (ListView) parentView.findViewById(getFirstListViewId());
-		CommonListAdapter firstListAdapter = new FirstListAdapter(context);
+		firstListAdapter = new FirstListAdapter(context);
 		firstListView.setAdapter(firstListAdapter);
 
+		ListView secondListView = (ListView) parentView.findViewById(getSecondListViewId());
+		secondListAdapter = new SecondListAdapter(context);
+		secondListView.setAdapter(secondListAdapter);
+	}
+
+	private void initListData(Set<String> firstSet)
+	{
 		List<String> provinceList = new ArrayList<>();
 		for (String string : firstSet)
 		{
 			provinceList.add(string);
 		}
-		
+
 		String insertData = getFirstFirstData();
 		if (!TextUtils.isEmpty(insertData))
 		{
@@ -79,13 +98,6 @@ public class SecondaryWidget
 		}
 
 		firstListAdapter.set(provinceList);
-	}
-
-	private void initSecondList(Context context)
-	{
-		ListView secondListView = (ListView) parentView.findViewById(getSecondListViewId());
-		secondListAdapter = new SecondListAdapter(context);
-		secondListView.setAdapter(secondListAdapter);
 	}
 
 	private class FirstListAdapter extends CommonListAdapter<String>

@@ -63,8 +63,8 @@ public class MainTaskHelper
 		View areaView = initFilterView();
 		contentViewList.add(areaView);
 
-		dropMenuWidget.start(context, Arrays.asList(headers), contentViewList);
-		dropMenuWidget.attach(linearLayout);
+		View dropMenuView = dropMenuWidget.start(context, Arrays.asList(headers), contentViewList);
+		linearLayout.addView(dropMenuView);
 	}
 
 	private View initClassifyView()
