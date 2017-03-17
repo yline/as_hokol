@@ -9,6 +9,7 @@ import com.hokol.test.widget.GlideActivity;
 import com.hokol.test.widget.LabelLayoutActivity;
 import com.hokol.test.widget.RecycleActivity;
 import com.hokol.test.widget.SecondaryActivity;
+import com.hokol.test.widget.SwipeRefreshActivity;
 
 public class WidgetFragment extends BaseTestFragment
 {
@@ -66,6 +67,15 @@ public class WidgetFragment extends BaseTestFragment
 			public void onClick(View v)
 			{
 				SecondaryActivity.actionStart(getContext());
+			}
+		});
+
+		addButton("SwipeRefresh", new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				SwipeRefreshActivity.actionStart(getContext());
 			}
 		});
 	}

@@ -44,10 +44,6 @@ public class SecondaryWidget
 	public View start(Context context, final OnSecondaryCallback listener)
 	{
 		this.parentView = LayoutInflater.from(context).inflate(getResourceId(), null);
-		if (-1 != getResourceBackgroundColor())
-		{
-			this.parentView.setBackgroundResource(getResourceBackgroundColor());
-		}
 
 		initListView(context);
 
@@ -193,12 +189,6 @@ public class SecondaryWidget
 	protected int getResourceId()
 	{
 		return R.layout.widget_secondary;
-	}
-
-	protected int getResourceBackgroundColor()
-	{
-		// return android.R.color.transparent;
-		return android.R.color.white;
 	}
 
 	protected int getFirstListViewId()

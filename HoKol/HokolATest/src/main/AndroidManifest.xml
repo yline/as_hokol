@@ -34,6 +34,8 @@
         </activity>
         <activity android:name=".widget.SecondaryActivity">
         </activity>
+        <activity android:name=".widget.SwipeRefreshActivity">
+        </activity>
     </application>
 
 </manifest>
