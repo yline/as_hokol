@@ -50,13 +50,13 @@ public abstract class BaseSwipeRefreshAdapter
 	 */
 	public int getBackgroundResource()
 	{
-		return android.R.color.holo_red_light;
+		return android.R.color.transparent;
 	}
 
 	/* ---------------------------------------- 被SuperSwipeRefreshLayout调用;一般不重写 ---------------------------------------------------- */
-	private SuperSwipeRefreshLayout.OnRefreshListener refreshListener;
+	private SuperSwipeRefreshLayout.OnSwipeListener refreshListener;
 
-	void setSwipeAnimatingListener(SuperSwipeRefreshLayout.OnRefreshListener refreshListener)
+	void setSwipeAnimatingListener(SuperSwipeRefreshLayout.OnSwipeListener refreshListener)
 	{
 		this.refreshListener = refreshListener;
 	}

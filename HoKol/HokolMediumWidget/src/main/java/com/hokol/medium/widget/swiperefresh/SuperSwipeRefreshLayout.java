@@ -172,8 +172,20 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 
 		ViewCompat.setChildrenDrawingOrderEnabled(this, true);
 
-		refreshAdapter = new CircleSwipeAdapter(context);
+		// 初始化 默认refreshAdapter
+		refreshAdapter = new DefaultSwipeRefreshAdapter(context);
 		setRefreshAdapter(refreshAdapter);
+
+		// 初始化 loadAdapter
+		loadAdapter = new DefaultSwipeRefreshAdapter(context)
+		{
+			@Override
+			public boolean isTargetScroll()
+			{
+				return true;
+			}
+		};
+		setLoadAdapter(loadAdapter);
 	}
 
 	/**
@@ -278,7 +290,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 	 *
 	 * @param onRefreshListener
 	 */
-	public void setOnRefreshListener(OnRefreshListener onRefreshListener)
+	public void setOnRefreshListener(OnSwipeListener onRefreshListener)
 	{
 		if (null != refreshAdapter)
 		{
@@ -311,6 +323,14 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 			mFooterViewContainer.removeAllViews();
 			RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(screenWidth, footerViewHeight);
 			mFooterViewContainer.addView(child, layoutParams);
+		}
+	}
+
+	public void setOnLoadListener(OnSwipeListener onLoadListener)
+	{
+		if (null != loadAdapter)
+		{
+			loadAdapter.setSwipeAnimatingListener(onLoadListener);
 		}
 	}
 
@@ -840,7 +860,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 					{
 						if (null != refreshAdapter)
 						{
-							refreshAdapter.create(totalDragOffset, overscrollTop);
+							refreshAdapter.create(overscrollTop, totalDragOffset);
 						}
 						if (refreshAdapter != null)
 						{
@@ -1271,7 +1291,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 	/**
 	 * 给用户使用
 	 */
-	public interface OnRefreshListener
+	public interface OnSwipeListener
 	{
 		/**
 		 * 动画中

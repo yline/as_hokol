@@ -242,7 +242,7 @@ public class CircleProgressBar extends ImageView
 		super.setImageDrawable(null);
 		super.setImageDrawable(mProgressDrawable);
 		mProgressDrawable.setAlpha(255);
-		if (getVisibility() == VISIBLE)
+		if (isProgressAutoStart() && getVisibility() == VISIBLE)
 		{
 			mProgressDrawable.start();
 		}
@@ -267,6 +267,32 @@ public class CircleProgressBar extends ImageView
 
 	}
 
+	private boolean isProgressAutoStart = true;
+
+	public boolean isProgressAutoStart()
+	{
+		return isProgressAutoStart;
+	}
+
+	public void setProgressAutoStart(boolean progressAutoStart)
+	{
+		isProgressAutoStart = progressAutoStart;
+	}
+
+	/**
+	 * Set the amount of rotation to apply to the progress spinner.
+	 *
+	 * @param rotation Rotation is from [0..1]
+	 */
+	public void setProgressRotation(float rotation)
+	{
+		mProgressDrawable.setProgressRotation(rotation);
+	}
+
+	public void startProgress()
+	{
+		mProgressDrawable.start();
+	}
 
 	public boolean isShowArrow()
 	{
