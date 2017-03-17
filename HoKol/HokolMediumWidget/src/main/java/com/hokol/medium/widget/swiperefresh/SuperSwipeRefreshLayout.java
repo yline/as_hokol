@@ -74,9 +74,9 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 	// SuperSwipeRefreshLayout内的目标View，比如RecyclerView,ListView,ScrollView,GridView and etc.
 	private View mTarget;
 
-	private OnPullRefreshListener pullRefreshListener;// 下拉刷新listener
+	private BaseSwipeRefreshAdapter refreshAdapter;// 下拉刷新listener
 
-	private OnPushLoadMoreListener mOnPushLoadMoreListener;// 上拉加载更多
+	private BaseSwipeRefreshAdapter mOnPushLoadMoreListener;// 上拉加载更多
 
 	private boolean mRefreshing = false;
 
@@ -141,7 +141,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 
 	private boolean mUsingCustomStart;
 
-	private boolean targetScrollWithLayout = true;
+/*	private boolean targetScrollWithLayout = true;*/
 
 	private int pushDistance = 0;
 
@@ -181,9 +181,9 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 						defaultProgressView.setOnDraw(true);
 						new Thread(defaultProgressView).start();
 					}
-					if (pullRefreshListener != null)
+					if (refreshAdapter != null)
 					{
-						pullRefreshListener.onAnimating();
+						refreshAdapter.onAnimating();
 					}
 				}
 			}
@@ -205,15 +205,16 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 		}
 	};
 
+
 	/**
 	 * 更新回调
 	 */
 	private void updateListenerCallBack()
 	{
 		int distance = mCurrentTargetOffsetTop + mHeadViewContainer.getHeight();
-		if (pullRefreshListener != null)
+		if (refreshAdapter != null)
 		{
-			pullRefreshListener.onDistance(distance);
+			refreshAdapter.onDistance(distance);
 		}
 		if (usingDefaultHeader && isProgressEnable)
 		{
@@ -222,40 +223,63 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 	}
 
 	/**
-	 * 添加头布局
+	 * 下拉刷新
 	 *
-	 * @param child
+	 * @param refreshAdapter
 	 */
-	public void setHeaderView(View child)
+	public void setRefreshAdapter(BaseSwipeRefreshAdapter refreshAdapter)
 	{
-		if (child == null)
+		this.refreshAdapter = refreshAdapter;
+		if (null != refreshAdapter)
 		{
-			return;
+			View child = refreshAdapter.getView();
+
+			if (child == null)
+			{
+				return;
+			}
+
+			if (mHeadViewContainer == null)
+			{
+				return;
+			}
+
+			usingDefaultHeader = false;
+			mHeadViewContainer.removeAllViews();
+			RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(mHeaderViewWidth, mHeaderViewHeight);
+			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+			mHeadViewContainer.addView(child, layoutParams);
+
+			mHeadViewContainer.setBackgroundResource(refreshAdapter.getBackgroundResource());
 		}
-		if (mHeadViewContainer == null)
-		{
-			return;
-		}
-		usingDefaultHeader = false;
-		mHeadViewContainer.removeAllViews();
-		RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(mHeaderViewWidth, mHeaderViewHeight);
-		layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-		mHeadViewContainer.addView(child, layoutParams);
 	}
 
-	public void setFooterView(View child)
+	/**
+	 * 上拉加载
+	 *
+	 * @param loadAdapter
+	 */
+	public void setLoadAdapter(BaseSwipeRefreshAdapter loadAdapter)
 	{
-		if (child == null)
+		this.mOnPushLoadMoreListener = loadAdapter;
+
+		if (null != loadAdapter)
 		{
-			return;
+			View child = loadAdapter.getView();
+
+
+			if (child == null)
+			{
+				return;
+			}
+			if (mFooterViewContainer == null)
+			{
+				return;
+			}
+			mFooterViewContainer.removeAllViews();
+			RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(mFooterViewWidth, mFooterViewHeight);
+			mFooterViewContainer.addView(child, layoutParams);
 		}
-		if (mFooterViewContainer == null)
-		{
-			return;
-		}
-		mFooterViewContainer.removeAllViews();
-		RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(mFooterViewWidth, mFooterViewHeight);
-		mFooterViewContainer.addView(child, layoutParams);
 	}
 
 	public SuperSwipeRefreshLayout(Context context)
@@ -285,8 +309,8 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 		Display display = wm.getDefaultDisplay();
 		final DisplayMetrics metrics = getResources().getDisplayMetrics();
-		mHeaderViewWidth = (int) display.getWidth();
-		mFooterViewWidth = (int) display.getWidth();
+		mHeaderViewWidth = display.getWidth();
+		mFooterViewWidth = display.getWidth();
 
 		mHeaderViewHeight = (int) (HEADER_VIEW_HEIGHT * metrics.density);
 		mFooterViewHeight = (int) (HEADER_VIEW_HEIGHT * metrics.density);
@@ -299,6 +323,24 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 		ViewCompat.setChildrenDrawingOrderEnabled(this, true);
 		mSpinnerFinalOffset = DEFAULT_CIRCLE_TARGET * metrics.density;
 		mTotalDragDistance = mSpinnerFinalOffset;
+	}
+
+	/**
+	 * 创建头布局的容器
+	 */
+	private void createHeaderViewContainer()
+	{
+		RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int) (mHeaderViewHeight * 0.8), (int) (mHeaderViewHeight * 0.8));
+		layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+		layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+
+		mHeadViewContainer = new HeadViewContainer(getContext());
+		mHeadViewContainer.setVisibility(View.GONE);
+
+		defaultProgressView.setVisibility(View.VISIBLE);
+		defaultProgressView.setOnDraw(false);
+		mHeadViewContainer.addView(defaultProgressView, layoutParams);
+		addView(mHeadViewContainer);
 	}
 
 	/**
@@ -338,22 +380,6 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 	}
 
 	/**
-	 * 创建头布局的容器
-	 */
-	private void createHeaderViewContainer()
-	{
-		RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams((int) (mHeaderViewHeight * 0.8), (int) (mHeaderViewHeight * 0.8));
-		layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-		layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-		mHeadViewContainer = new HeadViewContainer(getContext());
-		mHeadViewContainer.setVisibility(View.GONE);
-		defaultProgressView.setVisibility(View.VISIBLE);
-		defaultProgressView.setOnDraw(false);
-		mHeadViewContainer.addView(defaultProgressView, layoutParams);
-		addView(mHeadViewContainer);
-	}
-
-	/**
 	 * 添加底部布局
 	 */
 	private void createFooterViewContainer()
@@ -361,31 +387,6 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 		mFooterViewContainer = new RelativeLayout(getContext());
 		mFooterViewContainer.setVisibility(View.GONE);
 		addView(mFooterViewContainer);
-	}
-
-	/**
-	 * 下拉刷新
-	 *
-	 * @param pullRefreshListener
-	 */
-	public void setOnPullRefreshListener(OnPullRefreshListener pullRefreshListener)
-	{
-		this.pullRefreshListener = pullRefreshListener;
-	}
-
-	public void setHeaderViewBackgroundColor(int color)
-	{
-		mHeadViewContainer.setBackgroundColor(color);
-	}
-
-	/**
-	 * 上拉加载
-	 *
-	 * @param onPushLoadMoreListener
-	 */
-	public void setOnPushLoadMoreListener(OnPushLoadMoreListener onPushLoadMoreListener)
-	{
-		this.mOnPushLoadMoreListener = onPushLoadMoreListener;
 	}
 
 	/**
@@ -409,8 +410,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 			{
 				endTarget = (int) mSpinnerFinalOffset;
 			}
-			setTargetOffsetTopAndBottom(endTarget - mCurrentTargetOffsetTop,
-					true /* requires update */);
+			setTargetOffsetTopAndBottom(endTarget - mCurrentTargetOffsetTop, true /* requires update */);
 			mNotify = false;
 			startScaleUpAnimation(mRefreshListener);
 		}
@@ -549,11 +549,12 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 		}
 
 		int distance = mCurrentTargetOffsetTop + mHeadViewContainer.getMeasuredHeight();
-		if (!targetScrollWithLayout)
+
+		if (null != refreshAdapter && !refreshAdapter.isTargetScroll())
 		{
-			// 判断标志位，如果目标View不跟随手指的滑动而滑动，将下拉偏移量设置为0
 			distance = 0;
 		}
+
 		final View child = mTarget;
 		final int childLeft = getPaddingLeft();
 		final int childTop = getPaddingTop() + distance - pushDistance;// 根据偏移量distance更新
@@ -566,6 +567,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 		mHeadViewContainer.layout((width / 2 - headViewWidth / 2),
 				mCurrentTargetOffsetTop, (width / 2 + headViewWidth / 2),
 				mCurrentTargetOffsetTop + headViewHeight);// 更新头布局的位置
+
 		int footViewWidth = mFooterViewContainer.getMeasuredWidth();
 		int footViewHeight = mFooterViewContainer.getMeasuredHeight();
 		mFooterViewContainer.layout((width / 2 - footViewWidth / 2), height - pushDistance,
@@ -929,16 +931,16 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 						{
 							setAnimationProgress(overscrollTop / mTotalDragDistance);
 						}
-						if (pullRefreshListener != null)
+						if (refreshAdapter != null)
 						{
-							pullRefreshListener.onStart(false);
+							refreshAdapter.onStart(false);
 						}
 					}
 					else
 					{
-						if (pullRefreshListener != null)
+						if (refreshAdapter != null)
 						{
-							pullRefreshListener.onStart(true);
+							refreshAdapter.onStart(true);
 						}
 					}
 					setTargetOffsetTopAndBottom(targetY - mCurrentTargetOffsetTop,
@@ -1302,8 +1304,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 		}
 	};
 
-	private void startScaleDownReturnToStartAnimation(int from,
-	                                                  AnimationListener listener)
+	private void startScaleDownReturnToStartAnimation(int from, AnimationListener listener)
 	{
 		mFrom = from;
 		mStartingScale = ViewCompat.getScaleX(mHeadViewContainer);
@@ -1376,12 +1377,11 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 	}
 
 	/**
-	 * @Description 下拉刷新布局头部的容器
+	 * 下拉刷新，头部布局容器
 	 */
 	private class HeadViewContainer extends RelativeLayout
 	{
-
-		private AnimationListener mListener;
+		private AnimationListener animationListener;
 
 		public HeadViewContainer(Context context)
 		{
@@ -1390,16 +1390,16 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 
 		public void setAnimationListener(AnimationListener listener)
 		{
-			mListener = listener;
+			animationListener = listener;
 		}
 
 		@Override
 		public void onAnimationStart()
 		{
 			super.onAnimationStart();
-			if (mListener != null)
+			if (null != animationListener)
 			{
-				mListener.onAnimationStart(getAnimation());
+				animationListener.onAnimationStart(getAnimation());
 			}
 		}
 
@@ -1407,69 +1407,32 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 		public void onAnimationEnd()
 		{
 			super.onAnimationEnd();
-			if (mListener != null)
+			if (null != animationListener)
 			{
-				mListener.onAnimationEnd(getAnimation());
+				animationListener.onAnimationEnd(getAnimation());
 			}
 		}
 	}
-
-	/**
-	 * 判断子View是否跟随手指的滑动而滑动，默认跟随
-	 *
-	 * @return
-	 */
+	/*
+	*//**
+ * 判断子View是否跟随手指的滑动而滑动，默认跟随
+ *
+ * @return
+ *//*
 	public boolean isTargetScrollWithLayout()
 	{
 		return targetScrollWithLayout;
 	}
 
-	/**
-	 * 设置子View是否跟谁手指的滑动而滑动
-	 *
-	 * @param targetScrollWithLayout
-	 */
+	*//**
+ * 设置子View是否跟谁手指的滑动而滑动
+ *
+ * @param targetScrollWithLayout
+ *//*
 	public void setTargetScrollWithLayout(boolean targetScrollWithLayout)
 	{
 		this.targetScrollWithLayout = targetScrollWithLayout;
-	}
-
-	/**
-	 * 下拉刷新回调
-	 */
-	public interface OnPullRefreshListener
-	{
-		/**
-		 * 操作开始
-		 *
-		 * @param enable
-		 */
-		void onStart(boolean enable);
-
-		/**
-		 * 在操作过程中
-		 *
-		 * @param distance
-		 */
-		void onDistance(int distance);
-
-		/**
-		 * 正在进行动画
-		 */
-		void onAnimating();
-	}
-
-	/**
-	 * 上拉加载更多
-	 */
-	public interface OnPushLoadMoreListener
-	{
-		void onStart(boolean enable);
-
-		void onDistance(int distance);
-
-		void onAnimating();
-	}
+	}*/
 
 	/**
 	 * 设置默认下拉刷新进度条的颜色
