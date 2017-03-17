@@ -1,5 +1,6 @@
 package com.hokol.medium.widget.swiperefresh;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
 
@@ -7,46 +8,28 @@ import android.view.View;
  * SuperSwipeRefreshLayout
  * 1，下拉刷新
  * 2，上拉加载
- *
- * @param <TargetView> 目标数据类型
  */
 public abstract class BaseSwipeRefreshAdapter
 {
-	/**
-	 * 操作开始
-	 *
-	 * @param enable
-	 */
-	protected void onStart(boolean enable)
-	{
+	protected Context sContext;
 
+	public BaseSwipeRefreshAdapter(Context context)
+	{
+		this.sContext = context;
 	}
 
-	/**
-	 * 人为操作过程
-	 *
-	 * @param distance
-	 */
-	protected void onDistance(int distance)
-	{
+	/* ----------------- 提供四个方法可被重写 ------------------ */
 
-	}
+	protected abstract void onCreate(float dragDistance, float targetDistance);
 
-	/**
-	 * 正在进行动画
-	 */
+	protected abstract void onStart(boolean enable);
+
 	protected void onAnimating()
 	{
-
 	}
 
-	/**
-	 * 返回 被加载的控件
-	 *
-	 * @return
-	 */
 	@NonNull
-	protected abstract View getView();
+	protected abstract View getView(Context context);
 
 	/**
 	 * 子View是否跟随,手指的滑动,而移动
@@ -54,7 +37,7 @@ public abstract class BaseSwipeRefreshAdapter
 	 *
 	 * @return
 	 */
-	protected boolean isTargetScroll()
+	public boolean isTargetScroll()
 	{
 		return false;
 	}
@@ -65,8 +48,56 @@ public abstract class BaseSwipeRefreshAdapter
 	 *
 	 * @return
 	 */
-	protected int getBackgroundResource()
+	public int getBackgroundResource()
 	{
 		return android.R.color.holo_red_light;
+	}
+
+	/* ---------------------------------------- 被SuperSwipeRefreshLayout调用;一般不重写 ---------------------------------------------------- */
+	private SuperSwipeRefreshLayout.OnRefreshListener refreshListener;
+
+	void setSwipeAnimatingListener(SuperSwipeRefreshLayout.OnRefreshListener refreshListener)
+	{
+		this.refreshListener = refreshListener;
+	}
+
+	/**
+	 * 拖出界面
+	 *
+	 * @param dragDistance   手指拖动距离
+	 * @param targetDistance 目标距离
+	 */
+	void create(float dragDistance, float targetDistance)
+	{
+		onCreate(dragDistance, targetDistance);
+	}
+
+	/**
+	 * 正式开始刷新
+	 *
+	 * @param enable
+	 */
+	void start(boolean enable)
+	{
+		onStart(enable);
+	}
+
+	void animating()
+	{
+		onAnimating();
+		if (null != refreshListener)
+		{
+			refreshListener.onAnimating();
+		}
+	}
+
+	/**
+	 * 创建布局
+	 *
+	 * @return
+	 */
+	View getView()
+	{
+		return getView(sContext);
 	}
 }

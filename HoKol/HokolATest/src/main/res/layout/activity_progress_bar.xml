@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_progress_bar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray">
+
+    <com.hokol.medium.widget.progressbar.CircleProgressBar
+        android:id="@+id/progress"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:bar_arrow_height="5dp"
+        app:bar_progress_stoke_width="3dp"
+        app:bar_progress_text_visibility="invisible"
+        app:bar_show_arrow="true">
+    </com.hokol.medium.widget.progressbar.CircleProgressBar>
+</RelativeLayout>

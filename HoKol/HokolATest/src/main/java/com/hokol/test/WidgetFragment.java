@@ -7,6 +7,7 @@ import com.hokol.test.widget.ADActivity;
 import com.hokol.test.widget.DropMenuActivity;
 import com.hokol.test.widget.GlideActivity;
 import com.hokol.test.widget.LabelLayoutActivity;
+import com.hokol.test.widget.ProgressBarActivity;
 import com.hokol.test.widget.RecycleActivity;
 import com.hokol.test.widget.SecondaryActivity;
 import com.hokol.test.widget.SwipeRefreshActivity;
@@ -76,6 +77,15 @@ public class WidgetFragment extends BaseTestFragment
 			public void onClick(View v)
 			{
 				SwipeRefreshActivity.actionStart(getContext());
+			}
+		});
+
+		addButton("ProgressBar", new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				ProgressBarActivity.actionStart(getContext());
 			}
 		});
 	}

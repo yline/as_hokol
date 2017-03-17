@@ -40,9 +40,23 @@ public class SwipeRefreshActivity extends BaseAppCompatActivity
 		recycleView.setLayoutManager(new LinearLayoutManager(this));
 
 		// init SuperSwipeRefreshLayout
-		// swipeRefreshLayout.setHeaderViewBackgroundColor(0xff888888);
-		// swipeRefreshLayout.setTargetScrollWithLayout(false);
-		swipeRefreshLayout.setRefreshAdapter(new BaseSwipeRefreshAdapter()
+		swipeRefreshLayout.setOnRefreshListener(new SuperSwipeRefreshLayout.OnRefreshListener()
+		{
+			@Override
+			public void onAnimating()
+			{
+				new Handler().postDelayed(new Runnable()
+				{
+
+					@Override
+					public void run()
+					{
+						swipeRefreshLayout.setRefreshing(false);
+					}
+				}, 2000);
+			}
+		});
+		/*swipeRefreshLayout.setRefreshAdapter(new BaseSwipeRefreshAdapter(this)
 		{
 			// Header View
 			private ProgressBar progressBar;
@@ -52,7 +66,21 @@ public class SwipeRefreshActivity extends BaseAppCompatActivity
 			private ImageView imageView;
 
 			@Override
-			public void onAnimating()
+			protected void onCreate(float dragDistance, float targetDistance)
+			{
+
+			}
+
+			@Override
+			protected void onStart(boolean enable)
+			{
+				textView.setText(enable ? "松开刷新" : "下拉刷新");
+				imageView.setVisibility(View.VISIBLE);
+				imageView.setRotation(enable ? 180 : 0);
+			}
+
+			@Override
+			protected void onAnimating()
 			{
 				textView.setText("正在刷新");
 				imageView.setVisibility(View.GONE);
@@ -69,30 +97,16 @@ public class SwipeRefreshActivity extends BaseAppCompatActivity
 				}, 2000);
 			}
 
-			@Override
-			public void onDistance(int distance)
-			{
-				// pull distance
-			}
-
-			@Override
-			public void onStart(boolean enable)
-			{
-				textView.setText(enable ? "松开刷新" : "下拉刷新");
-				imageView.setVisibility(View.VISIBLE);
-				imageView.setRotation(enable ? 180 : 0);
-			}
-
 			@NonNull
 			@Override
-			protected View getView()
+			protected View getView(Context context)
 			{
-				return createHeaderView();
+				return createHeaderView(context);
 			}
 
-			private View createHeaderView()
+			private View createHeaderView(Context context)
 			{
-				View headerView = LayoutInflater.from(swipeRefreshLayout.getContext()).inflate(R.layout.layout_head, null);
+				View headerView = LayoutInflater.from(context).inflate(R.layout.layout_head, null);
 				progressBar = (ProgressBar) headerView.findViewById(R.id.pb_view);
 				textView = (TextView) headerView.findViewById(R.id.text_view);
 				textView.setText("下拉刷新");
@@ -102,9 +116,9 @@ public class SwipeRefreshActivity extends BaseAppCompatActivity
 				progressBar.setVisibility(View.GONE);
 				return headerView;
 			}
-		});
+		});*/
 
-		swipeRefreshLayout.setLoadAdapter(new BaseSwipeRefreshAdapter()
+		swipeRefreshLayout.setLoadAdapter(new BaseSwipeRefreshAdapter(this)
 		{
 			// Footer View
 			private ProgressBar footerProgressBar;
@@ -114,7 +128,13 @@ public class SwipeRefreshActivity extends BaseAppCompatActivity
 			private ImageView footerImageView;
 
 			@Override
-			public void onStart(boolean enable)
+			protected void onCreate(float dragDistance, float targetDistance)
+			{
+
+			}
+
+			@Override
+			protected void onStart(boolean enable)
 			{
 				footerTextView.setText(enable ? "松开加载" : "上拉加载");
 				footerImageView.setVisibility(View.VISIBLE);
@@ -122,7 +142,7 @@ public class SwipeRefreshActivity extends BaseAppCompatActivity
 			}
 
 			@Override
-			public void onAnimating()
+			protected void onAnimating()
 			{
 				footerTextView.setText("正在加载...");
 				footerImageView.setVisibility(View.GONE);
@@ -140,22 +160,16 @@ public class SwipeRefreshActivity extends BaseAppCompatActivity
 				}, 5000);
 			}
 
-			@Override
-			public void onDistance(int distance)
-			{
-				// TODO Auto-generated method stub
-			}
-
 			@NonNull
 			@Override
-			protected View getView()
+			protected View getView(Context context)
 			{
-				return createFooterView();
+				return createFooterView(context);
 			}
 
-			private View createFooterView()
+			private View createFooterView(Context context)
 			{
-				View footerView = LayoutInflater.from(swipeRefreshLayout.getContext()).inflate(R.layout.layout_footer, null);
+				View footerView = LayoutInflater.from(context).inflate(R.layout.layout_footer, null);
 				footerProgressBar = (ProgressBar) footerView.findViewById(R.id.footer_pb_view);
 				footerImageView = (ImageView) footerView.findViewById(R.id.footer_image_view);
 				footerTextView = (TextView) footerView.findViewById(R.id.footer_text_view);
