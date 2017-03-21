@@ -13,22 +13,43 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Default.NoActionBar">
+
         <!-- 功能 -->
-        <activity android:name=".activity.WelcomeActivity"/>
-        <activity
-            android:name=".activity.MainActivity">
+        <!--
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        -->
         <activity android:name=".activity.NewsInfoActivity"/>
         <activity android:name=".activity.DynamicInfoActivity"/>
         <activity android:name=".activity.StarInfoActivity"/>
         <activity android:name=".activity.MineInfoActivity"/>
         <activity android:name=".activity.TaskPublishActivity"/>
         <activity android:name=".activity.TaskDetailActivity"/>
+        <!-- 登入Enter -->
+        <activity
+            android:name=".activity.EnterChoiceActivity"
+            android:label="登入流程">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.EnterLoginPhonePwdActivity">
+        </activity>
+        <activity android:name=".activity.EnterRegisterPhoneActivity">
+        </activity>
+        <activity android:name=".activity.EnterForgetPwdActivity">
+        </activity>
+        <activity android:name=".activity.EnterForgetPwdNewActivity">
+        </activity>
+        <activity android:name=".activity.EnterRegisterCompleteInfoActivity">
+        </activity>
     </application>
 
 </manifest>

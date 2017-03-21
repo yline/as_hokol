@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_enter_register_phone_title"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/enter_register_phone_title"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/default_text_size_normal"/>
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/et_enter_register_phone_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_enter_register_phone_title"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginRight="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_large"
+        android:background="@drawable/widget_bg_white_radius_normal"
+        android:hint="@string/enter_login_phone_pwd_hint_username"
+        android:inputType="phone"
+        android:paddingBottom="@dimen/default_space_medium"
+        android:paddingLeft="@dimen/default_space_medium"
+        android:paddingTop="@dimen/default_space_medium"
+        android:text="13656786656"/>
+
+    <LinearLayout
+        android:id="@+id/ll_enter_register_phone_identify_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_enter_register_phone_username"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginRight="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_large">
+
+        <EditText
+            android:id="@+id/et_enter_register_phone_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@drawable/widget_bg_white_radiusleft_normal"
+            android:hint="@string/enter_login_phone_pwd_hint_password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingBottom="@dimen/default_space_medium"
+            android:paddingLeft="@dimen/default_space_medium"
+            android:paddingTop="@dimen/default_space_medium"
+            android:text="lj123456"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/widget_bg_white_radiusright_normal"
+            android:gravity="center"
+            android:text="@string/enter_register_phone_identify_code"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_enter_register_phone_action_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_enter_register_phone_identify_code"
+        android:layout_margin="@dimen/default_space_large"
+        android:background="@drawable/widget_bg_red_radius_normal"
+        android:text="@string/enter_register_phone_action_start"
+        android:textColor="@android:color/white"/>
+
+    <CheckBox
+        android:id="@+id/checkBox_enter_register_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btn_enter_register_phone_action_next"
+        android:layout_alignStart="@+id/btn_enter_register_phone_action_next"
+        android:layout_below="@+id/btn_enter_register_phone_action_next"
+        android:checked="true"/>
+
+    <TextView
+        android:id="@+id/tv_enter_register_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/checkBox_enter_register_phone"
+        android:layout_alignBottom="@+id/checkBox_enter_register_phone"
+        android:layout_toEndOf="@+id/checkBox_enter_register_phone"
+        android:layout_toRightOf="@+id/checkBox_enter_register_phone"
+        android:text="@string/enter_register_phone_check_box"
+        android:textColor="@android:color/black"/>
+</RelativeLayout>

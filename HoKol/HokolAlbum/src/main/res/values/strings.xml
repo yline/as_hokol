@@ -1,11 +1,6 @@
 <resources>
     <string name="app_name">红客</string>
 
-    <!--App登录-->
-    <string name="login_hint_username">手机号</string>
-    <string name="login_hint_password">密码</string>
-    <string name="login_action_start">确定</string>
-
     <!-- 首页内容 -->
     <string name="main_tab_news">新闻</string>
     <string name="main_tab_care">关注</string>
@@ -29,4 +24,42 @@
         <item name="singer">歌手</item>
         <item name="sport">体育</item>
     </string-array>
+
+    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% enter 登入流程 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+    <!-- 登录注册选择页面-->
+    <string name="enter_choice_register">极速注册</string>
+    <string name="enter_choice_login">登录</string>
+    <!-- 手机号 + 密码登录 -->
+    <string name="enter_login_phone_pwd_title">登录</string>
+    <string name="enter_login_phone_pwd_title_right">注册</string>
+    <string name="enter_login_phone_pwd_hint_username">手机号</string>
+    <string name="enter_login_phone_pwd_hint_password">密码</string>
+    <string name="enter_login_phone_pwd_action_start">立即登录</string>
+    <string name="enter_login_phone_pwd_pwd_forget">忘记密码？</string>
+    <!-- 手机号+验证码 注册 -->
+    <string name="enter_register_phone_title">注册</string>
+    <string name="enter_register_phone_identify_code">获取验证码</string>
+    <string name="enter_register_phone_action_start">下一步</string>
+    <string name="enter_register_phone_check_box">我已阅读并同意《红客用户协议》</string>
+    <!-- 忘记密码界面 -->
+    <string name="enter_forget_pwd_title">重置密码</string>
+    <string name="enter_forget_pwd_title_left">取消</string>
+    <string name="enter_forget_pwd_hint">请输入你的手机号</string>
+    <string name="enter_forget_pwd_action_commit">提交</string>
+    <string name="enter_forget_pwd_dialog_hint">验证码已发送到手机，请查收。</string>
+    <string name="enter_forget_pwd_dialog_commit">确定</string>
+    <!-- 忘记密码设置新密码界面 -->
+    <string name="enter_forget_pwd_new_title">设置新密码</string>
+    <string name="enter_forget_pwd_new_identify_code">获取验证码</string>
+    <string name="enter_forget_pwd_new_identify_code_hint">请输入验证码</string>
+    <string name="enter_forget_pwd_new_new_pwd_hint">设置新密码</string>
+    <string name="enter_forget_pwd_new_commit">确定</string>
+    <!-- 注册成功，填写信息界面 -->
+    <string name="enter_register_complete_info_title_name">有了专属昵称，会增加辨识度哦！</string>
+    <string name="enter_register_complete_info_hint_name">用户名</string>
+    <string name="enter_register_complete_info_hint_pwd">6~20位密码，数字或字母</string>
+    <string name="enter_register_complete_info_sex">性别</string>
+    <string name="enter_register_complete_info_label">我的标签(1/2)</string>
+    <string name="enter_register_complete_info_commit">确定</string>
+
 </resources>

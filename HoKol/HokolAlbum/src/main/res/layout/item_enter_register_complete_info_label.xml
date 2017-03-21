@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/default_space_little"
-    android:layout_marginRight="@dimen/default_space_normal"
+    android:layout_marginRight="@dimen/default_space_large"
     android:layout_marginTop="@dimen/default_space_little"
     android:background="@drawable/widget_item_label_bg_layout"
     android:textColor="@drawable/widget_item_label_text_color">

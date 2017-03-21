@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee">
+
+    <RelativeLayout
+        android:id="@+id/rl_enter_forget_pwd_title"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <TextView
+            android:id="@+id/tv_enter_forget_pwd_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_space_large"
+            android:text="@string/enter_forget_pwd_title_left"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/enter_forget_pwd_title"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/default_text_size_large"/>
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/et_enter_forget_pwd_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_enter_forget_pwd_title"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginRight="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_large"
+        android:background="@drawable/widget_bg_white_radius_normal"
+        android:hint="@string/enter_forget_pwd_hint"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingLeft="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_normal"/>
+
+    <Button
+        android:id="@+id/btn_enter_forget_pwd_commit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_enter_forget_pwd_input"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginRight="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_large"
+        android:background="@drawable/widget_bg_red_radius_normal"
+        android:text="@string/enter_forget_pwd_action_commit"
+        android:textColor="@android:color/white"/>
+</RelativeLayout>

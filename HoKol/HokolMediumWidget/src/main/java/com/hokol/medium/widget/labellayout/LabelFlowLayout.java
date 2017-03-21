@@ -56,7 +56,6 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataCh
 		this(context, null);
 	}
 
-
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
 	{
@@ -109,14 +108,12 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataCh
 		}
 	}
 
-
 	public void setAdapter(LabelAdapter adapter)
 	{
 		mTagAdapter = adapter;
 		mTagAdapter.setOnDataChangedListener(this);
 		mSelectedView.clear();
 		changeAdapter();
-
 	}
 
 	private void changeAdapter()
@@ -130,14 +127,6 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataCh
 			View tagView = adapter.getView(this, i, adapter.getItem(i));
 
 			tagViewContainer = new LabelView(getContext());
-			//            ViewGroup.MarginLayoutParams clp = (ViewGroup.MarginLayoutParams) tagView.getLayoutParams();
-			//            ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(clp);
-			//            lp.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-			//            lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-			//            lp.topMargin = clp.topMargin;
-			//            lp.bottomMargin = clp.bottomMargin;
-			//            lp.leftMargin = clp.leftMargin;
-			//            lp.rightMargin = clp.rightMargin;
 			tagView.setDuplicateParentStateEnabled(true);
 			if (tagView.getLayoutParams() != null)
 			{

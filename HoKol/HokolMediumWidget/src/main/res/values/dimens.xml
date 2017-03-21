@@ -1,0 +1,17 @@
+<resources>
+    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 设置几个默认大小 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+    <!-- 间隔 -->
+    <dimen name="default_space_little">4dp</dimen>
+    <dimen name="default_space_small">6dp</dimen>
+    <dimen name="default_space_medium">8dp</dimen>
+    <dimen name="default_space_normal">10dp</dimen>
+    <dimen name="default_space_large">15dp</dimen>
+
+    <!-- 字体 -->
+    <dimen name="default_text_size_little">8dp</dimen>
+    <dimen name="default_text_size_small">11dp</dimen>
+    <dimen name="default_text_size_medium">14dp</dimen>
+    <dimen name="default_text_size_normal">16dp</dimen>
+    <dimen name="default_text_size_large">18dp</dimen>
+    <dimen name="default_text_size_super">22dp</dimen>
+</resources>

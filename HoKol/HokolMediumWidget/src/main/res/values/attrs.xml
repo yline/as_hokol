@@ -4,6 +4,7 @@
     <declare-styleable name="WidgetLabelLayout">
         <attr name="auto_select_effect" format="boolean"></attr>
         <attr name="max_select" format="integer"></attr>
+        <attr name="max_count_each_line" format="integer"></attr>
         <attr name="gravity">
             <enum name="left" value="-1"/>
             <enum name="center" value="0"/>
@@ -34,5 +35,10 @@
             <enum name="visible" value="0"/>
             <enum name="invisible" value="1"/>
         </attr>
+    </declare-styleable>
+    <!-- CircleView -->
+    <declare-styleable name="WidgetCircle">
+        <attr name="circle_border_width" format="dimension"/>
+        <attr name="circle_border_color" format="color"/>
     </declare-styleable>
 </resources>

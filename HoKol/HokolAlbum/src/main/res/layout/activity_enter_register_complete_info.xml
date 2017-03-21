@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_enter_register_complete_info_title"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical"
+        android:text="欢迎来到红客"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/default_text_size_large"/>
+
+    <com.hokol.medium.viewcustom.CircleView
+        android:id="@+id/iv_enter_register_complete_info_avatar"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_below="@+id/tv_enter_register_complete_info_title"
+        android:layout_centerHorizontal="true"
+        android:src="@android:color/white"
+        app:circle_border_color="@android:color/black"
+        app:circle_border_width="1px"/>
+
+    <TextView
+        android:id="@+id/tv_enter_register_complete_info_title_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_enter_register_complete_info_avatar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/default_space_large"
+        android:gravity="center_vertical"
+        android:text="@string/enter_register_complete_info_title_name"
+        android:textColor="@android:color/tertiary_text_dark"
+        android:textSize="@dimen/default_text_size_medium"/>
+
+    <!-- 输入框-名称 -->
+    <EditText
+        android:id="@+id/et_enter_register_complete_info_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_enter_register_complete_info_title_name"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginRight="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_little"
+        android:background="@drawable/widget_bg_white_radius_normal"
+        android:hint="@string/enter_register_complete_info_hint_name"
+        android:inputType="text"
+        android:paddingBottom="@dimen/default_space_medium"
+        android:paddingLeft="@dimen/default_space_medium"
+        android:paddingTop="@dimen/default_space_medium"/>
+
+    <EditText
+        android:id="@+id/et_enter_register_complete_info_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_enter_register_complete_info_name"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginRight="@dimen/default_space_large"
+        android:background="@drawable/widget_bg_white_radius_normal"
+        android:drawableRight="@drawable/base_bg_toast"
+        android:hint="@string/enter_register_complete_info_hint_pwd"
+        android:inputType="textPassword"
+        android:paddingBottom="@dimen/default_space_medium"
+        android:paddingLeft="@dimen/default_space_medium"
+        android:paddingTop="@dimen/default_space_medium"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_enter_register_complete_info_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_enter_register_complete_info_pwd"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingLeft="@dimen/default_space_large"
+        android:paddingRight="@dimen/default_space_large"
+        android:paddingTop="@dimen/default_space_normal">
+
+        <TextView
+            android:id="@+id/tv_enter_register_complete_info_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="@string/enter_register_complete_info_sex"
+            android:textColor="@android:color/black"/>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/default_space_large"
+                android:text="女生"
+                android:textColor="@android:color/tertiary_text_dark"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="男生"
+                android:textColor="@android:color/tertiary_text_dark"/>
+        </RadioGroup>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_enter_register_complete_info_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/rl_enter_register_complete_info_sex"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="@dimen/default_space_normal"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:gravity="center_vertical"
+        android:text="@string/enter_register_complete_info_label"
+        android:textColor="@android:color/black"/>
+
+    <!-- 标签 -->
+    <com.hokol.medium.widget.labellayout.LabelFlowLayout
+        android:id="@+id/label_flow_enter_register_complete_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_enter_register_complete_info_label"
+        android:layout_marginLeft="@dimen/default_space_large">
+    </com.hokol.medium.widget.labellayout.LabelFlowLayout>
+
+    <com.hokol.medium.widget.labellayout.LabelView
+        android:id="@+id/label_enter_register_complete_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_flow_enter_register_complete_info"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/tv_enter_register_complete_info_label_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_space_little"
+            android:layout_marginRight="@dimen/default_space_large"
+            android:layout_marginTop="@dimen/default_space_little"
+            android:background="@drawable/widget_item_label_bg_layout"
+            android:duplicateParentState="true"
+            android:text="其他"
+            android:textColor="@drawable/widget_item_label_text_color">
+        </TextView>
+    </com.hokol.medium.widget.labellayout.LabelView>
+
+    <Button
+        android:id="@+id/btn_enter_register_complete_info_commit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_enter_register_complete_info"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginRight="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_large"
+        android:background="@drawable/widget_bg_red_radius_normal"
+        android:text="@string/enter_register_complete_info_commit"
+        android:textColor="@android:color/white"/>
+</RelativeLayout>

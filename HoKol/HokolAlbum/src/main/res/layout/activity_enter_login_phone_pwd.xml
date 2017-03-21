@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_enter_login_phone_pwd_title"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:padding="@dimen/default_space_normal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/enter_login_phone_pwd_title"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/default_text_size_normal"/>
+
+        <TextView
+            android:id="@+id/tv_enter_login_phone_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/enter_login_phone_pwd_title_right"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/default_text_size_normal"/>
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/et_enter_login_phone_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_enter_login_phone_pwd_title"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginRight="@dimen/default_space_large"
+        android:background="@drawable/widget_bg_white_radius_normal"
+        android:hint="@string/enter_login_phone_pwd_hint_username"
+        android:inputType="phone"
+        android:paddingBottom="@dimen/default_space_medium"
+        android:paddingLeft="@dimen/default_space_medium"
+        android:paddingTop="@dimen/default_space_medium"
+        android:text="13656786656"/>
+
+    <EditText
+        android:id="@+id/et_enter_login_phone_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_enter_login_phone_username"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginRight="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_large"
+        android:background="@drawable/widget_bg_white_radius_normal"
+        android:hint="@string/enter_login_phone_pwd_hint_password"
+        android:inputType="textPassword"
+        android:paddingBottom="@dimen/default_space_medium"
+        android:paddingLeft="@dimen/default_space_medium"
+        android:paddingTop="@dimen/default_space_medium"
+        android:text="lj123456"/>
+
+    <Button
+        android:id="@+id/btn_enter_login_phone_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_enter_login_phone_password"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginRight="@dimen/default_space_large"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/widget_bg_red_radius_normal"
+        android:text="@string/enter_login_phone_pwd_action_start"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/et_enter_login_phone_pwd_forget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/btn_enter_login_phone_login"
+        android:layout_below="@+id/btn_enter_login_phone_login"
+        android:layout_marginRight="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_normal"
+        android:text="@string/enter_login_phone_pwd_pwd_forget"
+        android:textColor="@android:color/holo_red_light"/>
+</RelativeLayout>
