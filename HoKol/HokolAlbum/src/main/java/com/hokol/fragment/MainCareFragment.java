@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
-import com.hokol.activity.DynamicInfoActivity;
+import com.hokol.activity.StarDynamicActivity;
 import com.hokol.activity.StarInfoActivity;
 import com.hokol.application.IApplication;
 import com.hokol.base.common.BaseFragment;
@@ -51,7 +51,7 @@ public class MainCareFragment extends BaseFragment
 			@Override
 			public void onPictureClick()
 			{
-				DynamicInfoActivity.actionStart(getContext());
+				StarDynamicActivity.actionStart(getContext());
 			}
 		});
 

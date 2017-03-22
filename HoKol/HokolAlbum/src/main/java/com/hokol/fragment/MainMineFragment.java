@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
-import com.hokol.activity.MineInfoActivity;
+import com.hokol.activity.UserInfoActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.medium.widget.LabelWidget;
@@ -50,7 +50,7 @@ public class MainMineFragment extends BaseFragment
 			@Override
 			public void onClick(View v)
 			{
-				MineInfoActivity.actionStart(getContext());
+				UserInfoActivity.actionStart(getContext());
 			}
 		});
 	}

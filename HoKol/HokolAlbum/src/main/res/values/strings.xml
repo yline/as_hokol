@@ -61,5 +61,6 @@
     <string name="enter_register_complete_info_sex">性别</string>
     <string name="enter_register_complete_info_label">我的标签(1/2)</string>
     <string name="enter_register_complete_info_commit">确定</string>
+    <string name="title_activity_user_fans">UserFansActivity</string>
 
 </resources>

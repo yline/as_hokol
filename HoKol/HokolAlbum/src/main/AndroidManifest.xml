@@ -23,13 +23,21 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.NewsInfoActivity"/>
-        <activity android:name=".activity.DynamicInfoActivity"/>
+        <activity android:name=".activity.StarDynamicActivity"/>
         <activity android:name=".activity.StarInfoActivity"/>
-        <activity android:name=".activity.MineInfoActivity"/>
+        <activity android:name=".activity.UserInfoActivity"/>
         <activity android:name=".activity.TaskPublishActivity"/>
         <activity android:name=".activity.TaskDetailActivity"/>
+        <activity android:name=".activity.UserFansActivity"/>
+        <activity android:name=".activity.UserCareActivity"/>
+        <activity android:name=".activity.UserCollectionActivity"/>
+        <activity android:name=".activity.UserAccountActivity"/>
+        <activity android:name=".activity.UserVIPActivity"/>
+        <activity android:name=".activity.UserRechargeActivity"/>
+        <activity android:name=".activity.UserSettingActivity"/>
         <!-- 登入Enter -->
-        <!--<activity
+        <!--
+        <activity
             android:name=".activity.EnterChoiceActivity"
             android:label="登入流程">
             <intent-filter>
@@ -37,7 +45,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>-->
+        </activity>
+        -->
         <activity android:name=".activity.EnterLoginPhonePwdActivity">
         </activity>
         <activity android:name=".activity.EnterRegisterPhoneActivity">

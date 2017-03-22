@@ -12,7 +12,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
-import com.hokol.activity.DynamicInfoActivity;
+import com.hokol.activity.StarDynamicActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
@@ -83,7 +83,7 @@ public class MainHomeRedFragment extends BaseFragment
 			public void onClick(View view, String string, int position)
 			{
 				IApplication.toast("string = " + string);
-				DynamicInfoActivity.actionStart(getContext());
+				StarDynamicActivity.actionStart(getContext());
 			}
 		});
 

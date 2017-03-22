@@ -7,10 +7,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.hokol.R;
+import com.hokol.application.DeleteConstant;
+import com.hokol.application.IApplication;
+import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
+import com.hokol.base.utils.UIResizeUtil;
+import com.hokol.base.utils.UIScreenUtil;
+import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
 
 import java.util.ArrayList;
@@ -37,20 +45,43 @@ public class StarInfoDynamicFragment extends BaseFragment
 	{
 		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_star_info_dynamic);
 		recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+		recyclerView.addItemDecoration(new DefaultGridItemDecoration(getContext())
+		{
+			@Override
+			protected int getDividerResourceId()
+			{
+				return R.drawable.widget_recycler_divider_white_small;
+			}
+		});
 
 		starInfoDynamicAdapter = new StarInfoDynamicAdapter();
 		recyclerView.setAdapter(starInfoDynamicAdapter);
 
+		starInfoDynamicAdapter.setOnClickListener(new CommonRecyclerAdapter.OnClickListener<String>()
+		{
+			@Override
+			public void onClick(View view, String string, int position)
+			{
+				IApplication.toast("url = " + string);
+			}
+		});
+
 		List<String> data = new ArrayList<>();
 		for (int i = 0; i < 35; i++)
 		{
-			data.add("i" + i);
+			data.add(DeleteConstant.getUrlSquare());
 		}
-		starInfoDynamicAdapter.setDataList(data);
+		starInfoDynamicAdapter.addAll(data);
 	}
 
 	private class StarInfoDynamicAdapter extends HeadFootRecycleAdapter<String>
 	{
+		private final int border_square;
+
+		public StarInfoDynamicAdapter()
+		{
+			border_square = UIScreenUtil.getScreenWidth(getContext()) / 3 - 10;
+		}
 
 		@Override
 		public int getItemRes()
@@ -61,6 +92,11 @@ public class StarInfoDynamicFragment extends BaseFragment
 		@Override
 		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
 		{
+			ImageView imageView = viewHolder.get(R.id.iv_item_star_info_dynamic);
+
+			UIResizeUtil.build().setWidth(border_square).setHeight(border_square).commit(imageView);
+
+			Glide.with(getContext()).load(sList.get(position)).into(imageView);
 		}
 	}
 }
