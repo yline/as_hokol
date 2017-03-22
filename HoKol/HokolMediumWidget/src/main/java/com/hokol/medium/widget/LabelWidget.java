@@ -9,8 +9,8 @@ import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.hokol.medium.widget.labellayout.LabelAdapter;
 import com.hokol.medium.widget.labellayout.LabelFlowLayout;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * 标签
@@ -100,9 +100,14 @@ public class LabelWidget
 	 *
 	 * @return
 	 */
-	public Set<Integer> getSelectedList()
+	public List<Integer> getSelectedList()
 	{
-		return labelFlowLayout.getSelectedList();
+		List<Integer> list = new ArrayList<>();
+		for (Integer position : labelFlowLayout.getSelectedList())
+		{
+			list.add(position);
+		}
+		return list;
 	}
 
 	private class WidgetLabelAdapter extends LabelAdapter<String>

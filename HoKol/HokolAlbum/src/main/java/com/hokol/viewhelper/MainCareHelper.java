@@ -80,7 +80,7 @@ public class MainCareHelper
 			ImageView avatarView = viewHolder.get(R.id.iv_item_main_care_avatar);
 
 			glideManager.load(DeleteConstant.url_default_avatar).centerCrop()
-					.transform(new CircleTransform(context)).placeholder(R.mipmap.ic_launcher)
+					.transform(new CircleTransform(context)).placeholder(android.R.color.white)
 					.into(avatarView);
 			
 			if (null != careRecycleClickListener)

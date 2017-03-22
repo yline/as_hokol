@@ -7,13 +7,15 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.hokol.R;
+import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.fragment.StarInfoDatumFragment;
 import com.hokol.fragment.StarInfoDynamicFragment;
 import com.hokol.fragment.StarInfoPrivateFragment;
+import com.hokol.viewhelper.StarInfoHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,15 +26,23 @@ import java.util.List;
  * @author yline 2017/3/5 --> 15:24
  * @version 1.0.0
  */
-public class StarInfoActivity extends AppCompatActivity
+public class StarInfoActivity extends BaseAppCompatActivity
 {
+	private StarInfoHelper starInfoHelper;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_star_info);
 
+		starInfoHelper = new StarInfoHelper(this);
+		View headView = findViewById(R.id.include_start_info_head);
+		starInfoHelper.initHeadView(headView);
+
 		initView();
+
+		starInfoHelper.initHeadData();
 	}
 
 	private void initView()

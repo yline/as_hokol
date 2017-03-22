@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!-- 头部 -->
     <include
         android:id="@+id/include_start_info_head"
         layout="@layout/activity_star_info_head"

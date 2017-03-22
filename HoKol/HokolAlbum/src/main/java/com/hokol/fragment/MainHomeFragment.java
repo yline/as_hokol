@@ -53,6 +53,15 @@ public class MainHomeFragment extends BaseFragment
 				mainHomeHelper.closeMenu();
 			}
 		});
+
+		mainHomeHelper.initFilterView(new MainHomeHelper.OnMenuFilterCallback()
+		{
+			@Override
+			public void onEnumFilterCommit(MainHomeHelper.FilterSex typeSex, MainHomeHelper.FilterRecommend typeRecommend)
+			{
+				IApplication.toast("typeSex = " + typeSex + ",typeRecommend = " + typeRecommend);
+			}
+		});
 		mainHomeHelper.initTabDownMenuView(linearLayout);
 
 		initData();

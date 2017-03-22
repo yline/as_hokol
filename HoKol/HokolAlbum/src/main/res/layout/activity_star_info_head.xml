@@ -6,27 +6,29 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/rl_star_info_head"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="180dp"
+        android:background="@drawable/delete_ad_img5"
         android:gravity="center_horizontal"
         android:padding="10dp">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView"
+        <com.hokol.medium.viewcustom.CircleView
+            android:id="@+id/circle_star_info_avatar"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_centerHorizontal="true"
-            android:background="@mipmap/ic_launcher"/>
+            android:layout_marginTop="@dimen/default_space_large"/>
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView"
+            android:layout_below="@+id/circle_star_info_avatar"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
-            android:text="昵称"/>
+            android:text="昵称"
+            android:textColor="@android:color/white"/>
 
         <LinearLayout
             android:id="@+id/linear"
@@ -43,7 +45,8 @@
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="关注 100"/>
+                android:text="关注 100"
+                android:textColor="@android:color/white"/>
 
             <TextView
                 android:id="@+id/textView7"
@@ -52,53 +55,54 @@
                 android:layout_marginLeft="15dp"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:text="粉丝 200"/>
+                android:text="粉丝 200"
+                android:textColor="@android:color/white"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/linear"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp">
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="已关注"/>
+                android:text="已关注"
+                android:textColor="@android:color/holo_red_light"/>
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/default_space_large"
+                android:layout_marginRight="@dimen/default_space_large"
                 android:gravity="left"
-                android:text="联系"/>
+                android:text="联系"
+                android:textColor="@android:color/holo_red_light"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="送红豆"
+                android:textColor="@android:color/holo_red_light"/>
         </LinearLayout>
     </RelativeLayout>
 
-    <LinearLayout
+    <TextView
+        android:padding="@dimen/default_space_normal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="个性签名，你猜是不是这样"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="个性签名，你猜是不是这样"/>
-    </LinearLayout>
-
-    <LinearLayout
+    <com.hokol.medium.widget.labellayout.LabelFlowLayout
+        android:paddingLeft="@dimen/default_space_normal"
+        android:id="@+id/label_flow_star_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="我是用来装标签的容器"/>
-    </LinearLayout>
+        android:layout_height="wrap_content">
+    </com.hokol.medium.widget.labellayout.LabelFlowLayout>
 </LinearLayout>

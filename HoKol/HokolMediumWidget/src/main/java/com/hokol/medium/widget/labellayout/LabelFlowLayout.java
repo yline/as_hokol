@@ -30,7 +30,7 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataCh
 
 	private MotionEvent mMotionEvent;
 
-	private Set<Integer> mSelectedView = new HashSet<Integer>();
+	private Set<Integer> mSelectedView = new HashSet<>();
 
 	public LabelFlowLayout(Context context, AttributeSet attrs, int defStyle)
 	{
@@ -203,7 +203,7 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataCh
 
 	public Set<Integer> getSelectedList()
 	{
-		return new HashSet<Integer>(mSelectedView);
+		return new HashSet<>(mSelectedView);
 	}
 
 	private void doSelect(LabelView child, int position)

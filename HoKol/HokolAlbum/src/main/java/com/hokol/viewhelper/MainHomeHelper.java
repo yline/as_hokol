@@ -7,7 +7,9 @@ import android.widget.LinearLayout;
 
 import com.hokol.R;
 import com.hokol.medium.widget.DropMenuWidget;
+import com.hokol.medium.widget.LabelWidget;
 import com.hokol.medium.widget.SecondaryWidget;
+import com.hokol.medium.widget.labellayout.LabelFlowLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,12 +41,50 @@ public class MainHomeHelper
 		contentViewList.add(provinceView);
 	}
 
+	public void initFilterView(final OnMenuFilterCallback menuFilterCallback)
+	{
+		final View filterView = LayoutInflater.from(context).inflate(R.layout.fragment_main_home__menu_filter, null);
+
+		// 性别
+		final LabelWidget sexLabelWidget = new LabelWidget()
+		{
+			@Override
+			protected LabelFlowLayout getLabelFlowLayout()
+			{
+				return (LabelFlowLayout) filterView.findViewById(R.id.label_flow_main_home_menu_sex);
+			}
+		};
+		sexLabelWidget.start(context, Arrays.asList(FilterSex.All.content, FilterSex.Boy.content, FilterSex.Girl.content));
+		sexLabelWidget.setMaxSelectCount(1);
+
+		// 推荐
+		final LabelWidget recommendLabelWidget = new LabelWidget()
+		{
+			@Override
+			protected LabelFlowLayout getLabelFlowLayout()
+			{
+				return (LabelFlowLayout) filterView.findViewById(R.id.label_flow_main_home_menu_recommend);
+			}
+		};
+		recommendLabelWidget.start(context, Arrays.asList(FilterRecommend.Popular.content, FilterRecommend.Newest.content));
+		recommendLabelWidget.setMaxSelectCount(1);
+
+		filterView.findViewById(R.id.btn_main_home_menu_commit).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				List sexList = sexLabelWidget.getSelectedList();
+				menuFilterCallback.onEnumFilterCommit(FilterSex.All, FilterRecommend.Popular);
+			}
+		});
+
+		contentViewList.add(filterView);
+	}
+
 	public void initTabDownMenuView(LinearLayout linearLayout)
 	{
 		dropMenuWidget = new DropMenuWidget();
-
-		View areaView = initFilterView();
-		contentViewList.add(areaView);
 
 		View dropView = dropMenuWidget.start(context, Arrays.asList(headers), contentViewList);
 		linearLayout.addView(dropView);
@@ -60,10 +100,32 @@ public class MainHomeHelper
 		dropMenuWidget.closeMenu();
 	}
 
-	private View initFilterView()
+	public interface OnMenuFilterCallback
 	{
-		View filterView = LayoutInflater.from(context).inflate(R.layout.fragment_main_home__menu_filter, null);
+		void onEnumFilterCommit(FilterSex typeSex, FilterRecommend typeRecommend);
+	}
 
-		return filterView;
+	public enum FilterSex
+	{
+		All("全部"), Boy("男"), Girl("女");
+
+		private final String content;
+
+		FilterSex(String content)
+		{
+			this.content = content;
+		}
+	}
+
+	public enum FilterRecommend
+	{
+		Popular("人气"), Newest("最新");
+
+		private final String content;
+
+		FilterRecommend(String content)
+		{
+			this.content = content;
+		}
 	}
 }
