@@ -21,23 +21,17 @@
             </intent-filter>
         </activity>
         <!-- Test -->
-        <activity android:name=".http.login.TestLoginActivity">
-        </activity>
+        <activity android:name=".http.login.TestLoginActivity"/>
         <activity android:name=".http.news.TestNewsActivity"/>
         <activity android:name=".widget.ADActivity"/>
-        <activity android:name=".widget.DropMenuActivity"/>
-        <activity android:name=".widget.LabelLayoutActivity"/>
         <activity android:name=".http.dynamic.TestDynamicActivity"/>
-        <activity android:name=".widget.RecycleActivity">
-        </activity>
-        <activity android:name=".widget.GlideActivity">
-        </activity>
-        <activity android:name=".widget.SecondaryActivity">
-        </activity>
-        <activity android:name=".widget.SwipeRefreshActivity">
-        </activity>
-        <activity android:name=".widget.ProgressBarActivity">
-        </activity>
+        <activity android:name=".widget.RecycleActivity"/>
+        <activity android:name=".widget.GlideActivity"/>
+        <activity android:name=".http.task.TestTaskActivity"/>
+        <activity android:name=".http.home.TestHomeActivity"/>
+        <activity android:name=".http.mine.TestMineActivity"/>
+        <activity android:name=".http.setting.TestSettingActivity"/>
+        <activity android:name=".http.local.TestLocalActivity"/>
     </application>
 
 </manifest>
