@@ -8,7 +8,7 @@ import java.util.List;
  * @author yline 2017/3/8 --> 23:14
  * @version 1.0.0
  */
-public class VUserDynamicCareBean
+public class VDynamicCareAllBean
 {
 	private List<DynamicBean> list;
 
@@ -25,7 +25,7 @@ public class VUserDynamicCareBean
 	@Override
 	public String toString()
 	{
-		return "VUserDynamicCareBean{" +
+		return "VDynamicCareAllBean{" +
 				"list=" + list +
 				'}';
 	}

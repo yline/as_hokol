@@ -6,7 +6,7 @@ package com.hokol.medium.http.bean;
  * @author yline 2017/3/8 --> 23:10
  * @version 1.0.0
  */
-public class WUserDynamicCareBean
+public class WDynamicCareAllBean
 {
 	/**
 	 * 用户唯一标识
@@ -23,7 +23,7 @@ public class WUserDynamicCareBean
 	 */
 	private int num2;
 
-	public WUserDynamicCareBean(String user_id, int num1, int num2)
+	public WDynamicCareAllBean(String user_id, int num1, int num2)
 	{
 		this.user_id = user_id;
 		this.num1 = num1;
@@ -63,7 +63,7 @@ public class WUserDynamicCareBean
 	@Override
 	public String toString()
 	{
-		return "WUserDynamicCareBean{" +
+		return "WDynamicCareAllBean{" +
 				"user_id='" + user_id + '\'' +
 				", num1=" + num1 +
 				", num2=" + num2 +

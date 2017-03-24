@@ -6,9 +6,9 @@ package com.hokol.medium.http.bean;
  * @author yline 2017/3/8 --> 22:56
  * @version 1.0.0
  */
-public class WUserDynamicPraiseBean
+public class WDynamicPraiseSingleBean
 {
-	public WUserDynamicPraiseBean(String user_id, String dt_id, int zan)
+	public WDynamicPraiseSingleBean(String user_id, String dt_id, int zan)
 	{
 		this.user_id = user_id;
 		this.dt_id = dt_id;
@@ -64,7 +64,7 @@ public class WUserDynamicPraiseBean
 	@Override
 	public String toString()
 	{
-		return "WUserDynamicPraiseBean{" +
+		return "WDynamicPraiseSingleBean{" +
 				"user_id='" + user_id + '\'' +
 				", dt_id='" + dt_id + '\'' +
 				", zan=" + zan +

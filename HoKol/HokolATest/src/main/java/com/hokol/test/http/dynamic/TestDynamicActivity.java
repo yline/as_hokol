@@ -31,7 +31,7 @@ public class TestDynamicActivity extends BaseTestActivity
 				String userId = editPraise1.getText().toString().trim();
 				String dynamicId = editPraise2.getText().toString().trim();
 				boolean praiseAction = editPraise3.getText().toString().trim().equals("0") ? true : false;
-				dynamicHelper.doDynamicPraise(userId, dynamicId, praiseAction);
+				dynamicHelper.doDynamicPraiseSingle(userId, dynamicId, praiseAction);
 			}
 		});
 		
@@ -46,7 +46,7 @@ public class TestDynamicActivity extends BaseTestActivity
 				String userId = editCare1.getText().toString().trim();
 				int start = Integer.parseInt(editCare2.getText().toString().trim());
 				int end = Integer.parseInt(editCare3.getText().toString().trim());
-				dynamicHelper.doDynamicCare(userId, start, end);
+				dynamicHelper.doDynamicCareAll(userId, start, end);
 			}
 		});
 	}

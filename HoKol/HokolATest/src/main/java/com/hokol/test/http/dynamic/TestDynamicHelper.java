@@ -2,10 +2,10 @@ package com.hokol.test.http.dynamic;
 
 import com.hokol.medium.http.HttpConstant;
 import com.hokol.medium.http.XHttp;
-import com.hokol.medium.http.bean.VUserDynamicCareBean;
-import com.hokol.medium.http.bean.VUserDynamicPraiseBean;
-import com.hokol.medium.http.bean.WUserDynamicCareBean;
-import com.hokol.medium.http.bean.WUserDynamicPraiseBean;
+import com.hokol.medium.http.bean.VDynamicCareAllBean;
+import com.hokol.medium.http.bean.VDynamicPraiseSingleBean;
+import com.hokol.medium.http.bean.WDynamicCareAllBean;
+import com.hokol.medium.http.bean.WDynamicPraiseSingleBean;
 
 public class TestDynamicHelper
 {
@@ -16,24 +16,40 @@ public class TestDynamicHelper
 	 * @param start
 	 * @param end
 	 */
-	public void doDynamicCare(final String userId, final int start, final int end)
+	public void doDynamicCareAll(final String userId, final int start, final int end)
 	{
-		String httpUrl = HttpConstant.url_care_dynamic_multiplex;
+		String httpUrl = HttpConstant.url_dynamic_care_all;
 
-		new XHttp<VUserDynamicCareBean>()
+		new XHttp<VDynamicCareAllBean>()
 		{
 			@Override
 			protected Object getRequestPostParam()
 			{
-				return new WUserDynamicCareBean(userId, start, end);
+				return new WDynamicCareAllBean(userId, start, end);
 			}
 
 			@Override
-			public void onSuccess(VUserDynamicCareBean vUserDynamicCareBean)
+			public void onSuccess(VDynamicCareAllBean vUserDynamicCareBean)
 			{
 
 			}
-		}.doRequest(httpUrl, VUserDynamicCareBean.class);
+		}.doRequest(httpUrl, VDynamicCareAllBean.class);
+	}
+
+	public void doDynamicUserDetail()
+	{
+		String httpUrl = HttpConstant.url_dynamic_user_detail;
+
+		new XHttp<String>()
+		{
+
+
+			@Override
+			public void onSuccess(String s)
+			{
+
+			}
+		}.doRequest(httpUrl, String.class);
 	}
 
 	/**
@@ -43,25 +59,25 @@ public class TestDynamicHelper
 	 * @param dynamicId
 	 * @param action
 	 */
-	public void doDynamicPraise(final String userId, final String dynamicId, boolean action)
+	public void doDynamicPraiseSingle(final String userId, final String dynamicId, boolean action)
 	{
-		String httpUrl = HttpConstant.url_care_dynamic_praise;
+		String httpUrl = HttpConstant.url_dynamic_praise_single;
 
 		final int dynamicPraise = action ? 1 : 0;
 
-		new XHttp<VUserDynamicPraiseBean>()
+		new XHttp<VDynamicPraiseSingleBean>()
 		{
 			@Override
 			protected Object getRequestPostParam()
 			{
-				return new WUserDynamicPraiseBean(userId, dynamicId, dynamicPraise);
+				return new WDynamicPraiseSingleBean(userId, dynamicId, dynamicPraise);
 			}
 
 			@Override
-			public void onSuccess(VUserDynamicPraiseBean vUserDynamicPraiseBean)
+			public void onSuccess(VDynamicPraiseSingleBean vUserDynamicPraiseBean)
 			{
 
 			}
-		}.doRequest(httpUrl, VUserDynamicPraiseBean.class);
+		}.doRequest(httpUrl, VDynamicPraiseSingleBean.class);
 	}
 }

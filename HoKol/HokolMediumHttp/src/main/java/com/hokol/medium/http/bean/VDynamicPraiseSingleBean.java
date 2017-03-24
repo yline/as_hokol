@@ -8,7 +8,7 @@ import java.util.List;
  * @author yline 2017/3/8 --> 22:58
  * @version 1.0.0
  */
-public class VUserDynamicPraiseBean
+public class VDynamicPraiseSingleBean
 {
 	/**
 	 * 所有点赞的用户昵称
