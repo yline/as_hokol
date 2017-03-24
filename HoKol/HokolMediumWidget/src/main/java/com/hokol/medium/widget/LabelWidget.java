@@ -3,13 +3,14 @@ package com.hokol.medium.widget;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.hokol.medium.widget.labellayout.LabelAdapter;
 import com.hokol.medium.widget.labellayout.LabelFlowLayout;
 
-import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 /**
@@ -20,29 +21,55 @@ import java.util.List;
  */
 public class LabelWidget
 {
-	private static final int ERROR = -1;
+	private Context sContext;
+
+	private View containerView;
 
 	private LabelFlowLayout labelFlowLayout;
 
 	private WidgetLabelAdapter widgetLabelAdapter;
 
-	public View start(Context context, List<String> strList)
+	public LabelWidget(Context context)
 	{
-		View view = null;
+		this.sContext = context;
 		if (null != getLabelFlowLayout())
 		{
 			labelFlowLayout = getLabelFlowLayout();
 		}
 		else
 		{
-			view = LayoutInflater.from(context).inflate(R.layout.widget_label_layout, null);
-			labelFlowLayout = (LabelFlowLayout) view.findViewById(R.id.label_layout_widget);
+			containerView = LayoutInflater.from(context).inflate(R.layout.widget_label_layout, null);
+			labelFlowLayout = (LabelFlowLayout) containerView.findViewById(R.id.label_layout_widget);
 		}
 
-		widgetLabelAdapter = new WidgetLabelAdapter(context, strList);
+		widgetLabelAdapter = new WidgetLabelAdapter();
 		labelFlowLayout.setAdapter(widgetLabelAdapter);
+	}
 
-		return view;
+	public void setDataList(List<String> dataList)
+	{
+		widgetLabelAdapter.setDataList(dataList);
+	}
+
+	public Deque<Integer> getSelectedList()
+	{
+		return widgetLabelAdapter.getSelectedList();
+	}
+
+	public int getSelectedFirstPosition()
+	{
+		return widgetLabelAdapter.getSelectedFirst();
+	}
+
+	public String getSelectedFirstContent()
+	{
+		int position = widgetLabelAdapter.getSelectedFirst();
+		return widgetLabelAdapter.getItem(position);
+	}
+
+	public View getView()
+	{
+		return containerView;
 	}
 
 	/**
@@ -56,23 +83,23 @@ public class LabelWidget
 	}
 
 	/**
-	 * 设置已选择项
+	 * 设置最小显示个数
 	 *
-	 * @param data
+	 * @param count
 	 */
-	public void setSelectedList(int... data)
+	public void setMinSelectCount(int count)
 	{
-		widgetLabelAdapter.setSelectedList(data);
+		labelFlowLayout.setMinSelectCount(count);
 	}
 
 	/**
-	 * 设置点击事件
+	 * 增加一个选项
 	 *
-	 * @param onTagClickListener
+	 * @param position
 	 */
-	public void setOnTagClickListener(LabelFlowLayout.OnTagClickListener onTagClickListener)
+	public void addSelectedPosition(int position)
 	{
-		labelFlowLayout.setOnTagClickListener(onTagClickListener);
+		widgetLabelAdapter.addSelectedPosition(position);
 	}
 
 	/**
@@ -85,53 +112,24 @@ public class LabelWidget
 		labelFlowLayout.setMaxCountEachLine(maxCountEachLine);
 	}
 
-	/**
-	 * 判断，被选择的项，被选择之后的操作
-	 *
-	 * @param onSelectListener
-	 */
-	public void setOnSelectListener(LabelFlowLayout.OnSelectListener onSelectListener)
-	{
-		labelFlowLayout.setOnSelectListener(onSelectListener);
-	}
-
-	/**
-	 * 返回 被选择的项
-	 *
-	 * @return
-	 */
-	public List<Integer> getSelectedList()
-	{
-		List<Integer> list = new ArrayList<>();
-		for (Integer position : labelFlowLayout.getSelectedList())
-		{
-			list.add(position);
-		}
-		return list;
-	}
-
 	private class WidgetLabelAdapter extends LabelAdapter<String>
 	{
-		private Context sContext;
-
-		public WidgetLabelAdapter(Context context, List<String> data)
-		{
-			super(data);
-			this.sContext = context;
-		}
-
 		@Override
-		public View getView(FlowLayout parent, int position, String s)
+		public View getView(FlowLayout container, String s, int position)
 		{
-			TextView itemView = (TextView) LayoutInflater.from(sContext).inflate(getItemResourceId(), parent, false);
-			itemView.setText(slist.get(position));
-			return itemView;
-		}
+			LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(sContext).inflate(getItemResourceId(), container, false);
 
-		@Override
-		public boolean setSelected(int position, String s)
-		{
-			return getSelected(position, s);
+			TextView itemView = (TextView) linearLayout.findViewById(R.id.tv_widget_item_label);
+			LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) itemView.getLayoutParams();
+			layoutParams.leftMargin = getLeftMargin();
+			layoutParams.rightMargin = getRightMargin();
+			layoutParams.topMargin = getTopMargin();
+			layoutParams.bottomMargin = getBottomMargin();
+
+			itemView.setText(s);
+			itemView.setLayoutParams(layoutParams);
+
+			return linearLayout;
 		}
 	}
 
@@ -157,15 +155,23 @@ public class LabelWidget
 		return R.layout.widget_item_label_layout;
 	}
 
-	/**
-	 * 默认选择项(每一项都会单独判断)
-	 *
-	 * @param position 位置
-	 * @param s        字符
-	 * @return false, 不选择, true,选择
-	 */
-	protected boolean getSelected(int position, String s)
+	protected int getLeftMargin()
 	{
-		return false;
+		return 0;
+	}
+
+	protected int getRightMargin()
+	{
+		return 0;
+	}
+
+	protected int getTopMargin()
+	{
+		return 0;
+	}
+
+	protected int getBottomMargin()
+	{
+		return 0;
 	}
 }

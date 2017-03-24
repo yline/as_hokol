@@ -60,6 +60,7 @@ public class MainHomeFragment extends BaseFragment
 			public void onEnumFilterCommit(MainHomeHelper.FilterSex typeSex, MainHomeHelper.FilterRecommend typeRecommend)
 			{
 				IApplication.toast("typeSex = " + typeSex + ",typeRecommend = " + typeRecommend);
+				mainHomeHelper.closeMenu();
 			}
 		});
 		mainHomeHelper.initTabDownMenuView(linearLayout);

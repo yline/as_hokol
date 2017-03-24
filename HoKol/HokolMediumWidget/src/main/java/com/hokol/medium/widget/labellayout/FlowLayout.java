@@ -6,26 +6,31 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hokol.base.common.BaseViewGroup;
 import com.hokol.medium.widget.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FlowLayout extends ViewGroup
+public class FlowLayout extends BaseViewGroup
 {
-	private static final String TAG = "FlowLayout";
+	public enum LabelGravity
+	{
+		LEFT(-1), CENTER(0), RIGHT(1);
 
-	private static final int LEFT = -1;
+		private final int value;
 
-	private static final int CENTER = 0;
+		LabelGravity(int value)
+		{
+			this.value = value;
+		}
+	}
 
-	private static final int RIGHT = 1;
+	private List<List<View>> mAllViews = new ArrayList<>();
 
-	protected List<List<View>> mAllViews = new ArrayList<>();
+	private List<Integer> mLineHeight = new ArrayList<>();
 
-	protected List<Integer> mLineHeight = new ArrayList<>();
-
-	protected List<Integer> mLineWidth = new ArrayList<>();
+	private List<Integer> mLineWidth = new ArrayList<>();
 
 	private int mGravity;
 
@@ -39,8 +44,8 @@ public class FlowLayout extends ViewGroup
 	{
 		super(context, attrs, defStyle);
 		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.WidgetLabelLayout);
-		mGravity = ta.getInt(R.styleable.WidgetLabelLayout_gravity, LEFT);
-		maxCountEachLine = ta.getInt(R.styleable.WidgetLabelLayout_max_count_each_line, -1);
+		mGravity = ta.getInt(R.styleable.WidgetLabelLayout_label_gravity, LabelGravity.LEFT.value);
+		maxCountEachLine = ta.getInt(R.styleable.WidgetLabelLayout_label_max_count_each_line, -1);
 		ta.recycle();
 	}
 
@@ -54,9 +59,9 @@ public class FlowLayout extends ViewGroup
 		this(context, null);
 	}
 
-	public void setGravity(int mGravity)
+	public void setLabelGravity(LabelGravity gravity)
 	{
-		this.mGravity = mGravity;
+		this.mGravity = gravity.value;
 	}
 
 	public void setMaxCountEachLine(int maxCountEachLine)
@@ -67,15 +72,16 @@ public class FlowLayout extends ViewGroup
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
 	{
-		int sizeWidth = MeasureSpec.getSize(widthMeasureSpec);
-		int modeWidth = MeasureSpec.getMode(widthMeasureSpec);
-		int sizeHeight = MeasureSpec.getSize(heightMeasureSpec);
-		int modeHeight = MeasureSpec.getMode(heightMeasureSpec);
+		int sizeWidth = View.MeasureSpec.getSize(widthMeasureSpec);
+		int modeWidth = View.MeasureSpec.getMode(widthMeasureSpec);
+		int sizeHeight = View.MeasureSpec.getSize(heightMeasureSpec);
+		int modeHeight = View.MeasureSpec.getMode(heightMeasureSpec);
 
-		// wrap_content
+		// wrap_content, 总高度
 		int width = 0;
 		int height = 0;
 
+		// 每一行的高度，考虑对齐的问题
 		int lineWidth = 0;
 		int lineHeight = 0;
 
@@ -96,27 +102,38 @@ public class FlowLayout extends ViewGroup
 			}
 			// 计算大小，获取子控件的宽高
 			measureChild(child, widthMeasureSpec, heightMeasureSpec);
-			MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
+			ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) child.getLayoutParams();
 
 			int childWidth = child.getMeasuredWidth() + lp.leftMargin + lp.rightMargin;
 			int childHeight = child.getMeasuredHeight() + lp.topMargin + lp.bottomMargin;
 
 			// 如果线宽+子控件宽度，大于剩余宽度，则换行； 否则，依序排列
-			if ((lineWidth + childWidth > sizeWidth - getPaddingLeft() - getPaddingRight()) || tempCountEachLine == maxCountEachLine)
+			if (lineWidth + childWidth > sizeWidth - getPaddingLeft() - getPaddingRight())
 			{
 				width = Math.max(width, lineWidth);
 				lineWidth = childWidth;
+
 				height += lineHeight;
 				lineHeight = childHeight;
 
-				tempCountEachLine = 0;
+				tempCountEachLine = 1;
 			}
-			else
+			else if (tempCountEachLine == maxCountEachLine) // 如果超过个数，换行
 			{
-				tempCountEachLine += 1;
+				width = Math.max(width, lineWidth);
+				lineWidth = childWidth;
 
+				height += lineHeight;
+				lineHeight = childHeight;
+
+				tempCountEachLine = 1;
+			}
+			else // 正常计算
+			{
 				lineWidth += childWidth;
 				lineHeight = Math.max(lineHeight, childHeight);
+
+				tempCountEachLine += 1;
 			}
 
 			// 最后一个，特殊处理
@@ -128,8 +145,9 @@ public class FlowLayout extends ViewGroup
 		}
 
 		tempCountEachLine = 0; // 结束之后，清零，给onLayout使用
-		int setWidth = modeWidth == MeasureSpec.EXACTLY ? sizeWidth : width + getPaddingLeft() + getPaddingRight();
-		int setHeight = modeHeight == MeasureSpec.EXACTLY ? sizeHeight : height + getPaddingTop() + getPaddingBottom();
+		int setWidth = (modeWidth == View.MeasureSpec.EXACTLY) ? sizeWidth : width + getPaddingLeft() + getPaddingRight();
+		int setHeight = (modeHeight == View.MeasureSpec.EXACTLY) ? sizeHeight : height + getPaddingTop() + getPaddingBottom();
+
 		setMeasuredDimension(setWidth, setHeight);
 	}
 
@@ -156,7 +174,7 @@ public class FlowLayout extends ViewGroup
 			{
 				continue;
 			}
-			MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
+			ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) child.getLayoutParams();
 
 			// 获取大小
 			int childWidth = child.getMeasuredWidth();
@@ -197,17 +215,17 @@ public class FlowLayout extends ViewGroup
 
 			// set gravity
 			int currentLineWidth = this.mLineWidth.get(i);
-			switch (this.mGravity)
+			if (this.mGravity == LabelGravity.LEFT.value)
 			{
-				case LEFT:
-					left = getPaddingLeft();
-					break;
-				case CENTER:
-					left = (width - currentLineWidth) / 2 + getPaddingLeft();
-					break;
-				case RIGHT:
-					left = width - currentLineWidth + getPaddingLeft();
-					break;
+				left = getPaddingLeft();
+			}
+			else if (this.mGravity == LabelGravity.CENTER.value)
+			{
+				left = (width - currentLineWidth) / 2 + getPaddingLeft();
+			}
+			else
+			{
+				left = width - currentLineWidth + getPaddingLeft();
 			}
 
 			for (int j = 0; j < lineViews.size(); j++)
@@ -218,7 +236,7 @@ public class FlowLayout extends ViewGroup
 					continue;
 				}
 
-				MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
+				ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) child.getLayoutParams();
 
 				int lc = left + lp.leftMargin;
 				int tc = top + lp.topMargin;
@@ -235,20 +253,20 @@ public class FlowLayout extends ViewGroup
 	}
 
 	@Override
-	public LayoutParams generateLayoutParams(AttributeSet attrs)
+	public ViewGroup.LayoutParams generateLayoutParams(AttributeSet attrs)
 	{
-		return new MarginLayoutParams(getContext(), attrs);
+		return new ViewGroup.MarginLayoutParams(getContext(), attrs);
 	}
 
 	@Override
-	protected LayoutParams generateDefaultLayoutParams()
+	protected ViewGroup.LayoutParams generateDefaultLayoutParams()
 	{
-		return new MarginLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		return new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 	}
 
 	@Override
-	protected LayoutParams generateLayoutParams(LayoutParams p)
+	protected ViewGroup.LayoutParams generateLayoutParams(ViewGroup.LayoutParams p)
 	{
-		return new MarginLayoutParams(p);
+		return new ViewGroup.MarginLayoutParams(p);
 	}
 }

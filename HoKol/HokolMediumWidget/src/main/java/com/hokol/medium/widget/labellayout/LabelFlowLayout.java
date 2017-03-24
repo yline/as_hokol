@@ -2,48 +2,30 @@ package com.hokol.medium.widget.labellayout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 
+import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.widget.R;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.Deque;
 
-public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataChangedListener
+public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataSetChangedListener, LabelAdapter.OnSelectedChangeListener
 {
-	private LabelAdapter mTagAdapter;
-
-	private boolean mAutoSelectEffect = true;
-
-	private int mSelectedMax = -1;//-1为不限制数量
-
 	private static final String TAG = "TagFlowLayout";
 
-	private MotionEvent mMotionEvent;
+	private LabelAdapter labelAdapter;
 
-	private Set<Integer> mSelectedView = new HashSet<>();
+	private int mSelectedMax = Integer.MAX_VALUE; // -1为不限制数量
 
-	public LabelFlowLayout(Context context, AttributeSet attrs, int defStyle)
+	private int mSelectedMin = -1; // -1为不限制下限
+
+	public LabelFlowLayout(Context context)
 	{
-		super(context, attrs, defStyle);
-		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.WidgetLabelLayout);
-		mAutoSelectEffect = ta.getBoolean(R.styleable.WidgetLabelLayout_auto_select_effect, true);
-		mSelectedMax = ta.getInt(R.styleable.WidgetLabelLayout_max_select, -1);
-		ta.recycle();
-
-		if (mAutoSelectEffect)
-		{
-			setClickable(true);
-		}
+		this(context, null);
 	}
 
 	public LabelFlowLayout(Context context, AttributeSet attrs)
@@ -51,204 +33,229 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataCh
 		this(context, attrs, 0);
 	}
 
-	public LabelFlowLayout(Context context)
+	public LabelFlowLayout(Context context, AttributeSet attrs, int defStyle)
 	{
-		this(context, null);
+		super(context, attrs, defStyle);
+		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.WidgetLabelLayout);
+		mSelectedMax = ta.getInt(R.styleable.WidgetLabelLayout_label_max_select, Integer.MAX_VALUE);
+		mSelectedMin = ta.getInt(R.styleable.WidgetLabelLayout_label_min_select, -1);
+		ta.recycle();
+
+		setClickable(true);
+	}
+
+	/**
+	 * 只支持,初始化的时候,设置
+	 *
+	 * @param count
+	 */
+	public void setMaxSelectCount(int count)
+	{
+		this.mSelectedMax = count;
+	}
+
+	/**
+	 * 只支持,初始化的时候,设置
+	 *
+	 * @param count
+	 */
+	public void setMinSelectCount(int count)
+	{
+		this.mSelectedMin = count;
+	}
+
+	public void setAdapter(LabelAdapter adapter)
+	{
+		this.labelAdapter = adapter;
+		this.labelAdapter.setOnDataChangedListener(this);
+		this.labelAdapter.setOnSelectedChangeListener(this);
+		updateLabelFlowLayout();
+		updateLabelState();
 	}
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
 	{
-		int cCount = getChildCount();
-
-		for (int i = 0; i < cCount; i++)
+		// 将LabelView中的子控件，与父控件的可视化，绑定
+		for (int i = 0; i < getChildCount(); i++)
 		{
-			LabelView tagView = (LabelView) getChildAt(i);
-			if (tagView.getVisibility() == View.GONE)
+			LabelView labelView = (LabelView) getChildAt(i);
+			if (labelView.getVisibility() == View.GONE)
 			{
 				continue;
 			}
-			if (tagView.getTagView().getVisibility() == View.GONE)
+			if (labelView.getLabelView().getVisibility() == View.GONE)
 			{
-				tagView.setVisibility(View.GONE);
+				labelView.setVisibility(View.GONE);
 			}
 		}
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 	}
 
-	public interface OnSelectListener
-	{
-		void onSelected(Set<Integer> selectPosSet);
-	}
-
-	private OnSelectListener mOnSelectListener;
-
-	public void setOnSelectListener(OnSelectListener onSelectListener)
-	{
-		mOnSelectListener = onSelectListener;
-		if (mOnSelectListener != null)
-		{
-			setClickable(true);
-		}
-	}
-
-	public interface OnTagClickListener
-	{
-		boolean onTagClick(View view, int position, FlowLayout parent);
-	}
-
-	private OnTagClickListener mOnTagClickListener;
-
-	public void setOnTagClickListener(OnTagClickListener onTagClickListener)
-	{
-		mOnTagClickListener = onTagClickListener;
-		if (onTagClickListener != null)
-		{
-			setClickable(true);
-		}
-	}
-
-	public void setAdapter(LabelAdapter adapter)
-	{
-		mTagAdapter = adapter;
-		mTagAdapter.setOnDataChangedListener(this);
-		mSelectedView.clear();
-		changeAdapter();
-	}
-
-	private void changeAdapter()
+	/**
+	 * 修改控件 自身状态(例如：增加、减少、可见、不可见)
+	 */
+	private void updateLabelFlowLayout()
 	{
 		removeAllViews();
-		LabelAdapter adapter = mTagAdapter;
-		LabelView tagViewContainer = null;
-		HashSet preCheckedList = mTagAdapter.getPreCheckedList();
-		for (int i = 0; i < adapter.getCount(); i++)
-		{
-			View tagView = adapter.getView(this, i, adapter.getItem(i));
 
-			tagViewContainer = new LabelView(getContext());
-			tagView.setDuplicateParentStateEnabled(true);
-			if (tagView.getLayoutParams() != null)
+		int sCount = labelAdapter.getDataSize();
+
+		for (int i = 0; i < sCount; i++)
+		{
+			final View labelView = labelAdapter.getView(this, labelAdapter.getItem(i), i);
+			final LabelView tagViewContainer = new LabelView(getContext());
+			final int position = i;
+
+			tagViewContainer.setOnClickListener(new View.OnClickListener()
 			{
-				tagViewContainer.setLayoutParams(tagView.getLayoutParams());
-			}
-			else
-			{
-				ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-				lp.setMargins(dip2px(getContext(), 5), dip2px(getContext(), 5), dip2px(getContext(), 5), dip2px(getContext(), 5));
-				tagViewContainer.setLayoutParams(lp);
-			}
-			tagViewContainer.addView(tagView);
+				@Override
+				public void onClick(View v)
+				{
+					if (LabelFlowLayout.this.isClickable())
+					{
+						doSelect(tagViewContainer, position);
+						labelAdapter.callLabelClick(LabelFlowLayout.this, labelView, position);
+					}
+				}
+			});
+
+			// 确定子控件,跟随父控件状态改变
+			labelView.setDuplicateParentStateEnabled(true);
+			tagViewContainer.addView(labelView);
+
 			addView(tagViewContainer);
+		}
+	}
 
+	/**
+	 * 更新 LabelFlowLayout中Label的状态
+	 */
+	private void updateLabelState()
+	{
+		if (null != labelAdapter)
+		{
+			// 更新所有 Label的状态
+			Deque<Integer> deque = labelAdapter.getSelectedList();
+			int sCount = labelAdapter.getDataSize();
+			LogFileUtil.v("sCount = " + sCount + ",deque = " + deque.toString());
+			LogFileUtil.v("labelAdapter.getSelectedSize() = " + labelAdapter.getSelectedSize() + ",mSelectedMax = " + mSelectedMax);
 
-			if (preCheckedList.contains(i))
+			for (int i = 0; i < sCount; i++)
 			{
-				tagViewContainer.setChecked(true);
+				if (deque.contains(i) && labelAdapter.getSelectedSize() <= mSelectedMax)
+				{
+					LabelView labelView = (LabelView) getChildAt(i);
+					doSelectState(labelView, true);
+				}
+				else
+				{
+					LabelView labelView = (LabelView) getChildAt(i);
+					doSelectState(labelView, false);
+				}
 			}
 
-			if (mTagAdapter.setSelected(i, adapter.getItem(i)))
+			labelAdapter.callLabelSelected();
+		}
+		else
+		{
+			LogFileUtil.e(TAG, "updateLabelState labelAdapter is null");
+		}
+	}
+
+	/**
+	 * 移除超出边界的 Label的状态; 不更新UI
+	 */
+	private void removeOverLabelState()
+	{
+		if (null != labelAdapter)
+		{
+			Deque<Integer> deque = labelAdapter.getSelectedList();
+			int sCount = labelAdapter.getDataSize();
+
+			int length = deque.size();
+			Integer[] selectArray = new Integer[length];
+			selectArray = deque.toArray(selectArray);
+
+			for (int i = 0; i < length; i++)
 			{
-				mSelectedView.add(i);
-				tagViewContainer.setChecked(true);
+				if (selectArray[i] >= sCount)
+				{
+					labelAdapter.removeInnerSelectedPosition(selectArray[i]);
+				}
 			}
 		}
-		mSelectedView.addAll(preCheckedList);
-	}
-
-	@Override
-	public boolean onTouchEvent(MotionEvent event)
-	{
-		if (event.getAction() == MotionEvent.ACTION_UP)
+		else
 		{
-			mMotionEvent = MotionEvent.obtain(event);
+			LogFileUtil.e(TAG, "removeOverLabelState labelAdapter is null");
 		}
-		return super.onTouchEvent(event);
-	}
-
-	@Override
-	public boolean performClick()
-	{
-		if (mMotionEvent == null)
-		{
-			return super.performClick();
-		}
-
-		int x = (int) mMotionEvent.getX();
-		int y = (int) mMotionEvent.getY();
-		mMotionEvent = null;
-
-		LabelView child = findChild(x, y);
-		int pos = findPosByView(child);
-		if (child != null)
-		{
-			doSelect(child, pos);
-			if (mOnTagClickListener != null)
-			{
-				return mOnTagClickListener.onTagClick(child.getTagView(), pos, this);
-			}
-		}
-		return true;
-	}
-
-	public void setMaxSelectCount(int count)
-	{
-		if (mSelectedView.size() > count)
-		{
-			Log.w(TAG, "you has already select more than " + count + " views , so it will be clear .");
-			mSelectedView.clear();
-		}
-		mSelectedMax = count;
-	}
-
-	public Set<Integer> getSelectedList()
-	{
-		return new HashSet<>(mSelectedView);
 	}
 
 	private void doSelect(LabelView child, int position)
 	{
-		if (mAutoSelectEffect)
+		if (!child.isChecked())
 		{
-			if (!child.isChecked())
+			// 处理max_select=1的情况
+			if (labelAdapter.getSelectedSize() >= mSelectedMax)
 			{
-				//处理max_select=1的情况
-				if (mSelectedMax == 1 && mSelectedView.size() == 1)
-				{
-					Iterator<Integer> iterator = mSelectedView.iterator();
-					Integer preIndex = iterator.next();
-					LabelView pre = (LabelView) getChildAt(preIndex);
-					pre.setChecked(false);
-					child.setChecked(true);
-					mSelectedView.remove(preIndex);
-					mSelectedView.add(position);
-				}
-				else
-				{
-					if (mSelectedMax > 0 && mSelectedView.size() >= mSelectedMax)
-					{
-						return;
-					}
-					child.setChecked(true);
-					mSelectedView.add(position);
-				}
+				Integer preIndex = labelAdapter.getSelectedFirst();
+				LabelView pre = (LabelView) getChildAt(preIndex);
+
+				doSelectState(pre, false);
+				doSelectState(child, true);
+
+				labelAdapter.removeInnerSelectedPosition(preIndex);
+				labelAdapter.addInnerSelectedPosition(position);
+				labelAdapter.callLabelSelected();
 			}
 			else
 			{
-				child.setChecked(false);
-				mSelectedView.remove(position);
+				doSelectState(child, true);
+				labelAdapter.addInnerSelectedPosition(position);
+				labelAdapter.callLabelSelected();
 			}
-			if (mOnSelectListener != null)
+		}
+		else
+		{
+			// 小于最小值,则跳过
+			if (mSelectedMin >= labelAdapter.getSelectedSize())
 			{
-				mOnSelectListener.onSelected(new HashSet<Integer>(mSelectedView));
+				return;
 			}
+			doSelectState(child, false);
+			labelAdapter.removeInnerSelectedPosition(position);
+			labelAdapter.callLabelSelected();
 		}
 	}
 
-	public LabelAdapter getAdapter()
+	/**
+	 * 修改选择的状态
+	 *
+	 * @param labelView
+	 * @param state
+	 */
+	private void doSelectState(LabelView labelView, boolean state)
 	{
-		return mTagAdapter;
+		labelView.setChecked(state);
+		labelView.setSelected(state);
+		labelView.setPressed(state);
 	}
+
+	@Override
+	public void onDataChanged()
+	{
+		updateLabelFlowLayout();
+		removeOverLabelState();
+		updateLabelState();
+	}
+
+	@Override
+	public void onSelectedChanged()
+	{
+		updateLabelState();
+	}
+
+	/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 以下是别人的,咋就别读了吧 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */
 
 	private static final String KEY_CHOOSE_POS = "key_choose_pos";
 
@@ -261,9 +268,10 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataCh
 		bundle.putParcelable(KEY_DEFAULT, super.onSaveInstanceState());
 
 		String selectPos = "";
-		if (mSelectedView.size() > 0)
+		if (labelAdapter.getSelectedSize() > 0)
 		{
-			for (int key : mSelectedView)
+			Deque<Integer> deque = labelAdapter.getSelectedList();
+			for (int key : deque)
 			{
 				selectPos += key + "|";
 			}
@@ -286,15 +294,10 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataCh
 				for (String pos : split)
 				{
 					int index = Integer.parseInt(pos);
-					mSelectedView.add(index);
-
-					LabelView tagView = (LabelView) getChildAt(index);
-					if (tagView != null)
-					{
-						tagView.setChecked(true);
-					}
+					labelAdapter.addInnerSelectedPosition(index);
 				}
 
+				updateLabelState();
 			}
 			super.onRestoreInstanceState(bundle.getParcelable(KEY_DEFAULT));
 			return;
@@ -302,50 +305,5 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataCh
 		super.onRestoreInstanceState(state);
 	}
 
-	private int findPosByView(View child)
-	{
-		final int cCount = getChildCount();
-		for (int i = 0; i < cCount; i++)
-		{
-			View v = getChildAt(i);
-			if (v == child)
-			{
-				return i;
-			}
-		}
-		return -1;
-	}
 
-	private LabelView findChild(int x, int y)
-	{
-		final int cCount = getChildCount();
-		for (int i = 0; i < cCount; i++)
-		{
-			LabelView v = (LabelView) getChildAt(i);
-			if (v.getVisibility() == View.GONE)
-			{
-				continue;
-			}
-			Rect outRect = new Rect();
-			v.getHitRect(outRect);
-			if (outRect.contains(x, y))
-			{
-				return v;
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public void onChanged()
-	{
-		mSelectedView.clear();
-		changeAdapter();
-	}
-
-	public static int dip2px(Context context, float dpValue)
-	{
-		final float scale = context.getResources().getDisplayMetrics().density;
-		return (int) (dpValue * scale + 0.5f);
-	}
 }

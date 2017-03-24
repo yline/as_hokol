@@ -28,7 +28,7 @@ public class StarInfoHelper
 	{
 		headViewHolder = new ViewHolder(headView);
 
-		LabelWidget labelWidget = new LabelWidget()
+		LabelWidget labelWidget = new LabelWidget(context)
 		{
 			@Override
 			protected LabelFlowLayout getLabelFlowLayout()
@@ -36,7 +36,7 @@ public class StarInfoHelper
 				return headViewHolder.get(R.id.label_flow_star_info);
 			}
 		};
-		labelWidget.start(context, Arrays.asList("网红", "模特"));
+		labelWidget.setDataList(Arrays.asList("网红", "模特"));
 	}
 
 	public void initHeadData()

@@ -16,6 +16,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static com.hokol.viewhelper.MainHomeHelper.FilterSex.All;
+import static com.hokol.viewhelper.MainHomeHelper.FilterSex.Boy;
+import static com.hokol.viewhelper.MainHomeHelper.FilterSex.Girl;
+
 public class MainHomeHelper
 {
 	private Context context;
@@ -46,7 +50,7 @@ public class MainHomeHelper
 		final View filterView = LayoutInflater.from(context).inflate(R.layout.fragment_main_home__menu_filter, null);
 
 		// 性别
-		final LabelWidget sexLabelWidget = new LabelWidget()
+		final LabelWidget sexLabelWidget = new LabelWidget(context)
 		{
 			@Override
 			protected LabelFlowLayout getLabelFlowLayout()
@@ -54,11 +58,13 @@ public class MainHomeHelper
 				return (LabelFlowLayout) filterView.findViewById(R.id.label_flow_main_home_menu_sex);
 			}
 		};
-		sexLabelWidget.start(context, Arrays.asList(FilterSex.All.content, FilterSex.Boy.content, FilterSex.Girl.content));
+		sexLabelWidget.setDataList(Arrays.asList(All.content, Boy.content, Girl.content));
 		sexLabelWidget.setMaxSelectCount(1);
+		sexLabelWidget.setMinSelectCount(1);
+		sexLabelWidget.addSelectedPosition(0);
 
 		// 推荐
-		final LabelWidget recommendLabelWidget = new LabelWidget()
+		final LabelWidget recommendLabelWidget = new LabelWidget(context)
 		{
 			@Override
 			protected LabelFlowLayout getLabelFlowLayout()
@@ -66,16 +72,20 @@ public class MainHomeHelper
 				return (LabelFlowLayout) filterView.findViewById(R.id.label_flow_main_home_menu_recommend);
 			}
 		};
-		recommendLabelWidget.start(context, Arrays.asList(FilterRecommend.Popular.content, FilterRecommend.Newest.content));
+		recommendLabelWidget.setDataList(Arrays.asList(FilterRecommend.Popular.content, FilterRecommend.Newest.content));
 		recommendLabelWidget.setMaxSelectCount(1);
+		recommendLabelWidget.setMinSelectCount(1);
+		recommendLabelWidget.addSelectedPosition(0);
 
 		filterView.findViewById(R.id.btn_main_home_menu_commit).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				List sexList = sexLabelWidget.getSelectedList();
-				menuFilterCallback.onEnumFilterCommit(FilterSex.All, FilterRecommend.Popular);
+				int sexPosition = sexLabelWidget.getSelectedFirstPosition();
+				int recommendPosition = recommendLabelWidget.getSelectedFirstPosition();
+
+				menuFilterCallback.onEnumFilterCommit(FilterSex.getFilterSex(sexPosition), FilterRecommend.getFilterRecommend(recommendPosition));
 			}
 		});
 
@@ -115,6 +125,22 @@ public class MainHomeHelper
 		{
 			this.content = content;
 		}
+
+		public static FilterSex getFilterSex(int position)
+		{
+			if (position == 0)
+			{
+				return All;
+			}
+			else if (position == 1)
+			{
+				return Boy;
+			}
+			else
+			{
+				return Girl;
+			}
+		}
 	}
 
 	public enum FilterRecommend
@@ -126,6 +152,18 @@ public class MainHomeHelper
 		FilterRecommend(String content)
 		{
 			this.content = content;
+		}
+
+		public static FilterRecommend getFilterRecommend(int position)
+		{
+			if (position == 0)
+			{
+				return Popular;
+			}
+			else
+			{
+				return Newest;
+			}
 		}
 	}
 }

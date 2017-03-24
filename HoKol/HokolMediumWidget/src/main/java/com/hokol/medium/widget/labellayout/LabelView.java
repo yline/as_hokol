@@ -6,6 +6,12 @@ import android.view.View;
 import android.widget.Checkable;
 import android.widget.FrameLayout;
 
+/**
+ * 这个容器是容纳一个子控件
+ *
+ * @author yline 2017/3/23 -- 16:36
+ * @version 1.0.0
+ */
 public class LabelView extends FrameLayout implements Checkable
 {
 	private boolean isChecked;
@@ -22,7 +28,7 @@ public class LabelView extends FrameLayout implements Checkable
 		super(context, attrs);
 	}
 
-	public View getTagView()
+	public View getLabelView()
 	{
 		return getChildAt(0);
 	}

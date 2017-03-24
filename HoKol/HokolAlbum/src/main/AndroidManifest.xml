@@ -36,7 +36,6 @@
         <activity android:name=".activity.UserRechargeActivity"/>
         <activity android:name=".activity.UserSettingActivity"/>
         <!-- 登入Enter -->
-        <!--
         <activity
             android:name=".activity.EnterChoiceActivity"
             android:label="登入流程">
@@ -46,7 +45,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        -->
         <activity android:name=".activity.EnterLoginPhonePwdActivity">
         </activity>
         <activity android:name=".activity.EnterRegisterPhoneActivity">

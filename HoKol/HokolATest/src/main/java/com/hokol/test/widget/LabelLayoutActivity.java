@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.medium.widget.LabelWidget;
-import com.hokol.medium.widget.labellayout.LabelFlowLayout;
 import com.hokol.test.R;
 
 import java.util.Arrays;

@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tv_widget_item_label"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/default_space_little"
-    android:layout_marginRight="@dimen/default_space_normal"
-    android:layout_marginTop="@dimen/default_space_little"
-    android:background="@drawable/widget_item_label_bg_layout"
-    android:textColor="@drawable/widget_item_label_text_color">
-</TextView>
+    android:paddingBottom="@dimen/default_space_little"
+    android:paddingRight="@dimen/default_space_normal"
+    android:paddingTop="@dimen/default_space_little">
+
+    <TextView
+        android:id="@+id/tv_widget_item_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/widget_item_label_bg_layout"
+        android:duplicateParentState="true"
+        android:textColor="@drawable/widget_item_label_text_color">
+    </TextView>
+</LinearLayout>
+
+
 
 
 
