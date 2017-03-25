@@ -12,7 +12,6 @@ import android.widget.ImageView;
 
 import com.hokol.R;
 import com.hokol.base.common.BaseAppCompatActivity;
-import com.hokol.base.log.LogFileUtil;
 import com.hokol.fragment.MainCareFragment;
 import com.hokol.fragment.MainHomeFragment;
 import com.hokol.fragment.MainMineFragment;
@@ -136,13 +135,7 @@ public class MainActivity extends BaseAppCompatActivity
 	 */
 	private void initShowData()
 	{
-		fragmentManager.beginTransaction().show(mainNewsFragment).commit();
-
-		LogFileUtil.v("position = " + TITLE.News.position + " " + TITLE.News.title + " " + TITLE.Care.titleBgColor);
-		LogFileUtil.v("position = " + TITLE.Care.position + " " + TITLE.Care.title + " " + TITLE.Care.titleBgColor);
-		LogFileUtil.v("position = " + TITLE.Home.position + " " + TITLE.Home.title + " " + TITLE.Home.titleBgColor);
-		mainHelper.setBarTextContent(TITLE.News.title).setTextColor(getResources().getColor(TITLE.News.titleColor));
-		mainHelper.setBarBackground(MainActivity.this, TITLE.News.titleBgColor, 56);
+		tabLayout.getTabAt(TAB.Home.position).select();
 	}
 
 	private void initView()

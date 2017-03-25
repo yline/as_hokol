@@ -44,17 +44,18 @@ public class HttpConstant
 	// 请求用户详情信息；点击关注的人头像
 	public static final String url_dynamic_user_detail = url_head + "ApiDongtai/user_info";
 
+	// 请求关注的人的信息; 我的界面查看我关注的人
+	public static final String url_user_care_all = url_head + "ApiDongtai/care_peo_info";
+
 	// 单条动态(取消)点赞
 	public static final String url_dynamic_praise_single = url_head + "ApiDongtai/dt_zan";
 
 	// 请求单条动态信息
-	public static final String url_care_dynamic_single = url_head + "ApiDongtai/dt_one";
+	public static final String url_dynamic_single = url_head + "ApiDongtai/dt_one";
 
 	// 请求用户自己的，多条动态信息
-	public static final String url_care_dynamic_self = url_head + "ApiDongtai/dt_nums";
+	public static final String url_dynamic_user_all = url_head + "ApiDongtai/dt_nums";
 
-	// 请求关注的人的信息; 我的界面查看我关注的人
-	public static final String url_care_user_cared = url_head + "ApiDongtai/care_peo_info";
 
 	/* ------------------------------ 控制 -------------------------------- */
 	// 是否 输出日志

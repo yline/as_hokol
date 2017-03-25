@@ -4,8 +4,8 @@ import java.util.Locale;
 
 /**
  * 时间单位转换,转换类
+ *
  * @author YLine
- *         <p/>
  *         2016年8月3日 下午7:50:16
  */
 public class TimeConvertUtil

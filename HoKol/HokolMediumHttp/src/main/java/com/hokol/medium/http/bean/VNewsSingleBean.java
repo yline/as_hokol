@@ -26,7 +26,7 @@ public class VNewsSingleBean
 	/**
 	 * 新闻发布时间
 	 */
-	private String news_time;
+	private long news_time;
 
 	/**
 	 * 新闻标题
@@ -68,12 +68,12 @@ public class VNewsSingleBean
 		this.news_source = news_source;
 	}
 
-	public String getNews_time()
+	public long getNews_time()
 	{
 		return news_time;
 	}
 
-	public void setNews_time(String news_time)
+	public void setNews_time(long news_time)
 	{
 		this.news_time = news_time;
 	}

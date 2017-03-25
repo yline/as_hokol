@@ -92,7 +92,11 @@ public class MainNewsHelper
 
 			viewHolder.setText(R.id.tv_item_main_news_title, sList.get(position).getNews_title());
 			viewHolder.setText(R.id.tv_item_main_news_origin, sList.get(position).getNews_source());
-			viewHolder.setText(R.id.tv_item_main_news_time, sList.get(position).getNews_time());
+
+			long stampTime = sList.get(position).getNews_time();
+
+
+			viewHolder.setText(R.id.tv_item_main_news_time, stampTime + "");
 		}
 	}
 
@@ -123,7 +127,9 @@ public class MainNewsHelper
 
 		recommendViewHolder.setText(R.id.tv_main_news_recommend_title, singleNewsBean.getNews_title());
 		recommendViewHolder.setText(R.id.tv_main_news_recommend_origin, singleNewsBean.getNews_source());
-		recommendViewHolder.setText(R.id.tv_main_news_recommend_time, singleNewsBean.getNews_time());
+
+		long stampTime = singleNewsBean.getNews_time();
+		recommendViewHolder.setText(R.id.tv_main_news_recommend_time, stampTime + "");
 	}
 
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 刷新布局 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */

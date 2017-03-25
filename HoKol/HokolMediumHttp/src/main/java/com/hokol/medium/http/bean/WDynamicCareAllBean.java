@@ -19,15 +19,15 @@ public class WDynamicCareAllBean
 	private int num1;
 
 	/**
-	 * 结束号
+	 * 请求长度
 	 */
-	private int num2;
+	private int length;
 
-	public WDynamicCareAllBean(String user_id, int num1, int num2)
+	public WDynamicCareAllBean(String user_id, int num1, int length)
 	{
 		this.user_id = user_id;
 		this.num1 = num1;
-		this.num2 = num2;
+		this.length = length;
 	}
 
 	public String getUser_id()
@@ -50,23 +50,13 @@ public class WDynamicCareAllBean
 		this.num1 = num1;
 	}
 
-	public int getNum2()
+	public int getLength()
 	{
-		return num2;
+		return length;
 	}
 
-	public void setNum2(int num2)
+	public void setLength(int length)
 	{
-		this.num2 = num2;
-	}
-
-	@Override
-	public String toString()
-	{
-		return "WDynamicCareAllBean{" +
-				"user_id='" + user_id + '\'' +
-				", num1=" + num1 +
-				", num2=" + num2 +
-				'}';
+		this.length = length;
 	}
 }

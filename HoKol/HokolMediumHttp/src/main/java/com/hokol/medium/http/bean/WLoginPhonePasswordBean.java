@@ -2,8 +2,14 @@ package com.hokol.medium.http.bean;
 
 public class WLoginPhonePasswordBean
 {
+	/**
+	 * 用户手机
+	 */
 	private String user_tel;
 
+	/**
+	 * 用户密码
+	 */
 	private String user_pwd;
 
 	public WLoginPhonePasswordBean(String user_tel, String user_pwd)

@@ -10,14 +10,14 @@ import java.util.List;
  */
 public class VDynamicCareAllBean
 {
-	private List<DynamicBean> list;
+	private List<VDynamicCareBean> list;
 
-	public List<DynamicBean> getList()
+	public List<VDynamicCareBean> getList()
 	{
 		return list;
 	}
 
-	public void setList(List<DynamicBean> list)
+	public void setList(List<VDynamicCareBean> list)
 	{
 		this.list = list;
 	}

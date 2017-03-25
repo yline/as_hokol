@@ -36,15 +36,15 @@
         <activity android:name=".activity.UserRechargeActivity"/>
         <activity android:name=".activity.UserSettingActivity"/>
         <!-- 登入Enter -->
-        <activity
-            android:name=".activity.EnterChoiceActivity"
-            android:label="登入流程">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+        <!-- <activity
+             android:name=".activity.EnterChoiceActivity"
+             android:label="登入流程">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+                 <category android:name="android.intent.category.LAUNCHER"/>
+             </intent-filter>
+         </activity>-->
         <activity android:name=".activity.EnterLoginPhonePwdActivity">
         </activity>
         <activity android:name=".activity.EnterRegisterPhoneActivity">

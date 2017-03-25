@@ -24,7 +24,7 @@ import com.hokol.base.utils.UIScreenUtil;
  */
 public class MainHelper
 {
-	private static final int DURATION_FLASH = 1500;
+	private static final int DURATION_FLASH = 1000;
 
 	/**
 	 * 初始化进入动画

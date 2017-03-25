@@ -2,8 +2,14 @@ package com.hokol.medium.http.bean;
 
 public class WDynamicUserDetailBean
 {
+	/**
+	 * 当前用户唯一标识
+	 */
 	private String user_id;
 
+	/**
+	 * 被查看信息的用户唯一标识
+	 */
 	private String user_id_find;
 
 	public WDynamicUserDetailBean(String user_id, String user_id_find)
