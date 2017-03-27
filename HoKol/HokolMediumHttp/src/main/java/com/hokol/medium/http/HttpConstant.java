@@ -48,7 +48,7 @@ public class HttpConstant
 	public static final String url_user_care_all = url_head + "ApiDongtai/care_peo_info";
 
 	// 单条动态(取消)点赞
-	public static final String url_dynamic_praise_single = url_head + "ApiDongtai/dt_zan";
+	public static final String url_dynamic_praise_single = url_head + "ApiDongtai/dt_zan_switch";
 
 	// 请求单条动态信息
 	public static final String url_dynamic_single = url_head + "ApiDongtai/dt_one";
@@ -56,6 +56,18 @@ public class HttpConstant
 	// 请求用户自己的，多条动态信息
 	public static final String url_dynamic_user_all = url_head + "ApiDongtai/dt_nums";
 
+	// 发布动态
+	public static final String url_dynamic_publish = url_head + "ApiDongtai/dt_pub";
+
+	/* --------------------------- 任务 --------------------------- */
+	// 获取任务列表 (多条)
+	public static final String url_task_main_all = url_head + "ApiTask/task_index";
+
+	// 获取任务详情 (单条)
+	public static final String url_task_main_detail = url_head + "ApiTask/task_detail";
+
+	// 任务收藏/取消收藏
+	public static final String url_task_main_collection = url_head + "ApiTask/task_collect_switch";
 
 	/* ------------------------------ 控制 -------------------------------- */
 	// 是否 输出日志

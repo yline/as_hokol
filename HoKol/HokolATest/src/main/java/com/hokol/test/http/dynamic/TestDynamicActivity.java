@@ -11,7 +11,9 @@ import com.hokol.medium.http.XHttp;
 import com.hokol.medium.http.bean.VDynamicCareAllBean;
 import com.hokol.medium.http.bean.VDynamicCareSingleBean;
 import com.hokol.medium.http.bean.VDynamicPraiseSingleBean;
+import com.hokol.medium.http.bean.VDynamicUserAllBean;
 import com.hokol.medium.http.bean.VDynamicUserDetailBean;
+import com.hokol.medium.http.bean.VUserCareAllBean;
 import com.hokol.medium.http.bean.WDynamicCareAllBean;
 import com.hokol.medium.http.bean.WDynamicCareSingleBean;
 import com.hokol.medium.http.bean.WDynamicPraiseSingleBean;
@@ -24,14 +26,30 @@ import com.hokol.test.common.BaseTestActivity;
  * 动态接口
  * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况
  * 请求关注的人的多条动态 --> dongtai --> url_dynamic_care_all --> WDynamicCareAllBean - VDynamicCareAllBean + VDynamicCareBean --> 长度<=0情况未处理、
- * 请求用户详情信息 --> user_info --> url_dynamic_user_detail --> WDynamicUserDetailBean - VDynamicUserDetailBean --> ok
- * 请求关注的人的信息（多条） --> care_peo_info --> url_user_care_all --> WUserCareAllBean - ？？？ --> 返回数据文档和实际对不上（提示修改）
- * 单条动态(取消)点赞功能 --> dt_zan_switch --> url_dynamic_praise_single --> WDynamicPraiseSingleBean - VDynamicPraiseSingleBean --> 返回网页，提示修改
+ * 请求用户详情信息 --> user_info --> url_dynamic_user_detail --> WDynamicUserDetailBean - VDynamicUserDetailBean --> ok + 没有参数也能请求到数据
+ * 请求关注的人的信息（多条） --> care_peo_info --> url_user_care_all --> WUserCareAllBean - VUserCareAllBean --> ok
+ * 单条动态(取消)点赞功能 --> dt_zan_switch --> url_dynamic_praise_single --> WDynamicPraiseSingleBean - VDynamicPraiseSingleBean --> ok
  * 请求单条动态的信息 --> dt_one --> url_dynamic_single --> WDynamicCareSingleBean - VDynamicCareSingleBean --> ok
- * 请求用户多条动态信息 --> dt_nums --> url_dynamic_user_all --> WDynamicUserAllBean - ？？？ --> 还没测试
+ * 请求用户多条动态信息 --> dt_nums --> url_dynamic_user_all --> WDynamicUserAllBean - VDynamicUserAllBean --> ok
+ * 发布动态 --> dt_pub --> url_dynamic_publish --> ？？？ - ？？？ --> 稍后测试
  */
 public class TestDynamicActivity extends BaseTestActivity
 {
+	/**
+	 * 发布动态
+	 */
+	private void testdt_pub()
+	{
+		addButton("", new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				String httpUrl = HttpConstant.url_dynamic_publish;
+			}
+		});
+	}
+
 	private void testdt_nums()
 	{
 		final EditText editTextOne = addEditNumber("User_id");
@@ -46,13 +64,13 @@ public class TestDynamicActivity extends BaseTestActivity
 				String httpUrl = HttpConstant.url_dynamic_user_all;
 
 				final String user_id = editTextOne.getText().toString().trim();
-				final String num1String = editTextOne.getText().toString().trim();
+				final String num1String = editTextTwo.getText().toString().trim();
 				final int num1 = Integer.parseInt(num1String);
 
-				final String lengthString = editTextOne.getText().toString().trim();
+				final String lengthString = editTextThree.getText().toString().trim();
 				final int length = Integer.parseInt(lengthString);
 
-				new XHttp<String>()
+				new XHttp<VDynamicUserAllBean>()
 				{
 					@Override
 					protected Object getRequestPostParam()
@@ -61,11 +79,11 @@ public class TestDynamicActivity extends BaseTestActivity
 					}
 
 					@Override
-					public void onSuccess(String s)
+					public void onSuccess(VDynamicUserAllBean vDynamicUserAllBean)
 					{
 
 					}
-				}.doRequest(httpUrl, String.class);
+				}.doRequest(httpUrl, VDynamicUserAllBean.class);
 			}
 		});
 	}
@@ -154,7 +172,7 @@ public class TestDynamicActivity extends BaseTestActivity
 				String lengthString = editThree.getText().toString().trim();
 				final int length = Integer.parseInt(lengthString);
 
-				new XHttp<String>()
+				new XHttp<VUserCareAllBean>()
 				{
 					@Override
 					protected Object getRequestPostParam()
@@ -163,11 +181,11 @@ public class TestDynamicActivity extends BaseTestActivity
 					}
 
 					@Override
-					public void onSuccess(String s)
+					public void onSuccess(VUserCareAllBean vUserCareAllBean)
 					{
 
 					}
-				}.doRequest(httpUrl, String.class);
+				}.doRequest(httpUrl, VUserCareAllBean.class);
 			}
 		});
 	}
@@ -247,6 +265,7 @@ public class TestDynamicActivity extends BaseTestActivity
 		testcare_peo_info();
 		testdt_zan_switch();
 		testdt_one();
+		testdt_nums();
 	}
 	
 	public static void actionStart(Context context)
