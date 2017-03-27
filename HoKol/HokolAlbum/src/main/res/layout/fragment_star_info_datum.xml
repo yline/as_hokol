@@ -10,7 +10,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/linear_layout1"
+            android:id="@+id/ll_star_info_datum_fans"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -43,7 +43,7 @@
             android:layout_height="1px"></View>
 
         <LinearLayout
-            android:id="@+id/linear_layout2"
+            android:id="@+id/ll_star_info_datum_care_people"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

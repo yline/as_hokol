@@ -1,11 +1,14 @@
 package com.hokol.fragment;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
+import com.hokol.application.IApplication;
 import com.hokol.base.common.BaseFragment;
 
 public class StarInfoPrivateFragment extends BaseFragment
@@ -41,5 +44,34 @@ public class StarInfoPrivateFragment extends BaseFragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		return inflater.inflate(R.layout.fragment_star_info_private, container, false);
+	}
+
+
+	@Override
+	public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
+	{
+		super.onViewCreated(view, savedInstanceState);
+
+		view.findViewById(R.id.rl_star_info_private_lock).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				IApplication.toast("已经点击");
+				// 弹框, popWindow
+
+				View contentView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_star_info_pop_window, null);
+
+				Dialog dialog = new Dialog(getContext());
+				dialog.setContentView(contentView);
+				dialog.show();
+
+				/*
+				AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+				builder.setView(contentView);
+				AlertDialog alertDialog = builder.create();
+				alertDialog.show();*/
+			}
+		});
 	}
 }

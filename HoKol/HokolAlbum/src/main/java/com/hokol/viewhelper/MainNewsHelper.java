@@ -14,6 +14,8 @@ import com.hokol.application.IApplication;
 import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.adapter.ViewHolder;
+import com.hokol.base.log.LogFileUtil;
+import com.hokol.base.utils.TimeConvertUtil;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
@@ -93,10 +95,10 @@ public class MainNewsHelper
 			viewHolder.setText(R.id.tv_item_main_news_title, sList.get(position).getNews_title());
 			viewHolder.setText(R.id.tv_item_main_news_origin, sList.get(position).getNews_source());
 
-			long stampTime = sList.get(position).getNews_time();
-
-
-			viewHolder.setText(R.id.tv_item_main_news_time, stampTime + "");
+			long stampTime = sList.get(position).getNews_time(); //  / 1000
+			LogFileUtil.v("position = " + position + ", stampTime = " + stampTime);
+			String showTime = TimeConvertUtil.stamp2FormatTime(stampTime * 1000);
+			viewHolder.setText(R.id.tv_item_main_news_time, showTime);
 		}
 	}
 
@@ -104,7 +106,7 @@ public class MainNewsHelper
 	private ViewHolder recommendViewHolder;
 
 	/**
-	 * 初始化推荐控件
+	 * 初始化推···荐控件
 	 *
 	 * @param recommendView
 	 */
@@ -129,7 +131,9 @@ public class MainNewsHelper
 		recommendViewHolder.setText(R.id.tv_main_news_recommend_origin, singleNewsBean.getNews_source());
 
 		long stampTime = singleNewsBean.getNews_time();
-		recommendViewHolder.setText(R.id.tv_main_news_recommend_time, stampTime + "");
+		LogFileUtil.v("Recommend stampTime = " + stampTime);
+		String showTime = TimeConvertUtil.stamp2FormatTime(stampTime * 1000);
+		recommendViewHolder.setText(R.id.tv_main_news_recommend_time, showTime);
 	}
 
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 刷新布局 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
