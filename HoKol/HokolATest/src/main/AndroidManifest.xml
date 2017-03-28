@@ -31,7 +31,7 @@
         <activity android:name=".http.home.TestHomeActivity"/>
         <activity android:name=".http.mine.TestUserActivity"/>
         <activity android:name=".http.setting.TestSettingActivity"/>
-        <activity android:name=".http.local.TestLocalActivity"/>
+        <activity android:name=".http.area.TestAreaActivity"/>
     </application>
 
 </manifest>

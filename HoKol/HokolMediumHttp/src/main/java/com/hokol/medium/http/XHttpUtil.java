@@ -1,5 +1,6 @@
 package com.hokol.medium.http;
 
+import com.hokol.medium.http.bean.VAreaAllBean;
 import com.hokol.medium.http.bean.VDynamicCareAllBean;
 import com.hokol.medium.http.bean.VDynamicCareSingleBean;
 import com.hokol.medium.http.bean.VDynamicPraiseSingleBean;
@@ -207,9 +208,9 @@ public class XHttpUtil
 		String httpUrl = HttpConstant.url_home_main;
 		new XHttp<VHomeMainBean>(adapter).doPost(httpUrl, wHomeMainBean, VHomeMainBean.class);
 	}
-
+	
 	/**
-	 * 主页接口
+	 * 我的页面 接口
 	 * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况
 	 * 请求用户粉丝的信息（多条） --> user_fans_info --> user_fans_info --> WUserFansAllBean - VUserFansAllBean -->
 	 * 请求用户的收藏 --> user_collect_task --> url_user_collection --> WUserCollectionBean - VUserCollectionBean -->
@@ -271,9 +272,9 @@ public class XHttpUtil
 	/**
 	 * 设置页面
 	 * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况
-	 * 用户发表意见 --> user_advice --> url_setting_submit_proposal --> WSettingSubmitProposalBean - null -->
-	 * 用户重置密码 --> reset_pwd --> url_setting_reset_pwd --> WSettingResetPwdBean - null -->
-	 * 用户重置手机 --> reset_tel --> url_setting_reset_phone --> WSettingResetPhoneBean - null -->
+	 * 用户发表意见 --> user_advice --> url_setting_submit_proposal --> WSettingSubmitProposalBean - null --> ok
+	 * 用户重置密码 --> reset_pwd --> url_setting_reset_pwd --> WSettingResetPwdBean - null --> ok
+	 * 用户重置手机 --> 接口废弃
 	 * 用户信息修改 --> reset_user_info --> url_setting_update_info --> WSettingUpdateInfoBean - null -->
 	 * 用户头像修改 --> reset_user_logo -->  暂时不测
 	 */
@@ -341,5 +342,17 @@ public class XHttpUtil
 				return false;
 			}
 		}.doPost(httpUrl, wSettingUpdateInfoBean, String.class);
+	}
+
+	/**
+	 * 设置页面
+	 * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况
+	 * 获取地区 --> get_area --> url_area_all --> null - VAreaAllBean --> ok
+	 */
+	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 设置页面 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+	public static void doAreaAll(XHttpAdapter<VAreaAllBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_area_all;
+		new XHttp<VAreaAllBean>(adapter).doPost(httpUrl, null, VAreaAllBean.class);
 	}
 }

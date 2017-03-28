@@ -3,9 +3,9 @@ package com.hokol.test;
 import android.view.View;
 
 import com.hokol.test.common.BaseTestFragment;
+import com.hokol.test.http.area.TestAreaActivity;
 import com.hokol.test.http.dynamic.TestDynamicActivity;
 import com.hokol.test.http.home.TestHomeActivity;
-import com.hokol.test.http.local.TestLocalActivity;
 import com.hokol.test.http.login.TestLoginActivity;
 import com.hokol.test.http.mine.TestUserActivity;
 import com.hokol.test.http.news.TestNewsActivity;
@@ -85,7 +85,7 @@ public class HttpFragment extends BaseTestFragment
 			@Override
 			public void onClick(View v)
 			{
-				TestLocalActivity.actionStart(getContext());
+				TestAreaActivity.actionStart(getContext());
 			}
 		});
 	}

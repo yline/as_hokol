@@ -86,7 +86,7 @@ public class HttpConstant
 	// 用户赠送红豆
 	public static final String url_user_coin_gift = url_head + "ApiMine/present_coin";
 
-	/* --------------------------- 设置页面 --------------------------- */
+	/* --------------------------- 设置接口 --------------------------- */
 	// 用户发表意见
 	public static final String url_setting_submit_proposal = url_head + "ApiSetting/user_advice";
 
@@ -102,6 +102,11 @@ public class HttpConstant
 	// 用户头像修改
 	public static final String url_setting_update_avatar = url_head + "ApiSetting/reset_user_logo";
 
+	/* --------------------------- 地区接口 --------------------------- */
+
+	// 获取地区
+	public static final String url_area_all = url_head + "ApiArea/get_area";
+	
 	/* ------------------------------ 控制 -------------------------------- */
 	// 是否 输出日志
 	private static boolean isDefaultDebug = true;
