@@ -43,6 +43,16 @@ public class VUserFansAllBean
 		 */
 		private String user_sign;
 
+		/**
+		 * 用户性别
+		 */
+		private String user_sex;
+
+		/**
+		 * 用户的赞
+		 */
+		private int user_zan;
+
 		public String getUser_id()
 		{
 			return user_id;
@@ -91,6 +101,26 @@ public class VUserFansAllBean
 		public void setUser_sign(String user_sign)
 		{
 			this.user_sign = user_sign;
+		}
+
+		public String getUser_sex()
+		{
+			return user_sex;
+		}
+
+		public void setUser_sex(String user_sex)
+		{
+			this.user_sex = user_sex;
+		}
+
+		public int getUser_zan()
+		{
+			return user_zan;
+		}
+
+		public void setUser_zan(int user_zan)
+		{
+			this.user_zan = user_zan;
 		}
 	}
 }

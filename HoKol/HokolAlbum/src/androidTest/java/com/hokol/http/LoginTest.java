@@ -4,9 +4,9 @@ import android.test.ActivityTestCase;
 
 import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.XHttpAdapter;
+import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VLoginPhonePwdBean;
 import com.hokol.medium.http.bean.WLoginPhonePwdBean;
-import com.hokol.medium.http.helper.XHttpUtil;
 
 public class LoginTest extends ActivityTestCase
 {
@@ -23,7 +23,7 @@ public class LoginTest extends ActivityTestCase
 	private void phoneLogin(String username, String password)
 	{
 		LogFileUtil.v(TAG, "phoneLogin start");
-		
+
 		final WLoginPhonePwdBean requestBean = new WLoginPhonePwdBean(username, password);
 		// 这样的方法,并不会被执行
 		XHttpUtil.doLoginPhonePwd(requestBean, new XHttpAdapter<VLoginPhonePwdBean>()

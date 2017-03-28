@@ -7,19 +7,12 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.hokol.medium.http.XHttpAdapter;
+import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
-import com.hokol.medium.http.helper.XHttpUtil;
 import com.hokol.test.common.BaseTestActivity;
 
-/**
- * 新闻接口
- * Button名称 --> API后缀 --> HttpConstant --> Bean名称/Bean名称 --> 情况
- * 推荐新闻获取 --> new_tui --> url_news_recommend --> null - VNewsSingleBean --> 还差 Html返回值
- * 多条新闻获取 --> news --> url_news_multiplex --> WNewsMultiplexBean - VNewsMultiplexBean --> 还差 Html返回值 + 待处理长度<=0的情况
- * 单条新闻获取 --> 等待Html5,未提供接口
- */
 public class TestNewsActivity extends BaseTestActivity
 {
 	@Override

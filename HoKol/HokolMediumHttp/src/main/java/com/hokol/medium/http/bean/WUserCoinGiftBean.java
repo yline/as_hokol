@@ -15,14 +15,14 @@ public class WUserCoinGiftBean
 	/**
 	 * 动态唯一标识:[非动态送红豆dt_id为0]
 	 */
-	private int dt_id;
+	private String dt_id;
 
 	/**
 	 * 赠送红豆数目
 	 */
 	private int coin_num;
 
-	public WUserCoinGiftBean(String user_id, String recive_user_id, int dt_id, int coin_num)
+	public WUserCoinGiftBean(String user_id, String recive_user_id, String dt_id, int coin_num)
 	{
 		this.user_id = user_id;
 		this.recive_user_id = recive_user_id;
@@ -50,12 +50,12 @@ public class WUserCoinGiftBean
 		this.recive_user_id = recive_user_id;
 	}
 
-	public int getDt_id()
+	public String getDt_id()
 	{
 		return dt_id;
 	}
 
-	public void setDt_id(int dt_id)
+	public void setDt_id(String dt_id)
 	{
 		this.dt_id = dt_id;
 	}

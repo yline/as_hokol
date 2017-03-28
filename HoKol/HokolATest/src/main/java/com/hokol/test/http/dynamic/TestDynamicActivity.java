@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import com.hokol.medium.http.HttpConstant;
 import com.hokol.medium.http.XHttpAdapter;
+import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VDynamicCareAllBean;
 import com.hokol.medium.http.bean.VDynamicCareSingleBean;
 import com.hokol.medium.http.bean.VDynamicPraiseSingleBean;
@@ -20,20 +21,8 @@ import com.hokol.medium.http.bean.WDynamicPraiseSingleBean;
 import com.hokol.medium.http.bean.WDynamicUserAllBean;
 import com.hokol.medium.http.bean.WDynamicUserDetailBean;
 import com.hokol.medium.http.bean.WUserCareAllBean;
-import com.hokol.medium.http.helper.XHttpUtil;
 import com.hokol.test.common.BaseTestActivity;
 
-/**
- * 动态接口
- * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况
- * 请求关注的人的多条动态 --> dongtai --> url_dynamic_care_all --> WDynamicCareAllBean - VDynamicCareAllBean + VDynamicCareBean --> 长度<=0情况未处理、
- * 请求用户详情信息 --> user_info --> url_dynamic_user_detail --> WDynamicUserDetailBean - VDynamicUserDetailBean --> ok + 没有参数也能请求到数据
- * 请求关注的人的信息（多条） --> care_peo_info --> url_user_care_all --> WUserCareAllBean - VUserCareAllBean --> ok
- * 单条动态(取消)点赞功能 --> dt_zan_switch --> url_dynamic_praise_single --> WDynamicPraiseSingleBean - VDynamicPraiseSingleBean --> ok
- * 请求单条动态的信息 --> dt_one --> url_dynamic_single --> WDynamicCareSingleBean - VDynamicCareSingleBean --> ok
- * 请求用户多条动态信息 --> dt_nums --> url_dynamic_user_all --> WDynamicUserAllBean - VDynamicUserAllBean --> ok
- * 发布动态 --> dt_pub --> url_dynamic_publish --> ？？？ - ？？？ --> 稍后测试
- */
 public class TestDynamicActivity extends BaseTestActivity
 {
 	/**

@@ -7,22 +7,14 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.hokol.medium.http.XHttpAdapter;
+import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskMainAll;
 import com.hokol.medium.http.bean.VTaskMainDetailBean;
 import com.hokol.medium.http.bean.WTaskMainAll;
 import com.hokol.medium.http.bean.WTaskMainCollectionBean;
 import com.hokol.medium.http.bean.WTaskMainDetailBean;
-import com.hokol.medium.http.helper.XHttpUtil;
 import com.hokol.test.common.BaseTestActivity;
 
-/**
- * 任务接口
- * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况
- * 获取任务列表(多条)--> task_index --> url_task_main_all --> WTaskMainAll - VTaskMainAll --> ok
- * 获取任务详情(单条)--> task_detail --> url_task_main_detail --> WTaskMainDetailBean - VTaskMainDetailBean --> ok
- * 任务发布--> 暂时不测
- * 任务收藏/取消收藏--> task_collect_switch --> url_task_main_collection --> WTaskMainCollectionBean - null --> ok
- */
 public class TestTaskActivity extends BaseTestActivity
 {
 	private void testtask_collect_switch()

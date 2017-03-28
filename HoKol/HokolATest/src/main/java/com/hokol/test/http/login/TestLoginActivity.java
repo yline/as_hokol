@@ -7,16 +7,11 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.hokol.medium.http.XHttpAdapter;
+import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VLoginPhonePwdBean;
 import com.hokol.medium.http.bean.WLoginPhonePwdBean;
-import com.hokol.medium.http.helper.XHttpUtil;
 import com.hokol.test.common.BaseTestActivity;
 
-/**
- * 登录接口
- * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况
- * 手机号+密码登陆 --> login --> url_login_pwd --> WLoginPhonePwdBean - VLoginPhonePwdBean --> OK
- */
 public class TestLoginActivity extends BaseTestActivity
 {
 	@Override

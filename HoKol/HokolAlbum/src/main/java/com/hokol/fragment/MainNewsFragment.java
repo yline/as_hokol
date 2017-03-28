@@ -14,11 +14,11 @@ import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.XHttpAdapter;
+import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
 import com.hokol.medium.http.bean.WNewsSingleBean;
-import com.hokol.medium.http.helper.XHttpUtil;
 import com.hokol.viewhelper.MainNewsHelper;
 
 import java.util.List;

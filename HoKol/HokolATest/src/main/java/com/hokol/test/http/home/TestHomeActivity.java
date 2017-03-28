@@ -7,16 +7,11 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.hokol.medium.http.XHttpAdapter;
+import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VHomeMainBean;
 import com.hokol.medium.http.bean.WHomeMainBean;
-import com.hokol.medium.http.helper.XHttpUtil;
 import com.hokol.test.common.BaseTestActivity;
 
-/**
- * 主页接口
- * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况
- * 请求主页动态数据 --> index --> url_home_main --> WHomeMainBean - VHomeMainBean --> OK
- */
 public class TestHomeActivity extends BaseTestActivity
 {
 	@Override
