@@ -4,17 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
-import com.hokol.medium.http.HttpConstant;
-import com.hokol.medium.http.XHttp;
-import com.hokol.medium.http.bean.VLoginPhonePasswordBean;
-import com.hokol.medium.http.bean.WLoginPhonePasswordBean;
+import com.hokol.medium.http.XHttpAdapter;
+import com.hokol.medium.http.bean.VLoginPhonePwdBean;
+import com.hokol.medium.http.bean.WLoginPhonePwdBean;
+import com.hokol.medium.http.helper.XHttpUtil;
 import com.hokol.test.common.BaseTestActivity;
 
 /**
  * 登录接口
  * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况
- * 手机号+密码登陆 --> login --> url_login_pwd --> WLoginPhonePasswordBean - VLoginPhonePasswordBean --> OK
+ * 手机号+密码登陆 --> login --> url_login_pwd --> WLoginPhonePwdBean - VLoginPhonePwdBean --> OK
  */
 public class TestLoginActivity extends BaseTestActivity
 {
@@ -23,32 +24,28 @@ public class TestLoginActivity extends BaseTestActivity
 	{
 		super.onCreate(savedInstanceState);
 		
-		// 手机号+密码登陆
+		// 手机号 + 密码登陆
+		final EditText editTextOne = addEditNumber("手机号", "13656786656");
+		final EditText editTextTwo = addEditNumber("密码", "lj123456");
 		addButton("手机号+密码登陆", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				String username = "13656786656";
-				String password = "lj123456";
-				String httpUrl = HttpConstant.url_login_pwd;
+				String username = editTextOne.getText().toString().trim();
+				String password = editTextTwo.getText().toString().trim();
 
-				final WLoginPhonePasswordBean requestBean = new WLoginPhonePasswordBean(username, password);
+				final WLoginPhonePwdBean requestBean = new WLoginPhonePwdBean(username, password);
+
 				// 这样的方法,并不会被执行
-				new XHttp<VLoginPhonePasswordBean>()
+				XHttpUtil.doLoginPhonePwd(requestBean, new XHttpAdapter<VLoginPhonePwdBean>()
 				{
 					@Override
-					protected Object getRequestPostParam()
-					{
-						return requestBean;
-					}
-
-					@Override
-					public void onSuccess(VLoginPhonePasswordBean responsePhoneLoginBean)
+					public void onSuccess(VLoginPhonePwdBean vLoginPhonePwdBean)
 					{
 
 					}
-				}.doRequest(httpUrl, VLoginPhonePasswordBean.class);
+				});
 			}
 		});
 	}

@@ -1,6 +1,6 @@
 package com.hokol.medium.http.bean;
 
-public class WLoginPhonePasswordBean
+public class WLoginPhonePwdBean
 {
 	/**
 	 * 用户手机
@@ -12,7 +12,7 @@ public class WLoginPhonePasswordBean
 	 */
 	private String user_pwd;
 
-	public WLoginPhonePasswordBean(String user_tel, String user_pwd)
+	public WLoginPhonePwdBean(String user_tel, String user_pwd)
 	{
 		this.user_tel = user_tel;
 		this.user_pwd = user_pwd;
@@ -41,7 +41,7 @@ public class WLoginPhonePasswordBean
 	@Override
 	public String toString()
 	{
-		return "WLoginPhonePasswordBean{" +
+		return "WLoginPhonePwdBean{" +
 				"user_tel='" + user_tel + '\'' +
 				", user_pwd='" + user_pwd + '\'' +
 				'}';

@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.hokol.medium.http.HttpConstant;
-import com.hokol.medium.http.XHttp;
+import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
+import com.hokol.medium.http.helper.XHttpUtil;
 import com.hokol.test.common.BaseTestActivity;
 
 /**
@@ -32,14 +32,14 @@ public class TestNewsActivity extends BaseTestActivity
 			@Override
 			public void onClick(View v)
 			{
-				new XHttp<VNewsSingleBean>()
+				XHttpUtil.doNewsRecommend(new XHttpAdapter<VNewsSingleBean>()
 				{
 					@Override
 					public void onSuccess(VNewsSingleBean vNewsSingleBean)
 					{
 
 					}
-				}.doRequest(HttpConstant.url_news_recommend, VNewsSingleBean.class);
+				});
 			}
 		});
 
@@ -53,20 +53,14 @@ public class TestNewsActivity extends BaseTestActivity
 				final int start = Integer.parseInt(editTextMuch1.getText().toString().trim());
 				final int length = Integer.parseInt(editTextMuch2.getText().toString().trim());
 
-				new XHttp<VNewsMultiplexBean>()
+				XHttpUtil.doNewsMultiplex(new WNewsMultiplexBean(start, length), new XHttpAdapter<VNewsMultiplexBean>()
 				{
 					@Override
-					protected Object getRequestPostParam()
-					{
-						return new WNewsMultiplexBean(start, length);
-					}
-
-					@Override
-					public void onSuccess(VNewsMultiplexBean multiplexNewsBeen)
+					public void onSuccess(VNewsMultiplexBean vNewsMultiplexBean)
 					{
 
 					}
-				}.doRequest(HttpConstant.url_news_multiplex, VNewsMultiplexBean.class);
+				});
 			}
 		});
 	}

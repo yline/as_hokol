@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.hokol.medium.http.HttpConstant;
-import com.hokol.medium.http.XHttp;
+import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.bean.VDynamicCareAllBean;
 import com.hokol.medium.http.bean.VDynamicCareSingleBean;
 import com.hokol.medium.http.bean.VDynamicPraiseSingleBean;
@@ -20,6 +20,7 @@ import com.hokol.medium.http.bean.WDynamicPraiseSingleBean;
 import com.hokol.medium.http.bean.WDynamicUserAllBean;
 import com.hokol.medium.http.bean.WDynamicUserDetailBean;
 import com.hokol.medium.http.bean.WUserCareAllBean;
+import com.hokol.medium.http.helper.XHttpUtil;
 import com.hokol.test.common.BaseTestActivity;
 
 /**
@@ -61,8 +62,6 @@ public class TestDynamicActivity extends BaseTestActivity
 			@Override
 			public void onClick(View v)
 			{
-				String httpUrl = HttpConstant.url_dynamic_user_all;
-
 				final String user_id = editTextOne.getText().toString().trim();
 				final String num1String = editTextTwo.getText().toString().trim();
 				final int num1 = Integer.parseInt(num1String);
@@ -70,20 +69,14 @@ public class TestDynamicActivity extends BaseTestActivity
 				final String lengthString = editTextThree.getText().toString().trim();
 				final int length = Integer.parseInt(lengthString);
 
-				new XHttp<VDynamicUserAllBean>()
+				XHttpUtil.doDynamicUserAll(new WDynamicUserAllBean(user_id, num1, length), new XHttpAdapter<VDynamicUserAllBean>()
 				{
-					@Override
-					protected Object getRequestPostParam()
-					{
-						return new WDynamicUserAllBean(user_id, num1, length);
-					}
-
 					@Override
 					public void onSuccess(VDynamicUserAllBean vDynamicUserAllBean)
 					{
 
 					}
-				}.doRequest(httpUrl, VDynamicUserAllBean.class);
+				});
 			}
 		});
 	}
@@ -96,23 +89,16 @@ public class TestDynamicActivity extends BaseTestActivity
 			@Override
 			public void onClick(View v)
 			{
-				String httpUrl = HttpConstant.url_dynamic_single;
 				final String dt_id = editTextOne.getText().toString().trim();
 
-				new XHttp<VDynamicCareSingleBean>()
+				XHttpUtil.doDynamicSingle(new WDynamicCareSingleBean(dt_id), new XHttpAdapter<VDynamicCareSingleBean>()
 				{
-					@Override
-					protected Object getRequestPostParam()
-					{
-						return new WDynamicCareSingleBean(dt_id);
-					}
-
 					@Override
 					public void onSuccess(VDynamicCareSingleBean vDynamicCareSingleBean)
 					{
 
 					}
-				}.doRequest(httpUrl, VDynamicCareSingleBean.class);
+				});
 			}
 		});
 	}
@@ -129,25 +115,18 @@ public class TestDynamicActivity extends BaseTestActivity
 			{
 				final String userId = editPraise1.getText().toString().trim();
 				final String dynamicId = editPraise2.getText().toString().trim();
-				final boolean praiseAction = editPraise3.getText().toString().trim().equals("0") ? true : false;
 
-				String httpUrl = HttpConstant.url_dynamic_praise_single;
+				final boolean praiseAction = editPraise3.getText().toString().trim().equals("0") ? true : false;
 				final int dynamicPraise = praiseAction ? 1 : 0;
 
-				new XHttp<VDynamicPraiseSingleBean>()
+				XHttpUtil.doDynamicPraiseSingle(new WDynamicPraiseSingleBean(userId, dynamicId, dynamicPraise), new XHttpAdapter<VDynamicPraiseSingleBean>()
 				{
 					@Override
-					protected Object getRequestPostParam()
-					{
-						return new WDynamicPraiseSingleBean(userId, dynamicId, dynamicPraise);
-					}
-
-					@Override
-					public void onSuccess(VDynamicPraiseSingleBean vUserDynamicPraiseBean)
+					public void onSuccess(VDynamicPraiseSingleBean vDynamicPraiseSingleBean)
 					{
 
 					}
-				}.doRequest(httpUrl, VDynamicPraiseSingleBean.class);
+				});
 			}
 		});
 	}
@@ -163,7 +142,6 @@ public class TestDynamicActivity extends BaseTestActivity
 			@Override
 			public void onClick(View v)
 			{
-				String httpUrl = HttpConstant.url_user_care_all;
 				final String user_id = editOne.getText().toString().trim();
 
 				String numString = editTwo.getText().toString().trim();
@@ -172,20 +150,14 @@ public class TestDynamicActivity extends BaseTestActivity
 				String lengthString = editThree.getText().toString().trim();
 				final int length = Integer.parseInt(lengthString);
 
-				new XHttp<VUserCareAllBean>()
+				XHttpUtil.doUserCareAll(new WUserCareAllBean(user_id, num1, length), new XHttpAdapter<VUserCareAllBean>()
 				{
-					@Override
-					protected Object getRequestPostParam()
-					{
-						return new WUserCareAllBean(user_id, num1, length);
-					}
-
 					@Override
 					public void onSuccess(VUserCareAllBean vUserCareAllBean)
 					{
 
 					}
-				}.doRequest(httpUrl, VUserCareAllBean.class);
+				});
 			}
 		});
 	}
@@ -203,20 +175,14 @@ public class TestDynamicActivity extends BaseTestActivity
 				final String user_id = editUser1.getText().toString().trim();
 				final String user_id_find = editUser2.getText().toString().trim();
 
-				new XHttp<VDynamicUserDetailBean>()
+				XHttpUtil.doDynamicUserDetail(new WDynamicUserDetailBean(user_id, user_id_find), new XHttpAdapter<VDynamicUserDetailBean>()
 				{
-					@Override
-					protected Object getRequestPostParam()
-					{
-						return new WDynamicUserDetailBean(user_id, user_id_find);
-					}
-
 					@Override
 					public void onSuccess(VDynamicUserDetailBean vDynamicUserDetailBean)
 					{
 
 					}
-				}.doRequest(httpUrl, VDynamicUserDetailBean.class);
+				});
 			}
 		});
 	}
@@ -235,22 +201,14 @@ public class TestDynamicActivity extends BaseTestActivity
 				final int start = Integer.parseInt(editCare2.getText().toString().trim());
 				final int length = Integer.parseInt(editCare3.getText().toString().trim());
 
-				String httpUrl = HttpConstant.url_dynamic_care_all;
-
-				new XHttp<VDynamicCareAllBean>()
+				XHttpUtil.doDynamicCareAll(new WDynamicCareAllBean(userId, start, length), new XHttpAdapter<VDynamicCareAllBean>()
 				{
 					@Override
-					protected Object getRequestPostParam()
-					{
-						return new WDynamicCareAllBean(userId, start, length);
-					}
-
-					@Override
-					public void onSuccess(VDynamicCareAllBean vUserDynamicCareBean)
+					public void onSuccess(VDynamicCareAllBean vDynamicCareAllBean)
 					{
 
 					}
-				}.doRequest(httpUrl, VDynamicCareAllBean.class);
+				});
 			}
 		});
 	}

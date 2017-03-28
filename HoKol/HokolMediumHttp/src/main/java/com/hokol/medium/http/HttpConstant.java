@@ -31,7 +31,7 @@ public class HttpConstant
 	// 多条新闻获取
 	public static final String url_news_multiplex = url_head + "ApiNews/news";
 
-	// 单条新闻获取
+	// 单条新闻获取；废弃
 	public static final String url_news_single = url_head + "ApiNews/new_one";
 
 	// 推荐新闻
@@ -69,6 +69,23 @@ public class HttpConstant
 	// 任务收藏/取消收藏
 	public static final String url_task_main_collection = url_head + "ApiTask/task_collect_switch";
 
+	/* --------------------------- 主页 --------------------------- */
+	// 请求主页动态数据
+	public static final String url_home_main = url_head + "ApiIndex/index";
+
+	/* --------------------------- 我的页面 --------------------------- */
+	// 请求用户粉丝的信息（多条）
+	public static final String url_user_fans_all = url_head + "ApiMine/user_fans_info";
+
+	// 请求用户的收藏
+	public static final String url_user_collection = url_head + "ApiMine/user_collect_task";
+
+	// 关注/取消关注某用户
+	public static final String url_user_care_or_cancel = url_head + "ApiMine/user_care_switch";
+
+	// 用户赠送红豆
+	public static final String url_user_coin_gift = url_head + "ApiMine/present_coin";
+	
 	/* ------------------------------ 控制 -------------------------------- */
 	// 是否 输出日志
 	private static boolean isDefaultDebug = true;

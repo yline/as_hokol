@@ -13,12 +13,12 @@ import com.hokol.activity.NewsInfoActivity;
 import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.base.log.LogFileUtil;
-import com.hokol.medium.http.HttpConstant;
-import com.hokol.medium.http.XHttp;
+import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
 import com.hokol.medium.http.bean.WNewsSingleBean;
+import com.hokol.medium.http.helper.XHttpUtil;
 import com.hokol.viewhelper.MainNewsHelper;
 
 import java.util.List;
@@ -79,7 +79,7 @@ public class MainNewsFragment extends BaseFragment
 	private void initData()
 	{
 		// 推荐
-		new XHttp<VNewsSingleBean>()
+		XHttpUtil.doNewsRecommend(new XHttpAdapter<VNewsSingleBean>()
 		{
 			@Override
 			public void onSuccess(VNewsSingleBean vNewsSingleBean)
@@ -87,23 +87,17 @@ public class MainNewsFragment extends BaseFragment
 				recommendId = vNewsSingleBean.getNews_id();
 				mainNewsHelper.updateRecommendData(vNewsSingleBean);
 			}
-		}.doRequest(HttpConstant.url_news_recommend, VNewsSingleBean.class);
+		});
 
 		// 多条新闻
-		new XHttp<VNewsMultiplexBean>()
+		XHttpUtil.doNewsMultiplex(new WNewsMultiplexBean(1, 14), new XHttpAdapter<VNewsMultiplexBean>()
 		{
-			@Override
-			protected Object getRequestPostParam()
-			{
-				return new WNewsMultiplexBean(1, 14);
-			}
-
 			@Override
 			public void onSuccess(VNewsMultiplexBean vNewsMultiplexBean)
 			{
 				List<VNewsSingleBean> result = vNewsMultiplexBean.getList();
 				mainNewsHelper.setRecycleData(result);
 			}
-		}.doRequest(HttpConstant.url_news_multiplex, VNewsMultiplexBean.class);
+		});
 	}
 }

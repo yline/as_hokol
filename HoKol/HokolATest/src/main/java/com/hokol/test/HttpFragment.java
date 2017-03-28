@@ -7,7 +7,7 @@ import com.hokol.test.http.dynamic.TestDynamicActivity;
 import com.hokol.test.http.home.TestHomeActivity;
 import com.hokol.test.http.local.TestLocalActivity;
 import com.hokol.test.http.login.TestLoginActivity;
-import com.hokol.test.http.mine.TestMineActivity;
+import com.hokol.test.http.mine.TestUserActivity;
 import com.hokol.test.http.news.TestNewsActivity;
 import com.hokol.test.http.setting.TestSettingActivity;
 import com.hokol.test.http.task.TestTaskActivity;
@@ -67,7 +67,7 @@ public class HttpFragment extends BaseTestFragment
 			@Override
 			public void onClick(View v)
 			{
-				TestMineActivity.actionStart(getContext());
+				TestUserActivity.actionStart(getContext());
 			}
 		});
 

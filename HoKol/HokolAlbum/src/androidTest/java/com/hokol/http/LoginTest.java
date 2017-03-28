@@ -3,10 +3,10 @@ package com.hokol.http;
 import android.test.ActivityTestCase;
 
 import com.hokol.base.log.LogFileUtil;
-import com.hokol.medium.http.HttpConstant;
-import com.hokol.medium.http.XHttp;
-import com.hokol.medium.http.bean.VLoginPhonePasswordBean;
-import com.hokol.medium.http.bean.WLoginPhonePasswordBean;
+import com.hokol.medium.http.XHttpAdapter;
+import com.hokol.medium.http.bean.VLoginPhonePwdBean;
+import com.hokol.medium.http.bean.WLoginPhonePwdBean;
+import com.hokol.medium.http.helper.XHttpUtil;
 
 public class LoginTest extends ActivityTestCase
 {
@@ -23,23 +23,16 @@ public class LoginTest extends ActivityTestCase
 	private void phoneLogin(String username, String password)
 	{
 		LogFileUtil.v(TAG, "phoneLogin start");
-
-		String httpUrl = HttpConstant.url_login_pwd;
-		final WLoginPhonePasswordBean requestBean = new WLoginPhonePasswordBean(username, password);
+		
+		final WLoginPhonePwdBean requestBean = new WLoginPhonePwdBean(username, password);
 		// 这样的方法,并不会被执行
-		new XHttp<VLoginPhonePasswordBean>()
+		XHttpUtil.doLoginPhonePwd(requestBean, new XHttpAdapter<VLoginPhonePwdBean>()
 		{
 			@Override
-			protected Object getRequestPostParam()
+			public void onSuccess(VLoginPhonePwdBean vLoginPhonePwdBean)
 			{
-				return requestBean;
+				assertNotNull(vLoginPhonePwdBean);
 			}
-
-			@Override
-			public void onSuccess(VLoginPhonePasswordBean vLoginPhonePasswordBean)
-			{
-				assertNotNull(vLoginPhonePasswordBean);
-			}
-		}.doRequest(httpUrl, VLoginPhonePasswordBean.class);
+		});
 	}
 }

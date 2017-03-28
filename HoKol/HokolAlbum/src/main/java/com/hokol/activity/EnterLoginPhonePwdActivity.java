@@ -10,9 +10,10 @@ import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.medium.http.HttpConstant;
-import com.hokol.medium.http.XHttp;
-import com.hokol.medium.http.bean.VLoginPhonePasswordBean;
-import com.hokol.medium.http.bean.WLoginPhonePasswordBean;
+import com.hokol.medium.http.XHttpAdapter;
+import com.hokol.medium.http.bean.VLoginPhonePwdBean;
+import com.hokol.medium.http.bean.WLoginPhonePwdBean;
+import com.hokol.medium.http.helper.XHttpUtil;
 
 /**
  * 登入流程，手机号+ 密码登录
@@ -73,28 +74,22 @@ public class EnterLoginPhonePwdActivity extends BaseAppCompatActivity
 
 				String httpUrl = HttpConstant.url_login_pwd;
 
-				doPost(httpUrl, new WLoginPhonePasswordBean(username, password));
+				doPost(httpUrl, new WLoginPhonePwdBean(username, password));
 			}
 		});
 	}
 
-	private void doPost(String httpUrl, final WLoginPhonePasswordBean requestBean)
+	private void doPost(String httpUrl, final WLoginPhonePwdBean requestBean)
 	{
-		new XHttp<VLoginPhonePasswordBean>()
+		XHttpUtil.doLoginPhonePwd(requestBean, new XHttpAdapter<VLoginPhonePwdBean>()
 		{
 			@Override
-			protected Object getRequestPostParam()
-			{
-				return requestBean;
-			}
-
-			@Override
-			public void onSuccess(VLoginPhonePasswordBean vLoginPhonePasswordBean)
+			public void onSuccess(VLoginPhonePwdBean vLoginPhonePwdBean)
 			{
 				MainActivity.actionStart(EnterLoginPhonePwdActivity.this);
 				IApplication.finishActivity();
 			}
-		}.doRequest(httpUrl, VLoginPhonePasswordBean.class);
+		});
 	}
 
 	public static void actionStart(Context context)

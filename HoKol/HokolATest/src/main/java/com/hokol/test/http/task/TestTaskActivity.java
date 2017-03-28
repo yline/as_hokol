@@ -3,21 +3,20 @@ package com.hokol.test.http.task;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
-import com.hokol.medium.http.HttpConstant;
-import com.hokol.medium.http.XHttp;
+import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.bean.VTaskMainAll;
 import com.hokol.medium.http.bean.VTaskMainDetailBean;
 import com.hokol.medium.http.bean.WTaskMainAll;
 import com.hokol.medium.http.bean.WTaskMainCollectionBean;
 import com.hokol.medium.http.bean.WTaskMainDetailBean;
+import com.hokol.medium.http.helper.XHttpUtil;
 import com.hokol.test.common.BaseTestActivity;
 
 /**
- * 登录接口
+ * 任务接口
  * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况
  * 获取任务列表(多条)--> task_index --> url_task_main_all --> WTaskMainAll - VTaskMainAll --> ok
  * 获取任务详情(单条)--> task_detail --> url_task_main_detail --> WTaskMainDetailBean - VTaskMainDetailBean --> ok
@@ -37,47 +36,19 @@ public class TestTaskActivity extends BaseTestActivity
 			@Override
 			public void onClick(View v)
 			{
-				String httpUrl = HttpConstant.url_task_main_collection;
 				final String user_id = editTextOne.getText().toString().trim();
 				final String task_id = editTextTwp.getText().toString().trim();
 
-				String collectString = editTextThree.getText().toString().trim();
-				final int collect;
-				if (TextUtils.isEmpty(collectString))
+				final int collect = parseInt(editTextThree, 0);
+
+				XHttpUtil.doTaskMainCollection(new WTaskMainCollectionBean(user_id, task_id, collect), new XHttpAdapter<String>()
 				{
-					collect = 0;
-				}
-				else
-				{
-					collect = Integer.parseInt(collectString);
-				}
-
-				new XHttp<String>()
-				{
-					@Override
-					protected Object getRequestPostParam()
-					{
-						return new WTaskMainCollectionBean(user_id, task_id, collect);
-					}
-
-					@Override
-					protected boolean isResponseParse()
-					{
-						return false;
-					}
-
-					/*@Override
-					protected boolean isResponseCodeHandler()
-					{
-						return false;
-					}*/
-
 					@Override
 					public void onSuccess(String s)
 					{
 
 					}
-				}.doRequest(httpUrl, String.class);
+				});
 			}
 		});
 	}
@@ -90,23 +61,16 @@ public class TestTaskActivity extends BaseTestActivity
 			@Override
 			public void onClick(View v)
 			{
-				String httpUrl = HttpConstant.url_task_main_detail;
 				final String task_id = editTextOne.getText().toString().trim();
 
-				new XHttp<VTaskMainDetailBean>()
+				XHttpUtil.doTaskMainDetail(new WTaskMainDetailBean(task_id), new XHttpAdapter<VTaskMainDetailBean>()
 				{
-					@Override
-					protected Object getRequestPostParam()
-					{
-						return new WTaskMainDetailBean(task_id);
-					}
-
 					@Override
 					public void onSuccess(VTaskMainDetailBean vTaskMainDetailBean)
 					{
 
 					}
-				}.doRequest(httpUrl, VTaskMainDetailBean.class);
+				});
 			}
 		});
 	}
@@ -125,28 +89,20 @@ public class TestTaskActivity extends BaseTestActivity
 			@Override
 			public void onClick(View v)
 			{
-				String httpUrl = HttpConstant.url_task_main_all;
-
 				/*int task_type = Integer.parseInt(editTextOne.getText().toString().trim());
 				String task_province = editTextTwo.getText().toString().trim();
 				String task_city = editTextThree.getText().toString().trim();*/
 				final int num1 = Integer.parseInt(editTextFour.getText().toString().trim());
 				final int length = Integer.parseInt(editTextFive.getText().toString().trim());
 
-				new XHttp<VTaskMainAll>()
+				XHttpUtil.doTaskMainAll(new WTaskMainAll(num1, length), new XHttpAdapter<VTaskMainAll>()
 				{
-					@Override
-					protected Object getRequestPostParam()
-					{
-						return new WTaskMainAll(num1, length);
-					}
-
 					@Override
 					public void onSuccess(VTaskMainAll vTaskMainAll)
 					{
 
 					}
-				}.doRequest(httpUrl, VTaskMainAll.class);
+				});
 			}
 		});
 	}

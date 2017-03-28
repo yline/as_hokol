@@ -4,16 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.base.adapter.ViewHolder;
 import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.base.log.LogFileUtil;
-import com.hokol.medium.http.HttpConstant;
-import com.hokol.medium.http.XHttp;
-import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.http.bean.WNewsSingleBean;
 
 /**
@@ -44,25 +39,12 @@ public class NewsInfoActivity extends BaseAppCompatActivity
 
 		if (null != bean && !TextUtils.isEmpty(bean.getNews_id()))
 		{
-			new XHttp<VNewsSingleBean>()
-			{
-				@Override
-				protected Object getRequestPostParam()
-				{
-					return bean;
-				}
+			/*newsInfoViewHolder.setText(R.id.tv_news_info_title, vNewsSingleBean.getNews_title());
+			newsInfoViewHolder.setText(R.id.tv_news_info_sub, vNewsSingleBean.getNews_source() + "  " + vNewsSingleBean.getNews_time());
+			newsInfoViewHolder.setText(R.id.tv_news_info_content, vNewsSingleBean.getNews_content());
 
-				@Override
-				public void onSuccess(VNewsSingleBean vNewsSingleBean)
-				{
-					newsInfoViewHolder.setText(R.id.tv_news_info_title, vNewsSingleBean.getNews_title());
-					newsInfoViewHolder.setText(R.id.tv_news_info_sub, vNewsSingleBean.getNews_source() + "  " + vNewsSingleBean.getNews_time());
-					newsInfoViewHolder.setText(R.id.tv_news_info_content, vNewsSingleBean.getNews_content());
-
-					ImageView imageView = newsInfoViewHolder.get(R.id.iv_news_info);
-					Glide.with(NewsInfoActivity.this).load(vNewsSingleBean.getNews_img()).placeholder(R.drawable.global_load_failed).into(imageView);
-				}
-			}.doRequest(HttpConstant.url_news_single, VNewsSingleBean.class);
+			ImageView imageView = newsInfoViewHolder.get(R.id.iv_news_info);
+			Glide.with(NewsInfoActivity.this).load(vNewsSingleBean.getNews_img()).placeholder(R.drawable.global_load_failed).into(imageView);*/
 		}
 		else
 		{

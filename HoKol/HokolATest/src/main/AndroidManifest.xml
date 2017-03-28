@@ -29,7 +29,7 @@
         <activity android:name=".widget.GlideActivity"/>
         <activity android:name=".http.task.TestTaskActivity"/>
         <activity android:name=".http.home.TestHomeActivity"/>
-        <activity android:name=".http.mine.TestMineActivity"/>
+        <activity android:name=".http.mine.TestUserActivity"/>
         <activity android:name=".http.setting.TestSettingActivity"/>
         <activity android:name=".http.local.TestLocalActivity"/>
     </application>
