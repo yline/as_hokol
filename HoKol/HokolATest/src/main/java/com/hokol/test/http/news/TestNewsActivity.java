@@ -43,8 +43,8 @@ public class TestNewsActivity extends BaseTestActivity
 			}
 		});
 
-		final EditText editTextMuch1 = addEditNumber("输入开始号");
-		final EditText editTextMuch2 = addEditNumber("长度");
+		final EditText editTextMuch1 = addEditNumber("输入开始号", "0");
+		final EditText editTextMuch2 = addEditNumber("长度", "2");
 		addButton("多条新闻测试", new View.OnClickListener()
 		{
 			@Override

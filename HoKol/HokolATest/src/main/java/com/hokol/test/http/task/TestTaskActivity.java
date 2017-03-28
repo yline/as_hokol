@@ -27,9 +27,9 @@ public class TestTaskActivity extends BaseTestActivity
 {
 	private void testtask_collect_switch()
 	{
-		final EditText editTextOne = addEditNumber("user_id");
-		final EditText editTextTwp = addEditNumber("task_id");
-		final EditText editTextThree = addEditNumber("collect");
+		final EditText editTextOne = addEditNumber("user_id", "2");
+		final EditText editTextTwp = addEditNumber("task_id", "1");
+		final EditText editTextThree = addEditNumber("collect", "1");
 
 		addButton("任务收藏/取消收藏", new View.OnClickListener()
 		{
@@ -55,7 +55,7 @@ public class TestTaskActivity extends BaseTestActivity
 
 	private void testtask_detail()
 	{
-		final EditText editTextOne = addEditNumber("task_id");
+		final EditText editTextOne = addEditNumber("task_id", "2");
 		addButton("获取任务详情(单条)", new View.OnClickListener()
 		{
 			@Override
@@ -80,8 +80,8 @@ public class TestTaskActivity extends BaseTestActivity
 		/*final EditText editTextOne = addEditNumber("task_type");
 		final EditText editTextTwo = addEditNumber("task_province");
 		final EditText editTextThree = addEditNumber("task_city");*/
-		final EditText editTextFour = addEditNumber("num1");
-		final EditText editTextFive = addEditNumber("length");
+		final EditText editTextFour = addEditNumber("num1", "0");
+		final EditText editTextFive = addEditNumber("length", "8");
 		/*final EditText editTextSix = addEditNumber("task_sex");*/
 
 		addButton("获取任务列表(多条)", new View.OnClickListener()

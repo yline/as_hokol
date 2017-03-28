@@ -53,9 +53,9 @@ public class TestDynamicActivity extends BaseTestActivity
 
 	private void testdt_nums()
 	{
-		final EditText editTextOne = addEditNumber("User_id");
-		final EditText editTextTwo = addEditNumber("开始号");
-		final EditText editTextThree = addEditNumber("长度");
+		final EditText editTextOne = addEditNumber("User_id", "2");
+		final EditText editTextTwo = addEditNumber("开始号", "0");
+		final EditText editTextThree = addEditNumber("长度", "2");
 
 		addButton("请求用户多条动态信息", new View.OnClickListener()
 		{
@@ -83,7 +83,7 @@ public class TestDynamicActivity extends BaseTestActivity
 
 	private void testdt_one()
 	{
-		final EditText editTextOne = addEditNumber("动态id");
+		final EditText editTextOne = addEditNumber("动态id", "2");
 		addButton("请求单条动态的信息", new View.OnClickListener()
 		{
 			@Override
@@ -105,8 +105,8 @@ public class TestDynamicActivity extends BaseTestActivity
 
 	private void testdt_zan_switch()
 	{
-		final EditText editPraise1 = addEditText("user_id");
-		final EditText editPraise2 = addEditText("dt_id");
+		final EditText editPraise1 = addEditText("user_id", "2");
+		final EditText editPraise2 = addEditText("dt_id", "2");
 		final EditText editPraise3 = addEditNumber("0 --> 点赞; 其它 --> 取消点赞");
 		addButton("单条动态(取消)点赞功能", new View.OnClickListener()
 		{
@@ -134,9 +134,9 @@ public class TestDynamicActivity extends BaseTestActivity
 
 	private void testcare_peo_info()
 	{
-		final EditText editOne = addEditNumber("user_id");
-		final EditText editTwo = addEditNumber("开始号");
-		final EditText editThree = addEditNumber("长度");
+		final EditText editOne = addEditNumber("user_id", "2");
+		final EditText editTwo = addEditNumber("开始号", "0");
+		final EditText editThree = addEditNumber("长度", "2");
 		addButton("请求关注的人的信息（多条）", new View.OnClickListener()
 		{
 			@Override
@@ -164,8 +164,8 @@ public class TestDynamicActivity extends BaseTestActivity
 
 	private void testuser_info()
 	{
-		final EditText editUser1 = addEditNumber("user_id");
-		final EditText editUser2 = addEditNumber("user_id_find");
+		final EditText editUser1 = addEditNumber("user_id", "2");
+		final EditText editUser2 = addEditNumber("user_id_find", "1");
 		addButton("请求用户详情信息", new View.OnClickListener()
 		{
 			@Override
@@ -189,9 +189,9 @@ public class TestDynamicActivity extends BaseTestActivity
 
 	private void testdongtai()
 	{
-		final EditText editCare1 = addEditText("user_id");
-		final EditText editCare2 = addEditNumber("start");
-		final EditText editCare3 = addEditNumber("length");
+		final EditText editCare1 = addEditText("user_id", "2");
+		final EditText editCare2 = addEditNumber("start", "0");
+		final EditText editCare3 = addEditNumber("length", "2");
 		addButton("请求关注的人的多条动态", new View.OnClickListener()
 		{
 			@Override

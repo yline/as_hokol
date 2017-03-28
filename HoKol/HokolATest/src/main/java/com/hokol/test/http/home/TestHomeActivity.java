@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.hokol.medium.http.HttpConstant;
 import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.bean.VHomeMainBean;
 import com.hokol.medium.http.bean.WHomeMainBean;
@@ -25,17 +24,15 @@ public class TestHomeActivity extends BaseTestActivity
 	{
 		super.onCreate(savedInstanceState);
 
-		final EditText editTextOne = addEditNumber("1:网红,2:主播,3:演员,4:模特,5:歌手,6:体育");
-		final EditText editTextTwo = addEditNumber("num1");
-		final EditText editTextThree = addEditNumber("length");
+		final EditText editTextOne = addEditNumber("1:网红,2:主播,3:演员,4:模特,5:歌手,6:体育", "1");
+		final EditText editTextTwo = addEditNumber("num1", "0");
+		final EditText editTextThree = addEditNumber("length", "112");
 
 		addButton("请求主页动态数据", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				String httpUrl = HttpConstant.url_home_main;
-
 				final int user_tag = parseInt(editTextOne, 1);
 				final int num1 = parseInt(editTextTwo, 0);
 				final int length = parseInt(editTextThree, 1);
