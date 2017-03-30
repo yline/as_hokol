@@ -9,10 +9,11 @@ import android.view.ViewGroup;
 import com.hokol.R;
 import com.hokol.activity.UserAccountActivity;
 import com.hokol.activity.UserCareActivity;
-import com.hokol.activity.UserCollectionActivity;
 import com.hokol.activity.UserFansActivity;
+import com.hokol.activity.UserMessageActivity;
 import com.hokol.activity.UserRechargeActivity;
 import com.hokol.activity.UserSettingActivity;
+import com.hokol.activity.UserTaskActivity;
 import com.hokol.activity.UserVIPActivity;
 import com.hokol.base.adapter.ViewHolder;
 import com.hokol.base.common.BaseFragment;
@@ -52,12 +53,12 @@ public class MainMineHomeFragment extends BaseFragment
 			}
 		});
 
-		homeViewHolder.get(R.id.ll_main_min_home_collection).setOnClickListener(new View.OnClickListener()
+		homeViewHolder.get(R.id.ll_main_min_home_task).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				UserCollectionActivity.actionStart(getContext());
+				UserTaskActivity.actionStart(getContext());
 			}
 		});
 
@@ -94,6 +95,15 @@ public class MainMineHomeFragment extends BaseFragment
 			public void onClick(View v)
 			{
 				UserSettingActivity.actionStart(getContext());
+			}
+		});
+
+		homeViewHolder.get(R.id.ll_main_min_home_msg).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				UserMessageActivity.actionStart(getContext());
 			}
 		});
 	}

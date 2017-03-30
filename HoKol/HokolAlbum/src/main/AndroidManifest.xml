@@ -30,13 +30,14 @@
         <activity android:name=".activity.TaskDetailActivity"/>
         <activity android:name=".activity.UserFansActivity"/>
         <activity android:name=".activity.UserCareActivity"/>
-        <activity android:name=".activity.UserCollectionActivity"/>
+        <activity android:name=".activity.UserTaskActivity"/>
         <activity android:name=".activity.UserAccountActivity"/>
         <activity android:name=".activity.UserVIPActivity"/>
         <activity android:name=".activity.UserRechargeActivity"/>
         <activity android:name=".activity.UserSettingActivity"/>
         <!-- 登入Enter -->
-        <!-- <activity
+        <!--
+         <activity
              android:name=".activity.EnterChoiceActivity"
              android:label="登入流程">
              <intent-filter>
@@ -44,7 +45,8 @@
 
                  <category android:name="android.intent.category.LAUNCHER"/>
              </intent-filter>
-         </activity>-->
+         </activity>
+        -->
         <activity android:name=".activity.EnterLoginPhonePwdActivity">
         </activity>
         <activity android:name=".activity.EnterRegisterPhoneActivity">
@@ -54,6 +56,8 @@
         <activity android:name=".activity.EnterForgetPwdNewActivity">
         </activity>
         <activity android:name=".activity.EnterRegisterCompleteInfoActivity">
+        </activity>
+        <activity android:name=".activity.UserMessageActivity">
         </activity>
     </application>
 

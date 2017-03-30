@@ -102,7 +102,7 @@
             android:background="@android:color/darker_gray"></View>
 
         <LinearLayout
-            android:id="@+id/ll_main_min_home_collection"
+            android:id="@+id/ll_main_min_home_task"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -112,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="我的收藏"
+                android:text="我的任务"
                 android:id="@+id/textView3"/>
 
             <TextView
@@ -174,6 +174,31 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="我的会员"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="==》"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray"></View>
+
+        <LinearLayout
+            android:id="@+id/ll_main_min_home_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="我的消息"/>
 
             <TextView
                 android:layout_width="wrap_content"
