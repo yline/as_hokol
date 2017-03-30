@@ -14,28 +14,15 @@
 
     <!-- ProgressBar -->
     <declare-styleable name="WidgetCircleProgressBar">
-        <attr name="bar_inner_radius" format="dimension"/>
-        <attr name="bar_background_color" format="color"/>
-        <attr name="bar_progress_color" format="color"/>
-        <attr name="bar_progress_stoke_width" format="dimension"/>
-        <attr name="bar_show_arrow" format="boolean"/>
-        <attr name="bar_enable_circle_background" format="boolean"/>
-        <attr name="bar_arrow_width" format="dimension"/>
-        <attr name="bar_arrow_height" format="dimension"/>
-
-        <attr name="bar_progress" format="integer"/>
-        <attr name="bar_max" format="integer"/>
-
-        <attr name="bar_progress_text_size" format="dimension"/>
-        <attr name="bar_progress_text_color" format="color"/>
-
-        <!--<attr name="bar_progress_text_offset" format="dimension"/>-->
-
-        <attr name="bar_progress_text_visibility" format="enum">
+        <attr name="bar_text_size" format="dimension"/>
+        <attr name="bar_text_color" format="color"/>
+        <attr name="bar_text_progress" format="dimension"/>
+        <attr name="bar_text_visibility" format="enum">
             <enum name="visible" value="0"/>
             <enum name="invisible" value="1"/>
         </attr>
     </declare-styleable>
+
     <!-- CircleView -->
     <declare-styleable name="WidgetCircle">
         <attr name="circle_border_width" format="dimension"/>

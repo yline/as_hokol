@@ -2,7 +2,6 @@ package com.hokol.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +18,7 @@ import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
 import com.hokol.medium.http.bean.WNewsSingleBean;
+import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainNewsHelper;
 
 import java.util.List;
@@ -72,8 +72,8 @@ public class MainNewsFragment extends BaseFragment
 			}
 		});
 
-		SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_main_news);
-		mainNewsHelper.initRefreshLayout(swipeRefreshLayout);
+		SuperSwipeRefreshLayout superSwipeRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_main_news);
+		mainNewsHelper.initRefreshLayout(superSwipeRefreshLayout);
 	}
 
 	private void initData()

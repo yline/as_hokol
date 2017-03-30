@@ -20,11 +20,18 @@ public abstract class BaseSwipeRefreshAdapter
 
 	/* ----------------- 提供四个方法可被重写 ------------------ */
 
-	protected abstract void onCreate(float dragDistance, float targetDistance);
+	/**
+	 * 手势操作时，一直调用
+	 *
+	 * @param dragDistance   实时改变的内容
+	 * @param targetDistance 目标内容
+	 */
+	protected abstract void onCreating(float dragDistance, float targetDistance);
 
-	protected abstract void onStart(boolean enable);
-
-	protected void onAnimating()
+	/**
+	 * 开始动画时,被调用一次
+	 */
+	protected void onAnimate()
 	{
 	}
 
@@ -67,27 +74,17 @@ public abstract class BaseSwipeRefreshAdapter
 	 * @param dragDistance   手指拖动距离
 	 * @param targetDistance 目标距离
 	 */
-	void create(float dragDistance, float targetDistance)
+	void creating(float dragDistance, float targetDistance)
 	{
-		onCreate(dragDistance, targetDistance);
+		onCreating(dragDistance, targetDistance);
 	}
 
-	/**
-	 * 正式开始刷新
-	 *
-	 * @param enable
-	 */
-	void start(boolean enable)
+	void animate()
 	{
-		onStart(enable);
-	}
-
-	void animating()
-	{
-		onAnimating();
+		onAnimate();
 		if (null != refreshListener)
 		{
-			refreshListener.onAnimating();
+			refreshListener.onAnimate();
 		}
 	}
 

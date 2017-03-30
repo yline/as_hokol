@@ -208,7 +208,7 @@ public class XHttpUtil
 		String httpUrl = HttpConstant.url_home_main;
 		new XHttp<VHomeMainBean>(adapter).doPost(httpUrl, wHomeMainBean, VHomeMainBean.class);
 	}
-	
+
 	/**
 	 * 我的页面 接口
 	 * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况

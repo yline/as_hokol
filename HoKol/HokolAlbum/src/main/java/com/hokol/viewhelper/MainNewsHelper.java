@@ -1,7 +1,6 @@
 package com.hokol.viewhelper;
 
 import android.content.Context;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -19,6 +18,7 @@ import com.hokol.base.utils.TimeConvertUtil;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
+import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 
 import java.util.List;
 
@@ -137,12 +137,12 @@ public class MainNewsHelper
 	}
 
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 刷新布局 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-	public void initRefreshLayout(final SwipeRefreshLayout swipeRefreshLayout)
+	public void initRefreshLayout(final SuperSwipeRefreshLayout superSwipeRefreshLayout)
 	{
-		swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+		superSwipeRefreshLayout.setOnRefreshListener(new SuperSwipeRefreshLayout.OnSwipeListener()
 		{
 			@Override
-			public void onRefresh()
+			public void onAnimate()
 			{
 				IApplication.toast("正在加载");
 				IApplication.getHandler().postDelayed(new Runnable()
@@ -151,7 +151,24 @@ public class MainNewsHelper
 					public void run()
 					{
 						IApplication.toast("加载结束");
-						swipeRefreshLayout.setRefreshing(false);
+						superSwipeRefreshLayout.setRefreshing(false);
+					}
+				}, 3000);
+			}
+		});
+		superSwipeRefreshLayout.setOnLoadListener(new SuperSwipeRefreshLayout.OnSwipeListener()
+		{
+			@Override
+			public void onAnimate()
+			{
+				IApplication.toast("正在加载");
+				IApplication.getHandler().postDelayed(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						IApplication.toast("加载结束");
+						superSwipeRefreshLayout.setLoadMore(false);
 					}
 				}, 3000);
 			}
