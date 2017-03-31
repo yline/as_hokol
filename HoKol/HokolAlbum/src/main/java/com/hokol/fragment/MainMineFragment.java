@@ -17,7 +17,7 @@ import com.hokol.R;
 import com.hokol.activity.UserInfoActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.base.common.BaseFragment;
-import com.hokol.medium.widget.LabelWidget;
+import com.hokol.medium.widget.LabelClickableWidget;
 import com.hokol.medium.widget.transform.CircleTransform;
 
 import java.util.ArrayList;
@@ -97,8 +97,8 @@ public class MainMineFragment extends BaseFragment
 				.into(imageView);
 
 		LinearLayout labelLayout = (LinearLayout) parentView.findViewById(R.id.ll_main_mine_label);
-		LabelWidget labelWidget = new LabelWidget(getContext());
-		labelWidget.setDataList(Arrays.asList("网红", "模特"));
-		labelLayout.addView(labelWidget.getView());
+		LabelClickableWidget labelClickableWidget = new LabelClickableWidget(getContext());
+		labelClickableWidget.setDataList(Arrays.asList("网红", "模特"));
+		labelLayout.addView(labelClickableWidget.getView());
 	}
 }

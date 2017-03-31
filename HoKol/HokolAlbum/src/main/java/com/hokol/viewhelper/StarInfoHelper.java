@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.application.DeleteConstant;
 import com.hokol.base.adapter.ViewHolder;
-import com.hokol.medium.widget.LabelWidget;
+import com.hokol.medium.widget.LabelClickableWidget;
 import com.hokol.medium.widget.labellayout.LabelFlowLayout;
 
 import java.util.Arrays;
@@ -28,7 +28,7 @@ public class StarInfoHelper
 	{
 		headViewHolder = new ViewHolder(headView);
 
-		LabelWidget labelWidget = new LabelWidget(context)
+		LabelClickableWidget labelClickableWidget = new LabelClickableWidget(context)
 		{
 			@Override
 			protected LabelFlowLayout getLabelFlowLayout()
@@ -36,7 +36,7 @@ public class StarInfoHelper
 				return headViewHolder.get(R.id.label_flow_star_info);
 			}
 		};
-		labelWidget.setDataList(Arrays.asList("网红", "模特"));
+		labelClickableWidget.setDataList(Arrays.asList("网红", "模特"));
 	}
 
 	public void initHeadData()

@@ -58,7 +58,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 	private static final int INVALID_POINTER = -1;
 
 	private static final float DRAG_RATE = .5f;
-
+	
 	private static final int SCALE_DOWN_DURATION = 150;
 
 	private static final int ANIMATE_TO_TRIGGER_DURATION = 200;
@@ -92,6 +92,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 
 	private int footViewIndex = -1; // 底部位置
 
+
 	private float mInitialMotionY;
 
 	private boolean mIsBeingDragged;
@@ -101,6 +102,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 	private static final int[] LAYOUT_ATTRS = new int[]{android.R.attr.enabled};
 
 	protected int mFrom;
+
 
 	private Animation mScaleAnimation;
 
@@ -173,7 +175,14 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 		ViewCompat.setChildrenDrawingOrderEnabled(this, true);
 
 		// 初始化 默认headRefreshAdapter
-		headRefreshAdapter = new DefaultSwipeRefreshAdapter(context);
+		headRefreshAdapter = new DefaultSwipeRefreshAdapter(context)
+		{
+			@Override
+			public boolean isTargetScroll()
+			{
+				return false;
+			}
+		};
 		setRefreshAdapter(headRefreshAdapter);
 
 		// 初始化 footLoadAdapter
@@ -182,7 +191,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 			@Override
 			public boolean isTargetScroll()
 			{
-				return true;
+				return false;
 			}
 		};
 		setLoadAdapter(footLoadAdapter);
@@ -283,6 +292,12 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 
 			headViewContainer.setBackgroundResource(headRefreshAdapter.getBackgroundResource());
 		}
+	}
+
+	@Override
+	public void addOnLayoutChangeListener(OnLayoutChangeListener listener)
+	{
+		super.addOnLayoutChangeListener(listener);
 	}
 
 	/**
@@ -483,19 +498,22 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 	@Override
 	public void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
 	{
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+		// 设置 控件的 改变的高度（动态改变，不再是原始高度）
+		setMeasuredDimension(getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec),
+				getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec));
 
 		ensureTarget();
 		if (null == childTarget)
 		{
 			return;
 		}
-		childTarget.measure(MeasureSpec.makeMeasureSpec(getMeasuredWidth() - getPaddingLeft() - getPaddingRight(), MeasureSpec.EXACTLY),
-				MeasureSpec.makeMeasureSpec(getMeasuredHeight() - getPaddingTop() - getPaddingBottom(), MeasureSpec.EXACTLY));
-		headViewContainer.measure(MeasureSpec.makeMeasureSpec(screenWidth, EXACTLY),
-				MeasureSpec.makeMeasureSpec(3 * headerViewHeight, EXACTLY));
-		footViewContainer.measure(MeasureSpec.makeMeasureSpec(screenWidth, EXACTLY),
-				MeasureSpec.makeMeasureSpec(footerViewHeight, EXACTLY));
+
+		int measureWidth = MeasureSpec.makeMeasureSpec(getMeasuredWidth() - getPaddingLeft() - getPaddingRight(), EXACTLY);
+		int measureHeight = MeasureSpec.makeMeasureSpec(getMeasuredHeight() - getPaddingTop() - getPaddingBottom(), EXACTLY);
+
+		childTarget.measure(measureWidth, measureHeight);
+		headViewContainer.measure(MeasureSpec.makeMeasureSpec(screenWidth, EXACTLY), MeasureSpec.makeMeasureSpec(headerViewHeight, EXACTLY));
+		footViewContainer.measure(MeasureSpec.makeMeasureSpec(screenWidth, EXACTLY), MeasureSpec.makeMeasureSpec(footerViewHeight, EXACTLY));
 
 		if (!isHeadOriginalOffsetCalculated)
 		{
@@ -541,25 +559,32 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 
 		// 获取内容控件到顶部的距离
 		int headTargetDistance = headCurrentTargetOffset + headViewContainer.getMeasuredHeight();
-		if (null != headRefreshAdapter && !headRefreshAdapter.isTargetScroll())
+		if (isHeadFloat())
 		{
 			headTargetDistance = 0;
 		}
 
-		// 获取控件 宽高
+		int footTargetDistance = pushDistance;
+		if (isFootFloat())
+		{
+			footTargetDistance = 0;
+		}
+
+		// 获取控件 原始宽高（依据Measure中的值获取）
 		final int width = getMeasuredWidth();
 		final int height = getMeasuredHeight();
-
+		final int originalHeight = getMeasuredHeight();
+		
 		final View child = childTarget;
 		final int childLeft = getPaddingLeft();
-		final int childTop = getPaddingTop() + headTargetDistance - pushDistance;// 根据偏移量headTargetDistance更新
+		final int childTop = getPaddingTop() + headTargetDistance - footTargetDistance; // 根据偏移量headTargetDistance更新
 		final int childWidth = width - getPaddingLeft() - getPaddingRight();
-		final int childHeight = height - getPaddingTop() - getPaddingBottom();
+		final int childHeight = originalHeight - getPaddingTop() - getPaddingBottom();
 
 		// 更新目标View的位置
 		child.layout(childLeft, childTop, childLeft + childWidth, childTop + childHeight);
 
-		// 更新 头布局的位置
+		// 更新  0
 		int headViewWidth = headViewContainer.getMeasuredWidth();
 		int headViewHeight = headViewContainer.getMeasuredHeight();
 		headViewContainer.layout(((width - headViewWidth) / 2), headCurrentTargetOffset,
@@ -570,6 +595,16 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 		int footViewHeight = footViewContainer.getMeasuredHeight();
 		footViewContainer.layout(((width - footViewWidth) / 2), height - pushDistance,
 				((width + footViewWidth) / 2), height + footViewHeight - pushDistance);
+	}
+
+	private boolean isHeadFloat()
+	{
+		return (null != headRefreshAdapter && !headRefreshAdapter.isTargetScroll());
+	}
+
+	private boolean isFootFloat()
+	{
+		return (null != footLoadAdapter && !footLoadAdapter.isTargetScroll());
 	}
 
 	/**

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/default_space_normal">
+
+    <com.hokol.medium.viewcustom.CircleView
+        android:id="@+id/circle_user_fans_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:src="@android:color/white"
+        app:circle_border_color="@android:color/darker_gray"
+        app:circle_border_width="1px"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/fl_user_fans_right"
+        android:layout_toRightOf="@+id/circle_user_fans_avatar"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/default_space_large">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="苏叁"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="简介"/>
+
+        <com.hokol.medium.widget.labellayout.FlowLayout
+            android:id="@+id/label_flow_user_fans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.hokol.medium.widget.labellayout.FlowLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_user_fans_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关注"/>
+    </FrameLayout>
+
+</RelativeLayout>
