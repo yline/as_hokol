@@ -29,6 +29,8 @@ public class MainHomeFragment extends BaseFragment
 
 	private List<BaseFragment> fragmentList;
 
+	private Map<String, List<String>> provinceMap;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
@@ -50,6 +52,7 @@ public class MainHomeFragment extends BaseFragment
 			public void onSecondarySelected(String first, String second)
 			{
 				IApplication.toast("first = " + first + ",second = " + second);
+				mainHomeHelper.updateProvinceTitle(second);
 				mainHomeHelper.closeMenu();
 			}
 		});
@@ -115,8 +118,6 @@ public class MainHomeFragment extends BaseFragment
 			}
 		});
 	}
-
-	private Map<String, List<String>> provinceMap;
 
 	private void initData()
 	{

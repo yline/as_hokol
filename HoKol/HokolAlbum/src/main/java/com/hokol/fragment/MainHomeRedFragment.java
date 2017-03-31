@@ -2,7 +2,6 @@ package com.hokol.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,7 +20,7 @@ import com.hokol.base.utils.UIScreenUtil;
 import com.hokol.medium.widget.ADWidget;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
-import com.hokol.viewhelper.MainHomeRedRefreshHelper;
+import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +40,8 @@ public class MainHomeRedFragment extends BaseFragment
 	};
 
 	private MainNewsHotAdapter recycleAdapter;
+
+	private SuperSwipeRefreshLayout superRefreshLayout;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -77,12 +78,11 @@ public class MainHomeRedFragment extends BaseFragment
 
 		recycleAdapter = new MainNewsHotAdapter();
 		recyclerView.setAdapter(recycleAdapter);
-		recycleAdapter.setOnClickListener(new MainNewsHotAdapter.OnClickListener<String>()
+		recycleAdapter.setOnClickListener(new HeadFootRecycleAdapter.OnClickListener<String>()
 		{
 			@Override
 			public void onClick(View view, String string, int position)
 			{
-				IApplication.toast("string = " + string);
 				StarDynamicActivity.actionStart(getContext());
 			}
 		});
@@ -97,9 +97,42 @@ public class MainHomeRedFragment extends BaseFragment
 		}
 		recycleAdapter.setDataList(dataList);
 
-		// SwipeRefreshLayout
-		MainHomeRedRefreshHelper mainNewsHotRefreshHelper = new MainHomeRedRefreshHelper();
-		mainNewsHotRefreshHelper.init((SwipeRefreshLayout) view.findViewById(R.id.swipe_main_home_red));
+		// 下拉刷新
+		superRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_main_home_red);
+		superRefreshLayout.setOnRefreshListener(new SuperSwipeRefreshLayout.OnSwipeListener()
+		{
+			@Override
+			public void onAnimate()
+			{
+				IApplication.toast("正在加载");
+				IApplication.getHandler().postDelayed(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						IApplication.toast("刷新结束");
+						superRefreshLayout.setRefreshing(false);
+					}
+				}, 2000);
+			}
+		});
+		superRefreshLayout.setOnLoadListener(new SuperSwipeRefreshLayout.OnSwipeListener()
+		{
+			@Override
+			public void onAnimate()
+			{
+				IApplication.toast("正在加载");
+				IApplication.getHandler().postDelayed(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						IApplication.toast("刷新结束");
+						superRefreshLayout.setLoadMore(false);
+					}
+				}, 2000);
+			}
+		});
 	}
 
 	/**
@@ -122,7 +155,7 @@ public class MainHomeRedFragment extends BaseFragment
 			@Override
 			public void onPageClick(View v, int position)
 			{
-				IApplication.toast("AD position = " + position);
+				IApplication.toast("广告位置 = " + position);
 			}
 
 			@Override

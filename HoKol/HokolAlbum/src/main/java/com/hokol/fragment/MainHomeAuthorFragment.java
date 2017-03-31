@@ -2,7 +2,6 @@ package com.hokol.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,12 +11,14 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
+import com.hokol.activity.StarDynamicActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
+import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,8 @@ public class MainHomeAuthorFragment extends BaseFragment
 	private String mParam1;
 
 	private HeadFootRecycleAdapter mainHomeAuthorAdapter;
+
+	private SuperSwipeRefreshLayout superRefreshLayout;
 
 	public static MainHomeAuthorFragment newInstance()
 	{
@@ -75,7 +78,6 @@ public class MainHomeAuthorFragment extends BaseFragment
 		});
 
 		mainHomeAuthorAdapter = new MainHomeAuthorAdapter();
-
 		recycleView.setAdapter(mainHomeAuthorAdapter);
 
 		List<String> dataList = new ArrayList<>();
@@ -84,12 +86,21 @@ public class MainHomeAuthorFragment extends BaseFragment
 			dataList.add(DeleteConstant.getUrlSquare());
 		}
 		mainHomeAuthorAdapter.setDataList(dataList);
-
-		final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_main_home_author);
-		swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+		
+		mainHomeAuthorAdapter.setOnClickListener(new HeadFootRecycleAdapter.OnClickListener<String>()
 		{
 			@Override
-			public void onRefresh()
+			public void onClick(View view, String string, int position)
+			{
+				StarDynamicActivity.actionStart(getContext());
+			}
+		});
+
+		superRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_main_home_author);
+		superRefreshLayout.setOnRefreshListener(new SuperSwipeRefreshLayout.OnSwipeListener()
+		{
+			@Override
+			public void onAnimate()
 			{
 				IApplication.toast("正在加载");
 				IApplication.getHandler().postDelayed(new Runnable()
@@ -98,9 +109,26 @@ public class MainHomeAuthorFragment extends BaseFragment
 					public void run()
 					{
 						IApplication.toast("刷新结束");
-						swipeRefreshLayout.setRefreshing(false);
+						superRefreshLayout.setRefreshing(false);
 					}
-				}, 3000);
+				}, 2000);
+			}
+		});
+		superRefreshLayout.setOnLoadListener(new SuperSwipeRefreshLayout.OnSwipeListener()
+		{
+			@Override
+			public void onAnimate()
+			{
+				IApplication.toast("正在加载");
+				IApplication.getHandler().postDelayed(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						IApplication.toast("刷新结束");
+						superRefreshLayout.setLoadMore(false);
+					}
+				}, 2000);
 			}
 		});
 	}

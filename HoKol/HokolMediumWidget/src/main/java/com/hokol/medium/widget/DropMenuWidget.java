@@ -53,6 +53,18 @@ public class DropMenuWidget
 		return view;
 	}
 
+	public void updateTitle(int index, String title)
+	{
+		if (index >= tabLayout.getChildCount())
+		{
+			throw new IllegalArgumentException("index out of range");
+		}
+
+		View tabView = tabLayout.getTabAt(index).getCustomView();
+		TextView textView = (TextView) tabView.findViewById(getItemTextId());
+		textView.setText(title);
+	}
+
 	public boolean isOpened()
 	{
 		return isOpened;

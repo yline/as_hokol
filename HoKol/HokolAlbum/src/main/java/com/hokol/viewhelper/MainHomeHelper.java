@@ -100,6 +100,11 @@ public class MainHomeHelper
 		linearLayout.addView(dropView);
 	}
 
+	public void updateProvinceTitle(String title)
+	{
+		dropMenuWidget.updateTitle(0, title);
+	}
+
 	public void setProvinceData(Map<String, List<String>> map)
 	{
 		secondaryWidget.setDataMap(map);
