@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout
+<com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/swipe_main_care"
+    android:id="@+id/super_swipe_main_care"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,4 +11,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
-</android.support.v4.widget.SwipeRefreshLayout>
+</com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout>

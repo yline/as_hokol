@@ -11,10 +11,10 @@
         android:id="@+id/rl_item_main_care"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/default_space_small"
-        android:paddingLeft="@dimen/default_space_large"
-        android:paddingRight="@dimen/default_space_large"
-        android:paddingTop="@dimen/default_space_small">
+        android:layout_marginBottom="@dimen/default_space_small"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginRight="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_small">
 
         <com.hokol.medium.viewcustom.CircleView
             android:id="@+id/iv_item_main_care_avatar"

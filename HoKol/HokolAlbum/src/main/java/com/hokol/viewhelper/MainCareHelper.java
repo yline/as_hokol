@@ -7,14 +7,12 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
 import com.hokol.R;
 import com.hokol.application.DeleteConstant;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
-import com.hokol.medium.widget.transform.CircleTransform;
 
 import java.util.List;
 
@@ -24,22 +22,22 @@ public class MainCareHelper
 
 	private OnCareRecycleClickListener careRecycleClickListener;
 
-	private RequestManager glideManager;
+	private Context sContext;
 
-	private Context context;
+	public MainCareHelper(Context context)
+	{
+		this.sContext = context;
+	}
 
 	/**
 	 * 初始化Recycle控件
 	 *
-	 * @param context
-	 * @param parentView
+	 * @param recyclerView
 	 */
-	public void initRecycleView(Context context, View parentView)
+	public void initRecycleView(RecyclerView recyclerView)
 	{
-		RecyclerView recyclerView = (RecyclerView) parentView.findViewById(R.id.recycle_main_care);
-
-		recyclerView.setLayoutManager(new LinearLayoutManager(context));
-		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(context)
+		recyclerView.setLayoutManager(new LinearLayoutManager(sContext));
+		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(sContext)
 		{
 			@Override
 			protected int getDividerResourceId()
@@ -47,12 +45,8 @@ public class MainCareHelper
 				return R.drawable.widget_recycler_divider_gray_normal;
 			}
 		});
-		
-		this.glideManager = Glide.with(context);
-		this.context = context;
 
 		recyclerAdapter = new MainCareHelper.RecycleAdapter();
-
 		recyclerView.setAdapter(recyclerAdapter);
 	}
 
@@ -78,14 +72,11 @@ public class MainCareHelper
 		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
 		{
 			ImageView avatarView = viewHolder.get(R.id.iv_item_main_care_avatar);
-
-			glideManager.load(DeleteConstant.url_default_avatar).centerCrop()
-					.transform(new CircleTransform(context)).placeholder(android.R.color.white)
-					.into(avatarView);
+			Glide.with(sContext).load(DeleteConstant.url_default_avatar).centerCrop().into(avatarView);
 			
 			if (null != careRecycleClickListener)
 			{
-				viewHolder.get(R.id.iv_item_main_care_avatar).setOnClickListener(new View.OnClickListener()
+				viewHolder.get(R.id.rl_item_main_care).setOnClickListener(new View.OnClickListener()
 				{
 					@Override
 					public void onClick(View v)
