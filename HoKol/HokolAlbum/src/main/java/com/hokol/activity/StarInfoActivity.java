@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.hokol.R;
+import com.hokol.application.IApplication;
 import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.fragment.StarInfoDatumFragment;
@@ -37,11 +38,31 @@ public class StarInfoActivity extends BaseAppCompatActivity
 		setContentView(R.layout.activity_star_info);
 
 		starInfoHelper = new StarInfoHelper(this);
+
 		View headView = findViewById(R.id.include_start_info_head);
 		starInfoHelper.initHeadView(headView);
+		starInfoHelper.setHeadViewListener(new StarInfoHelper.OnHeadViewClickListener()
+		{
+			@Override
+			public void onCareOrCancel()
+			{
+				IApplication.toast("点击关注");
+			}
+
+			@Override
+			public void onContact()
+			{
+				IApplication.toast("点击联系");
+			}
+
+			@Override
+			public void onGiveGift()
+			{
+				IApplication.toast("点击送红豆");
+			}
+		});
 
 		initView();
-
 		starInfoHelper.initHeadData();
 	}
 
@@ -83,6 +104,8 @@ public class StarInfoActivity extends BaseAppCompatActivity
 			}
 		});
 		tabLayout.setupWithViewPager(viewPager);
+		tabLayout.setSelectedTabIndicatorColor(getResources().getColor(android.R.color.holo_red_light));
+		tabLayout.setTabTextColors(getResources().getColor(android.R.color.black), getResources().getColor(android.R.color.holo_red_light));
 	}
 
 	public static void actionStart(Context context)

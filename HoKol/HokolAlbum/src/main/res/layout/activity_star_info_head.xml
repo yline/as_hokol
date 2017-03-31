@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -18,7 +19,10 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/default_space_large"/>
+            android:layout_marginTop="@dimen/default_space_large"
+            android:src="@android:color/white"
+            app:circle_border_color="@android:color/darker_gray"
+            app:circle_border_width="1px"/>
 
         <TextView
             android:id="@+id/textView5"
@@ -66,6 +70,7 @@
             android:layout_centerHorizontal="true">
 
             <TextView
+                android:id="@+id/tv_star_info_head_care_or_cancel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -74,6 +79,7 @@
                 android:textColor="@android:color/holo_red_light"/>
 
             <TextView
+                android:id="@+id/tv_star_info_head_contact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_space_large"
@@ -83,6 +89,7 @@
                 android:textColor="@android:color/holo_red_light"/>
 
             <TextView
+                android:id="@+id/tv_star_info_head_gift"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left"
@@ -92,17 +99,17 @@
     </RelativeLayout>
 
     <TextView
-        android:padding="@dimen/default_space_normal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="2"
+        android:padding="@dimen/default_space_normal"
         android:text="个性签名，你猜是不是这样"/>
 
-    <com.hokol.medium.widget.labellayout.LabelFlowLayout
-        android:paddingLeft="@dimen/default_space_normal"
+    <com.hokol.medium.widget.labellayout.FlowLayout
         android:id="@+id/label_flow_star_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </com.hokol.medium.widget.labellayout.LabelFlowLayout>
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/default_space_normal">
+    </com.hokol.medium.widget.labellayout.FlowLayout>
 </LinearLayout>
