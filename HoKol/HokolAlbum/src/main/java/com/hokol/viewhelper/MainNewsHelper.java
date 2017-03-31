@@ -153,7 +153,7 @@ public class MainNewsHelper
 						IApplication.toast("加载结束");
 						superSwipeRefreshLayout.setRefreshing(false);
 					}
-				}, 3000);
+				}, 2000);
 			}
 		});
 		superSwipeRefreshLayout.setOnLoadListener(new SuperSwipeRefreshLayout.OnSwipeListener()
@@ -170,7 +170,7 @@ public class MainNewsHelper
 						IApplication.toast("加载结束");
 						superSwipeRefreshLayout.setLoadMore(false);
 					}
-				}, 3000);
+				}, 2000);
 			}
 		});
 	}

@@ -11,7 +11,6 @@ import com.hokol.R;
 import com.hokol.activity.NewsInfoActivity;
 import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.common.BaseFragment;
-import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
@@ -46,25 +45,25 @@ public class MainNewsFragment extends BaseFragment
 
 	private void initView(View view)
 	{
-		View recommendView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_news_recommend, null);
+		// recycleView
 		mainNewsHelper.initRecycleView(view);
 		mainNewsHelper.setOnRecycleItemClickListener(new CommonRecyclerAdapter.OnClickListener<VNewsSingleBean>()
 		{
 			@Override
 			public void onClick(View view, VNewsSingleBean responseMultiplexNews, int position)
 			{
-				LogFileUtil.v("setOnRecycleItemClickListener position -> " + position);
 				NewsInfoActivity.actionStart(getContext(), new WNewsSingleBean(responseMultiplexNews.getNews_id()));
 			}
 		});
 
-		mainNewsHelper.initRecommendView(recommendView); // 初始化控件
+		// 推荐
+		View recommendView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_news_recommend, null);
+		mainNewsHelper.initRecommendView(recommendView);
 		mainNewsHelper.setOnRecommendClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				LogFileUtil.v("setOnRecommendClickListener");
 				if (!TextUtils.isEmpty(recommendId))
 				{
 					NewsInfoActivity.actionStart(getContext(), new WNewsSingleBean(recommendId));
@@ -72,6 +71,7 @@ public class MainNewsFragment extends BaseFragment
 			}
 		});
 
+		// 刷新
 		SuperSwipeRefreshLayout superSwipeRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_main_news);
 		mainNewsHelper.initRefreshLayout(superSwipeRefreshLayout);
 	}

@@ -3,12 +3,10 @@ package com.hokol.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.view.View;
 
 import com.hokol.R;
-import com.hokol.base.adapter.ViewHolder;
 import com.hokol.base.common.BaseAppCompatActivity;
-import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.bean.WNewsSingleBean;
 
 /**
@@ -19,16 +17,20 @@ import com.hokol.medium.http.bean.WNewsSingleBean;
  */
 public class NewsInfoActivity extends BaseAppCompatActivity
 {
-	private ViewHolder newsInfoViewHolder;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_news_info);
-		setTitle("新闻详情页面");
 
-		newsInfoViewHolder = new ViewHolder(getWindow().getDecorView());
+		findViewById(R.id.tv_news_info_back).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				finish();
+			}
+		});
 
 		initData();
 	}
@@ -36,20 +38,6 @@ public class NewsInfoActivity extends BaseAppCompatActivity
 	private void initData()
 	{
 		final WNewsSingleBean bean = getIntentData();
-
-		if (null != bean && !TextUtils.isEmpty(bean.getNews_id()))
-		{
-			/*newsInfoViewHolder.setText(R.id.tv_news_info_title, vNewsSingleBean.getNews_title());
-			newsInfoViewHolder.setText(R.id.tv_news_info_sub, vNewsSingleBean.getNews_source() + "  " + vNewsSingleBean.getNews_time());
-			newsInfoViewHolder.setText(R.id.tv_news_info_content, vNewsSingleBean.getNews_content());
-
-			ImageView imageView = newsInfoViewHolder.get(R.id.iv_news_info);
-			Glide.with(NewsInfoActivity.this).load(vNewsSingleBean.getNews_img()).placeholder(R.drawable.global_load_failed).into(imageView);*/
-		}
-		else
-		{
-			LogFileUtil.v("bean is null");
-		}
 	}
 
 	public static void actionStart(Context context, WNewsSingleBean bean)
