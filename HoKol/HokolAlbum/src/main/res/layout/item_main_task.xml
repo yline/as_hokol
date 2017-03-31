@@ -4,6 +4,8 @@
     android:id="@+id/ll_main_task_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/default_space_large"
+    android:layout_marginRight="@dimen/default_space_normal"
     android:orientation="vertical">
 
     <LinearLayout

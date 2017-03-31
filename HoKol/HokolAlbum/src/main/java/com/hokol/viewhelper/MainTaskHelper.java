@@ -1,7 +1,6 @@
 package com.hokol.viewhelper;
 
 import android.content.Context;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,8 +15,11 @@ import com.hokol.application.IApplication;
 import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.medium.widget.DropMenuWidget;
+import com.hokol.medium.widget.LabelClickableWidget;
+import com.hokol.medium.widget.labellayout.LabelFlowLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
+import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.transform.CircleTransform;
 
 import java.util.ArrayList;
@@ -71,6 +73,17 @@ public class MainTaskHelper
 	{
 		View areaView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_classify, null);
 
+		final LabelFlowLayout labelFlowLayout = (LabelFlowLayout) areaView.findViewById(R.id.label_flow_main_task_menu_classify);
+		LabelClickableWidget labelClickableWidget = new LabelClickableWidget(context)
+		{
+			@Override
+			protected LabelFlowLayout getLabelFlowLayout()
+			{
+				return labelFlowLayout;
+			}
+		};
+		labelClickableWidget.setDataList(Arrays.asList("全部", "网红", "主播", "演员", "模特", "歌手", "体育"));
+
 		return areaView;
 	}
 
@@ -82,12 +95,12 @@ public class MainTaskHelper
 	}
 
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Refresh %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-	public void initRefreshLayout(final SwipeRefreshLayout swipeRefreshLayout)
+	public void initRefreshLayout(final SuperSwipeRefreshLayout swipeRefreshLayout)
 	{
-		swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+		swipeRefreshLayout.setOnRefreshListener(new SuperSwipeRefreshLayout.OnSwipeListener()
 		{
 			@Override
-			public void onRefresh()
+			public void onAnimate()
 			{
 				IApplication.toast("正在加载");
 				IApplication.getHandler().postDelayed(new Runnable()
@@ -97,6 +110,23 @@ public class MainTaskHelper
 					{
 						IApplication.toast("刷新结束");
 						swipeRefreshLayout.setRefreshing(false);
+					}
+				}, 3000);
+			}
+		});
+		swipeRefreshLayout.setOnLoadListener(new SuperSwipeRefreshLayout.OnSwipeListener()
+		{
+			@Override
+			public void onAnimate()
+			{
+				IApplication.toast("正在加载");
+				IApplication.getHandler().postDelayed(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						IApplication.toast("刷新结束");
+						swipeRefreshLayout.setLoadMore(false);
 					}
 				}, 3000);
 			}

@@ -60,17 +60,15 @@
         android:orientation="vertical">
     </LinearLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout
         android:id="@+id/swipe_main_task"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="10dp">
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycle_main_task"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </android.support.v7.widget.RecyclerView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout>
 </LinearLayout>

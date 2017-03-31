@@ -2,7 +2,6 @@ package com.hokol.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +17,7 @@ import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.base.utils.UIScreenUtil;
 import com.hokol.medium.widget.ADWidget;
+import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainTaskHelper;
 
 import java.util.ArrayList;
@@ -28,6 +28,8 @@ public class MainTaskFragment extends BaseFragment
 	private MainTaskHelper mainTaskHelper;
 
 	private List<Integer> data;
+
+	private SuperSwipeRefreshLayout superRefreshLayout;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -53,8 +55,8 @@ public class MainTaskFragment extends BaseFragment
 		data.add(R.drawable.delete_ad_img4);
 		data.add(R.drawable.delete_ad_img5);
 
+		// 广告
 		LinearLayout linearLayout = (LinearLayout) parentView.findViewById(R.id.ll_main_task_ad);
-
 		ADWidget adWidget = new ADWidget()
 		{
 			@Override
@@ -80,12 +82,15 @@ public class MainTaskFragment extends BaseFragment
 		});
 		linearLayout.addView(adView);
 
+		// 下拉菜单
 		LinearLayout linearLayout1 = (LinearLayout) parentView.findViewById(R.id.ll_main_task_menu);
 		mainTaskHelper.initTabDownMenuView(linearLayout1);
 
-		SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) parentView.findViewById(R.id.swipe_main_task);
-		mainTaskHelper.initRefreshLayout(swipeRefreshLayout);
+		// 刷新
+		superRefreshLayout = (SuperSwipeRefreshLayout) parentView.findViewById(R.id.swipe_main_task);
+		mainTaskHelper.initRefreshLayout(superRefreshLayout);
 
+		// 内容
 		RecyclerView recycleView = (RecyclerView) parentView.findViewById(R.id.recycle_main_task);
 		mainTaskHelper.initRecycleView(recycleView);
 		mainTaskHelper.setOnRecyclerClickListener(new CommonRecyclerAdapter.OnClickListener()
