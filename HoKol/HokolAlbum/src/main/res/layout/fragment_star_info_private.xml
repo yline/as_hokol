@@ -4,10 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout
+        android:id="@+id/super_swipe_star_info_private"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle_star_info_private"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+    </com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout>
+
     <RelativeLayout
         android:id="@+id/rl_star_info_private_lock"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
 
         <TextView
             android:layout_width="wrap_content"

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
+import com.hokol.activity.StarDynamicActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.base.adapter.CommonRecyclerAdapter;
@@ -20,6 +21,7 @@ import com.hokol.base.utils.UIResizeUtil;
 import com.hokol.base.utils.UIScreenUtil;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
+import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,8 @@ import java.util.List;
 public class StarInfoDynamicFragment extends BaseFragment
 {
 	private HeadFootRecycleAdapter starInfoDynamicAdapter;
+
+	private SuperSwipeRefreshLayout superRefreshLayout;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -56,13 +60,12 @@ public class StarInfoDynamicFragment extends BaseFragment
 
 		starInfoDynamicAdapter = new StarInfoDynamicAdapter();
 		recyclerView.setAdapter(starInfoDynamicAdapter);
-
 		starInfoDynamicAdapter.setOnClickListener(new CommonRecyclerAdapter.OnClickListener<String>()
 		{
 			@Override
 			public void onClick(View view, String string, int position)
 			{
-				IApplication.toast("url = " + string);
+				StarDynamicActivity.actionStart(getContext());
 			}
 		});
 
@@ -72,6 +75,42 @@ public class StarInfoDynamicFragment extends BaseFragment
 			data.add(DeleteConstant.getUrlSquare());
 		}
 		starInfoDynamicAdapter.addAll(data);
+
+		superRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_star_info_dynamic);
+		superRefreshLayout.setOnRefreshListener(new SuperSwipeRefreshLayout.OnSwipeListener()
+		{
+			@Override
+			public void onAnimate()
+			{
+				IApplication.toast("正在加载");
+				IApplication.getHandler().postDelayed(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						IApplication.toast("刷新结束");
+						superRefreshLayout.setRefreshing(false);
+					}
+				}, 2000);
+			}
+		});
+		superRefreshLayout.setOnLoadListener(new SuperSwipeRefreshLayout.OnSwipeListener()
+		{
+			@Override
+			public void onAnimate()
+			{
+				IApplication.toast("正在加载");
+				IApplication.getHandler().postDelayed(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						IApplication.toast("刷新结束");
+						superRefreshLayout.setLoadMore(false);
+					}
+				}, 2000);
+			}
+		});
 	}
 
 	private class StarInfoDynamicAdapter extends HeadFootRecycleAdapter<String>
