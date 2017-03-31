@@ -22,27 +22,48 @@
                 android:scaleType="centerCrop"/>
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/tv_star_dynamic_care_or_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/textView11"
-                android:layout_alignBottom="@+id/textView11"
-                android:layout_marginRight="10dp"
-                android:layout_toLeftOf="@+id/textView11"
-                android:layout_toStartOf="@+id/textView11"
+                android:layout_alignBaseline="@+id/tv_star_dynamic_give_gift"
+                android:layout_alignBottom="@+id/tv_star_dynamic_give_gift"
+                android:layout_toLeftOf="@+id/tv_star_dynamic_give_gift"
+                android:layout_toStartOf="@+id/tv_star_dynamic_give_gift"
+                android:paddingBottom="@dimen/default_space_normal"
+                android:paddingLeft="@dimen/default_space_small"
+                android:paddingRight="@dimen/default_space_small"
+                android:paddingTop="@dimen/default_space_normal"
                 android:text="关注"
                 android:textColor="@android:color/holo_red_light"/>
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/tv_star_dynamic_give_gift"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tv_star_dynamic_praise"
+                android:layout_alignBottom="@+id/tv_star_dynamic_praise"
+                android:layout_toLeftOf="@+id/tv_star_dynamic_praise"
+                android:layout_toStartOf="@+id/tv_star_dynamic_praise"
+                android:paddingBottom="@dimen/default_space_normal"
+                android:paddingLeft="@dimen/default_space_small"
+                android:paddingRight="@dimen/default_space_small"
+                android:paddingTop="@dimen/default_space_normal"
+                android:text="送礼"
+                android:textColor="@android:color/holo_red_light"/>
+
+            <TextView
+                android:id="@+id/tv_star_dynamic_praise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/imageView2"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
-                android:text="礼物"
+                android:layout_marginRight="@dimen/default_space_large"
+                android:paddingBottom="@dimen/default_space_normal"
+                android:paddingLeft="@dimen/default_space_small"
+                android:paddingRight="@dimen/default_space_small"
+                android:paddingTop="@dimen/default_space_normal"
+                android:text="点赞"
                 android:textColor="@android:color/holo_red_light"/>
         </RelativeLayout>
 
@@ -54,6 +75,7 @@
             android:text="1天前"/>
 
         <LinearLayout
+            android:id="@+id/ll_star_dynamic_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -64,7 +86,7 @@
             <com.hokol.medium.viewcustom.CircleView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@mipmap/ic_launcher"
+                android:src="@android:color/white"
                 app:circle_border_color="@android:color/darker_gray"
                 app:circle_border_width="1px"/>
 
