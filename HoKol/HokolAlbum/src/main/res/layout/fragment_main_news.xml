@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/super_swipe_main_news"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <!--RecycleView-->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycle_main_news"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@android:color/holo_red_light">
+
+        <TextView
+            android:id="@+id/tv_main_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/main_title_news"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/default_text_size_large"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/super_swipe_main_news"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
-</com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout>
+
+        <!--RecycleView-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle_main_news"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+    </com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout>
+</LinearLayout>
+

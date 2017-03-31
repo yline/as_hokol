@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.hokol.R;
@@ -18,8 +16,6 @@ import com.hokol.fragment.MainMineFragment;
 import com.hokol.fragment.MainNewsFragment;
 import com.hokol.fragment.MainTaskFragment;
 import com.hokol.viewhelper.MainHelper;
-
-import static android.R.color.transparent;
 
 
 /**
@@ -46,12 +42,16 @@ public class MainActivity extends BaseAppCompatActivity
 
 	private TabLayout tabLayout;
 
-	private enum TAB
+	public enum TAB
 	{
 		News(0, R.drawable.main_tab_news, R.string.main_tab_news),
+
 		Care(1, R.drawable.main_tab_care, R.string.main_tab_care),
+
 		Home(2, R.drawable.main_tab_home, R.string.main_tab_home),
+
 		Task(3, R.drawable.main_tab_task, R.string.main_tab_task),
+
 		Mine(4, R.drawable.main_tab_mine, R.string.main_tab_mine);
 
 		private final int position;
@@ -73,37 +73,6 @@ public class MainActivity extends BaseAppCompatActivity
 		}
 	}
 
-	private enum TITLE
-	{
-		News(0, R.string.main_title_news, android.R.color.white, android.R.color.holo_red_light),
-		Care(1, R.string.main_title_care, android.R.color.black, transparent),
-		Home(2, R.string.main_title_home, android.R.color.holo_red_light, transparent),
-		Task(3, R.string.main_title_task, android.R.color.white, android.R.color.holo_red_light),
-		Mine(4, R.string.main_title_mine, android.R.color.black, transparent);
-
-		private final int position;
-
-		private final int title;
-
-		private final int titleColor;
-
-		private final int titleBgColor;
-
-		/**
-		 * @param position     位置
-		 * @param title        title内容
-		 * @param titleColor   title颜色
-		 * @param titleBgColor title背景颜色
-		 */
-		TITLE(int position, int title, int titleColor, int titleBgColor)
-		{
-			this.position = position;
-			this.title = title;
-			this.titleColor = titleColor;
-			this.titleBgColor = titleBgColor;
-		}
-	}
-
 	private ImageView imageFlashView;
 
 	@Override
@@ -120,12 +89,6 @@ public class MainActivity extends BaseAppCompatActivity
 
 		initView();
 		initData();
-
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main_title);
-		mainHelper.initToolbar(toolbar);
-
-		View taskMenu = mainHelper.getBarTaskMenu();
-		mainTaskFragment.setTaskMenu(taskMenu);
 
 		initShowData();
 	}
@@ -153,33 +116,22 @@ public class MainActivity extends BaseAppCompatActivity
 				if (position == TAB.News.position)
 				{
 					fragmentManager.beginTransaction().show(mainNewsFragment).commit();
-					mainHelper.setBarTextContent(TITLE.News.title).setTextColor(getResources().getColor(TITLE.News.titleColor));
-					mainHelper.setBarBackground(MainActivity.this, TITLE.News.titleBgColor, 56);
 				}
 				else if (position == TAB.Care.position)
 				{
 					fragmentManager.beginTransaction().show(mainCareFragment).commit();
-					mainHelper.setBarTextContent(TITLE.Care.title).setTextColor(getResources().getColor(TITLE.Care.titleColor));
-					mainHelper.setBarBackground(MainActivity.this, TITLE.Care.titleBgColor, 40);
 				}
 				else if (position == TAB.Home.position)
 				{
 					fragmentManager.beginTransaction().show(mainHomeFragment).commit();
-					mainHelper.setBarTextContent(TITLE.Home.title).setTextColor(getResources().getColor(TITLE.Home.titleColor));
-					mainHelper.setBarBackground(MainActivity.this, TITLE.Home.titleBgColor, 40);
 				}
 				else if (position == TAB.Task.position)
 				{
 					fragmentManager.beginTransaction().show(mainTaskFragment).commit();
-					mainHelper.setBarTextContent(TITLE.Task.title).setTextColor(getResources().getColor(TITLE.Task.titleColor));
-					mainHelper.setBarBackground(MainActivity.this, TITLE.Task.titleBgColor, 56);
-					mainHelper.setBarTaskMenuVisibility(View.VISIBLE);
 				}
 				else if (position == TAB.Mine.position)
 				{
 					fragmentManager.beginTransaction().show(mainMineFragment).commit();
-					mainHelper.setBarTextContent(TITLE.Mine.title).setTextColor(getResources().getColor(TITLE.Mine.titleColor));
-					mainHelper.setBarBackground(MainActivity.this, TITLE.Mine.titleBgColor, 40);
 				}
 			}
 
@@ -202,7 +154,6 @@ public class MainActivity extends BaseAppCompatActivity
 				else if (position == TAB.Task.position)
 				{
 					fragmentManager.beginTransaction().hide(mainTaskFragment).commit();
-					mainHelper.setBarTaskMenuVisibility(View.GONE);
 				}
 				else if (position == TAB.Mine.position)
 				{

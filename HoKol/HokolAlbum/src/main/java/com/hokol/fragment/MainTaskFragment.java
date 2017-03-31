@@ -97,11 +97,8 @@ public class MainTaskFragment extends BaseFragment
 			}
 		});
 		mainTaskHelper.setRecycleData();
-	}
 
-	public void setTaskMenu(View taskMenu)
-	{
-		taskMenu.setOnClickListener(new View.OnClickListener()
+		parentView.findViewById(R.id.ll_main_task_action_task).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)

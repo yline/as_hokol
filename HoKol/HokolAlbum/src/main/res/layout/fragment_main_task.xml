@@ -5,6 +5,45 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@android:color/holo_red_light">
+
+        <TextView
+            android:id="@+id/tv_main_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/main_title_task"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/default_text_size_large"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:id="@+id/ll_main_task_action_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发通告"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/default_text_size_small"/>
+        </LinearLayout>
+    </RelativeLayout>
+
     <!-- 广告 -->
     <LinearLayout
         android:id="@+id/ll_main_task_ad"
@@ -13,6 +52,7 @@
         android:orientation="vertical">
     </LinearLayout>
 
+    <!-- 菜单 -->
     <LinearLayout
         android:id="@+id/ll_main_task_menu"
         android:layout_width="match_parent"

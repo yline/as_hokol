@@ -5,16 +5,12 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.design.widget.TabLayout;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hokol.R;
-import com.hokol.base.utils.UIResizeUtil;
-import com.hokol.base.utils.UIScreenUtil;
 
 /**
  * MainActivity helper; 最好全部都用装饰模式
@@ -89,58 +85,5 @@ public class MainHelper
 		}
 		tabLayout.setSelectedTabIndicatorHeight(0);
 	}
-
-	/* --------------------------------- ToolBar 管理 ---------------------------------- */
-	private Toolbar toolbar;
-
-	private LinearLayout barTaskMenu;
-
-	private TextView tvBarTitle;
-
-	public void initToolbar(Toolbar toolbar)
-	{
-		this.toolbar = toolbar;
-		this.barTaskMenu = (LinearLayout) toolbar.findViewById(R.id.ll_main_action_task);
-		this.barTaskMenu.setVisibility(View.GONE);
-
-		this.tvBarTitle = (TextView) toolbar.findViewById(R.id.tv_main_title);
-	}
-
-	/**
-	 * @param visibility One of {@link #View.VISIBLE}, {@link #View.INVISIBLE}, or {@link #View.GONE}.
-	 */
-	public void setBarTaskMenuVisibility(int visibility)
-	{
-		this.barTaskMenu.setVisibility(visibility);
-	}
-
-	/**
-	 * 设置背景颜色；同时把背景控件给出去，以便可能需要设置其他参数
-	 *
-	 * @param color
-	 */
-	public void setBarBackground(Context context, int color, int height)
-	{
-		toolbar.setBackgroundResource(color);
-		UIResizeUtil.build().setHeight(UIScreenUtil.dp2px(context, height)).commit(toolbar);
-	}
-
-	/**
-	 * 设置标题内容；同时把标题控件给出去，以便可能需要设置其它参数
-	 *
-	 * @param contentId
-	 * @return
-	 */
-	public TextView setBarTextContent(int contentId)
-	{
-		tvBarTitle.setText(contentId);
-		return tvBarTitle;
-	}
-
-	public View getBarTaskMenu()
-	{
-		return barTaskMenu;
-	}
-
 	/* ---------------------------------  ---------------------------------- */
 }
