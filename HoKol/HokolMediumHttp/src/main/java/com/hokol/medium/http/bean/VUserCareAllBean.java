@@ -4,108 +4,123 @@ import java.util.List;
 
 public class VUserCareAllBean
 {
-	/**
-	 * 关注的人唯一标识
-	 */
-	private String user_id;
+	private List<VUserCareAllBean> list;
 
-	/**
-	 * 头像：(链接)
-	 */
-	private String user_logo;
-
-	/**
-	 * 昵称
-	 */
-	private String user_nickname;
-
-	/**
-	 * 标签：[数组]
-	 */
-	private List<String> user_tag;
-
-	/**
-	 * 用户性别
-	 */
-	private String user_sex;
-
-	/**
-	 * 用户获得的赞
-	 */
-	private int user_zan;
-
-	/**
-	 * 签名
-	 */
-	private String user_sign;
-
-	public String getUser_id()
+	public List<VUserCareAllBean> getList()
 	{
-		return user_id;
+		return list;
 	}
 
-	public void setUser_id(String user_id)
+	public void setList(List<VUserCareAllBean> list)
 	{
-		this.user_id = user_id;
+		this.list = list;
 	}
 
-	public String getUser_logo()
+	public static class UserCareAllOneBean
 	{
-		return user_logo;
-	}
+		/**
+		 * 关注的人唯一标识
+		 */
+		private String user_id;
 
-	public void setUser_logo(String user_logo)
-	{
-		this.user_logo = user_logo;
-	}
+		/**
+		 * 头像：(链接)
+		 */
+		private String user_logo;
 
-	public String getUser_nickname()
-	{
-		return user_nickname;
-	}
+		/**
+		 * 昵称
+		 */
+		private String user_nickname;
 
-	public void setUser_nickname(String user_nickname)
-	{
-		this.user_nickname = user_nickname;
-	}
+		/**
+		 * 标签：[数组]
+		 */
+		private List<String> user_tag;
 
-	public List<String> getUser_tag()
-	{
-		return user_tag;
-	}
+		/**
+		 * 用户性别
+		 */
+		private String user_sex;
 
-	public void setUser_tag(List<String> user_tag)
-	{
-		this.user_tag = user_tag;
-	}
+		/**
+		 * 用户获得的赞
+		 */
+		private int user_zan;
 
-	public String getUser_sex()
-	{
-		return user_sex;
-	}
+		/**
+		 * 签名
+		 */
+		private String user_sign;
 
-	public void setUser_sex(String user_sex)
-	{
-		this.user_sex = user_sex;
-	}
+		public String getUser_id()
+		{
+			return user_id;
+		}
 
-	public int getUser_zan()
-	{
-		return user_zan;
-	}
+		public void setUser_id(String user_id)
+		{
+			this.user_id = user_id;
+		}
 
-	public void setUser_zan(int user_zan)
-	{
-		this.user_zan = user_zan;
-	}
+		public String getUser_logo()
+		{
+			return user_logo;
+		}
 
-	public String getUser_sign()
-	{
-		return user_sign;
-	}
+		public void setUser_logo(String user_logo)
+		{
+			this.user_logo = user_logo;
+		}
 
-	public void setUser_sign(String user_sign)
-	{
-		this.user_sign = user_sign;
+		public String getUser_nickname()
+		{
+			return user_nickname;
+		}
+
+		public void setUser_nickname(String user_nickname)
+		{
+			this.user_nickname = user_nickname;
+		}
+
+		public List<String> getUser_tag()
+		{
+			return user_tag;
+		}
+
+		public void setUser_tag(List<String> user_tag)
+		{
+			this.user_tag = user_tag;
+		}
+
+		public String getUser_sex()
+		{
+			return user_sex;
+		}
+
+		public void setUser_sex(String user_sex)
+		{
+			this.user_sex = user_sex;
+		}
+
+		public int getUser_zan()
+		{
+			return user_zan;
+		}
+
+		public void setUser_zan(int user_zan)
+		{
+			this.user_zan = user_zan;
+		}
+
+		public String getUser_sign()
+		{
+			return user_sign;
+		}
+
+		public void setUser_sign(String user_sign)
+		{
+			this.user_sign = user_sign;
+		}
 	}
 }
