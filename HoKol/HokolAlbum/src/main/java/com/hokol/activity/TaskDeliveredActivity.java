@@ -7,24 +7,18 @@ import android.os.Bundle;
 import com.hokol.R;
 import com.hokol.base.common.BaseAppCompatActivity;
 
-/**
- * 发布任务
- *
- * @author yline 2017/4/1 -- 17:53
- * @version 1.0.0
- */
-public class TaskPublishActivity extends BaseAppCompatActivity
+public class TaskDeliveredActivity extends BaseAppCompatActivity
 {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_task_publish);
+		setContentView(R.layout.activity_task_delivered);
 	}
-
+	
 	public static void actionStart(Context context)
 	{
-		context.startActivity(new Intent(context, TaskPublishActivity.class));
+		context.startActivity(new Intent(context, TaskDeliveredActivity.class));
 	}
 }

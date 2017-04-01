@@ -30,11 +30,14 @@
         <activity android:name=".activity.TaskDetailActivity"/>
         <activity android:name=".activity.UserFansActivity"/>
         <activity android:name=".activity.UserCareActivity"/>
-        <activity android:name=".activity.UserTaskActivity"/>
+        <activity android:name=".activity.UserTaskCollectionActivity"/>
         <activity android:name=".activity.UserAccountActivity"/>
         <activity android:name=".activity.UserVIPActivity"/>
         <activity android:name=".activity.UserRechargeActivity"/>
         <activity android:name=".activity.UserSettingActivity"/>
+        <activity android:name=".activity.UserTaskMessageActivity"/>
+        <activity android:name=".activity.TaskAssignedActivity"/>
+        <activity android:name=".activity.TaskDeliveredActivity"/>
         <!-- 登入Enter -->
         <!--
          <activity
@@ -47,20 +50,11 @@
              </intent-filter>
          </activity>
         -->
-        <activity android:name=".activity.EnterLoginPhonePwdActivity">
-        </activity>
-        <activity android:name=".activity.EnterRegisterPhoneActivity">
-        </activity>
-        <activity android:name=".activity.EnterForgetPwdActivity">
-        </activity>
-        <activity android:name=".activity.EnterForgetPwdNewActivity">
-        </activity>
-        <activity android:name=".activity.EnterRegisterCompleteInfoActivity">
-        </activity>
-        <activity android:name=".activity.UserMessageActivity">
-        </activity>
-        <activity android:name=".activity.TaskAssignedActivity">
-        </activity>
+        <activity android:name=".activity.EnterLoginPhonePwdActivity"/>
+        <activity android:name=".activity.EnterRegisterPhoneActivity"/>
+        <activity android:name=".activity.EnterForgetPwdActivity"/>
+        <activity android:name=".activity.EnterForgetPwdNewActivity"/>
+        <activity android:name=".activity.EnterRegisterCompleteInfoActivity"/>
     </application>
 
 </manifest>

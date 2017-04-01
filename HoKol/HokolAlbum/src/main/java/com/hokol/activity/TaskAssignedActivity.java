@@ -20,6 +20,12 @@ import com.hokol.fragment.TaskAssignedTradeFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 已发布任务
+ *
+ * @author yline 2017/4/1 -- 17:54
+ * @version 1.0.0
+ */
 public class TaskAssignedActivity extends BaseAppCompatActivity
 {
 	@Override

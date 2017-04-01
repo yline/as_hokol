@@ -7,18 +7,18 @@ import android.os.Bundle;
 import com.hokol.R;
 import com.hokol.base.common.BaseAppCompatActivity;
 
-public class UserTaskActivity extends BaseAppCompatActivity
+public class UserTaskMessageActivity extends BaseAppCompatActivity
 {
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_user_task);
+		setContentView(R.layout.activity_user_task_message);
 	}
-
+	
 	public static void actionStart(Context context)
 	{
-		context.startActivity(new Intent(context, UserTaskActivity.class));
+		context.startActivity(new Intent(context, UserTaskMessageActivity.class));
 	}
 }
