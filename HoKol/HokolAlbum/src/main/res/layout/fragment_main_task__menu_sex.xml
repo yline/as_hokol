@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_main_task_menu_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_space_normal"
+        android:text="性别"
+        android:textColor="@android:color/black"/>
+
+    <com.hokol.medium.widget.labellayout.LabelFlowLayout
+        android:id="@+id/label_flow_main_task_menu_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_main_task_menu_sex">
+    </com.hokol.medium.widget.labellayout.LabelFlowLayout>
+
+    <Button
+        android:id="@+id/btn_main_task_menu_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_flow_main_task_menu_sex"
+        android:layout_marginBottom="@dimen/default_space_large"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/widget_item_label_bg_selected"
+        android:text="确定"
+        android:textColor="@android:color/holo_red_light"/>
+</RelativeLayout>

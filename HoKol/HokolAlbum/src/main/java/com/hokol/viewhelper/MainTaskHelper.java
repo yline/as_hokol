@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -16,6 +17,7 @@ import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.medium.widget.DropMenuWidget;
 import com.hokol.medium.widget.LabelClickableWidget;
+import com.hokol.medium.widget.SecondaryWidget;
 import com.hokol.medium.widget.labellayout.LabelFlowLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
@@ -25,6 +27,7 @@ import com.hokol.medium.widget.transform.CircleTransform;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Task helper
@@ -42,7 +45,7 @@ public class MainTaskHelper
 	}
 
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 下拉菜单 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-	private String headers[] = {"分类", "金额", "地区"};
+	private String headers[] = {"分类", "男/女", "地区"};
 
 	private String provinceList[] = {"不限", "武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州",
 			"武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州",
@@ -59,16 +62,17 @@ public class MainTaskHelper
 		View classifyView = initClassifyView();
 		contentViewList.add(classifyView);
 
-		View moneyView = initClassifyView();
-		contentViewList.add(moneyView);
-
-		View areaView = initFilterView();
+		View sexView = initSexView();
+		contentViewList.add(sexView);
+		
+		View areaView = initAreaView();
 		contentViewList.add(areaView);
 
 		View dropMenuView = dropMenuWidget.start(context, Arrays.asList(headers), contentViewList);
 		linearLayout.addView(dropMenuView);
 	}
 
+	// 分类
 	private View initClassifyView()
 	{
 		View areaView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_classify, null);
@@ -84,14 +88,71 @@ public class MainTaskHelper
 		};
 		labelClickableWidget.setDataList(Arrays.asList("全部", "网红", "主播", "演员", "模特", "歌手", "体育"));
 
+		Button btnClassify = (Button) areaView.findViewById(R.id.btn_main_task_menu_classify);
+		btnClassify.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				dropMenuWidget.closeMenu();
+			}
+		});
+
 		return areaView;
 	}
 
-	private View initFilterView()
+	// 男女
+	private View initSexView()
 	{
-		View filterView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_filter, null);
+		View sexView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_sex, null);
 
-		return filterView;
+		final LabelFlowLayout labelFlowLayout = (LabelFlowLayout) sexView.findViewById(R.id.label_flow_main_task_menu_sex);
+		LabelClickableWidget labelClickableWidget = new LabelClickableWidget(context)
+		{
+			@Override
+			protected LabelFlowLayout getLabelFlowLayout()
+			{
+				return labelFlowLayout;
+			}
+		};
+		labelClickableWidget.setDataList(Arrays.asList("不限", "女神", "男神"));
+
+		Button btnSex = (Button) sexView.findViewById(R.id.btn_main_task_menu_sex);
+		btnSex.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				dropMenuWidget.closeMenu();
+			}
+		});
+
+		return sexView;
+	}
+
+	private SecondaryWidget secondaryWidget;
+
+	// 地区
+	private View initAreaView()
+	{
+		// View areaView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_area, null);
+
+		secondaryWidget = new SecondaryWidget();
+		View secondaryView = secondaryWidget.start(context, new SecondaryWidget.OnSecondaryCallback()
+		{
+			@Override
+			public void onSecondarySelected(String first, String second)
+			{
+				dropMenuWidget.closeMenu();
+			}
+		});
+		
+		return secondaryView;
+	}
+
+	public void setAreaData(Map<String, List<String>> map)
+	{
+		secondaryWidget.setDataMap(map);
 	}
 
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Refresh %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */

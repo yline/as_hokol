@@ -17,7 +17,7 @@ public class HeightListView extends ListView
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
 	{
 		// 设置最大高度
-		heightMeasureSpec = MeasureSpec.makeMeasureSpec(UIScreenUtil.getScreenHeight(getContext()) / 2, MeasureSpec.AT_MOST);
+		heightMeasureSpec = MeasureSpec.makeMeasureSpec(UIScreenUtil.getScreenHeight(getContext()) / 3, MeasureSpec.AT_MOST);
 
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 	}
