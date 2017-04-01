@@ -46,7 +46,7 @@ public class MainCareHelper
 			}
 		});
 
-		recyclerAdapter = new MainCareHelper.RecycleAdapter();
+		recyclerAdapter = new RecycleAdapter();
 		recyclerView.setAdapter(recyclerAdapter);
 	}
 

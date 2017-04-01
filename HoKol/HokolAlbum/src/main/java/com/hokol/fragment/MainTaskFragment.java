@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.hokol.R;
+import com.hokol.activity.TaskAssignedActivity;
 import com.hokol.activity.TaskDetailActivity;
 import com.hokol.activity.TaskPublishActivity;
 import com.hokol.application.IApplication;
@@ -107,12 +108,21 @@ public class MainTaskFragment extends BaseFragment
 		});
 		mainTaskHelper.setRecycleData();
 
+		// 头部
 		parentView.findViewById(R.id.ll_main_task_action_task).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
 				TaskPublishActivity.actionStart(getContext());
+			}
+		});
+		parentView.findViewById(R.id.ll_main_task_action_history).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				TaskAssignedActivity.actionStart(getContext());
 			}
 		});
 	}
