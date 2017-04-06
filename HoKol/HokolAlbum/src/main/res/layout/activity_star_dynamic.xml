@@ -65,6 +65,14 @@
                 android:paddingTop="@dimen/default_space_normal"
                 android:text="点赞"
                 android:textColor="@android:color/holo_red_light"/>
+
+            <!-- 送礼的DialogFragment -->
+            <FrameLayout
+                android:id="@+id/fl_star_dynamic_gift"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+            </FrameLayout>
         </RelativeLayout>
 
         <TextView

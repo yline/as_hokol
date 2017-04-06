@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -145,16 +148,37 @@ public class StarInfoPrivateFragment extends BaseFragment
 			@Override
 			public void onClick(View v)
 			{
-				IApplication.toast("点击弹框");
 				// 弹框, popWindow
-				lockRelativeLayout.setVisibility(View.GONE);
-
 				View contentView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_star_info_pop_window, null);
 
-				Dialog dialog = new Dialog(getContext());
+				Dialog dialog = new Dialog(getContext(), R.style.AppDialog_Default);
 				dialog.setContentView(contentView);
-				dialog.show();
 
+				Window dialogWindow = dialog.getWindow();
+				dialogWindow.setGravity(Gravity.BOTTOM);
+
+				WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+				lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+				lp.height = ViewGroup.LayoutParams.MATCH_PARENT;
+				dialog.onWindowAttributesChanged(lp);
+
+				dialog.setOnShowListener(new DialogInterface.OnShowListener()
+				{
+					@Override
+					public void onShow(DialogInterface dialog)
+					{
+						IApplication.toast("点击弹框");
+						// 延时200ms
+						IApplication.getHandler().postDelayed(new Runnable()
+						{
+							@Override
+							public void run()
+							{
+								lockRelativeLayout.setVisibility(View.GONE);
+							}
+						}, 200);
+					}
+				});
 				dialog.setOnDismissListener(new DialogInterface.OnDismissListener()
 				{
 					@Override
@@ -163,6 +187,8 @@ public class StarInfoPrivateFragment extends BaseFragment
 						lockRelativeLayout.setVisibility(View.VISIBLE);
 					}
 				});
+
+				dialog.show();
 			}
 		});
 	}

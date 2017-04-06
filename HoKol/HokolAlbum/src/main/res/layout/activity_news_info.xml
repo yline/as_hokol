@@ -9,7 +9,7 @@
         android:id="@+id/rl_news_info_title"
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:background="@android:color/holo_red_light">
+        android:background="@color/hokolRed">
 
         <ImageView
             android:id="@+id/iv_news_info_back"

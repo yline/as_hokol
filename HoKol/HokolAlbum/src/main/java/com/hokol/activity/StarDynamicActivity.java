@@ -3,12 +3,14 @@ package com.hokol.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.base.adapter.ViewHolder;
 import com.hokol.base.common.BaseAppCompatActivity;
+import com.hokol.fragment.StarDynamicGiftFragment;
 
 /**
  * 动态信息详情界面
@@ -20,6 +22,8 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 {
 	private ViewHolder starDynamicViewHolder;
 
+	private StarDynamicGiftFragment starDynamicGiftFragment;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -27,6 +31,8 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 		setContentView(R.layout.activity_star_dynamic);
 
 		starDynamicViewHolder = new ViewHolder(this.getWindow().getDecorView());
+		starDynamicGiftFragment = new StarDynamicGiftFragment();
+
 		starDynamicViewHolder.get(R.id.tv_star_dynamic_care_or_cancel).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -41,6 +47,7 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 			public void onClick(View v)
 			{
 				IApplication.toast("点击送礼物");
+				getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.fl_star_dynamic_gift, starDynamicGiftFragment).commit();
 			}
 		});
 		starDynamicViewHolder.get(R.id.tv_star_dynamic_praise).setOnClickListener(new View.OnClickListener()
@@ -51,7 +58,6 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 				IApplication.toast("点击点赞");
 			}
 		});
-
 
 		starDynamicViewHolder.get(R.id.ll_star_dynamic_user).setOnClickListener(new View.OnClickListener()
 		{
