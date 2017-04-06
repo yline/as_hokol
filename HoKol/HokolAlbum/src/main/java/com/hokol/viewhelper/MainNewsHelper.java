@@ -15,6 +15,7 @@ import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.adapter.ViewHolder;
 import com.hokol.base.log.LogFileUtil;
 import com.hokol.base.utils.TimeConvertUtil;
+import com.hokol.base.utils.UIScreenUtil;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
@@ -49,7 +50,14 @@ public class MainNewsHelper
 	{
 		RecyclerView recyclerView = (RecyclerView) parentView.findViewById(R.id.recycle_main_news);
 		recyclerView.setLayoutManager(new LinearLayoutManager(context));
-		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(context));
+		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(context)
+		{
+			@Override
+			protected int getVerticalDividePaddingLeft()
+			{
+				return UIScreenUtil.dp2px(context, 10);
+			}
+		});
 
 		recyclerAdapter = new CommonNewsAdapter();
 

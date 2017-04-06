@@ -54,8 +54,8 @@ public class DefaultLinearItemDecoration extends RecyclerView.ItemDecoration
 
 	private void drawVertical(Canvas c, RecyclerView parent)
 	{
-		final int left = parent.getPaddingLeft();
-		final int right = parent.getWidth() - parent.getPaddingRight();
+		final int left = parent.getPaddingLeft() + getVerticalDividePaddingLeft();
+		final int right = parent.getWidth() - parent.getPaddingRight() - getVerticalDividePaddingRight();
 		final int childTotalCount = parent.getAdapter().getItemCount();
 		final int childCount = parent.getChildCount();
 
@@ -184,5 +184,23 @@ public class DefaultLinearItemDecoration extends RecyclerView.ItemDecoration
 		return 0;
 	}
 
+	/**
+	 * 分割线距离左边的宽度
+	 *
+	 * @return px unit
+	 */
+	protected int getVerticalDividePaddingLeft()
+	{
+		return 0;
+	}
 
+	/**
+	 * 分割线距离右边的宽度
+	 *
+	 * @return px unit
+	 */
+	protected int getVerticalDividePaddingRight()
+	{
+		return 0;
+	}
 }

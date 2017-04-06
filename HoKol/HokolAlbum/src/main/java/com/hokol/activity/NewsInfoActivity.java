@@ -23,7 +23,7 @@ public class NewsInfoActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_news_info);
 
-		findViewById(R.id.tv_news_info_back).setOnClickListener(new View.OnClickListener()
+		findViewById(R.id.iv_news_info_back).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)

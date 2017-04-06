@@ -8,7 +8,6 @@ import android.support.design.widget.TabLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.hokol.R;
 
@@ -68,18 +67,15 @@ public class MainHelper
 	 * @param context
 	 * @param tabLayout
 	 * @param icons
-	 * @param texts
 	 */
-	public void initTabLayout(Context context, TabLayout tabLayout, int[] icons, int[] texts)
+	public void initTabLayout(Context context, TabLayout tabLayout, int[] icons)
 	{
 		for (int i = 0; i < icons.length; i++)
 		{
 			View view = LayoutInflater.from(context).inflate(R.layout.item_main_tab, null);
+
 			ImageView imageView = (ImageView) view.findViewById(R.id.iv_item_main_tab);
 			imageView.setBackgroundResource(icons[i]);
-
-			TextView textView = (TextView) view.findViewById(R.id.tv_item_main_tab);
-			textView.setText(texts[i]);
 
 			tabLayout.addTab(tabLayout.newTab().setCustomView(view));
 		}

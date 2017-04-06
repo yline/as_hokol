@@ -1,13 +1,6 @@
 <resources>
     <string name="app_name">红客</string>
 
-    <!-- 首页内容 -->
-    <string name="main_tab_news">新闻</string>
-    <string name="main_tab_care">关注</string>
-    <string name="main_tab_home">首页</string>
-    <string name="main_tab_task">任务</string>
-    <string name="main_tab_mine">我的</string>
-
     <!-- 首页标题 -->
     <string name="main_title_news">红客头条</string>
     <string name="main_title_care">关注</string>

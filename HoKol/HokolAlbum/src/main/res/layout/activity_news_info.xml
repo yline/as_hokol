@@ -8,24 +8,25 @@
     <RelativeLayout
         android:id="@+id/rl_news_info_title"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="46dp"
         android:background="@android:color/holo_red_light">
 
-        <TextView
-            android:id="@+id/tv_news_info_back"
+        <ImageView
+            android:id="@+id/iv_news_info_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:padding="10dp"
-            android:text="《="
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/default_text_size_large"/>
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/default_space_normal"
+            android:src="@drawable/news_back"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="新闻详情页"
+            android:text="@string/main_title_news"
             android:textColor="@android:color/white"
             android:textSize="@dimen/default_text_size_large"/>
     </RelativeLayout>

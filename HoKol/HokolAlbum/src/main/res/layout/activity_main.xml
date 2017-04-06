@@ -13,6 +13,12 @@
         android:layout_above="@+id/tab_layout_main">
     </FrameLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_above="@+id/tab_layout_main"
+        android:background="@color/hokolGray"/>
+
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout_main"
         android:layout_width="match_parent"

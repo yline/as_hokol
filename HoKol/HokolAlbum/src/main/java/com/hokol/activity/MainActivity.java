@@ -44,32 +44,28 @@ public class MainActivity extends BaseAppCompatActivity
 
 	public enum TAB
 	{
-		News(0, R.drawable.main_tab_news, R.string.main_tab_news),
+		News(0, R.drawable.main_tab_news),
 
-		Care(1, R.drawable.main_tab_care, R.string.main_tab_care),
+		Care(1, R.drawable.main_tab_care),
 
-		Home(2, R.drawable.main_tab_home, R.string.main_tab_home),
+		Home(2, R.drawable.main_tab_home),
 
-		Task(3, R.drawable.main_tab_task, R.string.main_tab_task),
+		Task(3, R.drawable.main_tab_task),
 
-		Mine(4, R.drawable.main_tab_mine, R.string.main_tab_mine);
+		Mine(4, R.drawable.main_tab_mine);
 
 		private final int position;
 
 		private final int icon;
 
-		private final int text;
-
 		/**
 		 * @param position 位置
 		 * @param icon     tab资源
-		 * @param text     tab内容
 		 */
-		TAB(int position, int icon, int text)
+		TAB(int position, int icon)
 		{
 			this.position = position;
 			this.icon = icon;
-			this.text = text;
 		}
 	}
 
@@ -103,9 +99,8 @@ public class MainActivity extends BaseAppCompatActivity
 
 	private void initView()
 	{
-		int[] text = {TAB.News.text, TAB.Care.text, TAB.Home.text, TAB.Task.text, TAB.Mine.text};
 		int[] icons = {TAB.News.icon, TAB.Care.icon, TAB.Home.icon, TAB.Task.icon, TAB.Mine.icon};
-		mainHelper.initTabLayout(this, tabLayout, icons, text);
+		mainHelper.initTabLayout(this, tabLayout, icons);
 
 		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
 		{

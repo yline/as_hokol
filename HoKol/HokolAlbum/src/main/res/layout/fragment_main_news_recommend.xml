@@ -4,7 +4,10 @@
     android:id="@+id/rl_main_news_recommend"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/fragment_main_news_item_margin_out">
+    android:paddingBottom="@dimen/default_space_medium"
+    android:paddingLeft="@dimen/default_space_normal"
+    android:paddingRight="@dimen/default_space_normal"
+    android:paddingTop="@dimen/default_space_normal">
 
     <ImageView
         android:id="@+id/iv_main_news_recommend"
@@ -17,19 +20,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/iv_main_news_recommend"
-        android:layout_marginBottom="@dimen/fragment_main_news_item_margin_in"
-        android:layout_marginLeft="@dimen/fragment_main_news_item_margin_in"
-        />
+        android:layout_marginBottom="@dimen/default_space_medium"
+        android:layout_marginLeft="@dimen/default_space_medium"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tv_main_news_recommend_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/iv_main_news_recommend"
-        android:layout_marginBottom="@dimen/fragment_main_news_item_margin_in"
-        android:layout_marginLeft="@dimen/fragment_main_news_item_margin_in"
+        android:layout_marginBottom="@dimen/default_space_medium"
+        android:layout_marginLeft="@dimen/default_space_medium"
         android:layout_toRightOf="@+id/tv_main_news_recommend_origin"
-        />
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tv_main_news_recommend_title"
@@ -37,5 +40,6 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/tv_main_news_recommend_origin"
         android:layout_centerHorizontal="true"
-        android:maxLines="2"/>
+        android:maxLines="2"
+        android:visibility="gone"/>
 </RelativeLayout>
