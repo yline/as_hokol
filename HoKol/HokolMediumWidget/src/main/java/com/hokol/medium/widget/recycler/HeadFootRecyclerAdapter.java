@@ -16,16 +16,16 @@ import com.hokol.base.adapter.CommonRecyclerViewHolder;
  * @author yline 2017/3/2 --> 17:33
  * @version 1.0.0
  */
-public abstract class HeadFootRecycleAdapter<T> extends CommonRecyclerAdapter<T>
+public abstract class HeadFootRecyclerAdapter<T> extends CommonRecyclerAdapter<T>
 {
-	// sList的最大数目
-	private static final int BASE_ITEM_TYPE_HEADER = 100000;
+	// 头部的开始标签
+	private static final int BASE_ITEM_TYPE_HEADER = 1024;
 
-	// 200000 - 100000 是头部布局的最大个数
-	private static final int BASE_ITEM_TYPE_FOOTER = 200000;
+	// 底部最大个数：100
+	private static final int BASE_ITEM_TYPE_FOOTER = Integer.MAX_VALUE - 1024;
 
 	// 头布局
-	private SparseArrayCompat<View> headerViewArray = new SparseArrayCompat<>();
+	private SparseArrayCompat<View> headViewArray = new SparseArrayCompat<>();
 
 	// 底部布局
 	private SparseArrayCompat<View> footViewArray = new SparseArrayCompat<>();
@@ -40,9 +40,9 @@ public abstract class HeadFootRecycleAdapter<T> extends CommonRecyclerAdapter<T>
 	@Override
 	public CommonRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
 	{
-		if (headerViewArray.get(viewType) != null)
+		if (headViewArray.get(viewType) != null)
 		{
-			return new CommonRecyclerViewHolder(headerViewArray.get(viewType));
+			return new CommonRecyclerViewHolder(headViewArray.get(viewType));
 		}
 		else if (footViewArray.get(viewType) != null)
 		{
@@ -57,7 +57,7 @@ public abstract class HeadFootRecycleAdapter<T> extends CommonRecyclerAdapter<T>
 	{
 		if (isHeaderViewPos(position))
 		{
-			return headerViewArray.keyAt(position);
+			return headViewArray.keyAt(position);
 		}
 		else if (isFooterViewPos(position))
 		{
@@ -108,7 +108,7 @@ public abstract class HeadFootRecycleAdapter<T> extends CommonRecyclerAdapter<T>
 				{
 					int viewType = getItemViewType(position);
 
-					if (headerViewArray.get(viewType) != null)
+					if (headViewArray.get(viewType) != null)
 					{
 						return gridLayoutManager.getSpanCount();
 					}
@@ -158,9 +158,9 @@ public abstract class HeadFootRecycleAdapter<T> extends CommonRecyclerAdapter<T>
 		return position >= getHeadersCount() + sList.size();
 	}
 
-	public void addHeaderView(View view)
+	public void addHeadView(View view)
 	{
-		headerViewArray.put(headerViewArray.size() + BASE_ITEM_TYPE_HEADER, view);
+		headViewArray.put(headViewArray.size() + BASE_ITEM_TYPE_HEADER, view);
 	}
 
 	public void addFootView(View view)
@@ -170,7 +170,7 @@ public abstract class HeadFootRecycleAdapter<T> extends CommonRecyclerAdapter<T>
 
 	public int getHeadersCount()
 	{
-		return headerViewArray.size();
+		return headViewArray.size();
 	}
 
 	public int getFootersCount()

@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.base.utils.UIResizeUtil;
-import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
+import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.test.R;
 
 public abstract class BaseTestFragment extends BaseFragment
@@ -74,12 +74,12 @@ public abstract class BaseTestFragment extends BaseFragment
 		return recycleView;
 	}
 
-	protected HeadFootRecycleAdapter getRecycleAdapter()
+	protected HeadFootRecyclerAdapter getRecycleAdapter()
 	{
 		return new RecycleAdapter();
 	}
 
-	private class RecycleAdapter extends HeadFootRecycleAdapter<String>
+	private class RecycleAdapter extends HeadFootRecyclerAdapter<String>
 	{
 
 		@Override

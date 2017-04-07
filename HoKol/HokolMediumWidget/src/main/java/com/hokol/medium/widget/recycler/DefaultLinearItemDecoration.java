@@ -25,9 +25,9 @@ public class DefaultLinearItemDecoration extends RecyclerView.ItemDecoration
 
 	public DefaultLinearItemDecoration(Context context)
 	{
-		if (-1 != getDividerResourceId())
+		if (-1 != getDivideResourceId())
 		{
-			mDivider = ContextCompat.getDrawable(context, getDividerResourceId());
+			mDivider = ContextCompat.getDrawable(context, getDivideResourceId());
 		}
 		else
 		{
@@ -129,12 +129,20 @@ public class DefaultLinearItemDecoration extends RecyclerView.ItemDecoration
 	 */
 	private boolean isDrawDivider(int totalCount, int currentPosition)
 	{
-		if (getHeadNumber() > currentPosition)
+		// 头部
+		if (getNonDivideHeadNumber() > currentPosition)
 		{
 			return false;
 		}
 
-		if (isLastDivideDisappear() && (currentPosition == totalCount - 1))
+		// 底部
+		if (currentPosition > totalCount - 1 - getNonDivideFootNumber())
+		{
+			return false;
+		}
+
+		// 最后一个
+		if ((currentPosition == totalCount - 1 - getNonDivideFootNumber()) && !isDivideLastLine())
 		{
 			return false;
 		}
@@ -155,31 +163,41 @@ public class DefaultLinearItemDecoration extends RecyclerView.ItemDecoration
 	}
 
 	/**
-	 * 最后一个分割线是否绘制
-	 *
-	 * @return
-	 */
-	protected boolean isLastDivideDisappear()
-	{
-		return true;
-	}
-
-	/**
 	 * 分割线资源
 	 *
 	 * @return
 	 */
-	protected int getDividerResourceId()
+	protected int getDivideResourceId()
 	{
 		return -1;
 	}
 
 	/**
-	 * 添加的头部的数量
+	 * 最后一个分割线是否绘制
 	 *
 	 * @return
 	 */
-	protected int getHeadNumber()
+	protected boolean isDivideLastLine()
+	{
+		return false;
+	}
+
+	/**
+	 * 确定头部有几个不绘制分割线
+	 *
+	 * @return
+	 */
+	protected int getNonDivideHeadNumber()
+	{
+		return 0;
+	}
+
+	/**
+	 * 确定底部有几个不绘制分割线
+	 *
+	 * @return
+	 */
+	protected int getNonDivideFootNumber()
 	{
 		return 0;
 	}

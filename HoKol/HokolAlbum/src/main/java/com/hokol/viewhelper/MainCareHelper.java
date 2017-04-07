@@ -12,13 +12,13 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
-import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
+import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 
 import java.util.List;
 
 public class MainCareHelper
 {
-	private HeadFootRecycleAdapter recyclerAdapter;
+	private HeadFootRecyclerAdapter recyclerAdapter;
 
 	private OnCareRecycleClickListener careRecycleClickListener;
 
@@ -40,7 +40,7 @@ public class MainCareHelper
 		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(sContext)
 		{
 			@Override
-			protected int getDividerResourceId()
+			protected int getDivideResourceId()
 			{
 				return R.drawable.widget_recycler_divider_gray_normal;
 			}
@@ -60,7 +60,7 @@ public class MainCareHelper
 		recyclerAdapter.setDataList(dataList);
 	}
 
-	private class RecycleAdapter extends HeadFootRecycleAdapter<VNewsSingleBean>
+	private class RecycleAdapter extends HeadFootRecyclerAdapter<VNewsSingleBean>
 	{
 		@Override
 		public int getItemRes()

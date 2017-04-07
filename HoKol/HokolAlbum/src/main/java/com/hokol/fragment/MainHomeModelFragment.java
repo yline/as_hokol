@@ -17,7 +17,7 @@ import com.hokol.application.IApplication;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
-import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
+import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class MainHomeModelFragment extends BaseFragment
 
 	private String mParam1;
 
-	private HeadFootRecycleAdapter mainHomeModelAdapter;
+	private HeadFootRecyclerAdapter mainHomeModelAdapter;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
@@ -72,7 +72,7 @@ public class MainHomeModelFragment extends BaseFragment
 		{
 
 			@Override
-			protected int getDividerResourceId()
+			protected int getDivideResourceId()
 			{
 				return R.drawable.widget_recycler_divider_white_small;
 			}
@@ -89,7 +89,7 @@ public class MainHomeModelFragment extends BaseFragment
 		}
 		mainHomeModelAdapter.setDataList(dataList);
 
-		mainHomeModelAdapter.setOnClickListener(new HeadFootRecycleAdapter.OnClickListener<String>()
+		mainHomeModelAdapter.setOnClickListener(new HeadFootRecyclerAdapter.OnClickListener<String>()
 		{
 			@Override
 			public void onClick(View view, String string, int position)
@@ -135,7 +135,7 @@ public class MainHomeModelFragment extends BaseFragment
 		});
 	}
 
-	private class MainHomeModelAdapter extends HeadFootRecycleAdapter<String>
+	private class MainHomeModelAdapter extends HeadFootRecyclerAdapter<String>
 	{
 
 		@Override

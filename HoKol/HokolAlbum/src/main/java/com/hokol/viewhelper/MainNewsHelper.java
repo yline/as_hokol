@@ -18,7 +18,7 @@ import com.hokol.base.utils.TimeConvertUtil;
 import com.hokol.base.utils.UIScreenUtil;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
-import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
+import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public class MainNewsHelper
 	}
 
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% RecyclerView 主布局 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-	private HeadFootRecycleAdapter recyclerAdapter;
+	private HeadFootRecyclerAdapter recyclerAdapter;
 
 	/**
 	 * 初始化Recycle控件
@@ -84,7 +84,7 @@ public class MainNewsHelper
 		recommendViewHolder.get(R.id.rl_main_news_recommend).setOnClickListener(listener);
 	}
 
-	private class CommonNewsAdapter extends HeadFootRecycleAdapter<VNewsSingleBean>
+	private class CommonNewsAdapter extends HeadFootRecyclerAdapter<VNewsSingleBean>
 	{
 
 		@Override
@@ -122,7 +122,7 @@ public class MainNewsHelper
 	{
 		recommendViewHolder = new ViewHolder(recommendView);
 
-		recyclerAdapter.addHeaderView(recommendView);
+		recyclerAdapter.addHeadView(recommendView);
 	}
 
 	/**

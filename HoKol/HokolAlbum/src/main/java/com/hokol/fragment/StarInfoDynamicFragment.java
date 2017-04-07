@@ -20,7 +20,7 @@ import com.hokol.base.common.BaseFragment;
 import com.hokol.base.utils.UIResizeUtil;
 import com.hokol.base.utils.UIScreenUtil;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
-import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
+import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import java.util.List;
 
 public class StarInfoDynamicFragment extends BaseFragment
 {
-	private HeadFootRecycleAdapter starInfoDynamicAdapter;
+	private HeadFootRecyclerAdapter starInfoDynamicAdapter;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
@@ -52,7 +52,7 @@ public class StarInfoDynamicFragment extends BaseFragment
 		recyclerView.addItemDecoration(new DefaultGridItemDecoration(getContext())
 		{
 			@Override
-			protected int getDividerResourceId()
+			protected int getDivideResourceId()
 			{
 				return R.drawable.widget_recycler_divider_white_small;
 			}
@@ -113,7 +113,7 @@ public class StarInfoDynamicFragment extends BaseFragment
 		});
 	}
 
-	private class StarInfoDynamicAdapter extends HeadFootRecycleAdapter<String>
+	private class StarInfoDynamicAdapter extends HeadFootRecyclerAdapter<String>
 	{
 		private final int border_square;
 

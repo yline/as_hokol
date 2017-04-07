@@ -1,5 +1,6 @@
 package com.hokol.activity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +8,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
@@ -59,6 +65,20 @@ public class StarInfoActivity extends BaseAppCompatActivity
 			public void onGiveGift()
 			{
 				IApplication.toast("点击送红豆");
+				View view = LayoutInflater.from(StarInfoActivity.this).inflate(R.layout.activity_star_info_head_gift_dialog, null);
+
+				Dialog dialog = new Dialog(StarInfoActivity.this, R.style.AppDialog_Default);// android.R.style.Theme_Holo_Light_Dialog_NoActionBar
+				dialog.setContentView(view);
+
+				Window dialogWindow = dialog.getWindow();
+				dialogWindow.setGravity(Gravity.BOTTOM);
+
+				WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+				lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+				lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+				dialog.onWindowAttributesChanged(lp);
+
+				dialog.show();
 			}
 		});
 

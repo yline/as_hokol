@@ -26,7 +26,7 @@ import com.hokol.base.common.BaseFragment;
 import com.hokol.base.utils.UIResizeUtil;
 import com.hokol.base.utils.UIScreenUtil;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
-import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
+import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 
 import java.util.ArrayList;
@@ -81,7 +81,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 		recyclerView.addItemDecoration(new DefaultGridItemDecoration(getContext())
 		{
 			@Override
-			protected int getDividerResourceId()
+			protected int getDivideResourceId()
 			{
 				return R.drawable.widget_recycler_divider_white_small;
 			}
@@ -193,7 +193,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 		});
 	}
 
-	private class StarInfoPrivateAdapter extends HeadFootRecycleAdapter<String>
+	private class StarInfoPrivateAdapter extends HeadFootRecyclerAdapter<String>
 	{
 		private final int border_square;
 

@@ -19,7 +19,7 @@ import com.hokol.base.common.BaseFragment;
 import com.hokol.base.utils.UIScreenUtil;
 import com.hokol.medium.widget.ADWidget;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
-import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
+import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 
 import java.util.ArrayList;
@@ -64,7 +64,7 @@ public class MainHomeRedFragment extends BaseFragment
 		{
 
 			@Override
-			protected int getDividerResourceId()
+			protected int getDivideResourceId()
 			{
 				return R.drawable.widget_recycler_divider_white_small;
 			}
@@ -78,7 +78,7 @@ public class MainHomeRedFragment extends BaseFragment
 
 		recycleAdapter = new MainNewsHotAdapter();
 		recyclerView.setAdapter(recycleAdapter);
-		recycleAdapter.setOnClickListener(new HeadFootRecycleAdapter.OnClickListener<String>()
+		recycleAdapter.setOnClickListener(new HeadFootRecyclerAdapter.OnClickListener<String>()
 		{
 			@Override
 			public void onClick(View view, String string, int position)
@@ -138,7 +138,7 @@ public class MainHomeRedFragment extends BaseFragment
 	/**
 	 * RecycleView 添加头部
 	 */
-	private void initRecycleViewHead(HeadFootRecycleAdapter wrapperAdapter)
+	private void initRecycleViewHead(HeadFootRecyclerAdapter wrapperAdapter)
 	{
 		// AD
 		ADWidget adWidget = new ADWidget()
@@ -164,16 +164,16 @@ public class MainHomeRedFragment extends BaseFragment
 				Glide.with(getContext()).load(DeleteConstant.getUrlRec()).centerCrop().placeholder(R.drawable.global_load_failed).into(imageView);
 			}
 		});
-		wrapperAdapter.addHeaderView(adView);
+		wrapperAdapter.addHeadView(adView);
 
 		// 分割线
 		View divideView = new View(getContext());
 		divideView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 10)));
 		divideView.setBackgroundResource(android.R.color.darker_gray);
-		wrapperAdapter.addHeaderView(divideView);
+		wrapperAdapter.addHeadView(divideView);
 	}
 
-	private class MainNewsHotAdapter extends HeadFootRecycleAdapter<String>
+	private class MainNewsHotAdapter extends HeadFootRecyclerAdapter<String>
 	{
 		@Override
 		public int getItemRes()

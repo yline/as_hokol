@@ -20,7 +20,7 @@ import com.hokol.medium.widget.LabelClickableWidget;
 import com.hokol.medium.widget.SecondaryWidget;
 import com.hokol.medium.widget.labellayout.LabelFlowLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
-import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
+import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.transform.CircleTransform;
 
@@ -222,7 +222,7 @@ public class MainTaskHelper
 		taskRecycleAdapter.setDataList(list);
 	}
 
-	private class TaskRecycleAdapter extends HeadFootRecycleAdapter
+	private class TaskRecycleAdapter extends HeadFootRecyclerAdapter
 	{
 
 		@Override

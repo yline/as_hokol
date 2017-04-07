@@ -18,7 +18,7 @@ import com.hokol.base.common.BaseFragment;
 import com.hokol.base.utils.UIScreenUtil;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
-import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
+import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.test.R;
 import com.hokol.test.common.BaseTestFragment;
 
@@ -85,18 +85,18 @@ public class RecycleActivity extends BaseAppCompatActivity
 			recyclerView.addItemDecoration(new DefaultLinearItemDecoration(getContext())
 			{
 				@Override
-				protected int getDividerResourceId()
+				protected int getDivideResourceId()
 				{
 					return R.drawable.widget_recycler_divider_gray_normal;
 				}
 
 				@Override
-				protected int getHeadNumber()
+				protected int getNonDivideHeadNumber()
 				{
 					return 2;
 				}
 			});
-			HeadFootRecycleAdapter recyclerAdapter = getRecycleAdapter();
+			HeadFootRecyclerAdapter recyclerAdapter = getRecycleAdapter();
 			recyclerView.setAdapter(recyclerAdapter);
 
 			List<String> dataList = new ArrayList<>();
@@ -109,12 +109,12 @@ public class RecycleActivity extends BaseAppCompatActivity
 			View grayView = new View(getContext());
 			grayView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 30)));
 			grayView.setBackgroundResource(android.R.color.holo_green_light);
-			recyclerAdapter.addHeaderView(grayView);
+			recyclerAdapter.addHeadView(grayView);
 
 			View redView = new View(getContext());
 			redView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 30)));
 			redView.setBackgroundResource(android.R.color.holo_red_light);
-			recyclerAdapter.addHeaderView(redView);
+			recyclerAdapter.addHeadView(redView);
 		}
 	}
 
@@ -134,7 +134,7 @@ public class RecycleActivity extends BaseAppCompatActivity
 			recyclerView.addItemDecoration(new DefaultGridItemDecoration(getContext())
 			{
 				@Override
-				protected int getDividerResourceId()
+				protected int getDivideResourceId()
 				{
 					return R.drawable.widget_recycler_divider_white_small;
 				}
@@ -145,7 +145,7 @@ public class RecycleActivity extends BaseAppCompatActivity
 					return 0;
 				}
 			});
-			HeadFootRecycleAdapter recyclerAdapter = getRecycleAdapter();
+			HeadFootRecyclerAdapter recyclerAdapter = getRecycleAdapter();
 			recyclerView.setAdapter(recyclerAdapter);
 
 			List<String> dataList = new ArrayList<>();
@@ -158,12 +158,12 @@ public class RecycleActivity extends BaseAppCompatActivity
 			View grayView = new View(getContext());
 			grayView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 30)));
 			grayView.setBackgroundResource(android.R.color.holo_green_light);
-			recyclerAdapter.addHeaderView(grayView);
+			recyclerAdapter.addHeadView(grayView);
 
 			View redView = new View(getContext());
 			redView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 30)));
 			redView.setBackgroundResource(android.R.color.holo_red_light);
-			recyclerAdapter.addHeaderView(redView);
+			recyclerAdapter.addHeadView(redView);
 		}
 	}
 

@@ -45,7 +45,7 @@ public class TaskAssignedAllFragment extends BaseFragment
 		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(getContext())
 		{
 			@Override
-			protected int getDividerResourceId()
+			protected int getDivideResourceId()
 			{
 				return R.drawable.widget_recycler_divider_gray_normal;
 			}

@@ -19,7 +19,7 @@ import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.base.utils.UIScreenUtil;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
-import com.hokol.medium.widget.recycler.HeadFootRecycleAdapter;
+import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.transform.CircleTransform;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import java.util.List;
 
 public class MainMineDynamicFragment extends BaseFragment
 {
-	private HeadFootRecycleAdapter recyclerAdapter;
+	private HeadFootRecyclerAdapter recyclerAdapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -45,13 +45,13 @@ public class MainMineDynamicFragment extends BaseFragment
 		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(getContext())
 		{
 			@Override
-			protected int getHeadNumber()
+			protected int getNonDivideHeadNumber()
 			{
 				return 3;
 			}
 
 			@Override
-			protected int getDividerResourceId()
+			protected int getDivideResourceId()
 			{
 				return R.drawable.widget_recycler_divider_white_small;
 			}
@@ -102,26 +102,26 @@ public class MainMineDynamicFragment extends BaseFragment
 	 *
 	 * @param wrapperAdapter
 	 */
-	private void initRecyclerHeadView(HeadFootRecycleAdapter wrapperAdapter)
+	private void initRecyclerHeadView(HeadFootRecyclerAdapter wrapperAdapter)
 	{
 		View grayView = new View(getContext());
 		grayView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 10)));
 		grayView.setBackgroundResource(android.R.color.darker_gray);
-		wrapperAdapter.addHeaderView(grayView);
+		wrapperAdapter.addHeadView(grayView);
 
 		// 照相栏目
 		View cameraView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_mine_dynamic_camera, null);
 		ImageView cameraImageView = (ImageView) cameraView.findViewById(R.id.iv_main_mine_dynamic_camera);
 		Glide.with(getContext()).load(DeleteConstant.url_icon_camera).into(cameraImageView);
-		wrapperAdapter.addHeaderView(cameraView);
+		wrapperAdapter.addHeadView(cameraView);
 
 		View grayView2 = new View(getContext());
 		grayView2.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 10)));
 		grayView2.setBackgroundResource(android.R.color.darker_gray);
-		wrapperAdapter.addHeaderView(grayView2);
+		wrapperAdapter.addHeadView(grayView2);
 	}
 
-	private class DynamicRecycleAdapter extends HeadFootRecycleAdapter
+	private class DynamicRecycleAdapter extends HeadFootRecyclerAdapter
 	{
 
 		@Override
