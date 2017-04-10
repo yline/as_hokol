@@ -42,7 +42,7 @@ public class MainCareHelper
 			@Override
 			protected int getDivideResourceId()
 			{
-				return R.drawable.widget_recycler_divider_gray_normal;
+				return R.drawable.widget_recycler_divider_gray_light_normal;
 			}
 		});
 
@@ -71,7 +71,7 @@ public class MainCareHelper
 		@Override
 		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
 		{
-			ImageView avatarView = viewHolder.get(R.id.iv_item_main_care_avatar);
+			ImageView avatarView = viewHolder.get(R.id.circle_item_main_care_avatar);
 			Glide.with(sContext).load(DeleteConstant.url_default_avatar).centerCrop().into(avatarView);
 			
 			if (null != careRecycleClickListener)

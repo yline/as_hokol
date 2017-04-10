@@ -87,7 +87,7 @@ public class RecycleActivity extends BaseAppCompatActivity
 				@Override
 				protected int getDivideResourceId()
 				{
-					return R.drawable.widget_recycler_divider_gray_normal;
+					return R.drawable.widget_recycler_divider_gray_light_normal;
 				}
 
 				@Override

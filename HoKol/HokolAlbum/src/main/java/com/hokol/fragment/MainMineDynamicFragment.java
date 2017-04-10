@@ -2,7 +2,6 @@ package com.hokol.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,10 +16,10 @@ import com.hokol.application.IApplication;
 import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
-import com.hokol.base.utils.UIScreenUtil;
+import com.hokol.base.utils.UIResizeUtil;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
-import com.hokol.medium.widget.transform.CircleTransform;
+import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +27,8 @@ import java.util.List;
 public class MainMineDynamicFragment extends BaseFragment
 {
 	private HeadFootRecyclerAdapter recyclerAdapter;
+
+	private SuperSwipeRefreshLayout superSwipeRefreshLayout;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -40,6 +41,13 @@ public class MainMineDynamicFragment extends BaseFragment
 	{
 		super.onViewCreated(view, savedInstanceState);
 
+		initView(view);
+		initData();
+	}
+
+	private void initView(View view)
+	{
+		// RecyclerView 内容
 		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_main_mine_dynamic);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(getContext())
@@ -47,13 +55,13 @@ public class MainMineDynamicFragment extends BaseFragment
 			@Override
 			protected int getNonDivideHeadNumber()
 			{
-				return 3;
+				return 1;
 			}
 
 			@Override
 			protected int getDivideResourceId()
 			{
-				return R.drawable.widget_recycler_divider_white_small;
+				return R.drawable.widget_recycler_divider_gray_light_normal;
 			}
 		});
 
@@ -68,20 +76,15 @@ public class MainMineDynamicFragment extends BaseFragment
 			}
 		});
 
+		// 头部
 		initRecyclerHeadView(recyclerAdapter);
 
-		List dataList = new ArrayList();
-		for (int i = 0; i < 10; i++)
-		{
-			dataList.add("i" + i);
-		}
-		recyclerAdapter.setDataList(dataList);
-
-		final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_main_mine_dynamic);
-		swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+		// 刷新
+		superSwipeRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_main_mine_dynamic);
+		superSwipeRefreshLayout.setOnRefreshListener(new SuperSwipeRefreshLayout.OnSwipeListener()
 		{
 			@Override
-			public void onRefresh()
+			public void onAnimate()
 			{
 				IApplication.toast("正在加载");
 				IApplication.getHandler().postDelayed(new Runnable()
@@ -90,11 +93,38 @@ public class MainMineDynamicFragment extends BaseFragment
 					public void run()
 					{
 						IApplication.toast("加载结束");
-						swipeRefreshLayout.setRefreshing(false);
+						superSwipeRefreshLayout.setRefreshing(false);
 					}
 				}, 3000);
 			}
 		});
+		superSwipeRefreshLayout.setOnLoadListener(new SuperSwipeRefreshLayout.OnSwipeListener()
+		{
+			@Override
+			public void onAnimate()
+			{
+				IApplication.toast("正在加载");
+				IApplication.getHandler().postDelayed(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						IApplication.toast("加载结束");
+						superSwipeRefreshLayout.setLoadMore(false);
+					}
+				}, 3000);
+			}
+		});
+	}
+
+	private void initData()
+	{
+		List dataList = new ArrayList();
+		for (int i = 0; i < 10; i++)
+		{
+			dataList.add("i" + i);
+		}
+		recyclerAdapter.setDataList(dataList);
 	}
 
 	/**
@@ -104,21 +134,8 @@ public class MainMineDynamicFragment extends BaseFragment
 	 */
 	private void initRecyclerHeadView(HeadFootRecyclerAdapter wrapperAdapter)
 	{
-		View grayView = new View(getContext());
-		grayView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 10)));
-		grayView.setBackgroundResource(android.R.color.darker_gray);
-		wrapperAdapter.addHeadView(grayView);
-
-		// 照相栏目
 		View cameraView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_mine_dynamic_camera, null);
-		ImageView cameraImageView = (ImageView) cameraView.findViewById(R.id.iv_main_mine_dynamic_camera);
-		Glide.with(getContext()).load(DeleteConstant.url_icon_camera).into(cameraImageView);
 		wrapperAdapter.addHeadView(cameraView);
-
-		View grayView2 = new View(getContext());
-		grayView2.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 10)));
-		grayView2.setBackgroundResource(android.R.color.darker_gray);
-		wrapperAdapter.addHeadView(grayView2);
 	}
 
 	private class DynamicRecycleAdapter extends HeadFootRecyclerAdapter
@@ -127,17 +144,19 @@ public class MainMineDynamicFragment extends BaseFragment
 		@Override
 		public int getItemRes()
 		{
-			return R.layout.item_main_care;
+			return R.layout.item_main_mine_dynamic;
 		}
 
 		@Override
 		public void setViewContent(CommonRecyclerViewHolder viewHolder, final int position)
 		{
-			ImageView imageView = viewHolder.get(R.id.iv_item_main_care_avatar);
+			ImageView avatarImageView = viewHolder.get(R.id.circle_item_main_mine_dynamic_avatar);
+			Glide.with(getContext()).load(DeleteConstant.url_default_avatar).into(avatarImageView);
 
-			Glide.with(getContext()).load(DeleteConstant.url_default_avatar).centerCrop()
-					.bitmapTransform(new CircleTransform(getContext())).placeholder(R.mipmap.ic_launcher)
-					.into(imageView);
+			ImageView contentImageView = viewHolder.get(R.id.iv_item_main_mine_dynamic_content);
+			int width = contentImageView.getWidth();
+			UIResizeUtil.build().setIsHeightAdapter(false).setHeight(width).commit(contentImageView);
+			Glide.with(getContext()).load(DeleteConstant.getUrlRec()).into(contentImageView);
 		}
 	}
 }

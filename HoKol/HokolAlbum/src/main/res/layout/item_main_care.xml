@@ -11,17 +11,16 @@
         android:id="@+id/rl_item_main_care"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/default_space_small"
-        android:layout_marginLeft="@dimen/default_space_large"
-        android:layout_marginRight="@dimen/default_space_large"
-        android:layout_marginTop="@dimen/default_space_small">
+        android:paddingLeft="@dimen/default_space_normal"
+        android:paddingRight="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_medium"
+        android:paddingBottom="@dimen/default_space_medium">
 
         <com.hokol.medium.viewcustom.CircleView
-            android:id="@+id/iv_item_main_care_avatar"
+            android:id="@+id/circle_item_main_care_avatar"
             android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:circle_border_color="@android:color/darker_gray"
-            app:circle_border_width="1px"/>
+            android:layout_height="40dp">
+        </com.hokol.medium.viewcustom.CircleView>
 
         <TextView
             android:id="@+id/tv_item_main_care_name"
@@ -29,9 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginRight="@dimen/default_space_large"
-            android:layout_toEndOf="@+id/iv_item_main_care_avatar"
+            android:layout_toEndOf="@+id/circle_item_main_care_avatar"
             android:layout_toLeftOf="@+id/tv_item_main_care_location"
-            android:layout_toRightOf="@+id/iv_item_main_care_avatar"
+            android:layout_toRightOf="@+id/circle_item_main_care_avatar"
             android:ellipsize="end"
             android:maxLines="1"
             android:paddingLeft="@dimen/default_space_normal"
@@ -43,11 +42,11 @@
             android:id="@+id/tv_item_main_care_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/iv_item_main_care_avatar"
+            android:layout_alignBottom="@+id/circle_item_main_care_avatar"
             android:layout_marginRight="@dimen/default_space_large"
-            android:layout_toEndOf="@+id/iv_item_main_care_avatar"
+            android:layout_toEndOf="@+id/circle_item_main_care_avatar"
             android:layout_toLeftOf="@+id/tv_item_main_care_location"
-            android:layout_toRightOf="@+id/iv_item_main_care_avatar"
+            android:layout_toRightOf="@+id/circle_item_main_care_avatar"
             android:maxLines="1"
             android:paddingLeft="@dimen/default_space_normal"
             android:text="刚刚"/>

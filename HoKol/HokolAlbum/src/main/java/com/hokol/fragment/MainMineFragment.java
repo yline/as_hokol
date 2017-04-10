@@ -10,15 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.activity.UserInfoActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.base.common.BaseFragment;
-import com.hokol.medium.widget.LabelClickableWidget;
-import com.hokol.medium.widget.transform.CircleTransform;
+import com.hokol.medium.widget.LabelWidget;
+import com.hokol.medium.widget.labellayout.FlowLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,9 +62,9 @@ public class MainMineFragment extends BaseFragment
 
 		TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout_main_mine);
 		ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager_main_mine);
-
+		
 		tabLayout.setupWithViewPager(viewPager);
-		tabLayout.setTabTextColors(getResources().getColor(android.R.color.black), getResources().getColor(android.R.color.holo_red_light));
+		tabLayout.setTabTextColors(getResources().getColor(R.color.hokolGrayDrak), getResources().getColor(R.color.hokolRed));
 		tabLayout.setSelectedTabIndicatorColor(getResources().getColor(android.R.color.holo_red_light));
 		viewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager())
 		{
@@ -91,14 +90,11 @@ public class MainMineFragment extends BaseFragment
 
 	private void initHeaderView(View parentView)
 	{
-		ImageView imageView = (ImageView) parentView.findViewById(R.id.iv_main_mine_avatar);
-		Glide.with(getContext()).load(DeleteConstant.url_default_avatar).centerCrop()
-				.bitmapTransform(new CircleTransform(getContext())).placeholder(R.mipmap.ic_launcher)
-				.into(imageView);
+		ImageView imageView = (ImageView) parentView.findViewById(R.id.circle_main_mine_avatar);
+		Glide.with(getContext()).load(DeleteConstant.url_default_avatar).centerCrop().into(imageView);
 
-		LinearLayout labelLayout = (LinearLayout) parentView.findViewById(R.id.ll_main_mine_label);
-		LabelClickableWidget labelClickableWidget = new LabelClickableWidget(getContext());
-		labelClickableWidget.setDataList(Arrays.asList("网红", "模特"));
-		labelLayout.addView(labelClickableWidget.getView());
+		FlowLayout flowLayout = (FlowLayout) parentView.findViewById(R.id.flow_layout_main_mine_head_label);
+		LabelWidget labelWidget = new LabelWidget(getContext(), flowLayout);
+		labelWidget.setDataList(Arrays.asList("网红", "模特"));
 	}
 }

@@ -2,4 +2,6 @@
 <resources>
     <color name="hokolRed">#ff2742</color>
     <color name="hokolGray">#999999</color>
+    <color name="hokolGrayDrak">#666666</color>
+    <color name="hokolGrayLight">#e6e6e6</color>
 </resources>

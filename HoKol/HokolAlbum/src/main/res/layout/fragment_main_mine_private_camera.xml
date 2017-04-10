@@ -16,18 +16,18 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_main_mine_dynamic_camera"
+            android:id="@+id/tv_main_mine_private_camera"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/iv_main_mine_dynamic_camera"
+            android:layout_toLeftOf="@+id/iv_main_mine_private_camera"
             android:layout_weight="1"
             android:padding="@dimen/default_space_normal"
-            android:text="发布最新动态吧..."
+            android:text="开启最新私密旅行..."
             android:textColor="@color/hokolGray"
             android:textSize="@dimen/default_text_size_medium"/>
 
         <ImageView
-            android:id="@+id/iv_main_mine_dynamic_camera"
+            android:id="@+id/iv_main_mine_private_camera"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"

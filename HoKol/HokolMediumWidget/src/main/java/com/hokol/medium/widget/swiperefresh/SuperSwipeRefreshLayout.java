@@ -13,10 +13,7 @@ import android.os.Handler;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.LayoutManager;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,6 +28,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import com.hokol.base.log.LogFileUtil;
+import com.hokol.base.log.LogUtil;
 import com.hokol.base.utils.UIScreenUtil;
 
 import static android.view.View.MeasureSpec.EXACTLY;
@@ -92,7 +90,6 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 
 	private int footViewIndex = -1; // 底部位置
 
-
 	private float mInitialMotionY;
 
 	private boolean mIsBeingDragged;
@@ -102,7 +99,6 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 	private static final int[] LAYOUT_ATTRS = new int[]{android.R.attr.enabled};
 
 	protected int mFrom;
-
 
 	private Animation mScaleAnimation;
 
@@ -325,7 +321,6 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 		if (null != footLoadAdapter)
 		{
 			View child = footLoadAdapter.getView();
-
 
 			if (child == null)
 			{
@@ -649,11 +644,16 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 		if (childTarget instanceof RecyclerView)
 		{
 			RecyclerView recyclerView = (RecyclerView) childTarget;
-			LayoutManager layoutManager = recyclerView.getLayoutManager();
+			/*LayoutManager layoutManager = recyclerView.getLayoutManager();*/
+
+			boolean canScrollVertically = recyclerView.canScrollVertically(1); // 判断是否能向上滑动
+			return !canScrollVertically;
+			/*
 			int count = recyclerView.getAdapter().getItemCount();
 			if (layoutManager instanceof LinearLayoutManager && count > 0)
 			{
 				LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
+
 				if (linearLayoutManager.findLastCompletelyVisibleItemPosition() == count - 1)
 				{
 					return true;
@@ -670,7 +670,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 					return true;
 				}
 			}
-			return false;
+			return false;*/
 		}
 		else if (childTarget instanceof AbsListView)
 		{
@@ -794,6 +794,8 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 				mActivePointerId = INVALID_POINTER;
 				break;
 		}
+
+		LogUtil.v("onInterceptTouchEvent mIsBeingDragged = " + mIsBeingDragged);
 
 		return mIsBeingDragged;// 如果正在拖动，则拦截子View的事件
 	}
