@@ -4,4 +4,5 @@
     <color name="hokolGray">#999999</color>
     <color name="hokolGrayDrak">#666666</color>
     <color name="hokolGrayLight">#e6e6e6</color>
+    <color name="hokolBlackNormal">#111111</color>
 </resources>

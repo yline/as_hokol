@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- 头部 -->
+    <RelativeLayout
+        android:id="@+id/rl_item_main_mine_private"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/default_space_medium"
+        android:paddingLeft="@dimen/default_space_normal"
+        android:paddingRight="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_medium">
+
+        <com.hokol.medium.viewcustom.CircleView
+            android:id="@+id/circle_item_main_mine_private_avatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="@dimen/default_space_normal">
+        </com.hokol.medium.viewcustom.CircleView>
+
+        <TextView
+            android:id="@+id/tv_item_main_mine_private_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="@dimen/default_space_large"
+            android:layout_toEndOf="@+id/circle_item_main_mine_private_avatar"
+            android:layout_toLeftOf="@+id/tv_item_main_mine_private_location"
+            android:layout_toRightOf="@+id/circle_item_main_mine_private_avatar"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="皮卡丘"
+            android:textColor="#3f3f3f"
+            android:textSize="@dimen/default_text_size_normal"/>
+
+        <TextView
+            android:id="@+id/tv_item_main_mine_private_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/circle_item_main_mine_private_avatar"
+            android:layout_marginRight="@dimen/default_space_large"
+            android:layout_toEndOf="@+id/circle_item_main_mine_private_avatar"
+            android:layout_toLeftOf="@+id/tv_item_main_mine_private_location"
+            android:layout_toRightOf="@+id/circle_item_main_mine_private_avatar"
+            android:maxLines="1"
+            android:text="1天前"
+            android:textColor="@color/hokolGray"
+            android:textSize="@dimen/default_text_size_medium"/>
+
+        <TextView
+            android:id="@+id/tv_item_main_mine_private_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/default_space_small"
+            android:text="杭州"
+            android:textColor="#245a8a"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_item_main_mine_private_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/default_space_normal"
+        android:layout_marginRight="@dimen/default_space_normal"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/tv_item_main_mine_private_scrap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/default_space_large"
+        android:paddingLeft="@dimen/default_space_normal"
+        android:paddingRight="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_medium"
+        android:text="We do talk anymore，like we used to do; I just heard you found the one you have been looking for"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/default_text_size_medium"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGray">
+    </View>
+
+    <TextView
+        android:id="@+id/tv_item_main_mine_private_coin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/global_gift"
+        android:drawablePadding="@dimen/default_space_medium"
+        android:paddingLeft="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_normal"
+        android:text="1000红豆"/>
+
+    <TextView
+        android:id="@+id/tv_item_main_mine_private_laud"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/global_praise"
+        android:drawablePadding="@dimen/default_space_medium"
+        android:paddingBottom="@dimen/default_space_medium"
+        android:paddingLeft="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_small"
+        android:text="yline，f21，fatenliyerF"/>
+</LinearLayout>

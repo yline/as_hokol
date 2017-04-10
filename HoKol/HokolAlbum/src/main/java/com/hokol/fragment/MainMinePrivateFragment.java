@@ -16,10 +16,10 @@ import com.hokol.application.IApplication;
 import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
+import com.hokol.base.utils.UIResizeUtil;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
-import com.hokol.medium.widget.transform.CircleTransform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -145,17 +145,19 @@ public class MainMinePrivateFragment extends BaseFragment
 		@Override
 		public int getItemRes()
 		{
-			return R.layout.item_main_care;
+			return R.layout.item_main_mine_private;
 		}
 
 		@Override
 		public void setViewContent(CommonRecyclerViewHolder viewHolder, final int position)
 		{
-			ImageView imageView = viewHolder.get(R.id.circle_item_main_care_avatar);
+			ImageView avatarImageView = viewHolder.get(R.id.circle_item_main_mine_private_avatar);
+			Glide.with(getContext()).load(DeleteConstant.url_default_avatar).into(avatarImageView);
 
-			Glide.with(getContext()).load(DeleteConstant.url_default_avatar).centerCrop()
-					.bitmapTransform(new CircleTransform(getContext())).placeholder(R.mipmap.ic_launcher)
-					.into(imageView);
+			ImageView contentImageView = viewHolder.get(R.id.iv_item_main_mine_private_content);
+			int width = contentImageView.getWidth();
+			UIResizeUtil.build().setIsHeightAdapter(false).setHeight(width).commit(contentImageView);
+			Glide.with(getContext()).load(DeleteConstant.getUrlRec()).into(contentImageView);
 		}
 	}
 }

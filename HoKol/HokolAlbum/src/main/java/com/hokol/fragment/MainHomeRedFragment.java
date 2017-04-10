@@ -161,7 +161,7 @@ public class MainHomeRedFragment extends BaseFragment
 			@Override
 			public void onPageInstance(ImageView imageView, int position)
 			{
-				Glide.with(getContext()).load(DeleteConstant.getUrlRec()).centerCrop().placeholder(R.drawable.global_load_failed).into(imageView);
+				Glide.with(getContext()).load(DeleteConstant.getUrlRec()).centerCrop().error(R.mipmap.global_load_failed).into(imageView);
 			}
 		});
 		wrapperAdapter.addHeadView(adView);

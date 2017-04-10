@@ -11,205 +11,199 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@android:color/darker_gray"/>
+            android:layout_height="@dimen/default_space_normal"
+            android:background="@color/hokolGrayLight"/>
 
         <LinearLayout
             android:id="@+id/ll_main_min_home_task_assigned"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="@dimen/default_space_normal">
 
             <TextView
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="已发任务"
-                android:id="@+id/textView3"/>
+                android:textColor="@color/hokolBlackNormal"/>
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="==》"/>
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:src="@drawable/global_forward_arrows"/>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@android:color/darker_gray"/>
+            android:background="@color/hokolGrayLight"/>
 
         <LinearLayout
             android:id="@+id/ll_main_min_home_task_delivered"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="@dimen/default_space_normal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="已投任务"/>
+                android:text="已投任务"
+                android:textColor="@color/hokolBlackNormal"/>
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="==》"/>
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:src="@drawable/global_forward_arrows"/>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@android:color/darker_gray"/>
+            android:background="@color/hokolGrayLight"/>
 
         <LinearLayout
             android:id="@+id/ll_main_min_home_task_collection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="@dimen/default_space_normal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="我的收藏"/>
+                android:text="我的收藏"
+                android:textColor="@color/hokolBlackNormal"/>
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="==》"/>
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:src="@drawable/global_forward_arrows"/>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@android:color/darker_gray"/>
+            android:background="@color/hokolGrayLight"/>
 
         <LinearLayout
             android:id="@+id/ll_main_min_home_task_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="@dimen/default_space_normal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="我的消息"/>
+                android:text="我的消息"
+                android:textColor="@color/hokolBlackNormal"/>
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="==》"/>
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:src="@drawable/global_forward_arrows"/>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@android:color/darker_gray"/>
+            android:layout_height="@dimen/default_space_normal"
+            android:background="@color/hokolGrayLight"/>
 
         <LinearLayout
             android:id="@+id/ll_main_mine_home_fans"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="@dimen/default_space_normal">
 
             <TextView
                 android:id="@+id/tv_main_mine_home_fans"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="我的粉丝"/>
+                android:text="我的粉丝"
+                android:textColor="@color/hokolBlackNormal"/>
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:text="200"/>
 
-            <TextView
-                android:id="@+id/textView9"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="==》"/>
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:src="@drawable/global_forward_arrows"/>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@android:color/darker_gray"></View>
+            android:background="@color/hokolGrayLight"></View>
 
         <LinearLayout
             android:id="@+id/ll_main_mine_home_care"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="@dimen/default_space_normal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="关注的人"/>
+                android:text="关注的人"
+                android:textColor="@color/hokolBlackNormal"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:text="128"/>
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="==》"/>
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:src="@drawable/global_forward_arrows"/>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@android:color/darker_gray"></View>
+            android:background="@color/hokolGrayLight"></View>
 
         <LinearLayout
             android:id="@+id/linear_layout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="@dimen/default_space_normal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="收到的赞"/>
+                android:text="收到的赞"
+                android:textColor="@color/hokolBlackNormal"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -220,7 +214,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/default_space_normal"
-            android:background="@android:color/darker_gray"></View>
+            android:background="@color/hokolGrayLight">
+        </View>
 
 
         <LinearLayout
@@ -228,104 +223,135 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="@dimen/default_space_normal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="我的账户"/>
+                android:text="我的账户"
+                android:textColor="@color/hokolBlackNormal"/>
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="129红豆"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="==》"/>
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:src="@drawable/global_forward_arrows"/>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@android:color/darker_gray"></View>
+            android:background="@color/hokolGrayLight"></View>
 
         <LinearLayout
             android:id="@+id/ll_main_min_home_vip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="@dimen/default_space_normal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="我的会员"/>
+                android:text="我的会员"
+                android:textColor="@color/hokolBlackNormal"/>
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="==》"/>
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:src="@drawable/global_forward_arrows"/>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@android:color/darker_gray"></View>
+            android:background="@color/hokolGrayLight"></View>
+
+        <LinearLayout
+            android:id="@+id/ll_main_min_home_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/default_space_normal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="我的评分"
+                android:textColor="@color/hokolBlackNormal"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:src="@drawable/global_forward_arrows"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/hokolGrayLight"></View>
 
         <LinearLayout
             android:id="@+id/ll_main_min_home_recharge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="@dimen/default_space_normal">
 
             <TextView
+                android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="充值"/>
+                android:text="充值"
+                android:textColor="@color/hokolBlackNormal"/>
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="==》"/>
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:src="@drawable/global_forward_arrows"/>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/default_space_normal"
-            android:background="@android:color/darker_gray"></View>
+            android:background="@color/hokolGrayLight"></View>
 
         <LinearLayout
             android:id="@+id/ll_main_min_home_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="@dimen/default_space_normal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="设置"/>
+                android:text="设置"
+                android:textColor="@color/hokolBlackNormal"/>
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="==》"/>
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:src="@drawable/global_forward_arrows"/>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@android:color/darker_gray"></View>
+            android:background="@color/hokolGrayLight"></View>
     </LinearLayout>
 </ScrollView>

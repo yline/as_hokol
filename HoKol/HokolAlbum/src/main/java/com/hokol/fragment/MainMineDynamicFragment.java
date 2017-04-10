@@ -156,7 +156,7 @@ public class MainMineDynamicFragment extends BaseFragment
 			ImageView contentImageView = viewHolder.get(R.id.iv_item_main_mine_dynamic_content);
 			int width = contentImageView.getWidth();
 			UIResizeUtil.build().setIsHeightAdapter(false).setHeight(width).commit(contentImageView);
-			Glide.with(getContext()).load(DeleteConstant.getUrlRec()).into(contentImageView);
+			Glide.with(getContext()).load(DeleteConstant.getUrlRec()).error(R.mipmap.global_load_failed).into(contentImageView);
 		}
 	}
 }
