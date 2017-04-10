@@ -16,6 +16,7 @@
         android:id="@+id/ll_user_care_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/circle_user_care_avatar"
         android:layout_toLeftOf="@+id/iv_user_care_arrow"
         android:layout_toRightOf="@+id/circle_user_care_avatar"
         android:orientation="horizontal">
@@ -52,7 +53,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_user_care_name"
-        android:layout_marginTop="@dimen/default_space_little"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="@dimen/default_space_little"
         android:layout_toLeftOf="@+id/iv_user_care_arrow"
         android:layout_toRightOf="@+id/circle_user_care_avatar"
         android:text="简介"
@@ -62,8 +64,7 @@
         android:id="@+id/flow_layout_user_care"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_user_care_brief"
-        android:layout_marginTop="@dimen/default_space_small"
+        android:layout_alignBottom="@+id/circle_user_care_avatar"
         android:layout_toLeftOf="@+id/iv_user_care_arrow"
         android:layout_toRightOf="@+id/circle_user_care_avatar">
     </com.hokol.medium.widget.labellayout.FlowLayout>

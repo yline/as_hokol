@@ -9,8 +9,8 @@
 
     <com.hokol.medium.viewcustom.CircleView
         android:id="@+id/circle_main_mine_avatar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_marginRight="@dimen/default_space_normal">
     </com.hokol.medium.viewcustom.CircleView>
 
@@ -18,6 +18,8 @@
         android:id="@+id/ll_main_mine_head_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignTop="@+id/circle_main_mine_avatar"
         android:layout_toRightOf="@+id/circle_main_mine_avatar"
         android:orientation="horizontal">
 
@@ -25,6 +27,7 @@
             android:id="@+id/tv_main_mine_head_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:maxLines="1"
             android:text="皮卡丘"
             android:textColor="@android:color/black"
@@ -51,8 +54,8 @@
         android:id="@+id/tv_main_mine_sign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_main_mine_head_name"
-        android:layout_marginTop="@dimen/default_space_little"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="@dimen/default_space_little"
         android:layout_toLeftOf="@+id/tv_main_mine_arrow"
         android:layout_toRightOf="@+id/circle_main_mine_avatar"
         android:maxLines="1"
@@ -64,7 +67,7 @@
         android:id="@+id/flow_layout_main_mine_head_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_main_mine_sign"
+        android:layout_alignBottom="@+id/circle_main_mine_avatar"
         android:layout_marginTop="@dimen/default_space_small"
         android:layout_toLeftOf="@+id/tv_main_mine_arrow"
         android:layout_toRightOf="@+id/circle_main_mine_avatar">
