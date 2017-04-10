@@ -20,7 +20,7 @@
             android:paddingLeft="@dimen/default_space_large"
             android:paddingRight="@dimen/default_space_large"
             android:paddingTop="@dimen/default_space_normal"
-            android:src="@drawable/main_news_back_arrows"/>
+            android:src="@drawable/global_back_transparent_arrows"/>
 
         <TextView
             android:layout_width="wrap_content"

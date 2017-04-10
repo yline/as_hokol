@@ -5,4 +5,5 @@
     <color name="hokolGrayDrak">#666666</color>
     <color name="hokolGrayLight">#e6e6e6</color>
     <color name="hokolBlackNormal">#111111</color>
+    <color name="hokolBlackLight">#4c4c4c</color>
 </resources>

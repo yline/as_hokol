@@ -8,7 +8,18 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp">
+        android:layout_height="46dp">
+
+        <ImageView
+            android:id="@+id/iv_user_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/default_space_normal"
+            android:src="@drawable/global_back_red_arrows"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,8 +41,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@android:color/darker_gray"/>
+                android:layout_height="@dimen/default_space_little"
+                android:background="@color/hokolGrayLight"/>
 
             <LinearLayout
                 android:id="@+id/linear_layout1"
@@ -39,144 +50,157 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:paddingBottom="@dimen/default_space_normal"
+                android:paddingLeft="@dimen/default_space_large"
+                android:paddingRight="@dimen/default_space_normal"
+                android:paddingTop="@dimen/default_space_normal">
 
                 <TextView
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="头像"/>
+                    android:text="头像"
+                    android:textColor="@color/hokolGray"/>
 
                 <com.hokol.medium.viewcustom.CircleView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@android:color/white"
-                    app:circle_border_color="@android:color/darker_gray"
-                    app:circle_border_width="1px"/>
+                    android:layout_width="50dp"
+                    android:layout_height="50dp">
+                </com.hokol.medium.viewcustom.CircleView>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@android:color/darker_gray"></View>
+                android:background="@color/hokolGrayLight">
+            </View>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="@dimen/default_space_large">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="昵称"/>
+                    android:text="昵称"
+                    android:textColor="@color/hokolGray"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:paddingLeft="@dimen/default_space_large"
-                    android:text="你的毛毛"/>
+                    android:text="你的毛毛"
+                    android:textColor="@color/hokolBlackLight"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@android:color/darker_gray"></View>
+                android:background="@color/hokolGrayLight"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="@dimen/default_space_large">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="性别"/>
+                    android:text="性别"
+                    android:textColor="@color/hokolGray"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:paddingLeft="@dimen/default_space_large"
-                    android:text="女"/>
+                    android:text="女"
+                    android:textColor="@color/hokolBlackLight"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@android:color/darker_gray"></View>
+                android:background="@color/hokolGrayLight"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="@dimen/default_space_large">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="星座"/>
+                    android:text="星座"
+                    android:textColor="@color/hokolGray"/>
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:paddingLeft="@dimen/default_space_large"
+                    android:text="双鱼座"
+                    android:textColor="@color/hokolBlackLight"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/hokolGrayLight"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/default_space_large">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="所在地"
+                    android:textColor="@color/hokolGray"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:paddingLeft="@dimen/default_space_large"
-                    android:text="双鱼座"/>
+                    android:text="杭州"
+                    android:textColor="@color/hokolBlackLight"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@android:color/darker_gray"></View>
+                android:background="@color/hokolGrayLight"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="@dimen/default_space_large">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="所在地"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:paddingLeft="@dimen/default_space_large"
-                    android:text="杭州"/>
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@android:color/darker_gray"></View>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="个性签名"/>
+                    android:text="个性签名"
+                    android:textColor="@color/hokolGray"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -186,58 +210,63 @@
                     android:gravity="right"
                     android:maxLines="1"
                     android:paddingLeft="@dimen/default_space_large"
-                    android:text="就是这么任性"/>
+                    android:text="就是这么任性"
+                    android:textColor="@color/hokolGray"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@android:color/darker_gray"></View>
+                android:background="@color/hokolGrayLight"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="@dimen/default_space_large">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="我的标签"/>
+                    android:text="我的标签"
+                    android:textColor="@color/hokolGray"/>
 
-                <TextView
+                <com.hokol.medium.widget.labellayout.FlowLayout
+                    android:id="@+id/flow_layout_user_info"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:gravity="right"
-                    android:text="文字"/>
+                    app:label_gravity="right">
+                </com.hokol.medium.widget.labellayout.FlowLayout>
 
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/default_space_large"
-                    android:text="==》"/>
+                    android:src="@drawable/global_forward_arrows"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_space_large"
-                android:background="@android:color/darker_gray"></View>
+                android:background="@color/hokolGrayLight"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="@dimen/default_space_large">
 
                 <TextView
+                    android:id="@+id/textView17"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="获奖经历"/>
+                    android:text="获奖经历"
+                    android:textColor="@color/hokolGray"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -247,13 +276,14 @@
                     android:gravity="right"
                     android:maxLines="1"
                     android:paddingLeft="@dimen/default_space_large"
-                    android:text="你猜你能不能猜到我猜我能不能猜到你猜能不能猜到结果"/>
+                    android:text="你猜你能不能猜到我猜我能不能猜到你猜能不能猜到结果"
+                    android:textColor="@color/hokolGray"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_space_large"
-                android:background="@android:color/darker_gray"></View>
+                android:background="@color/hokolGrayLight"></View>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
