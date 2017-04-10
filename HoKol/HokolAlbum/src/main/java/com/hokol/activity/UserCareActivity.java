@@ -5,8 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.hokol.R;
+import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
@@ -39,6 +43,15 @@ public class UserCareActivity extends BaseAppCompatActivity
 		recyclerView.setAdapter(userCareAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(this));
+
+		findViewById(R.id.iv_user_care_finish).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				finish();
+			}
+		});
 
 		// 刷新
 		swipeRefreshLayout = (SuperSwipeRefreshLayout) findViewById(R.id.super_swipe_user_care);
@@ -95,9 +108,12 @@ public class UserCareActivity extends BaseAppCompatActivity
 		@Override
 		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
 		{
-			final FlowLayout flowLayout = viewHolder.get(R.id.label_flow_user_care);
+			FlowLayout flowLayout = viewHolder.get(R.id.flow_layout_user_care);
 			LabelWidget labelWidget = new LabelWidget(UserCareActivity.this, flowLayout);
 			labelWidget.setDataList(Arrays.asList("网红", "模特"));
+
+			ImageView avatarImageView = viewHolder.get(R.id.circle_user_care_avatar);
+			Glide.with(UserCareActivity.this).load(DeleteConstant.url_default_avatar).error(R.mipmap.global_load_failed).into(avatarImageView);
 		}
 	}
 

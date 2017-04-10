@@ -1,57 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/default_space_normal">
 
     <com.hokol.medium.viewcustom.CircleView
         android:id="@+id/circle_user_care_avatar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/default_space_large"
-        android:src="@android:color/white"
-        app:circle_border_color="@android:color/darker_gray"
-        app:circle_border_width="1px"/>
+        android:layout_marginRight="@dimen/default_space_normal"/>
 
     <LinearLayout
+        android:id="@+id/ll_user_care_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/fl_user_care_right"
+        android:layout_toLeftOf="@+id/iv_user_care_arrow"
         android:layout_toRightOf="@+id/circle_user_care_avatar"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/default_space_large">
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tv_user_care_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="苏叁"/>
+            android:layout_gravity="center_vertical"
+            android:layout_toLeftOf="@+id/iv_user_care_arrow"
+            android:layout_toRightOf="@+id/circle_user_care_avatar"
+            android:text="超级奥特曼"
+            android:textColor="@color/hokolBlackNormal"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="简介"/>
+        <ImageView
+            android:id="@+id/iv_user_info_sex"
+            android:layout_width="@dimen/default_text_size_large"
+            android:layout_height="@dimen/default_text_size_large"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_space_little"
+            android:background="@drawable/global_sex_girl"/>
 
-        <com.hokol.medium.widget.labellayout.FlowLayout
-            android:id="@+id/label_flow_user_care"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </com.hokol.medium.widget.labellayout.FlowLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/default_text_size_large"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_space_little"
+            android:background="@drawable/main_mine_head_vip"
+            android:scaleType="centerCrop"/>
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/fl_user_care_right"
+    <TextView
+        android:id="@+id/tv_user_care_brief"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_user_care_name"
+        android:layout_marginTop="@dimen/default_space_little"
+        android:layout_toLeftOf="@+id/iv_user_care_arrow"
+        android:layout_toRightOf="@+id/circle_user_care_avatar"
+        android:text="简介"
+        android:textColor="@color/hokolGray"/>
+
+    <com.hokol.medium.widget.labellayout.FlowLayout
+        android:id="@+id/flow_layout_user_care"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_user_care_brief"
+        android:layout_marginTop="@dimen/default_space_small"
+        android:layout_toLeftOf="@+id/iv_user_care_arrow"
+        android:layout_toRightOf="@+id/circle_user_care_avatar">
+    </com.hokol.medium.widget.labellayout.FlowLayout>
+
+    <ImageView
+        android:id="@+id/iv_user_care_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="关注"/>
-    </FrameLayout>
-
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/default_space_small"
+        android:src="@drawable/global_forward_arrows"/>
 </RelativeLayout>
