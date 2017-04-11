@@ -1,5 +1,6 @@
 package com.hokol.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -15,7 +16,9 @@ import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.activity.UserInfoActivity;
 import com.hokol.application.DeleteConstant;
+import com.hokol.application.IApplication;
 import com.hokol.base.common.BaseFragment;
+import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.LabelWidget;
 import com.hokol.medium.widget.labellayout.FlowLayout;
 
@@ -44,6 +47,30 @@ public class MainMineFragment extends BaseFragment
 
 		View headView = view.findViewById(R.id.include_main_mine_head);
 		initHeaderView(headView);
+		headView.findViewById(R.id.circle_main_mine_avatar).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				DialogFootWidget dialogFootWidget = new DialogFootWidget(getContext(), Arrays.asList("相册", "拍照"));
+				dialogFootWidget.show(new DialogFootWidget.OnSelectedListener()
+				{
+					@Override
+					public void onCancelSelected(DialogInterface dialog)
+					{
+						IApplication.toast("DisAppear");
+						dialog.dismiss();
+					}
+
+					@Override
+					public void onOptionSelected(DialogInterface dialog, int position, String content)
+					{
+						IApplication.toast("position = " + position + ", content = " + content);
+						dialog.dismiss();
+					}
+				});
+			}
+		});
 		headView.setOnClickListener(new View.OnClickListener()
 		{
 			@Override

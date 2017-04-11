@@ -12,6 +12,7 @@
     </View>
 
     <RelativeLayout
+        android:id="@+id/rl_main_mine_private_camera"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

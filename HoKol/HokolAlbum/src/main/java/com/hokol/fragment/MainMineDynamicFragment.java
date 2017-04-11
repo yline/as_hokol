@@ -1,5 +1,6 @@
 package com.hokol.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,11 +18,13 @@ import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseFragment;
 import com.hokol.base.utils.UIResizeUtil;
+import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainMineDynamicFragment extends BaseFragment
@@ -135,6 +138,28 @@ public class MainMineDynamicFragment extends BaseFragment
 	private void initRecyclerHeadView(HeadFootRecyclerAdapter wrapperAdapter)
 	{
 		View cameraView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_mine_dynamic_camera, null);
+		cameraView.findViewById(R.id.rl_main_mine_dynamic_camera).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				DialogFootWidget dialogFootWidget = new DialogFootWidget(getContext(), Arrays.asList("从手机相册选择", "拍照", "小视频"));
+				dialogFootWidget.show(new DialogFootWidget.OnSelectedListener()
+				{
+					@Override
+					public void onCancelSelected(DialogInterface dialog)
+					{
+						dialog.dismiss();
+					}
+
+					@Override
+					public void onOptionSelected(DialogInterface dialog, int position, String content)
+					{
+						dialog.dismiss();
+					}
+				});
+			}
+		});
 		wrapperAdapter.addHeadView(cameraView);
 	}
 

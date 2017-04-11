@@ -21,12 +21,13 @@ public class ViewHolder
 	public ViewHolder(View view)
 	{
 		this.sView = view;
-		sArray = new SparseArray<>();
+		this.sArray = new SparseArray<>();
 	}
 
 	public ViewHolder(Activity activity)
 	{
-		
+		this.sView = activity.getWindow().getDecorView();
+		this.sArray = new SparseArray<>();
 	}
 
 	/**
@@ -52,11 +53,11 @@ public class ViewHolder
 	 * @param content 内容
 	 * @return 为了连缀写法, 返回自身
 	 */
-	public ViewHolder setText(int viewId, String content)
+	public TextView setText(int viewId, String content)
 	{
 		TextView textView = this.get(viewId);
 		textView.setText(content);
-		return this;
+		return textView;
 	}
 
 	/**
@@ -66,10 +67,10 @@ public class ViewHolder
 	 * @param resId  图片背景id
 	 * @return
 	 */
-	public ViewHolder setImageBackgroundResource(int viewId, int resId)
+	public ImageView setImageBackgroundResource(int viewId, int resId)
 	{
 		ImageView imageView = this.get(viewId);
 		imageView.setBackgroundResource(resId);
-		return this;
+		return imageView;
 	}
 }
