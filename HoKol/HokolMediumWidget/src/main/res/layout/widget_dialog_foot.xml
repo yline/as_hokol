@@ -29,7 +29,7 @@
             android:id="@+id/view_dialog_foot_one"
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@android:color/black">
+            android:background="@color/hokolGrayLight">
         </View>
 
         <Button
@@ -46,7 +46,7 @@
             android:id="@+id/view_dialog_foot_two"
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@android:color/black">
+            android:background="@color/hokolGrayLight">
         </View>
 
         <Button
@@ -63,7 +63,7 @@
             android:id="@+id/view_dialog_foot_three"
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@android:color/black">
+            android:background="@color/hokolGrayLight">
         </View>
 
         <Button

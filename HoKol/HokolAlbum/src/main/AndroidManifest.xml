@@ -14,6 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Default.NoActionBar">
 
+        <!-- 这个必须在 activity 的前面; debug时, 不需要去混淆 -->
+        <meta-data
+            android:name="com.hokol.config.HokolGlideModule"
+            android:value="GlideModule"/>
+
         <!-- 功能 -->
         <activity android:name=".activity.MainActivity">
             <intent-filter>

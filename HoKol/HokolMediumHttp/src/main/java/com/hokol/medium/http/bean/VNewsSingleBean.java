@@ -34,9 +34,9 @@ public class VNewsSingleBean
 	private String news_title;
 
 	/**
-	 * 新闻内容
+	 * 新闻链接
 	 */
-	private String news_content;
+	private String url;
 
 	public String getNews_id()
 	{
@@ -88,14 +88,14 @@ public class VNewsSingleBean
 		this.news_title = news_title;
 	}
 
-	public String getNews_content()
+	public String getUrl()
 	{
-		return news_content;
+		return url;
 	}
 
-	public void setNews_content(String news_content)
+	public void setUrl(String url)
 	{
-		this.news_content = news_content;
+		this.url = url;
 	}
 
 	@Override
@@ -105,9 +105,9 @@ public class VNewsSingleBean
 				"news_id='" + news_id + '\'' +
 				", news_img='" + news_img + '\'' +
 				", news_source='" + news_source + '\'' +
-				", news_time='" + news_time + '\'' +
+				", news_time=" + news_time +
 				", news_title='" + news_title + '\'' +
-				", news_content='" + news_content + '\'' +
+				", url='" + url + '\'' +
 				'}';
 	}
 }
