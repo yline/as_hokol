@@ -1,4 +1,4 @@
-package com.hokol.config;
+package com.hokol.config.glide;
 
 import android.content.Context;
 

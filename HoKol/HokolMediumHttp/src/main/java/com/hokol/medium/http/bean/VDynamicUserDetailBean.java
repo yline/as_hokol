@@ -4,95 +4,56 @@ import java.util.List;
 
 public class VDynamicUserDetailBean
 {
-	/**
-	 * 关注的人唯一标识
-	 */
+	/* 关注的人唯一标识 */
 	private String user_id;
 
-	/**
-	 * 用户手机号
-	 */
-	private String user_tel;
-
-	/**
-	 * 用户头像（链接）
-	 */
+	/* 用户头像（链接） */
 	private String user_logo;
 
-	/**
-	 * 用户背景 （链接)
-	 */
+	/* 用户背景 （链接) */
 	private String user_big_logo;
 
-	/**
-	 * 是否关注:0[未关注],1[已关注],2[自己的主页]
-	 */
-	private String is_care;
-
-	/**
-	 * 昵称
-	 */
+	/* 昵称 */
 	private String user_nickname;
 
-	/**
-	 * 标签：[数组]
-	 */
+	/* 标签：[数组] */
 	private List<String> user_tag;
 
-	/**
-	 * 用户签名
-	 */
-	private String user_sign;
+	/* 是否关注:0[未关注],1[已关注],2[自己的主页] */
+	private String is_care;
 
-	/**
-	 * 用户星座
-	 */
-	private String user_constell;
+	/* 用户收藏数 */
+	private String user_collect_task_num;
 
-	/**
-	 * 用户所在省份
-	 */
-	private String user_province;
-
-	/**
-	 * 用户所在城市
-	 */
+	/* 用户所在城市 */
 	private String user_city;
 
-	/**
-	 * 图片(链接)
-	 */
-	private String user_img;
+	/* 用户手机号 */
+	private String user_tel;
 
-	/**
-	 * 用户点赞数
-	 */
-	private String user_zan;
+	/* 用户所在省份 */
+	private String user_province;
 
-	/**
-	 * 用户红豆数
-	 */
-	private String user_coin;
+	/* 用户签名 */
+	private String user_sign;
 
-	/**
-	 * 用户关注数
-	 */
-	private String user_care_num;
-
-	/**
-	 * 用户粉丝数
-	 */
-	private String user_fans_num;
-
-	/**
-	 * 用户获奖经历：[数组]
-	 */
+	/* 用户获奖经历：[数组] */
 	private String user_prize;
 
-	/**
-	 * 用户收藏数
-	 */
-	private String user_collect_task_num;
+	/* 用户星座 */
+	private String user_constell;
+
+	/* 用户点赞数 */
+	private String user_zan;
+
+	/* 用户红豆数 */
+	private String user_coin;
+
+	/* 用户关注数 */
+	private String user_care_num;
+
+	/* 用户粉丝数 */
+	private String user_fans_num;
 
 	public String getUser_id()
 	{
@@ -102,16 +63,6 @@ public class VDynamicUserDetailBean
 	public void setUser_id(String user_id)
 	{
 		this.user_id = user_id;
-	}
-
-	public String getUser_tel()
-	{
-		return user_tel;
-	}
-
-	public void setUser_tel(String user_tel)
-	{
-		this.user_tel = user_tel;
 	}
 
 	public String getUser_logo()
@@ -134,16 +85,6 @@ public class VDynamicUserDetailBean
 		this.user_big_logo = user_big_logo;
 	}
 
-	public String getIs_care()
-	{
-		return is_care;
-	}
-
-	public void setIs_care(String is_care)
-	{
-		this.is_care = is_care;
-	}
-
 	public String getUser_nickname()
 	{
 		return user_nickname;
@@ -164,34 +105,24 @@ public class VDynamicUserDetailBean
 		this.user_tag = user_tag;
 	}
 
-	public String getUser_sign()
+	public String getIs_care()
 	{
-		return user_sign;
+		return is_care;
 	}
 
-	public void setUser_sign(String user_sign)
+	public void setIs_care(String is_care)
 	{
-		this.user_sign = user_sign;
+		this.is_care = is_care;
 	}
 
-	public String getUser_constell()
+	public String getUser_collect_task_num()
 	{
-		return user_constell;
+		return user_collect_task_num;
 	}
 
-	public void setUser_constell(String user_constell)
+	public void setUser_collect_task_num(String user_collect_task_num)
 	{
-		this.user_constell = user_constell;
-	}
-
-	public String getUser_province()
-	{
-		return user_province;
-	}
-
-	public void setUser_province(String user_province)
-	{
-		this.user_province = user_province;
+		this.user_collect_task_num = user_collect_task_num;
 	}
 
 	public String getUser_city()
@@ -204,14 +135,54 @@ public class VDynamicUserDetailBean
 		this.user_city = user_city;
 	}
 
-	public String getUser_img()
+	public String getUser_tel()
 	{
-		return user_img;
+		return user_tel;
 	}
 
-	public void setUser_img(String user_img)
+	public void setUser_tel(String user_tel)
 	{
-		this.user_img = user_img;
+		this.user_tel = user_tel;
+	}
+
+	public String getUser_province()
+	{
+		return user_province;
+	}
+
+	public void setUser_province(String user_province)
+	{
+		this.user_province = user_province;
+	}
+
+	public String getUser_sign()
+	{
+		return user_sign;
+	}
+
+	public void setUser_sign(String user_sign)
+	{
+		this.user_sign = user_sign;
+	}
+
+	public String getUser_prize()
+	{
+		return user_prize;
+	}
+
+	public void setUser_prize(String user_prize)
+	{
+		this.user_prize = user_prize;
+	}
+
+	public String getUser_constell()
+	{
+		return user_constell;
+	}
+
+	public void setUser_constell(String user_constell)
+	{
+		this.user_constell = user_constell;
 	}
 
 	public String getUser_zan()
@@ -252,25 +223,5 @@ public class VDynamicUserDetailBean
 	public void setUser_fans_num(String user_fans_num)
 	{
 		this.user_fans_num = user_fans_num;
-	}
-
-	public String getUser_prize()
-	{
-		return user_prize;
-	}
-
-	public void setUser_prize(String user_prize)
-	{
-		this.user_prize = user_prize;
-	}
-
-	public String getUser_collect_task_num()
-	{
-		return user_collect_task_num;
-	}
-
-	public void setUser_collect_task_num(String user_collect_task_num)
-	{
-		this.user_collect_task_num = user_collect_task_num;
 	}
 }

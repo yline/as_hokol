@@ -2,34 +2,22 @@ package com.hokol.medium.http.bean;
 
 public class WTaskMainAll
 {
-	/**
-	 * 任务类型：【0:不限,1:网红,2:主播,3:演员,4:模特,5:歌手,6:体育】
-	 */
+	/* 任务类型：【0:不限,1:网红,2:主播,3:演员,4:模特,5:歌手,6:体育】 */
 	private int task_type = 0;
 
-	/**
-	 * 任务所在省份：【例：浙江省，不限:0】
-	 */
+	/* 任务所在省份：【例：浙江省，不限:0】 */
 	private String task_province = "0";
 
-	/**
-	 * 任务所在城市:【例：杭州市，不限:0】
-	 */
+	/* 任务所在城市:【例：杭州市，不限:0】 */
 	private String task_city = "0";
 
-	/**
-	 * 获取任务数量(上限)：
-	 */
+	/* 获取任务数量(上限)： */
 	private int num1;
 
-	/**
-	 * 获取任务数量
-	 */
+	/* 获取任务数量 */
 	private int length;
 
-	/**
-	 * 任务所需性别：【0:不限,1:男，2:女】
-	 */
+	/* 任务所需性别：【0:不限,1:男，2:女】 */
 	private int task_sex = 0;
 
 	public WTaskMainAll(int num1, int length)

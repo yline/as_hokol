@@ -2,54 +2,34 @@ package com.hokol.medium.http.bean;
 
 public class VLoginPhonePwdBean
 {
-	/**
-	 * 用户手机
-	 */
+	/* 用户手机 */
 	private String user_tel;
 
-	/**
-	 * 用户密码
-	 */
+	/* 用户密码 */
 	private String user_pwd;
 
-	/**
-	 * 用户昵称
-	 */
+	/* 用户昵称 */
 	private String user_nickname;
 
-	/**
-	 * 用户省份
-	 */
+	/* 用户省份 */
 	private String user_province;
 
-	/**
-	 * 用户ID，唯一标识
-	 */
+	/* 用户ID，唯一标识 */
 	private String user_id;
 
-	/**
-	 * 用户城市
-	 */
+	/* 用户城市 */
 	private String user_city;
 
-	/**
-	 * 用户微信
-	 */
+	/* 用户微信 */
 	private String user_weixin;
 
-	/**
-	 * 微信ID标识
-	 */
+	/* 微信ID标识 */
 	private String user_weixin_id;
 
-	/**
-	 * 用户性别
-	 */
+	/* 用户性别 */
 	private String user_sex;
 
-	/**
-	 * 用户头像
-	 */
+	/* 用户头像 */
 	private String user_logo;
 
 	public String getUser_tel()

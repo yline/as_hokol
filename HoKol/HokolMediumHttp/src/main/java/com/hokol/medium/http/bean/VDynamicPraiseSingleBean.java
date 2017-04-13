@@ -10,9 +10,7 @@ import java.util.List;
  */
 public class VDynamicPraiseSingleBean
 {
-	/**
-	 * 所有点赞的用户昵称
-	 */
+	/* 所有点赞的用户昵称 */
 	private List<String> user_nickname;
 
 	public List<String> getUser_nickname()

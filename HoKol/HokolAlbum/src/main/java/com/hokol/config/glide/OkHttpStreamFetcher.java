@@ -1,4 +1,4 @@
-package com.hokol.config;
+package com.hokol.config.glide;
 
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.data.DataFetcher;

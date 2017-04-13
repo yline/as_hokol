@@ -44,21 +44,21 @@ public class HttpFragment extends BaseTestFragment
 			}
 		});
 
-		addButton("任务", new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				TestTaskActivity.actionStart(getContext());
-			}
-		});
-
 		addButton("主页", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
 				TestHomeActivity.actionStart(getContext());
+			}
+		});
+
+		addButton("任务", new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				TestTaskActivity.actionStart(getContext());
 			}
 		});
 

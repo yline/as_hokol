@@ -4,52 +4,32 @@ import java.util.List;
 
 public class VDynamicCareSingleBean
 {
-
-
-	/**
-	 * 用户昵称
-	 */
+	/* 用户昵称 */
 	private String user_nickname;
 
-	/**
-	 * 用户红豆
-	 */
+	/* 用户红豆 */
 	private int user_coin;
 
-	/**
-	 * 用户头像
-	 */
+	/* 用户头像 */
 	private String user_logo;
 
-	/**
-	 * 动态用户ID
-	 */
+	/* 动态用户ID */
 	private String dt_user_id;
 
-	/**
-	 * 动态发布时间：(时间戳)
-	 */
+	/* 动态发布时间：(时间戳) */
 	private long dt_pub_time;
 
-	/**
-	 * 动态点赞数
-	 */
+	/* 动态点赞数 */
 	private int dt_total_zan;
 
-	/**
-	 * 动态大图片：(链接)
-	 */
-	private String dt_img;
+	/* 动态内容 */
+	private String dt_content;
 
-	/**
-	 * 点赞人的昵称：[数组]
-	 */
+	/* 点赞人的昵称：[数组] */
 	private List<String> dt_zan_people_nickname;
 
-	/**
-	 * 动态内容
-	 */
-	private String dt_content;
+	/* 动态大图片：(链接) */
+	private String dt_img;
 
 	public String getUser_nickname()
 	{
@@ -111,14 +91,14 @@ public class VDynamicCareSingleBean
 		this.dt_total_zan = dt_total_zan;
 	}
 
-	public String getDt_img()
+	public String getDt_content()
 	{
-		return dt_img;
+		return dt_content;
 	}
 
-	public void setDt_img(String dt_img)
+	public void setDt_content(String dt_content)
 	{
-		this.dt_img = dt_img;
+		this.dt_content = dt_content;
 	}
 
 	public List<String> getDt_zan_people_nickname()
@@ -131,13 +111,13 @@ public class VDynamicCareSingleBean
 		this.dt_zan_people_nickname = dt_zan_people_nickname;
 	}
 
-	public String getDt_content()
+	public String getDt_img()
 	{
-		return dt_content;
+		return dt_img;
 	}
 
-	public void setDt_content(String dt_content)
+	public void setDt_img(String dt_img)
 	{
-		this.dt_content = dt_content;
+		this.dt_img = dt_img;
 	}
 }

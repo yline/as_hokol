@@ -18,39 +18,25 @@ public class VTaskMainAll
 
 	public static class TaskMainAllOne
 	{
-		/**
-		 * 任务唯一标识
-		 */
+		/* 任务唯一标识 */
 		private String task_id;
 
-		/**
-		 * 任务类型：[数组]
-		 */
+		/* 任务类型：[数组] */
 		private List<String> task_type;
 
-		/**
-		 * 任务预算
-		 */
+		/* 任务预算 */
 		private int task_fee;
 
-		/**
-		 * 任务标题
-		 */
+		/* 任务标题 */
 		private String task_title;
-
-		/**
-		 * 任务发布者昵称
-		 */
+		
+		/* 任务发布者昵称 */
 		private String user_nickname;
 
-		/**
-		 * 任务发布者头像
-		 */
+		/* 任务发布者头像 */
 		private String user_logo;
 
-		/**
-		 * 任务剩余时间(时间戳)
-		 */
+		/* 任务剩余时间(时间戳) */
 		private long task_rem_time;
 
 		public String getTask_id()

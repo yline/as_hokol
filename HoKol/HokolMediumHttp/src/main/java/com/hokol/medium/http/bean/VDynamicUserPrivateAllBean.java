@@ -2,27 +2,30 @@ package com.hokol.medium.http.bean;
 
 import java.util.List;
 
-public class VDynamicUserAllBean
+public class VDynamicUserPrivateAllBean
 {
-	private List<VDynamicUserAllOneBean> list;
+	private List<VDynamicUserPrivateSingleBean> list;
 
-	public List<VDynamicUserAllOneBean> getList()
+	public List<VDynamicUserPrivateSingleBean> getList()
 	{
 		return list;
 	}
 
-	public void setList(List<VDynamicUserAllOneBean> list)
+	public void setList(List<VDynamicUserPrivateSingleBean> list)
 	{
 		this.list = list;
 	}
 
-	public static class VDynamicUserAllOneBean
+	public static class VDynamicUserPrivateSingleBean
 	{
 		/* 动态唯一标识 */
 		private String dt_id;
 
 		/* 动态小图(链接) */
 		private String dt_small_img;
+
+		/* 动态中等图(链接) */
+		private String dt_mid_img;
 
 		/* 动态点赞数 */
 		private int dt_total_zan;
@@ -37,7 +40,7 @@ public class VDynamicUserAllBean
 		private String user_logo;
 
 		/* 用户红豆数 */
-		private String user_coin;
+		private int user_coin;
 
 		/* 用户城市 */
 		private String user_city;
@@ -69,6 +72,16 @@ public class VDynamicUserAllBean
 		public void setDt_small_img(String dt_small_img)
 		{
 			this.dt_small_img = dt_small_img;
+		}
+
+		public String getDt_mid_img()
+		{
+			return dt_mid_img;
+		}
+
+		public void setDt_mid_img(String dt_mid_img)
+		{
+			this.dt_mid_img = dt_mid_img;
 		}
 
 		public int getDt_total_zan()
@@ -111,12 +124,12 @@ public class VDynamicUserAllBean
 			this.user_logo = user_logo;
 		}
 
-		public String getUser_coin()
+		public int getUser_coin()
 		{
 			return user_coin;
 		}
 
-		public void setUser_coin(String user_coin)
+		public void setUser_coin(int user_coin)
 		{
 			this.user_coin = user_coin;
 		}

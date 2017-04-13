@@ -14,12 +14,14 @@ import com.hokol.medium.http.bean.VDynamicCareSingleBean;
 import com.hokol.medium.http.bean.VDynamicPraiseSingleBean;
 import com.hokol.medium.http.bean.VDynamicUserAllBean;
 import com.hokol.medium.http.bean.VDynamicUserDetailBean;
+import com.hokol.medium.http.bean.VDynamicUserPrivateAllBean;
 import com.hokol.medium.http.bean.VUserCareAllBean;
 import com.hokol.medium.http.bean.WDynamicCareAllBean;
 import com.hokol.medium.http.bean.WDynamicCareSingleBean;
 import com.hokol.medium.http.bean.WDynamicPraiseSingleBean;
 import com.hokol.medium.http.bean.WDynamicUserAllBean;
 import com.hokol.medium.http.bean.WDynamicUserDetailBean;
+import com.hokol.medium.http.bean.WDynamicUserPrivateAllBean;
 import com.hokol.medium.http.bean.WUserCareAllBean;
 import com.hokol.test.common.BaseTestActivity;
 
@@ -38,6 +40,36 @@ public class TestDynamicActivity extends BaseTestActivity
 				String httpUrl = HttpConstant.url_dynamic_publish;
 			}
 		});
+	}
+
+	private void testdt_private_nums()
+	{
+		final EditText editTextOne = addEditNumber("用户唯一标识", "2");
+		final EditText editTextTwo = addEditNumber("被查看用户ID", "3");
+		final EditText editTextThree = addEditNumber("开始号", "0");
+		final EditText editTextFour = addEditNumber("请求长度", "0");
+		
+		addButton("请求用户多条私密动态信息", new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				String user_id = editTextOne.getText().toString().trim();
+				String user_id_find = editTextTwo.getText().toString().trim();
+				int num1 = parseInt(editTextThree, 0);
+				int length = parseInt(editTextFour, 0);
+				XHttpUtil.doDynamicUserPrivateAll(new WDynamicUserPrivateAllBean(user_id, user_id_find, num1, length), new XHttpAdapter<VDynamicUserPrivateAllBean>()
+				{
+					@Override
+					public void onSuccess(VDynamicUserPrivateAllBean vDynamicUserPrivateAllBean)
+					{
+
+					}
+				});
+			}
+		});
+
+
 	}
 
 	private void testdt_nums()
@@ -213,6 +245,7 @@ public class TestDynamicActivity extends BaseTestActivity
 		testdt_zan_switch();
 		testdt_one();
 		testdt_nums();
+		testdt_private_nums();
 	}
 	
 	public static void actionStart(Context context)

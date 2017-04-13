@@ -56,6 +56,9 @@ public class HttpConstant
 	// 请求用户自己的，多条动态信息
 	public static final String url_dynamic_user_all = url_head + "ApiDongtai/dt_nums";
 
+	// 请求用户多条私密动态信息
+	public static final String url_dynamic_user_private_all = url_head + "ApiDongtai/dt_private_nums";
+
 	// 发布动态
 	public static final String url_dynamic_publish = url_head + "ApiDongtai/dt_pub";
 
@@ -66,8 +69,29 @@ public class HttpConstant
 	// 获取任务详情 (单条)
 	public static final String url_task_main_detail = url_head + "ApiTask/task_detail";
 
+	// 任务发布
+	public static final String url_task_main_publish = url_head + "ApiTask/task_pub";
+
 	// 任务收藏/取消收藏
 	public static final String url_task_main_collection = url_head + "ApiTask/task_collect_switch";
+
+	// 任务接单详情
+	public static final String url_task_user_accept_detail = url_head + "ApiTask/task_confirm_detail";
+
+	// 任务报名详情
+	public static final String url_task_user_signup_detail = url_head + "ApiTask/task_join_detail";
+
+	// 用户已发布任务
+	public static final String url_task_user_published = url_head + "ApiTask/task_published";
+
+	// 任务报名
+	public static final String url_task_action_staff_signup = url_head + "ApiTask/task_join";
+
+	// 雇主录用报名者
+	public static final String url_task_action_master_takeon = url_head + "ApiTask/task_employe";
+
+	// 雇主评价雇员
+	public static final String url_task_action_master_comment = url_head + "ApiTask/task_comment_employer";
 
 	/* --------------------------- 主页 --------------------------- */
 	// 请求主页动态数据

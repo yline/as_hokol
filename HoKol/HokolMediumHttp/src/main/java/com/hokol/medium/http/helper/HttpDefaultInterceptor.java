@@ -1,7 +1,6 @@
 package com.hokol.medium.http.helper;
 
 import com.hokol.base.log.LogFileUtil;
-import com.hokol.medium.http.HttpConstant;
 
 import java.io.IOException;
 
@@ -11,19 +10,21 @@ import okhttp3.Response;
 
 public class HttpDefaultInterceptor implements Interceptor
 {
+	public static final boolean Interceptor_debug = false;
+
 	@Override
 	public Response intercept(Chain chain) throws IOException
 	{
 		Request request = chain.request();
 		long time1 = System.nanoTime();
-		if (HttpConstant.isDefaultDebug())
+		if (Interceptor_debug)
 		{
 			LogFileUtil.v(String.format("request %s on %s%n%s", request.url(), chain.connection(), request.headers()));
 		}
 
 		Response response = chain.proceed(request);
 		// 打印日志
-		if (HttpConstant.isDefaultDebug())
+		if (Interceptor_debug)
 		{
 			long time2 = System.nanoTime();
 

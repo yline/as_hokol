@@ -16,7 +16,7 @@
 
         <!-- 这个必须在 activity 的前面; debug时, 不需要去混淆 -->
         <meta-data
-            android:name="com.hokol.config.HokolGlideModule"
+            android:name="com.hokol.config.glide.HokolGlideModule"
             android:value="GlideModule"/>
 
         <!-- 功能 -->

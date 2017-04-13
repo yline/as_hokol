@@ -10,74 +10,50 @@ import java.util.List;
  */
 public class VDynamicCareBean
 {
-	/**
-	 * 关注的人唯一标识
-	 */
-	private String user_care_id;
-
-	/**
-	 * 关注的人头像
-	 */
-	private String user_logo;
-
-	/**
-	 * 关注的人昵称
-	 */
-	private String user_nickname;
-
-	/**
-	 * 关注的人标签
-	 */
-	private List<String> user_tag;
-
-	/**
-	 * 关注的人红豆数
-	 */
-	private String user_coin;
-
-	/**
-	 * 关注的人所在城市
-	 */
-	private String user_city;
-
-	/**
-	 * 动态发布时间(时间戳)
-	 */
-	private long dt_pub_time;
-
-	/**
-	 * 动态唯一标识
-	 */
+	/* 动态唯一标识 */
 	private String dt_id;
 
-	/**
-	 * 动态图片(链接)
-	 */
-	private String dt_mg;
+	/* 关注的人头像 */
+	private String user_logo;
 
-	/**
-	 * 动态点赞数
-	 */
+	/* 关注的人标签 */
+	private List<String> user_tag;
+
+	/* 动态点赞数 */
 	private int dt_total_zan;
 
-	/**
-	 * 点赞人的昵称[数组]
-	 */
-	private List<String> dt_zan_people_nickname;
+	/* 关注的人所在城市 */
+	private String user_city;
 
-	/**
-	 * 动态内容
-	 */
+	/* 关注的人昵称 */
+	private String user_nickname;
+
+	/* 关注的人红豆数 */
+	private String user_coin;
+
+	/* 动态发布者 */
+	private String dt_user_id;
+
+	/* 动态发布时间(时间戳) */
+	private long dt_pub_time;
+
+	/* 动态内容 */
 	private String dt_content;
 
-	public String getUser_care_id()
+	/* 点赞人的昵称[数组] */
+	private List<String> dt_zan_people_nickname;
+
+	/* 动态图片(链接) */
+	private String dt_img;
+
+	public String getDt_id()
 	{
-		return user_care_id;
+		return dt_id;
 	}
 
-	public void setUser_care_id(String user_care_id)
+	public void setDt_id(String dt_id)
 	{
-		this.user_care_id = user_care_id;
+		this.dt_id = dt_id;
 	}
 
 	public String getUser_logo()
@@ -90,16 +66,6 @@ public class VDynamicCareBean
 		this.user_logo = user_logo;
 	}
 
-	public String getUser_nickname()
-	{
-		return user_nickname;
-	}
-
-	public void setUser_nickname(String user_nickname)
-	{
-		this.user_nickname = user_nickname;
-	}
-
 	public List<String> getUser_tag()
 	{
 		return user_tag;
@@ -108,56 +74,6 @@ public class VDynamicCareBean
 	public void setUser_tag(List<String> user_tag)
 	{
 		this.user_tag = user_tag;
-	}
-
-	public String getUser_coin()
-	{
-		return user_coin;
-	}
-
-	public void setUser_coin(String user_coin)
-	{
-		this.user_coin = user_coin;
-	}
-
-	public String getUser_city()
-	{
-		return user_city;
-	}
-
-	public void setUser_city(String user_city)
-	{
-		this.user_city = user_city;
-	}
-
-	public long getDt_pub_time()
-	{
-		return dt_pub_time;
-	}
-
-	public void setDt_pub_time(long dt_pub_time)
-	{
-		this.dt_pub_time = dt_pub_time;
-	}
-
-	public String getDt_id()
-	{
-		return dt_id;
-	}
-
-	public void setDt_id(String dt_id)
-	{
-		this.dt_id = dt_id;
-	}
-
-	public String getDt_mg()
-	{
-		return dt_mg;
-	}
-
-	public void setDt_mg(String dt_mg)
-	{
-		this.dt_mg = dt_mg;
 	}
 
 	public int getDt_total_zan()
@@ -170,14 +86,54 @@ public class VDynamicCareBean
 		this.dt_total_zan = dt_total_zan;
 	}
 
-	public List<String> getDt_zan_people_nickname()
+	public String getUser_city()
 	{
-		return dt_zan_people_nickname;
+		return user_city;
 	}
 
-	public void setDt_zan_people_nickname(List<String> dt_zan_people_nickname)
+	public void setUser_city(String user_city)
 	{
-		this.dt_zan_people_nickname = dt_zan_people_nickname;
+		this.user_city = user_city;
+	}
+
+	public String getUser_nickname()
+	{
+		return user_nickname;
+	}
+
+	public void setUser_nickname(String user_nickname)
+	{
+		this.user_nickname = user_nickname;
+	}
+
+	public String getUser_coin()
+	{
+		return user_coin;
+	}
+
+	public void setUser_coin(String user_coin)
+	{
+		this.user_coin = user_coin;
+	}
+
+	public String getDt_user_id()
+	{
+		return dt_user_id;
+	}
+
+	public void setDt_user_id(String dt_user_id)
+	{
+		this.dt_user_id = dt_user_id;
+	}
+
+	public long getDt_pub_time()
+	{
+		return dt_pub_time;
+	}
+
+	public void setDt_pub_time(long dt_pub_time)
+	{
+		this.dt_pub_time = dt_pub_time;
 	}
 
 	public String getDt_content()
@@ -188,5 +144,25 @@ public class VDynamicCareBean
 	public void setDt_content(String dt_content)
 	{
 		this.dt_content = dt_content;
+	}
+
+	public List<String> getDt_zan_people_nickname()
+	{
+		return dt_zan_people_nickname;
+	}
+
+	public void setDt_zan_people_nickname(List<String> dt_zan_people_nickname)
+	{
+		this.dt_zan_people_nickname = dt_zan_people_nickname;
+	}
+
+	public String getDt_img()
+	{
+		return dt_img;
+	}
+
+	public void setDt_img(String dt_img)
+	{
+		this.dt_img = dt_img;
 	}
 }

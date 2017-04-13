@@ -4,55 +4,36 @@ import java.util.List;
 
 public class VTaskMainDetailBean
 {
-	/**
-	 * 任务唯一标识
-	 */
+	/* 任务唯一标识 */
 	private String task_id;
 
-	/**
-	 * 任务类型：[数组]
-	 */
+	/* 任务类型：[数组] */
 	private List<String> task_type;
 
-	/**
-	 * 任务预算
-	 */
+	/* 任务预算 */
 	private int task_fee;
 
-	/**
-	 * 任务标题
-	 */
+	/* 任务标题 */
 	private String task_title;
 
-	/**
-	 * 任务剩余时间(时间戳)
-	 */
+	/* 任务内容 */
+	private String task_content;
+
+	/* 任务剩余时间(时间戳) */
 	private long task_rem_time;
 
-	/**
-	 * 任务发布时间（时间戳）
-	 */
+	/* 任务发布时间（时间戳） */
 	private long task_pub_time;
 
-	/**
-	 * 任务男生数量
-	 */
+	/* 任务男生数量 */
 	private int task_man_num;
 
-	/**
-	 * 任务女生数量
-	 */
+	/* 任务女生数量 */
 	private int task_woman_num;
 
-	/**
-	 * 任务数量
-	 */
+	/* 任务数量 */
 	private int task_num;
 
-	/**
-	 * 任务内容
-	 */
-	private String task_content;
 
 	public String getTask_id()
 	{

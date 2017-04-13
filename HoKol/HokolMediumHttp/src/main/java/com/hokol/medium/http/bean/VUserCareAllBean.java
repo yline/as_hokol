@@ -4,54 +4,40 @@ import java.util.List;
 
 public class VUserCareAllBean
 {
-	private List<VUserCareAllBean> list;
+	private List<UserCareAllOneBean> list;
 
-	public List<VUserCareAllBean> getList()
+	public List<UserCareAllOneBean> getList()
 	{
 		return list;
 	}
 
-	public void setList(List<VUserCareAllBean> list)
+	public void setList(List<UserCareAllOneBean> list)
 	{
 		this.list = list;
 	}
 
 	public static class UserCareAllOneBean
 	{
-		/**
-		 * 关注的人唯一标识
-		 */
+		/* 关注的人唯一标识 */
 		private String user_id;
 
-		/**
-		 * 头像：(链接)
-		 */
+		/* 头像：(链接) */
 		private String user_logo;
 
-		/**
-		 * 昵称
-		 */
-		private String user_nickname;
+		/* 签名 */
+		private String user_sign;
 
-		/**
-		 * 标签：[数组]
-		 */
-		private List<String> user_tag;
-
-		/**
-		 * 用户性别
-		 */
+		/* 用户性别 */
 		private String user_sex;
 
-		/**
-		 * 用户获得的赞
-		 */
-		private int user_zan;
+		/* 昵称 */
+		private String user_nickname;
 
-		/**
-		 * 签名
-		 */
-		private String user_sign;
+		/* 标签：[数组] */
+		private List<String> user_tag;
+
+		/* 用户获得的赞 */
+		private int user_zan;
 
 		public String getUser_id()
 		{

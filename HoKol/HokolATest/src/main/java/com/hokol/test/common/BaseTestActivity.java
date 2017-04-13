@@ -91,4 +91,20 @@ public class BaseTestActivity extends BaseAppCompatActivity
 		}
 		return result;
 	}
+
+	protected float parseFloat(TextView textView, int defaultInt)
+	{
+		String content = textView.getText().toString().trim();
+
+		final float result;
+		if (TextUtils.isEmpty(content))
+		{
+			result = defaultInt;
+		}
+		else
+		{
+			result = Float.parseFloat(content);
+		}
+		return result;
+	}
 }

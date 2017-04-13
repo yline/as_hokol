@@ -6,12 +6,16 @@ import com.hokol.medium.http.bean.VDynamicCareSingleBean;
 import com.hokol.medium.http.bean.VDynamicPraiseSingleBean;
 import com.hokol.medium.http.bean.VDynamicUserAllBean;
 import com.hokol.medium.http.bean.VDynamicUserDetailBean;
+import com.hokol.medium.http.bean.VDynamicUserPrivateAllBean;
 import com.hokol.medium.http.bean.VHomeMainBean;
 import com.hokol.medium.http.bean.VLoginPhonePwdBean;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.http.bean.VTaskMainAll;
 import com.hokol.medium.http.bean.VTaskMainDetailBean;
+import com.hokol.medium.http.bean.VTaskUserAcceptBean;
+import com.hokol.medium.http.bean.VTaskUserPublishedBean;
+import com.hokol.medium.http.bean.VTaskUserSignUpDetailBean;
 import com.hokol.medium.http.bean.VUserCareAllBean;
 import com.hokol.medium.http.bean.VUserCollectionBean;
 import com.hokol.medium.http.bean.VUserFansAllBean;
@@ -20,6 +24,7 @@ import com.hokol.medium.http.bean.WDynamicCareSingleBean;
 import com.hokol.medium.http.bean.WDynamicPraiseSingleBean;
 import com.hokol.medium.http.bean.WDynamicUserAllBean;
 import com.hokol.medium.http.bean.WDynamicUserDetailBean;
+import com.hokol.medium.http.bean.WDynamicUserPrivateAllBean;
 import com.hokol.medium.http.bean.WHomeMainBean;
 import com.hokol.medium.http.bean.WLoginPhonePwdBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
@@ -27,9 +32,16 @@ import com.hokol.medium.http.bean.WSettingResetPhoneBean;
 import com.hokol.medium.http.bean.WSettingResetPwdBean;
 import com.hokol.medium.http.bean.WSettingSubmitProposalBean;
 import com.hokol.medium.http.bean.WSettingUpdateInfoBean;
+import com.hokol.medium.http.bean.WTaskActionMasterCommentBean;
+import com.hokol.medium.http.bean.WTaskActionMasterTakeOnBean;
+import com.hokol.medium.http.bean.WTaskActionStaffSignUpBean;
 import com.hokol.medium.http.bean.WTaskMainAll;
 import com.hokol.medium.http.bean.WTaskMainCollectionBean;
 import com.hokol.medium.http.bean.WTaskMainDetailBean;
+import com.hokol.medium.http.bean.WTaskMainPublishBean;
+import com.hokol.medium.http.bean.WTaskUserAcceptBean;
+import com.hokol.medium.http.bean.WTaskUserPublishedBean;
+import com.hokol.medium.http.bean.WTaskUserSignUpDetailBean;
 import com.hokol.medium.http.bean.WUserCareAllBean;
 import com.hokol.medium.http.bean.WUserCareOrCancelBean;
 import com.hokol.medium.http.bean.WUserCoinGiftBean;
@@ -141,6 +153,15 @@ public class XHttpUtil
 	}
 
 	/**
+	 * 请求用户多条私密动态信息
+	 */
+	public static void doDynamicUserPrivateAll(WDynamicUserPrivateAllBean wDynamicUserPrivateAllBean, XHttpAdapter<VDynamicUserPrivateAllBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_dynamic_user_private_all;
+		new XHttp<VDynamicUserPrivateAllBean>(adapter).doPost(httpUrl, wDynamicUserPrivateAllBean, VDynamicUserPrivateAllBean.class);
+	}
+
+	/**
 	 * 请求关注的人的信息（多条）
 	 */
 	public static void doUserCareAll(WUserCareAllBean wUserCareAllBean, XHttpAdapter<VUserCareAllBean> adapter)
@@ -178,7 +199,23 @@ public class XHttpUtil
 	}
 
 	/**
-	 * 请求关注的人的信息（多条）
+	 * 任务发布
+	 */
+	public static void doTaskMainPublish(WTaskMainPublishBean wTaskMainPublishBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_main_publish;
+		new XHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, wTaskMainPublishBean, String.class);
+	}
+
+	/**
+	 * 任务收藏/取消收藏
 	 */
 	public static void doTaskMainCollection(WTaskMainCollectionBean wTaskMainCollectionBean, XHttpAdapter<String> adapter)
 	{
@@ -191,6 +228,81 @@ public class XHttpUtil
 				return false;
 			}
 		}.doPost(httpUrl, wTaskMainCollectionBean, String.class);
+	}
+
+	/**
+	 * 任务接单详情
+	 */
+	public static void doTaskUserAcceptDetail(WTaskUserAcceptBean wTaskUserAcceptBean, XHttpAdapter<VTaskUserAcceptBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_user_accept_detail;
+		new XHttp<VTaskUserAcceptBean>(adapter).doPost(httpUrl, wTaskUserAcceptBean, VTaskUserAcceptBean.class);
+	}
+
+	/**
+	 * 任务报名详情
+	 */
+	public static void doTaskUserSignUpDetail(WTaskUserSignUpDetailBean wTaskUserSignUpBean, XHttpAdapter<VTaskUserSignUpDetailBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_user_signup_detail;
+		new XHttp<VTaskUserSignUpDetailBean>(adapter).doPost(httpUrl, wTaskUserSignUpBean, VTaskUserSignUpDetailBean.class);
+	}
+
+	/**
+	 * 用户已发布任务
+	 */
+	public static void doTaskUserPublished(WTaskUserPublishedBean wTaskUserPublishedBean, XHttpAdapter<VTaskUserPublishedBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_user_published;
+		new XHttp<VTaskUserPublishedBean>(adapter).doPost(httpUrl, wTaskUserPublishedBean, VTaskUserPublishedBean.class);
+	}
+
+	/**
+	 * 任务报名
+	 */
+	public static void doTaskActionStaffSignUp(WTaskActionStaffSignUpBean wTaskActionStaffSignUpBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_action_staff_signup;
+		new XHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, wTaskActionStaffSignUpBean, String.class);
+	}
+
+	/**
+	 * 雇主录用报名者
+	 */
+	public static void doTaskActionMasterTakeOn(WTaskActionMasterTakeOnBean wTaskActionMasterTakeOnBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_action_master_takeon;
+		new XHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, wTaskActionMasterTakeOnBean, String.class);
+	}
+
+	/**
+	 * 雇主评价雇员
+	 */
+	public static void doTaskActionMasterComment(WTaskActionMasterCommentBean wTaskActionMasterCommentBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_action_master_comment;
+		new XHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, wTaskActionMasterCommentBean, String.class);
 	}
 
 	/**

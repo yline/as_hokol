@@ -10,9 +10,7 @@ import java.util.List;
  */
 public class VNewsMultiplexBean
 {
-	/**
-	 * 多条新闻
-	 */
+	/* 多条新闻 */
 	private List<VNewsSingleBean> list;
 
 	public List<VNewsSingleBean> getList()

@@ -16,6 +16,6 @@
 #   public *;
 #}
 
--keepnames class com.hokol.config.HokolGlideModule
+-keepnames class com.hokol.config.glide.HokolGlideModule
 # or more generally:
 #-keep public class * implements com.bumptech.glide.module.GlideModule

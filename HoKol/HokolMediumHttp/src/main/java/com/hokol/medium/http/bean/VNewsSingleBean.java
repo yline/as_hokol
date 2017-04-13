@@ -8,34 +8,22 @@ package com.hokol.medium.http.bean;
  */
 public class VNewsSingleBean
 {
-	/**
-	 * 新闻ID标识
-	 */
+	/* 新闻ID标识 */
 	private String news_id;
 
-	/**
-	 * 新闻图片(大图片)
-	 */
-	private String news_img;
-
-	/**
-	 * 新闻来源
-	 */
-	private String news_source;
-
-	/**
-	 * 新闻发布时间
-	 */
+	/* 新闻发布时间 */
 	private long news_time;
 
-	/**
-	 * 新闻标题
-	 */
+	/* 新闻标题 */
 	private String news_title;
 
-	/**
-	 * 新闻链接
-	 */
+	/* 新闻图片(大图片) */
+	private String news_img;
+
+	/* 新闻来源 */
+	private String news_source;
+
+	/* 新闻链接 */
 	private String url;
 
 	public String getNews_id()
