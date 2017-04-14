@@ -93,6 +93,24 @@ public class HttpConstant
 	// 雇主评价雇员
 	public static final String url_task_action_master_comment = url_head + "ApiTask/task_comment_employer";
 
+	// 获取被评价雇员信息
+	public static final String url_task_master_comment_info = url_head + "ApiTask/task_comment_peo_info";
+
+	// 雇主结束报名/取消任务
+	public static final String url_task_action_master_finish = url_head + "ApiTask/finish_task_employe";
+
+	// 雇主确定交易
+	public static final String url_task_action_master_trade = url_head + "ApiTask/confirm_task";
+
+	// 用户已投递的任务
+	public static final String url_task_user_delivered = url_head + "ApiTask/post_task";
+	
+	// 雇员确认、拒绝接单
+	public static final String url_task_action_staff_confirm = url_head + "ApiTask/is_confirm_task";
+
+	// 雇员确认交易
+	public static final String url_task_action_staff_trade = url_head + "ApiTask/is_success_task";
+
 	/* --------------------------- 主页 --------------------------- */
 	// 请求主页动态数据
 	public static final String url_home_main = url_head + "ApiIndex/index";

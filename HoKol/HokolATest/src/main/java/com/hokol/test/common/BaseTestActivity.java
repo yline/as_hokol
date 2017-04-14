@@ -3,6 +3,7 @@ package com.hokol.test.common;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -38,41 +39,61 @@ public class BaseTestActivity extends BaseAppCompatActivity
 
 	protected EditText addEditText(String hintContent)
 	{
-		EditText editText = new EditText(this);
-		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		View itemView = LayoutInflater.from(this).inflate(R.layout.activity_test_base_edittext, null);
+
+		TextView textView = (TextView) itemView.findViewById(R.id.tv_test_base);
+		textView.setText(hintContent);
+
+		EditText editText = (EditText) itemView.findViewById(R.id.et_test_base);
 		editText.setHint(hintContent);
-		linearLayout.addView(editText);
+
+		linearLayout.addView(itemView);
 		return editText;
 	}
 
 	protected EditText addEditText(String hintContent, String content)
 	{
-		EditText editText = new EditText(this);
-		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		View itemView = LayoutInflater.from(this).inflate(R.layout.activity_test_base_edittext, null);
+
+		TextView textView = (TextView) itemView.findViewById(R.id.tv_test_base);
+		textView.setText(hintContent);
+
+		EditText editText = (EditText) itemView.findViewById(R.id.et_test_base);
 		editText.setHint(hintContent);
 		editText.setText(content);
-		linearLayout.addView(editText);
+
+		linearLayout.addView(itemView);
 		return editText;
 	}
 
 	protected EditText addEditNumber(String hintContent)
 	{
-		EditText editText = new EditText(this);
-		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		View itemView = LayoutInflater.from(this).inflate(R.layout.activity_test_base_edittext, null);
+
+		TextView textView = (TextView) itemView.findViewById(R.id.tv_test_base);
+		textView.setText(hintContent);
+
+		EditText editText = (EditText) itemView.findViewById(R.id.et_test_base);
 		editText.setHint(hintContent);
 		editText.setInputType(InputType.TYPE_CLASS_NUMBER);
-		linearLayout.addView(editText);
+
+		linearLayout.addView(itemView);
 		return editText;
 	}
 
 	protected EditText addEditNumber(String hintContent, String content)
 	{
-		EditText editText = new EditText(this);
-		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		View itemView = LayoutInflater.from(this).inflate(R.layout.activity_test_base_edittext, null);
+
+		TextView textView = (TextView) itemView.findViewById(R.id.tv_test_base);
+		textView.setText(hintContent);
+
+		EditText editText = (EditText) itemView.findViewById(R.id.et_test_base);
 		editText.setHint(hintContent);
-		editText.setText(content);
 		editText.setInputType(InputType.TYPE_CLASS_NUMBER);
-		linearLayout.addView(editText);
+		editText.setText(content);
+		
+		linearLayout.addView(itemView);
 		return editText;
 	}
 

@@ -10,17 +10,25 @@ import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskMainAll;
 import com.hokol.medium.http.bean.VTaskMainDetailBean;
+import com.hokol.medium.http.bean.VTaskStaffCommentedInfoBean;
 import com.hokol.medium.http.bean.VTaskUserAcceptBean;
+import com.hokol.medium.http.bean.VTaskUserDeliveredBean;
 import com.hokol.medium.http.bean.VTaskUserPublishedBean;
 import com.hokol.medium.http.bean.VTaskUserSignUpDetailBean;
 import com.hokol.medium.http.bean.WTaskActionMasterCommentBean;
+import com.hokol.medium.http.bean.WTaskActionMasterFinishBean;
 import com.hokol.medium.http.bean.WTaskActionMasterTakeOnBean;
+import com.hokol.medium.http.bean.WTaskActionMasterTradeBean;
+import com.hokol.medium.http.bean.WTaskActionStaffConfirmBean;
 import com.hokol.medium.http.bean.WTaskActionStaffSignUpBean;
+import com.hokol.medium.http.bean.WTaskActionStaffTradeBean;
 import com.hokol.medium.http.bean.WTaskMainAll;
 import com.hokol.medium.http.bean.WTaskMainCollectionBean;
 import com.hokol.medium.http.bean.WTaskMainDetailBean;
 import com.hokol.medium.http.bean.WTaskMainPublishBean;
+import com.hokol.medium.http.bean.WTaskStaffCommentedInfoBean;
 import com.hokol.medium.http.bean.WTaskUserAcceptBean;
+import com.hokol.medium.http.bean.WTaskUserDeliveredBean;
 import com.hokol.medium.http.bean.WTaskUserPublishedBean;
 import com.hokol.medium.http.bean.WTaskUserSignUpDetailBean;
 import com.hokol.test.common.BaseTestActivity;
@@ -29,6 +37,66 @@ import java.util.Arrays;
 
 public class TestTaskActivity extends BaseTestActivity
 {
+	private void testpost_task()
+	{
+		addButton("雇员确认交易", new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				WTaskActionStaffTradeBean wTaskActionStaffTradeBean = null;
+				XHttpUtil.doTaskActionStaffTrade(wTaskActionStaffTradeBean, new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+
+					}
+				});
+			}
+		});
+	}
+
+	private void testis_confirm_task()
+	{
+		addButton("雇员确认、拒绝接单", new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				WTaskActionStaffConfirmBean wTaskActionStaffConfirmBean = null;
+				XHttpUtil.doTaskActionStaffConfirm(wTaskActionStaffConfirmBean, new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+
+					}
+				});
+			}
+		});
+	}
+
+	private void testis_success_task()
+	{
+		addButton("用户已投递的任务", new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				WTaskUserDeliveredBean wTaskUserDeliveredBean = null;
+				XHttpUtil.doTaskUserDelivered(wTaskUserDeliveredBean, new XHttpAdapter<VTaskUserDeliveredBean>()
+				{
+					@Override
+					public void onSuccess(VTaskUserDeliveredBean vTaskUserDeliveredBean)
+					{
+
+					}
+				});
+			}
+		});
+	}
+
 	private void testconfirm_task()
 	{
 		addButton("雇主确定交易", new View.OnClickListener()
@@ -36,7 +104,15 @@ public class TestTaskActivity extends BaseTestActivity
 			@Override
 			public void onClick(View v)
 			{
-				
+				WTaskActionMasterTradeBean wTaskActionMasterTradeBean = null;
+				XHttpUtil.doTaskActionMasterTrade(wTaskActionMasterTradeBean, new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+
+					}
+				});
 			}
 		});
 	}
@@ -48,19 +124,35 @@ public class TestTaskActivity extends BaseTestActivity
 			@Override
 			public void onClick(View v)
 			{
-				
+				WTaskActionMasterFinishBean wTaskActionMasterFinishBean = null;
+				XHttpUtil.doTaskActionMasterFinish(wTaskActionMasterFinishBean, new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+
+					}
+				});
 			}
 		});
 	}
 	
 	private void testtask_comment_peo_info()
 	{
-		addButton("获取被评价雇员信息", new View.OnClickListener()
+		addButton("获取该任务雇员信息", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				
+				WTaskStaffCommentedInfoBean wTaskStaffCommentedInfoBean = null;
+				XHttpUtil.doTaskStaffCommentedInfo(wTaskStaffCommentedInfoBean, new XHttpAdapter<VTaskStaffCommentedInfoBean>()
+				{
+					@Override
+					public void onSuccess(VTaskStaffCommentedInfoBean vTaskStaffCommentedInfoBean)
+					{
+
+					}
+				});
 			}
 		});
 	}
@@ -353,6 +445,9 @@ public class TestTaskActivity extends BaseTestActivity
 		testtask_comment_peo_info();
 		testfinish_task_employe();
 		testconfirm_task();
+		testis_success_task();
+		testis_confirm_task();
+		testpost_task();
 	}
 	
 	public static void actionStart(Context context)

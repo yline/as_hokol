@@ -13,7 +13,9 @@ import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.http.bean.VTaskMainAll;
 import com.hokol.medium.http.bean.VTaskMainDetailBean;
+import com.hokol.medium.http.bean.VTaskStaffCommentedInfoBean;
 import com.hokol.medium.http.bean.VTaskUserAcceptBean;
+import com.hokol.medium.http.bean.VTaskUserDeliveredBean;
 import com.hokol.medium.http.bean.VTaskUserPublishedBean;
 import com.hokol.medium.http.bean.VTaskUserSignUpDetailBean;
 import com.hokol.medium.http.bean.VUserCareAllBean;
@@ -33,13 +35,19 @@ import com.hokol.medium.http.bean.WSettingResetPwdBean;
 import com.hokol.medium.http.bean.WSettingSubmitProposalBean;
 import com.hokol.medium.http.bean.WSettingUpdateInfoBean;
 import com.hokol.medium.http.bean.WTaskActionMasterCommentBean;
+import com.hokol.medium.http.bean.WTaskActionMasterFinishBean;
 import com.hokol.medium.http.bean.WTaskActionMasterTakeOnBean;
+import com.hokol.medium.http.bean.WTaskActionMasterTradeBean;
+import com.hokol.medium.http.bean.WTaskActionStaffConfirmBean;
 import com.hokol.medium.http.bean.WTaskActionStaffSignUpBean;
+import com.hokol.medium.http.bean.WTaskActionStaffTradeBean;
 import com.hokol.medium.http.bean.WTaskMainAll;
 import com.hokol.medium.http.bean.WTaskMainCollectionBean;
 import com.hokol.medium.http.bean.WTaskMainDetailBean;
 import com.hokol.medium.http.bean.WTaskMainPublishBean;
+import com.hokol.medium.http.bean.WTaskStaffCommentedInfoBean;
 import com.hokol.medium.http.bean.WTaskUserAcceptBean;
+import com.hokol.medium.http.bean.WTaskUserDeliveredBean;
 import com.hokol.medium.http.bean.WTaskUserPublishedBean;
 import com.hokol.medium.http.bean.WTaskUserSignUpDetailBean;
 import com.hokol.medium.http.bean.WUserCareAllBean;
@@ -304,6 +312,89 @@ public class XHttpUtil
 			}
 		}.doPost(httpUrl, wTaskActionMasterCommentBean, String.class);
 	}
+
+	/**
+	 * 获取该任务雇员信息
+	 */
+	public static void doTaskStaffCommentedInfo(WTaskStaffCommentedInfoBean wTaskStaffCommentedInfoBean, XHttpAdapter<VTaskStaffCommentedInfoBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_master_comment_info;
+		new XHttp<VTaskStaffCommentedInfoBean>(adapter).doPost(httpUrl, wTaskStaffCommentedInfoBean, VTaskStaffCommentedInfoBean.class);
+	}
+
+	/**
+	 * 雇主结束报名/取消任务
+	 */
+	public static void doTaskActionMasterFinish(WTaskActionMasterFinishBean wTaskActionMasterFinishBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_action_master_finish;
+		new XHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, wTaskActionMasterFinishBean, String.class);
+	}
+
+	/**
+	 * 雇主确定交易
+	 */
+	public static void doTaskActionMasterTrade(WTaskActionMasterTradeBean wTaskActionMasterTradeBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_action_master_trade;
+		new XHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, wTaskActionMasterTradeBean, String.class);
+	}
+
+	/**
+	 * 用户已投递的任务
+	 */
+	public static void doTaskUserDelivered(WTaskUserDeliveredBean wTaskUserDeliveredBean, XHttpAdapter<VTaskUserDeliveredBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_user_delivered;
+		new XHttp<VTaskUserDeliveredBean>(adapter).doPost(httpUrl, wTaskUserDeliveredBean, VTaskUserDeliveredBean.class);
+	}
+
+	/**
+	 * 雇员确认、拒绝接单
+	 */
+	public static void doTaskActionStaffConfirm(WTaskActionStaffConfirmBean wTaskActionStaffConfirmBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_action_staff_confirm;
+		new XHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, wTaskActionStaffConfirmBean, String.class);
+	}
+
+	/**
+	 * 雇员确认交易
+	 */
+	public static void doTaskActionStaffTrade(WTaskActionStaffTradeBean wTaskActionStaffTradeBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_action_staff_trade;
+		new XHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, wTaskActionStaffTradeBean, String.class);
+	}
+
 
 	/**
 	 * 主页接口
