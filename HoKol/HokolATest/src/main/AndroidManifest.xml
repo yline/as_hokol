@@ -32,6 +32,8 @@
         <activity android:name=".http.mine.TestUserActivity"/>
         <activity android:name=".http.setting.TestSettingActivity"/>
         <activity android:name=".http.area.TestAreaActivity"/>
+        <activity android:name=".httpattach.AvatarActivity">
+        </activity>
     </application>
 
 </manifest>

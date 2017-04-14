@@ -11,6 +11,7 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VLoginPhonePwdBean;
 import com.hokol.medium.http.bean.WLoginPhonePwdBean;
 import com.hokol.test.common.BaseTestActivity;
+import com.hokol.test.httpattach.AvatarActivity;
 
 public class TestLoginActivity extends BaseTestActivity
 {
@@ -38,7 +39,7 @@ public class TestLoginActivity extends BaseTestActivity
 					@Override
 					public void onSuccess(VLoginPhonePwdBean vLoginPhonePwdBean)
 					{
-
+						AvatarActivity.actionStart(TestLoginActivity.this, vLoginPhonePwdBean.getUser_logo());
 					}
 				});
 			}

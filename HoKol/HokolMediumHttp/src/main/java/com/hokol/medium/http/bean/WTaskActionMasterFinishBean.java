@@ -9,9 +9,9 @@ public class WTaskActionMasterFinishBean
 	private String task_id;
 
 	/* 操作开关(0-实现结束报名,1-实现取消任务) */
-	private String switchs;
+	private int switchs;
 
-	public WTaskActionMasterFinishBean(String user_id, String task_id, String switchs)
+	public WTaskActionMasterFinishBean(String user_id, String task_id, int switchs)
 	{
 		this.user_id = user_id;
 		this.task_id = task_id;
@@ -38,12 +38,12 @@ public class WTaskActionMasterFinishBean
 		this.task_id = task_id;
 	}
 
-	public String getSwitchs()
+	public int getSwitchs()
 	{
 		return switchs;
 	}
 
-	public void setSwitchs(String switchs)
+	public void setSwitchs(int switchs)
 	{
 		this.switchs = switchs;
 	}

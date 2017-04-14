@@ -22,12 +22,20 @@ public class TestUserActivity extends BaseTestActivity
 {
 	private void testmine_message()
 	{
+		final EditText editTextOne = addEditNumber("user_id", "2");
+		final EditText editTextTwo = addEditNumber("num1", "0");
+		final EditText editTextThree = addEditNumber("length", "2");
+
 		addButton("我的消息", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				WUserMessageBean wUserMessageBean = null;
+				String userId = editTextOne.getText().toString().trim();
+				String receiverUserId = editTextTwo.getText().toString().trim();
+				String dynamicId = editTextThree.getText().toString().trim();
+
+				WUserMessageBean wUserMessageBean = new WUserMessageBean(userId, receiverUserId, dynamicId);
 				XHttpUtil.doUserMessage(wUserMessageBean, new XHttpAdapter<VUserMessageBean>()
 				{
 					@Override

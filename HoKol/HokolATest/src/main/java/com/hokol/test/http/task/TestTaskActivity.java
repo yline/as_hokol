@@ -39,12 +39,20 @@ public class TestTaskActivity extends BaseTestActivity
 {
 	private void testpost_task()
 	{
+		final EditText editTextOne = addEditNumber("user_id", "1");
+		final EditText editTextTwo = addEditNumber("task_id", "2");
+		final EditText editTextThree = addEditNumber("选择开关(0-未完成交易,1-完成交易)", "1");
+
 		addButton("雇员确认交易", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				WTaskActionStaffTradeBean wTaskActionStaffTradeBean = null;
+				String user_id = editTextOne.getText().toString().trim();
+				String task_id = editTextTwo.getText().toString().trim();
+				int switchs = parseInt(editTextThree, 1);
+
+				WTaskActionStaffTradeBean wTaskActionStaffTradeBean = new WTaskActionStaffTradeBean(user_id, task_id, switchs);
 				XHttpUtil.doTaskActionStaffTrade(wTaskActionStaffTradeBean, new XHttpAdapter<String>()
 				{
 					@Override
@@ -59,12 +67,20 @@ public class TestTaskActivity extends BaseTestActivity
 
 	private void testis_confirm_task()
 	{
+		final EditText editTextOne = addEditNumber("user_id", "1");
+		final EditText editTextTwo = addEditNumber("task_id", "2");
+		final EditText editTextThree = addEditNumber("选择开关(0-拒绝接单,1-确定接单)", "1");
+
 		addButton("雇员确认、拒绝接单", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				WTaskActionStaffConfirmBean wTaskActionStaffConfirmBean = null;
+				String user_id = editTextOne.getText().toString().trim();
+				String task_id = editTextTwo.getText().toString().trim();
+				int switchs = parseInt(editTextThree, 1);
+
+				WTaskActionStaffConfirmBean wTaskActionStaffConfirmBean = new WTaskActionStaffConfirmBean(user_id, task_id, switchs);
 				XHttpUtil.doTaskActionStaffConfirm(wTaskActionStaffConfirmBean, new XHttpAdapter<String>()
 				{
 					@Override
@@ -79,12 +95,22 @@ public class TestTaskActivity extends BaseTestActivity
 
 	private void testis_success_task()
 	{
+		final EditText editTextOne = addEditNumber("user_id", "3");
+		final EditText editTextTwo = addEditNumber("列表选择开关(0-全部,1-待交易,2-待评论)", "0");
+		final EditText editTextThree = addEditNumber("num1", "0");
+		final EditText editTextFour = addEditNumber("length", "4");
+
 		addButton("用户已投递的任务", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				WTaskUserDeliveredBean wTaskUserDeliveredBean = null;
+				String user_id = editTextOne.getText().toString().trim();
+				int switchs = parseInt(editTextTwo, 0);
+				int num1 = parseInt(editTextThree, 0);
+				int length = parseInt(editTextFour, 4);
+
+				WTaskUserDeliveredBean wTaskUserDeliveredBean = new WTaskUserDeliveredBean(user_id, switchs, num1, length);
 				XHttpUtil.doTaskUserDelivered(wTaskUserDeliveredBean, new XHttpAdapter<VTaskUserDeliveredBean>()
 				{
 					@Override
@@ -99,12 +125,24 @@ public class TestTaskActivity extends BaseTestActivity
 
 	private void testconfirm_task()
 	{
+		final EditText editTextOne = addEditNumber("user_id", "3");
+		final EditText editTextTwo = addEditNumber("task_id", "2");
+		final EditText editTextThree = addEditNumber("被确认用户ID", "4");
+		final EditText editTextFour = addEditNumber("完成状态(0-未完成任务, 1-完成任务)", "4");
+
 		addButton("雇主确定交易", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				WTaskActionMasterTradeBean wTaskActionMasterTradeBean = null;
+				String user_id = editTextOne.getText().toString().trim();
+				String task_id = editTextTwo.getText().toString().trim();
+
+				String confirm_user_id = editTextThree.getText().toString().trim();
+				int confirm_status = parseInt(editTextFour, 0);
+				WTaskActionMasterTradeBean.WTaskActionMasterTradeInfoBean infoBean = new WTaskActionMasterTradeBean.WTaskActionMasterTradeInfoBean(confirm_user_id, confirm_status);
+
+				WTaskActionMasterTradeBean wTaskActionMasterTradeBean = new WTaskActionMasterTradeBean(user_id, task_id, Arrays.asList(infoBean));
 				XHttpUtil.doTaskActionMasterTrade(wTaskActionMasterTradeBean, new XHttpAdapter<String>()
 				{
 					@Override
@@ -119,12 +157,20 @@ public class TestTaskActivity extends BaseTestActivity
 	
 	private void testfinish_task_employe()
 	{
+		final EditText editTextOne = addEditNumber("user_id", "3");
+		final EditText editTextTwo = addEditNumber("task_id", "2");
+		final EditText editTextThree = addEditNumber("操作开关(0-实现结束报名,1-实现取消任务)", "4");
+
 		addButton("雇主结束报名/取消任务", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				WTaskActionMasterFinishBean wTaskActionMasterFinishBean = null;
+				String user_id = editTextOne.getText().toString().trim();
+				String task_id = editTextTwo.getText().toString().trim();
+				int switchs = parseInt(editTextThree, 0);
+
+				WTaskActionMasterFinishBean wTaskActionMasterFinishBean = new WTaskActionMasterFinishBean(user_id, task_id, switchs);
 				XHttpUtil.doTaskActionMasterFinish(wTaskActionMasterFinishBean, new XHttpAdapter<String>()
 				{
 					@Override
@@ -139,12 +185,14 @@ public class TestTaskActivity extends BaseTestActivity
 	
 	private void testtask_comment_peo_info()
 	{
+		final EditText editTextTwo = addEditNumber("task_id", "2");
 		addButton("获取该任务雇员信息", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				WTaskStaffCommentedInfoBean wTaskStaffCommentedInfoBean = null;
+				String task_id = editTextTwo.getText().toString().trim();
+				WTaskStaffCommentedInfoBean wTaskStaffCommentedInfoBean = new WTaskStaffCommentedInfoBean(task_id);
 				XHttpUtil.doTaskStaffCommentedInfo(wTaskStaffCommentedInfoBean, new XHttpAdapter<VTaskStaffCommentedInfoBean>()
 				{
 					@Override
@@ -159,12 +207,21 @@ public class TestTaskActivity extends BaseTestActivity
 	
 	private void testtask_comment_employer()
 	{
+		final EditText editTextOne = addEditNumber("user_id", "3");
+		final EditText editTextTwo = addEditNumber("task_id", "2");
+		final EditText editTextThree = addEditNumber("被评论用户ID", "4");
+
 		addButton("雇主评价雇员", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				WTaskActionMasterCommentBean wTaskActionMasterCommentBean = null;
+				String user_id = editTextOne.getText().toString().trim();
+				String task_id = editTextTwo.getText().toString().trim();
+				String commentedUserId = editTextThree.getText().toString().trim();
+				WTaskActionMasterCommentBean.MasterCommentContentBean bean = new WTaskActionMasterCommentBean.MasterCommentContentBean(commentedUserId, 3, 3, 3);
+
+				WTaskActionMasterCommentBean wTaskActionMasterCommentBean = new WTaskActionMasterCommentBean(user_id, task_id, Arrays.asList(bean));
 				XHttpUtil.doTaskActionMasterComment(wTaskActionMasterCommentBean, new XHttpAdapter<String>()
 				{
 					@Override
