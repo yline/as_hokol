@@ -30,7 +30,7 @@ public abstract class XHttpAdapter<Result> implements IHttpResponse<Result>
 		}
 	}
 
-	protected boolean isDebug()
+	public boolean isDebug()
 	{
 		return HttpConstant.isDefaultDebug();
 	}

@@ -8,7 +8,7 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class HttpDefaultInterceptor implements Interceptor
+public class HttpTextInterceptor implements Interceptor
 {
 	public static final boolean Interceptor_debug = false;
 

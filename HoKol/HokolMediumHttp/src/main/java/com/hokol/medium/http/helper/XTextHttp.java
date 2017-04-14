@@ -1,9 +1,8 @@
-package com.hokol.medium.http;
+package com.hokol.medium.http.helper;
 
 import com.google.gson.Gson;
 import com.hokol.base.log.LogFileUtil;
-import com.hokol.medium.http.helper.HttpDefaultClient;
-import com.hokol.medium.http.helper.HttpHandler;
+import com.hokol.medium.http.XHttpAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +26,7 @@ import okhttp3.Response;
  * @author yline 2017/3/9 --> 13:14
  * @version 1.0.0
  */
-public class XHttp<Result>
+public class XTextHttp<Result>
 {
 	public static final int REQUEST_POST = 0;
 
@@ -37,16 +36,16 @@ public class XHttp<Result>
 
 	private static final int REQUEST_SUCCESS_CODE = 0;
 
-	private HttpHandler httpHandler;
+	private HttpTextHandler httpHandler;
 
 	private XHttpAdapter<Result> xHttpAdapter;
 
-	public XHttp(XHttpAdapter adapter)
+	public XTextHttp(XHttpAdapter adapter)
 	{
 		this.xHttpAdapter = adapter;
 		if (isResponseHandler())
 		{
-			httpHandler = HttpHandler.build();
+			httpHandler = HttpTextHandler.build();
 		}
 	}
 
@@ -315,13 +314,13 @@ public class XHttp<Result>
 	}
 
 	/**
-	 * 默认 单例方式获取 HttpDefaultClient
+	 * 默认 单例方式获取 HttpTextClient
 	 *
 	 * @return
 	 */
 	protected OkHttpClient getClient()
 	{
-		return HttpDefaultClient.getInstance();
+		return HttpTextClient.getInstance();
 	}
 
 	/**

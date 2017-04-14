@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.WSettingResetPhoneBean;
@@ -13,17 +14,38 @@ import com.hokol.medium.http.bean.WSettingResetPwdBean;
 import com.hokol.medium.http.bean.WSettingSubmitProposalBean;
 import com.hokol.medium.http.bean.WSettingUpdateInfoBean;
 import com.hokol.test.common.BaseTestActivity;
+import com.hokol.test.common.IApplication;
 
 public class TestSettingActivity extends BaseTestActivity
 {
+	private EditText editTextResetUserLogo;
+
+	private static final int ResetUserLogoRequestCode = 1;
+
 	private void testreset_user_logo()
 	{
+		editTextResetUserLogo = addEditNumber("userId", "2");
 		addButton("用户头像修改", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				// 暂时不测
+				String userId = editTextResetUserLogo.getText().toString().trim();
+
+				Intent tempIntent = new Intent();
+				tempIntent.setAction(Intent.ACTION_GET_CONTENT);
+				tempIntent.setType("*/*");
+				tempIntent.addCategory(Intent.CATEGORY_OPENABLE); // 可选择的选项
+
+				if (null != tempIntent.resolveActivity(TestSettingActivity.this.getPackageManager()))
+				{
+					Intent target = Intent.createChooser(tempIntent, "chooser");
+					TestSettingActivity.this.startActivityForResult(target, ResetUserLogoRequestCode);
+				}
+				else
+				{
+					IApplication.toast("跳转失败");
+				}
 			}
 		});
 	}
@@ -139,6 +161,23 @@ public class TestSettingActivity extends BaseTestActivity
 
 		testreset_user_info();
 		testreset_user_logo();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		super.onActivityResult(requestCode, resultCode, data);
+
+		LogFileUtil.v(IApplication.TAG, "onActivityResult data is null ? -> " + (data == null));
+		if (null != data)
+		{
+			if (requestCode == ResetUserLogoRequestCode)
+			{
+				String string = data.getDataString();
+				LogFileUtil.v(data.getExtras().toString());
+				// XHttpUtil.doSettingUpdateAvatar();
+			}
+		}
 	}
 
 	public static void actionStart(Context context)

@@ -31,9 +31,6 @@ public class HttpConstant
 	// 多条新闻获取
 	public static final String url_news_multiplex = url_head + "ApiNews/news";
 
-	// 单条新闻获取；废弃
-	public static final String url_news_single = url_head + "ApiNews/new_one";
-
 	// 推荐新闻
 	public static final String url_news_recommend = url_head + "ApiNews/new_tui";
 
