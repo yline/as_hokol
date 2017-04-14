@@ -19,8 +19,9 @@ import com.hokol.medium.http.bean.VTaskUserDeliveredBean;
 import com.hokol.medium.http.bean.VTaskUserPublishedBean;
 import com.hokol.medium.http.bean.VTaskUserSignUpDetailBean;
 import com.hokol.medium.http.bean.VUserCareAllBean;
-import com.hokol.medium.http.bean.VUserCollectionBean;
 import com.hokol.medium.http.bean.VUserFansAllBean;
+import com.hokol.medium.http.bean.VUserMessageBean;
+import com.hokol.medium.http.bean.VUserTaskCollectionBean;
 import com.hokol.medium.http.bean.WDynamicCareAllBean;
 import com.hokol.medium.http.bean.WDynamicCareSingleBean;
 import com.hokol.medium.http.bean.WDynamicPraiseSingleBean;
@@ -53,8 +54,9 @@ import com.hokol.medium.http.bean.WTaskUserSignUpDetailBean;
 import com.hokol.medium.http.bean.WUserCareAllBean;
 import com.hokol.medium.http.bean.WUserCareOrCancelBean;
 import com.hokol.medium.http.bean.WUserCoinGiftBean;
-import com.hokol.medium.http.bean.WUserCollectionBean;
 import com.hokol.medium.http.bean.WUserFansAllBean;
+import com.hokol.medium.http.bean.WUserMessageBean;
+import com.hokol.medium.http.bean.WUserTaskCollectionBean;
 
 public class XHttpUtil
 {
@@ -416,7 +418,7 @@ public class XHttpUtil
 	 * 我的页面 接口
 	 * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况
 	 * 请求用户粉丝的信息（多条） --> user_fans_info --> user_fans_info --> WUserFansAllBean - VUserFansAllBean -->
-	 * 请求用户的收藏 --> user_collect_task --> url_user_collection --> WUserCollectionBean - VUserCollectionBean -->
+	 * 请求用户的收藏 --> user_collect_task --> url_user_collection --> WUserTaskCollectionBean - VUserTaskCollectionBean -->
 	 * 关注/取消关注某用户 --> user_care_switch --> url_user_care_or_cancel --> WUserCareOrCancelBean - null -->
 	 * 用户赠送红豆 --> present_coin --> url_user_coin_gift --> WUserCoinGiftBean - null -->
 	 */
@@ -432,12 +434,12 @@ public class XHttpUtil
 	}
 
 	/**
-	 * 请求用户的收藏
+	 * 请求用户的收藏任务
 	 */
-	public static void doUserCollection(WUserCollectionBean wUserCollectionBean, XHttpAdapter<VUserCollectionBean> adapter)
+	public static void doUserCollection(WUserTaskCollectionBean wUserCollectionBean, XHttpAdapter<VUserTaskCollectionBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_collection;
-		new XHttp<VUserCollectionBean>(adapter).doPost(httpUrl, wUserCollectionBean, VUserCollectionBean.class);
+		new XHttp<VUserTaskCollectionBean>(adapter).doPost(httpUrl, wUserCollectionBean, VUserTaskCollectionBean.class);
 	}
 
 	/**
@@ -470,6 +472,22 @@ public class XHttpUtil
 				return false;
 			}
 		}.doPost(httpUrl, wUserCoinGiftBean, String.class);
+	}
+
+	/**
+	 * 我的消息
+	 */
+	public static void doUserMessage(WUserMessageBean wUserMessageBean, XHttpAdapter<VUserMessageBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_user_message;
+		new XHttp<VUserMessageBean>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, wUserMessageBean, VUserMessageBean.class);
 	}
 
 	/**

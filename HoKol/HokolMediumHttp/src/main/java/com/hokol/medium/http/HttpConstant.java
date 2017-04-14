@@ -119,7 +119,7 @@ public class HttpConstant
 	// 请求用户粉丝的信息（多条）
 	public static final String url_user_fans_all = url_head + "ApiMine/user_fans_info";
 
-	// 请求用户的收藏
+	// 请求用户的收藏任务
 	public static final String url_user_collection = url_head + "ApiMine/user_collect_task";
 
 	// 关注/取消关注某用户
@@ -127,6 +127,9 @@ public class HttpConstant
 
 	// 用户赠送红豆
 	public static final String url_user_coin_gift = url_head + "ApiMine/present_coin";
+
+	// 我的消息
+	public static final String url_user_message = url_head + "ApiMine/mine_message";
 
 	/* --------------------------- 设置接口 --------------------------- */
 	// 用户发表意见

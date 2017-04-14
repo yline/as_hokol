@@ -1,6 +1,6 @@
 package com.hokol.medium.http.bean;
 
-public class WUserCollectionBean
+public class WUserTaskCollectionBean
 {
 	/**
 	 * 用户唯一标识
@@ -17,7 +17,7 @@ public class WUserCollectionBean
 	 */
 	private int length;
 
-	public WUserCollectionBean(String user_id, int num1, int length)
+	public WUserTaskCollectionBean(String user_id, int num1, int length)
 	{
 		this.user_id = user_id;
 		this.num1 = num1;

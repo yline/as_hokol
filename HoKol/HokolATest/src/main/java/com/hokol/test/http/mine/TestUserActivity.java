@@ -8,16 +8,38 @@ import android.widget.EditText;
 
 import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.XHttpUtil;
-import com.hokol.medium.http.bean.VUserCollectionBean;
 import com.hokol.medium.http.bean.VUserFansAllBean;
+import com.hokol.medium.http.bean.VUserMessageBean;
+import com.hokol.medium.http.bean.VUserTaskCollectionBean;
 import com.hokol.medium.http.bean.WUserCareOrCancelBean;
 import com.hokol.medium.http.bean.WUserCoinGiftBean;
-import com.hokol.medium.http.bean.WUserCollectionBean;
 import com.hokol.medium.http.bean.WUserFansAllBean;
+import com.hokol.medium.http.bean.WUserMessageBean;
+import com.hokol.medium.http.bean.WUserTaskCollectionBean;
 import com.hokol.test.common.BaseTestActivity;
 
 public class TestUserActivity extends BaseTestActivity
 {
+	private void testmine_message()
+	{
+		addButton("我的消息", new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				WUserMessageBean wUserMessageBean = null;
+				XHttpUtil.doUserMessage(wUserMessageBean, new XHttpAdapter<VUserMessageBean>()
+				{
+					@Override
+					public void onSuccess(VUserMessageBean vUserMessageBean)
+					{
+
+					}
+				});
+			}
+		});
+	}
+
 	private void testpresent_coin()
 	{
 		final EditText editTextOne = addEditNumber("userId", "1");
@@ -76,7 +98,7 @@ public class TestUserActivity extends BaseTestActivity
 		final EditText editTextOne = addEditNumber("user_id", "1");
 		final EditText editTextTwo = addEditNumber("开始号", "0");
 		final EditText editTextThree = addEditNumber("长度", "2");
-		addButton("请求用户的收藏", new View.OnClickListener()
+		addButton("请求用户的收藏任务", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -85,10 +107,10 @@ public class TestUserActivity extends BaseTestActivity
 				int num1 = parseInt(editTextTwo, 0);
 				int length = parseInt(editTextThree, 3);
 
-				XHttpUtil.doUserCollection(new WUserCollectionBean(user_id, num1, length), new XHttpAdapter<VUserCollectionBean>()
+				XHttpUtil.doUserCollection(new WUserTaskCollectionBean(user_id, num1, length), new XHttpAdapter<VUserTaskCollectionBean>()
 				{
 					@Override
-					public void onSuccess(VUserCollectionBean vUserCollectionBean)
+					public void onSuccess(VUserTaskCollectionBean vUserCollectionBean)
 					{
 
 					}
@@ -132,6 +154,7 @@ public class TestUserActivity extends BaseTestActivity
 		testuser_collect_task();
 		testuser_care_switch();
 		testpresent_coin();
+		testmine_message();
 	}
 
 	public static void actionStart(Context context)

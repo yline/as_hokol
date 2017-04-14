@@ -2,7 +2,7 @@ package com.hokol.medium.http.bean;
 
 import java.util.List;
 
-public class VUserCollectionBean
+public class VUserTaskCollectionBean
 {
 	private List<VUserCollectionOneBean> list;
 

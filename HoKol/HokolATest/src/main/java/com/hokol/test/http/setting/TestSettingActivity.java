@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.WSettingResetPhoneBean;
 import com.hokol.medium.http.bean.WSettingResetPwdBean;
 import com.hokol.medium.http.bean.WSettingSubmitProposalBean;
 import com.hokol.medium.http.bean.WSettingUpdateInfoBean;
@@ -15,6 +16,18 @@ import com.hokol.test.common.BaseTestActivity;
 
 public class TestSettingActivity extends BaseTestActivity
 {
+	private void testreset_user_logo()
+	{
+		addButton("用户头像修改", new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				// 暂时不测
+			}
+		});
+	}
+
 	private void testreset_user_info()
 	{
 		final EditText editTextOne = addEditNumber("userId", "4");
@@ -31,6 +44,26 @@ public class TestSettingActivity extends BaseTestActivity
 				wSettingUpdateInfoBean.setUser_nickname(user_nickname);
 
 				XHttpUtil.doSettingUpdateInfo(wSettingUpdateInfoBean, new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+
+					}
+				});
+			}
+		});
+	}
+
+	private void testreset_tel()
+	{
+		addButton("用户重置手机", new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				WSettingResetPhoneBean wSettingResetPhoneBean = null;
+				XHttpUtil.doSettingResetPhone(wSettingResetPhoneBean, new XHttpAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -102,7 +135,10 @@ public class TestSettingActivity extends BaseTestActivity
 
 		testuser_advice();
 		testreset_pwd();
+		testreset_tel();
+
 		testreset_user_info();
+		testreset_user_logo();
 	}
 
 	public static void actionStart(Context context)
