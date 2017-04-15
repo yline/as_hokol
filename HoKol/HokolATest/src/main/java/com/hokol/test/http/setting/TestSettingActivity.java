@@ -2,11 +2,13 @@ package com.hokol.test.http.setting;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
 import com.hokol.base.log.LogFileUtil;
+import com.hokol.base.utils.FileUtil;
 import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.WSettingResetPhoneBean;
@@ -15,6 +17,8 @@ import com.hokol.medium.http.bean.WSettingSubmitProposalBean;
 import com.hokol.medium.http.bean.WSettingUpdateInfoBean;
 import com.hokol.test.common.BaseTestActivity;
 import com.hokol.test.common.IApplication;
+
+import java.io.File;
 
 public class TestSettingActivity extends BaseTestActivity
 {
@@ -173,9 +177,27 @@ public class TestSettingActivity extends BaseTestActivity
 		{
 			if (requestCode == ResetUserLogoRequestCode)
 			{
-				String string = data.getDataString();
-				LogFileUtil.v(data.getExtras().toString());
-				// XHttpUtil.doSettingUpdateAvatar();
+				String contentPath = data.getDataString();
+				String filePath = FileUtil.uri2File(this, Uri.parse(contentPath));
+				String userId = editTextResetUserLogo.getText().toString().trim();
+				LogFileUtil.v("contentPath = " + contentPath + ", filePath = " + filePath + ", userId = " + userId);
+
+				File file = new File(filePath);
+				if (null == file || !file.exists())
+				{
+					LogFileUtil.v("file is null or not exist");
+				}
+				else
+				{
+					XHttpUtil.doSettingUpdateAvatar(userId, file, new XHttpAdapter<String>()
+					{
+						@Override
+						public void onSuccess(String s)
+						{
+
+						}
+					});
+				}
 			}
 		}
 	}

@@ -44,7 +44,7 @@ public abstract class XUploadFileHttp<Result>
 	{
 		OkHttpClient okHttpClient = getOkHttpClient();
 
-		Request request = getReqeust(httpUrl);
+		Request request = getRequest(httpUrl);
 
 		okHttpClient.newCall(request).enqueue(new Callback()
 		{
@@ -69,11 +69,21 @@ public abstract class XUploadFileHttp<Result>
 		bodyBuilder.setType(MultipartBody.FORM);
 		initRequestForm(bodyBuilder);
 
-		return bodyBuilder.build();
+		MultipartBody multipartBody = bodyBuilder.build();
+		if (xHttpAdapter.isDebug())
+		{
+			LogFileUtil.v("MultipartBody Size = " + multipartBody.size());
+		}
+		
+		return multipartBody;
 	}
 
-	private Request getReqeust(String httpUrl)
+	private Request getRequest(String httpUrl)
 	{
+		if (xHttpAdapter.isDebug())
+		{
+			LogFileUtil.v("httpUrl = " + httpUrl);
+		}
 		Request.Builder requestBuilder = new Request.Builder();
 
 		requestBuilder.url(httpUrl);

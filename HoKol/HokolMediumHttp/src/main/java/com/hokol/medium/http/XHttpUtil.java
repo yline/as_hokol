@@ -581,6 +581,10 @@ public class XHttpUtil
 				@Override
 				protected void initRequestForm(MultipartBody.Builder bodyBuilder)
 				{
+					if (isDebug())
+					{
+						LogFileUtil.v("user_id = " + userId + ", user_logo = " + file.getAbsolutePath());
+					}
 					bodyBuilder.addFormDataPart("user_id", userId);
 					bodyBuilder.addFormDataPart("user_logo", file.getName(), RequestBody.create(MediaType.parse("image"), file));
 				}
@@ -602,5 +606,10 @@ public class XHttpUtil
 	{
 		String httpUrl = HttpConstant.url_area_all;
 		new XTextHttp<VAreaAllBean>(adapter).doPost(httpUrl, null, VAreaAllBean.class);
+	}
+
+	private static boolean isDebug()
+	{
+		return HttpConstant.isDefaultDebug();
 	}
 }
