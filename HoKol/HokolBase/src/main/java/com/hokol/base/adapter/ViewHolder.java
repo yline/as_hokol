@@ -73,4 +73,27 @@ public class ViewHolder
 		imageView.setBackgroundResource(resId);
 		return imageView;
 	}
+
+	/**
+	 * 设置监听事件
+	 *
+	 * @param viewId
+	 * @param listener
+	 */
+	public void setOnClickListener(int viewId, View.OnClickListener listener)
+	{
+		this.get(viewId).setOnClickListener(listener);
+	}
+
+	/**
+	 * 获取 文本内容
+	 *
+	 * @param viewId
+	 * @return
+	 */
+	public String getText(int viewId)
+	{
+		TextView textView = this.get(viewId);
+		return textView.getText().toString();
+	}
 }

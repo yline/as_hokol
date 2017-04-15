@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_dialog_foot_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:text="1"
+            android:textAllCaps="false"
+            android:textColor="@color/hokolBlackLight"
+            android:textSize="@dimen/default_text_size_normal"/>
+
+        <View
+            android:id="@+id/view_dialog_foot_one"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/hokolGrayLight">
+        </View>
+
+        <Button
+            android:id="@+id/btn_dialog_foot_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:text="2"
+            android:textAllCaps="false"
+            android:textColor="@color/hokolBlackLight"
+            android:textSize="@dimen/default_text_size_normal"/>
+
+        <View
+            android:id="@+id/view_dialog_foot_two"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/hokolGrayLight">
+        </View>
+
+        <Button
+            android:id="@+id/btn_dialog_foot_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:text="3"
+            android:textAllCaps="false"
+            android:textColor="@color/hokolBlackLight"
+            android:textSize="@dimen/default_text_size_normal"/>
+
+        <View
+            android:id="@+id/view_dialog_foot_three"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/hokolGrayLight">
+        </View>
+
+        <Button
+            android:id="@+id/btn_dialog_foot_four"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:text="4"
+            android:textAllCaps="false"
+            android:textColor="@color/hokolBlackLight"
+            android:textSize="@dimen/default_text_size_normal"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/hokolGrayLight">
+    </View>
+
+    <Button
+        android:id="@+id/btn_dialog_foot_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:text="取消"
+        android:textColor="@color/hokolBlackLight"
+        android:textSize="@dimen/default_text_size_normal"/>
+</LinearLayout>

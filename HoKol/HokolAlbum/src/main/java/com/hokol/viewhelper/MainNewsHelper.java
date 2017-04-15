@@ -104,7 +104,6 @@ public class MainNewsHelper
 			viewHolder.setText(R.id.tv_item_main_news_origin, sList.get(position).getNews_source());
 
 			long stampTime = sList.get(position).getNews_time(); //  / 1000
-			LogFileUtil.v("position = " + position + ", stampTime = " + stampTime);
 			String showTime = TimeConvertUtil.stamp2FormatTime(stampTime * 1000);
 			viewHolder.setText(R.id.tv_item_main_news_time, showTime);
 		}

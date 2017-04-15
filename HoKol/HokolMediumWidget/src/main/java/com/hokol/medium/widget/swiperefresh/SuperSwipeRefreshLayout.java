@@ -28,7 +28,6 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import com.hokol.base.log.LogFileUtil;
-import com.hokol.base.log.LogUtil;
 import com.hokol.base.utils.UIScreenUtil;
 
 import static android.view.View.MeasureSpec.EXACTLY;
@@ -794,8 +793,6 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 				mActivePointerId = INVALID_POINTER;
 				break;
 		}
-
-		LogUtil.v("onInterceptTouchEvent mIsBeingDragged = " + mIsBeingDragged);
 
 		return mIsBeingDragged;// 如果正在拖动，则拦截子View的事件
 	}

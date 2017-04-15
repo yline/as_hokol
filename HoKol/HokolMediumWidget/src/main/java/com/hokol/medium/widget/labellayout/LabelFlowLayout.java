@@ -138,8 +138,6 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataSe
 			// 更新所有 Label的状态
 			Deque<Integer> deque = labelAdapter.getSelectedList();
 			int sCount = labelAdapter.getDataSize();
-			LogFileUtil.v("sCount = " + sCount + ",deque = " + deque.toString());
-			LogFileUtil.v("labelAdapter.getSelectedSize() = " + labelAdapter.getSelectedSize() + ",mSelectedMax = " + mSelectedMax);
 
 			for (int i = 0; i < sCount; i++)
 			{

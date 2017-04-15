@@ -37,7 +37,7 @@ public class DialogFootWidget
 	 */
 	public DialogFootWidget(Context context, @NonNull List<String> dataList)
 	{
-		View view = LayoutInflater.from(context).inflate(R.layout.widget_dialog_foot, null);
+		View view = LayoutInflater.from(context).inflate(getResourceId(), null);
 		viewHolder = new ViewHolder(view);
 		initData(dataList);
 
@@ -210,5 +210,11 @@ public class DialogFootWidget
 		 *               method.
 		 */
 		public void onOptionSelected(DialogInterface dialog, int position, String content);
+	}
+
+	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 重写 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+	protected int getResourceId()
+	{
+		return R.layout.widget_dialog_foot_radius;
 	}
 }

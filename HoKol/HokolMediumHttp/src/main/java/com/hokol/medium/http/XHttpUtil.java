@@ -579,6 +579,12 @@ public class XHttpUtil
 			new XUploadFileHttp<String>(adapter)
 			{
 				@Override
+				protected boolean isResponseParse()
+				{
+					return false;
+				}
+
+				@Override
 				protected void initRequestForm(MultipartBody.Builder bodyBuilder)
 				{
 					if (isDebug())

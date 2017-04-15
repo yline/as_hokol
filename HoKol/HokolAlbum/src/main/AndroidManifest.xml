@@ -60,6 +60,12 @@
         <activity android:name=".activity.EnterForgetPwdActivity"/>
         <activity android:name=".activity.EnterForgetPwdNewActivity"/>
         <activity android:name=".activity.EnterRegisterCompleteInfoActivity"/>
+        <activity android:name=".activity.UserInfoUpdateSignActivity">
+        </activity>
+        <activity android:name=".activity.UserInfoUpdateAwardActivity">
+        </activity>
+        <activity android:name=".activity.UserInfoUpdateNicknameActivity">
+        </activity>
     </application>
 
 </manifest>

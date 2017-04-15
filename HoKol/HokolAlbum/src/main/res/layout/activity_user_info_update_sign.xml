@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_user_info_update_sign"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_user_info_update_sign_title"
+        android:layout_width="match_parent"
+        android:layout_height="46dp">
+
+        <ImageView
+            android:id="@+id/iv_user_info_update_sign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/default_space_normal"
+            android:src="@drawable/global_back_red_arrows"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="个性签名"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/default_text_size_large"/>
+
+        <TextView
+            android:id="@+id/tv_user_info_update_sign_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingLeft="@dimen/default_space_normal"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/default_space_normal"
+            android:text="完成"
+            android:textColor="@color/hokolRed"
+            android:textSize="@dimen/default_text_size_large"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/rl_user_info_update_sign_title"
+        android:background="@color/hokolGrayLight">
+    </View>
+
+    <EditText
+        android:id="@+id/et_user_info_update_sign_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_user_info_update_sign_title"
+        android:background="@null"
+        android:gravity="top"
+        android:lines="5"
+        android:maxLength="242"
+        android:padding="@dimen/default_space_large"
+        android:textColor="@color/hokolGrayDrak"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/et_user_info_update_sign_input"
+        android:background="@color/hokolGrayLight">
+    </View>
+
+    <TextView
+        android:id="@+id/tv_user_info_update_sign_remainder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/et_user_info_update_sign_input"
+        android:layout_alignRight="@+id/et_user_info_update_sign_input"
+        android:inputType="numberDecimal"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingRight="@dimen/default_space_normal"
+        android:textColor="@color/hokolBlackLight"
+        android:textSize="@dimen/default_text_size_normal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_user_info_update_sign_input"
+        android:padding="@dimen/default_space_normal"
+        android:text="请不要在签名中泄漏过多个人信息"
+        android:textColor="#fe182b"
+        android:textSize="@dimen/default_space_large"/>
+</RelativeLayout>
