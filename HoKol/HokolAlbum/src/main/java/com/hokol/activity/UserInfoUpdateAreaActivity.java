@@ -1,15 +1,15 @@
 package com.hokol.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.hokol.R;
 import com.hokol.base.adapter.CommonRecyclerAdapter;
 import com.hokol.base.adapter.CommonRecyclerViewHolder;
+import com.hokol.base.common.BaseAppCompatActivity;
 
-public class UserInfoUpdateAreaActivity extends AppCompatActivity
+public class UserInfoUpdateAreaActivity extends BaseAppCompatActivity
 {
 	private UserInfoAreaAdapter userInfoAreaAdapter;
 

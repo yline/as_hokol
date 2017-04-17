@@ -27,7 +27,7 @@ import okhttp3.Response;
  */
 public abstract class XUploadFileHttp<Result>
 {
-	private HttpTextHandler httpHandler;
+	private HttpHandler httpHandler;
 
 	private XHttpAdapter<Result> xHttpAdapter;
 
@@ -36,7 +36,7 @@ public abstract class XUploadFileHttp<Result>
 		this.xHttpAdapter = adapter;
 		if (isResponseHandler())
 		{
-			this.httpHandler = HttpTextHandler.build();
+			this.httpHandler = HttpHandler.build();
 		}
 	}
 

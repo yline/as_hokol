@@ -36,7 +36,7 @@ public class XTextHttp<Result>
 
 	private static final int REQUEST_SUCCESS_CODE = 0;
 
-	private HttpTextHandler httpHandler;
+	private HttpHandler httpHandler;
 
 	private XHttpAdapter<Result> xHttpAdapter;
 
@@ -45,7 +45,7 @@ public class XTextHttp<Result>
 		this.xHttpAdapter = adapter;
 		if (isResponseHandler())
 		{
-			httpHandler = HttpTextHandler.build();
+			httpHandler = HttpHandler.build();
 		}
 	}
 

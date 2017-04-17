@@ -9,19 +9,19 @@ import android.os.Handler;
  * @author yline 2017/2/23 --> 10:26
  * @version 1.0.0
  */
-public class HttpTextHandler extends Handler
+public class HttpHandler extends Handler
 {
-	private HttpTextHandler()
+	private HttpHandler()
 	{
 	}
 
-	public static HttpTextHandler build()
+	public static HttpHandler build()
 	{
 		return HttpHandlerHold.sInstance;
 	}
 
 	private static class HttpHandlerHold
 	{
-		private static HttpTextHandler sInstance = new HttpTextHandler();
+		private static HttpHandler sInstance = new HttpHandler();
 	}
 }
