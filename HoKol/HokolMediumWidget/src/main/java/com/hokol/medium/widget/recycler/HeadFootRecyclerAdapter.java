@@ -30,6 +30,13 @@ public abstract class HeadFootRecyclerAdapter<T> extends CommonRecyclerAdapter<T
 	// 底部布局
 	private SparseArrayCompat<View> footViewArray = new SparseArrayCompat<>();
 
+	private OnRecyclerItemClickListener<T> itemClickListener;
+
+	public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener<T> itemClickListener)
+	{
+		this.itemClickListener = itemClickListener;
+	}
+
 	/**
 	 * 创建时会调用多次,依据viewType类型,创建ViewHolder
 	 *
@@ -67,7 +74,7 @@ public abstract class HeadFootRecyclerAdapter<T> extends CommonRecyclerAdapter<T
 	}
 
 	@Override
-	public void onBindViewHolder(CommonRecyclerViewHolder holder, int position)
+	public void onBindViewHolder(final CommonRecyclerViewHolder holder, final int position)
 	{
 		if (isHeaderViewPos(position))
 		{
@@ -76,6 +83,18 @@ public abstract class HeadFootRecyclerAdapter<T> extends CommonRecyclerAdapter<T
 		if (isFooterViewPos(position))
 		{
 			return;
+		}
+
+		if (null != itemClickListener)
+		{
+			holder.getItemView().setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					itemClickListener.onClick(holder, sList.get(position), position);
+				}
+			});
 		}
 
 		setViewContent(holder, position - getHeadersCount());

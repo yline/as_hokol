@@ -13,7 +13,13 @@ import com.hokol.application.IApplication;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
+import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
+import com.yline.common.CommonRecyclerViewHolder;
+import com.yline.common.ViewHolder;
+import com.yline.log.LogFileUtil;
+import com.yline.utils.TimeConvertUtil;
+import com.yline.utils.UIScreenUtil;
 
 import java.util.List;
 
@@ -68,9 +74,9 @@ public class MainNewsHelper
 		recyclerAdapter.addAll(dataList);
 	}
 
-	public void setOnRecycleItemClickListener(CommonRecyclerAdapter.OnClickListener listener)
+	public void setOnRecycleItemClickListener(OnRecyclerItemClickListener listener)
 	{
-		recyclerAdapter.setOnClickListener(listener);
+		recyclerAdapter.setOnRecyclerItemClickListener(listener);
 	}
 
 	public void setOnRecommendClickListener(View.OnClickListener listener)

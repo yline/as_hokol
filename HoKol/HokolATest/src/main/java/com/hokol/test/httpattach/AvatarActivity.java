@@ -7,8 +7,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.test.R;
+import com.yline.base.BaseAppCompatActivity;
+import com.yline.log.LogFileUtil;
 
 /**
  * 测试头像展示

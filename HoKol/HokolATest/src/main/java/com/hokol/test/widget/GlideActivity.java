@@ -7,10 +7,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.medium.widget.transform.CircleTransform;
 import com.hokol.test.R;
 import com.hokol.test.common.DeleteConstant;
+import com.yline.base.BaseAppCompatActivity;
 
 public class GlideActivity extends BaseAppCompatActivity
 {

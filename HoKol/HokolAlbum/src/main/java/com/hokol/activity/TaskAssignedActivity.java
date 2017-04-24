@@ -10,11 +10,12 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.hokol.R;
-import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.fragment.TaskAssignedAllFragment;
 import com.hokol.fragment.TaskAssignedEvaluateFragment;
 import com.hokol.fragment.TaskAssignedSignFragment;
 import com.hokol.fragment.TaskAssignedTradeFragment;
+import com.yline.base.BaseAppCompatActivity;
+import com.yline.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;

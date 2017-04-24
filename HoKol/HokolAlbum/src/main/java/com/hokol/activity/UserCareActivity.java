@@ -12,12 +12,14 @@ import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
-import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.medium.http.bean.VUserCareAllBean;
 import com.hokol.medium.widget.LabelWidget;
 import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
+import com.yline.base.BaseAppCompatActivity;
+import com.yline.common.CommonRecyclerAdapter;
+import com.yline.common.CommonRecyclerViewHolder;
 
 import java.util.Arrays;
 
@@ -104,7 +106,7 @@ public class UserCareActivity extends BaseAppCompatActivity
 		}
 
 		@Override
-		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
+		public void onBindViewHolder(CommonRecyclerViewHolder viewHolder, int position)
 		{
 			FlowLayout flowLayout = viewHolder.get(R.id.flow_layout_user_care);
 			LabelWidget labelWidget = new LabelWidget(UserCareActivity.this, flowLayout);

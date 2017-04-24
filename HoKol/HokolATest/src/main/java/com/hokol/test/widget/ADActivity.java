@@ -7,9 +7,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.medium.widget.ADWidget;
 import com.hokol.test.R;
+import com.yline.application.BaseApplication;
+import com.yline.base.BaseAppCompatActivity;
 
 /**
  * 广告

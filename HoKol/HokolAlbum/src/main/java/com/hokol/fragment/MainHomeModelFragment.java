@@ -16,7 +16,10 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
+import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
+import com.yline.base.BaseFragment;
+import com.yline.common.CommonRecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,11 +89,10 @@ public class MainHomeModelFragment extends BaseFragment
 			dataList.add(DeleteConstant.getUrlSquare());
 		}
 		mainHomeModelAdapter.setDataList(dataList);
-
-		mainHomeModelAdapter.setOnClickListener(new HeadFootRecyclerAdapter.OnClickListener<String>()
+		mainHomeModelAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<String>()
 		{
 			@Override
-			public void onClick(View view, String string, int position)
+			public void onClick(RecyclerView.ViewHolder viewHolder, String s, int position)
 			{
 				StarDynamicActivity.actionStart(getContext());
 			}

@@ -17,7 +17,11 @@ import com.hokol.application.IApplication;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
+import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
+import com.yline.base.BaseFragment;
+import com.yline.common.CommonRecyclerViewHolder;
+import com.yline.utils.UIResizeUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,10 +70,10 @@ public class MainMinePrivateFragment extends BaseFragment
 
 		recyclerAdapter = new PrivateRecycleAdapter();
 		recyclerView.setAdapter(recyclerAdapter);
-		recyclerAdapter.setOnClickListener(new CommonRecyclerAdapter.OnClickListener()
+		recyclerAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener()
 		{
 			@Override
-			public void onClick(View view, Object o, int position)
+			public void onClick(RecyclerView.ViewHolder viewHolder, Object o, int position)
 			{
 				IApplication.toast("position = " + position);
 			}

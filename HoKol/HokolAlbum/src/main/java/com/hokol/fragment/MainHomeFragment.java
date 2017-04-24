@@ -15,6 +15,7 @@ import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.medium.widget.SecondaryWidget;
 import com.hokol.viewhelper.MainHomeHelper;
+import com.yline.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;

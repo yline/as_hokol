@@ -19,8 +19,10 @@ import com.hokol.medium.widget.SecondaryWidget;
 import com.hokol.medium.widget.labellayout.LabelFlowLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
+import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.transform.CircleTransform;
+import com.yline.common.CommonRecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -205,9 +207,9 @@ public class MainTaskHelper
 		recycleView.setAdapter(taskRecycleAdapter);
 	}
 
-	public void setOnRecyclerClickListener(CommonRecyclerAdapter.OnClickListener listener)
+	public void setOnRecyclerClickListener(OnRecyclerItemClickListener listener)
 	{
-		taskRecycleAdapter.setOnClickListener(listener);
+		taskRecycleAdapter.setOnRecyclerItemClickListener(listener);
 	}
 
 	public void setRecycleData()

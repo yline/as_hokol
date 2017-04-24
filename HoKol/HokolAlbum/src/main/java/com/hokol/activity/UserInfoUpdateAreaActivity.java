@@ -5,7 +5,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.hokol.R;
-import com.hokol.base.common.BaseAppCompatActivity;
+import com.yline.base.BaseAppCompatActivity;
+import com.yline.common.CommonRecyclerAdapter;
+import com.yline.common.CommonRecyclerViewHolder;
 
 public class UserInfoUpdateAreaActivity extends BaseAppCompatActivity
 {
@@ -38,7 +40,7 @@ public class UserInfoUpdateAreaActivity extends BaseAppCompatActivity
 		}
 
 		@Override
-		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
+		public void onBindViewHolder(CommonRecyclerViewHolder viewHolder, int position)
 		{
 
 		}

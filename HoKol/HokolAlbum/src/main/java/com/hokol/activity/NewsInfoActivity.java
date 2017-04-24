@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.hokol.R;
-import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.medium.http.bean.WNewsSingleBean;
+import com.yline.base.BaseAppCompatActivity;
 
 /**
  * 新闻详情界面

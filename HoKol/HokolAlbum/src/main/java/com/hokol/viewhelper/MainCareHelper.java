@@ -12,6 +12,7 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
+import com.yline.common.CommonRecyclerViewHolder;
 
 import java.util.List;
 

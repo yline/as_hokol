@@ -13,6 +13,7 @@ import com.hokol.activity.StarInfoActivity;
 import com.hokol.application.IApplication;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainCareHelper;
+import com.yline.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;

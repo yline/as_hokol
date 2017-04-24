@@ -20,6 +20,7 @@ import com.hokol.application.IApplication;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.LabelWidget;
 import com.hokol.medium.widget.labellayout.FlowLayout;
+import com.yline.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -7,8 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
-import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.test.common.BaseTestFragment;
+import com.yline.base.BaseAppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;

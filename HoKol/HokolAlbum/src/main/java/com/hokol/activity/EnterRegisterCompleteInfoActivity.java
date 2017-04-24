@@ -8,10 +8,10 @@ import android.widget.Button;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
-import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.medium.widget.LabelClickableWidget;
 import com.hokol.medium.widget.labellayout.LabelFlowLayout;
 import com.hokol.medium.widget.labellayout.LabelView;
+import com.yline.base.BaseAppCompatActivity;
 
 import java.util.Arrays;
 

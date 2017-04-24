@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.hokol.R;
-import com.hokol.base.common.BaseAppCompatActivity;
+import com.yline.base.BaseAppCompatActivity;
 
 public class UserSettingActivity extends BaseAppCompatActivity
 {

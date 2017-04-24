@@ -15,8 +15,11 @@ import com.hokol.activity.TaskDetailActivity;
 import com.hokol.activity.TaskPublishActivity;
 import com.hokol.application.IApplication;
 import com.hokol.medium.widget.ADWidget;
+import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainTaskHelper;
+import com.yline.base.BaseFragment;
+import com.yline.utils.UIScreenUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -95,10 +98,10 @@ public class MainTaskFragment extends BaseFragment
 		// 内容
 		RecyclerView recycleView = (RecyclerView) parentView.findViewById(R.id.recycle_main_task);
 		mainTaskHelper.initRecycleView(recycleView);
-		mainTaskHelper.setOnRecyclerClickListener(new CommonRecyclerAdapter.OnClickListener()
+		mainTaskHelper.setOnRecyclerClickListener(new OnRecyclerItemClickListener()
 		{
 			@Override
-			public void onClick(View view, Object o, int position)
+			public void onClick(RecyclerView.ViewHolder viewHolder, Object o, int position)
 			{
 				TaskDetailActivity.actionStart(getContext());
 			}

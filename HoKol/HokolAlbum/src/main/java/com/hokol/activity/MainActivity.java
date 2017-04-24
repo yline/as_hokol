@@ -9,13 +9,13 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.hokol.R;
-import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.fragment.MainCareFragment;
 import com.hokol.fragment.MainHomeFragment;
 import com.hokol.fragment.MainMineFragment;
 import com.hokol.fragment.MainNewsFragment;
 import com.hokol.fragment.MainTaskFragment;
 import com.hokol.viewhelper.MainHelper;
+import com.yline.base.BaseAppCompatActivity;
 
 
 /**

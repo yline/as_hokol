@@ -13,12 +13,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.test.R;
 import com.hokol.test.common.BaseTestFragment;
+import com.yline.base.BaseAppCompatActivity;
+import com.yline.base.BaseFragment;
+import com.yline.utils.UIScreenUtil;
 
 import java.util.ArrayList;
 import java.util.List;

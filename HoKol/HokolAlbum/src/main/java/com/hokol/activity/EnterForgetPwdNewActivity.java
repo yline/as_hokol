@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
-import com.hokol.base.common.BaseAppCompatActivity;
+import com.yline.base.BaseAppCompatActivity;
 
 /**
  * 设置新密码

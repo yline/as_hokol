@@ -8,8 +8,9 @@ import android.view.View;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
-import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.fragment.StarDynamicGiftFragment;
+import com.yline.base.BaseAppCompatActivity;
+import com.yline.common.ViewHolder;
 
 /**
  * 动态信息详情界面

@@ -2,6 +2,7 @@ package com.hokol.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +16,10 @@ import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
 import com.hokol.medium.http.bean.WNewsSingleBean;
+import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainNewsHelper;
+import com.yline.base.BaseFragment;
 
 import java.util.List;
 
@@ -45,12 +48,12 @@ public class MainNewsFragment extends BaseFragment
 	{
 		// recycleView
 		mainNewsHelper.initRecycleView(view);
-		mainNewsHelper.setOnRecycleItemClickListener(new CommonRecyclerAdapter.OnClickListener<VNewsSingleBean>()
+		mainNewsHelper.setOnRecycleItemClickListener(new OnRecyclerItemClickListener<VNewsSingleBean>()
 		{
 			@Override
-			public void onClick(View view, VNewsSingleBean responseMultiplexNews, int position)
+			public void onClick(RecyclerView.ViewHolder viewHolder, VNewsSingleBean vNewsSingleBean, int position)
 			{
-				NewsInfoActivity.actionStart(getContext(), new WNewsSingleBean(responseMultiplexNews.getNews_id()));
+				NewsInfoActivity.actionStart(getContext(), new WNewsSingleBean(vNewsSingleBean.getNews_id()));
 			}
 		});
 

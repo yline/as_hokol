@@ -8,10 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.hokol.R;
-import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.LabelWidget;
 import com.hokol.medium.widget.labellayout.FlowLayout;
+import com.yline.base.BaseAppCompatActivity;
+import com.yline.common.ViewHolder;
 
 import java.util.Arrays;
 

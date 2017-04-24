@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.hokol.R;
-import com.hokol.base.common.BaseAppCompatActivity;
+import com.yline.base.BaseAppCompatActivity;
 
 /**
  * 任务详情
