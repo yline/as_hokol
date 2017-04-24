@@ -14,8 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.base.common.BaseAppCompatActivity;
-import com.hokol.base.common.BaseFragment;
-import com.hokol.base.utils.UIScreenUtil;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;

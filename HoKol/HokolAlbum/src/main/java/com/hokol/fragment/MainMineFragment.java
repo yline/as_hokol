@@ -17,7 +17,6 @@ import com.hokol.R;
 import com.hokol.activity.UserInfoActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
-import com.hokol.base.common.BaseFragment;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.LabelWidget;
 import com.hokol.medium.widget.labellayout.FlowLayout;

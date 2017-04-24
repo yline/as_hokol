@@ -4,9 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.widget.R;
 import com.hokol.medium.widget.progressbar.CircleProgressBar;
+import com.yline.log.LogFileUtil;
 
 /**
  * 默认的Adapter;

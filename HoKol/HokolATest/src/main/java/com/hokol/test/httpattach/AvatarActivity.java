@@ -8,7 +8,6 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.hokol.base.common.BaseAppCompatActivity;
-import com.hokol.base.log.LogFileUtil;
 import com.hokol.test.R;
 
 /**

@@ -10,9 +10,6 @@ import android.view.ViewGroup;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
-import com.hokol.base.adapter.CommonRecyclerAdapter;
-import com.hokol.base.adapter.CommonRecyclerViewHolder;
-import com.hokol.base.common.BaseFragment;
 import com.hokol.medium.widget.LabelWidget;
 import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;

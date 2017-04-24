@@ -11,11 +11,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.hokol.base.adapter.CommonRecyclerViewHolder;
-import com.hokol.base.common.BaseFragment;
-import com.hokol.base.utils.UIResizeUtil;
 import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.test.R;
+import com.yline.base.BaseFragment;
+import com.yline.common.CommonRecyclerViewHolder;
+import com.yline.utils.UIResizeUtil;
 
 public abstract class BaseTestFragment extends BaseFragment
 {
@@ -81,7 +81,6 @@ public abstract class BaseTestFragment extends BaseFragment
 
 	private class RecycleAdapter extends HeadFootRecyclerAdapter<String>
 	{
-
 		@Override
 		public int getItemRes()
 		{

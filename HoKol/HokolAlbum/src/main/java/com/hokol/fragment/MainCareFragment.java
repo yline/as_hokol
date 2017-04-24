@@ -11,7 +11,6 @@ import com.hokol.R;
 import com.hokol.activity.StarDynamicActivity;
 import com.hokol.activity.StarInfoActivity;
 import com.hokol.application.IApplication;
-import com.hokol.base.common.BaseFragment;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainCareHelper;
 

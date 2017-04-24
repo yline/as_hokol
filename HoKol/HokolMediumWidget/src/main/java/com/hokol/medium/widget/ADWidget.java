@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.hokol.base.utils.UIResizeUtil;
+import com.yline.utils.UIResizeUtil;
 
 /**
  * 支持定制 + 动态加载图片

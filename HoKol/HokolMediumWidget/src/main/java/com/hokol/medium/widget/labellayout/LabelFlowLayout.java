@@ -8,8 +8,8 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.widget.R;
+import com.yline.log.LogFileUtil;
 
 import java.util.Deque;
 

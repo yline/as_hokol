@@ -27,8 +27,8 @@ import android.widget.AbsListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
-import com.hokol.base.log.LogFileUtil;
-import com.hokol.base.utils.UIScreenUtil;
+import com.yline.log.LogFileUtil;
+import com.yline.utils.UIScreenUtil;
 
 import static android.view.View.MeasureSpec.EXACTLY;
 

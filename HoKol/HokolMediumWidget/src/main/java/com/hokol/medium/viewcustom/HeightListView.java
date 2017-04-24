@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ListView;
 
-import com.hokol.base.utils.UIScreenUtil;
+import com.yline.utils.UIScreenUtil;
 
 public class HeightListView extends ListView
 {

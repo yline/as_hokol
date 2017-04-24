@@ -9,9 +9,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.hokol.base.adapter.CommonListAdapter;
-import com.hokol.base.adapter.ViewHolder;
-import com.hokol.base.log.LogFileUtil;
+import com.yline.common.CommonListAdapter;
+import com.yline.common.ViewHolder;
+import com.yline.log.LogFileUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,7 +97,7 @@ public class SecondaryWidget
 			provinceList.add(0, insertData);
 		}
 
-		firstListAdapter.set(provinceList);
+		firstListAdapter.setDataList(provinceList);
 	}
 
 	private class FirstListAdapter extends CommonListAdapter<String>
@@ -115,9 +115,9 @@ public class SecondaryWidget
 		}
 
 		@Override
-		protected void setViewContent(final int position, ViewGroup parent, ViewHolder item)
+		protected void onBindViewHolder(ViewGroup parent, ViewHolder viewHolder, final int position)
 		{
-			TextView textView = item.get(android.R.id.text1);
+			TextView textView = viewHolder.get(android.R.id.text1);
 			textView.setText(sList.get(position));
 			textView.setOnClickListener(new View.OnClickListener()
 			{
@@ -138,7 +138,7 @@ public class SecondaryWidget
 						{
 							selectList.add(0, secondFirstString);
 						}
-						secondListAdapter.set(selectList);
+						secondListAdapter.setDataList(selectList);
 					}
 					else
 					{
@@ -164,9 +164,9 @@ public class SecondaryWidget
 		}
 
 		@Override
-		protected void setViewContent(final int position, ViewGroup parent, ViewHolder item)
+		protected void onBindViewHolder(ViewGroup parent, ViewHolder viewHolder, final int position)
 		{
-			TextView textView = item.get(android.R.id.text1);
+			TextView textView = viewHolder.get(android.R.id.text1);
 			textView.setText(sList.get(position));
 			textView.setOnClickListener(new View.OnClickListener()
 			{

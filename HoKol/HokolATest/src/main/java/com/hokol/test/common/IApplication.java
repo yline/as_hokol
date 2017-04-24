@@ -1,13 +1,7 @@
 package com.hokol.test.common;
 
-import com.hokol.base.application.BaseApplication;
-import com.hokol.base.application.SDKConfig;
+import com.yline.application.BaseApplication;
 
 public class IApplication extends BaseApplication
 {
-	@Override
-	public SDKConfig initConfig()
-	{
-		return super.initConfig();
-	}
 }

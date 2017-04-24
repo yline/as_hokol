@@ -1,7 +1,7 @@
 package com.hokol.medium.http;
 
-import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.helper.IHttpResponse;
+import com.yline.log.LogFileUtil;
 
 /**
  * 配置每次的请求参数

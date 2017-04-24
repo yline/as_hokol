@@ -5,8 +5,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.hokol.R;
-import com.hokol.base.adapter.CommonRecyclerAdapter;
-import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.base.common.BaseAppCompatActivity;
 
 public class UserInfoUpdateAreaActivity extends BaseAppCompatActivity

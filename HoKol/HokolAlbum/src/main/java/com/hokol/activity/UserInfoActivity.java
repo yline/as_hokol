@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.hokol.R;
-import com.hokol.base.adapter.ViewHolder;
 import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.LabelWidget;

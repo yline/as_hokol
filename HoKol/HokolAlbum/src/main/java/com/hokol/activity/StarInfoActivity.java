@@ -18,7 +18,6 @@ import android.view.WindowManager;
 import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.base.common.BaseAppCompatActivity;
-import com.hokol.base.common.BaseFragment;
 import com.hokol.fragment.StarInfoDatumFragment;
 import com.hokol.fragment.StarInfoDynamicFragment;
 import com.hokol.fragment.StarInfoPrivateFragment;

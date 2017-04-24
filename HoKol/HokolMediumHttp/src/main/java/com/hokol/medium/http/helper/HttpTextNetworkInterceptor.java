@@ -1,6 +1,6 @@
 package com.hokol.medium.http.helper;
 
-import com.hokol.base.log.LogFileUtil;
+import com.yline.log.LogFileUtil;
 
 import java.io.IOException;
 

@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.hokol.R;
-import com.hokol.base.adapter.ViewHolder;
 import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.medium.widget.EditTextWidget;
 

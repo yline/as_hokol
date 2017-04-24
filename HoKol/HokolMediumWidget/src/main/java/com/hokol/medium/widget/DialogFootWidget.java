@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.hokol.base.adapter.ViewHolder;
+import com.yline.common.ViewHolder;
 
 import java.util.List;
 

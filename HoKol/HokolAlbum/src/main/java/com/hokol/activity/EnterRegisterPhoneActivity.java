@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.base.common.BaseAppCompatActivity;
-import com.hokol.base.log.LogFileUtil;
 
 public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 {

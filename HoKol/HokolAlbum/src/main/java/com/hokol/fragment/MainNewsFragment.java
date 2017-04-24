@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 
 import com.hokol.R;
 import com.hokol.activity.NewsInfoActivity;
-import com.hokol.base.adapter.CommonRecyclerAdapter;
-import com.hokol.base.common.BaseFragment;
 import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;

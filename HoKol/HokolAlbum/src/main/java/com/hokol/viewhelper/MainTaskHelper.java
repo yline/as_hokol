@@ -13,8 +13,6 @@ import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
-import com.hokol.base.adapter.CommonRecyclerAdapter;
-import com.hokol.base.adapter.CommonRecyclerViewHolder;
 import com.hokol.medium.widget.DropMenuWidget;
 import com.hokol.medium.widget.LabelClickableWidget;
 import com.hokol.medium.widget.SecondaryWidget;

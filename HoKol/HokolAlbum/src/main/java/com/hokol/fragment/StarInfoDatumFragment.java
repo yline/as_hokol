@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import com.hokol.R;
 import com.hokol.activity.UserCareActivity;
 import com.hokol.activity.UserFansActivity;
-import com.hokol.base.common.BaseFragment;
 
 public class StarInfoDatumFragment extends BaseFragment
 {

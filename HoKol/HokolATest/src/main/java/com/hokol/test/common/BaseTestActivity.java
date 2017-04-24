@@ -11,9 +11,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.hokol.base.common.BaseAppCompatActivity;
-import com.hokol.base.utils.UIResizeUtil;
 import com.hokol.test.R;
+import com.yline.base.BaseAppCompatActivity;
+import com.yline.utils.UIResizeUtil;
 
 public class BaseTestActivity extends BaseAppCompatActivity
 {

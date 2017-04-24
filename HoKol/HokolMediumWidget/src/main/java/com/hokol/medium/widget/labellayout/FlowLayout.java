@@ -6,8 +6,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hokol.base.common.BaseViewGroup;
 import com.hokol.medium.widget.R;
+import com.yline.base.BaseViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;

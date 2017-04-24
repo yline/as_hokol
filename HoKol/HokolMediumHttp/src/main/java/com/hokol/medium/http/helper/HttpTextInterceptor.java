@@ -1,6 +1,6 @@
 package com.hokol.medium.http.helper;
 
-import com.hokol.base.log.LogFileUtil;
+import com.yline.log.LogFileUtil;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ import okhttp3.Response;
 
 public class HttpTextInterceptor implements Interceptor
 {
-	public static final boolean Interceptor_debug = false;
+	public static final boolean Interceptor_debug = true;
 
 	@Override
 	public Response intercept(Chain chain) throws IOException

@@ -17,8 +17,6 @@ import com.hokol.activity.UserSettingActivity;
 import com.hokol.activity.UserTaskCollectionActivity;
 import com.hokol.activity.UserTaskMessageActivity;
 import com.hokol.activity.UserVIPActivity;
-import com.hokol.base.adapter.ViewHolder;
-import com.hokol.base.common.BaseFragment;
 
 public class MainMineHomeFragment extends BaseFragment
 {

@@ -1,9 +1,9 @@
 package com.hokol.medium.http.helper;
 
 import com.google.gson.Gson;
-import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.HttpConstant;
 import com.hokol.medium.http.XHttpAdapter;
+import com.yline.log.LogFileUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;

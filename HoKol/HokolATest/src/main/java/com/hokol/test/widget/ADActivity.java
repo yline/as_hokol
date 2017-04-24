@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.hokol.base.application.BaseApplication;
 import com.hokol.base.common.BaseAppCompatActivity;
 import com.hokol.medium.widget.ADWidget;
 import com.hokol.test.R;

@@ -11,7 +11,6 @@ import android.view.View;
 
 import com.hokol.R;
 import com.hokol.base.common.BaseAppCompatActivity;
-import com.hokol.base.common.BaseFragment;
 import com.hokol.fragment.TaskAssignedAllFragment;
 import com.hokol.fragment.TaskAssignedEvaluateFragment;
 import com.hokol.fragment.TaskAssignedSignFragment;

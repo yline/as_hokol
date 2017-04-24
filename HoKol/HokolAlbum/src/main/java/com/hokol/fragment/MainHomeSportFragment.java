@@ -14,8 +14,6 @@ import com.hokol.R;
 import com.hokol.activity.StarDynamicActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
-import com.hokol.base.adapter.CommonRecyclerViewHolder;
-import com.hokol.base.common.BaseFragment;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;

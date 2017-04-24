@@ -7,8 +7,8 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hokol.base.adapter.CommonRecyclerAdapter;
-import com.hokol.base.adapter.CommonRecyclerViewHolder;
+import com.yline.common.CommonRecyclerAdapter;
+import com.yline.common.CommonRecyclerViewHolder;
 
 /**
  * 添加头部和底部的Recycle
@@ -77,8 +77,11 @@ public abstract class HeadFootRecyclerAdapter<T> extends CommonRecyclerAdapter<T
 		{
 			return;
 		}
-		super.onBindViewHolder(holder, position - getHeadersCount());
+
+		setViewContent(holder, position - getHeadersCount());
 	}
+
+	protected abstract void setViewContent(CommonRecyclerViewHolder holder, int position);
 
 	@Override
 	public int getItemCount()

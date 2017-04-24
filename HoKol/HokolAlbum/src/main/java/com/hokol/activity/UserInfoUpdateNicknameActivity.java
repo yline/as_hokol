@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.hokol.R;
-import com.hokol.base.adapter.ViewHolder;
 
 public class UserInfoUpdateNicknameActivity extends AppCompatActivity
 {

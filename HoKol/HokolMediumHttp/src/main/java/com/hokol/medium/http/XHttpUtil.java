@@ -1,6 +1,5 @@
 package com.hokol.medium.http;
 
-import com.hokol.base.log.LogFileUtil;
 import com.hokol.medium.http.bean.VAreaAllBean;
 import com.hokol.medium.http.bean.VDynamicCareAllBean;
 import com.hokol.medium.http.bean.VDynamicCareSingleBean;
@@ -60,6 +59,7 @@ import com.hokol.medium.http.bean.WUserMessageBean;
 import com.hokol.medium.http.bean.WUserTaskCollectionBean;
 import com.hokol.medium.http.helper.XTextHttp;
 import com.hokol.medium.http.helper.XUploadFileHttp;
+import com.yline.log.LogFileUtil;
 
 import java.io.File;
 

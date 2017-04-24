@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
-import com.hokol.base.common.BaseFragment;
 import com.hokol.medium.widget.SecondaryWidget;
 import com.hokol.viewhelper.MainHomeHelper;
 

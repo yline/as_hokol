@@ -1,7 +1,7 @@
 package com.hokol.medium.http.helper;
 
-import com.hokol.base.application.BaseApplication;
-import com.hokol.base.utils.FileUtil;
+import com.yline.application.SDKManager;
+import com.yline.utils.FileUtil;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -38,8 +38,8 @@ public class HttpTextClient extends OkHttpClient
 					Builder builder = new Builder();
 
 					// 设置缓存
-					String cacheDirStr = BaseApplication.getApplication().getExternalCacheDir() + File.separator + DEFAULT_CACHE_PATH;
-					File cacheDir = FileUtil.createFileDir(cacheDirStr);
+					String cacheDirStr = SDKManager.getApplication().getExternalCacheDir() + File.separator + DEFAULT_CACHE_PATH;
+					File cacheDir = FileUtil.createDir(cacheDirStr);
 					Cache cache = new Cache(cacheDir, DEFAULT_CACHE_SIZE);
 					builder.cache(cache);
 					
