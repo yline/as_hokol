@@ -2,6 +2,7 @@ package com.hokol.medium.http.helper;
 
 import com.google.gson.Gson;
 import com.hokol.medium.http.XHttpAdapter;
+import com.hokol.medium.http.cache.CacheManager;
 import com.yline.log.LogFileUtil;
 
 import org.json.JSONException;
@@ -31,8 +32,6 @@ public class XTextHttp<Result>
 	public static final int REQUEST_POST = 0;
 
 	public static final int REQUEST_GET = 1;
-
-	private static final String MEDIA_TYPE_JSON = "application/json; charset=utf-8";
 
 	private static final int REQUEST_SUCCESS_CODE = 0;
 
@@ -207,7 +206,6 @@ public class XTextHttp<Result>
 	}
 
 	/* --------------------------- 处理返回参数 --------------------------- */
-
 	private void handleResponse(Response response, Class<Result> clazz) throws IOException
 	{
 		String jsonResult = response.body().string();
@@ -322,7 +320,7 @@ public class XTextHttp<Result>
 	{
 		return HttpTextClient.getInstance();
 	}
-
+	
 	/**
 	 * 添加 Request信息
 	 *
@@ -346,7 +344,7 @@ public class XTextHttp<Result>
 
 	protected MediaType getRequestPostMediaType()
 	{
-		return MediaType.parse(MEDIA_TYPE_JSON);
+		return CacheManager.DEFAULT_MEDIA_TYPE;
 	}
 
 	/**

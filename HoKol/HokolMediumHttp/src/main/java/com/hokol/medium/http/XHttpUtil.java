@@ -57,6 +57,7 @@ import com.hokol.medium.http.bean.WUserCoinGiftBean;
 import com.hokol.medium.http.bean.WUserFansAllBean;
 import com.hokol.medium.http.bean.WUserMessageBean;
 import com.hokol.medium.http.bean.WUserTaskCollectionBean;
+import com.hokol.medium.http.cache.CacheManager;
 import com.hokol.medium.http.helper.XTextHttp;
 import com.hokol.medium.http.helper.XUploadFileHttp;
 import com.yline.log.LogFileUtil;
@@ -70,6 +71,15 @@ import okhttp3.RequestBody;
 public class XHttpUtil
 {
 	private static final String TAG = "XHttpUtil";
+
+	/**
+	 * 完成Http的全局初始化
+	 */
+	public void initHttpCache(File dir, int maxSize)
+	{
+		CacheManager.getInstance().init(dir, maxSize);
+	}
+
 	/**
 	 * 登录接口
 	 * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况
