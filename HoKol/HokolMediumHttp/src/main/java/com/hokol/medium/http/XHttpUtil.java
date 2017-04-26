@@ -82,8 +82,7 @@ public class XHttpUtil
 	 */
 	public static void init(Context context)
 	{
-		File cacheTopFile = FileUtil.getFileExternalCacheDir(context);
-		File cacheDir = FileUtil.createDir(cacheTopFile.getAbsolutePath() + File.separator + "Text" + File.separator);
+		File cacheDir = FileUtil.getFileExternalDir(context, "Text");
 
 		XHttpConfig config = XHttpConfig.getInstance();
 		config.setCacheDir(cacheDir);
