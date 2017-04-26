@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
 import com.hokol.test.common.BaseTestActivity;
+import com.lib.http.XHttpAdapter;
 
 public class TestNewsActivity extends BaseTestActivity
 {

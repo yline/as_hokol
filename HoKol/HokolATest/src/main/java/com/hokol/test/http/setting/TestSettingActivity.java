@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.WSettingResetPhoneBean;
 import com.hokol.medium.http.bean.WSettingResetPwdBean;
@@ -15,6 +14,7 @@ import com.hokol.medium.http.bean.WSettingSubmitProposalBean;
 import com.hokol.medium.http.bean.WSettingUpdateInfoBean;
 import com.hokol.test.common.BaseTestActivity;
 import com.hokol.test.common.IApplication;
+import com.lib.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.FileUtil;
 

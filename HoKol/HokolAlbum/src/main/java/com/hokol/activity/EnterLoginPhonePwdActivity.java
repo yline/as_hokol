@@ -9,10 +9,10 @@ import android.widget.EditText;
 import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpConstant;
-import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VLoginPhonePwdBean;
 import com.hokol.medium.http.bean.WLoginPhonePwdBean;
+import com.lib.http.XHttpAdapter;
 import com.yline.base.BaseAppCompatActivity;
 
 /**

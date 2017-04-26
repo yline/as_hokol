@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VAreaAllBean;
 import com.hokol.test.common.BaseTestActivity;
+import com.lib.http.XHttpAdapter;
 
 
 public class TestAreaActivity extends BaseTestActivity

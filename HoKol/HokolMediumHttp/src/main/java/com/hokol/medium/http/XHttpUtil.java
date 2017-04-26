@@ -1,5 +1,7 @@
 package com.hokol.medium.http;
 
+import android.content.Context;
+
 import com.hokol.medium.http.bean.VAreaAllBean;
 import com.hokol.medium.http.bean.VDynamicCareAllBean;
 import com.hokol.medium.http.bean.VDynamicCareSingleBean;
@@ -57,10 +59,13 @@ import com.hokol.medium.http.bean.WUserCoinGiftBean;
 import com.hokol.medium.http.bean.WUserFansAllBean;
 import com.hokol.medium.http.bean.WUserMessageBean;
 import com.hokol.medium.http.bean.WUserTaskCollectionBean;
-import com.hokol.medium.http.cache.CacheManager;
-import com.hokol.medium.http.helper.XTextHttp;
-import com.hokol.medium.http.helper.XUploadFileHttp;
+import com.lib.http.XHttpAdapter;
+import com.lib.http.XHttpConfig;
+import com.lib.http.XHttpConstant;
+import com.lib.http.helper.XTextHttp;
+import com.lib.http.helper.XUploadFileHttp;
 import com.yline.log.LogFileUtil;
+import com.yline.utils.FileUtil;
 
 import java.io.File;
 
@@ -75,9 +80,16 @@ public class XHttpUtil
 	/**
 	 * 完成Http的全局初始化
 	 */
-	public void initHttpCache(File dir, int maxSize)
+	public static void init(Context context)
 	{
-		CacheManager.getInstance().init(dir, maxSize);
+		File cacheTopFile = FileUtil.getFileExternalCacheDir(context);
+		File cacheDir = FileUtil.createDir(cacheTopFile.getAbsolutePath() + File.separator + "Text" + File.separator);
+
+		XHttpConfig config = XHttpConfig.getInstance();
+		config.setCacheDir(cacheDir);
+		config.init(context);
+
+		XHttpConstant.setIsInterceptorDebug(false);
 	}
 
 	/**
@@ -611,7 +623,7 @@ public class XHttpUtil
 			LogFileUtil.e(TAG, "Setting Update Avatar file is null or not exists");
 		}
 	}
-
+	
 	/**
 	 * 设置页面
 	 * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况
@@ -626,6 +638,6 @@ public class XHttpUtil
 
 	private static boolean isDebug()
 	{
-		return HttpConstant.isDefaultDebug();
+		return XHttpConstant.isDefaultDebug();
 	}
 }

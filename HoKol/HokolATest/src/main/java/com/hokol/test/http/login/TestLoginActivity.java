@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VLoginPhonePwdBean;
 import com.hokol.medium.http.bean.WLoginPhonePwdBean;
 import com.hokol.test.common.BaseTestActivity;
 import com.hokol.test.httpattach.AvatarActivity;
+import com.lib.http.XHttpAdapter;
 
 public class TestLoginActivity extends BaseTestActivity
 {

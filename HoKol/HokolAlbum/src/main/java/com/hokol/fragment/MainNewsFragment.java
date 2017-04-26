@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import com.hokol.R;
 import com.hokol.activity.NewsInfoActivity;
-import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsSingleBean;
@@ -19,6 +18,7 @@ import com.hokol.medium.http.bean.WNewsSingleBean;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainNewsHelper;
+import com.lib.http.XHttpAdapter;
 import com.yline.base.BaseFragment;
 
 import java.util.List;

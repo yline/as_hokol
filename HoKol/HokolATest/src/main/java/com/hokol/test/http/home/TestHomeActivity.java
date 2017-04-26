@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VHomeMainBean;
 import com.hokol.medium.http.bean.WHomeMainBean;
 import com.hokol.test.common.BaseTestActivity;
+import com.lib.http.XHttpAdapter;
 
 public class TestHomeActivity extends BaseTestActivity
 {

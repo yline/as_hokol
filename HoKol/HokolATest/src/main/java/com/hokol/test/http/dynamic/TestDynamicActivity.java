@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.hokol.medium.http.HttpConstant;
-import com.hokol.medium.http.XHttpAdapter;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VDynamicCareAllBean;
 import com.hokol.medium.http.bean.VDynamicCareSingleBean;
@@ -24,6 +23,7 @@ import com.hokol.medium.http.bean.WDynamicUserDetailBean;
 import com.hokol.medium.http.bean.WDynamicUserPrivateAllBean;
 import com.hokol.medium.http.bean.WUserCareAllBean;
 import com.hokol.test.common.BaseTestActivity;
+import com.lib.http.XHttpAdapter;
 
 public class TestDynamicActivity extends BaseTestActivity
 {

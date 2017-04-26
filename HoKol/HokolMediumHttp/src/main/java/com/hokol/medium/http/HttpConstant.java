@@ -150,44 +150,6 @@ public class HttpConstant
 	public static final String url_area_all = url_head + "ApiArea/get_area";
 	
 	/* ------------------------------ 控制 -------------------------------- */
-	// 拦截器是否输出日志
-	private static boolean isInterceptorDebug = false;
-
-	public static boolean isInterceptorDebug()
-	{
-		return isInterceptorDebug;
-	}
-
-	public static void setIsInterceptorDebug(boolean isInterceptorDebug)
-	{
-		HttpConstant.isInterceptorDebug = isInterceptorDebug;
-	}
-
-	// 缓存是否输出日志
-	private static boolean isCacheDebug = true;
-
-	public static boolean isCacheDebug()
-	{
-		return isCacheDebug;
-	}
-
-	public static void setIsCacheDebug(boolean isCacheDebug)
-	{
-		HttpConstant.isCacheDebug = isCacheDebug;
-	}
-
-	// 输入输出是否日志
-	private static boolean isDefaultDebug = true;
-
-	public static boolean isDefaultDebug()
-	{
-		return isDefaultDebug;
-	}
-
-	public static void setIsDefaultDebug(boolean isDefaultDebug)
-	{
-		HttpConstant.isDefaultDebug = isDefaultDebug;
-	}
 
 	/**
 	 * 解析最外层Json
