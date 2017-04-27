@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_some_test"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--android:solidColor="@color/colorPrimary" 背景色-->
+    <NumberPicker
+        android:id="@+id/number_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </NumberPicker>
+</RelativeLayout>

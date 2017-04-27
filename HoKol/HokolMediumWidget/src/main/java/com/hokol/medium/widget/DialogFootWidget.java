@@ -43,6 +43,7 @@ public class DialogFootWidget
 
 		dialog = new Dialog(context, R.style.AppDialog_Default);// android.R.style.Theme_Holo_Light_Dialog_NoActionBar
 		dialog.setContentView(view);
+		dialog.setCanceledOnTouchOutside(true);
 
 		Window dialogWindow = dialog.getWindow();
 		dialogWindow.setGravity(Gravity.BOTTOM);

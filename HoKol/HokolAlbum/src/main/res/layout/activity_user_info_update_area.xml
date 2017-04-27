@@ -30,9 +30,10 @@
             android:textSize="@dimen/default_text_size_large"/>
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_user_info_update_area"
+    <FrameLayout
+        android:id="@+id/fl_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        ></android.support.v7.widget.RecyclerView>
+        android:background="#f2f2f2">
+    </FrameLayout>
 </LinearLayout>

@@ -14,11 +14,6 @@
         <activity
             android:name=".TestInnerActivity"
             android:label="HoKol测试入口">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <!-- Test -->
         <activity android:name=".http.login.TestLoginActivity"/>
@@ -32,7 +27,13 @@
         <activity android:name=".http.mine.TestUserActivity"/>
         <activity android:name=".http.setting.TestSettingActivity"/>
         <activity android:name=".http.area.TestAreaActivity"/>
-        <activity android:name=".httpattach.AvatarActivity">
+        <activity android:name=".httpattach.AvatarActivity"/>
+        <activity android:name=".test.SomeTestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
     </application>
 

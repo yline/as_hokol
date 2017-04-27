@@ -16,6 +16,7 @@ import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.LabelWidget;
 import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.hokol.util.IntentUtil;
+import com.hokol.viewhelper.UserInfoHelper;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.common.ViewHolder;
 import com.yline.log.LogFileUtil;
@@ -24,13 +25,15 @@ import com.yline.utils.FileUtil;
 import java.io.File;
 import java.util.Arrays;
 
-import static com.hokol.R.id.circle_user_info_avatar;
-
 public class UserInfoActivity extends BaseAppCompatActivity
 {
 	private ViewHolder viewHolder;
 
+	private UserInfoHelper userInfoHelper;
+
 	private static final String request_key = "UserInfo";
+
+	private static final String request_key_second = "UserInfoSecond";
 
 	private static final String camera_picture_name = "camera_picture.jpg";
 
@@ -41,6 +44,8 @@ public class UserInfoActivity extends BaseAppCompatActivity
 	private static final int request_code_sign = 101;
 
 	private static final int request_code_award = 102;
+
+	private static final int request_code_area = 103;
 
 	private static final int request_code_camera = 1001;
 
@@ -54,13 +59,14 @@ public class UserInfoActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_info);
 
+		viewHolder = new ViewHolder(this);
+		userInfoHelper = new UserInfoHelper(this);
+
 		initView();
 	}
 
 	private void initView()
 	{
-		viewHolder = new ViewHolder(this);
-
 		FlowLayout flowLayout = (FlowLayout) findViewById(R.id.flow_layout_user_info);
 		LabelWidget labelWidget = new LabelWidget(this, flowLayout);
 		labelWidget.setDataList(Arrays.asList("网红", "模特"));
@@ -76,7 +82,7 @@ public class UserInfoActivity extends BaseAppCompatActivity
 		});
 
 		// 头像
-		viewHolder.setOnClickListener(circle_user_info_avatar, new View.OnClickListener()
+		viewHolder.setOnClickListener(R.id.circle_user_info_avatar, new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -125,6 +131,66 @@ public class UserInfoActivity extends BaseAppCompatActivity
 			}
 		});
 
+		// 修改性别
+		viewHolder.setOnClickListener(R.id.ll_user_info_sex, new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				DialogFootWidget dialogFootWidget = new DialogFootWidget(UserInfoActivity.this, Arrays.asList("女", "男"))
+				{
+					@Override
+					protected int getResourceId()
+					{
+						return R.layout.widget_dialog_foot_rec;
+					}
+				};
+				dialogFootWidget.show(new DialogFootWidget.OnSelectedListener()
+				{
+					@Override
+					public void onCancelSelected(DialogInterface dialog)
+					{
+						dialog.dismiss();
+					}
+
+					@Override
+					public void onOptionSelected(DialogInterface dialog, int position, String content)
+					{
+						viewHolder.setText(R.id.tv_user_info_sex, content);
+						dialog.dismiss();
+					}
+				});
+			}
+		});
+
+		// 修改星座
+		viewHolder.setOnClickListener(R.id.ll_user_info_constell, new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				userInfoHelper.updateConstellation(new DialogInterface.OnDismissListener()
+				{
+
+					@Override
+					public void onDismiss(DialogInterface dialog)
+					{
+						viewHolder.setText(R.id.tv_user_info_constellation, userInfoHelper.getSelectContent());
+					}
+				});
+			}
+		});
+
+		// 修改所在地
+		viewHolder.setOnClickListener(R.id.ll_user_info_area, new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				UserInfoUpdateAreaActivity.actionStartForResult(UserInfoActivity.this, request_code_area);
+			}
+		});
+
 		// 修改个性签名
 		viewHolder.setOnClickListener(R.id.ll_user_info_sign, new View.OnClickListener()
 		{
@@ -156,20 +222,29 @@ public class UserInfoActivity extends BaseAppCompatActivity
 		// 界面间跳转
 		if (null != data)
 		{
-			if (request_code_sign == requestCode)
+			if (resultCode == RESULT_OK)
 			{
-				String resultContent = data.getStringExtra(request_key);
-				viewHolder.setText(R.id.tv_user_info_sign, resultContent);
-			}
-			else if (request_code_award == requestCode)
-			{
-				String resultContent = data.getStringExtra(request_key);
-				viewHolder.setText(R.id.tv_user_info_award, resultContent);
-			}
-			else if (request_code_nickname == requestCode)
-			{
-				String resultContent = data.getStringExtra(request_key);
-				viewHolder.setText(R.id.tv_user_info_nickname, resultContent);
+				if (request_code_sign == requestCode)
+				{
+					String resultContent = data.getStringExtra(request_key);
+					viewHolder.setText(R.id.tv_user_info_sign, resultContent);
+				}
+				else if (request_code_award == requestCode)
+				{
+					String resultContent = data.getStringExtra(request_key);
+					viewHolder.setText(R.id.tv_user_info_award, resultContent);
+				}
+				else if (request_code_nickname == requestCode)
+				{
+					String resultContent = data.getStringExtra(request_key);
+					viewHolder.setText(R.id.tv_user_info_nickname, resultContent);
+				}
+				else if (request_code_area == requestCode)
+				{
+					String resultFirst = data.getStringExtra(request_key);
+					String resultSecond = data.getStringExtra(request_key_second);
+					viewHolder.setText(R.id.tv_city, resultFirst + " " + resultSecond);
+				}
 			}
 		}
 
@@ -222,7 +297,15 @@ public class UserInfoActivity extends BaseAppCompatActivity
 	{
 		Intent intent = new Intent();
 		intent.putExtra(request_key, result);
-		activity.setResult(request_code_sign, intent);
+		activity.setResult(RESULT_OK, intent);
+	}
+
+	public static void actionResultUpdate(Activity activity, String first, String second)
+	{
+		Intent intent = new Intent();
+		intent.putExtra(request_key, first);
+		intent.putExtra(request_key_second, second);
+		activity.setResult(RESULT_OK, intent);
 	}
 
 	public static void actionStart(Context context)

@@ -58,6 +58,8 @@
         android:layout_below="@+id/rl_user_info_update_nickname_title"
         android:background="@null"
         android:gravity="top"
+        android:hint="昵称不能为空"
+        android:textColorHint="@color/hokolGrayLight"
         android:maxLines="1"
         android:padding="@dimen/default_space_large"
         android:textColor="@color/hokolGrayDrak"/>

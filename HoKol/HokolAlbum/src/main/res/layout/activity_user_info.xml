@@ -108,6 +108,7 @@
                 android:background="@color/hokolGrayLight"></View>
 
             <LinearLayout
+                android:id="@+id/ll_user_info_sex"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -122,6 +123,7 @@
                     android:textColor="@color/hokolGray"/>
 
                 <TextView
+                    android:id="@+id/tv_user_info_sex"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
@@ -136,6 +138,7 @@
                 android:background="@color/hokolGrayLight"></View>
 
             <LinearLayout
+                android:id="@+id/ll_user_info_constell"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -150,12 +153,12 @@
                     android:textColor="@color/hokolGray"/>
 
                 <TextView
-                    android:id="@+id/textView18"
+                    android:id="@+id/tv_user_info_constellation"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:paddingLeft="@dimen/default_space_large"
-                    android:text="双鱼座"
+                    android:text="水瓶座"
                     android:textColor="@color/hokolBlackLight"/>
             </LinearLayout>
 
@@ -165,6 +168,7 @@
                 android:background="@color/hokolGrayLight"></View>
 
             <LinearLayout
+                android:id="@+id/ll_user_info_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -179,6 +183,7 @@
                     android:textColor="@color/hokolGray"/>
 
                 <TextView
+                    android:id="@+id/tv_city"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
