@@ -43,25 +43,33 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
+        android:layout_height="2px"
         android:background="@color/hokolGrayLight">
     </View>
 
     <TextView
-        android:textSize="@dimen/default_text_size_normal"
-        android:textColor="@color/hokolBlackLight"
-        android:paddingLeft="@dimen/default_space_large"
-        android:paddingTop="@dimen/default_space_medium"
-        android:paddingBottom="@dimen/default_space_medium"
+        android:id="@+id/tv_label_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="已添加(0/2)"/>
+        android:paddingBottom="@dimen/default_space_large"
+        android:paddingLeft="@dimen/default_space_large"
+        android:paddingTop="@dimen/default_space_normal"
+        android:text="已添加(0/2)"
+        android:textColor="@color/hokolBlackLight"
+        android:textSize="@dimen/default_text_size_normal"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:background="@color/hokolGrayLight">
+    </View>
 
     <com.hokol.medium.widget.labellayout.LabelFlowLayout
         android:id="@+id/label_clickable_layout"
-        android:layout_marginLeft="@dimen/default_space_large"
-        android:layout_marginRight="@dimen/default_space_large"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginRight="@dimen/default_space_large">
     </com.hokol.medium.widget.labellayout.LabelFlowLayout>
 </LinearLayout>

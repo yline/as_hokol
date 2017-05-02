@@ -32,14 +32,6 @@ import java.util.List;
  */
 public class MainHomeRedFragment extends BaseFragment
 {
-	private final static int[] res = new int[]{
-			R.drawable.delete_ad_img1,
-			R.drawable.delete_ad_img2,
-			R.drawable.delete_ad_img3,
-			R.drawable.delete_ad_img4,
-			R.drawable.delete_ad_img5,
-	};
-
 	private MainNewsHotAdapter recycleAdapter;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
@@ -150,7 +142,7 @@ public class MainHomeRedFragment extends BaseFragment
 				return UIScreenUtil.dp2px(getContext(), 150);
 			}
 		};
-		View adView = adWidget.start(getContext(), 5);
+		View adView = adWidget.start(getContext(), 3);
 		adWidget.setListener(new ADWidget.OnPageListener()
 		{
 			@Override
@@ -169,8 +161,8 @@ public class MainHomeRedFragment extends BaseFragment
 
 		// 分割线
 		View divideView = new View(getContext());
-		divideView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 10)));
-		divideView.setBackgroundResource(android.R.color.darker_gray);
+		divideView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 6)));
+		divideView.setBackgroundResource(R.color.hokolGrayLight);
 		wrapperAdapter.addHeadView(divideView);
 	}
 
@@ -187,7 +179,8 @@ public class MainHomeRedFragment extends BaseFragment
 		{
 			ImageView ivPic = item.get(R.id.iv_main_news_hot_pic);
 			Glide.with(getContext()).load(sList.get(position)).centerCrop()
-					.placeholder(R.mipmap.ic_launcher)
+					.placeholder(R.mipmap.global_load_failed)
+					.error(R.mipmap.global_load_failed)
 					.into(ivPic);
 		}
 	}

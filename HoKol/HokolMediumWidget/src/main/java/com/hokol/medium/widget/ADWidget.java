@@ -156,14 +156,14 @@ public class ADWidget
 		{
 			if (i == position)
 			{
-				UIResizeUtil.build().setIsWidthAdapter(false)
+				UIResizeUtil.build().setIsWidthAdapter(false).setIsHeightAdapter(false)
 						.setWidth(getPointSizeAfter()).setHeight(getPointSizeAfter())
 						.commit(parentLayout.getChildAt(i));
 				parentLayout.getChildAt(i).setSelected(true);
 			}
 			else
 			{
-				UIResizeUtil.build().setIsWidthAdapter(false)
+				UIResizeUtil.build().setIsWidthAdapter(false).setIsHeightAdapter(false)
 						.setWidth(getPointSizeBefore()).setHeight(getPointSizeBefore())
 						.commit(parentLayout.getChildAt(i));
 				parentLayout.getChildAt(i).setSelected(false);
@@ -375,7 +375,7 @@ public class ADWidget
 
 	protected int getPointLeftMargin()
 	{
-		return 10;
+		return 20;
 	}
 
 	protected int getPointRightMargin()

@@ -20,6 +20,7 @@ import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseFragment;
 import com.yline.common.CommonRecyclerViewHolder;
+import com.yline.utils.UIScreenUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class MainHomeAuthorFragment extends BaseFragment
 {
 	private static final String ARG_PARAM1 = "param1";
 
-	private String mParam1;
+	private static final int COUNT_AUTHOR = 3;
 
 	private HeadFootRecyclerAdapter mainHomeAuthorAdapter;
 
@@ -37,8 +38,6 @@ public class MainHomeAuthorFragment extends BaseFragment
 	public static MainHomeAuthorFragment newInstance()
 	{
 		MainHomeAuthorFragment fragment = new MainHomeAuthorFragment();
-		/*Bundle args = new Bundle();
-		fragment.setArguments(args);*/
 		return fragment;
 	}
 
@@ -46,10 +45,6 @@ public class MainHomeAuthorFragment extends BaseFragment
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		if (getArguments() != null)
-		{
-			mParam1 = getArguments().getString(ARG_PARAM1);
-		}
 	}
 
 	@Override
@@ -68,7 +63,7 @@ public class MainHomeAuthorFragment extends BaseFragment
 	private void initView(View view)
 	{
 		RecyclerView recycleView = (RecyclerView) view.findViewById(R.id.recycle_main_home_author);
-		recycleView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+		recycleView.setLayoutManager(new GridLayoutManager(getContext(), COUNT_AUTHOR));
 		recycleView.addItemDecoration(new DefaultGridItemDecoration(getContext())
 		{
 			@Override
@@ -96,6 +91,12 @@ public class MainHomeAuthorFragment extends BaseFragment
 				StarDynamicActivity.actionStart(getContext());
 			}
 		});
+
+		// 分割线
+		View divideView = new View(getContext());
+		divideView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 10)));
+		divideView.setBackgroundResource(R.color.hokolGrayLight);
+		mainHomeAuthorAdapter.addHeadView(divideView);
 
 		superRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_main_home_author);
 		superRefreshLayout.setOnRefreshListener(new SuperSwipeRefreshLayout.OnSwipeListener()
@@ -147,8 +148,12 @@ public class MainHomeAuthorFragment extends BaseFragment
 		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
 		{
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_home_author);
+			/*int width = (UIScreenUtil.getScreenWidth(getContext()) - 20) / COUNT_AUTHOR;
+			UIResizeUtil.build().setWidth(width).setHeight(width).commit(imageView);*/
+
 			Glide.with(getContext()).load(sList.get(position)).centerCrop()
-					.placeholder(R.mipmap.ic_launcher)
+					.placeholder(R.mipmap.global_load_failed)
+					.error(R.mipmap.global_load_failed)
 					.into(imageView);
 		}
 	}

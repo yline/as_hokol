@@ -30,7 +30,7 @@ public class MainHomeHelper
 	}
 
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%% 下拉菜单 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
-	private String headers[] = {"城市", "筛选"};
+	private String headers[] = {"地区", "筛选"};
 
 	private DropMenuWidget dropMenuWidget;
 

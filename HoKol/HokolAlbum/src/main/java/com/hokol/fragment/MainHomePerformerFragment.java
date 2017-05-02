@@ -20,6 +20,7 @@ import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseFragment;
 import com.yline.common.CommonRecyclerViewHolder;
+import com.yline.utils.UIScreenUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +39,6 @@ public class MainHomePerformerFragment extends BaseFragment
 	public static MainHomePerformerFragment newInstance()
 	{
 		MainHomePerformerFragment fragment = new MainHomePerformerFragment();
-		/*Bundle args = new Bundle();
-		fragment.setArguments(args);*/
 		return fragment;
 	}
 
@@ -97,6 +96,12 @@ public class MainHomePerformerFragment extends BaseFragment
 			}
 		});
 
+		// 分割线
+		View divideView = new View(getContext());
+		divideView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 10)));
+		divideView.setBackgroundResource(R.color.hokolGrayLight);
+		mainHomePerformerAdapter.addHeadView(divideView);
+
 		superRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_main_home_performer);
 		superRefreshLayout.setOnRefreshListener(new SuperSwipeRefreshLayout.OnSwipeListener()
 		{
@@ -148,7 +153,8 @@ public class MainHomePerformerFragment extends BaseFragment
 		{
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_home_performer);
 			Glide.with(getContext()).load(sList.get(position)).centerCrop()
-					.placeholder(R.mipmap.ic_launcher)
+					.placeholder(R.mipmap.global_load_failed)
+					.error(R.mipmap.global_load_failed)
 					.into(imageView);
 		}
 	}

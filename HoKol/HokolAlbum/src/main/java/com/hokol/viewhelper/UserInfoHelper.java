@@ -90,6 +90,7 @@ public class UserInfoHelper
 			});
 
 			constellationDialog.setOnDismissListener(listener);
+			constellationDialog.show();
 		}
 		else
 		{

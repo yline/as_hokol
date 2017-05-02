@@ -22,6 +22,7 @@ import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseFragment;
 import com.yline.common.CommonRecyclerViewHolder;
 import com.yline.utils.UIResizeUtil;
+import com.yline.utils.UIScreenUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -179,9 +180,9 @@ public class MainMineDynamicFragment extends BaseFragment
 			Glide.with(getContext()).load(DeleteConstant.url_default_avatar).into(avatarImageView);
 
 			ImageView contentImageView = viewHolder.get(R.id.iv_item_main_mine_dynamic_content);
-			int width = contentImageView.getWidth();
+			int width = UIScreenUtil.getScreenWidth(getContext()) - UIScreenUtil.dp2px(getContext(), 10 + 10);
 			UIResizeUtil.build().setIsHeightAdapter(false).setHeight(width).commit(contentImageView);
-			Glide.with(getContext()).load(DeleteConstant.getUrlRec()).error(R.mipmap.global_load_failed).into(contentImageView);
+			Glide.with(getContext()).load(DeleteConstant.getUrlSquare()).placeholder(R.mipmap.global_load_failed).error(R.mipmap.global_load_failed).into(contentImageView);
 		}
 	}
 }
