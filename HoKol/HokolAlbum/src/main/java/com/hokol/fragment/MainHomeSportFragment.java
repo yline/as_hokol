@@ -72,6 +72,11 @@ public class MainHomeSportFragment extends BaseFragment
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(getContext())
 		{
+			@Override
+			protected int getNonDivideHeadNumber()
+			{
+				return 1;
+			}
 
 			@Override
 			protected int getDivideResourceId()
@@ -100,7 +105,7 @@ public class MainHomeSportFragment extends BaseFragment
 
 		// 分割线
 		View divideView = new View(getContext());
-		divideView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 10)));
+		divideView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 6)));
 		divideView.setBackgroundResource(R.color.hokolGrayLight);
 		mainHomeSportAdapter.addHeadView(divideView);
 

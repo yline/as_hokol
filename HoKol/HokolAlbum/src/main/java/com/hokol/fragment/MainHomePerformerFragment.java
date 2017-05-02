@@ -72,6 +72,12 @@ public class MainHomePerformerFragment extends BaseFragment
 		recycleView.addItemDecoration(new DefaultGridItemDecoration(getContext())
 		{
 			@Override
+			protected int getHeadNumber()
+			{
+				return 1;
+			}
+
+			@Override
 			protected int getDivideResourceId()
 			{
 				return R.drawable.widget_recycler_divider_white_small;
@@ -98,7 +104,7 @@ public class MainHomePerformerFragment extends BaseFragment
 
 		// 分割线
 		View divideView = new View(getContext());
-		divideView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 10)));
+		divideView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 6)));
 		divideView.setBackgroundResource(R.color.hokolGrayLight);
 		mainHomePerformerAdapter.addHeadView(divideView);
 

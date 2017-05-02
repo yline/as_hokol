@@ -20,6 +20,7 @@ import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseFragment;
 import com.yline.common.CommonRecyclerViewHolder;
+import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 
 import java.util.ArrayList;
@@ -67,6 +68,12 @@ public class MainHomeAuthorFragment extends BaseFragment
 		recycleView.addItemDecoration(new DefaultGridItemDecoration(getContext())
 		{
 			@Override
+			protected int getHeadNumber()
+			{
+				return 1;
+			}
+
+			@Override
 			protected int getDivideResourceId()
 			{
 				return R.drawable.widget_recycler_divider_white_small;
@@ -94,7 +101,7 @@ public class MainHomeAuthorFragment extends BaseFragment
 
 		// 分割线
 		View divideView = new View(getContext());
-		divideView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 10)));
+		divideView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 6)));
 		divideView.setBackgroundResource(R.color.hokolGrayLight);
 		mainHomeAuthorAdapter.addHeadView(divideView);
 
@@ -148,8 +155,8 @@ public class MainHomeAuthorFragment extends BaseFragment
 		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
 		{
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_home_author);
-			/*int width = (UIScreenUtil.getScreenWidth(getContext()) - 20) / COUNT_AUTHOR;
-			UIResizeUtil.build().setWidth(width).setHeight(width).commit(imageView);*/
+			int width = (UIScreenUtil.getScreenWidth(getContext())) / COUNT_AUTHOR;
+			UIResizeUtil.build().setWidth(width).setHeight(width).commit(imageView);
 
 			Glide.with(getContext()).load(sList.get(position)).centerCrop()
 					.placeholder(R.mipmap.global_load_failed)

@@ -20,6 +20,7 @@ import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseFragment;
 import com.yline.common.CommonRecyclerViewHolder;
+import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ public class MainHomeModelFragment extends BaseFragment
 	private static final String ARG_PARAM1 = "param1";
 
 	private String mParam1;
+
+	private static final int COUNT_MODEL = 3;
 
 	private HeadFootRecyclerAdapter mainHomeModelAdapter;
 
@@ -67,9 +70,14 @@ public class MainHomeModelFragment extends BaseFragment
 	private void initView(View view)
 	{
 		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_main_home_model);
-		recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+		recyclerView.setLayoutManager(new GridLayoutManager(getContext(), COUNT_MODEL));
 		recyclerView.addItemDecoration(new DefaultGridItemDecoration(getContext())
 		{
+			@Override
+			protected int getHeadNumber()
+			{
+				return 1;
+			}
 
 			@Override
 			protected int getDivideResourceId()
@@ -99,7 +107,7 @@ public class MainHomeModelFragment extends BaseFragment
 
 		// 分割线
 		View divideView = new View(getContext());
-		divideView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 10)));
+		divideView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 6)));
 		divideView.setBackgroundResource(R.color.hokolGrayLight);
 		mainHomeModelAdapter.addHeadView(divideView);
 
@@ -153,6 +161,9 @@ public class MainHomeModelFragment extends BaseFragment
 		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
 		{
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_home_model);
+			int width = (UIScreenUtil.getScreenWidth(getContext())) / COUNT_MODEL;
+			UIResizeUtil.build().setWidth(width).setHeight(width).commit(imageView);
+
 			Glide.with(getContext()).load(sList.get(position)).centerCrop()
 					.placeholder(R.mipmap.global_load_failed)
 					.error(R.mipmap.global_load_failed)
