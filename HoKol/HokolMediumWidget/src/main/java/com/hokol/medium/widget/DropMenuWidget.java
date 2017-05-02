@@ -20,10 +20,9 @@ import java.util.List;
  */
 public class DropMenuWidget
 {
+
 	// 默认位置
 	private static final int CONTENT_VIEW_POSITION = 0;
-
-	private TabLayout tabLayout;
 
 	// 承载物
 	private PopupWindow popupWindow;
@@ -42,25 +41,34 @@ public class DropMenuWidget
 
 	private boolean isOpened = false;
 
-	private View view;
+	private Context sContext;
 
-	public View start(Context context, List<String> header, List<View> viewList)
+	private TabLayout sTabLayout;
+
+	public DropMenuWidget(Context context, TabLayout tabLayout)
 	{
-		view = LayoutInflater.from(context).inflate(getResourceId(), null);
-		tabLayout = (TabLayout) view.findViewById(getTabLayoutId());
-		setDropDownMenu(context, tabLayout, header, viewList);
+		this.sContext = context;
+		this.sTabLayout = tabLayout;
+	}
 
-		return view;
+	public void start(List<String> header, List<View> viewList)
+	{
+		if (header.size() != viewList.size())
+		{
+			throw new IllegalArgumentException("params not match, header.size() should be equal popupViews.size()");
+		}
+
+		setDropDownMenu(sContext, header, viewList);
 	}
 
 	public void updateTitle(int index, String title)
 	{
-		if (index >= tabLayout.getChildCount())
+		if (index >= sTabLayout.getChildCount())
 		{
 			throw new IllegalArgumentException("index out of range");
 		}
 
-		View tabView = tabLayout.getTabAt(index).getCustomView();
+		View tabView = sTabLayout.getTabAt(index).getCustomView();
 		TextView textView = (TextView) tabView.findViewById(getItemTextId());
 		textView.setText(title);
 	}
@@ -75,7 +83,7 @@ public class DropMenuWidget
 	 */
 	public void closeMenu()
 	{
-		closeMenu(tabLayout.getSelectedTabPosition());
+		closeMenu(sTabLayout.getSelectedTabPosition());
 	}
 
 	/**
@@ -95,19 +103,13 @@ public class DropMenuWidget
 	}
 
 	/**
-	 * @param context   上下文
-	 * @param tabLayout tab标题
-	 * @param header    标题信息
-	 * @param viewList  pop 内容
+	 * @param context  上下文
+	 * @param header   标题信息
+	 * @param viewList pop 内容
 	 */
-	private void setDropDownMenu(final Context context, final TabLayout tabLayout, List<String> header, List<View> viewList)
+	private void setDropDownMenu(final Context context, List<String> header, List<View> viewList)
 	{
-		if (header.size() != viewList.size())
-		{
-			throw new IllegalArgumentException("params not match, header.size() should be equal popupViews.size()");
-		}
-
-		initTabView(context, tabLayout, header);
+		initTabView(context, sTabLayout, header);
 
 		initPopupWindow(context);
 
@@ -246,16 +248,6 @@ public class DropMenuWidget
 	public int getMaskColor()
 	{
 		return 0x88888888;
-	}
-
-	protected int getResourceId()
-	{
-		return R.layout.widget_drop_menu;
-	}
-
-	protected int getTabLayoutId()
-	{
-		return R.id.tab_layout_drop_menu;
 	}
 
 	protected int getItemResourceId()

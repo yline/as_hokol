@@ -13,7 +13,7 @@ import com.hokol.R;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.bean.VUserFansAllBean;
-import com.hokol.medium.widget.LabelWidget;
+import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
@@ -110,7 +110,7 @@ public class UserFansActivity extends BaseAppCompatActivity
 		public void onBindViewHolder(final CommonRecyclerViewHolder viewHolder, int position)
 		{
 			FlowLayout flowLayout = viewHolder.get(R.id.flow_layout_user_fans);
-			LabelWidget labelWidget = new LabelWidget(UserFansActivity.this, flowLayout);
+			FlowWidget labelWidget = new FlowWidget(UserFansActivity.this, flowLayout);
 			labelWidget.setDataList(Arrays.asList("网红", "模特"));
 
 			ImageView avatarImageView = viewHolder.get(R.id.circle_user_fans_avatar);

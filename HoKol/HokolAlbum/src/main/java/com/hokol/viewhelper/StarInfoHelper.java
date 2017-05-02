@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.application.DeleteConstant;
-import com.hokol.medium.widget.LabelWidget;
+import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.yline.common.ViewHolder;
 
@@ -31,7 +31,7 @@ public class StarInfoHelper
 		headViewHolder = new ViewHolder(headView);
 
 		FlowLayout flowLayout = headViewHolder.get(R.id.label_flow_star_info);
-		LabelWidget labelWidget = new LabelWidget(sContext, flowLayout);
+		FlowWidget labelWidget = new FlowWidget(sContext, flowLayout);
 		labelWidget.setDataList(Arrays.asList("网红", "模特"));
 
 		headViewHolder.get(R.id.tv_star_info_head_care_or_cancel).setOnClickListener(new View.OnClickListener()

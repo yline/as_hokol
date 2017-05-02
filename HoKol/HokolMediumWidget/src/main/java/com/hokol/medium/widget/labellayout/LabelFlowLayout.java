@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.hokol.medium.widget.R;
-import com.yline.log.LogFileUtil;
 
 import java.util.Deque;
 
@@ -47,21 +47,21 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataSe
 	/**
 	 * 只支持,初始化的时候,设置
 	 *
-	 * @param count
+	 * @param maxCount
 	 */
-	public void setMaxSelectCount(int count)
+	public void setMaxSelectCount(int maxCount)
 	{
-		this.mSelectedMax = count;
+		this.mSelectedMax = maxCount;
 	}
 
 	/**
 	 * 只支持,初始化的时候,设置
 	 *
-	 * @param count
+	 * @param minCount
 	 */
-	public void setMinSelectCount(int count)
+	public void setMinSelectCount(int minCount)
 	{
-		this.mSelectedMin = count;
+		this.mSelectedMin = minCount;
 	}
 
 	public void setAdapter(LabelAdapter adapter)
@@ -107,7 +107,7 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataSe
 			final LabelView tagViewContainer = new LabelView(getContext());
 			final int position = i;
 
-			tagViewContainer.setOnClickListener(new View.OnClickListener()
+			tagViewContainer.setOnClickListener(new OnClickListener()
 			{
 				@Override
 				public void onClick(View v)
@@ -157,7 +157,7 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataSe
 		}
 		else
 		{
-			LogFileUtil.e(TAG, "updateLabelState labelAdapter is null");
+			Log.e(TAG, "updateLabelState labelAdapter is null");
 		}
 	}
 
@@ -185,7 +185,7 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataSe
 		}
 		else
 		{
-			LogFileUtil.e(TAG, "removeOverLabelState labelAdapter is null");
+			Log.e(TAG, "removeOverLabelState labelAdapter is null");
 		}
 	}
 

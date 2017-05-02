@@ -95,10 +95,6 @@ public abstract class LabelAdapter<T>
 
 	public int getSelectedFirst()
 	{
-		if (null == selectDeque)
-		{
-			return -1;
-		}
 		return selectDeque.getFirst();
 	}
 
@@ -128,10 +124,14 @@ public abstract class LabelAdapter<T>
 		notifyDataSetChange();
 	}
 
-	public void removeData(T t)
+	public boolean removeData(T t)
 	{
-		this.dataList.remove(t);
-		notifyDataSetChange();
+		boolean result = this.dataList.remove(t);
+		if (result)
+		{
+			notifyDataSetChange();
+		}
+		return result;
 	}
 
 	public void removeData(int index)

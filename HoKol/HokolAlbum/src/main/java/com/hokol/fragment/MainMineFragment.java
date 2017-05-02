@@ -18,7 +18,7 @@ import com.hokol.activity.UserInfoActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.widget.DialogFootWidget;
-import com.hokol.medium.widget.LabelWidget;
+import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.yline.base.BaseFragment;
 
@@ -121,7 +121,7 @@ public class MainMineFragment extends BaseFragment
 		Glide.with(getContext()).load(DeleteConstant.url_default_avatar).centerCrop().into(imageView);
 
 		FlowLayout flowLayout = (FlowLayout) parentView.findViewById(R.id.flow_layout_main_mine_head_label);
-		LabelWidget labelWidget = new LabelWidget(getContext(), flowLayout);
-		labelWidget.setDataList(Arrays.asList("网红", "模特"));
+		FlowWidget flowWidget = new FlowWidget(getContext(), flowLayout);
+		flowWidget.setDataList(Arrays.asList("网红", "模特"));
 	}
 }

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
-import com.hokol.medium.widget.LabelWidget;
+import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
@@ -112,7 +112,7 @@ public class TaskAssignedSignFragment extends BaseFragment
 		public void onBindViewHolder(CommonRecyclerViewHolder viewHolder, int position)
 		{
 			FlowLayout flowLayout = viewHolder.get(R.id.flow_task_assigned);
-			LabelWidget labelWidget = new LabelWidget(getContext(), flowLayout);
+			FlowWidget labelWidget = new FlowWidget(getContext(), flowLayout);
 			labelWidget.setDataList(Arrays.asList("报名详情", "结束报名", "取消交易"));
 		}
 	}

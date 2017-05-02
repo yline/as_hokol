@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hokol.R;
 import com.hokol.medium.widget.DialogFootWidget;
-import com.hokol.medium.widget.LabelWidget;
+import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.hokol.util.IntentUtil;
 import com.hokol.viewhelper.UserInfoHelper;
@@ -200,7 +200,7 @@ public class UserInfoActivity extends BaseAppCompatActivity
 
 		// 修改标签
 		FlowLayout flowLayout = (FlowLayout) findViewById(R.id.flow_layout_user_info);
-		LabelWidget labelWidget = new LabelWidget(this, flowLayout);
+		FlowWidget labelWidget = new FlowWidget(this, flowLayout);
 		labelWidget.setDataList(Arrays.asList("网红", "模特"));
 		viewHolder.setOnClickListener(R.id.ll_label, new View.OnClickListener()
 		{

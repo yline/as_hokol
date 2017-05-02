@@ -2,6 +2,7 @@ package com.hokol.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,11 +87,11 @@ public class MainTaskFragment extends BaseFragment
 		linearLayout.addView(adView);
 
 		// 下拉菜单
-		LinearLayout linearLayout1 = (LinearLayout) parentView.findViewById(R.id.ll_main_task_menu);
-		mainTaskHelper.initTabDownMenuView(linearLayout1);
+		TabLayout menuTabLayout = (TabLayout) parentView.findViewById(R.id.tab_main_task_menu);
+		mainTaskHelper.initTabDownMenuView(menuTabLayout);
 
 		mainTaskHelper.setAreaData(initData());
-
+		
 		// 刷新
 		superRefreshLayout = (SuperSwipeRefreshLayout) parentView.findViewById(R.id.swipe_main_task);
 		mainTaskHelper.initRefreshLayout(superRefreshLayout);

@@ -9,7 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
@@ -45,7 +44,6 @@ public class MainHomeFragment extends BaseFragment
 		initView(view);
 
 		// 下拉菜单栏
-		LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.ll_main_home_menu);
 		mainHomeHelper.initSecondaryView(new SecondaryWidget.OnSecondaryCallback()
 		{
 			@Override
@@ -56,7 +54,6 @@ public class MainHomeFragment extends BaseFragment
 				mainHomeHelper.closeMenu();
 			}
 		});
-
 		mainHomeHelper.initFilterView(new MainHomeHelper.OnMenuFilterCallback()
 		{
 			@Override
@@ -66,7 +63,8 @@ public class MainHomeFragment extends BaseFragment
 				mainHomeHelper.closeMenu();
 			}
 		});
-		mainHomeHelper.initTabDownMenuView(linearLayout);
+		TabLayout menuTabLayout = (TabLayout) view.findViewById(R.id.tab_main_home_menu);
+		mainHomeHelper.initTabDownMenuView(menuTabLayout);
 
 		initData();
 		IApplication.getHandler().postDelayed(new Runnable()

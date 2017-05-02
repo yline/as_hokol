@@ -1,13 +1,13 @@
 package com.hokol.viewhelper;
 
 import android.content.Context;
+import android.support.design.widget.TabLayout;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.hokol.R;
 import com.hokol.medium.widget.DropMenuWidget;
-import com.hokol.medium.widget.LabelClickableWidget;
+import com.hokol.medium.widget.FlowAbleWidget;
 import com.hokol.medium.widget.SecondaryWidget;
 import com.hokol.medium.widget.labellayout.LabelFlowLayout;
 
@@ -50,40 +50,26 @@ public class MainHomeHelper
 		final View filterView = LayoutInflater.from(context).inflate(R.layout.fragment_main_home__menu_filter, null);
 
 		// 性别
-		final LabelClickableWidget sexLabelClickableWidget = new LabelClickableWidget(context)
-		{
-			@Override
-			protected LabelFlowLayout getLabelFlowLayout()
-			{
-				return (LabelFlowLayout) filterView.findViewById(R.id.label_flow_main_home_menu_sex);
-			}
-		};
-		sexLabelClickableWidget.setDataList(Arrays.asList(All.content, Boy.content, Girl.content));
-		sexLabelClickableWidget.setMaxSelectCount(1);
-		sexLabelClickableWidget.setMinSelectCount(1);
-		sexLabelClickableWidget.addSelectedPosition(0);
+		final FlowAbleWidget sexFlowAbleWidget = new FlowAbleWidget(context, (LabelFlowLayout) filterView.findViewById(R.id.label_flow_main_home_menu_sex));
+		sexFlowAbleWidget.setDataList(Arrays.asList(All.content, Boy.content, Girl.content));
+		sexFlowAbleWidget.setMaxSelectCount(1);
+		sexFlowAbleWidget.setMinSelectCount(1);
+		sexFlowAbleWidget.addSelectedPosition(0);
 
 		// 推荐
-		final LabelClickableWidget recommendLabelClickableWidget = new LabelClickableWidget(context)
-		{
-			@Override
-			protected LabelFlowLayout getLabelFlowLayout()
-			{
-				return (LabelFlowLayout) filterView.findViewById(R.id.label_flow_main_home_menu_recommend);
-			}
-		};
-		recommendLabelClickableWidget.setDataList(Arrays.asList(FilterRecommend.Popular.content, FilterRecommend.Newest.content));
-		recommendLabelClickableWidget.setMaxSelectCount(1);
-		recommendLabelClickableWidget.setMinSelectCount(1);
-		recommendLabelClickableWidget.addSelectedPosition(0);
+		final FlowAbleWidget recommendFlowAbleWidget = new FlowAbleWidget(context, (LabelFlowLayout) filterView.findViewById(R.id.label_flow_main_home_menu_recommend));
+		recommendFlowAbleWidget.setDataList(Arrays.asList(FilterRecommend.Popular.content, FilterRecommend.Newest.content));
+		recommendFlowAbleWidget.setMaxSelectCount(1);
+		recommendFlowAbleWidget.setMinSelectCount(1);
+		recommendFlowAbleWidget.addSelectedPosition(0);
 
 		filterView.findViewById(R.id.btn_main_home_menu_commit).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				int sexPosition = sexLabelClickableWidget.getSelectedFirstPosition();
-				int recommendPosition = recommendLabelClickableWidget.getSelectedFirstPosition();
+				int sexPosition = sexFlowAbleWidget.getSelectedFirst();
+				int recommendPosition = recommendFlowAbleWidget.getSelectedFirst();
 
 				menuFilterCallback.onEnumFilterCommit(FilterSex.getFilterSex(sexPosition), FilterRecommend.getFilterRecommend(recommendPosition));
 			}
@@ -92,12 +78,10 @@ public class MainHomeHelper
 		contentViewList.add(filterView);
 	}
 
-	public void initTabDownMenuView(LinearLayout linearLayout)
+	public void initTabDownMenuView(TabLayout tabLayout)
 	{
-		dropMenuWidget = new DropMenuWidget();
-
-		View dropView = dropMenuWidget.start(context, Arrays.asList(headers), contentViewList);
-		linearLayout.addView(dropView);
+		dropMenuWidget = new DropMenuWidget(context, tabLayout);
+		dropMenuWidget.start(Arrays.asList(headers), contentViewList);
 	}
 
 	public void updateProvinceTitle(String title)

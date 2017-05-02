@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
-import com.hokol.medium.widget.LabelClickableWidget;
+import com.hokol.medium.widget.FlowAbleWidget;
 import com.hokol.medium.widget.labellayout.LabelFlowLayout;
 import com.hokol.medium.widget.labellayout.LabelView;
 import com.yline.base.BaseAppCompatActivity;
@@ -33,17 +33,10 @@ public class EnterRegisterCompleteInfoActivity extends BaseAppCompatActivity
 		labelFlowLayout = (LabelFlowLayout) findViewById(R.id.label_flow_enter_register_complete_info);
 		labelView = (LabelView) findViewById(R.id.label_enter_register_complete_info);
 
-		LabelClickableWidget labelClickableWidget = new LabelClickableWidget(this)
-		{
-			@Override
-			protected LabelFlowLayout getLabelFlowLayout()
-			{
-				return labelFlowLayout;
-			}
-		};
+		FlowAbleWidget flowAbleWidget = new FlowAbleWidget(this, labelFlowLayout);
 		String[] dataList = new String[]{"网红", "主播", "演员", "模特", "歌手", "体育"};
-		labelClickableWidget.setDataList(Arrays.asList(dataList));
-		labelClickableWidget.setMaxCountEachLine(3);
+		flowAbleWidget.setDataList(Arrays.asList(dataList));
+		flowAbleWidget.setMaxCountEachLine(3);
 
 		labelView.setOnClickListener(new View.OnClickListener()
 		{

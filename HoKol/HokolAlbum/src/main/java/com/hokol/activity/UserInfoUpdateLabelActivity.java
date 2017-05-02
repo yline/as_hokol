@@ -5,15 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.hokol.R;
-import com.hokol.medium.widget.LabelClickableWidget;
-import com.hokol.medium.widget.labellayout.LabelFlowLayout;
+import com.hokol.medium.widget.FlowAbleWidget;
 import com.yline.base.BaseAppCompatActivity;
 
 import java.util.Arrays;
 
 public class UserInfoUpdateLabelActivity extends BaseAppCompatActivity
 {
-	private LabelClickableWidget labelClickableWidget;
+	private FlowAbleWidget labelClickableWidget;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -21,14 +20,7 @@ public class UserInfoUpdateLabelActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_info_update_label);
 		
-		labelClickableWidget = new LabelClickableWidget(this)
-		{
-			@Override
-			protected LabelFlowLayout getLabelFlowLayout()
-			{
-				return (LabelFlowLayout) findViewById(R.id.label_clickable_layout);
-			}
-		};
+		labelClickableWidget = new FlowAbleWidget(this, R.id.label_clickable_layout);
 		labelClickableWidget.setDataList(Arrays.asList("网红", "主播", "演员", "模特", "歌手", "体育"));
 	}
 	

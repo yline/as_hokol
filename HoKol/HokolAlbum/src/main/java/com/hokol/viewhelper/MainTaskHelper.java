@@ -1,20 +1,20 @@
 package com.hokol.viewhelper;
 
 import android.content.Context;
+import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.widget.DropMenuWidget;
-import com.hokol.medium.widget.LabelClickableWidget;
+import com.hokol.medium.widget.FlowAbleWidget;
 import com.hokol.medium.widget.SecondaryWidget;
 import com.hokol.medium.widget.labellayout.LabelFlowLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
@@ -53,9 +53,9 @@ public class MainTaskHelper
 
 	private DropMenuWidget dropMenuWidget;
 
-	public void initTabDownMenuView(LinearLayout linearLayout)
+	public void initTabDownMenuView(TabLayout menuTabLayout)
 	{
-		dropMenuWidget = new DropMenuWidget();
+		dropMenuWidget = new DropMenuWidget(context, menuTabLayout);
 
 		List<View> contentViewList = new ArrayList<>();
 
@@ -68,8 +68,7 @@ public class MainTaskHelper
 		View areaView = initAreaView();
 		contentViewList.add(areaView);
 
-		View dropMenuView = dropMenuWidget.start(context, Arrays.asList(headers), contentViewList);
-		linearLayout.addView(dropMenuView);
+		dropMenuWidget.start(Arrays.asList(headers), contentViewList);
 	}
 
 	// 分类
@@ -78,15 +77,8 @@ public class MainTaskHelper
 		View areaView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_classify, null);
 
 		final LabelFlowLayout labelFlowLayout = (LabelFlowLayout) areaView.findViewById(R.id.label_flow_main_task_menu_classify);
-		LabelClickableWidget labelClickableWidget = new LabelClickableWidget(context)
-		{
-			@Override
-			protected LabelFlowLayout getLabelFlowLayout()
-			{
-				return labelFlowLayout;
-			}
-		};
-		labelClickableWidget.setDataList(Arrays.asList("全部", "网红", "主播", "演员", "模特", "歌手", "体育"));
+		FlowAbleWidget flowAbleWidget = new FlowAbleWidget(context, labelFlowLayout);
+		flowAbleWidget.setDataList(Arrays.asList("全部", "网红", "主播", "演员", "模特", "歌手", "体育"));
 
 		Button btnClassify = (Button) areaView.findViewById(R.id.btn_main_task_menu_classify);
 		btnClassify.setOnClickListener(new View.OnClickListener()
@@ -107,14 +99,7 @@ public class MainTaskHelper
 		View sexView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_sex, null);
 
 		final LabelFlowLayout labelFlowLayout = (LabelFlowLayout) sexView.findViewById(R.id.label_flow_main_task_menu_sex);
-		LabelClickableWidget labelClickableWidget = new LabelClickableWidget(context)
-		{
-			@Override
-			protected LabelFlowLayout getLabelFlowLayout()
-			{
-				return labelFlowLayout;
-			}
-		};
+		FlowAbleWidget labelClickableWidget = new FlowAbleWidget(context, labelFlowLayout);
 		labelClickableWidget.setDataList(Arrays.asList("不限", "女神", "男神"));
 
 		Button btnSex = (Button) sexView.findViewById(R.id.btn_main_task_menu_sex);
