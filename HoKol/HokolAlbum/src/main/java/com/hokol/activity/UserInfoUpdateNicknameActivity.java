@@ -3,15 +3,15 @@ package com.hokol.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
 import com.hokol.R;
+import com.yline.base.BaseAppCompatActivity;
 import com.yline.common.ViewHolder;
 
-public class UserInfoUpdateNicknameActivity extends AppCompatActivity
+public class UserInfoUpdateNicknameActivity extends BaseAppCompatActivity
 {
 	private final static String key_edit_content = "UserInfoUpdateNickname";
 

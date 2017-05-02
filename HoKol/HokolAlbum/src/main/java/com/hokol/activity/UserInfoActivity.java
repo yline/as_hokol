@@ -67,10 +67,6 @@ public class UserInfoActivity extends BaseAppCompatActivity
 
 	private void initView()
 	{
-		FlowLayout flowLayout = (FlowLayout) findViewById(R.id.flow_layout_user_info);
-		LabelWidget labelWidget = new LabelWidget(this, flowLayout);
-		labelWidget.setDataList(Arrays.asList("网红", "模特"));
-
 		// title
 		viewHolder.setOnClickListener(R.id.iv_user_info, new View.OnClickListener()
 		{
@@ -199,6 +195,19 @@ public class UserInfoActivity extends BaseAppCompatActivity
 			{
 				String content = viewHolder.getText(R.id.tv_user_info_sign);
 				UserInfoUpdateSignActivity.actionStartForResult(UserInfoActivity.this, request_code_sign, content);
+			}
+		});
+
+		// 修改标签
+		FlowLayout flowLayout = (FlowLayout) findViewById(R.id.flow_layout_user_info);
+		LabelWidget labelWidget = new LabelWidget(this, flowLayout);
+		labelWidget.setDataList(Arrays.asList("网红", "模特"));
+		viewHolder.setOnClickListener(R.id.ll_label, new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				UserInfoUpdateLabelActivity.actionStart(UserInfoActivity.this);
 			}
 		});
 
