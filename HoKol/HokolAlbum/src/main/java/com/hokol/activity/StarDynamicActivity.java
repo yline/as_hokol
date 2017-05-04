@@ -5,12 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.hokol.R;
+import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.fragment.StarDynamicGiftFragment;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.common.ViewHolder;
+import com.yline.utils.UIResizeUtil;
+import com.yline.utils.UIScreenUtil;
 
 /**
  * 动态信息详情界面
@@ -30,10 +35,18 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_star_dynamic);
 
-		starDynamicViewHolder = new ViewHolder(this.getWindow().getDecorView());
+		starDynamicViewHolder = new ViewHolder(this);
 		starDynamicGiftFragment = new StarDynamicGiftFragment();
 
-		starDynamicViewHolder.get(R.id.tv_star_dynamic_care_or_cancel).setOnClickListener(new View.OnClickListener()
+		ImageView contentImageView = starDynamicViewHolder.get(R.id.iv_star_dynamic_content);
+		int width = UIScreenUtil.getScreenWidth(this);
+		UIResizeUtil.build().setHeight(width).commit(contentImageView);
+		Glide.with(this).load(DeleteConstant.getUrlRec()).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).into(contentImageView);
+
+		ImageView avatarImageView = starDynamicViewHolder.get(R.id.circle_star_dynamic);
+		Glide.with(this).load(DeleteConstant.url_default_avatar).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).into(avatarImageView);
+
+		starDynamicViewHolder.get(R.id.iv_star_dynamic_care).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -41,7 +54,7 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 				IApplication.toast("点击关注");
 			}
 		});
-		starDynamicViewHolder.get(R.id.tv_star_dynamic_give_gift).setOnClickListener(new View.OnClickListener()
+		starDynamicViewHolder.get(R.id.iv_star_dynamic_give_gift).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -50,7 +63,7 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 				getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.fl_star_dynamic_gift, starDynamicGiftFragment).commit();
 			}
 		});
-		starDynamicViewHolder.get(R.id.tv_star_dynamic_praise).setOnClickListener(new View.OnClickListener()
+		starDynamicViewHolder.get(R.id.iv_star_dynamic_praise).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)

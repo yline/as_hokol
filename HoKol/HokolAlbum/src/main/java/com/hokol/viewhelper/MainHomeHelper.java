@@ -49,14 +49,28 @@ public class MainHomeHelper
 		final View filterView = LayoutInflater.from(context).inflate(R.layout.fragment_main_home__menu_filter, null);
 
 		// 性别
-		final FlowAbleWidget sexFlowAbleWidget = new FlowAbleWidget(context, (LabelFlowLayout) filterView.findViewById(R.id.label_flow_main_home_menu_sex));
-		sexFlowAbleWidget.setDataList(Arrays.asList(All.content, Boy.content, Girl.content));
+		final FlowAbleWidget sexFlowAbleWidget = new FlowAbleWidget(context, (LabelFlowLayout) filterView.findViewById(R.id.label_flow_main_home_menu_sex))
+		{
+			@Override
+			protected int getItemResourceId()
+			{
+				return R.layout.item_main_home__filter;
+			}
+		};
+		sexFlowAbleWidget.setDataList(Arrays.asList(All.content, Girl.content, Boy.content));
 		sexFlowAbleWidget.setMaxSelectCount(1);
 		sexFlowAbleWidget.setMinSelectCount(1);
 		sexFlowAbleWidget.addSelectedPosition(0);
-
+		
 		// 推荐
-		final FlowAbleWidget recommendFlowAbleWidget = new FlowAbleWidget(context, (LabelFlowLayout) filterView.findViewById(R.id.label_flow_main_home_menu_recommend));
+		final FlowAbleWidget recommendFlowAbleWidget = new FlowAbleWidget(context, (LabelFlowLayout) filterView.findViewById(R.id.label_flow_main_home_menu_recommend))
+		{
+			@Override
+			protected int getItemResourceId()
+			{
+				return R.layout.item_main_home__filter;
+			}
+		};
 		recommendFlowAbleWidget.setDataList(Arrays.asList(FilterRecommend.Popular.content, FilterRecommend.Newest.content));
 		recommendFlowAbleWidget.setMaxSelectCount(1);
 		recommendFlowAbleWidget.setMinSelectCount(1);

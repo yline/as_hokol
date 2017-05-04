@@ -154,7 +154,7 @@ public class MainHomeRedFragment extends BaseFragment
 			@Override
 			public void onPageInstance(ImageView imageView, int position)
 			{
-				Glide.with(getContext()).load(DeleteConstant.getUrlRec()).centerCrop().error(R.mipmap.global_load_failed).into(imageView);
+				Glide.with(getContext()).load(DeleteConstant.getUrlRec()).centerCrop().error(R.drawable.global_load_failed).into(imageView);
 			}
 		});
 		wrapperAdapter.addHeadView(adView);
@@ -179,8 +179,8 @@ public class MainHomeRedFragment extends BaseFragment
 		{
 			ImageView ivPic = item.get(R.id.iv_main_news_hot_pic);
 			Glide.with(getContext()).load(sList.get(position)).centerCrop()
-					.placeholder(R.mipmap.global_load_failed)
-					.error(R.mipmap.global_load_failed)
+					.placeholder(R.drawable.global_load_failed)
+					.error(R.drawable.global_load_failed)
 					.into(ivPic);
 		}
 	}

@@ -47,22 +47,8 @@ public class MainHomeFragment extends BaseFragment
 		mainHomeHelper.initSecondaryView(new SecondaryWidget.OnSecondaryCallback()
 		{
 			@Override
-			public void onSecondarySelected(String first, List<String> second)
+			public void onSecondarySelected(String first, List<String> second, String title)
 			{
-				String title;
-				if (null == second)
-				{
-					title = first;
-				}
-				else if (second.size() == 1)
-				{
-					title = second.get(0);
-				}
-				else
-				{
-					title = String.format("%s(%d)", first, second.size());
-				}
-
 				mainHomeHelper.updateProvinceTitle(title);
 				mainHomeHelper.closeMenu();
 			}

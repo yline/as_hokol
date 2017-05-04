@@ -98,7 +98,7 @@ public class MainNewsHelper
 		{
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_news);
 
-			Glide.with(context).load(sList.get(position).getNews_img()).placeholder(R.mipmap.global_load_failed).into(imageView);
+			Glide.with(context).load(sList.get(position).getNews_img()).placeholder(R.drawable.global_load_failed).into(imageView);
 
 			viewHolder.setText(R.id.tv_item_main_news_title, sList.get(position).getNews_title());
 			viewHolder.setText(R.id.tv_item_main_news_origin, sList.get(position).getNews_source());
@@ -132,7 +132,7 @@ public class MainNewsHelper
 	public void updateRecommendData(VNewsSingleBean singleNewsBean)
 	{
 		ImageView imageView = recommendViewHolder.get(R.id.iv_main_news_recommend);
-		Glide.with(context).load(singleNewsBean.getNews_img()).placeholder(R.mipmap.global_load_failed).priority(Priority.HIGH).into(imageView);
+		Glide.with(context).load(singleNewsBean.getNews_img()).placeholder(R.drawable.global_load_failed).priority(Priority.HIGH).into(imageView);
 
 		recommendViewHolder.setText(R.id.tv_main_news_recommend_title, singleNewsBean.getNews_title());
 		recommendViewHolder.setText(R.id.tv_main_news_recommend_origin, singleNewsBean.getNews_source());

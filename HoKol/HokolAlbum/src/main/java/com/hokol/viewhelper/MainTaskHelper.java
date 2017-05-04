@@ -21,13 +21,14 @@ import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.secondary.SecondaryWidget;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
-import com.hokol.medium.widget.transform.CircleTransform;
 import com.yline.common.CommonRecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
  * Task helper
@@ -123,8 +124,9 @@ public class MainTaskHelper
 		secondaryWidget.setOnSecondaryCallback(new SecondaryWidget.OnSecondaryCallback()
 		{
 			@Override
-			public void onSecondarySelected(String first, List<String> second)
+			public void onSecondarySelected(String first, List<String> second, String title)
 			{
+				dropMenuWidget.updateTitle(0, title);
 				dropMenuWidget.closeMenu();
 			}
 		});
@@ -217,7 +219,7 @@ public class MainTaskHelper
 			// 设置点击时间
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_task_avatar);
 			Glide.with(context).load(DeleteConstant.url_default_avatar).centerCrop()
-					.transform(new CircleTransform(context)).placeholder(R.mipmap.ic_launcher)
+					.bitmapTransform(new CropCircleTransformation(context)).placeholder(R.mipmap.ic_launcher)
 					.into(imageView);
 		}
 	}

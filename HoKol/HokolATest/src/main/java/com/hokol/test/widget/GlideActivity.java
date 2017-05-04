@@ -7,10 +7,11 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.hokol.medium.widget.transform.CircleTransform;
 import com.hokol.test.R;
 import com.hokol.test.common.DeleteConstant;
 import com.yline.base.BaseAppCompatActivity;
+
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class GlideActivity extends BaseAppCompatActivity
 {
@@ -29,7 +30,7 @@ public class GlideActivity extends BaseAppCompatActivity
 			public void onClick(View v)
 			{
 				Glide.with(GlideActivity.this).load(DeleteConstant.getUrlSquare()).centerCrop()
-						.bitmapTransform(new CircleTransform(GlideActivity.this)).into(imageView);
+						.bitmapTransform(new CropCircleTransformation(GlideActivity.this)).into(imageView);
 			}
 		});
 

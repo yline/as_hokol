@@ -159,8 +159,8 @@ public class MainHomePerformerFragment extends BaseFragment
 		{
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_home_performer);
 			Glide.with(getContext()).load(sList.get(position)).centerCrop()
-					.placeholder(R.mipmap.global_load_failed)
-					.error(R.mipmap.global_load_failed)
+					.placeholder(R.drawable.global_load_failed)
+					.error(R.drawable.global_load_failed)
 					.into(imageView);
 		}
 	}

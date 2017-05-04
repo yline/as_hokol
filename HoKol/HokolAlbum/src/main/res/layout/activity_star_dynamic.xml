@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,56 +16,45 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/iv_star_dynamic_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/delete_ad_img5"
                 android:scaleType="centerCrop"/>
 
-            <TextView
-                android:id="@+id/tv_star_dynamic_care_or_cancel"
+            <!-- 关注 -->
+            <ImageView
+                android:id="@+id/iv_star_dynamic_care"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/tv_star_dynamic_give_gift"
-                android:layout_alignBottom="@+id/tv_star_dynamic_give_gift"
-                android:layout_toLeftOf="@+id/tv_star_dynamic_give_gift"
-                android:layout_toStartOf="@+id/tv_star_dynamic_give_gift"
-                android:paddingBottom="@dimen/default_space_normal"
-                android:paddingLeft="@dimen/default_space_small"
-                android:paddingRight="@dimen/default_space_small"
-                android:paddingTop="@dimen/default_space_normal"
-                android:text="关注"
-                android:textColor="@android:color/holo_red_light"/>
+                android:layout_alignBottom="@+id/iv_star_dynamic_praise"
+                android:layout_toLeftOf="@+id/iv_star_dynamic_praise"
+                android:layout_toStartOf="@+id/iv_star_dynamic_praise"
+                android:padding="@dimen/default_space_normal"
+                android:src="@drawable/star_dynamic_care"/>
 
-            <TextView
-                android:id="@+id/tv_star_dynamic_give_gift"
+            <!-- 点赞 -->
+            <ImageView
+                android:id="@+id/iv_star_dynamic_praise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/tv_star_dynamic_praise"
-                android:layout_alignBottom="@+id/tv_star_dynamic_praise"
-                android:layout_toLeftOf="@+id/tv_star_dynamic_praise"
-                android:layout_toStartOf="@+id/tv_star_dynamic_praise"
-                android:paddingBottom="@dimen/default_space_normal"
-                android:paddingLeft="@dimen/default_space_small"
-                android:paddingRight="@dimen/default_space_small"
-                android:paddingTop="@dimen/default_space_normal"
-                android:text="送礼"
-                android:textColor="@android:color/holo_red_light"/>
+                android:layout_alignBottom="@+id/iv_star_dynamic_give_gift"
+                android:layout_toLeftOf="@+id/iv_star_dynamic_give_gift"
+                android:layout_toStartOf="@+id/iv_star_dynamic_give_gift"
+                android:padding="@dimen/default_space_normal"
+                android:src="@drawable/star_dynamic_unlike"/>
 
-            <TextView
-                android:id="@+id/tv_star_dynamic_praise"
+            <!-- 送礼 -->
+            <ImageView
+                android:id="@+id/iv_star_dynamic_give_gift"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/imageView2"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/default_space_large"
-                android:paddingBottom="@dimen/default_space_normal"
-                android:paddingLeft="@dimen/default_space_small"
-                android:paddingRight="@dimen/default_space_small"
-                android:paddingTop="@dimen/default_space_normal"
-                android:text="点赞"
-                android:textColor="@android:color/holo_red_light"/>
+                android:layout_alignBottom="@+id/iv_star_dynamic_content"
+                android:layout_alignRight="@+id/iv_star_dynamic_content"
+                android:layout_marginBottom="@dimen/default_space_little"
+                android:layout_marginRight="@dimen/default_space_normal"
+                android:padding="@dimen/default_space_normal"
+                android:src="@drawable/star_dynamic_gift"/>
 
             <!-- 送礼的DialogFragment -->
             <FrameLayout
@@ -76,11 +66,15 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/tv_star_dynamic_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:padding="10dp"
-            android:text="1天前"/>
+            android:paddingBottom="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_normal"
+            android:paddingTop="@dimen/default_space_medium"
+            android:text="1天前"
+            android:textColor="#a6a6a6"/>
 
         <LinearLayout
             android:id="@+id/ll_star_dynamic_user"
@@ -88,13 +82,15 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:paddingBottom="25dp"
+            android:paddingLeft="@dimen/default_space_normal"
+            android:paddingRight="@dimen/default_space_normal">
 
             <com.hokol.medium.viewcustom.CircleView
+                android:id="@+id/circle_star_dynamic"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@android:color/white"
+                android:src="@drawable/global_load_failed"
                 app:circle_border_color="@android:color/darker_gray"
                 app:circle_border_width="1px"/>
 
@@ -102,49 +98,64 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="昵称"/>
+                android:paddingLeft="@dimen/default_space_normal"
+                android:text="昵称"
+                android:textColor="#3f3f3f"
+                android:textSize="@dimen/default_text_size_large"/>
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="==》"/>
+                android:padding="@dimen/default_space_normal"
+                android:src="@drawable/global_forward_arrows_dark"/>
         </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="3"
+            android:lineSpacingExtra="@dimen/default_space_little"
             android:paddingBottom="@dimen/default_space_large"
             android:paddingLeft="@dimen/default_space_normal"
             android:paddingRight="@dimen/default_space_normal"
-            android:text="签名就是要字长，字多，才能表达这就是签名；签名太短，就少了一些含义，太长久太啰嗦，所以还是以三行为标准，比较有味道"/>
+            android:text="签名就是要字长，字多，才能表达这就是签名；签名太短，就少了一些含义，太长久太啰嗦，所以还是以三行为标准，比较有味道"
+            android:textColor="#333333"
+            android:textSize="@dimen/default_text_size_normal"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@android:color/darker_gray"></View>
+            android:layout_marginLeft="@dimen/default_space_normal"
+            android:background="@color/hokolGray"></View>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/default_space_normal">
+            android:orientation="horizontal"
+            android:paddingBottom="100dp"
+            android:paddingTop="@dimen/default_space_medium">
 
             <TextView
+                android:id="@+id/tv_star_dynamic_coin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="我是点赞的容器"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/default_space_normal"
-            android:paddingRight="@dimen/default_space_normal">
+                android:drawableLeft="@drawable/main_care_item_gift"
+                android:drawablePadding="@dimen/default_space_little"
+                android:drawableRight="@drawable/global_ormosia"
+                android:paddingBottom="@dimen/default_space_little"
+                android:paddingLeft="15dp"
+                android:paddingTop="@dimen/default_space_little"
+                android:text="1000"/>
 
             <TextView
+                android:id="@+id/tv_star_dynamic_laud"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="我是红豆的容器"/>
+                android:drawableLeft="@drawable/global_praise"
+                android:drawablePadding="@dimen/default_space_medium"
+                android:paddingBottom="@dimen/default_space_little"
+                android:paddingLeft="15dp"
+                android:paddingTop="@dimen/default_space_little"
+                android:text="3"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

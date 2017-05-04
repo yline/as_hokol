@@ -13,6 +13,9 @@ import com.yline.common.ViewHolder;
 
 import java.util.Arrays;
 
+import jp.wasabeef.glide.transformations.ColorFilterTransformation;
+import jp.wasabeef.glide.transformations.gpu.KuwaharaFilterTransformation;
+
 public class StarInfoHelper
 {
 	private Context sContext;
@@ -30,11 +33,17 @@ public class StarInfoHelper
 	{
 		headViewHolder = new ViewHolder(headView);
 
+		// 背景
+		ImageView bgImageView = headViewHolder.get(R.id.iv_star_info_bg);
+		Glide.with(sContext).load(DeleteConstant.getUrlSquare()).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed)
+				.bitmapTransform(new KuwaharaFilterTransformation(sContext, 25)).bitmapTransform(new ColorFilterTransformation(sContext, 0xc0000000)).into(bgImageView); //  Color.argb(99, )
+
+		// 标签
 		FlowLayout flowLayout = headViewHolder.get(R.id.label_flow_star_info);
 		FlowWidget labelWidget = new FlowWidget(sContext, flowLayout);
 		labelWidget.setDataList(Arrays.asList("网红", "模特"));
 
-		headViewHolder.get(R.id.tv_star_info_head_care_or_cancel).setOnClickListener(new View.OnClickListener()
+		headViewHolder.get(R.id.iv_star_info_head_care_or_cancel).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -45,7 +54,7 @@ public class StarInfoHelper
 				}
 			}
 		});
-		headViewHolder.get(R.id.tv_star_info_head_contact).setOnClickListener(new View.OnClickListener()
+		headViewHolder.get(R.id.iv_star_info_head_contact).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -56,7 +65,7 @@ public class StarInfoHelper
 				}
 			}
 		});
-		headViewHolder.get(R.id.tv_star_info_head_gift).setOnClickListener(new View.OnClickListener()
+		headViewHolder.get(R.id.iv_star_info_head_gift).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)

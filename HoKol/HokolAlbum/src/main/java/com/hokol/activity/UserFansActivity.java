@@ -114,7 +114,7 @@ public class UserFansActivity extends BaseAppCompatActivity
 			labelWidget.setDataList(Arrays.asList("网红", "模特"));
 
 			ImageView avatarImageView = viewHolder.get(R.id.circle_user_fans_avatar);
-			Glide.with(UserFansActivity.this).load(DeleteConstant.url_default_avatar).error(R.mipmap.global_load_failed).into(avatarImageView);
+			Glide.with(UserFansActivity.this).load(DeleteConstant.url_default_avatar).error(R.drawable.global_load_failed).into(avatarImageView);
 
 			final ImageView attentionImageView = viewHolder.get(R.id.iv_user_fans_attention);
 			attentionImageView.setOnClickListener(new View.OnClickListener()

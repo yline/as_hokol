@@ -9,13 +9,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:textSize="@dimen/default_text_size_normal"
         android:textColor="@drawable/widget_item_drop_menu_text_color"/>
 
     <ImageView
         android:id="@+id/iv_tab_down_menu"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="@dimen/default_text_size_normal"
+        android:layout_height="@dimen/default_text_size_normal"
+        android:layout_marginLeft="@dimen/default_space_medium"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/tv_drop_down_menu"
-        android:background="@drawable/widget_item_drop_menu_icon"/>
+        android:src="@drawable/widget_item_drop_menu_icon"/>
 </RelativeLayout>

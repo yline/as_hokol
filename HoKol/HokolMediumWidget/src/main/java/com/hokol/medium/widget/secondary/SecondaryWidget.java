@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -172,7 +173,9 @@ public class SecondaryWidget
 			{
 				if (null != onSecondaryCallback)
 				{
-					onSecondaryCallback.onSecondarySelected(firstListAdapter.getSelectedString(), secondListAdapter.getSelectedList());
+					List<String> secondResultList = secondListAdapter.getSelectedList();
+					onSecondaryCallback.onSecondarySelected(firstListAdapter.getSelectedString(), secondResultList,
+							getResultTitle(firstListAdapter.getSelectedString(), secondResultList));
 				}
 			}
 		});
@@ -235,7 +238,14 @@ public class SecondaryWidget
 
 	public interface OnSecondaryCallback
 	{
-		void onSecondarySelected(String first, List<String> second);
+		/**
+		 * 选择之后，的回调
+		 *
+		 * @param first  第一列数据
+		 * @param second 第二列数据
+		 * @param title  应该显示的标题
+		 */
+		void onSecondarySelected(String first, List<String> second, String title);
 	}
 
 	/* ---------------------------------------------------- 从这里开始设置参数；这些参数都是可以被重写的 ---------------------------------------------------- */
@@ -264,19 +274,19 @@ public class SecondaryWidget
 	@ColorInt
 	protected int getFirstColorBgUnselected()
 	{
-		return 0xffffffff;
+		return ContextCompat.getColor(sContext, android.R.color.white);
 	}
 
 	@ColorInt
 	protected int getFirstColorTextSelected()
 	{
-		return 0xffff2742;
+		return ContextCompat.getColor(sContext, R.color.hokolRed);
 	}
 
 	@ColorInt
 	protected int getFirstColorTextUnselected()
 	{
-		return 0xff666666;
+		return ContextCompat.getColor(sContext, R.color.hokolGrayDrak);
 	}
 
 	protected String getSecondHeadItemContent()
@@ -293,25 +303,25 @@ public class SecondaryWidget
 	@ColorInt
 	protected int getSecondColorBgSelected()
 	{
-		return 0x00000000;
+		return ContextCompat.getColor(sContext, android.R.color.transparent);
 	}
 
 	@ColorInt
 	protected int getSecondColorBgUnselected()
 	{
-		return 0x00000000;
+		return ContextCompat.getColor(sContext, android.R.color.transparent);
 	}
 
 	@ColorInt
 	protected int getSecondColorTextSelected()
 	{
-		return 0xffff2742;
+		return ContextCompat.getColor(sContext, R.color.hokolRed);
 	}
 
 	@ColorInt
 	protected int getSecondColorTextUnselected()
 	{
-		return 0xff666666;
+		return ContextCompat.getColor(sContext, R.color.hokolGrayDrak);
 	}
 
 	@DrawableRes
@@ -324,5 +334,30 @@ public class SecondaryWidget
 	protected int getSecondDrawableUnselected()
 	{
 		return R.drawable.widget_item_secondary_second_unselected;
+	}
+
+	protected String getResultTitle(String first, List<String> second)
+	{
+		if (TextUtils.isEmpty(first) || first.equals(getSecondHeadItemContent()))
+		{
+			return "地区";
+		}
+
+		if (null == second || second.size() == 0)
+		{
+			return first;
+		}
+		else if (second.size() == 1)
+		{
+			if (second.get(0).equals(getSecondHeadItemContent()))
+			{
+				return first;
+			}
+			return second.get(0);
+		}
+		else
+		{
+			return String.format("%s(%d)", first, second.size());
+		}
 	}
 }

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/hokolGrayLittle"
     android:orientation="vertical">
 
     <TextView
@@ -11,9 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/default_space_large"
-        android:layout_marginTop="@dimen/default_space_large"
+        android:layout_marginTop="30dp"
         android:text="性别"
-        android:textColor="@android:color/black"
+        android:textColor="@color/hokolGrayDrak"
         android:textSize="@dimen/default_text_size_normal"/>
 
     <com.hokol.medium.widget.labellayout.LabelFlowLayout
@@ -21,7 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_main_home_filter_sex"
-        android:layout_marginLeft="@dimen/default_space_large">
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_normal">
     </com.hokol.medium.widget.labellayout.LabelFlowLayout>
 
     <TextView
@@ -30,9 +31,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/label_flow_main_home_menu_sex"
         android:layout_marginLeft="@dimen/default_space_large"
-        android:layout_marginTop="@dimen/default_space_large"
+        android:layout_marginTop="30dp"
         android:text="推荐"
-        android:textColor="@android:color/black"
+        android:textColor="@color/hokolGrayDrak"
         android:textSize="@dimen/default_text_size_normal"/>
 
     <com.hokol.medium.widget.labellayout.LabelFlowLayout
@@ -40,7 +41,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_main_home_filter_recommend"
-        android:layout_marginLeft="@dimen/default_space_large">
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_normal">
     </com.hokol.medium.widget.labellayout.LabelFlowLayout>
 
     <Button
@@ -48,8 +50,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/label_flow_main_home_menu_recommend"
-        android:layout_marginTop="@dimen/default_space_large"
-        android:background="@drawable/widget_bg_red_radius_normal"
+        android:layout_marginTop="40dp"
+        android:background="@color/hokolRed"
         android:text="确定"
         android:textColor="@android:color/white"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGray">
+    </View>
 </RelativeLayout>

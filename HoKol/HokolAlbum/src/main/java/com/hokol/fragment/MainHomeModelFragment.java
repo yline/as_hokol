@@ -165,8 +165,8 @@ public class MainHomeModelFragment extends BaseFragment
 			UIResizeUtil.build().setWidth(width).setHeight(width).commit(imageView);
 
 			Glide.with(getContext()).load(sList.get(position)).centerCrop()
-					.placeholder(R.mipmap.global_load_failed)
-					.error(R.mipmap.global_load_failed)
+					.placeholder(R.drawable.global_load_failed)
+					.error(R.drawable.global_load_failed)
 					.into(imageView);
 		}
 	}

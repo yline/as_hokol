@@ -195,6 +195,14 @@ public class DropMenuWidget
 			maskView = new View(context);
 			maskView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 			maskView.setBackgroundColor(getMaskColor());
+			maskView.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					closeMenu();
+				}
+			});
 
 			contentView = new View(context);
 

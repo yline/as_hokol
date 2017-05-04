@@ -9,41 +9,75 @@
     <RelativeLayout
         android:id="@+id/rl_star_info_head"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:background="@drawable/delete_ad_img5"
-        android:gravity="center_horizontal"
-        android:padding="10dp">
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
 
+        <ImageView
+            android:id="@+id/iv_star_info_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/ll_star_info_action"
+            android:scaleType="centerCrop"/>
+
+        <!-- 头像 -->
         <com.hokol.medium.viewcustom.CircleView
             android:id="@+id/circle_star_info_avatar"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/default_space_large"
-            android:src="@android:color/white"
+            android:src="@drawable/global_load_failed"
             app:circle_border_color="@android:color/darker_gray"
             app:circle_border_width="1px"/>
 
+        <!-- 昵称 + 性别 -->
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tv_star_info_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/circle_star_info_avatar"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/default_space_small"
+            android:drawablePadding="@dimen/default_space_little"
+            android:drawableRight="@drawable/global_sex_girl"
             android:text="昵称"
             android:textColor="@android:color/white"/>
 
+        <!-- 身份标识 -->
         <LinearLayout
-            android:id="@+id/linear"
+            android:id="@+id/ll_star_info_identity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_star_info_nickname"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/default_space_small">
+
+            <ImageView
+                android:id="@+id/iv_star_info_vip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/default_space_little"
+                android:src="@drawable/star_info_vip"/>
+
+            <ImageView
+                android:id="@+id/iv_star_info_credit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_space_little"
+                android:src="@drawable/star_info_credit"/>
+        </LinearLayout>
+
+        <!-- 关注 + 粉丝 -->
+        <LinearLayout
+            android:id="@+id/ll_star_info_attention"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView5"
+            android:layout_below="@+id/ll_star_info_identity"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp">
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/tv_star_info_cared_number"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
@@ -53,7 +87,7 @@
                 android:textColor="@android:color/white"/>
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/tv_star_info_fans_number"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -64,37 +98,40 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_star_info_action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true">
+            android:layout_below="@+id/ll_star_info_attention"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingTop="@dimen/default_space_little">
 
-            <TextView
-                android:id="@+id/tv_star_info_head_care_or_cancel"
+            <!-- 关注 -->
+            <ImageView
+                android:id="@+id/iv_star_info_head_care_or_cancel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="已关注"
-                android:textColor="@android:color/holo_red_light"/>
+                android:src="@drawable/star_info_unfollow"/>
 
-            <TextView
-                android:id="@+id/tv_star_info_head_contact"
+            <!-- 联系 -->
+            <ImageView
+                android:id="@+id/iv_star_info_head_contact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_space_large"
                 android:layout_marginRight="@dimen/default_space_large"
                 android:gravity="left"
-                android:text="联系"
-                android:textColor="@android:color/holo_red_light"/>
+                android:src="@drawable/star_info_contact"/>
 
-            <TextView
-                android:id="@+id/tv_star_info_head_gift"
+            <!-- 送红豆 -->
+            <ImageView
+                android:id="@+id/iv_star_info_head_gift"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:text="送红豆"
-                android:textColor="@android:color/holo_red_light"/>
+                android:src="@drawable/star_info_gift"/>
         </LinearLayout>
     </RelativeLayout>
 

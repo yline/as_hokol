@@ -56,11 +56,14 @@ public class SecondRecyclerAdapter extends CommonRecyclerAdapter<String>
 	public List<String> getSelectedList()
 	{
 		List<String> secondSelectedList = new ArrayList<>();
-		for (int i = 0; i < isSelected.length; i++)
+		if (null != isSelected)
 		{
-			if (isSelected[i])
+			for (int i = 0; i < isSelected.length; i++)
 			{
-				secondSelectedList.add(sList.get(i));
+				if (isSelected[i])
+				{
+					secondSelectedList.add(sList.get(i));
+				}
 			}
 		}
 		return secondSelectedList;
@@ -73,7 +76,8 @@ public class SecondRecyclerAdapter extends CommonRecyclerAdapter<String>
 	}
 
 	@Override
-	public void onBindViewHolder(final CommonRecyclerViewHolder viewHolder, final int position)
+	public void onBindViewHolder(final CommonRecyclerViewHolder viewHolder,
+	                             final int position)
 	{
 		viewHolder.setText(R.id.tv_item_second, sList.get(position));
 		viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
@@ -121,6 +125,7 @@ public class SecondRecyclerAdapter extends CommonRecyclerAdapter<String>
 	 * @param viewHolder
 	 * @param select
 	 */
+
 	private void updateItemState(CommonRecyclerViewHolder viewHolder, boolean select)
 	{
 		if (select)

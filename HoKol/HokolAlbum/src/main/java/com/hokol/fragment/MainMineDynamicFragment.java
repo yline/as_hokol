@@ -182,7 +182,7 @@ public class MainMineDynamicFragment extends BaseFragment
 			ImageView contentImageView = viewHolder.get(R.id.iv_item_main_mine_dynamic_content);
 			int width = UIScreenUtil.getScreenWidth(getContext()) - UIScreenUtil.dp2px(getContext(), 10 + 10);
 			UIResizeUtil.build().setIsHeightAdapter(false).setHeight(width).commit(contentImageView);
-			Glide.with(getContext()).load(DeleteConstant.getUrlSquare()).placeholder(R.mipmap.global_load_failed).error(R.mipmap.global_load_failed).into(contentImageView);
+			Glide.with(getContext()).load(DeleteConstant.getUrlSquare()).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).into(contentImageView);
 		}
 	}
 }

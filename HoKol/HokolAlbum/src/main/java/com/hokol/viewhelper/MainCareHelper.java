@@ -13,6 +13,8 @@ import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.yline.common.CommonRecyclerViewHolder;
+import com.yline.utils.UIResizeUtil;
+import com.yline.utils.UIScreenUtil;
 
 import java.util.List;
 
@@ -72,7 +74,12 @@ public class MainCareHelper
 		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
 		{
 			ImageView avatarView = viewHolder.get(R.id.circle_item_main_care_avatar);
-			Glide.with(sContext).load(DeleteConstant.url_default_avatar).centerCrop().into(avatarView);
+			Glide.with(sContext).load(DeleteConstant.url_default_avatar).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).centerCrop().into(avatarView);
+
+			ImageView contentView = viewHolder.get(R.id.iv_item_main_care_content);
+			int width = UIScreenUtil.getScreenWidth(sContext) - UIScreenUtil.dp2px(sContext, 20);
+			UIResizeUtil.build().setHeight(width).commit(contentView);
+			Glide.with(sContext).load(DeleteConstant.getUrlRec()).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).into(contentView);
 			
 			if (null != careRecycleClickListener)
 			{

@@ -67,7 +67,7 @@
                     android:id="@+id/circle_user_info_avatar"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@mipmap/global_load_failed">
+                    android:src="@drawable/global_load_failed">
                 </com.hokol.medium.viewcustom.CircleView>
             </LinearLayout>
 
