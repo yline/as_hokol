@@ -15,11 +15,11 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.widget.DropMenuWidget;
 import com.hokol.medium.widget.FlowAbleWidget;
-import com.hokol.medium.widget.SecondaryWidget;
 import com.hokol.medium.widget.labellayout.LabelFlowLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
+import com.hokol.medium.widget.secondary.SecondaryWidget;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.transform.CircleTransform;
 import com.yline.common.CommonRecyclerViewHolder;
@@ -64,9 +64,8 @@ public class MainTaskHelper
 
 		View sexView = initSexView();
 		contentViewList.add(sexView);
-		
-		View areaView = initAreaView();
-		contentViewList.add(areaView);
+
+		initAreaView(contentViewList);
 
 		dropMenuWidget.start(Arrays.asList(headers), contentViewList);
 	}
@@ -118,21 +117,17 @@ public class MainTaskHelper
 	private SecondaryWidget secondaryWidget;
 
 	// 地区
-	private View initAreaView()
+	private void initAreaView(List<View> contentViewList)
 	{
-		// View areaView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_area, null);
-
-		secondaryWidget = new SecondaryWidget();
-		View secondaryView = secondaryWidget.start(context, new SecondaryWidget.OnSecondaryCallback()
+		secondaryWidget = new SecondaryWidget(context, contentViewList);
+		secondaryWidget.setOnSecondaryCallback(new SecondaryWidget.OnSecondaryCallback()
 		{
 			@Override
-			public void onSecondarySelected(String first, String second)
+			public void onSecondarySelected(String first, List<String> second)
 			{
 				dropMenuWidget.closeMenu();
 			}
 		});
-		
-		return secondaryView;
 	}
 
 	public void setAreaData(Map<String, List<String>> map)

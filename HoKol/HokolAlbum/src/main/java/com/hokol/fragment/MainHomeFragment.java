@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
-import com.hokol.medium.widget.SecondaryWidget;
+import com.hokol.medium.widget.secondary.SecondaryWidget;
 import com.hokol.viewhelper.MainHomeHelper;
 import com.yline.base.BaseFragment;
 
@@ -47,10 +47,23 @@ public class MainHomeFragment extends BaseFragment
 		mainHomeHelper.initSecondaryView(new SecondaryWidget.OnSecondaryCallback()
 		{
 			@Override
-			public void onSecondarySelected(String first, String second)
+			public void onSecondarySelected(String first, List<String> second)
 			{
-				IApplication.toast("first = " + first + ",second = " + second);
-				mainHomeHelper.updateProvinceTitle(second);
+				String title;
+				if (null == second)
+				{
+					title = first;
+				}
+				else if (second.size() == 1)
+				{
+					title = second.get(0);
+				}
+				else
+				{
+					title = String.format("%s(%d)", first, second.size());
+				}
+
+				mainHomeHelper.updateProvinceTitle(title);
 				mainHomeHelper.closeMenu();
 			}
 		});
