@@ -4,54 +4,68 @@
     android:id="@+id/ll_main_task_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/default_space_large"
-    android:layout_marginRight="@dimen/default_space_normal"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/default_space_large"
+    android:paddingRight="@dimen/default_space_large">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/default_space_normal">
 
         <TextView
             android:id="@+id/tv_item_main_task_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="￥2000"
-            android:textColor="@android:color/holo_red_light"/>
+            android:textColor="@color/hokolRed"
+            android:textSize="@dimen/default_text_size_normal"/>
 
         <TextView
             android:id="@+id/tv_item_main_task_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="@dimen/default_space_normal"
             android:layout_toRightOf="@+id/tv_item_main_task_price"
-            android:text="接拍广告"/>
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="接拍广告"
+            android:textColor="#474747"
+            android:textSize="@dimen/default_text_size_normal"/>
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/default_space_little"
-        android:paddingTop="@dimen/default_space_little">
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_medium">
 
-        <ImageView
+        <com.hokol.medium.viewcustom.CircleView
             android:id="@+id/iv_item_main_task_avatar"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:src="@drawable/global_load_failed"/>
 
         <TextView
             android:id="@+id/tv_item_main_task_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:layout_toLeftOf="@+id/tv_item_main_task_time"
-            android:layout_toRightOf="@+id/iv_item_main_task_avatar"
-            android:text="用户人"/>
+            android:layout_marginLeft="@dimen/default_space_normal"
+            android:text="用户人"
+            android:textColor="#808080"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="5人报名"
+            android:textColor="#808080"/>
 
         <TextView
             android:id="@+id/tv_item_main_task_time"
@@ -59,6 +73,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="17天1小时后截止"/>
-    </RelativeLayout>
+            android:gravity="right"
+            android:text="17天1小时后截止"
+            android:textColor="#808080"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"></View>
 </LinearLayout>

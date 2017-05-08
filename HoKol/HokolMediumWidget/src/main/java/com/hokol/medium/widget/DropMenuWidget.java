@@ -5,9 +5,14 @@ import android.support.design.widget.TabLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import com.yline.log.LogFileUtil;
+import com.yline.utils.UIResizeUtil;
+import com.yline.utils.UIScreenUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +50,9 @@ public class DropMenuWidget
 
 	private TabLayout sTabLayout;
 
+	// 进行高度适配
+	private int maxContentHeight;
+
 	public DropMenuWidget(Context context, TabLayout tabLayout)
 	{
 		this.sContext = context;
@@ -63,8 +71,9 @@ public class DropMenuWidget
 
 	public void updateTitle(int index, String title)
 	{
-		if (index >= sTabLayout.getChildCount())
+		if (index >= sTabLayout.getTabCount())
 		{
+			LogFileUtil.e("TabLayout", "index = " + index + ", TabCount = " + sTabLayout.getChildCount());
 			throw new IllegalArgumentException("index out of range");
 		}
 
@@ -219,13 +228,29 @@ public class DropMenuWidget
 	 * @param tabLayout
 	 * @param position
 	 */
-	private void addMenu(TabLayout tabLayout, int position)
+	private void addMenu(final TabLayout tabLayout, int position)
 	{
+		if (0 == maxContentHeight)
+		{
+			this.maxContentHeight = UIScreenUtil.getScreenHeight(sContext) - UIScreenUtil.getStatusHeight(sContext) - sTabLayout.getBottom();
+		}
+
 		if (null != popupWindow)
 		{
 			contentView = contentViewList.get(position);
 			popupView.removeViewAt(CONTENT_VIEW_POSITION);
 			popupView.addView(contentView, CONTENT_VIEW_POSITION);
+			contentView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener()
+			{
+				@Override
+				public void onGlobalLayout()
+				{
+					if (contentView.getHeight() > maxContentHeight)
+					{
+						UIResizeUtil.build().setHeight(maxContentHeight).commit(contentView);
+					}
+				}
+			});
 
 			tabViewList.get(position).setSelected(true);
 			isOpened = true;

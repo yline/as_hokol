@@ -88,13 +88,13 @@ public class MainActivity extends BaseAppCompatActivity
 
 		initShowData();
 	}
-
+	
 	/**
 	 * 显示用户第一次看到的内容
 	 */
 	private void initShowData()
 	{
-		tabLayout.getTabAt(TAB.Care.position).select();
+		tabLayout.getTabAt(TAB.Task.position).select();
 	}
 
 	private void initView()

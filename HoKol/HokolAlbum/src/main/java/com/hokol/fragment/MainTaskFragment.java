@@ -69,7 +69,7 @@ public class MainTaskFragment extends BaseFragment
 				return UIScreenUtil.dp2px(getContext(), 150);
 			}
 		};
-		View adView = adWidget.start(getContext(), 5);
+		View adView = adWidget.start(getContext(), 3);
 		adWidget.setListener(new ADWidget.OnPageListener()
 		{
 			@Override
@@ -110,7 +110,7 @@ public class MainTaskFragment extends BaseFragment
 		mainTaskHelper.setRecycleData();
 
 		// 头部
-		parentView.findViewById(R.id.ll_main_task_action_task).setOnClickListener(new View.OnClickListener()
+		parentView.findViewById(R.id.iv_main_task_action_task).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -118,7 +118,7 @@ public class MainTaskFragment extends BaseFragment
 				TaskPublishActivity.actionStart(getContext());
 			}
 		});
-		parentView.findViewById(R.id.ll_main_task_action_history).setOnClickListener(new View.OnClickListener()
+		parentView.findViewById(R.id.iv_main_task_action_history).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)

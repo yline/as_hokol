@@ -2,22 +2,23 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal">
 
     <TextView
         android:id="@+id/tv_drop_down_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="@dimen/default_text_size_normal"
-        android:textColor="@drawable/widget_item_drop_menu_text_color"/>
+        android:layout_centerVertical="true"
+        android:textColor="@drawable/widget_item_drop_menu_text_color"
+        android:textSize="@dimen/default_text_size_normal"/>
 
     <ImageView
         android:id="@+id/iv_tab_down_menu"
         android:layout_width="@dimen/default_text_size_normal"
         android:layout_height="@dimen/default_text_size_normal"
-        android:layout_marginLeft="@dimen/default_space_medium"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/default_space_medium"
         android:layout_toRightOf="@+id/tv_drop_down_menu"
         android:src="@drawable/widget_item_drop_menu_icon"/>
 </RelativeLayout>

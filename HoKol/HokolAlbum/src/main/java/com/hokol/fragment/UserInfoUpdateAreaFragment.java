@@ -20,7 +20,7 @@ public class UserInfoUpdateAreaFragment extends BaseListFragment
 {
 	private AreaListAdapter areaListAdapter;
 
-	private List<String> dataList = new ArrayList<>();
+	private List<String> dataList;
 
 	private AdapterView.OnItemClickListener onItemClickListener;
 
@@ -33,6 +33,11 @@ public class UserInfoUpdateAreaFragment extends BaseListFragment
 	public void onViewCreated(View view, Bundle savedInstanceState)
 	{
 		super.onViewCreated(view, savedInstanceState);
+
+		if (null == dataList)
+		{
+			dataList = new ArrayList<>();
+		}
 
 		areaListAdapter = new AreaListAdapter(getContext());
 		setListAdapter(areaListAdapter);

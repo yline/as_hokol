@@ -15,8 +15,8 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.widget.DropMenuWidget;
 import com.hokol.medium.widget.FlowAbleWidget;
+import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.hokol.medium.widget.labellayout.LabelFlowLayout;
-import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.secondary.SecondaryWidget;
@@ -48,10 +48,6 @@ public class MainTaskHelper
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 下拉菜单 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 	private String headers[] = {"分类", "男/女", "地区"};
 
-	private String provinceList[] = {"不限", "武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州",
-			"武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州",
-			"武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州"};
-
 	private DropMenuWidget dropMenuWidget;
 
 	public void initTabDownMenuView(TabLayout menuTabLayout)
@@ -77,7 +73,17 @@ public class MainTaskHelper
 		View areaView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_classify, null);
 
 		final LabelFlowLayout labelFlowLayout = (LabelFlowLayout) areaView.findViewById(R.id.label_flow_main_task_menu_classify);
-		FlowAbleWidget flowAbleWidget = new FlowAbleWidget(context, labelFlowLayout);
+		labelFlowLayout.setLabelGravity(FlowLayout.LabelGravity.EQUIDISTANT);
+		labelFlowLayout.setMaxSelectCount(1);
+		labelFlowLayout.setMaxCountEachLine(4);
+		FlowAbleWidget flowAbleWidget = new FlowAbleWidget(context, labelFlowLayout)
+		{
+			@Override
+			protected int getItemResourceId()
+			{
+				return R.layout.activity_user_info__flow_able;
+			}
+		};
 		flowAbleWidget.setDataList(Arrays.asList("全部", "网红", "主播", "演员", "模特", "歌手", "体育"));
 
 		Button btnClassify = (Button) areaView.findViewById(R.id.btn_main_task_menu_classify);
@@ -99,7 +105,15 @@ public class MainTaskHelper
 		View sexView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_sex, null);
 
 		final LabelFlowLayout labelFlowLayout = (LabelFlowLayout) sexView.findViewById(R.id.label_flow_main_task_menu_sex);
-		FlowAbleWidget labelClickableWidget = new FlowAbleWidget(context, labelFlowLayout);
+		labelFlowLayout.setMaxSelectCount(1);
+		FlowAbleWidget labelClickableWidget = new FlowAbleWidget(context, labelFlowLayout)
+		{
+			@Override
+			protected int getItemResourceId()
+			{
+				return R.layout.fragment_main_task__flow_able;
+			}
+		};
 		labelClickableWidget.setDataList(Arrays.asList("不限", "女神", "男神"));
 
 		Button btnSex = (Button) sexView.findViewById(R.id.btn_main_task_menu_sex);
@@ -126,7 +140,7 @@ public class MainTaskHelper
 			@Override
 			public void onSecondarySelected(String first, List<String> second, String title)
 			{
-				dropMenuWidget.updateTitle(0, title);
+				dropMenuWidget.updateTitle(2, title);
 				dropMenuWidget.closeMenu();
 			}
 		});
@@ -183,7 +197,6 @@ public class MainTaskHelper
 	public void initRecycleView(RecyclerView recycleView)
 	{
 		recycleView.setLayoutManager(new LinearLayoutManager(context));
-		recycleView.addItemDecoration(new DefaultLinearItemDecoration(context));
 		taskRecycleAdapter = new TaskRecycleAdapter();
 		
 		recycleView.setAdapter(taskRecycleAdapter);
