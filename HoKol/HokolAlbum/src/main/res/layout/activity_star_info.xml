@@ -13,17 +13,17 @@
         android:layout_height="wrap_content">
     </include>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/default_space_normal"
+        android:background="@color/hokolGrayLight"></View>
+
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout_start_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </android.support.design.widget.TabLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@android:color/darker_gray">
-    </LinearLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager_start_info"

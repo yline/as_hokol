@@ -91,9 +91,9 @@ public class StarInfoActivity extends BaseAppCompatActivity
 		final List<BaseFragment> fragmentList = new ArrayList<>();
 		final List<String> titleList = new ArrayList<>();
 
-		fragmentList.add(new StarInfoDynamicFragment());
+		fragmentList.add(StarInfoDynamicFragment.newInstance());
 		titleList.add("她的动态");
-
+		
 		fragmentList.add(StarInfoPrivateFragment.newInstance());
 		titleList.add("私密空间");
 

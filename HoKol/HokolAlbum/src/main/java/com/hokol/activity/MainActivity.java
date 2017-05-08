@@ -94,7 +94,7 @@ public class MainActivity extends BaseAppCompatActivity
 	 */
 	private void initShowData()
 	{
-		tabLayout.getTabAt(TAB.Mine.position).select();
+		tabLayout.getTabAt(TAB.Care.position).select();
 	}
 
 	private void initView()

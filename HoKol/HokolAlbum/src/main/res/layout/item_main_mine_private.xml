@@ -86,27 +86,38 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
+        android:layout_marginLeft="@dimen/default_space_normal"
         android:background="@color/hokolGray">
     </View>
 
-    <TextView
-        android:id="@+id/tv_item_main_mine_private_coin"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/global_gift"
-        android:drawablePadding="@dimen/default_space_medium"
-        android:paddingLeft="@dimen/default_space_normal"
-        android:paddingTop="@dimen/default_space_normal"
-        android:text="1000红豆"/>
-
-    <TextView
-        android:id="@+id/tv_item_main_mine_private_laud"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/global_praise"
-        android:drawablePadding="@dimen/default_space_medium"
+        android:orientation="horizontal"
         android:paddingBottom="@dimen/default_space_medium"
-        android:paddingLeft="@dimen/default_space_normal"
-        android:paddingTop="@dimen/default_space_small"
-        android:text="yline，f21，fatenliyerF"/>
+        android:paddingTop="@dimen/default_space_medium">
+
+        <TextView
+            android:id="@+id/tv_item_main_private_coin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/main_care_item_gift"
+            android:drawablePadding="@dimen/default_space_little"
+            android:drawableRight="@drawable/global_ormosia"
+            android:paddingBottom="@dimen/default_space_little"
+            android:paddingLeft="15dp"
+            android:paddingTop="@dimen/default_space_little"
+            android:text="1000"/>
+
+        <TextView
+            android:id="@+id/tv_item_main_private_laud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/global_praise"
+            android:drawablePadding="@dimen/default_space_medium"
+            android:paddingBottom="@dimen/default_space_little"
+            android:paddingLeft="15dp"
+            android:paddingTop="@dimen/default_space_little"
+            android:text="3"/>
+    </LinearLayout>
 </LinearLayout>

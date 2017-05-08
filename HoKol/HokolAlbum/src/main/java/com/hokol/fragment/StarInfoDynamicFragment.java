@@ -32,6 +32,14 @@ public class StarInfoDynamicFragment extends BaseFragment
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
+	public static StarInfoDynamicFragment newInstance()
+	{
+		StarInfoDynamicFragment fragment = new StarInfoDynamicFragment();
+		/*Bundle args = new Bundle();
+		fragment.setArguments(args);*/
+		return fragment;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
@@ -52,6 +60,12 @@ public class StarInfoDynamicFragment extends BaseFragment
 		recyclerView.addItemDecoration(new DefaultGridItemDecoration(getContext())
 		{
 			@Override
+			protected int getHeadNumber()
+			{
+				return 1;
+			}
+
+			@Override
 			protected int getDivideResourceId()
 			{
 				return R.drawable.widget_recycler_divider_white_small;
@@ -68,6 +82,11 @@ public class StarInfoDynamicFragment extends BaseFragment
 				StarDynamicActivity.actionStart(getContext());
 			}
 		});
+		
+		View headView = new View(getContext());
+		headView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 8)));
+		headView.setBackgroundResource(R.color.hokolGrayLight);
+		starInfoDynamicAdapter.addHeadView(headView);
 
 		List<String> data = new ArrayList<>();
 		for (int i = 0; i < 35; i++)

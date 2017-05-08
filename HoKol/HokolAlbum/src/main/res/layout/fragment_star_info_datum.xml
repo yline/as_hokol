@@ -9,152 +9,183 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@color/hokolGrayLight"></View>
+
         <LinearLayout
             android:id="@+id/ll_star_info_datum_fans"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_normal"
+            android:paddingTop="@dimen/default_space_normal">
 
             <TextView
-                android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="ta的粉丝"/>
+                android:text="ta的粉丝"
+                android:textColor="@color/hokolGrayDrak"/>
 
             <TextView
-                android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="200"/>
+                android:text="200"
+                android:textColor="@color/hokolGrayDrak"/>
 
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="==》"/>
+            <ImageView
+                android:layout_width="@dimen/default_text_size_medium"
+                android:layout_height="@dimen/default_text_size_medium"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:src="@drawable/global_forward_arrows"/>
         </LinearLayout>
 
         <View
-            android:background="@android:color/darker_gray"
             android:layout_width="match_parent"
-            android:layout_height="1px"></View>
+            android:layout_height="1px"
+            android:background="@color/hokolGrayLight"></View>
 
         <LinearLayout
             android:id="@+id/ll_star_info_datum_care_people"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_normal"
+            android:paddingTop="@dimen/default_space_normal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="关注的人"/>
+                android:text="关注的人"
+                android:textColor="@color/hokolGrayDrak"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="128"/>
+                android:text="28"
+                android:textColor="@color/hokolGrayDrak"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="==》"/>
+            <ImageView
+                android:layout_width="@dimen/default_text_size_medium"
+                android:layout_height="@dimen/default_text_size_medium"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:src="@drawable/global_forward_arrows"/>
         </LinearLayout>
 
         <View
-            android:background="@android:color/darker_gray"
             android:layout_width="match_parent"
-            android:layout_height="1px"></View>
+            android:layout_height="1px"
+            android:background="@color/hokolGrayLight"></View>
 
         <LinearLayout
             android:id="@+id/linear_layout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_normal"
+            android:paddingTop="@dimen/default_space_normal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="收到的赞"/>
+                android:text="收到的赞"
+                android:textColor="@color/hokolGrayDrak"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="212546"/>
+                android:text="4656156"
+                android:textColor="@color/hokolGrayDrak"/>
         </LinearLayout>
 
         <View
-            android:background="@android:color/darker_gray"
             android:layout_width="match_parent"
-            android:layout_height="1px"></View>
+            android:layout_height="1px"
+            android:background="@color/hokolGrayLight"></View>
 
         <LinearLayout
             android:id="@+id/linear_layout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_normal"
+            android:paddingTop="@dimen/default_space_normal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="星座"/>
+                android:text="星座"
+                android:textColor="@color/hokolGrayDrak"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="处女座"/>
+                android:text="处女座"
+                android:textColor="@color/hokolGrayDrak"/>
         </LinearLayout>
 
         <View
-            android:background="@android:color/darker_gray"
             android:layout_width="match_parent"
-            android:layout_height="1px"></View>
+            android:layout_height="1px"
+            android:background="@color/hokolGrayLight"></View>
 
         <LinearLayout
             android:id="@+id/linear_layout5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_normal"
+            android:paddingTop="@dimen/default_space_normal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="所在地"/>
+                android:text="所在地"
+                android:textColor="@color/hokolGrayDrak"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="浙江 杭州"/>
+                android:text="浙江 杭州"
+                android:textColor="@color/hokolGrayDrak"/>
         </LinearLayout>
 
         <View
-            android:background="@android:color/darker_gray"
             android:layout_width="match_parent"
-            android:layout_height="1px"></View>
+            android:layout_height="1px"
+            android:background="@color/hokolGrayLight"></View>
 
         <RelativeLayout
             android:id="@+id/relative_layout6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_normal"
+            android:paddingTop="@dimen/default_space_normal">
 
             <TextView
                 android:id="@+id/text_view_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="个性签名"/>
+                android:text="个性签名"
+                android:textColor="@color/hokolGrayDrak"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -165,25 +196,30 @@
                 android:ellipsize="end"
                 android:gravity="end"
                 android:maxLines="1"
-                android:text="当一首船，沉入海底，当一个人，成了谜，你不知道，为何..."/>
+                android:text="当一首船，沉入海底，当一个人，成了谜，你不知道，为何..."
+                android:textColor="@color/hokolGrayDrak"/>
         </RelativeLayout>
 
         <View
-            android:background="@android:color/darker_gray"
             android:layout_width="match_parent"
-            android:layout_height="1px"></View>
+            android:layout_height="1px"
+            android:background="@color/hokolGrayLight"></View>
 
         <RelativeLayout
             android:id="@+id/relative_layout7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_normal"
+            android:paddingTop="@dimen/default_space_normal">
 
             <TextView
                 android:id="@+id/text_view_7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="获奖经历"/>
+                android:text="获奖经历"
+                android:textColor="@color/hokolGrayDrak"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -194,12 +230,13 @@
                 android:ellipsize="end"
                 android:gravity="end"
                 android:maxLines="1"
-                android:text="你猜我有什么奖，也许有，也许没有呢"/>
+                android:text="你猜我有什么奖，也许有，也许没有呢"
+                android:textColor="@color/hokolGrayDrak"/>
         </RelativeLayout>
 
         <View
-            android:background="@android:color/darker_gray"
             android:layout_width="match_parent"
-            android:layout_height="1px"></View>
+            android:layout_height="1px"
+            android:background="@color/hokolGrayLight"></View>
     </LinearLayout>
 </ScrollView>

@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_star_info_attention"
             android:layout_centerHorizontal="true"
-            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingBottom="@dimen/default_space_large"
             android:paddingTop="@dimen/default_space_little">
 
             <!-- 关注 -->
@@ -139,9 +139,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:maxLines="2"
+        android:maxLines="3"
         android:padding="@dimen/default_space_normal"
-        android:text="个性签名，你猜是不是这样"/>
+        android:text="个性签名，你猜是不是这样"
+        android:textColor="@color/hokolGray"
+        android:textSize="@dimen/default_text_size_medium"/>
 
     <com.hokol.medium.widget.labellayout.FlowLayout
         android:id="@+id/label_flow_star_info"

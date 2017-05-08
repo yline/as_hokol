@@ -20,12 +20,23 @@
         android:id="@+id/rl_star_info_private_lock"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white">
+        android:background="@android:color/white"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/iv_star_info_private_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/star_info_private_lock"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="私密空间"/>
+            android:layout_below="@+id/iv_star_info_private_lock"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/default_space_small"
+            android:text="付费才可以观看哦"
+            android:textColor="@color/hokolGrayDrak"/>
     </RelativeLayout>
 </RelativeLayout>

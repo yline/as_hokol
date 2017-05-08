@@ -32,8 +32,6 @@ import com.yline.utils.UIScreenUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.hokol.R.id.rl_star_info_private_lock;
-
 public class StarInfoPrivateFragment extends BaseFragment
 {
 	private static final String ARG_PARAM1 = "param1";
@@ -81,6 +79,12 @@ public class StarInfoPrivateFragment extends BaseFragment
 		recyclerView.addItemDecoration(new DefaultGridItemDecoration(getContext())
 		{
 			@Override
+			protected int getHeadNumber()
+			{
+				return 1;
+			}
+
+			@Override
 			protected int getDivideResourceId()
 			{
 				return R.drawable.widget_recycler_divider_white_small;
@@ -88,6 +92,11 @@ public class StarInfoPrivateFragment extends BaseFragment
 		});
 		starInfoPrivateAdapter = new StarInfoPrivateAdapter();
 		recyclerView.setAdapter(starInfoPrivateAdapter);
+
+		View headView = new View(getContext());
+		headView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 8)));
+		headView.setBackgroundResource(R.color.hokolGrayLight);
+		starInfoPrivateAdapter.addHeadView(headView);
 
 		List<String> data = new ArrayList<>();
 		for (int i = 0; i < 35; i++)
@@ -141,7 +150,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 			}
 		});
 
-		lockRelativeLayout = (RelativeLayout) view.findViewById(rl_star_info_private_lock);
+		lockRelativeLayout = (RelativeLayout) view.findViewById(R.id.rl_star_info_private_lock);
 		lockRelativeLayout.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
