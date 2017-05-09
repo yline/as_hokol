@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/default_space_normal"
-                android:src="@drawable/global_forward_arrows"/>
+                android:src="@drawable/global_forward_arrows_dark"/>
         </LinearLayout>
 
         <View
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/default_space_normal"
-                android:src="@drawable/global_forward_arrows"/>
+                android:src="@drawable/global_forward_arrows_dark"/>
         </LinearLayout>
 
         <View
@@ -139,7 +139,7 @@
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginRight="@dimen/default_space_large"
             android:layout_marginTop="30dp"
-            android:background="@color/hokolRed"
+            android:background="@drawable/widget_bg_red_radius_normal"
             android:text="退出登录"
             android:textColor="@android:color/white"/>
     </LinearLayout>
