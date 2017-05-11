@@ -9,7 +9,7 @@ import com.hokol.R;
 import com.hokol.application.DeleteConstant;
 import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.labellayout.FlowLayout;
-import com.yline.common.ViewHolder;
+import com.yline.view.common.ViewHolder;
 
 import java.util.Arrays;
 

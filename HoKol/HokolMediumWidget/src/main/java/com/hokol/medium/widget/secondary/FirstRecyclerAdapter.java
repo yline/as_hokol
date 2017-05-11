@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hokol.medium.widget.R;
-import com.yline.common.CommonRecyclerAdapter;
-import com.yline.common.CommonRecyclerViewHolder;
+import com.yline.view.common.CommonRecyclerAdapter;
+import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +29,7 @@ public class FirstRecyclerAdapter extends CommonRecyclerAdapter<String>
 	}
 
 	@Override
-	public CommonRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+	public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
 	{
 		return super.onCreateViewHolder(parent, viewType);
 	}
@@ -85,7 +85,7 @@ public class FirstRecyclerAdapter extends CommonRecyclerAdapter<String>
 	}
 
 	@Override
-	public void onBindViewHolder(final CommonRecyclerViewHolder viewHolder, final int position)
+	public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
 	{
 		final TextView textView = viewHolder.get(R.id.tv_item_first);
 		textView.setText(sList.get(position));

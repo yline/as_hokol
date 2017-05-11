@@ -14,8 +14,8 @@ import android.widget.TextView;
 import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.test.R;
 import com.yline.base.BaseFragment;
-import com.yline.common.CommonRecyclerViewHolder;
 import com.yline.utils.UIResizeUtil;
+import com.yline.view.common.RecyclerViewHolder;
 
 public abstract class BaseTestFragment extends BaseFragment
 {
@@ -88,7 +88,7 @@ public abstract class BaseTestFragment extends BaseFragment
 		}
 
 		@Override
-		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
+		public void setViewContent(RecyclerViewHolder viewHolder, int position)
 		{
 			TextView textView = viewHolder.get(android.R.id.text1);
 			textView.setText(sList.get(position));

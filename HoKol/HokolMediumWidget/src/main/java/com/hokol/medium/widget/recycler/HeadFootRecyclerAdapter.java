@@ -7,8 +7,8 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.yline.common.CommonRecyclerAdapter;
-import com.yline.common.CommonRecyclerViewHolder;
+import com.yline.view.common.CommonRecyclerAdapter;
+import com.yline.view.common.RecyclerViewHolder;
 
 /**
  * 添加头部和底部的Recycle
@@ -45,15 +45,15 @@ public abstract class HeadFootRecyclerAdapter<T> extends CommonRecyclerAdapter<T
 	 * @return
 	 */
 	@Override
-	public CommonRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+	public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
 	{
 		if (headViewArray.get(viewType) != null)
 		{
-			return new CommonRecyclerViewHolder(headViewArray.get(viewType));
+			return new RecyclerViewHolder(headViewArray.get(viewType));
 		}
 		else if (footViewArray.get(viewType) != null)
 		{
-			return new CommonRecyclerViewHolder(footViewArray.get(viewType));
+			return new RecyclerViewHolder(footViewArray.get(viewType));
 		}
 
 		return super.onCreateViewHolder(parent, viewType);
@@ -74,7 +74,7 @@ public abstract class HeadFootRecyclerAdapter<T> extends CommonRecyclerAdapter<T
 	}
 
 	@Override
-	public void onBindViewHolder(final CommonRecyclerViewHolder holder, final int position)
+	public void onBindViewHolder(final RecyclerViewHolder holder, final int position)
 	{
 		if (isHeaderViewPos(position))
 		{
@@ -100,7 +100,7 @@ public abstract class HeadFootRecyclerAdapter<T> extends CommonRecyclerAdapter<T
 		setViewContent(holder, position - getHeadersCount());
 	}
 
-	protected abstract void setViewContent(CommonRecyclerViewHolder holder, int position);
+	protected abstract void setViewContent(RecyclerViewHolder holder, int position);
 
 	@Override
 	public int getItemCount()
@@ -154,7 +154,7 @@ public abstract class HeadFootRecyclerAdapter<T> extends CommonRecyclerAdapter<T
 
 	// 适配 StaggeredGridLayoutManager
 	@Override
-	public void onViewAttachedToWindow(CommonRecyclerViewHolder holder)
+	public void onViewAttachedToWindow(RecyclerViewHolder holder)
 	{
 		super.onViewAttachedToWindow(holder);
 		int position = holder.getLayoutPosition();

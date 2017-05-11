@@ -14,7 +14,7 @@ import com.hokol.medium.http.bean.WSettingSubmitProposalBean;
 import com.hokol.medium.http.bean.WSettingUpdateInfoBean;
 import com.hokol.test.common.BaseTestActivity;
 import com.hokol.test.common.IApplication;
-import com.lib.http.XHttpAdapter;
+import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.FileUtil;
 

@@ -10,7 +10,7 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VHomeMainBean;
 import com.hokol.medium.http.bean.WHomeMainBean;
 import com.hokol.test.common.BaseTestActivity;
-import com.lib.http.XHttpAdapter;
+import com.yline.http.XHttpAdapter;
 
 public class TestHomeActivity extends BaseTestActivity
 {

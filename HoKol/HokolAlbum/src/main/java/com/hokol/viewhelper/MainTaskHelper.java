@@ -21,7 +21,7 @@ import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.secondary.SecondaryWidget;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
-import com.yline.common.CommonRecyclerViewHolder;
+import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -227,7 +227,7 @@ public class MainTaskHelper
 		}
 
 		@Override
-		public void setViewContent(CommonRecyclerViewHolder viewHolder, final int position)
+		public void setViewContent(RecyclerViewHolder viewHolder, final int position)
 		{
 			// 设置点击时间
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_task_avatar);

@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import com.hokol.R;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.common.ViewHolder;
+import com.yline.view.common.ViewHolder;
 
 public class UserInfoUpdateNicknameActivity extends BaseAppCompatActivity
 {

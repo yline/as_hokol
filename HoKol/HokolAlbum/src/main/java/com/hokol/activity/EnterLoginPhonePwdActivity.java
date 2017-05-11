@@ -12,8 +12,8 @@ import com.hokol.medium.http.HttpConstant;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VLoginPhonePwdBean;
 import com.hokol.medium.http.bean.WLoginPhonePwdBean;
-import com.lib.http.XHttpAdapter;
 import com.yline.base.BaseAppCompatActivity;
+import com.yline.http.XHttpAdapter;
 
 /**
  * 登入流程，手机号+ 密码登录

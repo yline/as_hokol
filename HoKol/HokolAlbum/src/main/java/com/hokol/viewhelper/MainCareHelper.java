@@ -12,9 +12,9 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
-import com.yline.common.CommonRecyclerViewHolder;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.List;
 
@@ -71,7 +71,7 @@ public class MainCareHelper
 		}
 
 		@Override
-		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
+		public void setViewContent(RecyclerViewHolder viewHolder, int position)
 		{
 			ImageView avatarView = viewHolder.get(R.id.circle_item_main_care_avatar);
 			Glide.with(sContext).load(DeleteConstant.url_default_avatar).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).centerCrop().into(avatarView);

@@ -25,9 +25,9 @@ import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseFragment;
-import com.yline.common.CommonRecyclerViewHolder;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -217,7 +217,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 		}
 
 		@Override
-		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
+		public void setViewContent(RecyclerViewHolder viewHolder, int position)
 		{
 			ImageView imageView = viewHolder.get(R.id.iv_item_star_info_dynamic);
 

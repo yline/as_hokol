@@ -18,8 +18,8 @@ import com.hokol.medium.http.bean.WNewsSingleBean;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainNewsHelper;
-import com.lib.http.XHttpAdapter;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
 
 import java.util.List;
 

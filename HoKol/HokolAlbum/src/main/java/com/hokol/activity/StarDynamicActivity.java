@@ -13,9 +13,9 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.fragment.StarDynamicGiftFragment;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.common.ViewHolder;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.common.ViewHolder;
 
 /**
  * 动态信息详情界面

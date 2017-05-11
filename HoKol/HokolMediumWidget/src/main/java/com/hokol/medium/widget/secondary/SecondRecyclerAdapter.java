@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.hokol.medium.widget.R;
-import com.yline.common.CommonRecyclerAdapter;
-import com.yline.common.CommonRecyclerViewHolder;
+import com.yline.view.common.CommonRecyclerAdapter;
+import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,7 +76,7 @@ public class SecondRecyclerAdapter extends CommonRecyclerAdapter<String>
 	}
 
 	@Override
-	public void onBindViewHolder(final CommonRecyclerViewHolder viewHolder,
+	public void onBindViewHolder(final RecyclerViewHolder viewHolder,
 	                             final int position)
 	{
 		viewHolder.setText(R.id.tv_item_second, sList.get(position));
@@ -126,7 +126,7 @@ public class SecondRecyclerAdapter extends CommonRecyclerAdapter<String>
 	 * @param select
 	 */
 
-	private void updateItemState(CommonRecyclerViewHolder viewHolder, boolean select)
+	private void updateItemState(RecyclerViewHolder viewHolder, boolean select)
 	{
 		if (select)
 		{

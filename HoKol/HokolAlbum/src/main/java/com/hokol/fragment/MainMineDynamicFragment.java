@@ -20,9 +20,9 @@ import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseFragment;
-import com.yline.common.CommonRecyclerViewHolder;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -174,7 +174,7 @@ public class MainMineDynamicFragment extends BaseFragment
 		}
 
 		@Override
-		public void setViewContent(CommonRecyclerViewHolder viewHolder, final int position)
+		public void setViewContent(RecyclerViewHolder viewHolder, final int position)
 		{
 			ImageView avatarImageView = viewHolder.get(R.id.circle_item_main_mine_dynamic_avatar);
 			Glide.with(getContext()).load(DeleteConstant.url_default_avatar).into(avatarImageView);

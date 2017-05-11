@@ -15,8 +15,8 @@ import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseFragment;
-import com.yline.common.CommonRecyclerAdapter;
-import com.yline.common.CommonRecyclerViewHolder;
+import com.yline.view.common.CommonRecyclerAdapter;
+import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -109,7 +109,7 @@ public class TaskAssignedSignFragment extends BaseFragment
 		}
 
 		@Override
-		public void onBindViewHolder(CommonRecyclerViewHolder viewHolder, int position)
+		public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
 		{
 			FlowLayout flowLayout = viewHolder.get(R.id.flow_task_assigned);
 			FlowWidget labelWidget = new FlowWidget(getContext(), flowLayout);

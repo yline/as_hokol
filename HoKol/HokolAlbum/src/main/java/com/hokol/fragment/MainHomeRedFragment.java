@@ -20,8 +20,8 @@ import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseFragment;
-import com.yline.common.CommonRecyclerViewHolder;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -175,7 +175,7 @@ public class MainHomeRedFragment extends BaseFragment
 		}
 
 		@Override
-		public void setViewContent(CommonRecyclerViewHolder item, int position)
+		public void setViewContent(RecyclerViewHolder item, int position)
 		{
 			ImageView ivPic = item.get(R.id.iv_main_news_hot_pic);
 			Glide.with(getContext()).load(sList.get(position)).centerCrop()

@@ -59,11 +59,11 @@ import com.hokol.medium.http.bean.WUserCoinGiftBean;
 import com.hokol.medium.http.bean.WUserFansAllBean;
 import com.hokol.medium.http.bean.WUserMessageBean;
 import com.hokol.medium.http.bean.WUserTaskCollectionBean;
-import com.lib.http.XHttpAdapter;
-import com.lib.http.XHttpConfig;
-import com.lib.http.XHttpConstant;
-import com.lib.http.helper.XTextHttp;
-import com.lib.http.helper.XUploadFileHttp;
+import com.yline.http.XHttpAdapter;
+import com.yline.http.XHttpConfig;
+import com.yline.http.XHttpConstant;
+import com.yline.http.helper.XTextHttp;
+import com.yline.http.helper.XUploadFileHttp;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.FileUtil;
 

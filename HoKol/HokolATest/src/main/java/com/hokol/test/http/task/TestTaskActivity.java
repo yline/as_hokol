@@ -31,7 +31,7 @@ import com.hokol.medium.http.bean.WTaskUserDeliveredBean;
 import com.hokol.medium.http.bean.WTaskUserPublishedBean;
 import com.hokol.medium.http.bean.WTaskUserSignUpDetailBean;
 import com.hokol.test.common.BaseTestActivity;
-import com.lib.http.XHttpAdapter;
+import com.yline.http.XHttpAdapter;
 
 import java.util.Arrays;
 

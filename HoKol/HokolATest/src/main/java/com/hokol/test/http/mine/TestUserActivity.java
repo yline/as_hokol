@@ -16,7 +16,7 @@ import com.hokol.medium.http.bean.WUserFansAllBean;
 import com.hokol.medium.http.bean.WUserMessageBean;
 import com.hokol.medium.http.bean.WUserTaskCollectionBean;
 import com.hokol.test.common.BaseTestActivity;
-import com.lib.http.XHttpAdapter;
+import com.yline.http.XHttpAdapter;
 
 public class TestUserActivity extends BaseTestActivity
 {

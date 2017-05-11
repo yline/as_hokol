@@ -11,7 +11,7 @@ import com.hokol.medium.http.bean.VLoginPhonePwdBean;
 import com.hokol.medium.http.bean.WLoginPhonePwdBean;
 import com.hokol.test.common.BaseTestActivity;
 import com.hokol.test.httpattach.AvatarActivity;
-import com.lib.http.XHttpAdapter;
+import com.yline.http.XHttpAdapter;
 
 public class TestLoginActivity extends BaseTestActivity
 {

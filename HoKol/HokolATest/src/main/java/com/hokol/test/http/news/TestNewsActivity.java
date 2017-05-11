@@ -11,7 +11,7 @@ import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
 import com.hokol.test.common.BaseTestActivity;
-import com.lib.http.XHttpAdapter;
+import com.yline.http.XHttpAdapter;
 
 public class TestNewsActivity extends BaseTestActivity
 {

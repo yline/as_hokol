@@ -18,9 +18,9 @@ import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.hokol.util.IntentUtil;
 import com.hokol.viewhelper.UserInfoHelper;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.common.ViewHolder;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.FileUtil;
+import com.yline.view.common.ViewHolder;
 
 import java.io.File;
 import java.util.Arrays;

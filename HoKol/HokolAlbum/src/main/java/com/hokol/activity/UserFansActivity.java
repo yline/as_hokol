@@ -18,8 +18,8 @@ import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.common.CommonRecyclerAdapter;
-import com.yline.common.CommonRecyclerViewHolder;
+import com.yline.view.common.CommonRecyclerAdapter;
+import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.Arrays;
 
@@ -107,7 +107,7 @@ public class UserFansActivity extends BaseAppCompatActivity
 		}
 
 		@Override
-		public void onBindViewHolder(final CommonRecyclerViewHolder viewHolder, int position)
+		public void onBindViewHolder(final RecyclerViewHolder viewHolder, int position)
 		{
 			FlowLayout flowLayout = viewHolder.get(R.id.flow_layout_user_fans);
 			FlowWidget labelWidget = new FlowWidget(UserFansActivity.this, flowLayout);

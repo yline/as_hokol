@@ -12,8 +12,8 @@ import com.hokol.R;
 import com.hokol.fragment.UserInfoUpdateAreaFragment;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VAreaAllBean;
-import com.lib.http.XHttpAdapter;
 import com.yline.base.BaseAppCompatActivity;
+import com.yline.http.XHttpAdapter;
 
 import java.util.Arrays;
 

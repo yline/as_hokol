@@ -23,7 +23,7 @@ import com.hokol.medium.http.bean.WDynamicUserDetailBean;
 import com.hokol.medium.http.bean.WDynamicUserPrivateAllBean;
 import com.hokol.medium.http.bean.WUserCareAllBean;
 import com.hokol.test.common.BaseTestActivity;
-import com.lib.http.XHttpAdapter;
+import com.yline.http.XHttpAdapter;
 
 public class TestDynamicActivity extends BaseTestActivity
 {

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.hokol.R;
 import com.hokol.medium.widget.EditTextWidget;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.common.ViewHolder;
+import com.yline.view.common.ViewHolder;
 
 public class UserInfoUpdateSignActivity extends BaseAppCompatActivity
 {

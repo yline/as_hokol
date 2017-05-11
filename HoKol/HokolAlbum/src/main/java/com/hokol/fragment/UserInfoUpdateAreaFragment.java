@@ -9,9 +9,9 @@ import android.widget.ListView;
 
 import com.hokol.R;
 import com.yline.base.BaseListFragment;
-import com.yline.common.CommonListAdapter;
-import com.yline.common.ViewHolder;
 import com.yline.log.LogFileUtil;
+import com.yline.view.common.CommonListAdapter;
+import com.yline.view.common.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;

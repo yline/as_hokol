@@ -10,7 +10,7 @@ import com.hokol.medium.widget.FlowAbleWidget;
 import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.hokol.medium.widget.labellayout.LabelAdapter;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.common.ViewHolder;
+import com.yline.view.common.ViewHolder;
 
 import java.util.Arrays;
 import java.util.Deque;

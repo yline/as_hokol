@@ -15,11 +15,11 @@ import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
-import com.yline.common.CommonRecyclerViewHolder;
-import com.yline.common.ViewHolder;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.TimeConvertUtil;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.common.RecyclerViewHolder;
+import com.yline.view.common.ViewHolder;
 
 import java.util.List;
 
@@ -94,7 +94,7 @@ public class MainNewsHelper
 		}
 
 		@Override
-		public void setViewContent(CommonRecyclerViewHolder viewHolder, int position)
+		public void setViewContent(RecyclerViewHolder viewHolder, int position)
 		{
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_news);
 
