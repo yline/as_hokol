@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/default_space_normal"
     android:layout_marginLeft="@dimen/default_space_normal"
     android:layout_marginRight="@dimen/default_space_normal"
     android:background="@drawable/user_task_collection_content_bg"

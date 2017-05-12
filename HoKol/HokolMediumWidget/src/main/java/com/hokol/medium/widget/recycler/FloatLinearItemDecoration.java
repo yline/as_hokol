@@ -12,18 +12,12 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.common.LinearItemDecoration;
+import com.yline.view.apply.SimpleLinearItemDecoration;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * 头部悬停的效果，只支持LineaLayoutManager
- *
- * @author yline 2017/5/9 -- 12:38
- * @version 1.0.0
- */
-public class FloatLinearItemDecoration extends LinearItemDecoration
+public class FloatLinearItemDecoration extends SimpleLinearItemDecoration
 {
 	private Map<Integer, String> keys = new HashMap<>();
 
@@ -77,12 +71,12 @@ public class FloatLinearItemDecoration extends LinearItemDecoration
 			// 说明是当前组最后一个元素，但不一定碰撞了
 			View child = parent.findViewHolderForAdapterPosition(firstVisiblePos).itemView;
 
-			if (child.getTop() + child.getMeasuredHeight() < getTitleHeight())
+			if (child.getTop() + child.getMeasuredHeight() + sDivider.getIntrinsicHeight() < getTitleHeight())
 			{
 				// 进一步检测碰撞
 				c.save();// 保存画布当前的状态
 				flag = true;
-				c.translate(0, child.getTop() + child.getMeasuredHeight() - getTitleHeight());//负的代表向上
+				c.translate(0, child.getTop() + child.getMeasuredHeight() - getTitleHeight() + sDivider.getIntrinsicHeight());//负的代表向上
 			}
 		}
 
@@ -92,7 +86,8 @@ public class FloatLinearItemDecoration extends LinearItemDecoration
 		int parentBottom = parent.getBottom() - parent.getPaddingBottom();
 		c.drawRect(parentLeft, parentTop, parentRight, parentTop + getTitleHeight(), mBackgroundPaint);
 		Rect bgRect = new Rect(parentLeft, parentTop, parentRight, parentTop + getTitleHeight());
-		drawVerticalText(c, title, bgRect, mTextPaint);
+		c.drawText(title, bgRect.left + getTextMarginLeft(),
+				bgRect.centerY() + ((int) mTextPaint.getTextSize() >> 1), mTextPaint);
 
 		if (flag) // 还原画布为初始状态
 		{
@@ -101,82 +96,34 @@ public class FloatLinearItemDecoration extends LinearItemDecoration
 	}
 
 	@Override
-	public boolean isDrawDivide(int totalCount, int currentPosition)
-	{
-		// 头部
-		if (getHeadNumber() > currentPosition)
-		{
-			return false;
-		}
-
-		// 底部
-		if (currentPosition > totalCount - 1 - getFootNumber())
-		{
-			return false;
-		}
-
-		return true;
-	}
-
-	@Override
 	public void setVerticalOffsets(Rect outRect, Drawable divider, int currentPosition)
 	{
-		currentPosition = currentPosition - getHeadNumber();
-		if (keys.containsKey(currentPosition))
+		if (keys.containsKey(currentPosition - getHeadNumber()))
 		{
-			outRect.set(0, getTitleHeight(), 0, 0);
+			outRect.set(0, getTitleHeight() + divider.getIntrinsicHeight(), 0, divider.getIntrinsicHeight());
 		}
 		else
 		{
-			outRect.set(0, divider.getIntrinsicHeight(), 0, 0);
-		}
-	}
-
-	@Override
-	public void setHorizontalOffsets(Rect outRect, Drawable divider, int currentPosition)
-	{
-		currentPosition = currentPosition - getHeadNumber();
-		if (keys.containsKey(currentPosition))
-		{
-			outRect.set(getTitleHeight(), 0, 0, 0);
-		}
-		else
-		{
-			outRect.set(divider.getIntrinsicWidth(), 0, 0, 0);
+			super.setVerticalOffsets(outRect, divider, currentPosition);
 		}
 	}
 
 	@Override
 	public void drawVerticalDivider(Canvas c, Drawable divide, int currentPosition, int childLeft, int childTop, int childRight, int childBottom)
 	{
-		currentPosition = currentPosition - getHeadNumber();
-		if (keys.containsKey(currentPosition))
+		if (keys.containsKey(currentPosition - getHeadNumber()))
 		{
-			c.drawRect(childLeft, childTop - getTitleHeight(), childRight, childTop, mBackgroundPaint);
+			Rect bgRect = new Rect(childLeft, childTop - getTitleHeight() - divide.getIntrinsicHeight(), childRight, childTop - divide.getIntrinsicHeight());
 
-			Rect bgRect = new Rect(childLeft, childTop - getTitleHeight(), childRight, childTop);
-			drawVerticalText(c, keys.get(currentPosition), bgRect, mTextPaint);
-		}
-		else
-		{
+			int textLeft = bgRect.left + getTextMarginLeft();
+			int textBottom = bgRect.centerY() + ((int) mTextPaint.getTextSize() >> 1);
+			c.drawRect(bgRect, mBackgroundPaint);
+			c.drawText(keys.get(currentPosition), textLeft, textBottom, mTextPaint);
+
 			divide.setBounds(childLeft, childTop - divide.getIntrinsicHeight(), childRight, childTop);
 			divide.draw(c);
 		}
-	}
-
-	@Override
-	public void drawHorizontalDivider(Canvas c, Drawable divide, int currentPosition, int childLeft, int childTop, int childRight, int childBottom)
-	{
-		if (keys.containsKey(currentPosition))
-		{
-			c.drawRect(childLeft, childTop, childLeft - divide.getIntrinsicWidth(), childBottom, mBackgroundPaint);
-			c.drawText(keys.get(currentPosition), childLeft, childTop, mTextPaint);
-		}
-		else
-		{
-			divide.setBounds(childLeft, childTop, childLeft - divide.getIntrinsicWidth(), childBottom);
-			divide.draw(c);
-		}
+		super.drawVerticalDivider(c, divide, currentPosition, childLeft, childTop, childRight, childBottom);
 	}
 
 	/**
@@ -198,12 +145,6 @@ public class FloatLinearItemDecoration extends LinearItemDecoration
 		return null;
 	}
 
-	public void setKeys(Map<Integer, String> keys)
-	{
-		this.keys.clear();
-		this.keys.putAll(keys);
-	}
-
 	public void initTextPaint(Paint textPaint)
 	{
 		textPaint.setTextSize(UIScreenUtil.dp2px(sContext, 18));
@@ -215,45 +156,20 @@ public class FloatLinearItemDecoration extends LinearItemDecoration
 		backgroundPaint.setColor(0xFFF2F2F2);
 	}
 
-	/**
-	 * 绘制文本
-	 *
-	 * @param c
-	 * @param content
-	 * @param bgRect
-	 * @param textPaint
-	 */
-	public void drawVerticalText(Canvas c, String content, Rect bgRect, Paint textPaint)
-	{
-		int textLeft = bgRect.left + UIScreenUtil.dp2px(sContext, 14);
-		int textBottom = bgRect.centerY() + ((int) textPaint.getTextSize() >> 1);
-
-		c.drawText(content, textLeft, textBottom, textPaint);
-	}
-
-	/**
-	 * 确定头部有几个不绘制分割线
-	 *
-	 * @return
-	 */
-	protected int getHeadNumber()
-	{
-		return 0;
-	}
-
-	/**
-	 * 确定底部有几个不绘制分割线
-	 *
-	 * @return
-	 */
-	protected int getFootNumber()
-	{
-		return 0;
-	}
-
 	public int getTitleHeight()
 	{
 		return UIScreenUtil.dp2px(sContext, 42);
+	}
+
+	public int getTextMarginLeft()
+	{
+		return UIScreenUtil.dp2px(sContext, 14);
+	}
+
+	public void setKeys(Map<Integer, String> keys)
+	{
+		this.keys.clear();
+		this.keys.putAll(keys);
 	}
 
 	public boolean isShowHeadFloating()
