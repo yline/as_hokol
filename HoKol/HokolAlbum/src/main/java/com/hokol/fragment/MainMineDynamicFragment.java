@@ -16,12 +16,12 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
-import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseFragment;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import java.util.List;
 
 public class MainMineDynamicFragment extends BaseFragment
 {
-	private HeadFootRecyclerAdapter recyclerAdapter;
+	private DynamicRecycleAdapter recyclerAdapter;
 
 	private SuperSwipeRefreshLayout superSwipeRefreshLayout;
 
@@ -57,7 +57,7 @@ public class MainMineDynamicFragment extends BaseFragment
 		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(getContext())
 		{
 			@Override
-			protected int getNonDivideHeadNumber()
+			protected int getHeadNumber()
 			{
 				return 1;
 			}
@@ -166,6 +166,12 @@ public class MainMineDynamicFragment extends BaseFragment
 
 	private class DynamicRecycleAdapter extends HeadFootRecyclerAdapter
 	{
+		private OnRecyclerItemClickListener listener;
+
+		public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener listener)
+		{
+			this.listener = listener;
+		}
 
 		@Override
 		public int getItemRes()
@@ -174,8 +180,20 @@ public class MainMineDynamicFragment extends BaseFragment
 		}
 
 		@Override
-		public void setViewContent(RecyclerViewHolder viewHolder, final int position)
+		public void setViewContent(final RecyclerViewHolder viewHolder, final int position)
 		{
+			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					if (null != listener)
+					{
+						listener.onClick(viewHolder, sList.get(position), position);
+					}
+				}
+			});
+
 			ImageView avatarImageView = viewHolder.get(R.id.circle_item_main_mine_dynamic_avatar);
 			Glide.with(getContext()).load(DeleteConstant.url_default_avatar).into(avatarImageView);
 

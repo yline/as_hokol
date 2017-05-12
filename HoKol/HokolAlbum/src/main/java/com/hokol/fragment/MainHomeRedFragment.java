@@ -16,11 +16,11 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.widget.ADWidget;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
-import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseFragment;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.ArrayList;
@@ -166,8 +166,15 @@ public class MainHomeRedFragment extends BaseFragment
 		wrapperAdapter.addHeadView(divideView);
 	}
 
-	private class MainNewsHotAdapter extends HeadFootRecyclerAdapter<String>
+	private class MainNewsHotAdapter extends HeadFootRecyclerAdapter
 	{
+		private OnRecyclerItemClickListener listener;
+
+		public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener listener)
+		{
+			this.listener = listener;
+		}
+
 		@Override
 		public int getItemRes()
 		{
@@ -175,9 +182,21 @@ public class MainHomeRedFragment extends BaseFragment
 		}
 
 		@Override
-		public void setViewContent(RecyclerViewHolder item, int position)
+		public void setViewContent(final RecyclerViewHolder viewHolder, final int position)
 		{
-			ImageView ivPic = item.get(R.id.iv_main_news_hot_pic);
+			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					if (null != listener)
+					{
+						listener.onClick(viewHolder, sList.get(position), position);
+					}
+				}
+			});
+
+			ImageView ivPic = viewHolder.get(R.id.iv_main_news_hot_pic);
 			Glide.with(getContext()).load(sList.get(position)).centerCrop()
 					.placeholder(R.drawable.global_load_failed)
 					.error(R.drawable.global_load_failed)

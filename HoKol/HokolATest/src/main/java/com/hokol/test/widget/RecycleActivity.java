@@ -15,12 +15,12 @@ import android.view.ViewGroup;
 
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
-import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.test.R;
 import com.hokol.test.common.BaseTestFragment;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.base.BaseFragment;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.common.HeadFootRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +91,7 @@ public class RecycleActivity extends BaseAppCompatActivity
 				}
 
 				@Override
-				protected int getNonDivideHeadNumber()
+				protected int getHeadNumber()
 				{
 					return 2;
 				}

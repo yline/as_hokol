@@ -24,7 +24,7 @@ dependencies {
     // base
     compile 'com.yline.lib:LibSDK:1.4.0'
     compile 'com.yline.lib:LibHttp:1.4.0'
-    compile 'com.yline.lib:LibView:1.0.0'
+    compile 'com.yline.lib:LibView:1.1.0'
     // google
     compile 'com.android.support:appcompat-v7:25.1.1'
     compile 'com.android.support:recyclerview-v7:25.1.1'

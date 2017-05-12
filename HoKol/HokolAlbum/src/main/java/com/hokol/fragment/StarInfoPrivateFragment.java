@@ -21,12 +21,12 @@ import com.hokol.activity.StarDynamicActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
-import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseFragment;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.ArrayList;
@@ -201,9 +201,16 @@ public class StarInfoPrivateFragment extends BaseFragment
 		});
 	}
 
-	private class StarInfoPrivateAdapter extends HeadFootRecyclerAdapter<String>
+	private class StarInfoPrivateAdapter extends HeadFootRecyclerAdapter
 	{
 		private final int border_square;
+
+		private OnRecyclerItemClickListener listener;
+
+		public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener listener)
+		{
+			this.listener = listener;
+		}
 
 		public StarInfoPrivateAdapter()
 		{
@@ -217,8 +224,20 @@ public class StarInfoPrivateFragment extends BaseFragment
 		}
 
 		@Override
-		public void setViewContent(RecyclerViewHolder viewHolder, int position)
+		public void setViewContent(final RecyclerViewHolder viewHolder, final int position)
 		{
+			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					if (null != listener)
+					{
+						listener.onClick(viewHolder, sList.get(position), position);
+					}
+				}
+			});
+
 			ImageView imageView = viewHolder.get(R.id.iv_item_star_info_dynamic);
 
 			UIResizeUtil.build().setWidth(border_square).setHeight(border_square).commit(imageView);

@@ -15,11 +15,11 @@ import com.hokol.activity.StarDynamicActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
-import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseFragment;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class MainHomeSportFragment extends BaseFragment
 
 	private String mParam1;
 
-	private HeadFootRecyclerAdapter mainHomeSportAdapter;
+	private MainHomeSportFragment.MainHomeSportAdapter mainHomeSportAdapter;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
@@ -73,7 +73,7 @@ public class MainHomeSportFragment extends BaseFragment
 		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(getContext())
 		{
 			@Override
-			protected int getNonDivideHeadNumber()
+			protected int getHeadNumber()
 			{
 				return 1;
 			}
@@ -146,8 +146,14 @@ public class MainHomeSportFragment extends BaseFragment
 		});
 	}
 
-	private class MainHomeSportAdapter extends HeadFootRecyclerAdapter<String>
+	private class MainHomeSportAdapter extends HeadFootRecyclerAdapter
 	{
+		private OnRecyclerItemClickListener listener;
+
+		public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener listener)
+		{
+			this.listener = listener;
+		}
 
 		@Override
 		public int getItemRes()
@@ -156,8 +162,20 @@ public class MainHomeSportFragment extends BaseFragment
 		}
 
 		@Override
-		public void setViewContent(RecyclerViewHolder viewHolder, int position)
+		public void setViewContent(final RecyclerViewHolder viewHolder, final int position)
 		{
+			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					if (null != listener)
+					{
+						listener.onClick(viewHolder, sList.get(position), position);
+					}
+				}
+			});
+
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_home_sport);
 			Glide.with(getContext()).load(sList.get(position)).centerCrop()
 					.placeholder(R.drawable.global_load_failed)

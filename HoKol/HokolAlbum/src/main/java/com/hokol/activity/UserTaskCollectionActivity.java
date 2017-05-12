@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.hokol.R;
-import com.hokol.medium.widget.recycler.FloatingItemDecoration;
+import com.hokol.medium.widget.recycler.FloatLinearItemDecoration;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.common.CommonRecyclerAdapter;
@@ -31,8 +31,20 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 
 		RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_task_collection);
 
-		FloatingItemDecoration itemDecoration = new FloatingItemDecoration(this, R.drawable.widget_recycler_divider_normal);
-		itemDecoration.setTitleHeight(UIScreenUtil.dp2px(this, 30));
+		FloatLinearItemDecoration itemDecoration = new FloatLinearItemDecoration(this)
+		{
+			@Override
+			public int getTitleHeight()
+			{
+				return UIScreenUtil.dp2px(UserTaskCollectionActivity.this, 30);
+			}
+
+			@Override
+			protected int getDivideResourceId()
+			{
+				return R.drawable.widget_recycler_divider_normal;
+			}
+		};
 		recyclerView.addItemDecoration(itemDecoration);
 
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));

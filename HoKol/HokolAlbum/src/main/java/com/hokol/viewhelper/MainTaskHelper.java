@@ -17,10 +17,10 @@ import com.hokol.medium.widget.DropMenuWidget;
 import com.hokol.medium.widget.FlowAbleWidget;
 import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.hokol.medium.widget.labellayout.LabelFlowLayout;
-import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.secondary.SecondaryWidget;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
+import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.ArrayList;
@@ -219,6 +219,12 @@ public class MainTaskHelper
 
 	private class TaskRecycleAdapter extends HeadFootRecyclerAdapter
 	{
+		private OnRecyclerItemClickListener listener;
+
+		public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener listener)
+		{
+			this.listener = listener;
+		}
 
 		@Override
 		public int getItemRes()
@@ -227,8 +233,20 @@ public class MainTaskHelper
 		}
 
 		@Override
-		public void setViewContent(RecyclerViewHolder viewHolder, final int position)
+		public void setViewContent(final RecyclerViewHolder viewHolder, final int position)
 		{
+			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					if (null != listener)
+					{
+						listener.onClick(viewHolder, sList.get(position), position);
+					}
+				}
+			});
+
 			// 设置点击时间
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_task_avatar);
 			Glide.with(context).load(DeleteConstant.url_default_avatar).centerCrop()

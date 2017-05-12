@@ -1,6 +1,8 @@
 package com.hokol.viewhelper;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,12 +14,12 @@ import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
-import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.TimeConvertUtil;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 import com.yline.view.common.ViewHolder;
 
@@ -39,7 +41,7 @@ public class MainNewsHelper
 	}
 
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% RecyclerView 主布局 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-	private HeadFootRecyclerAdapter recyclerAdapter;
+	private CommonNewsAdapter recyclerAdapter;
 
 	/**
 	 * 初始化Recycle控件
@@ -52,10 +54,12 @@ public class MainNewsHelper
 		recyclerView.setLayoutManager(new LinearLayoutManager(context));
 		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(context)
 		{
+
 			@Override
-			protected int getVerticalDividePaddingLeft()
+			public void drawVerticalDivider(Canvas c, Drawable divide, int currentPosition, int childLeft, int childTop, int childRight, int childBottom)
 			{
-				return UIScreenUtil.dp2px(context, 10);
+				childLeft = childLeft + UIScreenUtil.dp2px(context, 10);
+				super.drawVerticalDivider(c, divide, currentPosition, childLeft, childTop, childRight, childBottom);
 			}
 		});
 
@@ -86,6 +90,12 @@ public class MainNewsHelper
 
 	private class CommonNewsAdapter extends HeadFootRecyclerAdapter<VNewsSingleBean>
 	{
+		private OnRecyclerItemClickListener listener;
+
+		public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener listener)
+		{
+			this.listener = listener;
+		}
 
 		@Override
 		public int getItemRes()
@@ -94,8 +104,20 @@ public class MainNewsHelper
 		}
 
 		@Override
-		public void setViewContent(RecyclerViewHolder viewHolder, int position)
+		public void setViewContent(final RecyclerViewHolder viewHolder, final int position)
 		{
+			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					if (null != listener)
+					{
+						listener.onClick(viewHolder, sList.get(position), position);
+					}
+				}
+			});
+
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_news);
 
 			Glide.with(context).load(sList.get(position).getNews_img()).placeholder(R.drawable.global_load_failed).into(imageView);

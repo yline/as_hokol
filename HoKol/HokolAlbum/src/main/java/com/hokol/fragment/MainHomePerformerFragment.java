@@ -15,11 +15,11 @@ import com.hokol.activity.StarDynamicActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
-import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseFragment;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class MainHomePerformerFragment extends BaseFragment
 
 	private String mParam1;
 
-	private HeadFootRecyclerAdapter mainHomePerformerAdapter;
+	private MainHomePerformerFragment.MainHomePerformerAdapter mainHomePerformerAdapter;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
@@ -145,8 +145,14 @@ public class MainHomePerformerFragment extends BaseFragment
 		});
 	}
 
-	private class MainHomePerformerAdapter extends HeadFootRecyclerAdapter<String>
+	private class MainHomePerformerAdapter extends HeadFootRecyclerAdapter
 	{
+		private OnRecyclerItemClickListener listener;
+
+		public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener listener)
+		{
+			this.listener = listener;
+		}
 
 		@Override
 		public int getItemRes()
@@ -155,8 +161,20 @@ public class MainHomePerformerFragment extends BaseFragment
 		}
 
 		@Override
-		public void setViewContent(RecyclerViewHolder viewHolder, int position)
+		public void setViewContent(final RecyclerViewHolder viewHolder, final int position)
 		{
+			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					if (null != listener)
+					{
+						listener.onClick(viewHolder, sList.get(position), position);
+					}
+				}
+			});
+
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_home_performer);
 			Glide.with(getContext()).load(sList.get(position)).centerCrop()
 					.placeholder(R.drawable.global_load_failed)

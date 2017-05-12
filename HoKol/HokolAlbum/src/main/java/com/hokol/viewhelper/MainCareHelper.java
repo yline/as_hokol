@@ -9,11 +9,10 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.application.DeleteConstant;
-import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
-import com.hokol.medium.widget.recycler.HeadFootRecyclerAdapter;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.List;
@@ -62,7 +61,7 @@ public class MainCareHelper
 		recyclerAdapter.setDataList(dataList);
 	}
 
-	private class RecycleAdapter extends HeadFootRecyclerAdapter<VNewsSingleBean>
+	private class RecycleAdapter extends HeadFootRecyclerAdapter
 	{
 		@Override
 		public int getItemRes()
