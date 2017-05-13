@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/default_space_medium"
+    android:paddingLeft="@dimen/default_space_large"
+    android:paddingTop="@dimen/default_space_normal">
+
+    <TextView
+        android:id="@+id/tv_message_system_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/tv_message_system_time"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingRight="@dimen/default_space_medium"
+        android:text="[置顶]  缤纷萌"
+        android:textColor="#262626"
+        android:textSize="@dimen/default_text_size_normal"/>
+
+    <TextView
+        android:id="@+id/tv_message_system_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/view_message_system_bubble"
+        android:text="今天10:43"
+        android:textColor="#808080"
+        android:textSize="@dimen/default_text_size_medium"/>
+
+    <TextView
+        android:id="@+id/tv_message_system_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_message_system_title"
+        android:layout_marginTop="@dimen/default_space_normal"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="哎呀，你还想要丈母娘啊，请先有个女朋友再说咯"
+        android:textColor="@color/hokolGray"
+        android:textSize="@dimen/default_text_size_medium"/>
+
+    <View
+        android:id="@+id/view_message_system_bubble"
+        android:layout_width="@dimen/default_space_medium"
+        android:layout_height="@dimen/default_space_medium"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/default_space_little"
+        android:layout_marginRight="@dimen/default_space_normal"
+        android:background="@drawable/user_task_message_bubble"></View>
+</RelativeLayout>

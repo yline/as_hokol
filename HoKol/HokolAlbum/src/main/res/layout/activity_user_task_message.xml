@@ -1,20 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_user_message"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.hokol.activity.UserTaskMessageActivity">
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_centerInParent="true"
-        android:text="任务消息"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp">
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/iv_task_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/default_space_normal"
+            android:src="@drawable/global_back_red_arrows"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="我的消息"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/default_text_size_large"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_space_little"
+        android:background="@color/hokolGrayLight"></View>
+
+    <RelativeLayout
+        android:id="@+id/rl_task_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/default_space_normal"
+        android:paddingRight="@dimen/default_space_normal">
+
+        <ImageView
+            android:id="@+id/iv_task_message_avatar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="@dimen/default_space_normal"
+            android:layout_marginTop="@dimen/default_space_normal"
+            android:src="@drawable/user_task_massage"/>
+
+        <TextView
+            android:id="@+id/tv_task_message_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/iv_task_message_avatar"
+            android:layout_marginLeft="@dimen/default_space_normal"
+            android:layout_marginTop="@dimen/default_space_little"
+            android:layout_toRightOf="@+id/iv_task_message_avatar"
+            android:maxLines="1"
+            android:text="系统消息"
+            android:textColor="#262626"
+            android:textSize="@dimen/default_text_size_normal"/>
+
+        <TextView
+            android:id="@+id/tv_task_message_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_task_message_content"
+            android:layout_alignParentRight="true"
+            android:text="今天10:43"
+            android:textColor="#cccccc"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/iv_task_message_avatar"
+            android:background="@color/hokolGrayLight"></View>
+
+        <TextView
+            android:id="@+id/tv_task_message_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/iv_task_message_avatar"
+            android:layout_marginBottom="@dimen/default_space_small"
+            android:layout_marginLeft="@dimen/default_space_normal"
+            android:layout_toEndOf="@+id/iv_task_message_avatar"
+            android:layout_toRightOf="@+id/iv_task_message_avatar"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingRight="@dimen/default_space_large"
+            android:text="内部消息标题"
+            android:textColor="@color/hokolGray"
+            android:textSize="@dimen/default_text_size_medium"/>
+
+        <TextView
+            android:layout_width="@dimen/default_text_size_normal"
+            android:layout_height="@dimen/default_text_size_normal"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="-4dp"
+            android:layout_marginTop="@dimen/default_space_small"
+            android:layout_toLeftOf="@+id/tv_task_message_title"
+            android:background="@drawable/user_task_message_bubble"
+            android:gravity="center"
+            android:text="2"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/default_text_size_small"/>
+    </RelativeLayout>
+</LinearLayout>

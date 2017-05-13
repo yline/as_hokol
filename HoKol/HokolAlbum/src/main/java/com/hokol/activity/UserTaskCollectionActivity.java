@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.hokol.R;
 import com.hokol.medium.widget.recycler.FloatLinearItemDecoration;
@@ -30,7 +31,6 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 		setContentView(R.layout.activity_user_task_collection);
 
 		RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_task_collection);
-
 		FloatLinearItemDecoration itemDecoration = new FloatLinearItemDecoration(this)
 		{
 			@Override
@@ -55,6 +55,15 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 		initData();
 
 		itemDecoration.setKeys(keys);
+
+		findViewById(R.id.iv_task_collection).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				finish();
+			}
+		});
 	}
 
 	private Map<Integer, String> keys;//存放所有key的位置和内容

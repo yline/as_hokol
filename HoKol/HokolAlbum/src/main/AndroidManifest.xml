@@ -71,6 +71,10 @@
         </activity>
         <activity android:name=".activity.UserInfoUpdateLabelActivity">
         </activity>
+        <activity android:name=".activity.UserMessageSystemActivity">
+        </activity>
+        <activity android:name=".activity.UserMessageDetailActivity">
+        </activity>
     </application>
 
 </manifest>
