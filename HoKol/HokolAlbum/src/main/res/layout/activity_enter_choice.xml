@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eeeeee"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -18,7 +17,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerHorizontal="true"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@drawable/enter_choice_icon"/>
 
         <TextView
             android:id="@+id/tv_enter_choice_name"
@@ -28,7 +27,7 @@
             android:layout_centerHorizontal="true"
             android:paddingTop="@dimen/default_space_large"
             android:text="@string/app_name"
-            android:textColor="@android:color/holo_red_light"/>
+            android:textColor="@color/hokolRed"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -43,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginRight="@dimen/default_space_large"
-            android:background="@drawable/widget_bg_red_radius_normal"
+            android:background="@drawable/enter_choice_register"
             android:text="@string/enter_choice_register"
             android:textColor="@android:color/white"/>
 
@@ -54,9 +53,10 @@
             android:layout_below="@+id/btn_enter_choice_register"
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginRight="@dimen/default_space_large"
-            android:layout_marginTop="@dimen/default_text_size_large"
-            android:background="@drawable/widget_bg_white_radius_normal"
-            android:text="@string/enter_choice_login"/>
+            android:layout_marginTop="@dimen/default_space_normal"
+            android:background="@drawable/enter_choice_login"
+            android:text="@string/enter_choice_login"
+            android:textColor="@color/hokolRed"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -75,9 +75,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/default_space_large"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:layout_marginRight="@dimen/default_space_little"
                 android:layout_toLeftOf="@+id/tv_enter_choice_divide"
-                android:background="@android:color/black">
+                android:background="@color/hokolGrayLight">
             </LinearLayout>
 
             <TextView
@@ -86,15 +87,16 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="社交账号一键登录"
-                android:textColor="@android:color/tertiary_text_dark"/>
+                android:textColor="#808080"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/default_space_large"
+                android:layout_marginLeft="@dimen/default_space_little"
+                android:layout_marginRight="@dimen/default_space_normal"
                 android:layout_toRightOf="@+id/tv_enter_choice_divide"
-                android:background="@android:color/black">
+                android:background="@color/hokolGrayLight">
             </LinearLayout>
         </RelativeLayout>
 
@@ -104,10 +106,8 @@
             android:layout_height="50dp"
             android:layout_below="@+id/ll_enter_choice_divide"
             android:layout_centerHorizontal="true"
-            android:layout_margin="@dimen/default_space_normal"
-            android:src="@android:color/white"
-            app:circle_border_color="@android:color/tertiary_text_dark"
-            app:circle_border_width="1px">
+            android:layout_margin="@dimen/default_space_large"
+            android:src="@drawable/enter_choice_wechat">
         </com.hokol.medium.viewcustom.CircleView>
 
         <TextView
@@ -115,6 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/circle_enter_choice_wechat"
             android:layout_centerHorizontal="true"
-            android:text="微信"/>
+            android:text="微信"
+            android:textColor="#808080"/>
     </RelativeLayout>
 </LinearLayout>

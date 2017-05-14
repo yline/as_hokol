@@ -29,7 +29,7 @@ public class MainHelper
 	public void initFlashAnimator(final ImageView imageView)
 	{
 		imageView.setVisibility(View.VISIBLE);
-		imageView.setBackgroundResource(R.drawable.main_flash_app);
+		imageView.setImageResource(R.drawable.main_flash_app);
 		ObjectAnimator animator = ObjectAnimator.ofFloat(imageView, "alpha", 1f, 1f);
 		animator.setDuration(DURATION_FLASH);
 		animator.addListener(new Animator.AnimatorListener()

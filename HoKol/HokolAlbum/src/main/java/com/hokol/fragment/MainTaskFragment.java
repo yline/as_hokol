@@ -10,10 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.activity.TaskAssignedActivity;
 import com.hokol.activity.TaskDetailActivity;
 import com.hokol.activity.TaskPublishActivity;
+import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.widget.ADWidget;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
@@ -22,7 +24,6 @@ import com.hokol.viewhelper.MainTaskHelper;
 import com.yline.base.BaseFragment;
 import com.yline.utils.UIScreenUtil;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -30,8 +31,6 @@ import java.util.List;
 public class MainTaskFragment extends BaseFragment
 {
 	private MainTaskHelper mainTaskHelper;
-
-	private List<Integer> data;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
@@ -52,13 +51,6 @@ public class MainTaskFragment extends BaseFragment
 
 	private void initView(View parentView)
 	{
-		data = new ArrayList<>();
-		data.add(R.drawable.delete_ad_img1);
-		data.add(R.drawable.delete_ad_img2);
-		data.add(R.drawable.delete_ad_img3);
-		data.add(R.drawable.delete_ad_img4);
-		data.add(R.drawable.delete_ad_img5);
-
 		// 广告
 		LinearLayout linearLayout = (LinearLayout) parentView.findViewById(R.id.ll_main_task_ad);
 		ADWidget adWidget = new ADWidget()
@@ -81,7 +73,7 @@ public class MainTaskFragment extends BaseFragment
 			@Override
 			public void onPageInstance(ImageView imageView, int position)
 			{
-				imageView.setImageResource(data.get(position));
+				Glide.with(getContext()).load(DeleteConstant.getUrlRec()).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).into(imageView);
 			}
 		});
 		linearLayout.addView(adView);

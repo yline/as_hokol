@@ -25,15 +25,8 @@
     <!-- 手机号 + 密码登录 -->
     <string name="enter_login_phone_pwd_title">登录</string>
     <string name="enter_login_phone_pwd_title_right">注册</string>
-    <string name="enter_login_phone_pwd_hint_username">手机号</string>
-    <string name="enter_login_phone_pwd_hint_password">密码</string>
     <string name="enter_login_phone_pwd_action_start">立即登录</string>
     <string name="enter_login_phone_pwd_pwd_forget">忘记密码？</string>
-    <!-- 手机号+验证码 注册 -->
-    <string name="enter_register_phone_title">注册</string>
-    <string name="enter_register_phone_identify_code">获取验证码</string>
-    <string name="enter_register_phone_action_start">下一步</string>
-    <string name="enter_register_phone_check_box">我已阅读并同意《红客用户协议》</string>
     <!-- 忘记密码界面 -->
     <string name="enter_forget_pwd_title">重置密码</string>
     <string name="enter_forget_pwd_title_left">取消</string>

@@ -21,13 +21,13 @@
             android:value="GlideModule"/>
 
         <!-- 功能 -->
-        <activity android:name=".activity.MainActivity">
+        <!--<activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
+        </activity>-->
         <activity android:name=".activity.NewsInfoActivity"/>
         <activity android:name=".activity.StarDynamicActivity"/>
         <activity android:name=".activity.StarInfoActivity"/>
@@ -44,37 +44,28 @@
         <activity android:name=".activity.UserTaskMessageActivity"/>
         <activity android:name=".activity.TaskAssignedActivity"/>
         <activity android:name=".activity.TaskDeliveredActivity"/>
+        <activity android:name=".activity.UserInfoUpdateSignActivity"/>
+        <activity android:name=".activity.UserInfoUpdateAwardActivity"/>
+        <activity android:name=".activity.UserInfoUpdateNicknameActivity"/>
+        <activity android:name=".activity.UserInfoUpdateAreaActivity"/>
+        <activity android:name=".activity.UserInfoUpdateLabelActivity"/>
+        <activity android:name=".activity.UserMessageSystemActivity"/>
+        <activity android:name=".activity.UserMessageDetailActivity"/>
         <!-- 登入Enter -->
-        <!--
-         <activity
-             android:name=".activity.EnterChoiceActivity"
-             android:label="登入流程">
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN"/>
+        <activity
+            android:name=".activity.EnterChoiceActivity"
+            android:label="登入流程">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
-                 <category android:name="android.intent.category.LAUNCHER"/>
-             </intent-filter>
-         </activity>
-        -->
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".activity.EnterLoginPhonePwdActivity"/>
         <activity android:name=".activity.EnterRegisterPhoneActivity"/>
         <activity android:name=".activity.EnterForgetPwdActivity"/>
         <activity android:name=".activity.EnterForgetPwdNewActivity"/>
         <activity android:name=".activity.EnterRegisterCompleteInfoActivity"/>
-        <activity android:name=".activity.UserInfoUpdateSignActivity">
-        </activity>
-        <activity android:name=".activity.UserInfoUpdateAwardActivity">
-        </activity>
-        <activity android:name=".activity.UserInfoUpdateNicknameActivity">
-        </activity>
-        <activity android:name=".activity.UserInfoUpdateAreaActivity">
-        </activity>
-        <activity android:name=".activity.UserInfoUpdateLabelActivity">
-        </activity>
-        <activity android:name=".activity.UserMessageSystemActivity">
-        </activity>
-        <activity android:name=".activity.UserMessageDetailActivity">
-        </activity>
     </application>
 
 </manifest>

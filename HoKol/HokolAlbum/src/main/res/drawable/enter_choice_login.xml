@@ -11,5 +11,5 @@
 
     <stroke
         android:width="1px"
-        android:color="@color/hokolGray"></stroke>
+        android:color="@color/hokolRed"></stroke>
 </shape>
