@@ -3,54 +3,135 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eeeeee">
+    android:background="@android:color/white">
 
     <RelativeLayout
         android:id="@+id/rl_enter_forget_pwd_title"
         android:layout_width="match_parent"
-        android:layout_height="56dp">
+        android:layout_height="52dp">
 
-        <TextView
-            android:id="@+id/tv_enter_forget_pwd_cancel"
+        <ImageView
+            android:id="@+id/iv_enter_forget_pwd_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/default_space_large"
-            android:text="@string/enter_forget_pwd_title_left"
-            android:textColor="@android:color/black"/>
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/default_space_normal"
+            android:src="@drawable/global_back_red_arrows"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/enter_forget_pwd_title"
+            android:text="密码找回"
             android:textColor="@android:color/black"
             android:textSize="@dimen/default_text_size_large"/>
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/et_enter_forget_pwd_input"
+    <com.hokol.medium.viewcustom.KeyClearEditText
+        android:id="@+id/et_enter_forget_pwd_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_enter_forget_pwd_title"
         android:layout_marginLeft="@dimen/default_space_large"
         android:layout_marginRight="@dimen/default_space_large"
-        android:layout_marginTop="@dimen/default_space_large"
+        android:layout_marginTop="32dp"
         android:background="@drawable/widget_bg_white_radius_normal"
-        android:hint="@string/enter_forget_pwd_hint"
-        android:paddingBottom="@dimen/default_space_normal"
-        android:paddingLeft="@dimen/default_space_normal"
-        android:paddingTop="@dimen/default_space_normal"/>
+        android:hint="请输入手机号"
+        android:inputType="phone"
+        android:padding="@dimen/default_space_large"
+        android:textColorHint="@color/hokolGray"
+        android:textSize="@dimen/default_text_size_normal"/>
 
-    <Button
-        android:id="@+id/btn_enter_forget_pwd_commit"
+    <LinearLayout
+        android:id="@+id/ll_enter_forget_pwd_identify"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/et_enter_forget_pwd_input"
+        android:layout_below="@+id/et_enter_forget_pwd_username"
         android:layout_marginLeft="@dimen/default_space_large"
         android:layout_marginRight="@dimen/default_space_large"
-        android:layout_marginTop="@dimen/default_space_large"
-        android:background="@drawable/widget_bg_red_radius_normal"
-        android:text="@string/enter_forget_pwd_action_commit"
-        android:textColor="@android:color/white"/>
+        android:layout_marginTop="@dimen/default_space_normal"
+        android:background="@drawable/widget_bg_white_radius_normal">
+
+        <com.hokol.medium.viewcustom.KeyClearEditText
+            android:id="@+id/et_enter_forget_pwd_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@null"
+            android:hint="请输入手机验证码"
+            android:inputType="number"
+            android:maxLines="1"
+            android:padding="@dimen/default_space_large"
+            android:textColorHint="@color/hokolGray"
+            android:textSize="@dimen/default_text_size_normal"/>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/hokolGray">
+        </View>
+
+        <TextView
+            android:id="@+id/tv_enter_forget_pwd_identify"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="获取验证码"
+            android:textColor="@color/hokolGray"
+            android:textSize="@dimen/default_text_size_normal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_enter_forget_pwd_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_enter_forget_pwd_identify"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginRight="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_normal"
+        android:background="@drawable/widget_bg_white_radius_normal"
+        android:orientation="horizontal">
+
+        <com.hokol.medium.viewcustom.KeyClearEditText
+            android:id="@+id/et_enter_forget_pwd_new_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:digits="@string/password_rule"
+            android:hint="请输入登录密码"
+            android:inputType="textVisiblePassword"
+            android:padding="@dimen/default_space_large"
+            android:textColorHint="@color/hokolGray"
+            android:textSize="@dimen/default_text_size_normal"/>
+
+        <ImageView
+            android:id="@+id/iv_enter_forget_pwd_new_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingBottom="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_normal"
+            android:paddingTop="@dimen/default_space_large"
+            android:scaleType="centerCrop"
+            android:src="@drawable/global_ward_close"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_register_phone_action_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_enter_forget_pwd_password"
+        android:layout_marginBottom="@dimen/default_space_large"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginRight="@dimen/default_space_large"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/enter_register_phone_finish"
+        android:text="完成"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/default_text_size_large"/>
 </RelativeLayout>

@@ -64,7 +64,6 @@
         <activity android:name=".activity.EnterLoginPhonePwdActivity"/>
         <activity android:name=".activity.EnterRegisterPhoneActivity"/>
         <activity android:name=".activity.EnterForgetPwdActivity"/>
-        <activity android:name=".activity.EnterForgetPwdNewActivity"/>
         <activity android:name=".activity.EnterRegisterCompleteInfoActivity"/>
     </application>
 
