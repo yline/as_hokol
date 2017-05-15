@@ -29,7 +29,7 @@
             android:textSize="@dimen/default_text_size_normal"/>
     </RelativeLayout>
 
-    <EditText
+    <com.hokol.medium.viewcustom.KeyClearEditText
         android:id="@+id/et_enter_register_phone_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,13 +38,9 @@
         android:layout_marginRight="@dimen/default_space_large"
         android:layout_marginTop="32dp"
         android:background="@drawable/widget_bg_white_radius_normal"
-        android:drawableRight="@drawable/enter_register_phone_delete"
-        android:drawablePadding="@dimen/default_space_normal"
         android:hint="请输入手机号"
         android:inputType="phone"
-        android:paddingBottom="@dimen/default_space_large"
-        android:paddingLeft="@dimen/default_space_large"
-        android:paddingTop="@dimen/default_space_large"
+        android:padding="@dimen/default_space_large"
         android:textColorHint="@color/hokolGray"
         android:textSize="@dimen/default_text_size_normal"/>
 
@@ -58,19 +54,16 @@
         android:layout_marginTop="@dimen/default_space_large"
         android:background="@drawable/widget_bg_white_radius_normal">
 
-        <EditText
+        <com.hokol.medium.viewcustom.KeyClearEditText
             android:id="@+id/et_register_phone_password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:background="@null"
-            android:drawableRight="@drawable/enter_register_phone_delete"
             android:hint="请输入手机验证码"
             android:inputType="number"
             android:maxLines="1"
-            android:paddingBottom="@dimen/default_space_large"
-            android:paddingLeft="@dimen/default_space_large"
-            android:paddingTop="@dimen/default_space_large"
+            android:padding="@dimen/default_space_large"
             android:textColorHint="@color/hokolGray"
             android:textSize="@dimen/default_text_size_normal"/>
 
