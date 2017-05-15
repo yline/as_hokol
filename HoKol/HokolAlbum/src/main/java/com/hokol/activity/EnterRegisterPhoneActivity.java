@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.view.View;
+import android.widget.TextView;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
+import com.hokol.medium.widget.DialogIosWidget;
 import com.hokol.viewhelper.EnterRegisterPhoneHelper;
 import com.yline.base.BaseAppCompatActivity;
 
@@ -37,7 +39,27 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 			public void onClick(View v, String mobile, String identify)
 			{
 				IApplication.toast("mobile = " + mobile + ",identify = " + identify);
-				if (identify.equals("123456"))
+				if (mobile.equals("15958148487"))
+				{
+					new DialogIosWidget(EnterRegisterPhoneActivity.this)
+					{
+						@Override
+						protected void initBuilder(Builder builder)
+						{
+							super.initBuilder(builder);
+							builder.setTitle("您已经注册过红客了\n请直接登陆吧");
+							builder.setPositiveText("立即登陆");
+						}
+
+						@Override
+						protected void initMessageTextView(TextView textView, Builder builder)
+						{
+							super.initMessageTextView(textView, builder);
+							textView.setVisibility(View.GONE);
+						}
+					}.show();
+				}
+				else if (identify.equals("123456"))
 				{
 					EnterRegisterCompleteInfoActivity.actionStart(EnterRegisterPhoneActivity.this);
 				}
