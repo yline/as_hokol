@@ -1,78 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/tv_enter_register_complete_info_title"
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
         android:layout_centerHorizontal="true"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:text="欢迎来到红客"
-        android:textColor="@android:color/black"
+        android:textColor="#333333"
         android:textSize="@dimen/default_text_size_large"/>
 
     <com.hokol.medium.viewcustom.CircleView
         android:id="@+id/iv_enter_register_complete_info_avatar"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_below="@+id/tv_enter_register_complete_info_title"
         android:layout_centerHorizontal="true"
-        android:src="@android:color/white"
-        app:circle_border_color="@android:color/black"
-        app:circle_border_width="1px"/>
-
-    <TextView
-        android:id="@+id/tv_enter_register_complete_info_title_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/iv_enter_register_complete_info_avatar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/default_space_large"
-        android:gravity="center_vertical"
-        android:text="@string/enter_register_complete_info_title_name"
-        android:textColor="@android:color/tertiary_text_dark"
-        android:textSize="@dimen/default_text_size_medium"/>
+        android:layout_marginTop="32dp"
+        android:src="@drawable/global_load_failed"/>
 
     <!-- 输入框-名称 -->
-    <EditText
+    <com.hokol.medium.viewcustom.KeyClearEditText
         android:id="@+id/et_enter_register_complete_info_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_enter_register_complete_info_title_name"
         android:layout_marginLeft="@dimen/default_space_large"
         android:layout_marginRight="@dimen/default_space_large"
-        android:layout_marginTop="@dimen/default_space_little"
+        android:layout_marginTop="@dimen/default_space_normal"
         android:background="@drawable/widget_bg_white_radius_normal"
-        android:hint="@string/enter_register_complete_info_hint_name"
+        android:hint="请输入手机号"
         android:inputType="text"
-        android:paddingBottom="@dimen/default_space_medium"
-        android:paddingLeft="@dimen/default_space_medium"
-        android:paddingTop="@dimen/default_space_medium"/>
+        android:padding="@dimen/default_space_large"
+        android:textColorHint="@color/hokolGray"
+        android:textSize="@dimen/default_text_size_normal"/>
 
-    <EditText
-        android:id="@+id/et_enter_register_complete_info_pwd"
+    <LinearLayout
+        android:id="@+id/ll_enter_register_complete_info_pwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/et_enter_register_complete_info_name"
         android:layout_marginLeft="@dimen/default_space_large"
         android:layout_marginRight="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_normal"
         android:background="@drawable/widget_bg_white_radius_normal"
-        android:drawableRight="@drawable/widget_bg_white_radius_normal"
-        android:hint="@string/enter_register_complete_info_hint_pwd"
-        android:inputType="textPassword"
-        android:paddingBottom="@dimen/default_space_medium"
-        android:paddingLeft="@dimen/default_space_medium"
-        android:paddingTop="@dimen/default_space_medium"/>
+        android:orientation="horizontal">
+
+        <com.hokol.medium.viewcustom.KeyClearEditText
+            android:id="@+id/et_enter_register_complete_info_new_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:digits="@string/password_rule"
+            android:hint="6-16位密码，数字和字母"
+            android:inputType="textVisiblePassword"
+            android:padding="@dimen/default_space_large"
+            android:textColorHint="@color/hokolGray"
+            android:textSize="@dimen/default_text_size_normal"/>
+
+        <ImageView
+            android:id="@+id/iv_enter_register_complete_info_new_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingBottom="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_normal"
+            android:paddingTop="@dimen/default_space_large"
+            android:scaleType="centerCrop"
+            android:src="@drawable/global_ward_close"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_enter_register_complete_info_title_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_space_large"
+        android:gravity="center_vertical"
+        android:text="有了专属昵称，会增加辨识度哦！"
+        android:textColor="@android:color/tertiary_text_dark"
+        android:textSize="@dimen/default_text_size_medium"
+        android:layout_below="@+id/iv_enter_register_complete_info_avatar"
+        android:layout_centerHorizontal="true"/>
 
     <RelativeLayout
         android:id="@+id/rl_enter_register_complete_info_sex"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/et_enter_register_complete_info_pwd"
+        android:layout_below="@+id/ll_enter_register_complete_info_pwd"
         android:paddingBottom="@dimen/default_space_normal"
         android:paddingLeft="@dimen/default_space_large"
         android:paddingRight="@dimen/default_space_large"
@@ -85,8 +104,8 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
-            android:text="@string/enter_register_complete_info_sex"
-            android:textColor="@android:color/black"/>
+            android:text="性别:"
+            android:textColor="@color/hokolGrayDrak"/>
 
         <RadioGroup
             android:layout_width="wrap_content"
@@ -100,13 +119,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/default_space_large"
                 android:text="女生"
-                android:textColor="@android:color/tertiary_text_dark"/>
+                android:textColor="@color/hokolGrayDrak"/>
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="男生"
-                android:textColor="@android:color/tertiary_text_dark"/>
+                android:textColor="@color/hokolGrayDrak"/>
         </RadioGroup>
     </RelativeLayout>
 
@@ -120,8 +139,8 @@
         android:layout_marginBottom="@dimen/default_space_normal"
         android:layout_marginLeft="@dimen/default_space_large"
         android:gravity="center_vertical"
-        android:text="@string/enter_register_complete_info_label"
-        android:textColor="@android:color/black"/>
+        android:text="我的标签(1/2)"
+        android:textColor="@color/hokolGrayDrak"/>
 
     <!-- 标签 -->
     <com.hokol.medium.widget.labellayout.LabelFlowLayout
@@ -132,37 +151,28 @@
         android:layout_marginLeft="@dimen/default_space_large">
     </com.hokol.medium.widget.labellayout.LabelFlowLayout>
 
-    <com.hokol.medium.widget.labellayout.LabelView
-        android:id="@+id/label_enter_register_complete_info"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/tv_enter_register_complete"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/label_flow_enter_register_complete_info"
-        android:layout_marginLeft="@dimen/default_space_large"
-        android:clickable="true">
-
-        <TextView
-            android:id="@+id/tv_enter_register_complete_info_label_other"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_space_little"
-            android:layout_marginRight="@dimen/default_space_large"
-            android:layout_marginTop="@dimen/default_space_little"
-            android:background="@drawable/widget_item_label_bg_layout"
-            android:duplicateParentState="true"
-            android:text="其他"
-            android:textColor="@drawable/widget_item_label_text_color">
-        </TextView>
-    </com.hokol.medium.widget.labellayout.LabelView>
+        android:letterSpacing="2.0"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingLeft="@dimen/default_space_large"
+        android:paddingTop="@dimen/default_space_little"
+        android:text="选择其他，动态消息不展示在主页哦"
+        android:textColor="@color/hokolRed"/>
 
     <Button
         android:id="@+id/btn_enter_register_complete_info_commit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/label_enter_register_complete_info"
+        android:layout_below="@+id/tv_enter_register_complete"
         android:layout_marginLeft="@dimen/default_space_large"
         android:layout_marginRight="@dimen/default_space_large"
-        android:layout_marginTop="@dimen/default_space_large"
         android:background="@drawable/widget_bg_red_radius_normal"
-        android:text="@string/enter_register_complete_info_commit"
+        android:text="确认"
         android:textColor="@android:color/white"/>
+
+
 </RelativeLayout>

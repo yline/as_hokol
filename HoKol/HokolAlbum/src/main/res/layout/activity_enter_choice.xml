@@ -43,7 +43,7 @@
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginRight="@dimen/default_space_large"
             android:background="@drawable/enter_choice_register"
-            android:text="@string/enter_choice_register"
+            android:text="注册"
             android:textColor="@android:color/white"/>
 
         <Button
@@ -55,7 +55,7 @@
             android:layout_marginRight="@dimen/default_space_large"
             android:layout_marginTop="@dimen/default_space_normal"
             android:background="@drawable/enter_choice_login"
-            android:text="@string/enter_choice_login"
+            android:text="登录"
             android:textColor="@color/hokolRed"/>
     </RelativeLayout>
 

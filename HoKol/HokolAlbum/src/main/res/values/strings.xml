@@ -21,16 +21,16 @@
     <!-- 密码输入格式 -->
     <string name="password_rule">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`¬!"£$%^*()~=#{}[];':,./?/*-_+&#060;&#062;&#064;&#038;</string>
     <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% enter 登入流程 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
-    <!-- 登录注册选择页面-->
+    <!-- 登录注册选择页面
     <string name="enter_choice_register">极速注册</string>
-    <string name="enter_choice_login">登录</string>
+    <string name="enter_choice_login">登录</string>-->
     <!-- 注册成功，填写信息界面 -->
-    <string name="enter_register_complete_info_title_name">有了专属昵称，会增加辨识度哦！</string>
-    <string name="enter_register_complete_info_hint_name">用户名</string>
-    <string name="enter_register_complete_info_hint_pwd">6~20位密码，数字或字母</string>
-    <string name="enter_register_complete_info_sex">性别</string>
-    <string name="enter_register_complete_info_label">我的标签(1/2)</string>
-    <string name="enter_register_complete_info_commit">确定</string>
-    <string name="title_activity_user_fans">UserFansActivity</string>
+    <!--  <string name="enter_register_complete_info_title_name">有了专属昵称，会增加辨识度哦！</string>
+      <string name="enter_register_complete_info_hint_name">用户名</string>
+      <string name="enter_register_complete_info_hint_pwd">6~20位密码，数字或字母</string>
+      <string name="enter_register_complete_info_sex">性别</string>
+      <string name="enter_register_complete_info_label">我的标签(1/2)</string>
+      <string name="enter_register_complete_info_commit">确定</string>
+      <string name="title_activity_user_fans">UserFansActivity</string>-->
 
 </resources>

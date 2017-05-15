@@ -31,21 +31,21 @@ public class EnterRegisterCompleteInfoActivity extends BaseAppCompatActivity
 
 		btnCommit = (Button) findViewById(R.id.btn_enter_register_complete_info_commit);
 		labelFlowLayout = (LabelFlowLayout) findViewById(R.id.label_flow_enter_register_complete_info);
-		labelView = (LabelView) findViewById(R.id.label_enter_register_complete_info);
+		//labelView = (LabelView) findViewById(R.id.label_enter_register_complete_info);
 
 		FlowAbleWidget flowAbleWidget = new FlowAbleWidget(this, labelFlowLayout);
 		String[] dataList = new String[]{"网红", "主播", "演员", "模特", "歌手", "体育"};
 		flowAbleWidget.setDataList(Arrays.asList(dataList));
 		flowAbleWidget.setMaxCountEachLine(3);
 
-		labelView.setOnClickListener(new View.OnClickListener()
+		/*labelView.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
 				labelView.setChecked(!labelView.isChecked());
 			}
-		});
+		});*/
 
 		btnCommit.setOnClickListener(new View.OnClickListener()
 		{
