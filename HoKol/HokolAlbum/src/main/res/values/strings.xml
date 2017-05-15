@@ -18,15 +18,12 @@
         <item name="sport">体育</item>
     </string-array>
 
+    <!-- 密码输入格式 -->
+    <string name="password_rule">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`¬!"£$%^*()~=#{}[];':,./?/*-_+&#060;&#062;&#064;&#038;</string>
     <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% enter 登入流程 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
     <!-- 登录注册选择页面-->
     <string name="enter_choice_register">极速注册</string>
     <string name="enter_choice_login">登录</string>
-    <!-- 手机号 + 密码登录 -->
-    <string name="enter_login_phone_pwd_title">登录</string>
-    <string name="enter_login_phone_pwd_title_right">注册</string>
-    <string name="enter_login_phone_pwd_action_start">立即登录</string>
-    <string name="enter_login_phone_pwd_pwd_forget">忘记密码？</string>
     <!-- 忘记密码界面 -->
     <string name="enter_forget_pwd_title">重置密码</string>
     <string name="enter_forget_pwd_title_left">取消</string>

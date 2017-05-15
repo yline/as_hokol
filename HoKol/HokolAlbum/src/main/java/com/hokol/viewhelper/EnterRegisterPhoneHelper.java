@@ -5,13 +5,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
-import android.text.Editable;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.TextWatcher;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -19,11 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.hokol.R;
+import com.hokol.util.TextDecorateUtil;
 import com.yline.log.LogFileUtil;
 import com.yline.view.common.ViewHolder;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class EnterRegisterPhoneHelper
 {
@@ -106,63 +97,23 @@ public class EnterRegisterPhoneHelper
 	{
 		// 手机号
 		EditText editUsername = viewHolder.get(R.id.et_enter_register_phone_username);
-		editUsername.addTextChangedListener(new TextWatcher()
+		TextDecorateUtil.isPhoneMatch(editUsername, new TextDecorateUtil.OnEditMatchCallback()
 		{
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
+			public void onTextChange(boolean isMatch)
 			{
-
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
-			{
-				String inputString = s.toString();
-				if (inputString.length() == 11)
-				{
-					if (isMobileNumber(s.toString()))
-					{
-						stateManager.setMobileMatch(true);
-						return;
-					}
-				}
-
-				stateManager.setMobileMatch(false);
-			}
-
-			@Override
-			public void afterTextChanged(Editable s)
-			{
-
+				stateManager.setMobileMatch(isMatch);
 			}
 		});
 
+		// 验证码
 		EditText editIdentify = viewHolder.get(R.id.et_register_phone_password);
-		editIdentify.addTextChangedListener(new TextWatcher()
+		TextDecorateUtil.isIdentifyMatch(editIdentify, new TextDecorateUtil.OnEditMatchCallback()
 		{
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
+			public void onTextChange(boolean isMatch)
 			{
-				
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
-			{
-				String inputString = s.toString();
-				if (inputString.length() == 6)
-				{
-					stateManager.setIdentifyMatch(true);
-					return;
-				}
-
-				stateManager.setIdentifyMatch(false);
-			}
-
-			@Override
-			public void afterTextChanged(Editable s)
-			{
-
+				stateManager.setIdentifyMatch(isMatch);
 			}
 		});
 	}
@@ -170,12 +121,21 @@ public class EnterRegisterPhoneHelper
 	/**
 	 * 协议部分按钮
 	 *
-	 * @param clickableSpan
+	 * @param spannableCallback
 	 */
-	public void initAgreementTextView(ClickableSpan clickableSpan)
+	public void initAgreementTextView(TextDecorateUtil.OnTextSpannableCallback spannableCallback)
 	{
 		TextView textView = viewHolder.get(R.id.tv_enter_register_phone);
-		initAgreementText(textView, clickableSpan);
+		int length = textView.length();
+
+		final int clickable_length = 8;
+		if (length <= clickable_length)
+		{
+			LogFileUtil.e("checkBox text span", "too short");
+			return;
+		}
+
+		TextDecorateUtil.decorateTextSpan(textView, false, length - clickable_length, length, Color.RED, spannableCallback);
 
 		CheckBox checkBox = viewHolder.get(R.id.checkBox_enter_register_phone);
 		checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
@@ -186,37 +146,6 @@ public class EnterRegisterPhoneHelper
 				stateManager.setAgreementChecked(isChecked);
 			}
 		});
-	}
-
-	/**
-	 * 给文字添加点击事件
-	 *
-	 * @param textView
-	 */
-	private void initAgreementText(TextView textView, ClickableSpan clickableSpan)
-	{
-		String agreementText = textView.getText().toString().trim();
-		int length = agreementText.length();
-
-		final int clickable_length = 8;
-		if (length <= clickable_length)
-		{
-			LogFileUtil.e("checkBox text span", "too short");
-			return;
-		}
-
-		final SpannableString spannableString = new SpannableString(agreementText);
-		spannableString.setSpan(clickableSpan, length - clickable_length, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		spannableString.setSpan(new ForegroundColorSpan(Color.RED), length - clickable_length, length, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
-		textView.setText(spannableString);
-		textView.setMovementMethod(LinkMovementMethod.getInstance());
-	}
-
-	private boolean isMobileNumber(String mobile)
-	{
-		Pattern pattern = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-		Matcher matcher = pattern.matcher(mobile);
-		return matcher.matches();
 	}
 
 	private class RegisterPhoneStateManager

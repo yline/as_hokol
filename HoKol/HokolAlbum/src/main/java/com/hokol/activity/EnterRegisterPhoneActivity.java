@@ -3,14 +3,13 @@ package com.hokol.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextPaint;
-import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.TextView;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.medium.widget.DialogIosWidget;
+import com.hokol.util.TextDecorateUtil;
 import com.hokol.viewhelper.EnterRegisterPhoneHelper;
 import com.yline.base.BaseAppCompatActivity;
 
@@ -66,20 +65,15 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 			}
 		});
 
-		registerPhoneHelper.initAgreementTextView(new ClickableSpan()
+		registerPhoneHelper.initAgreementTextView(new TextDecorateUtil.OnTextSpannableCallback()
 		{
-			@Override
-			public void updateDrawState(TextPaint ds)
-			{
-				ds.setUnderlineText(false); // 出去下划线
-			}
-
 			@Override
 			public void onClick(View widget)
 			{
 
 			}
 		});
+
 		registerPhoneHelper.setOnIdentifyCodeListener(new View.OnClickListener()
 		{
 			@Override

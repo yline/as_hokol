@@ -3,6 +3,7 @@ package com.hokol.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 
@@ -12,8 +13,10 @@ import com.hokol.medium.http.HttpConstant;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VLoginPhonePwdBean;
 import com.hokol.medium.http.bean.WLoginPhonePwdBean;
+import com.hokol.util.TextDecorateUtil;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
+import com.yline.view.common.ViewHolder;
 
 /**
  * 登入流程，手机号+ 密码登录
@@ -23,9 +26,9 @@ import com.yline.http.XHttpAdapter;
  */
 public class EnterLoginPhonePwdActivity extends BaseAppCompatActivity
 {
-	private EditText etUserName;
+	private ViewHolder viewHolder;
 
-	private EditText etPassWord;
+	private boolean isPasswordVisible = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -33,16 +36,54 @@ public class EnterLoginPhonePwdActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_enter_login_phone_pwd);
 
+		viewHolder = new ViewHolder(this);
+
 		initView();
+		initViewClick();
 	}
 
 	private void initView()
 	{
-		etUserName = (EditText) findViewById(R.id.et_enter_login_phone_username);
-		etPassWord = (EditText) findViewById(R.id.et_enter_login_phone_password);
+		EditText editTextPhone = viewHolder.get(R.id.et_enter_login_phone_username);
+		TextDecorateUtil.isPhoneMatch(editTextPhone, new TextDecorateUtil.OnEditMatchCallback()
+		{
+			@Override
+			public void onTextChange(boolean isMatch)
+			{
+				if (isMatch)
+				{
+					IApplication.toast("手机号符合规则");
+				}
+			}
+		});
 
+		EditText editTextPwd = viewHolder.get(R.id.et_enter_login_phone_password);
+		TextDecorateUtil.isPhonePwdMatch(editTextPwd, new TextDecorateUtil.OnEditMatchCallback()
+		{
+			@Override
+			public void onTextChange(boolean isMatch)
+			{
+				if (isMatch)
+				{
+					IApplication.toast("密码符合规则");
+				}
+			}
+		});
+	}
+
+	private void initViewClick()
+	{
+		// 返回
+		viewHolder.setOnClickListener(R.id.iv_enter_login_phone_pwd_register, new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				finish();
+			}
+		});
 		// 跳转到注册
-		findViewById(R.id.tv_enter_login_phone_register).setOnClickListener(new View.OnClickListener()
+		viewHolder.setOnClickListener(R.id.tv_enter_login_phone_register, new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -50,9 +91,8 @@ public class EnterLoginPhonePwdActivity extends BaseAppCompatActivity
 				EnterRegisterPhoneActivity.actionStart(EnterLoginPhonePwdActivity.this);
 			}
 		});
-
 		// 忘记密码
-		findViewById(R.id.et_enter_login_phone_pwd_forget).setOnClickListener(new View.OnClickListener()
+		viewHolder.setOnClickListener(R.id.et_enter_login_phone_pwd_forget, new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -60,21 +100,41 @@ public class EnterLoginPhonePwdActivity extends BaseAppCompatActivity
 				EnterForgetPwdActivity.actionStart(EnterLoginPhonePwdActivity.this);
 			}
 		});
-
 		// 登录
-		findViewById(R.id.btn_enter_login_phone_login).setOnClickListener(new View.OnClickListener()
+		viewHolder.setOnClickListener(R.id.btn_enter_login_phone_login, new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
 				IApplication.toast("正在登录...");
 
-				String username = etUserName.getText().toString().trim();
-				String password = etPassWord.getText().toString().trim();
+				String username = viewHolder.getText(R.id.et_enter_login_phone_username);
+				String password = viewHolder.getText(R.id.et_enter_login_phone_password);
 
 				String httpUrl = HttpConstant.url_login_pwd;
 
 				doPost(httpUrl, new WLoginPhonePwdBean(username, password));
+			}
+		});
+		// 眼睛
+		viewHolder.setOnClickListener(R.id.iv_enter_login_phone_password, new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				EditText editText = viewHolder.get(R.id.et_enter_login_phone_password);
+				if (isPasswordVisible)
+				{
+					editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+					viewHolder.setImageResource(R.id.iv_enter_login_phone_password, R.drawable.global_ward_open);
+					isPasswordVisible = !isPasswordVisible;
+				}
+				else
+				{
+					editText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+					viewHolder.setImageResource(R.id.iv_enter_login_phone_password, R.drawable.global_ward_close);
+					isPasswordVisible = !isPasswordVisible;
+				}
 			}
 		});
 	}
