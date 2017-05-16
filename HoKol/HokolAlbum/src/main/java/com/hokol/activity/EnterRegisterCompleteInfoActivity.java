@@ -4,24 +4,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.medium.widget.FlowAbleWidget;
-import com.hokol.medium.widget.labellayout.LabelFlowLayout;
-import com.hokol.medium.widget.labellayout.LabelView;
+import com.hokol.medium.widget.labellayout.FlowLayout;
+import com.hokol.medium.widget.labellayout.LabelAdapter;
 import com.yline.base.BaseAppCompatActivity;
+import com.yline.view.common.ViewHolder;
 
 import java.util.Arrays;
+import java.util.Deque;
 
 public class EnterRegisterCompleteInfoActivity extends BaseAppCompatActivity
 {
-	private Button btnCommit;
-
-	private LabelFlowLayout labelFlowLayout;
-
-	private LabelView labelView;
+	private ViewHolder viewHolder;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -29,25 +26,32 @@ public class EnterRegisterCompleteInfoActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_enter_register_complete_info);
 
-		btnCommit = (Button) findViewById(R.id.btn_enter_register_complete_info_commit);
-		labelFlowLayout = (LabelFlowLayout) findViewById(R.id.label_flow_enter_register_complete_info);
-		//labelView = (LabelView) findViewById(R.id.label_enter_register_complete_info);
+		viewHolder = new ViewHolder(this);
 
-		FlowAbleWidget flowAbleWidget = new FlowAbleWidget(this, labelFlowLayout);
-		String[] dataList = new String[]{"网红", "主播", "演员", "模特", "歌手", "体育"};
-		flowAbleWidget.setDataList(Arrays.asList(dataList));
-		flowAbleWidget.setMaxCountEachLine(3);
-
-		/*labelView.setOnClickListener(new View.OnClickListener()
+		FlowAbleWidget flowAbleWidget = new FlowAbleWidget(this, R.id.label_flow_enter_register_complete_info)
 		{
 			@Override
-			public void onClick(View v)
+			protected int getItemResourceId()
 			{
-				labelView.setChecked(!labelView.isChecked());
+				return R.layout.activity_user_info__flow_able;
 			}
-		});*/
+		};
+		flowAbleWidget.setMaxCountEachLine(4); // 每行4个
+		flowAbleWidget.setMaxSelectCount(2); // 最多选择两个
+		flowAbleWidget.setLabelGravity(FlowLayout.LabelGravity.EQUIDISTANT);
+		flowAbleWidget.setDataList(Arrays.asList("网红", "主播", "演员", "模特", "歌手", "体育", "其它"));
+		flowAbleWidget.addSelectedPosition(0);
+		flowAbleWidget.setOnLabelSelectListener(new LabelAdapter.OnLabelSelectListener()
+		{
+			@Override
+			public void onLabelSelected(Deque selectedDeque)
+			{
+				int length = selectedDeque.size();
+				viewHolder.setText(R.id.tv_enter_register_complete_info_label, String.format("我的标签(%d/2)", length));
+			}
+		});
 
-		btnCommit.setOnClickListener(new View.OnClickListener()
+		viewHolder.setOnClickListener(R.id.btn_enter_register_complete_info_commit, new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
