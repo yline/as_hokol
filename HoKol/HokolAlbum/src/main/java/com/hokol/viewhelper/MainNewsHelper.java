@@ -11,11 +11,9 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.hokol.R;
-import com.hokol.application.IApplication;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
-import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.TimeConvertUtil;
 import com.yline.utils.UIScreenUtil;
@@ -73,7 +71,7 @@ public class MainNewsHelper
 	 *
 	 * @param dataList
 	 */
-	public void setRecycleData(List<VNewsSingleBean> dataList)
+	public void setRecyclerData(List<VNewsSingleBean> dataList)
 	{
 		recyclerAdapter.addAll(dataList);
 	}
@@ -81,6 +79,11 @@ public class MainNewsHelper
 	public void setOnRecycleItemClickListener(OnRecyclerItemClickListener listener)
 	{
 		recyclerAdapter.setOnRecyclerItemClickListener(listener);
+	}
+
+	public void addRecyclerData(List<VNewsSingleBean> dataList)
+	{
+		recyclerAdapter.addAll(dataList);
 	}
 
 	public void setOnRecommendClickListener(View.OnClickListener listener)
@@ -166,42 +169,5 @@ public class MainNewsHelper
 	}
 
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 刷新布局 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-	public void initRefreshLayout(final SuperSwipeRefreshLayout superSwipeRefreshLayout)
-	{
-		superSwipeRefreshLayout.setOnRefreshListener(new SuperSwipeRefreshLayout.OnSwipeListener()
-		{
-			@Override
-			public void onAnimate()
-			{
-				IApplication.toast("正在加载");
-				IApplication.getHandler().postDelayed(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						IApplication.toast("加载结束");
-						superSwipeRefreshLayout.setRefreshing(false);
-					}
-				}, 2000);
-			}
-		});
-		superSwipeRefreshLayout.setOnLoadListener(new SuperSwipeRefreshLayout.OnSwipeListener()
-		{
-			@Override
-			public void onAnimate()
-			{
-				IApplication.toast("正在加载");
-				IApplication.getHandler().postDelayed(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						IApplication.toast("加载结束");
-						superSwipeRefreshLayout.setLoadMore(false);
-					}
-				}, 2000);
-			}
-		});
-	}
 
 }

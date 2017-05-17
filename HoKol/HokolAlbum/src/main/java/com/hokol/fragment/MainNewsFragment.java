@@ -3,18 +3,18 @@ package com.hokol.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
 import com.hokol.activity.NewsInfoActivity;
+import com.hokol.application.DeleteConstant;
+import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
-import com.hokol.medium.http.bean.WNewsSingleBean;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainNewsHelper;
@@ -27,7 +27,11 @@ public class MainNewsFragment extends BaseFragment
 {
 	private MainNewsHelper mainNewsHelper;
 
-	private String recommendId;
+	private VNewsSingleBean mRecommendBean;
+
+	private SuperSwipeRefreshLayout superSwipeRefreshLayout;
+
+	private int loadedNewsNumber;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -53,7 +57,7 @@ public class MainNewsFragment extends BaseFragment
 			@Override
 			public void onClick(RecyclerView.ViewHolder viewHolder, VNewsSingleBean vNewsSingleBean, int position)
 			{
-				NewsInfoActivity.actionStart(getContext(), new WNewsSingleBean(vNewsSingleBean.getNews_id()));
+				NewsInfoActivity.actionStart(getContext(), vNewsSingleBean.getUrl());
 			}
 		});
 
@@ -65,16 +69,79 @@ public class MainNewsFragment extends BaseFragment
 			@Override
 			public void onClick(View v)
 			{
-				if (!TextUtils.isEmpty(recommendId))
+				if (null != mRecommendBean)
 				{
-					NewsInfoActivity.actionStart(getContext(), new WNewsSingleBean(recommendId));
+					NewsInfoActivity.actionStart(getContext(), mRecommendBean.getUrl());
 				}
 			}
 		});
 
 		// 刷新
-		SuperSwipeRefreshLayout superSwipeRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_main_news);
-		mainNewsHelper.initRefreshLayout(superSwipeRefreshLayout);
+		superSwipeRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_main_news);
+		superSwipeRefreshLayout.setOnRefreshListener(new SuperSwipeRefreshLayout.OnSwipeListener()
+		{
+			@Override
+			public void onAnimate()
+			{
+				XHttpUtil.doNewsRecommend(new XHttpAdapter<VNewsSingleBean>()
+				{
+					@Override
+					public void onSuccess(VNewsSingleBean vNewsSingleBean)
+					{
+						IApplication.toast("刷新成功");
+						superSwipeRefreshLayout.setRefreshing(false);
+					}
+
+					@Override
+					public void onFailure(Exception ex)
+					{
+						super.onFailure(ex);
+						superSwipeRefreshLayout.setRefreshing(false);
+					}
+
+					@Override
+					public void onFailureCode(int code)
+					{
+						super.onFailureCode(code);
+						superSwipeRefreshLayout.setRefreshing(false);
+					}
+				});
+			}
+		});
+		superSwipeRefreshLayout.setOnLoadListener(new SuperSwipeRefreshLayout.OnSwipeListener()
+		{
+			@Override
+			public void onAnimate()
+			{
+				WNewsMultiplexBean loadBean = new WNewsMultiplexBean(loadedNewsNumber, DeleteConstant.DEFAULT_RECYCLER_NUMBER);
+				XHttpUtil.doNewsMultiplex(loadBean, new XHttpAdapter<VNewsMultiplexBean>()
+				{
+					@Override
+					public void onSuccess(VNewsMultiplexBean vNewsMultiplexBean)
+					{
+						IApplication.toast("加载结束");
+						loadedNewsNumber += vNewsMultiplexBean.getList().size();
+						superSwipeRefreshLayout.setLoadMore(false);
+
+						mainNewsHelper.addRecyclerData(vNewsMultiplexBean.getList());
+					}
+
+					@Override
+					public void onFailure(Exception ex)
+					{
+						super.onFailure(ex);
+						superSwipeRefreshLayout.setLoadMore(false);
+					}
+
+					@Override
+					public void onFailureCode(int code)
+					{
+						super.onFailureCode(code);
+						superSwipeRefreshLayout.setLoadMore(false);
+					}
+				});
+			}
+		});
 	}
 
 	private void initData()
@@ -85,19 +152,20 @@ public class MainNewsFragment extends BaseFragment
 			@Override
 			public void onSuccess(VNewsSingleBean vNewsSingleBean)
 			{
-				recommendId = vNewsSingleBean.getNews_id();
+				mRecommendBean = vNewsSingleBean;
 				mainNewsHelper.updateRecommendData(vNewsSingleBean);
 			}
 		});
 
 		// 多条新闻
-		XHttpUtil.doNewsMultiplex(new WNewsMultiplexBean(1, 14), new XHttpAdapter<VNewsMultiplexBean>()
+		XHttpUtil.doNewsMultiplex(new WNewsMultiplexBean(loadedNewsNumber, DeleteConstant.DEFAULT_RECYCLER_NUMBER), new XHttpAdapter<VNewsMultiplexBean>()
 		{
 			@Override
 			public void onSuccess(VNewsMultiplexBean vNewsMultiplexBean)
 			{
 				List<VNewsSingleBean> result = vNewsMultiplexBean.getList();
-				mainNewsHelper.setRecycleData(result);
+				loadedNewsNumber += result.size();
+				mainNewsHelper.setRecyclerData(result);
 			}
 		});
 	}

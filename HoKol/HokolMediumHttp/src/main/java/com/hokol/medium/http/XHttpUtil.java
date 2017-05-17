@@ -62,6 +62,7 @@ import com.hokol.medium.http.bean.WUserTaskCollectionBean;
 import com.yline.http.XHttpAdapter;
 import com.yline.http.XHttpConfig;
 import com.yline.http.XHttpConstant;
+import com.yline.http.helper.HttpCacheAndNetClient;
 import com.yline.http.helper.XTextHttp;
 import com.yline.http.helper.XUploadFileHttp;
 import com.yline.log.LogFileUtil;
@@ -71,6 +72,7 @@ import java.io.File;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 
 public class XHttpUtil
@@ -632,7 +634,14 @@ public class XHttpUtil
 	public static void doAreaAll(XHttpAdapter<VAreaAllBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_area_all;
-		new XTextHttp<VAreaAllBean>(adapter).doPost(httpUrl, null, VAreaAllBean.class);
+		new XTextHttp<VAreaAllBean>(adapter)
+		{
+			@Override
+			protected OkHttpClient getClient()
+			{
+				return HttpCacheAndNetClient.getInstance();
+			}
+		}.doPost(httpUrl, null, VAreaAllBean.class);
 	}
 
 	private static boolean isDebug()

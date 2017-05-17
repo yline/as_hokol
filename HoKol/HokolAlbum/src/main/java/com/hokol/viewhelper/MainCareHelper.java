@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.application.DeleteConstant;
+import com.hokol.medium.http.bean.VUserCareAllBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
@@ -19,7 +20,7 @@ import java.util.List;
 
 public class MainCareHelper
 {
-	private HeadFootRecyclerAdapter recyclerAdapter;
+	private RecycleAdapter recyclerAdapter;
 
 	private OnCareRecycleClickListener careRecycleClickListener;
 
@@ -56,12 +57,12 @@ public class MainCareHelper
 		this.careRecycleClickListener = listener;
 	}
 
-	public void setRecycleData(List<Object> dataList)
+	public void setRecycleData(List<VUserCareAllBean.UserCareAllOneBean> dataList)
 	{
 		recyclerAdapter.setDataList(dataList);
 	}
 
-	private class RecycleAdapter extends HeadFootRecyclerAdapter
+	private class RecycleAdapter extends HeadFootRecyclerAdapter<VUserCareAllBean.UserCareAllOneBean>
 	{
 		@Override
 		public int getItemRes()

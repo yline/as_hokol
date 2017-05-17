@@ -3,6 +3,7 @@ package com.hokol.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +11,22 @@ import android.view.ViewGroup;
 import com.hokol.R;
 import com.hokol.activity.StarDynamicActivity;
 import com.hokol.activity.StarInfoActivity;
+import com.hokol.application.AppStateManager;
+import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VUserCareAllBean;
+import com.hokol.medium.http.bean.WUserCareAllBean;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainCareHelper;
 import com.yline.base.BaseFragment;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.yline.http.XHttpAdapter;
 
 public class MainCareFragment extends BaseFragment
 {
 	private MainCareHelper mainCareHelper;
+
+	private int refreshedNumber;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -99,11 +105,35 @@ public class MainCareFragment extends BaseFragment
 
 	private void initData()
 	{
-		List<Object> list = new ArrayList<>();
-		for (int i = 0; i < 10; i++)
+		String userId = AppStateManager.getInstance().getUserLoginId(getContext());
+		if (TextUtils.isEmpty(userId))
 		{
-			list.add("" + i);
+			IApplication.toast("用户还未登陆，等待佳曦UI");
 		}
-		mainCareHelper.setRecycleData(list);
+		else
+		{
+			WUserCareAllBean wUserCareAllBean = new WUserCareAllBean(userId, refreshedNumber, DeleteConstant.DEFAULT_RECYCLER_NUMBER);
+			XHttpUtil.doUserCareAll(wUserCareAllBean, new XHttpAdapter<VUserCareAllBean>()
+			{
+				@Override
+				public void onSuccess(VUserCareAllBean vUserCareAllBean)
+				{
+					mainCareHelper.setRecycleData(vUserCareAllBean.getList());
+					refreshedNumber += vUserCareAllBean.getList().size();
+				}
+
+				@Override
+				public void onFailure(Exception ex)
+				{
+					super.onFailure(ex);
+				}
+
+				@Override
+				public void onFailureCode(int code)
+				{
+					super.onFailureCode(code);
+				}
+			});
+		}
 	}
 }

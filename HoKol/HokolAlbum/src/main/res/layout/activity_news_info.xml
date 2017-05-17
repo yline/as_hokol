@@ -31,7 +31,14 @@
             android:textSize="@dimen/default_text_size_large"/>
     </RelativeLayout>
 
-    <ScrollView
+    <WebView
+        android:id="@+id/web_view_news"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray">
+    </WebView>
+
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/darker_gray">
@@ -41,5 +48,5 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
         </RelativeLayout>
-    </ScrollView>
+    </ScrollView>-->
 </LinearLayout>

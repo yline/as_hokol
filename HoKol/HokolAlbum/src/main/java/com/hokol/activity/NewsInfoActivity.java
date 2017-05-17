@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 import com.hokol.R;
-import com.hokol.medium.http.bean.WNewsSingleBean;
 import com.yline.base.BaseAppCompatActivity;
+import com.yline.log.LogFileUtil;
 
 /**
  * 新闻详情界面
@@ -17,6 +19,8 @@ import com.yline.base.BaseAppCompatActivity;
  */
 public class NewsInfoActivity extends BaseAppCompatActivity
 {
+	private static final String SingleInfoBeanUrl = "NewsInfoBeanUrl";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -32,28 +36,26 @@ public class NewsInfoActivity extends BaseAppCompatActivity
 			}
 		});
 
-		initData();
+		String newsUrl = getIntent().getStringExtra(SingleInfoBeanUrl);
+		LogFileUtil.v("newsUrl = " + newsUrl);
+
+		WebView webView = (WebView) findViewById(R.id.web_view_news);
+
+		WebSettings webSettings = webView.getSettings();
+		webSettings.setDomStorageEnabled(true);
+		webSettings.setLoadWithOverviewMode(true);
+		webSettings.setUseWideViewPort(true);
+		webSettings.setJavaScriptEnabled(true);
+		webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+		webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+
+		webView.loadUrl(newsUrl);
 	}
 
-	private void initData()
-	{
-		final WNewsSingleBean bean = getIntentData();
-	}
-
-	public static void actionStart(Context context, WNewsSingleBean bean)
+	public static void actionStart(Context context, String url)
 	{
 		Intent intent = new Intent(context, NewsInfoActivity.class);
-		Bundle bundle = new Bundle();
-		bundle.putParcelable("WNewsSingleBean", bean);
-		intent.putExtras(bundle);
+		intent.putExtra(SingleInfoBeanUrl, url);
 		context.startActivity(intent);
-	}
-
-	private WNewsSingleBean getIntentData()
-	{
-		Intent intent = this.getIntent();
-		Bundle bundle = intent.getExtras();
-		WNewsSingleBean bean = bundle.getParcelable("WNewsSingleBean");
-		return bean;
 	}
 }
