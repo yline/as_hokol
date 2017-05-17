@@ -17,6 +17,7 @@ import com.hokol.application.IApplication;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
+import com.hokol.viewhelper.MainHomeHelper;
 import com.yline.base.BaseFragment;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
@@ -26,7 +27,7 @@ import com.yline.view.common.RecyclerViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainHomeAuthorFragment extends BaseFragment
+public class MainHomeAuthorFragment extends BaseFragment implements MainHomeFragment.OnHomeFilterCallback
 {
 	private static final String ARG_PARAM1 = "param1";
 
@@ -140,6 +141,18 @@ public class MainHomeAuthorFragment extends BaseFragment
 				}, 2000);
 			}
 		});
+	}
+
+	@Override
+	public void onAreaUpdate(String first, List<String> second)
+	{
+
+	}
+
+	@Override
+	public void onFilterUpdate(MainHomeHelper.FilterSex typeSex, MainHomeHelper.FilterRecommend typeRecommend)
+	{
+
 	}
 
 	private class MainHomeAuthorAdapter extends HeadFootRecyclerAdapter

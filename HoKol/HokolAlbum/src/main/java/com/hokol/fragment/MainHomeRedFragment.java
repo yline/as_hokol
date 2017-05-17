@@ -18,7 +18,9 @@ import com.hokol.medium.widget.ADWidget;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
+import com.hokol.viewhelper.MainHomeHelper;
 import com.yline.base.BaseFragment;
+import com.yline.log.LogFileUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
@@ -30,12 +32,12 @@ import java.util.List;
  * @author yline 2017/2/13 --> 17:36
  * @version 1.0.0
  */
-public class MainHomeRedFragment extends BaseFragment
+public class MainHomeRedFragment extends BaseFragment implements MainHomeFragment.OnHomeFilterCallback
 {
 	private MainNewsHotAdapter recycleAdapter;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
@@ -164,6 +166,18 @@ public class MainHomeRedFragment extends BaseFragment
 		divideView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 6)));
 		divideView.setBackgroundResource(R.color.hokolGrayLight);
 		wrapperAdapter.addHeadView(divideView);
+	}
+
+	@Override
+	public void onAreaUpdate(String first, List<String> second)
+	{
+		LogFileUtil.v("onAreaUpdate first = " + first + ",second = " + second.toString());
+	}
+
+	@Override
+	public void onFilterUpdate(MainHomeHelper.FilterSex typeSex, MainHomeHelper.FilterRecommend typeRecommend)
+	{
+		LogFileUtil.v("onAreaUpdate typeSex = " + typeSex + ",typeRecommend = " + typeRecommend);
 	}
 
 	private class MainNewsHotAdapter extends HeadFootRecyclerAdapter

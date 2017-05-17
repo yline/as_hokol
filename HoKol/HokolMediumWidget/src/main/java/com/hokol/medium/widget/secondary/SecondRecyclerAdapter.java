@@ -76,8 +76,7 @@ public class SecondRecyclerAdapter extends CommonRecyclerAdapter<String>
 	}
 
 	@Override
-	public void onBindViewHolder(final RecyclerViewHolder viewHolder,
-	                             final int position)
+	public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
 	{
 		viewHolder.setText(R.id.tv_item_second, sList.get(position));
 		viewHolder.getItemView().setOnClickListener(new View.OnClickListener()

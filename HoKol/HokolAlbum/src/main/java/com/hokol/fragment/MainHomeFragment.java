@@ -11,13 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
-import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VAreaAllBean;
 import com.hokol.medium.widget.secondary.SecondaryWidget;
+import com.hokol.util.ArraysUtil;
 import com.hokol.viewhelper.MainHomeHelper;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
+import com.yline.log.LogFileUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,9 @@ public class MainHomeFragment extends BaseFragment
 	private MainHomeHelper mainHomeHelper;
 
 	private List<BaseFragment> fragmentList;
+
+	private TabLayout tabLayout;
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -50,6 +54,22 @@ public class MainHomeFragment extends BaseFragment
 			{
 				mainHomeHelper.updateProvinceTitle(title);
 				mainHomeHelper.closeMenu();
+
+				if (isAreaChanged(first, second))
+				{
+					// int currentPosition = tabLayout.getSelectedTabPosition();
+					for (int i = 0; i < fragmentList.size(); i++)
+					{
+						if (fragmentList.get(i) instanceof OnHomeFilterCallback)
+						{
+							((OnHomeFilterCallback) fragmentList.get(i)).onAreaUpdate(first, second);
+						}
+					}
+				}
+				else
+				{
+					LogFileUtil.v("isAreaChanged - false");
+				}
 			}
 		});
 		mainHomeHelper.initFilterView(new MainHomeHelper.OnMenuFilterCallback()
@@ -57,8 +77,23 @@ public class MainHomeFragment extends BaseFragment
 			@Override
 			public void onEnumFilterCommit(MainHomeHelper.FilterSex typeSex, MainHomeHelper.FilterRecommend typeRecommend)
 			{
-				IApplication.toast("typeSex = " + typeSex + ",typeRecommend = " + typeRecommend);
 				mainHomeHelper.closeMenu();
+
+				if (isFilterChanged(typeSex, typeRecommend))
+				{
+					// int currentPosition = tabLayout.getSelectedTabPosition();
+					for (int i = 0; i < fragmentList.size(); i++)
+					{
+						if (fragmentList.get(i) instanceof OnHomeFilterCallback)
+						{
+							((OnHomeFilterCallback) fragmentList.get(i)).onFilterUpdate(typeSex, typeRecommend);
+						}
+					}
+				}
+				else
+				{
+					LogFileUtil.v("isFilterChanged - false");
+				}
 			}
 		});
 		TabLayout menuTabLayout = (TabLayout) view.findViewById(R.id.tab_main_home_menu);
@@ -78,7 +113,7 @@ public class MainHomeFragment extends BaseFragment
 		fragmentList.add(new MainHomeSportFragment());
 
 		// 主页 tab栏目
-		TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout_main_home);
+		tabLayout = (TabLayout) view.findViewById(R.id.tab_layout_main_home);
 		ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager_main_home);
 		tabLayout.setupWithViewPager(viewPager);
 		tabLayout.setTabTextColors(getResources().getColor(android.R.color.black), getResources().getColor(android.R.color.holo_red_light));
@@ -105,26 +140,6 @@ public class MainHomeFragment extends BaseFragment
 				return RES_MAIN_HOME_TAB[position];
 			}
 		});
-		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
-		{
-			@Override
-			public void onTabSelected(TabLayout.Tab tab)
-			{
-
-			}
-
-			@Override
-			public void onTabUnselected(TabLayout.Tab tab)
-			{
-
-			}
-
-			@Override
-			public void onTabReselected(TabLayout.Tab tab)
-			{
-
-			}
-		});
 	}
 
 	private void initData()
@@ -138,5 +153,63 @@ public class MainHomeFragment extends BaseFragment
 				mainHomeHelper.setProvinceData(provinceMap);
 			}
 		});
+	}
+
+	private String oldAreaFirst;
+
+	private List<String> oldSecondList;
+
+	private boolean isAreaChanged(String first, List<String> second)
+	{
+		if (ArraysUtil.compare(first, oldAreaFirst))
+		{
+			if (ArraysUtil.compare(oldSecondList, second))
+			{
+				return false;
+			}
+		}
+		
+		oldAreaFirst = first;
+		oldSecondList = second;
+		return true;
+	}
+
+	private MainHomeHelper.FilterSex oldTypeSex;
+
+	private MainHomeHelper.FilterRecommend oldTypeRecommend;
+
+	private boolean isFilterChanged(MainHomeHelper.FilterSex typeSex, MainHomeHelper.FilterRecommend typeRecommend)
+	{
+		if (typeSex == oldTypeSex)
+		{
+			if (typeRecommend == oldTypeRecommend)
+			{
+				return false;
+			}
+		}
+
+		oldTypeSex = typeSex;
+		oldTypeRecommend = typeRecommend;
+		return true;
+	}
+
+	// 数据选择类目，更新接口
+	public interface OnHomeFilterCallback
+	{
+		/**
+		 * 地区选择，更新
+		 *
+		 * @param first
+		 * @param second
+		 */
+		void onAreaUpdate(String first, List<String> second);
+
+		/**
+		 * 筛选选择，更新
+		 *
+		 * @param typeSex
+		 * @param typeRecommend
+		 */
+		void onFilterUpdate(MainHomeHelper.FilterSex typeSex, MainHomeHelper.FilterRecommend typeRecommend);
 	}
 }

@@ -120,6 +120,7 @@ public class FirstRecyclerAdapter extends CommonRecyclerAdapter<String>
 						else
 						{
 							secondAdapter.clear();
+							secondAdapter.initSelect(null);
 						}
 					}
 
