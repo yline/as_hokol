@@ -1,5 +1,7 @@
 package com.hokol.medium.http.bean;
 
+import com.hokol.medium.http.HttpEnum;
+
 public class WHomeMainBean
 {
 	/**
@@ -38,9 +40,9 @@ public class WHomeMainBean
 	 */
 	private int length;
 
-	public WHomeMainBean(int user_tag, int num1, int length)
+	public WHomeMainBean(HttpEnum.UserTag userTag, int num1, int length)
 	{
-		this.user_tag = user_tag;
+		this.user_tag = userTag.getIndex();
 		this.user_sex = 0;
 		this.user_province = "0";
 		this.user_city = "0";

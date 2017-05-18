@@ -139,6 +139,12 @@ public class MainHomeFragment extends BaseFragment
 			{
 				return RES_MAIN_HOME_TAB[position];
 			}
+
+			@Override
+			public Object instantiateItem(ViewGroup container, int position)
+			{
+				return super.instantiateItem(container, position);
+			}
 		});
 	}
 
@@ -168,7 +174,7 @@ public class MainHomeFragment extends BaseFragment
 				return false;
 			}
 		}
-		
+
 		oldAreaFirst = first;
 		oldSecondList = second;
 		return true;

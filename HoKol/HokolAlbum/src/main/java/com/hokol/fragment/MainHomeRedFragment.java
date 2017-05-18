@@ -14,18 +14,22 @@ import com.hokol.R;
 import com.hokol.activity.StarDynamicActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
+import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VHomeMainBean;
+import com.hokol.medium.http.bean.WHomeMainBean;
 import com.hokol.medium.widget.ADWidget;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainHomeHelper;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,7 +41,9 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 	private MainNewsHotAdapter recycleAdapter;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
-	
+
+	private int refreshedNumber;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
@@ -72,25 +78,18 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 		});
 
 		recycleAdapter = new MainNewsHotAdapter();
-		recyclerView.setAdapter(recycleAdapter);
-		recycleAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<String>()
+		recycleAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VHomeMainBean.VHomeMainOneBean>()
 		{
 			@Override
-			public void onClick(RecyclerView.ViewHolder viewHolder, String s, int position)
+			public void onClick(RecyclerView.ViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean vHomeMainOneBean, int position)
 			{
 				StarDynamicActivity.actionStart(getContext());
 			}
 		});
+		recyclerView.setAdapter(recycleAdapter);
 
 		// RecycleView
 		initRecycleViewHead(recycleAdapter);
-
-		List<String> dataList = new ArrayList<>();
-		for (int i = 0; i < 35; i++)
-		{
-			dataList.add(DeleteConstant.getUrlSquare());
-		}
-		recycleAdapter.setDataList(dataList);
 
 		// 下拉刷新
 		superRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_main_home_red);
@@ -126,6 +125,27 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 						superRefreshLayout.setLoadMore(false);
 					}
 				}, 2000);
+			}
+		});
+
+		initData();
+
+		LogFileUtil.v("recycler = " + recyclerView.hashCode() + ", recycleAdapter = " + recycleAdapter.hashCode());
+	}
+
+	private void initData()
+	{
+		refreshedNumber = 0;
+		WHomeMainBean wHomeMainBean = new WHomeMainBean(HttpEnum.UserTag.Red, refreshedNumber, DeleteConstant.DEFAULT_RECYCLER_NUMBER);
+		XHttpUtil.doHomeMain(wHomeMainBean, new XHttpAdapter<VHomeMainBean>()
+		{
+			@Override
+			public void onSuccess(VHomeMainBean vHomeMainBean)
+			{
+				recycleAdapter.setDataList(vHomeMainBean.getList());
+
+				refreshedNumber = recycleAdapter.size();
+				LogFileUtil.v("vHomeMainBean size = " + refreshedNumber);
 			}
 		});
 	}
@@ -180,7 +200,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 		LogFileUtil.v("onAreaUpdate typeSex = " + typeSex + ",typeRecommend = " + typeRecommend);
 	}
 
-	private class MainNewsHotAdapter extends HeadFootRecyclerAdapter
+	private class MainNewsHotAdapter extends HeadFootRecyclerAdapter<VHomeMainBean.VHomeMainOneBean>
 	{
 		private OnRecyclerItemClickListener listener;
 
@@ -211,7 +231,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 			});
 
 			ImageView ivPic = viewHolder.get(R.id.iv_main_news_hot_pic);
-			Glide.with(getContext()).load(sList.get(position)).centerCrop()
+			Glide.with(getContext()).load(sList.get(position).getDt_img()).centerCrop()
 					.placeholder(R.drawable.global_load_failed)
 					.error(R.drawable.global_load_failed)
 					.into(ivPic);

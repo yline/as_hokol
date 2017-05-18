@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VHomeMainBean;
 import com.hokol.medium.http.bean.WHomeMainBean;
@@ -28,11 +29,13 @@ public class TestHomeActivity extends BaseTestActivity
 			@Override
 			public void onClick(View v)
 			{
-				final int user_tag = parseInt(editTextOne, 1);
+				final int index = parseInt(editTextOne, 1);
+				HttpEnum.UserTag userTag = HttpEnum.getUserTag(index);
+
 				final int num1 = parseInt(editTextTwo, 0);
 				final int length = parseInt(editTextThree, 1);
 
-				XHttpUtil.doHomeMain(new WHomeMainBean(user_tag, num1, length), new XHttpAdapter<VHomeMainBean>()
+				XHttpUtil.doHomeMain(new WHomeMainBean(userTag, num1, length), new XHttpAdapter<VHomeMainBean>()
 				{
 					@Override
 					public void onSuccess(VHomeMainBean vHomeMainBean)

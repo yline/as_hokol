@@ -152,6 +152,10 @@ public class MainNewsFragment extends BaseFragment
 			@Override
 			public void onSuccess(VNewsSingleBean vNewsSingleBean)
 			{
+				if (null == vNewsSingleBean)
+				{
+					return;
+				}
 				mRecommendBean = vNewsSingleBean;
 				mainNewsHelper.updateRecommendData(vNewsSingleBean);
 			}

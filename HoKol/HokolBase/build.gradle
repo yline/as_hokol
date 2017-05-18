@@ -23,7 +23,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     // base
     compile 'com.yline.lib:LibSDK:1.4.0'
-    compile 'com.yline.lib:LibHttp:1.4.1'
+    compile 'com.yline.lib:LibHttp:1.4.3'
     compile 'com.yline.lib:LibView:1.2.0'
     // google
     compile 'com.android.support:appcompat-v7:25.1.1'
