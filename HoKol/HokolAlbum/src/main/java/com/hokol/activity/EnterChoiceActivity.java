@@ -1,5 +1,7 @@
 package com.hokol.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -20,10 +22,10 @@ public class EnterChoiceActivity extends BaseAppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_enter_choice);
-
+		
 		initView();
 	}
-
+	
 	private void initView()
 	{
 		findViewById(R.id.btn_enter_choice_register).setOnClickListener(new View.OnClickListener()
@@ -34,7 +36,7 @@ public class EnterChoiceActivity extends BaseAppCompatActivity
 				EnterRegisterPhoneActivity.actionStart(EnterChoiceActivity.this);
 			}
 		});
-
+		
 		findViewById(R.id.btn_enter_choice_login).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -43,7 +45,7 @@ public class EnterChoiceActivity extends BaseAppCompatActivity
 				EnterLoginPhonePwdActivity.actionStart(EnterChoiceActivity.this);
 			}
 		});
-
+		
 		findViewById(R.id.circle_enter_choice_wechat).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -53,5 +55,9 @@ public class EnterChoiceActivity extends BaseAppCompatActivity
 			}
 		});
 	}
-
+	
+	public static void actionStart(Context context)
+	{
+		context.startActivity(new Intent(context, EnterChoiceActivity.class));
+	}
 }

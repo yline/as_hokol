@@ -4,15 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
-import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.fragment.StarDynamicGiftFragment;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VDynamicCareSingleBean;
+import com.hokol.medium.http.bean.WDynamicCareSingleBean;
 import com.yline.base.BaseAppCompatActivity;
+import com.yline.http.XHttpAdapter;
+import com.yline.log.LogFileUtil;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.common.ViewHolder;
@@ -31,6 +36,8 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 
 	private StarDynamicGiftFragment starDynamicGiftFragment;
 
+	private ImageView contentImageView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -38,16 +45,13 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 		setContentView(R.layout.activity_star_dynamic);
 
 		starDynamicViewHolder = new ViewHolder(this);
-		starDynamicGiftFragment = new StarDynamicGiftFragment();
 
-		ImageView contentImageView = starDynamicViewHolder.get(R.id.iv_star_dynamic_content);
-		int width = UIScreenUtil.getScreenWidth(this);
-		UIResizeUtil.build().setHeight(width).commit(contentImageView);
-		Glide.with(this).load(DeleteConstant.getUrlRec()).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).into(contentImageView);
+		initView();
+		initData();
+	}
 
-		ImageView avatarImageView = starDynamicViewHolder.get(R.id.circle_star_dynamic);
-		Glide.with(this).load(DeleteConstant.url_default_avatar).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).into(avatarImageView);
-
+	private void initView()
+	{
 		starDynamicViewHolder.get(R.id.iv_star_dynamic_care).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -82,6 +86,40 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 				StarInfoActivity.actionStart(StarDynamicActivity.this);
 			}
 		});
+
+		// 送礼物 Fragment
+		starDynamicGiftFragment = new StarDynamicGiftFragment();
+
+		// 背景大小
+		contentImageView = starDynamicViewHolder.get(R.id.iv_star_dynamic_content);
+		int width = UIScreenUtil.getScreenWidth(this);
+		UIResizeUtil.build().setHeight(width).commit(contentImageView);
+	}
+
+	private void initData()
+	{
+		String dynamicId = getIntent().getStringExtra(KeyDynamicId);
+		if (!TextUtils.isEmpty(dynamicId))
+		{
+			WDynamicCareSingleBean wDynamicSingleBean = new WDynamicCareSingleBean(dynamicId);
+			XHttpUtil.doDynamicSingle(wDynamicSingleBean, new XHttpAdapter<VDynamicCareSingleBean>()
+			{
+				@Override
+				public void onSuccess(VDynamicCareSingleBean vDynamicCareSingleBean)
+				{
+					String contentUrl = vDynamicCareSingleBean.getDt_img();
+					Glide.with(StarDynamicActivity.this).load(contentUrl).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).into(contentImageView);
+
+					String avatarUrl = vDynamicCareSingleBean.getUser_logo();
+					ImageView avatarImageView = starDynamicViewHolder.get(R.id.circle_star_dynamic);
+					Glide.with(StarDynamicActivity.this).load(avatarUrl).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).into(avatarImageView);
+				}
+			});
+		}
+		else
+		{
+			LogFileUtil.e("Procedure Error", "Dynamic is Empty");
+		}
 	}
 
 	public static void actionStart(Context context, String dynamicId)

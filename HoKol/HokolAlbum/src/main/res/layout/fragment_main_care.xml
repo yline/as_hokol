@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/rl_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_title_normal"
         android:background="@color/hokolRed">
@@ -24,7 +25,8 @@
     <com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout
         android:id="@+id/super_swipe_main_care"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_title">
 
         <!--RecycleView-->
         <android.support.v7.widget.RecyclerView
@@ -33,7 +35,52 @@
             android:layout_height="match_parent">
         </android.support.v7.widget.RecyclerView>
     </com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout>
-</LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_loading_cover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_title"
+        android:background="@android:color/white"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/iv_loading_cover"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/default_title_normal"
+            android:layout_marginRight="@dimen/default_title_normal"
+            android:scaleType="centerInside"
+            android:src="@drawable/global_load_failed_normal"/>
+
+        <TextView
+            android:id="@+id/tv_loading_cover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_loading_cover"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/default_space_normal"
+            android:text="您还没有关注的对象哦~"
+            android:textColor="@color/hokolGray"
+            android:textSize="@dimen/default_text_size_large"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/btn_loading_cover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_loading_cover"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/default_space_large"
+            android:background="@drawable/enter_register_phone_finish_able"
+            android:paddingLeft="@dimen/default_title_normal"
+            android:paddingRight="@dimen/default_title_normal"
+            android:text="去主页看看"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/default_text_size_medium"/>
+    </RelativeLayout>
+</RelativeLayout>
 
 
 

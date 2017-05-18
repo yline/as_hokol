@@ -67,6 +67,16 @@ public class MainActivity extends BaseAppCompatActivity
 			this.position = position;
 			this.icon = icon;
 		}
+
+		public int getPosition()
+		{
+			return position;
+		}
+
+		public int getIcon()
+		{
+			return icon;
+		}
 	}
 
 	private ImageView imageFlashView;
@@ -94,7 +104,7 @@ public class MainActivity extends BaseAppCompatActivity
 	 */
 	private void initShowData()
 	{
-		tabLayout.getTabAt(TAB.Task.position).select();
+		doSelected(TAB.Task.position);
 	}
 
 	private void initView()
@@ -177,6 +187,11 @@ public class MainActivity extends BaseAppCompatActivity
 				.add(R.id.fl_main_content, mainHomeFragment).hide(mainHomeFragment)
 				.add(R.id.fl_main_content, mainTaskFragment).hide(mainTaskFragment)
 				.add(R.id.fl_main_content, mainMineFragment).hide(mainMineFragment).commit();
+	}
+
+	public void doSelected(int index)
+	{
+		tabLayout.getTabAt(index).select();
 	}
 
 	@Override

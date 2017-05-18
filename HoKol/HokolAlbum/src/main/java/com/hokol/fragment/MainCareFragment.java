@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
+import com.hokol.activity.EnterChoiceActivity;
+import com.hokol.activity.MainActivity;
 import com.hokol.activity.StarDynamicActivity;
 import com.hokol.activity.StarInfoActivity;
 import com.hokol.application.AppStateManager;
@@ -22,12 +24,19 @@ import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainCareHelper;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
+import com.yline.view.common.ViewHolder;
+
+import static com.hokol.R.id.super_swipe_main_care;
 
 public class MainCareFragment extends BaseFragment
 {
 	private MainCareHelper mainCareHelper;
 
 	private int refreshedNumber;
+
+	private ViewHolder viewHolder;
+
+	private SuperSwipeRefreshLayout swipeRefreshLayout;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -40,6 +49,7 @@ public class MainCareFragment extends BaseFragment
 	{
 		super.onViewCreated(view, savedInstanceState);
 
+		viewHolder = new ViewHolder(view);
 		mainCareHelper = new MainCareHelper(getContext());
 
 		initView(view);
@@ -67,7 +77,7 @@ public class MainCareFragment extends BaseFragment
 		});
 
 		// 刷新
-		final SuperSwipeRefreshLayout swipeRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_main_care);
+		swipeRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(super_swipe_main_care);
 		swipeRefreshLayout.setOnRefreshListener(new SuperSwipeRefreshLayout.OnSwipeListener()
 		{
 			@Override
@@ -102,6 +112,27 @@ public class MainCareFragment extends BaseFragment
 				}, 2000);
 			}
 		});
+
+		// 没有数据 或 为登录
+		viewHolder.setOnClickListener(R.id.btn_loading_cover, new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				String userId = AppStateManager.getInstance().getUserLoginId(getContext());
+				if (TextUtils.isEmpty(userId))
+				{
+					EnterChoiceActivity.actionStart(getContext());
+				}
+				else
+				{
+					if (getActivity() instanceof MainActivity)
+					{
+						((MainActivity) getActivity()).doSelected(MainActivity.TAB.Home.getPosition());
+					}
+				}
+			}
+		});
 	}
 
 	private void initData()
@@ -109,18 +140,40 @@ public class MainCareFragment extends BaseFragment
 		String userId = AppStateManager.getInstance().getUserLoginId(getContext());
 		if (TextUtils.isEmpty(userId))
 		{
-			IApplication.toast("用户还未登陆，等待佳曦UI");
+			viewHolder.get(R.id.super_swipe_main_care).setVisibility(View.INVISIBLE);
+
+			viewHolder.get(R.id.rl_loading_cover).setVisibility(View.VISIBLE);
+			viewHolder.setText(R.id.tv_loading_cover, "登陆后才能看到你喜欢的哦~");
+			viewHolder.setText(R.id.btn_loading_cover, "立即登录");
 		}
 		else
 		{
+			viewHolder.get(R.id.super_swipe_main_care).setVisibility(View.VISIBLE);
+			viewHolder.get(R.id.rl_loading_cover).setVisibility(View.INVISIBLE);
+
+			refreshedNumber = 0;
 			WDynamicCareAllBean wDynamicCareAllBean = new WDynamicCareAllBean(userId, refreshedNumber, DeleteConstant.defaultNumberSmall);
 			XHttpUtil.doDynamicCareAll(wDynamicCareAllBean, new XHttpAdapter<VDynamicCareAllBean>()
 			{
 				@Override
 				public void onSuccess(VDynamicCareAllBean vDynamicCareAllBean)
 				{
-					mainCareHelper.setRecycleData(vDynamicCareAllBean.getList());
-					refreshedNumber += vDynamicCareAllBean.getList().size();
+					if (vDynamicCareAllBean.getList().size() == 0)
+					{
+						viewHolder.get(R.id.super_swipe_main_care).setVisibility(View.INVISIBLE);
+
+						viewHolder.get(R.id.rl_loading_cover).setVisibility(View.VISIBLE);
+						viewHolder.setText(R.id.tv_loading_cover, "您还没有关注的对象哦~");
+						viewHolder.setText(R.id.btn_loading_cover, "去主页看看");
+					}
+					else
+					{
+						viewHolder.get(R.id.super_swipe_main_care).setVisibility(View.VISIBLE);
+						viewHolder.get(R.id.rl_loading_cover).setVisibility(View.INVISIBLE);
+
+						mainCareHelper.setRecycleData(vDynamicCareAllBean.getList());
+						refreshedNumber += vDynamicCareAllBean.getList().size();
+					}
 				}
 
 				@Override
