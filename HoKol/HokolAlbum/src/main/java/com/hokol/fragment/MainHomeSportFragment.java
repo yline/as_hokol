@@ -87,7 +87,7 @@ public class MainHomeSportFragment extends BaseFragment implements MainHomeFragm
 			@Override
 			public void onClick(RecyclerView.ViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
 			{
-				StarDynamicActivity.actionStart(getContext());
+				StarDynamicActivity.actionStart(getContext(), bean.getDt_id());
 			}
 		});
 

@@ -85,7 +85,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 			@Override
 			public void onClick(RecyclerView.ViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean vHomeMainOneBean, int position)
 			{
-				StarDynamicActivity.actionStart(getContext());
+				StarDynamicActivity.actionStart(getContext(), vHomeMainOneBean.getDt_id());
 			}
 		});
 		recyclerView.setAdapter(recycleAdapter);

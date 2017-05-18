@@ -25,6 +25,8 @@ import com.yline.view.common.ViewHolder;
  */
 public class StarDynamicActivity extends BaseAppCompatActivity
 {
+	private static final String KeyDynamicId = "StarKeyDynamicId";
+
 	private ViewHolder starDynamicViewHolder;
 
 	private StarDynamicGiftFragment starDynamicGiftFragment;
@@ -82,8 +84,10 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 		});
 	}
 
-	public static void actionStart(Context context)
+	public static void actionStart(Context context, String dynamicId)
 	{
-		context.startActivity(new Intent(context, StarDynamicActivity.class));
+		Intent intent = new Intent(context, StarDynamicActivity.class);
+		intent.putExtra(KeyDynamicId, dynamicId);
+		context.startActivity(intent);
 	}
 }

@@ -92,7 +92,7 @@ public class MainHomePerformerFragment extends BaseFragment implements MainHomeF
 			@Override
 			public void onClick(RecyclerView.ViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
 			{
-				StarDynamicActivity.actionStart(getContext());
+				StarDynamicActivity.actionStart(getContext(), bean.getDt_id());
 			}
 		});
 

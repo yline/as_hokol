@@ -15,8 +15,9 @@ import com.hokol.application.AppStateManager;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
-import com.hokol.medium.http.bean.VUserCareAllBean;
-import com.hokol.medium.http.bean.WUserCareAllBean;
+import com.hokol.medium.http.bean.VDynamicCareAllBean;
+import com.hokol.medium.http.bean.VDynamicCareBean;
+import com.hokol.medium.http.bean.WDynamicCareAllBean;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainCareHelper;
 import com.yline.base.BaseFragment;
@@ -53,15 +54,15 @@ public class MainCareFragment extends BaseFragment
 		mainCareHelper.setOnRecycleItemClickListener(new MainCareHelper.OnCareRecycleClickListener()
 		{
 			@Override
-			public void onAvatarClick()
+			public void onAvatarClick(VDynamicCareBean bean)
 			{
 				StarInfoActivity.actionStart(getContext());
 			}
 
 			@Override
-			public void onPictureClick()
+			public void onPictureClick(VDynamicCareBean bean)
 			{
-				StarDynamicActivity.actionStart(getContext());
+				StarDynamicActivity.actionStart(getContext(), bean.getDt_id());
 			}
 		});
 
@@ -112,14 +113,14 @@ public class MainCareFragment extends BaseFragment
 		}
 		else
 		{
-			WUserCareAllBean wUserCareAllBean = new WUserCareAllBean(userId, refreshedNumber, DeleteConstant.defaultNumberSmall);
-			XHttpUtil.doUserCareAll(wUserCareAllBean, new XHttpAdapter<VUserCareAllBean>()
+			WDynamicCareAllBean wDynamicCareAllBean = new WDynamicCareAllBean(userId, refreshedNumber, DeleteConstant.defaultNumberSmall);
+			XHttpUtil.doDynamicCareAll(wDynamicCareAllBean, new XHttpAdapter<VDynamicCareAllBean>()
 			{
 				@Override
-				public void onSuccess(VUserCareAllBean vUserCareAllBean)
+				public void onSuccess(VDynamicCareAllBean vDynamicCareAllBean)
 				{
-					mainCareHelper.setRecycleData(vUserCareAllBean.getList());
-					refreshedNumber += vUserCareAllBean.getList().size();
+					mainCareHelper.setRecycleData(vDynamicCareAllBean.getList());
+					refreshedNumber += vDynamicCareAllBean.getList().size();
 				}
 
 				@Override

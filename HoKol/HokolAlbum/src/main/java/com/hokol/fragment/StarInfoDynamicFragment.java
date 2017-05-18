@@ -14,6 +14,7 @@ import com.hokol.R;
 import com.hokol.activity.StarDynamicActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
+import com.hokol.medium.http.bean.VHomeMainBean;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
@@ -74,12 +75,12 @@ public class StarInfoDynamicFragment extends BaseFragment
 
 		starInfoDynamicAdapter = new StarInfoDynamicAdapter();
 		recyclerView.setAdapter(starInfoDynamicAdapter);
-		starInfoDynamicAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener()
+		starInfoDynamicAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VHomeMainBean.VHomeMainOneBean>()
 		{
 			@Override
-			public void onClick(RecyclerView.ViewHolder viewHolder, Object o, int position)
+			public void onClick(RecyclerView.ViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
 			{
-				StarDynamicActivity.actionStart(getContext());
+				StarDynamicActivity.actionStart(getContext(), bean.getDt_id());
 			}
 		});
 		

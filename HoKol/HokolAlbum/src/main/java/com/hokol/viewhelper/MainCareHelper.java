@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.application.DeleteConstant;
-import com.hokol.medium.http.bean.VUserCareAllBean;
+import com.hokol.medium.http.bean.VDynamicCareBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
@@ -57,12 +57,12 @@ public class MainCareHelper
 		this.careRecycleClickListener = listener;
 	}
 
-	public void setRecycleData(List<VUserCareAllBean.UserCareAllOneBean> dataList)
+	public void setRecycleData(List<VDynamicCareBean> dataList)
 	{
 		recyclerAdapter.setDataList(dataList);
 	}
 
-	private class RecycleAdapter extends HeadFootRecyclerAdapter<VUserCareAllBean.UserCareAllOneBean>
+	private class RecycleAdapter extends HeadFootRecyclerAdapter<VDynamicCareBean>
 	{
 		@Override
 		public int getItemRes()
@@ -71,7 +71,7 @@ public class MainCareHelper
 		}
 
 		@Override
-		public void setViewContent(RecyclerViewHolder viewHolder, int position)
+		public void setViewContent(RecyclerViewHolder viewHolder, final int position)
 		{
 			ImageView avatarView = viewHolder.get(R.id.circle_item_main_care_avatar);
 			Glide.with(sContext).load(DeleteConstant.url_default_avatar).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).centerCrop().into(avatarView);
@@ -88,7 +88,7 @@ public class MainCareHelper
 					@Override
 					public void onClick(View v)
 					{
-						careRecycleClickListener.onAvatarClick();
+						careRecycleClickListener.onAvatarClick(sList.get(position));
 					}
 				});
 
@@ -97,7 +97,7 @@ public class MainCareHelper
 					@Override
 					public void onClick(View v)
 					{
-						careRecycleClickListener.onPictureClick();
+						careRecycleClickListener.onPictureClick(sList.get(position));
 					}
 				});
 			}
@@ -106,8 +106,8 @@ public class MainCareHelper
 
 	public interface OnCareRecycleClickListener
 	{
-		void onAvatarClick();
+		void onAvatarClick(VDynamicCareBean bean);
 
-		void onPictureClick();
+		void onPictureClick(VDynamicCareBean bean);
 	}
 }

@@ -20,6 +20,7 @@ import com.hokol.R;
 import com.hokol.activity.StarDynamicActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
+import com.hokol.medium.http.bean.VHomeMainBean;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
@@ -104,12 +105,12 @@ public class StarInfoPrivateFragment extends BaseFragment
 			data.add(DeleteConstant.getUrlSquare());
 		}
 		starInfoPrivateAdapter.addAll(data);
-		starInfoPrivateAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<String>()
+		starInfoPrivateAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VHomeMainBean.VHomeMainOneBean>()
 		{
 			@Override
-			public void onClick(RecyclerView.ViewHolder viewHolder, String s, int position)
+			public void onClick(RecyclerView.ViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
 			{
-				StarDynamicActivity.actionStart(getContext());
+				StarDynamicActivity.actionStart(getContext(), bean.getDt_id());
 			}
 		});
 

@@ -159,7 +159,7 @@ public class XHttpUtil
 	}
 
 	/**
-	 * 请求关注的人的多条动态
+	 * 请求用户详情信息
 	 */
 	public static void doDynamicUserDetail(WDynamicUserDetailBean wDynamicUserDetailBean, XHttpAdapter<VDynamicUserDetailBean> adapter)
 	{
