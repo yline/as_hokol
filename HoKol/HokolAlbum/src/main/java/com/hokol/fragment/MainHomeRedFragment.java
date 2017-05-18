@@ -55,6 +55,8 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 	{
 		super.onViewCreated(view, savedInstanceState);
 		initView(view);
+
+		initData();
 	}
 	
 	private void initView(View view)
@@ -127,16 +129,12 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 				}, 2000);
 			}
 		});
-
-		initData();
-
-		LogFileUtil.v("recycler = " + recyclerView.hashCode() + ", recycleAdapter = " + recycleAdapter.hashCode());
 	}
 
 	private void initData()
 	{
 		refreshedNumber = 0;
-		WHomeMainBean wHomeMainBean = new WHomeMainBean(HttpEnum.UserTag.Red, refreshedNumber, DeleteConstant.DEFAULT_RECYCLER_NUMBER);
+		WHomeMainBean wHomeMainBean = new WHomeMainBean(HttpEnum.UserTag.Red, refreshedNumber, DeleteConstant.defaultNumberSmall);
 		XHttpUtil.doHomeMain(wHomeMainBean, new XHttpAdapter<VHomeMainBean>()
 		{
 			@Override

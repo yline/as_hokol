@@ -113,7 +113,7 @@ public class MainNewsFragment extends BaseFragment
 			@Override
 			public void onAnimate()
 			{
-				WNewsMultiplexBean loadBean = new WNewsMultiplexBean(loadedNewsNumber, DeleteConstant.DEFAULT_RECYCLER_NUMBER);
+				WNewsMultiplexBean loadBean = new WNewsMultiplexBean(loadedNewsNumber, DeleteConstant.defaultNumberNormal);
 				XHttpUtil.doNewsMultiplex(loadBean, new XHttpAdapter<VNewsMultiplexBean>()
 				{
 					@Override
@@ -162,14 +162,17 @@ public class MainNewsFragment extends BaseFragment
 		});
 
 		// 多条新闻
-		XHttpUtil.doNewsMultiplex(new WNewsMultiplexBean(loadedNewsNumber, DeleteConstant.DEFAULT_RECYCLER_NUMBER), new XHttpAdapter<VNewsMultiplexBean>()
+		XHttpUtil.doNewsMultiplex(new WNewsMultiplexBean(loadedNewsNumber, DeleteConstant.defaultNumberNormal), new XHttpAdapter<VNewsMultiplexBean>()
 		{
 			@Override
 			public void onSuccess(VNewsMultiplexBean vNewsMultiplexBean)
 			{
 				List<VNewsSingleBean> result = vNewsMultiplexBean.getList();
-				loadedNewsNumber += result.size();
-				mainNewsHelper.setRecyclerData(result);
+				if (null != result)
+				{
+					loadedNewsNumber += result.size();
+					mainNewsHelper.setRecyclerData(result);
+				}
 			}
 		});
 	}

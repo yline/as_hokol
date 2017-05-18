@@ -14,28 +14,33 @@ import com.hokol.R;
 import com.hokol.activity.StarDynamicActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
+import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VHomeMainBean;
+import com.hokol.medium.http.bean.WHomeMainBean;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainHomeHelper;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
+import com.yline.log.LogFileUtil;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainHomeAuthorFragment extends BaseFragment implements MainHomeFragment.OnHomeFilterCallback
 {
-	private static final String ARG_PARAM1 = "param1";
-
 	private static final int COUNT_AUTHOR = 3;
 
 	private MainHomeAuthorAdapter mainHomeAuthorAdapter;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
+
+	private int refreshedNumber;
 
 	public static MainHomeAuthorFragment newInstance()
 	{
@@ -60,6 +65,8 @@ public class MainHomeAuthorFragment extends BaseFragment implements MainHomeFrag
 	{
 		super.onViewCreated(view, savedInstanceState);
 		initView(view);
+
+		initData();
 	}
 
 	private void initView(View view)
@@ -82,23 +89,16 @@ public class MainHomeAuthorFragment extends BaseFragment implements MainHomeFrag
 		});
 
 		mainHomeAuthorAdapter = new MainHomeAuthorAdapter();
-		recycleView.setAdapter(mainHomeAuthorAdapter);
-
-		List<String> dataList = new ArrayList<>();
-		for (int i = 0; i < 35; i++)
-		{
-			dataList.add(DeleteConstant.getUrlSquare());
-		}
-		mainHomeAuthorAdapter.setDataList(dataList);
-
-		mainHomeAuthorAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<String>()
+		mainHomeAuthorAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VHomeMainBean.VHomeMainOneBean>()
 		{
 			@Override
-			public void onClick(RecyclerView.ViewHolder viewHolder, String s, int position)
+			public void onClick(RecyclerView.ViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
 			{
 				StarDynamicActivity.actionStart(getContext());
 			}
 		});
+
+		recycleView.setAdapter(mainHomeAuthorAdapter);
 
 		// 分割线
 		View divideView = new View(getContext());
@@ -143,19 +143,36 @@ public class MainHomeAuthorFragment extends BaseFragment implements MainHomeFrag
 		});
 	}
 
+	private void initData()
+	{
+		refreshedNumber = 0;
+		WHomeMainBean wHomeMainBean = new WHomeMainBean(HttpEnum.UserTag.Author, refreshedNumber, DeleteConstant.defaultNumberSuper);
+		XHttpUtil.doHomeMain(wHomeMainBean, new XHttpAdapter<VHomeMainBean>()
+		{
+			@Override
+			public void onSuccess(VHomeMainBean vHomeMainBean)
+			{
+				mainHomeAuthorAdapter.setDataList(vHomeMainBean.getList());
+				refreshedNumber = mainHomeAuthorAdapter.size();
+
+				LogFileUtil.v("vHomeMainBean size = " + refreshedNumber);
+			}
+		});
+	}
+
 	@Override
 	public void onAreaUpdate(String first, List<String> second)
 	{
-
+		LogFileUtil.v("onAreaUpdate first = " + first + ",second = " + second.toString());
 	}
 
 	@Override
 	public void onFilterUpdate(MainHomeHelper.FilterSex typeSex, MainHomeHelper.FilterRecommend typeRecommend)
 	{
-
+		LogFileUtil.v("onAreaUpdate typeSex = " + typeSex + ",typeRecommend = " + typeRecommend);
 	}
 
-	private class MainHomeAuthorAdapter extends HeadFootRecyclerAdapter
+	private class MainHomeAuthorAdapter extends HeadFootRecyclerAdapter<VHomeMainBean.VHomeMainOneBean>
 	{
 		private OnRecyclerItemClickListener listener;
 
@@ -189,7 +206,7 @@ public class MainHomeAuthorFragment extends BaseFragment implements MainHomeFrag
 			int width = (UIScreenUtil.getScreenWidth(getContext())) / COUNT_AUTHOR;
 			UIResizeUtil.build().setWidth(width).setHeight(width).commit(imageView);
 
-			Glide.with(getContext()).load(sList.get(position)).centerCrop()
+			Glide.with(getContext()).load(sList.get(position).getDt_img()).centerCrop()
 					.placeholder(R.drawable.global_load_failed)
 					.error(R.drawable.global_load_failed)
 					.into(imageView);

@@ -4,7 +4,16 @@ import java.util.Random;
 
 public class DeleteConstant
 {
-	public static final int DEFAULT_RECYCLER_NUMBER = 10;
+	// 默认加载 数据
+	public static final int defaultNumberSmall = 6;
+
+	public static final int defaultNumberLittle = 4;
+
+	public static final int defaultNumberNormal = 10;
+
+	public static final int defaultNumberLarge = 16;
+
+	public static final int defaultNumberSuper = 24;
 
 	public static final String url_default_avatar = "http://imgsrc.baidu.com/forum/w=580/sign=d07e03955ddf8db1bc2e7c6c3923dddb/33c254f40ad162d97ecd601112dfa9ec8b13cde2.jpg";
 

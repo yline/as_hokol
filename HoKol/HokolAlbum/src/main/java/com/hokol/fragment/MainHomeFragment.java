@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
+import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VAreaAllBean;
 import com.hokol.medium.widget.secondary.SecondaryWidget;
@@ -31,7 +32,6 @@ public class MainHomeFragment extends BaseFragment
 	private List<BaseFragment> fragmentList;
 
 	private TabLayout tabLayout;
-
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -115,6 +115,7 @@ public class MainHomeFragment extends BaseFragment
 		// 主页 tab栏目
 		tabLayout = (TabLayout) view.findViewById(R.id.tab_layout_main_home);
 		ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager_main_home);
+		viewPager.setOffscreenPageLimit(HttpEnum.UserTag.values().length);
 		tabLayout.setupWithViewPager(viewPager);
 		tabLayout.setTabTextColors(getResources().getColor(android.R.color.black), getResources().getColor(android.R.color.holo_red_light));
 		tabLayout.setSelectedTabIndicatorColor(getResources().getColor(android.R.color.holo_red_light));

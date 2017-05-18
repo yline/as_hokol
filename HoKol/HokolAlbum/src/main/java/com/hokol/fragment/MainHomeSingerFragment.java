@@ -14,42 +14,35 @@ import com.hokol.R;
 import com.hokol.activity.StarDynamicActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
+import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VHomeMainBean;
+import com.hokol.medium.http.bean.WHomeMainBean;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainHomeHelper;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
+import com.yline.log.LogFileUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainHomeSingerFragment extends BaseFragment implements MainHomeFragment.OnHomeFilterCallback
 {
-	private static final String ARG_PARAM1 = "param1";
-
-	private String mParam1;
-
 	private MainHomeSingerFragment.MainHomeSingerAdapter mainHomeSingerAdapter;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
+
+	private int refreshedNumber;
 
 	public static MainHomeSingerFragment newInstance()
 	{
 		MainHomeSingerFragment fragment = new MainHomeSingerFragment();
 		return fragment;
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		if (getArguments() != null)
-		{
-			mParam1 = getArguments().getString(ARG_PARAM1);
-		}
 	}
 
 	@Override
@@ -63,6 +56,8 @@ public class MainHomeSingerFragment extends BaseFragment implements MainHomeFrag
 	{
 		super.onViewCreated(view, savedInstanceState);
 		initView(view);
+
+		initData();
 	}
 
 	private void initView(View view)
@@ -85,22 +80,15 @@ public class MainHomeSingerFragment extends BaseFragment implements MainHomeFrag
 		});
 
 		mainHomeSingerAdapter = new MainHomeSingerFragment.MainHomeSingerAdapter();
-		recyclerView.setAdapter(mainHomeSingerAdapter);
-
-		List<String> dataList = new ArrayList<>();
-		for (int i = 0; i < 35; i++)
-		{
-			dataList.add(DeleteConstant.getUrlSquare());
-		}
-		mainHomeSingerAdapter.setDataList(dataList);
-		mainHomeSingerAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener()
+		mainHomeSingerAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VHomeMainBean.VHomeMainOneBean>()
 		{
 			@Override
-			public void onClick(RecyclerView.ViewHolder viewHolder, Object o, int position)
+			public void onClick(RecyclerView.ViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
 			{
 				StarDynamicActivity.actionStart(getContext());
 			}
 		});
+		recyclerView.setAdapter(mainHomeSingerAdapter);
 
 		// 分割线
 		View divideView = new View(getContext());
@@ -145,6 +133,23 @@ public class MainHomeSingerFragment extends BaseFragment implements MainHomeFrag
 		});
 	}
 
+	private void initData()
+	{
+		refreshedNumber = 0;
+		WHomeMainBean wHomeMainBean = new WHomeMainBean(HttpEnum.UserTag.Singer, refreshedNumber, DeleteConstant.defaultNumberNormal);
+		XHttpUtil.doHomeMain(wHomeMainBean, new XHttpAdapter<VHomeMainBean>()
+		{
+			@Override
+			public void onSuccess(VHomeMainBean vHomeMainBean)
+			{
+				mainHomeSingerAdapter.setDataList(vHomeMainBean.getList());
+
+				refreshedNumber = mainHomeSingerAdapter.size();
+				LogFileUtil.v("vHomeMainBean size = " + refreshedNumber);
+			}
+		});
+	}
+
 	@Override
 	public void onAreaUpdate(String first, List<String> second)
 	{
@@ -157,7 +162,7 @@ public class MainHomeSingerFragment extends BaseFragment implements MainHomeFrag
 
 	}
 
-	private class MainHomeSingerAdapter extends HeadFootRecyclerAdapter
+	private class MainHomeSingerAdapter extends HeadFootRecyclerAdapter<VHomeMainBean.VHomeMainOneBean>
 	{
 		private OnRecyclerItemClickListener listener;
 
@@ -188,7 +193,7 @@ public class MainHomeSingerFragment extends BaseFragment implements MainHomeFrag
 			});
 
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_home_singer);
-			Glide.with(getContext()).load(sList.get(position)).centerCrop()
+			Glide.with(getContext()).load(sList.get(position).getDt_img()).centerCrop()
 					.placeholder(R.drawable.global_load_failed)
 					.error(R.drawable.global_load_failed)
 					.into(imageView);

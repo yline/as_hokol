@@ -14,45 +14,38 @@ import com.hokol.R;
 import com.hokol.activity.StarDynamicActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
+import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VHomeMainBean;
+import com.hokol.medium.http.bean.WHomeMainBean;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainHomeHelper;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
+import com.yline.log.LogFileUtil;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainHomeModelFragment extends BaseFragment implements MainHomeFragment.OnHomeFilterCallback
 {
-	private static final String ARG_PARAM1 = "param1";
-
-	private String mParam1;
-
 	private static final int COUNT_MODEL = 3;
 
 	private MainHomeModelFragment.MainHomeModelAdapter mainHomeModelAdapter;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
+	private int refreshedNumber;
+
 	public static MainHomeModelFragment newInstance()
 	{
 		MainHomeModelFragment fragment = new MainHomeModelFragment();
 		return fragment;
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		if (getArguments() != null)
-		{
-			mParam1 = getArguments().getString(ARG_PARAM1);
-		}
 	}
 
 	@Override
@@ -66,6 +59,8 @@ public class MainHomeModelFragment extends BaseFragment implements MainHomeFragm
 	{
 		super.onViewCreated(view, savedInstanceState);
 		initView(view);
+
+		initData();
 	}
 
 	private void initView(View view)
@@ -88,23 +83,16 @@ public class MainHomeModelFragment extends BaseFragment implements MainHomeFragm
 		});
 
 		mainHomeModelAdapter = new MainHomeModelFragment.MainHomeModelAdapter();
-
-		recyclerView.setAdapter(mainHomeModelAdapter);
-
-		List<String> dataList = new ArrayList<>();
-		for (int i = 0; i < 35; i++)
-		{
-			dataList.add(DeleteConstant.getUrlSquare());
-		}
-		mainHomeModelAdapter.setDataList(dataList);
-		mainHomeModelAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<String>()
+		mainHomeModelAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VHomeMainBean.VHomeMainOneBean>()
 		{
 			@Override
-			public void onClick(RecyclerView.ViewHolder viewHolder, String s, int position)
+			public void onClick(RecyclerView.ViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
 			{
 				StarDynamicActivity.actionStart(getContext());
 			}
 		});
+
+		recyclerView.setAdapter(mainHomeModelAdapter);
 
 		// 分割线
 		View divideView = new View(getContext());
@@ -149,6 +137,23 @@ public class MainHomeModelFragment extends BaseFragment implements MainHomeFragm
 		});
 	}
 
+	private void initData()
+	{
+		refreshedNumber = 0;
+		WHomeMainBean wHomeMainBean = new WHomeMainBean(HttpEnum.UserTag.Model, refreshedNumber, DeleteConstant.defaultNumberLarge);
+		XHttpUtil.doHomeMain(wHomeMainBean, new XHttpAdapter<VHomeMainBean>()
+		{
+			@Override
+			public void onSuccess(VHomeMainBean vHomeMainBean)
+			{
+				mainHomeModelAdapter.setDataList(vHomeMainBean.getList());
+
+				refreshedNumber = mainHomeModelAdapter.size();
+				LogFileUtil.v("vHomeMainBean size = " + refreshedNumber);
+			}
+		});
+	}
+
 	@Override
 	public void onAreaUpdate(String first, List<String> second)
 	{
@@ -161,7 +166,7 @@ public class MainHomeModelFragment extends BaseFragment implements MainHomeFragm
 
 	}
 
-	private class MainHomeModelAdapter extends HeadFootRecyclerAdapter
+	private class MainHomeModelAdapter extends HeadFootRecyclerAdapter<VHomeMainBean.VHomeMainOneBean>
 	{
 		private OnRecyclerItemClickListener listener;
 
@@ -195,7 +200,7 @@ public class MainHomeModelFragment extends BaseFragment implements MainHomeFragm
 			int width = (UIScreenUtil.getScreenWidth(getContext())) / COUNT_MODEL;
 			UIResizeUtil.build().setWidth(width).setHeight(width).commit(imageView);
 
-			Glide.with(getContext()).load(sList.get(position)).centerCrop()
+			Glide.with(getContext()).load(sList.get(position).getDt_img()).centerCrop()
 					.placeholder(R.drawable.global_load_failed)
 					.error(R.drawable.global_load_failed)
 					.into(imageView);

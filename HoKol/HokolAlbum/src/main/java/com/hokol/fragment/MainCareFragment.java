@@ -112,7 +112,7 @@ public class MainCareFragment extends BaseFragment
 		}
 		else
 		{
-			WUserCareAllBean wUserCareAllBean = new WUserCareAllBean(userId, refreshedNumber, DeleteConstant.DEFAULT_RECYCLER_NUMBER);
+			WUserCareAllBean wUserCareAllBean = new WUserCareAllBean(userId, refreshedNumber, DeleteConstant.defaultNumberSmall);
 			XHttpUtil.doUserCareAll(wUserCareAllBean, new XHttpAdapter<VUserCareAllBean>()
 			{
 				@Override

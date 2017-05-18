@@ -14,27 +14,30 @@ import com.hokol.R;
 import com.hokol.activity.StarDynamicActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
+import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VHomeMainBean;
+import com.hokol.medium.http.bean.WHomeMainBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainHomeHelper;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
+import com.yline.log.LogFileUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainHomeSportFragment extends BaseFragment implements MainHomeFragment.OnHomeFilterCallback
 {
-	private static final String ARG_PARAM1 = "param1";
-
-	private String mParam1;
-
 	private MainHomeSportFragment.MainHomeSportAdapter mainHomeSportAdapter;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
+
+	private int refreshedNumber;
 
 	public static MainHomeSportFragment newInstance()
 	{
@@ -42,16 +45,6 @@ public class MainHomeSportFragment extends BaseFragment implements MainHomeFragm
 		/*Bundle args = new Bundle();
 		fragment.setArguments(args);*/
 		return fragment;
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		if (getArguments() != null)
-		{
-			mParam1 = getArguments().getString(ARG_PARAM1);
-		}
 	}
 
 	@Override
@@ -65,6 +58,8 @@ public class MainHomeSportFragment extends BaseFragment implements MainHomeFragm
 	{
 		super.onViewCreated(view, savedInstanceState);
 		initView(view);
+
+		initData();
 	}
 
 	private void initView(View view)
@@ -87,22 +82,16 @@ public class MainHomeSportFragment extends BaseFragment implements MainHomeFragm
 		});
 
 		mainHomeSportAdapter = new MainHomeSportFragment.MainHomeSportAdapter();
-		recyclerView.setAdapter(mainHomeSportAdapter);
-
-		List<String> dataList = new ArrayList<>();
-		for (int i = 0; i < 35; i++)
-		{
-			dataList.add(DeleteConstant.getUrlSquare());
-		}
-		mainHomeSportAdapter.setDataList(dataList);
-		mainHomeSportAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener()
+		mainHomeSportAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VHomeMainBean.VHomeMainOneBean>()
 		{
 			@Override
-			public void onClick(RecyclerView.ViewHolder viewHolder, Object o, int position)
+			public void onClick(RecyclerView.ViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
 			{
 				StarDynamicActivity.actionStart(getContext());
 			}
 		});
+
+		recyclerView.setAdapter(mainHomeSportAdapter);
 
 		// 分割线
 		View divideView = new View(getContext());
@@ -147,6 +136,23 @@ public class MainHomeSportFragment extends BaseFragment implements MainHomeFragm
 		});
 	}
 
+	private void initData()
+	{
+		refreshedNumber = 0;
+		WHomeMainBean wHomeMainBean = new WHomeMainBean(HttpEnum.UserTag.Sport, refreshedNumber, DeleteConstant.defaultNumberLittle);
+		XHttpUtil.doHomeMain(wHomeMainBean, new XHttpAdapter<VHomeMainBean>()
+		{
+			@Override
+			public void onSuccess(VHomeMainBean vHomeMainBean)
+			{
+				mainHomeSportAdapter.setDataList(vHomeMainBean.getList());
+
+				refreshedNumber = mainHomeSportAdapter.size();
+				LogFileUtil.v("vHomeMainBean size = " + refreshedNumber);
+			}
+		});
+	}
+
 	@Override
 	public void onAreaUpdate(String first, List<String> second)
 	{
@@ -159,7 +165,7 @@ public class MainHomeSportFragment extends BaseFragment implements MainHomeFragm
 
 	}
 
-	private class MainHomeSportAdapter extends HeadFootRecyclerAdapter
+	private class MainHomeSportAdapter extends HeadFootRecyclerAdapter<VHomeMainBean.VHomeMainOneBean>
 	{
 		private OnRecyclerItemClickListener listener;
 
@@ -190,7 +196,7 @@ public class MainHomeSportFragment extends BaseFragment implements MainHomeFragm
 			});
 
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_home_sport);
-			Glide.with(getContext()).load(sList.get(position)).centerCrop()
+			Glide.with(getContext()).load(sList.get(position).getDt_img()).centerCrop()
 					.placeholder(R.drawable.global_load_failed)
 					.error(R.drawable.global_load_failed)
 					.into(imageView);
