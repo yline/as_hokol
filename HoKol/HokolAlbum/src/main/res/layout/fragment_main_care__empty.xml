@@ -1,46 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/rl_title"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/default_title_normal"
-        android:background="@color/hokolRed">
-
-        <TextView
-            android:id="@+id/tv_main_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/main_title_care"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/default_text_size_large"
-            android:textStyle="bold"/>
-    </RelativeLayout>
-
-    <com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout
-        android:id="@+id/super_swipe_main_care"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/rl_title">
-
-        <!--RecycleView-->
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycle_main_care"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </android.support.v7.widget.RecyclerView>
-    </com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout>
-
-    <!--<RelativeLayout
         android:id="@+id/rl_loading_cover"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/rl_title"
         android:background="@android:color/white"
         android:gravity="center_vertical">
 
@@ -79,8 +47,5 @@
             android:text="去主页看看"
             android:textColor="@android:color/white"
             android:textSize="@dimen/default_text_size_medium"/>
-    </RelativeLayout>-->
-</RelativeLayout>
-
-
-
+    </RelativeLayout>
+</LinearLayout>

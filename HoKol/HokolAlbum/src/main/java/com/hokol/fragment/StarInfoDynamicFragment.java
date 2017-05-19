@@ -78,7 +78,7 @@ public class StarInfoDynamicFragment extends BaseFragment
 		starInfoDynamicAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VHomeMainBean.VHomeMainOneBean>()
 		{
 			@Override
-			public void onClick(RecyclerView.ViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
+			public void onClick(RecyclerViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
 			{
 				StarDynamicActivity.actionStart(getContext(), bean.getDt_id());
 			}
@@ -133,7 +133,7 @@ public class StarInfoDynamicFragment extends BaseFragment
 		});
 	}
 
-	private class StarInfoDynamicAdapter extends HeadFootRecyclerAdapter
+	private class StarInfoDynamicAdapter extends HeadFootRecyclerAdapter<String>
 	{
 		private final int border_square;
 
@@ -156,7 +156,7 @@ public class StarInfoDynamicFragment extends BaseFragment
 		}
 
 		@Override
-		public void setViewContent(final RecyclerViewHolder viewHolder, final int position)
+		public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
 		{
 			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
 			{

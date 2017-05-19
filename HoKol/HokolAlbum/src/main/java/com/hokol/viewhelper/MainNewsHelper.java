@@ -107,7 +107,7 @@ public class MainNewsHelper
 		}
 
 		@Override
-		public void setViewContent(final RecyclerViewHolder viewHolder, final int position)
+		public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
 		{
 			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
 			{
@@ -131,6 +131,12 @@ public class MainNewsHelper
 			long stampTime = sList.get(position).getNews_time(); //  / 1000
 			String showTime = TimeConvertUtil.stamp2FormatTime(stampTime * 1000);
 			viewHolder.setText(R.id.tv_item_main_news_time, showTime);
+		}
+
+		@Override
+		public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
+		{
+			// super.onBindEmptyViewHolder(viewHolder, position);
 		}
 	}
 
@@ -167,7 +173,5 @@ public class MainNewsHelper
 		String showTime = TimeConvertUtil.stamp2FormatTime(stampTime * 1000);
 		recommendViewHolder.setText(R.id.tv_main_news_recommend_time, showTime);
 	}
-
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 刷新布局 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-
 }

@@ -2,7 +2,6 @@ package com.hokol.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainNewsHelper;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
+import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.List;
 
@@ -55,7 +55,7 @@ public class MainNewsFragment extends BaseFragment
 		mainNewsHelper.setOnRecycleItemClickListener(new OnRecyclerItemClickListener<VNewsSingleBean>()
 		{
 			@Override
-			public void onClick(RecyclerView.ViewHolder viewHolder, VNewsSingleBean vNewsSingleBean, int position)
+			public void onClick(RecyclerViewHolder viewHolder, VNewsSingleBean vNewsSingleBean, int position)
 			{
 				NewsInfoActivity.actionStart(getContext(), vNewsSingleBean.getUrl());
 			}

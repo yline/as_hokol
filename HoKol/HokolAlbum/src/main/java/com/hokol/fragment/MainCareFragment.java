@@ -26,8 +26,6 @@ import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 import com.yline.view.common.ViewHolder;
 
-import static com.hokol.R.id.super_swipe_main_care;
-
 public class MainCareFragment extends BaseFragment
 {
 	private MainCareHelper mainCareHelper;
@@ -77,7 +75,7 @@ public class MainCareFragment extends BaseFragment
 		});
 
 		// 刷新
-		swipeRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(super_swipe_main_care);
+		swipeRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_main_care);
 		swipeRefreshLayout.setOnRefreshListener(new SuperSwipeRefreshLayout.OnSwipeListener()
 		{
 			@Override
@@ -113,8 +111,8 @@ public class MainCareFragment extends BaseFragment
 			}
 		});
 
-		// 没有数据 或 为登录
-		viewHolder.setOnClickListener(R.id.btn_loading_cover, new View.OnClickListener()
+		// 没有数据 或者 未登录时 状态
+		mainCareHelper.setOnRecyclerEmptyCLickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -140,40 +138,21 @@ public class MainCareFragment extends BaseFragment
 		String userId = AppStateManager.getInstance().getUserLoginId(getContext());
 		if (TextUtils.isEmpty(userId))
 		{
-			viewHolder.get(R.id.super_swipe_main_care).setVisibility(View.INVISIBLE);
-
-			viewHolder.get(R.id.rl_loading_cover).setVisibility(View.VISIBLE);
-			viewHolder.setText(R.id.tv_loading_cover, "登陆后才能看到你喜欢的哦~");
-			viewHolder.setText(R.id.btn_loading_cover, "立即登录");
+			mainCareHelper.updateRecyclerEmptyState(false);
 		}
 		else
 		{
-			viewHolder.get(R.id.super_swipe_main_care).setVisibility(View.VISIBLE);
-			viewHolder.get(R.id.rl_loading_cover).setVisibility(View.INVISIBLE);
-
 			refreshedNumber = 0;
+			mainCareHelper.updateRecyclerEmptyState(true);
+
 			WDynamicCareAllBean wDynamicCareAllBean = new WDynamicCareAllBean(userId, refreshedNumber, DeleteConstant.defaultNumberSmall);
 			XHttpUtil.doDynamicCareAll(wDynamicCareAllBean, new XHttpAdapter<VDynamicCareAllBean>()
 			{
 				@Override
 				public void onSuccess(VDynamicCareAllBean vDynamicCareAllBean)
 				{
-					if (vDynamicCareAllBean.getList().size() == 0)
-					{
-						viewHolder.get(R.id.super_swipe_main_care).setVisibility(View.INVISIBLE);
-
-						viewHolder.get(R.id.rl_loading_cover).setVisibility(View.VISIBLE);
-						viewHolder.setText(R.id.tv_loading_cover, "您还没有关注的对象哦~");
-						viewHolder.setText(R.id.btn_loading_cover, "去主页看看");
-					}
-					else
-					{
-						viewHolder.get(R.id.super_swipe_main_care).setVisibility(View.VISIBLE);
-						viewHolder.get(R.id.rl_loading_cover).setVisibility(View.INVISIBLE);
-
-						mainCareHelper.setRecycleData(vDynamicCareAllBean.getList());
-						refreshedNumber += vDynamicCareAllBean.getList().size();
-					}
+					mainCareHelper.setRecycleData(vDynamicCareAllBean.getList());
+					refreshedNumber += vDynamicCareAllBean.getList().size();
 				}
 
 				@Override

@@ -74,7 +74,7 @@ public class MainMineDynamicFragment extends BaseFragment
 		recyclerAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener()
 		{
 			@Override
-			public void onClick(RecyclerView.ViewHolder viewHolder, Object o, int position)
+			public void onClick(RecyclerViewHolder viewHolder, Object o, int position)
 			{
 				IApplication.toast("position = " + position);
 			}
@@ -164,7 +164,7 @@ public class MainMineDynamicFragment extends BaseFragment
 		wrapperAdapter.addHeadView(cameraView);
 	}
 
-	private class DynamicRecycleAdapter extends HeadFootRecyclerAdapter
+	private class DynamicRecycleAdapter extends HeadFootRecyclerAdapter<String>
 	{
 		private OnRecyclerItemClickListener listener;
 
@@ -180,7 +180,7 @@ public class MainMineDynamicFragment extends BaseFragment
 		}
 
 		@Override
-		public void setViewContent(final RecyclerViewHolder viewHolder, final int position)
+		public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
 		{
 			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
 			{

@@ -23,6 +23,7 @@ import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainTaskHelper;
 import com.yline.base.BaseFragment;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -94,7 +95,7 @@ public class MainTaskFragment extends BaseFragment
 		mainTaskHelper.setOnRecyclerClickListener(new OnRecyclerItemClickListener()
 		{
 			@Override
-			public void onClick(RecyclerView.ViewHolder viewHolder, Object o, int position)
+			public void onClick(RecyclerViewHolder viewHolder, Object o, int position)
 			{
 				TaskDetailActivity.actionStart(getContext());
 			}

@@ -1,8 +1,8 @@
 package com.hokol.medium.widget.recycler;
 
-import android.support.v7.widget.RecyclerView;
+import com.yline.view.common.RecyclerViewHolder;
 
 public interface OnRecyclerItemClickListener<T>
 {
-	void onClick(RecyclerView.ViewHolder viewHolder, T t, int position);
+	void onClick(RecyclerViewHolder viewHolder, T t, int position);
 }

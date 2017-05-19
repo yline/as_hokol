@@ -29,6 +29,7 @@ import com.yline.log.LogFileUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
+import com.yline.view.common.ViewHolder;
 
 import java.util.List;
 
@@ -44,6 +45,10 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 
 	private int refreshedNumber;
 
+	private ViewHolder viewHolder;
+
+	private View adView;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
@@ -54,8 +59,10 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
 	{
 		super.onViewCreated(view, savedInstanceState);
-		initView(view);
 
+		viewHolder = new ViewHolder(view);
+
+		initView(view);
 		initData();
 	}
 	
@@ -83,7 +90,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 		recycleAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VHomeMainBean.VHomeMainOneBean>()
 		{
 			@Override
-			public void onClick(RecyclerView.ViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean vHomeMainOneBean, int position)
+			public void onClick(RecyclerViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean vHomeMainOneBean, int position)
 			{
 				StarDynamicActivity.actionStart(getContext(), vHomeMainOneBean.getDt_id());
 			}
@@ -140,10 +147,33 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 			@Override
 			public void onSuccess(VHomeMainBean vHomeMainBean)
 			{
-				recycleAdapter.setDataList(vHomeMainBean.getList());
+				if (vHomeMainBean.getList().size() == 2)
+				{/*
+					viewHolder.get(R.id.super_swipe_main_home_red).setVisibility(View.INVISIBLE);
+					viewHolder.get(R.id.rl_red_loading_cover).setVisibility(View.VISIBLE);
 
-				refreshedNumber = recycleAdapter.size();
-				LogFileUtil.v("vHomeMainBean size = " + refreshedNumber);
+					ViewGroup viewGroup = viewHolder.get(R.id.ll_red_ad);
+					viewGroup.addView(adView);
+					*/
+					recycleAdapter.setNullData(true);
+
+					recycleAdapter.setDataList(vHomeMainBean.getList());
+
+					refreshedNumber = recycleAdapter.dataSize();
+					LogFileUtil.v("vHomeMainBean size = " + refreshedNumber);
+				}
+				else
+				{
+					recycleAdapter.setNullData(false);
+					/*
+					viewHolder.get(R.id.super_swipe_main_home_red).setVisibility(View.VISIBLE);
+					viewHolder.get(R.id.rl_red_loading_cover).setVisibility(View.INVISIBLE);
+					*/
+					recycleAdapter.setDataList(vHomeMainBean.getList());
+
+					refreshedNumber = recycleAdapter.dataSize();
+					LogFileUtil.v("vHomeMainBean size = " + refreshedNumber);
+				}
 			}
 		});
 	}
@@ -162,7 +192,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 				return UIScreenUtil.dp2px(getContext(), 150);
 			}
 		};
-		View adView = adWidget.start(getContext(), 3);
+		adView = adWidget.start(getContext(), 3);
 		adWidget.setListener(new ADWidget.OnPageListener()
 		{
 			@Override
@@ -202,9 +232,17 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 	{
 		private OnRecyclerItemClickListener listener;
 
+		private boolean isNullData;
+
 		public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener listener)
 		{
 			this.listener = listener;
+		}
+
+		@Override
+		public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+		{
+			return super.onCreateViewHolder(parent, viewType);
 		}
 
 		@Override
@@ -214,8 +252,14 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 		}
 
 		@Override
-		public void setViewContent(final RecyclerViewHolder viewHolder, final int position)
+		public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
 		{
+			if (isNullData)
+			{
+				viewHolder.getItemView().setBackgroundColor(0xffff2742);
+				return;
+			}
+
 			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
 			{
 				@Override
@@ -233,6 +277,11 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 					.placeholder(R.drawable.global_load_failed)
 					.error(R.drawable.global_load_failed)
 					.into(ivPic);
+		}
+
+		public void setNullData(boolean nullData)
+		{
+			isNullData = nullData;
 		}
 	}
 

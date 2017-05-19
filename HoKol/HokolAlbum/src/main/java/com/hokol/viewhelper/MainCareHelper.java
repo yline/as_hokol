@@ -57,6 +57,16 @@ public class MainCareHelper
 		this.careRecycleClickListener = listener;
 	}
 
+	public void setOnRecyclerEmptyCLickListener(View.OnClickListener clickListener)
+	{
+		recyclerAdapter.setOnClickListener(clickListener);
+	}
+
+	public void updateRecyclerEmptyState(boolean isLogin)
+	{
+		recyclerAdapter.setLogin(isLogin);
+	}
+
 	public void setRecycleData(List<VDynamicCareBean> dataList)
 	{
 		recyclerAdapter.setDataList(dataList);
@@ -64,6 +74,10 @@ public class MainCareHelper
 
 	private class RecycleAdapter extends HeadFootRecyclerAdapter<VDynamicCareBean>
 	{
+		private boolean isLogin;
+
+		private View.OnClickListener onClickListener;
+
 		@Override
 		public int getItemRes()
 		{
@@ -71,7 +85,7 @@ public class MainCareHelper
 		}
 
 		@Override
-		public void setViewContent(RecyclerViewHolder viewHolder, final int position)
+		public void onBindViewHolder(RecyclerViewHolder viewHolder, final int position)
 		{
 			ImageView avatarView = viewHolder.get(R.id.circle_item_main_care_avatar);
 			Glide.with(sContext).load(DeleteConstant.url_default_avatar).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).centerCrop().into(avatarView);
@@ -100,6 +114,53 @@ public class MainCareHelper
 						careRecycleClickListener.onPictureClick(sList.get(position));
 					}
 				});
+			}
+		}
+
+		@Override
+		public int getEmptyItemRes()
+		{
+			return R.layout.fragment_main_care__empty;
+		}
+
+		@Override
+		public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
+		{
+			if (isLogin)
+			{
+				viewHolder.setText(R.id.tv_loading_cover, "您还没有关注的对象哦~");
+				viewHolder.setText(R.id.btn_loading_cover, "去主页看看");
+			}
+			else
+			{
+				viewHolder.setText(R.id.tv_loading_cover, "登陆后才能看到你喜欢的哦~");
+				viewHolder.setText(R.id.btn_loading_cover, "立即登录");
+			}
+
+			viewHolder.setOnClickListener(R.id.btn_loading_cover, new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					if (null != onClickListener)
+					{
+						onClickListener.onClick(v);
+					}
+				}
+			});
+		}
+
+		public void setOnClickListener(View.OnClickListener onClickListener)
+		{
+			this.onClickListener = onClickListener;
+		}
+
+		public void setLogin(boolean login)
+		{
+			this.isLogin = login;
+			if (sList.size() == 0)
+			{
+				notifyItemChanged(getHeadersCount());
 			}
 		}
 	}

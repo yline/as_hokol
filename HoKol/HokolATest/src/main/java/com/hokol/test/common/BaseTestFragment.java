@@ -88,7 +88,7 @@ public abstract class BaseTestFragment extends BaseFragment
 		}
 
 		@Override
-		public void setViewContent(RecyclerViewHolder viewHolder, int position)
+		public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
 		{
 			TextView textView = viewHolder.get(android.R.id.text1);
 			textView.setText(sList.get(position));

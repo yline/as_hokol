@@ -52,7 +52,7 @@ public class UserMessageSystemActivity extends BaseAppCompatActivity
 		messageSystemAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener()
 		{
 			@Override
-			public void onClick(RecyclerView.ViewHolder viewHolder, Object o, int position)
+			public void onClick(RecyclerViewHolder viewHolder, Object o, int position)
 			{
 				UserMessageDetailActivity.actionStart(UserMessageSystemActivity.this);
 			}

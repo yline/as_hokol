@@ -35,10 +35,6 @@ import java.util.List;
 
 public class StarInfoPrivateFragment extends BaseFragment
 {
-	private static final String ARG_PARAM1 = "param1";
-
-	private String mParam1;
-
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
 	private StarInfoPrivateAdapter starInfoPrivateAdapter;
@@ -51,16 +47,6 @@ public class StarInfoPrivateFragment extends BaseFragment
 		/*Bundle args = new Bundle();
 		fragment.setArguments(args);*/
 		return fragment;
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		if (getArguments() != null)
-		{
-			mParam1 = getArguments().getString(ARG_PARAM1);
-		}
 	}
 
 	@Override
@@ -108,7 +94,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 		starInfoPrivateAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VHomeMainBean.VHomeMainOneBean>()
 		{
 			@Override
-			public void onClick(RecyclerView.ViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
+			public void onClick(RecyclerViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
 			{
 				StarDynamicActivity.actionStart(getContext(), bean.getDt_id());
 			}
@@ -202,7 +188,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 		});
 	}
 
-	private class StarInfoPrivateAdapter extends HeadFootRecyclerAdapter
+	private class StarInfoPrivateAdapter extends HeadFootRecyclerAdapter<String>
 	{
 		private final int border_square;
 
@@ -225,7 +211,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 		}
 
 		@Override
-		public void setViewContent(final RecyclerViewHolder viewHolder, final int position)
+		public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
 		{
 			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
 			{

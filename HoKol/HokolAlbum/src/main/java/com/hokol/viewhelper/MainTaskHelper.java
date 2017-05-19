@@ -217,7 +217,7 @@ public class MainTaskHelper
 		taskRecycleAdapter.setDataList(list);
 	}
 
-	private class TaskRecycleAdapter extends HeadFootRecyclerAdapter
+	private class TaskRecycleAdapter extends HeadFootRecyclerAdapter<String>
 	{
 		private OnRecyclerItemClickListener listener;
 
@@ -233,7 +233,7 @@ public class MainTaskHelper
 		}
 
 		@Override
-		public void setViewContent(final RecyclerViewHolder viewHolder, final int position)
+		public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
 		{
 			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
 			{

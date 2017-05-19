@@ -90,7 +90,7 @@ public class MainHomePerformerFragment extends BaseFragment implements MainHomeF
 		mainHomePerformerAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VHomeMainBean.VHomeMainOneBean>()
 		{
 			@Override
-			public void onClick(RecyclerView.ViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
+			public void onClick(RecyclerViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
 			{
 				StarDynamicActivity.actionStart(getContext(), bean.getDt_id());
 			}
@@ -152,7 +152,7 @@ public class MainHomePerformerFragment extends BaseFragment implements MainHomeF
 			{
 				mainHomePerformerAdapter.setDataList(vHomeMainBean.getList());
 
-				refreshedNumber = mainHomePerformerAdapter.size();
+				refreshedNumber = mainHomePerformerAdapter.dataSize();
 				LogFileUtil.v("vHomeMainBean size = " + refreshedNumber);
 			}
 		});
@@ -186,7 +186,7 @@ public class MainHomePerformerFragment extends BaseFragment implements MainHomeF
 		}
 
 		@Override
-		public void setViewContent(final RecyclerViewHolder viewHolder, final int position)
+		public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
 		{
 			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
 			{
