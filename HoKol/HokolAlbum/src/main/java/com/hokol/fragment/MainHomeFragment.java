@@ -57,11 +57,20 @@ public class MainHomeFragment extends BaseFragment
 
 				if (isAreaChanged(first, second))
 				{
-					// int currentPosition = tabLayout.getSelectedTabPosition();
 					for (int i = 0; i < fragmentList.size(); i++)
 					{
 						if (fragmentList.get(i) instanceof OnHomeFilterCallback)
 						{
+							if (first.equals(SecondaryWidget.DefaultTitle))
+							{
+								first = "0";
+							}
+
+							if (second.contains(SecondaryWidget.DefaultTitle))
+							{
+								second = new ArrayList<>();
+							}
+
 							((OnHomeFilterCallback) fragmentList.get(i)).onAreaUpdate(first, second);
 						}
 					}
@@ -81,7 +90,6 @@ public class MainHomeFragment extends BaseFragment
 
 				if (isFilterChanged(typeSex, typeRecommend))
 				{
-					// int currentPosition = tabLayout.getSelectedTabPosition();
 					for (int i = 0; i < fragmentList.size(); i++)
 					{
 						if (fragmentList.get(i) instanceof OnHomeFilterCallback)

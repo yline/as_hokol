@@ -31,6 +31,7 @@ import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 import com.yline.view.common.ViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,7 +48,9 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 
 	private ViewHolder viewHolder;
 
-	private View adView;
+	private GridLayoutManager gridLayoutManager;
+
+	private WHomeMainBean homeRedBean;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -69,7 +72,8 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 	private void initView(View view)
 	{
 		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_main_home_red);
-		recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+		gridLayoutManager = new GridLayoutManager(getContext(), 2);
+		recyclerView.setLayoutManager(gridLayoutManager);
 		recyclerView.addItemDecoration(new DefaultGridItemDecoration(getContext())
 		{
 
@@ -141,41 +145,71 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 	private void initData()
 	{
 		refreshedNumber = 0;
-		WHomeMainBean wHomeMainBean = new WHomeMainBean(HttpEnum.UserTag.Red, refreshedNumber, DeleteConstant.defaultNumberSmall);
-		XHttpUtil.doHomeMain(wHomeMainBean, new XHttpAdapter<VHomeMainBean>()
+		homeRedBean = new WHomeMainBean(HttpEnum.UserTag.Red, refreshedNumber, DeleteConstant.defaultNumberSmall);
+		doRequest();
+	}
+
+	private void doRequest()
+	{
+		XHttpUtil.doHomeMain(homeRedBean, new XHttpAdapter<VHomeMainBean>()
 		{
 			@Override
 			public void onSuccess(VHomeMainBean vHomeMainBean)
 			{
-				if (vHomeMainBean.getList().size() == 2)
-				{/*
-					viewHolder.get(R.id.super_swipe_main_home_red).setVisibility(View.INVISIBLE);
-					viewHolder.get(R.id.rl_red_loading_cover).setVisibility(View.VISIBLE);
+				List<VHomeMainBean.VHomeMainOneBean> resultList = vHomeMainBean.getList();
+				if (null == resultList)
+				{
+					resultList = new ArrayList<>();
+				}
 
-					ViewGroup viewGroup = viewHolder.get(R.id.ll_red_ad);
-					viewGroup.addView(adView);
-					*/
-					recycleAdapter.setNullData(true);
-
-					recycleAdapter.setDataList(vHomeMainBean.getList());
-
-					refreshedNumber = recycleAdapter.dataSize();
-					LogFileUtil.v("vHomeMainBean size = " + refreshedNumber);
+				if (resultList.size() == 0)
+				{
+					gridLayoutManager.setSpanCount(1);
 				}
 				else
 				{
-					recycleAdapter.setNullData(false);
-					/*
-					viewHolder.get(R.id.super_swipe_main_home_red).setVisibility(View.VISIBLE);
-					viewHolder.get(R.id.rl_red_loading_cover).setVisibility(View.INVISIBLE);
-					*/
-					recycleAdapter.setDataList(vHomeMainBean.getList());
-
-					refreshedNumber = recycleAdapter.dataSize();
-					LogFileUtil.v("vHomeMainBean size = " + refreshedNumber);
+					gridLayoutManager.setSpanCount(2);
 				}
+
+				recycleAdapter.setDataList(resultList);
+				refreshedNumber = recycleAdapter.dataSize();
+				LogFileUtil.v("vHomeMainBean size = " + refreshedNumber);
 			}
 		});
+	}
+
+	@Override
+	public void onAreaUpdate(String first, List<String> second)
+	{
+		LogFileUtil.v("onAreaUpdate first = " + first + ",second = " + second.toString());
+
+		refreshedNumber = 0;
+		homeRedBean.setNum1(refreshedNumber);
+		homeRedBean.setLength(DeleteConstant.defaultNumberSmall);
+
+		homeRedBean.setUser_province(first);
+		if (second.size() == 0)
+		{
+			homeRedBean.setUser_city("0");
+		}
+		else
+		{
+			homeRedBean.setUser_city(second.get(0));
+		}
+		doRequest();
+	}
+
+	@Override
+	public void onFilterUpdate(MainHomeHelper.FilterSex typeSex, MainHomeHelper.FilterRecommend typeRecommend)
+	{
+		LogFileUtil.v("onAreaUpdate typeSex = " + typeSex + ",typeRecommend = " + typeRecommend);
+
+		refreshedNumber = 0;
+		homeRedBean.setNum1(refreshedNumber);
+		homeRedBean.setUser_sex(typeSex.getIndex());
+		homeRedBean.setUser_adv(typeRecommend.getIndex());
+
+		doRequest();
 	}
 
 	/**
@@ -192,7 +226,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 				return UIScreenUtil.dp2px(getContext(), 150);
 			}
 		};
-		adView = adWidget.start(getContext(), 3);
+		View adView = adWidget.start(getContext(), 3);
 		adWidget.setListener(new ADWidget.OnPageListener()
 		{
 			@Override
@@ -216,23 +250,9 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 		wrapperAdapter.addHeadView(divideView);
 	}
 
-	@Override
-	public void onAreaUpdate(String first, List<String> second)
-	{
-		LogFileUtil.v("onAreaUpdate first = " + first + ",second = " + second.toString());
-	}
-
-	@Override
-	public void onFilterUpdate(MainHomeHelper.FilterSex typeSex, MainHomeHelper.FilterRecommend typeRecommend)
-	{
-		LogFileUtil.v("onAreaUpdate typeSex = " + typeSex + ",typeRecommend = " + typeRecommend);
-	}
-
 	private class MainNewsHotAdapter extends HeadFootRecyclerAdapter<VHomeMainBean.VHomeMainOneBean>
 	{
 		private OnRecyclerItemClickListener listener;
-
-		private boolean isNullData;
 
 		public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener listener)
 		{
@@ -254,12 +274,6 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 		@Override
 		public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
 		{
-			if (isNullData)
-			{
-				viewHolder.getItemView().setBackgroundColor(0xffff2742);
-				return;
-			}
-
 			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
 			{
 				@Override
@@ -279,9 +293,15 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 					.into(ivPic);
 		}
 
-		public void setNullData(boolean nullData)
+		@Override
+		public int getEmptyItemRes()
 		{
-			isNullData = nullData;
+			return R.layout.fragment_main_home__empty;
+		}
+
+		@Override
+		public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
+		{
 		}
 	}
 

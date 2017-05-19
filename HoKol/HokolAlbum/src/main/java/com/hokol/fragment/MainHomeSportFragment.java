@@ -201,5 +201,16 @@ public class MainHomeSportFragment extends BaseFragment implements MainHomeFragm
 					.error(R.drawable.global_load_failed)
 					.into(imageView);
 		}
+
+		@Override
+		public int getEmptyItemRes()
+		{
+			return R.layout.fragment_main_home__empty;
+		}
+
+		@Override
+		public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
+		{
+		}
 	}
 }

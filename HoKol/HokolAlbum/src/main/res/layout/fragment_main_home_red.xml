@@ -16,45 +16,4 @@
             android:layout_height="wrap_content">
         </android.support.v7.widget.RecyclerView>
     </com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout>
-
-    <RelativeLayout
-        android:id="@+id/rl_red_loading_cover"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/super_swipe_main_home_red"
-        android:background="@android:color/white"
-        android:gravity="center_vertical"
-        android:visibility="invisible">
-
-        <LinearLayout
-            android:id="@+id/ll_red_ad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:orientation="vertical">
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/iv_red_loading_cover"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ll_red_ad"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="@dimen/default_title_normal"
-            android:layout_marginRight="@dimen/default_title_normal"
-            android:scaleType="centerInside"
-            android:src="@drawable/global_load_failed_normal"/>
-
-        <TextView
-            android:id="@+id/tv_red_loading_cover"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/iv_red_loading_cover"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/default_space_normal"
-            android:text="没有找到相关结果，减少筛选条件试一试~"
-            android:textColor="@color/hokolGray"
-            android:textSize="@dimen/default_text_size_large"
-            android:textStyle="bold"/>
-    </RelativeLayout>
 </LinearLayout>

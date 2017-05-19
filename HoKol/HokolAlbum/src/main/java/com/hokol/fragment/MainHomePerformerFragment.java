@@ -40,6 +40,8 @@ public class MainHomePerformerFragment extends BaseFragment implements MainHomeF
 
 	private int refreshedNumber;
 
+	private GridLayoutManager gridLayoutManager;
+
 	public static MainHomePerformerFragment newInstance()
 	{
 		MainHomePerformerFragment fragment = new MainHomePerformerFragment();
@@ -70,7 +72,9 @@ public class MainHomePerformerFragment extends BaseFragment implements MainHomeF
 	private void initView(View view)
 	{
 		RecyclerView recycleView = (RecyclerView) view.findViewById(R.id.recycle_main_home_performer);
-		recycleView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+
+		gridLayoutManager = new GridLayoutManager(getContext(), 2);
+		recycleView.setLayoutManager(gridLayoutManager);
 		recycleView.addItemDecoration(new DefaultGridItemDecoration(getContext())
 		{
 			@Override
@@ -150,6 +154,15 @@ public class MainHomePerformerFragment extends BaseFragment implements MainHomeF
 			@Override
 			public void onSuccess(VHomeMainBean vHomeMainBean)
 			{
+				if (vHomeMainBean.getList().size() == 0)
+				{
+					gridLayoutManager.setSpanCount(1);
+				}
+				else
+				{
+					gridLayoutManager.setSpanCount(2);
+				}
+
 				mainHomePerformerAdapter.setDataList(vHomeMainBean.getList());
 
 				refreshedNumber = mainHomePerformerAdapter.dataSize();
@@ -205,6 +218,17 @@ public class MainHomePerformerFragment extends BaseFragment implements MainHomeF
 					.placeholder(R.drawable.global_load_failed)
 					.error(R.drawable.global_load_failed)
 					.into(imageView);
+		}
+
+		@Override
+		public int getEmptyItemRes()
+		{
+			return R.layout.fragment_main_home__empty;
+		}
+
+		@Override
+		public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
+		{
 		}
 	}
 }

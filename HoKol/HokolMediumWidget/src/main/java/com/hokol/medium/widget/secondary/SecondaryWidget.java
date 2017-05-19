@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.hokol.medium.widget.R;
+import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,10 @@ import java.util.Map;
  */
 public class SecondaryWidget
 {
+	public static final String DefaultFirst = "不限";
+
+	public static final String DefaultTitle = "地区";
+
 	private Context sContext;
 
 	private Map<String, List<String>> dataMap;
@@ -104,6 +109,11 @@ public class SecondaryWidget
 			{
 				return getSecondDrawableUnselected();
 			}
+
+			@Override
+			public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
+			{
+			}
 		};
 		secondRecyclerView.setAdapter(secondListAdapter);
 
@@ -140,6 +150,11 @@ public class SecondaryWidget
 			protected int getColorTextUnselected()
 			{
 				return getFirstColorTextUnselected();
+			}
+
+			@Override
+			public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
+			{
 			}
 		};
 		firstRecyclerView.setAdapter(firstListAdapter);
@@ -256,7 +271,7 @@ public class SecondaryWidget
 
 	protected String getFirstHeadItemContent()
 	{
-		return "不限";
+		return DefaultFirst;
 	}
 
 	@LayoutRes
@@ -291,7 +306,7 @@ public class SecondaryWidget
 
 	protected String getSecondHeadItemContent()
 	{
-		return "不限";
+		return DefaultFirst;
 	}
 
 	@LayoutRes
@@ -340,7 +355,7 @@ public class SecondaryWidget
 	{
 		if (TextUtils.isEmpty(first) || first.equals(getSecondHeadItemContent()))
 		{
-			return "地区";
+			return DefaultTitle;
 		}
 
 		if (null == second || second.size() == 0)

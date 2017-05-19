@@ -119,13 +119,18 @@ public class MainHomeHelper
 
 	public enum FilterSex
 	{
-		All("全部"), Boy("男"), Girl("女");
+		All("全部", 0), Boy("男", 1), Girl("女", 2);
 
+		// 显示内容
 		private final String content;
 
-		FilterSex(String content)
+		// 后台编号
+		private final int index;
+
+		FilterSex(String content, int index)
 		{
 			this.content = content;
+			this.index = index;
 		}
 
 		public static FilterSex getFilterSex(int position)
@@ -143,17 +148,31 @@ public class MainHomeHelper
 				return Girl;
 			}
 		}
+
+		public String getContent()
+		{
+			return content;
+		}
+
+		public int getIndex()
+		{
+			return index;
+		}
 	}
 
 	public enum FilterRecommend
 	{
-		Popular("人气"), Newest("最新");
+		Popular("人气", 1), Newest("最新", 2);
 
 		private final String content;
 
-		FilterRecommend(String content)
+		// 后台编号
+		private final int index;
+
+		FilterRecommend(String content, int index)
 		{
 			this.content = content;
+			this.index = index;
 		}
 
 		public static FilterRecommend getFilterRecommend(int position)
@@ -166,6 +185,16 @@ public class MainHomeHelper
 			{
 				return Newest;
 			}
+		}
+
+		public String getContent()
+		{
+			return content;
+		}
+
+		public int getIndex()
+		{
+			return index;
 		}
 	}
 }
