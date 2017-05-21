@@ -29,6 +29,7 @@ import com.yline.utils.UIScreenUtil;
 import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainHomeSportFragment extends BaseFragment implements MainHomeFragment.OnHomeFilterCallback
@@ -145,6 +146,11 @@ public class MainHomeSportFragment extends BaseFragment implements MainHomeFragm
 			@Override
 			public void onSuccess(VHomeMainBean vHomeMainBean)
 			{
+				if (null == vHomeMainBean.getList())
+				{
+					vHomeMainBean.setList(new ArrayList<VHomeMainBean.VHomeMainOneBean>());
+				}
+
 				mainHomeSportAdapter.setDataList(vHomeMainBean.getList());
 
 				refreshedNumber = mainHomeSportAdapter.dataSize();

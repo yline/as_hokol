@@ -438,6 +438,7 @@ public class XHttpUtil
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 主页接口 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 
 	/**
+	 * 进行了数据过滤
 	 * 请求主页动态数据
 	 */
 	public static void doHomeMain(WHomeMainBean wHomeMainBean, XHttpAdapter<VHomeMainBean> adapter)

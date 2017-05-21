@@ -29,6 +29,7 @@ import com.yline.utils.UIScreenUtil;
 import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainHomeSingerFragment extends BaseFragment implements MainHomeFragment.OnHomeFilterCallback
@@ -146,6 +147,11 @@ public class MainHomeSingerFragment extends BaseFragment implements MainHomeFrag
 			@Override
 			public void onSuccess(VHomeMainBean vHomeMainBean)
 			{
+				if (null == vHomeMainBean.getList())
+				{
+					vHomeMainBean.setList(new ArrayList<VHomeMainBean.VHomeMainOneBean>());
+				}
+
 				if (vHomeMainBean.getList().size() == 0)
 				{
 					gridLayoutManager.setSpanCount(1);

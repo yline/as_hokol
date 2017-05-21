@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
+import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.widget.DropMenuWidget;
 import com.hokol.medium.widget.FlowAbleWidget;
 import com.hokol.medium.widget.labellayout.FlowLayout;
@@ -75,8 +76,9 @@ public class MainTaskHelper
 		final LabelFlowLayout labelFlowLayout = (LabelFlowLayout) areaView.findViewById(R.id.label_flow_main_task_menu_classify);
 		labelFlowLayout.setLabelGravity(FlowLayout.LabelGravity.EQUIDISTANT);
 		labelFlowLayout.setMaxSelectCount(1);
+		labelFlowLayout.setMinSelectCount(1);
 		labelFlowLayout.setMaxCountEachLine(4);
-		FlowAbleWidget flowAbleWidget = new FlowAbleWidget(context, labelFlowLayout)
+		final FlowAbleWidget flowAbleWidget = new FlowAbleWidget(context, labelFlowLayout)
 		{
 			@Override
 			protected int getItemResourceId()
@@ -84,7 +86,8 @@ public class MainTaskHelper
 				return R.layout.activity_user_info__flow_able;
 			}
 		};
-		flowAbleWidget.setDataList(Arrays.asList("全部", "网红", "主播", "演员", "模特", "歌手", "体育"));
+		flowAbleWidget.setDataList(HttpEnum.getUserTagListAll());
+		flowAbleWidget.addSelectedPosition(0);
 
 		Button btnClassify = (Button) areaView.findViewById(R.id.btn_main_task_menu_classify);
 		btnClassify.setOnClickListener(new View.OnClickListener()
@@ -92,6 +95,11 @@ public class MainTaskHelper
 			@Override
 			public void onClick(View v)
 			{
+				if (null != taskFilterCallback)
+				{
+					int position = flowAbleWidget.getSelectedFirst();
+					taskFilterCallback.onFilterClassify(HttpEnum.getUserTag(position));
+				}
 				dropMenuWidget.closeMenu();
 			}
 		});
@@ -106,7 +114,8 @@ public class MainTaskHelper
 
 		final LabelFlowLayout labelFlowLayout = (LabelFlowLayout) sexView.findViewById(R.id.label_flow_main_task_menu_sex);
 		labelFlowLayout.setMaxSelectCount(1);
-		FlowAbleWidget labelClickableWidget = new FlowAbleWidget(context, labelFlowLayout)
+		labelFlowLayout.setMinSelectCount(1);
+		final FlowAbleWidget labelClickableWidget = new FlowAbleWidget(context, labelFlowLayout)
 		{
 			@Override
 			protected int getItemResourceId()
@@ -114,7 +123,8 @@ public class MainTaskHelper
 				return R.layout.fragment_main_task__flow_able;
 			}
 		};
-		labelClickableWidget.setDataList(Arrays.asList("不限", "女神", "男神"));
+		labelClickableWidget.setDataList(HttpEnum.getUserSexListAll());
+		labelClickableWidget.addSelectedPosition(0);
 
 		Button btnSex = (Button) sexView.findViewById(R.id.btn_main_task_menu_sex);
 		btnSex.setOnClickListener(new View.OnClickListener()
@@ -122,6 +132,11 @@ public class MainTaskHelper
 			@Override
 			public void onClick(View v)
 			{
+				if (null != taskFilterCallback)
+				{
+					int position = labelClickableWidget.getSelectedFirst();
+					taskFilterCallback.onFilterSex(HttpEnum.getUserSex(position));
+				}
 				dropMenuWidget.closeMenu();
 			}
 		});
@@ -140,6 +155,11 @@ public class MainTaskHelper
 			@Override
 			public void onSecondarySelected(String first, List<String> second, String title)
 			{
+				if (null != taskFilterCallback)
+				{
+					taskFilterCallback.onFilterArea(first, second);
+				}
+
 				dropMenuWidget.updateTitle(2, title);
 				dropMenuWidget.closeMenu();
 			}
@@ -149,6 +169,22 @@ public class MainTaskHelper
 	public void setAreaData(Map<String, List<String>> map)
 	{
 		secondaryWidget.setDataMap(map);
+	}
+
+	private OnTaskFilterCallback taskFilterCallback;
+
+	public void setOnTaskFilterCallback(OnTaskFilterCallback taskFilterCallback)
+	{
+		this.taskFilterCallback = taskFilterCallback;
+	}
+
+	public interface OnTaskFilterCallback
+	{
+		void onFilterClassify(HttpEnum.UserTag userTag);
+
+		void onFilterSex(HttpEnum.UserSex userSex);
+
+		void onFilterArea(String first, List<String> second);
 	}
 
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Refresh %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
@@ -207,16 +243,6 @@ public class MainTaskHelper
 		taskRecycleAdapter.setOnRecyclerItemClickListener(listener);
 	}
 
-	public void setRecycleData()
-	{
-		List list = new ArrayList();
-		for (int i = 0; i < 20; i++)
-		{
-			list.add("i");
-		}
-		taskRecycleAdapter.setDataList(list);
-	}
-
 	private class TaskRecycleAdapter extends HeadFootRecyclerAdapter<String>
 	{
 		private OnRecyclerItemClickListener listener;
@@ -252,6 +278,11 @@ public class MainTaskHelper
 			Glide.with(context).load(DeleteConstant.url_default_avatar).centerCrop()
 					.bitmapTransform(new CropCircleTransformation(context)).placeholder(R.mipmap.ic_launcher)
 					.into(imageView);
+		}
+
+		@Override
+		public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
+		{
 		}
 	}
 }

@@ -2,6 +2,9 @@ package com.hokol.medium.http.bean;
 
 import com.hokol.medium.http.HttpEnum;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WHomeMainBean
 {
 	/**
@@ -23,7 +26,7 @@ public class WHomeMainBean
 	/**
 	 * 用户城市：【例：杭州市，不限:0】
 	 */
-	private String user_city;
+	private List<String> user_city;
 
 	/**
 	 * 用户筛选推荐：【不限：0,人气:1，最新:2】
@@ -45,7 +48,7 @@ public class WHomeMainBean
 		this.user_tag = userTag.getIndex();
 		this.user_sex = 0;
 		this.user_province = "0";
-		this.user_city = "0";
+		this.user_city = new ArrayList<>();
 		this.user_adv = 0;
 		this.num1 = num1;
 		this.length = length;
@@ -81,12 +84,12 @@ public class WHomeMainBean
 		this.user_province = user_province;
 	}
 
-	public String getUser_city()
+	public List<String> getUser_city()
 	{
 		return user_city;
 	}
 
-	public void setUser_city(String user_city)
+	public void setUser_city(List<String> user_city)
 	{
 		this.user_city = user_city;
 	}

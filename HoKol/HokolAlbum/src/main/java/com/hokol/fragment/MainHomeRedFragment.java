@@ -188,14 +188,8 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 		homeRedBean.setLength(DeleteConstant.defaultNumberSmall);
 
 		homeRedBean.setUser_province(first);
-		if (second.size() == 0)
-		{
-			homeRedBean.setUser_city("0");
-		}
-		else
-		{
-			homeRedBean.setUser_city(second.get(0));
-		}
+		homeRedBean.setUser_city(second);
+
 		doRequest();
 	}
 
