@@ -19,8 +19,8 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.FlowWidget;
-import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.yline.base.BaseFragment;
+import com.yline.widget.label.FlowLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;

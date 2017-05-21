@@ -8,8 +8,8 @@ import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.application.DeleteConstant;
 import com.hokol.medium.widget.FlowWidget;
-import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.yline.view.common.ViewHolder;
+import com.yline.widget.label.FlowLayout;
 
 import java.util.Arrays;
 

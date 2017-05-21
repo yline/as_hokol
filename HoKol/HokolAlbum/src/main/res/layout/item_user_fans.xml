@@ -59,14 +59,14 @@
         android:text="简介"
         android:textColor="@color/hokolGray"/>
 
-    <com.hokol.medium.widget.labellayout.FlowLayout
+    <com.yline.widget.label.FlowLayout
         android:id="@+id/flow_layout_user_fans"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/circle_user_fans_avatar"
         android:layout_toLeftOf="@+id/fl_user_fans_right"
         android:layout_toRightOf="@+id/circle_user_fans_avatar">
-    </com.hokol.medium.widget.labellayout.FlowLayout>
+    </com.yline.widget.label.FlowLayout>
 
     <FrameLayout
         android:id="@+id/fl_user_fans_right"

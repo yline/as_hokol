@@ -60,14 +60,14 @@
         android:text="简介"
         android:textColor="@color/hokolGray"/>
 
-    <com.hokol.medium.widget.labellayout.FlowLayout
+    <com.yline.widget.label.FlowLayout
         android:id="@+id/flow_layout_user_care"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/circle_user_care_avatar"
         android:layout_toLeftOf="@+id/iv_user_care_arrow"
         android:layout_toRightOf="@+id/circle_user_care_avatar">
-    </com.hokol.medium.widget.labellayout.FlowLayout>
+    </com.yline.widget.label.FlowLayout>
 
     <ImageView
         android:id="@+id/iv_user_care_arrow"

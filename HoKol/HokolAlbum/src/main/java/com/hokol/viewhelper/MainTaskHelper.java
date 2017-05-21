@@ -16,13 +16,13 @@ import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.widget.DropMenuWidget;
 import com.hokol.medium.widget.FlowAbleWidget;
-import com.hokol.medium.widget.labellayout.FlowLayout;
-import com.hokol.medium.widget.labellayout.LabelFlowLayout;
 import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.hokol.medium.widget.secondary.SecondaryWidget;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
+import com.yline.widget.label.FlowLayout;
+import com.yline.widget.label.LabelFlowLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -14,12 +14,12 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.bean.VUserFansAllBean;
 import com.hokol.medium.widget.FlowWidget;
-import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.view.common.CommonRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
+import com.yline.widget.label.FlowLayout;
 
 import java.util.Arrays;
 

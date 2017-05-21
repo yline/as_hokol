@@ -63,7 +63,7 @@
         android:textColor="@color/hokolGray"
         android:textSize="@dimen/default_text_size_medium"/>
 
-    <com.hokol.medium.widget.labellayout.FlowLayout
+    <com.yline.widget.label.FlowLayout
         android:id="@+id/flow_layout_main_mine_head_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
         android:layout_marginTop="@dimen/default_space_small"
         android:layout_toLeftOf="@+id/tv_main_mine_arrow"
         android:layout_toRightOf="@+id/circle_main_mine_avatar">
-    </com.hokol.medium.widget.labellayout.FlowLayout>
+    </com.yline.widget.label.FlowLayout>
 
     <ImageView
         android:id="@+id/tv_main_mine_arrow"

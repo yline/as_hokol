@@ -63,11 +63,11 @@
             android:text="17天1小时后截止"/>
     </RelativeLayout>
 
-    <com.hokol.medium.widget.labellayout.FlowLayout
+    <com.yline.widget.label.FlowLayout
         android:id="@+id/flow_task_assigned"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:orientation="horizontal">
-    </com.hokol.medium.widget.labellayout.FlowLayout>
+    </com.yline.widget.label.FlowLayout>
 </LinearLayout>

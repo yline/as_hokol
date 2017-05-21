@@ -14,13 +14,13 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hokol.R;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.FlowWidget;
-import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.hokol.util.IntentUtil;
 import com.hokol.viewhelper.UserInfoHelper;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.FileUtil;
 import com.yline.view.common.ViewHolder;
+import com.yline.widget.label.FlowLayout;
 
 import java.io.File;
 import java.util.Arrays;

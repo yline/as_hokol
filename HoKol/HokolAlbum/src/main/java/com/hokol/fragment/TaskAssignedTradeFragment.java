@@ -11,12 +11,12 @@ import android.view.ViewGroup;
 import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.medium.widget.FlowWidget;
-import com.hokol.medium.widget.labellayout.FlowLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseFragment;
 import com.yline.view.common.CommonRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
+import com.yline.widget.label.FlowLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;

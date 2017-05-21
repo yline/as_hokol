@@ -17,14 +17,14 @@
         android:textColor="@color/hokolGrayDrak"
         android:textSize="@dimen/default_text_size_normal"/>
 
-    <com.hokol.medium.widget.labellayout.LabelFlowLayout
+    <com.yline.widget.label.LabelFlowLayout
         android:id="@+id/label_flow_main_task_menu_sex"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_main_task_menu_sex"
         android:paddingLeft="@dimen/default_space_large"
         android:paddingRight="@dimen/default_space_large">
-    </com.hokol.medium.widget.labellayout.LabelFlowLayout>
+    </com.yline.widget.label.LabelFlowLayout>
 
     <Button
         android:id="@+id/btn_main_task_menu_sex"
