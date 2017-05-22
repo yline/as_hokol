@@ -25,7 +25,6 @@ import java.util.List;
  */
 public class DropMenuWidget
 {
-
 	// 默认位置
 	private static final int CONTENT_VIEW_POSITION = 0;
 

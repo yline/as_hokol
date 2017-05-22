@@ -14,7 +14,7 @@ import com.hokol.R;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VAreaAllBean;
-import com.hokol.medium.widget.secondary.SecondaryWidget;
+import com.hokol.medium.widget.SecondaryWidget;
 import com.hokol.util.ArraysUtil;
 import com.hokol.viewhelper.MainHomeHelper;
 import com.yline.base.BaseFragment;

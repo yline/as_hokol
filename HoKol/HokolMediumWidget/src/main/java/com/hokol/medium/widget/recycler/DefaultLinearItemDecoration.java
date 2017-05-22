@@ -13,7 +13,6 @@ import com.yline.view.apply.SimpleLinearItemDecoration;
  */
 public class DefaultLinearItemDecoration extends SimpleLinearItemDecoration
 {
-
 	public DefaultLinearItemDecoration(Context context)
 	{
 		super(context);

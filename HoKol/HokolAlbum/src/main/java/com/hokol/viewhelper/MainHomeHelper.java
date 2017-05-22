@@ -8,7 +8,7 @@ import android.view.View;
 import com.hokol.R;
 import com.hokol.medium.widget.DropMenuWidget;
 import com.hokol.medium.widget.FlowAbleWidget;
-import com.hokol.medium.widget.secondary.SecondaryWidget;
+import com.hokol.medium.widget.SecondaryWidget;
 import com.yline.widget.label.LabelFlowLayout;
 
 import java.util.ArrayList;

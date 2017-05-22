@@ -66,19 +66,19 @@ public class CircleProgressBar extends ImageView
 		super(context, attrs, defStyleAttr);
 
 		// text
-		final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.WidgetCircleProgressBar, defStyleAttr, 0);
+		final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ViewCircleProgressBar, defStyleAttr, 0);
 		final float density = context.getResources().getDisplayMetrics().density;
 
-		int textVisible = a.getInt(R.styleable.WidgetCircleProgressBar_bar_text_visibility, 1);
+		int textVisible = a.getInt(R.styleable.ViewCircleProgressBar_bar_text_visibility, 1);
 		if (textVisible != 1)
 		{
 			isTextDraw = true;
 		}
-		textSize = a.getDimensionPixelOffset(R.styleable.WidgetCircleProgressBar_bar_text_size, (int) (density * text_size));
-		int textColor = a.getColor(R.styleable.WidgetCircleProgressBar_bar_text_color, Color.BLACK);
-		textPercentage = a.getInt(R.styleable.WidgetCircleProgressBar_bar_text_progress, 0);
+		textSize = a.getDimensionPixelOffset(R.styleable.ViewCircleProgressBar_bar_text_size, (int) (density * text_size));
+		int textColor = a.getColor(R.styleable.ViewCircleProgressBar_bar_text_color, Color.BLACK);
+		textPercentage = a.getInt(R.styleable.ViewCircleProgressBar_bar_text_progress, 0);
 		a.recycle();
-
+		
 		textPaint = new Paint();
 		textPaint.setStyle(Paint.Style.FILL);
 		textPaint.setColor(textColor);
