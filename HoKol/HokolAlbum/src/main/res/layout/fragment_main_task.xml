@@ -11,7 +11,7 @@
         android:background="@color/hokolRed">
 
         <ImageView
-            android:id="@+id/iv_main_task_action_task"
+            android:id="@+id/iv_main_task_action_history"
             android:layout_width="40dp"
             android:layout_height="32dp"
             android:layout_centerVertical="true"
@@ -30,7 +30,7 @@
             android:textStyle="bold"/>
 
         <ImageView
-            android:id="@+id/iv_main_task_action_history"
+            android:id="@+id/iv_main_task_action_task"
             android:layout_width="40dp"
             android:layout_height="32dp"
             android:layout_alignParentRight="true"
