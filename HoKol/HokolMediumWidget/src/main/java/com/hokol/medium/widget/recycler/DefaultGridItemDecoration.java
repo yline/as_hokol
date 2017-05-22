@@ -11,4 +11,16 @@ public class DefaultGridItemDecoration extends SimpleGridItemDecoration
 	{
 		super(context);
 	}
+
+	@Override
+	protected int getHeadNumber()
+	{
+		return super.getHeadNumber();
+	}
+
+	@Override
+	protected int getFootNumber()
+	{
+		return super.getFootNumber();
+	}
 }

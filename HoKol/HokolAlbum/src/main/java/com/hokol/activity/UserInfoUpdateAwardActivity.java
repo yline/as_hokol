@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.hokol.R;
-import com.hokol.medium.widget.EditTextWidget;
+import com.hokol.medium.widget.EtMaxNumWidget;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.view.common.ViewHolder;
 
@@ -20,7 +20,7 @@ public class UserInfoUpdateAwardActivity extends BaseAppCompatActivity
 
 	private ViewHolder viewHolder;
 
-	private EditTextWidget editTextWidget;
+	private EtMaxNumWidget editTextWidget;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -37,7 +37,7 @@ public class UserInfoUpdateAwardActivity extends BaseAppCompatActivity
 	{
 		viewHolder = new ViewHolder(this);
 
-		editTextWidget = new EditTextWidget((EditText) viewHolder.get(R.id.et_user_info_update_award_input),
+		editTextWidget = new EtMaxNumWidget((EditText) viewHolder.get(R.id.et_user_info_update_award_input),
 				(TextView) viewHolder.get(R.id.tv_user_info_update_award_remainder))
 		{
 			@Override

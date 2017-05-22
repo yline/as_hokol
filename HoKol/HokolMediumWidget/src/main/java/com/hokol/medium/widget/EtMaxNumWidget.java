@@ -12,18 +12,18 @@ import android.widget.TextView;
  * @author yline 2017/4/15 -- 14:35
  * @version 1.0.0
  */
-public class EditTextWidget
+public class EtMaxNumWidget
 {
 	private EditText editText;
 
 	private TextView textView;
 
-	public EditTextWidget(@NonNull EditText editText)
+	public EtMaxNumWidget(@NonNull EditText editText)
 	{
 		this(editText, null);
 	}
 
-	public EditTextWidget(@NonNull EditText editText, TextView textView)
+	public EtMaxNumWidget(@NonNull EditText editText, TextView textView)
 	{
 		this.editText = editText;
 		this.textView = textView;
