@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingLeft="@dimen/default_space_large"
+        android:paddingTop="@dimen/default_space_normal"
+        android:text="选择属性"
+        android:textColor="@color/hokolGrayDrak"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGrayDrak">
+    </View>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingLeft="@dimen/default_space_large"
+        android:paddingTop="@dimen/default_space_normal"
+        android:text="类目"
+        android:textColor="@color/hokolGrayDrak"/>
+
+    <com.yline.widget.label.LabelFlowLayout
+        android:id="@+id/label_task_publish_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_space_large">
+    </com.yline.widget.label.LabelFlowLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGrayDrak">
+    </View>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingLeft="@dimen/default_space_large"
+        android:paddingTop="@dimen/default_space_normal"
+        android:text="性别"
+        android:textColor="@color/hokolGrayDrak"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/default_space_large">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_space_little"
+            android:layout_marginTop="@dimen/default_space_little"
+            android:background="@drawable/view_global_stroke_gray_radius_all"
+            android:gravity="center_horizontal"
+            android:hint="价格"
+            android:maxLines="1"
+            android:paddingBottom="@dimen/view_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/view_space_normal"
+            android:textSize="@dimen/default_text_size_medium"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="@dimen/default_space_normal"
+            android:paddingRight="@dimen/default_space_normal"
+            android:text="×"
+            android:textColor="@color/hokolGray"
+            android:textSize="@dimen/default_text_size_super"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_space_little"
+            android:layout_marginTop="@dimen/default_space_little"
+            android:background="@drawable/view_global_stroke_gray_radius_all"
+            android:gravity="center_horizontal"
+            android:hint="数量"
+            android:maxLines="1"
+            android:paddingBottom="@dimen/view_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/view_space_normal"
+            android:textSize="@dimen/default_text_size_medium"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/default_space_large">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_space_little"
+            android:layout_marginTop="@dimen/default_space_little"
+            android:background="@drawable/view_global_stroke_gray_radius_all"
+            android:gravity="center_horizontal"
+            android:hint="价格"
+            android:maxLines="1"
+            android:paddingBottom="@dimen/view_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/view_space_normal"
+            android:textSize="@dimen/default_text_size_medium"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="@dimen/default_space_normal"
+            android:paddingRight="@dimen/default_space_normal"
+            android:text="×"
+            android:textColor="@color/hokolGray"
+            android:textSize="@dimen/default_text_size_super"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_space_little"
+            android:layout_marginTop="@dimen/default_space_little"
+            android:background="@drawable/view_global_stroke_gray_radius_all"
+            android:gravity="center_horizontal"
+            android:hint="数量"
+            android:maxLines="1"
+            android:paddingBottom="@dimen/view_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/view_space_normal"
+            android:textSize="@dimen/default_text_size_medium"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/default_space_small"
+        android:background="@color/hokolGrayDrak">
+    </View>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </View>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/default_space_small"
+        android:background="@color/hokolGrayDrak">
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:text="取消"
+            android:textColor="@color/hokolGray"
+            android:textSize="@dimen/default_text_size_normal"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/hokolRed"
+            android:text="完成"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/default_text_size_normal"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- 选择属性 -->
+        <LinearLayout
+            android:id="@+id/ll_task_publish_content_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/view_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/view_space_normal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:text="选择属性"
+                android:textColor="@color/hokolBlackSmall"
+                android:textSize="@dimen/default_text_size_medium"/>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/hokolGrayLight">
+            </View>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:text="类目 性别 数量"
+                android:textColor="@color/hokolGrayDrak"
+                android:textSize="@dimen/default_text_size_medium"/>
+
+            <ImageView
+                android:layout_width="@dimen/default_text_size_medium"
+                android:layout_height="@dimen/default_text_size_medium"
+                android:src="@drawable/global_forward_arrows_dark"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_space_medium"
+            android:background="@color/hokolGrayLight">
+        </View>
+
+        <!--标题-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/view_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/view_space_normal"
+            android:text="标题"
+            android:textColor="@color/hokolBlackSmall"
+            android:textSize="@dimen/default_text_size_medium"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/hokolGrayLight">
+        </View>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="如轻熟风服装模特2名"
+            android:maxLines="2"
+            android:paddingBottom="@dimen/view_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/view_space_normal"
+            android:textColor="#b2b2b2"
+            android:textSize="@dimen/default_text_size_medium"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_space_medium"
+            android:background="@color/hokolGrayLight">
+        </View>
+
+        <!--标题-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/view_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/view_space_normal"
+            android:text="描述你的需求"
+            android:textColor="@color/hokolBlackSmall"
+            android:textSize="@dimen/default_text_size_medium"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/hokolGrayLight">
+        </View>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="top|left"
+            android:hint="姐想找一妹子，身高170以下，地点浙江杭州下沙女生教学楼的内置图书馆，时间随时，内容，带你开车带你飞"
+            android:lines="5"
+            android:paddingBottom="@dimen/view_space_normal"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/view_space_normal"
+            android:textColor="#b2b2b2"
+            android:textSize="@dimen/default_text_size_small"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_space_medium"
+            android:background="@color/hokolGrayLight">
+        </View>
+
+        <!--报酬-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/default_space_large">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="@dimen/default_space_normal"
+                android:text="报酬"
+                android:textColor="@color/hokolBlackSmall"
+                android:textSize="@dimen/default_text_size_medium"/>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="@dimen/default_text_size_medium"
+                android:layout_gravity="center_vertical"
+                android:background="@color/hokolGrayLight">
+            </View>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_space_little"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:layout_marginRight="@dimen/default_space_normal"
+                android:layout_marginTop="@dimen/default_space_little"
+                android:layout_weight="1"
+                android:background="@drawable/view_global_stroke_gray_radius_all"
+                android:gravity="center_horizontal"
+                android:hint="价格"
+                android:maxLines="1"
+                android:paddingBottom="@dimen/view_space_normal"
+                android:paddingTop="@dimen/view_space_normal"
+                android:textSize="@dimen/default_text_size_medium"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="×"
+                android:textColor="@color/hokolGray"
+                android:textSize="@dimen/default_text_size_super"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_space_little"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:layout_marginRight="@dimen/default_space_normal"
+                android:layout_marginTop="@dimen/default_space_little"
+                android:layout_weight="1"
+                android:background="@drawable/view_global_stroke_gray_radius_all"
+                android:gravity="center_horizontal"
+                android:hint="人数"
+                android:maxLines="1"
+                android:paddingBottom="@dimen/view_space_normal"
+                android:paddingTop="@dimen/view_space_normal"
+                android:textSize="@dimen/default_text_size_medium"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_space_little"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:layout_marginRight="@dimen/default_space_normal"
+                android:layout_marginTop="@dimen/default_space_little"
+                android:layout_weight="1"
+                android:background="@drawable/view_global_stroke_gray_radius_all"
+                android:gravity="center_horizontal"
+                android:paddingBottom="@dimen/view_space_normal"
+                android:paddingTop="@dimen/view_space_normal"
+                android:text="面议"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_space_medium"
+            android:background="@color/hokolGrayLight">
+        </View>
+
+        <!--地区选择-->
+        <LinearLayout
+            android:id="@+id/ll_task_publish_content_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/default_space_normal"
+                android:paddingLeft="@dimen/default_space_large"
+                android:paddingRight="@dimen/default_space_large"
+                android:paddingTop="@dimen/default_space_normal"
+                android:text="地区"
+                android:textColor="@color/hokolBlackSmall"
+                android:textSize="@dimen/default_text_size_medium"/>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="@dimen/default_text_size_medium"
+                android:layout_gravity="center_vertical"
+                android:background="@color/hokolGrayLight">
+            </View>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/default_space_normal"
+                android:text="未选择"
+                android:textColor="@color/hokolGrayDrak"
+                android:textSize="@dimen/default_text_size_medium"/>
+
+            <ImageView
+                android:layout_width="@dimen/default_text_size_medium"
+                android:layout_height="@dimen/default_text_size_medium"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/default_space_large"
+                android:src="@drawable/global_forward_arrows_dark"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_space_medium"
+            android:background="@color/hokolGrayLight"
+            android:id="@+id/view">
+        </View>
+
+        <!--时间-->
+        <LinearLayout
+            android:id="@+id/ll_task_publish_content_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/default_space_normal"
+                android:paddingLeft="@dimen/default_space_large"
+                android:paddingRight="@dimen/default_space_large"
+                android:paddingTop="@dimen/default_space_normal"
+                android:text="截止时间"
+                android:textColor="@color/hokolBlackSmall"
+                android:textSize="@dimen/default_text_size_medium"/>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="@dimen/default_text_size_medium"
+                android:layout_gravity="center_vertical"
+                android:background="@color/hokolGrayLight">
+            </View>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/default_space_normal"
+                android:text="未选择"
+                android:textColor="@color/hokolGrayDrak"
+                android:textSize="@dimen/default_text_size_medium"/>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="@dimen/default_text_size_medium"
+                android:layout_gravity="center_vertical"
+                android:background="@color/hokolGrayLight">
+            </View>
+
+            <ImageView
+                android:layout_width="@dimen/default_text_size_medium"
+                android:layout_height="@dimen/default_text_size_medium"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/default_space_large"
+                android:src="@drawable/global_forward_arrows_dark"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_space_medium"
+            android:background="@color/hokolGrayLight">
+        </View>
+
+        <!--时间-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/default_space_normal"
+                android:paddingLeft="@dimen/default_space_large"
+                android:paddingRight="@dimen/default_space_large"
+                android:paddingTop="@dimen/default_space_normal"
+                android:text="担保交易"
+                android:textColor="@color/hokolBlackSmall"
+                android:textSize="@dimen/default_text_size_medium"/>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="@dimen/default_text_size_medium"
+                android:layout_gravity="center_vertical"
+                android:background="@color/hokolGrayLight">
+            </View>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/default_space_normal"
+                android:text="未担保"
+                android:textColor="@color/hokolGrayDrak"
+                android:textSize="@dimen/default_text_size_medium"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_space_medium"
+            android:background="@color/hokolGrayLight">
+        </View>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/default_space_small"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingTop="@dimen/default_space_small"
+            android:text="注:发布任务即同意全额担保，选择面议将在交流成功后全额担保"
+            android:textColor="@color/hokolGrayDrak"
+            android:textSize="@dimen/default_text_size_small"/>
+
+        <Button
+            android:id="@+id/btn_task_publish_content_commit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_space_large"
+            android:layout_marginRight="@dimen/default_space_large"
+            android:background="@drawable/widget_bg_red_radius_normal"
+            android:text="提交"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/default_text_size_large"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/view_text_size_huge"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingTop="@dimen/default_space_small">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:checked="true"
+                android:drawableRight="@drawable/enter_register_phone_check"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/default_space_small"
+                android:text="我已阅读并同意《红客用户担保交易协议》"
+                android:textColor="@color/hokolGrayDrak"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
