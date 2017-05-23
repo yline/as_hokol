@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout
+    <com.hokol.medium.viewcustom.SuperSwipeRefreshLayout
         android:id="@+id/super_swipe_star_info_private"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </android.support.v7.widget.RecyclerView>
-    </com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout>
+    </com.hokol.medium.viewcustom.SuperSwipeRefreshLayout>
 
     <RelativeLayout
         android:id="@+id/rl_star_info_private_lock"

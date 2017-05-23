@@ -14,11 +14,11 @@ import com.hokol.R;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.DropMenuWidget;
 import com.hokol.medium.widget.FlowAbleWidget;
 import com.hokol.medium.widget.SecondaryWidget;
-import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
-import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
+import com.yline.view.callback.OnRecyclerItemClickListener;
 import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 import com.yline.widget.label.FlowLayout;
@@ -268,7 +268,7 @@ public class MainTaskHelper
 				{
 					if (null != listener)
 					{
-						listener.onClick(viewHolder, sList.get(position), position);
+						listener.onItemClick(viewHolder, sList.get(position), position);
 					}
 				}
 			});

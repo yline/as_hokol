@@ -14,13 +14,13 @@ import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
+import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
-import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
-import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseFragment;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.callback.OnRecyclerItemClickListener;
 import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
@@ -74,7 +74,7 @@ public class MainMinePrivateFragment extends BaseFragment
 		recyclerAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener()
 		{
 			@Override
-			public void onClick(RecyclerViewHolder viewHolder, Object o, int position)
+			public void onItemClick(RecyclerViewHolder viewHolder, Object o, int position)
 			{
 				IApplication.toast("position = " + position);
 			}
@@ -190,7 +190,7 @@ public class MainMinePrivateFragment extends BaseFragment
 				{
 					if (null != listener)
 					{
-						listener.onClick(viewHolder, sList.get(position), position);
+						listener.onItemClick(viewHolder, sList.get(position), position);
 					}
 				}
 			});

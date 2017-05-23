@@ -18,14 +18,14 @@ import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VHomeMainBean;
 import com.hokol.medium.http.bean.WHomeMainBean;
+import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
-import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
-import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainHomeHelper;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.callback.OnRecyclerItemClickListener;
 import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
@@ -95,7 +95,7 @@ public class MainHomePerformerFragment extends BaseFragment implements MainHomeF
 		mainHomePerformerAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VHomeMainBean.VHomeMainOneBean>()
 		{
 			@Override
-			public void onClick(RecyclerViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
+			public void onItemClick(RecyclerViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
 			{
 				StarDynamicActivity.actionStart(getContext(), bean.getDt_id());
 			}
@@ -214,7 +214,7 @@ public class MainHomePerformerFragment extends BaseFragment implements MainHomeF
 				{
 					if (null != listener)
 					{
-						listener.onClick(viewHolder, sList.get(position), position);
+						listener.onItemClick(viewHolder, sList.get(position), position);
 					}
 				}
 			});

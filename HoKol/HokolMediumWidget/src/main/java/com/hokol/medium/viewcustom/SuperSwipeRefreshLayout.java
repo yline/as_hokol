@@ -1,4 +1,4 @@
-package com.hokol.medium.widget.swiperefresh;
+package com.hokol.medium.viewcustom;
 
 import android.content.Context;
 import android.util.AttributeSet;

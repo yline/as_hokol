@@ -13,10 +13,10 @@ import com.bumptech.glide.Priority;
 import com.hokol.R;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
-import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.TimeConvertUtil;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.callback.OnRecyclerItemClickListener;
 import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 import com.yline.view.common.ViewHolder;
@@ -116,7 +116,7 @@ public class MainNewsHelper
 				{
 					if (null != listener)
 					{
-						listener.onClick(viewHolder, sList.get(position), position);
+						listener.onItemClick(viewHolder, sList.get(position), position);
 					}
 				}
 			});

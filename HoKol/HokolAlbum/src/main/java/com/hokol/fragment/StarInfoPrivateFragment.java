@@ -21,12 +21,12 @@ import com.hokol.activity.StarDynamicActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.bean.VHomeMainBean;
+import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
-import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
-import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.yline.base.BaseFragment;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.callback.OnRecyclerItemClickListener;
 import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
@@ -94,7 +94,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 		starInfoPrivateAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VHomeMainBean.VHomeMainOneBean>()
 		{
 			@Override
-			public void onClick(RecyclerViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
+			public void onItemClick(RecyclerViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
 			{
 				StarDynamicActivity.actionStart(getContext(), bean.getDt_id());
 			}
@@ -220,7 +220,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 				{
 					if (null != listener)
 					{
-						listener.onClick(viewHolder, sList.get(position), position);
+						listener.onItemClick(viewHolder, sList.get(position), position);
 					}
 				}
 			});

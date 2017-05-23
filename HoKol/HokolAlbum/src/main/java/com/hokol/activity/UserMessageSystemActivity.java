@@ -11,9 +11,9 @@ import android.view.View;
 
 import com.hokol.R;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
-import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.callback.OnRecyclerItemClickListener;
 import com.yline.view.common.CommonRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
@@ -52,7 +52,7 @@ public class UserMessageSystemActivity extends BaseAppCompatActivity
 		messageSystemAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener()
 		{
 			@Override
-			public void onClick(RecyclerViewHolder viewHolder, Object o, int position)
+			public void onItemClick(RecyclerViewHolder viewHolder, Object o, int position)
 			{
 				UserMessageDetailActivity.actionStart(UserMessageSystemActivity.this);
 			}
@@ -89,7 +89,7 @@ public class UserMessageSystemActivity extends BaseAppCompatActivity
 				{
 					if (null != listener)
 					{
-						listener.onClick(viewHolder, sList.get(position), position);
+						listener.onItemClick(viewHolder, sList.get(position), position);
 					}
 				}
 			});

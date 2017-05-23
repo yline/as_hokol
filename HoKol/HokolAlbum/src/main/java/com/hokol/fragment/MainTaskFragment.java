@@ -20,14 +20,14 @@ import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VAreaAllBean;
+import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.ADWidget;
-import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
-import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainTaskHelper;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.callback.OnRecyclerItemClickListener;
 import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.List;
@@ -99,7 +99,7 @@ public class MainTaskFragment extends BaseFragment
 		mainTaskHelper.setOnRecyclerClickListener(new OnRecyclerItemClickListener()
 		{
 			@Override
-			public void onClick(RecyclerViewHolder viewHolder, Object o, int position)
+			public void onItemClick(RecyclerViewHolder viewHolder, Object o, int position)
 			{
 				TaskDetailActivity.actionStart(getContext());
 			}

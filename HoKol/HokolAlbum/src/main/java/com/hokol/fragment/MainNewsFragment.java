@@ -14,11 +14,11 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
-import com.hokol.medium.widget.recycler.OnRecyclerItemClickListener;
-import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
+import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainNewsHelper;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
+import com.yline.view.callback.OnRecyclerItemClickListener;
 import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.List;
@@ -55,7 +55,7 @@ public class MainNewsFragment extends BaseFragment
 		mainNewsHelper.setOnRecycleItemClickListener(new OnRecyclerItemClickListener<VNewsSingleBean>()
 		{
 			@Override
-			public void onClick(RecyclerViewHolder viewHolder, VNewsSingleBean vNewsSingleBean, int position)
+			public void onItemClick(RecyclerViewHolder viewHolder, VNewsSingleBean vNewsSingleBean, int position)
 			{
 				NewsInfoActivity.actionStart(getContext(), vNewsSingleBean.getUrl());
 			}

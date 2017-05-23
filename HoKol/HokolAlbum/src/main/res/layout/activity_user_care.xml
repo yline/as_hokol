@@ -29,7 +29,7 @@
             android:textSize="@dimen/default_text_size_large"/>
     </RelativeLayout>
 
-    <com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout
+    <com.hokol.medium.viewcustom.SuperSwipeRefreshLayout
         android:id="@+id/super_swipe_user_care"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </android.support.v7.widget.RecyclerView>
-    </com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout>
+    </com.hokol.medium.viewcustom.SuperSwipeRefreshLayout>
 </LinearLayout>
 
 

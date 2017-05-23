@@ -20,7 +20,7 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VDynamicCareAllBean;
 import com.hokol.medium.http.bean.VDynamicCareBean;
 import com.hokol.medium.http.bean.WDynamicCareAllBean;
-import com.hokol.medium.widget.swiperefresh.SuperSwipeRefreshLayout;
+import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainCareHelper;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
