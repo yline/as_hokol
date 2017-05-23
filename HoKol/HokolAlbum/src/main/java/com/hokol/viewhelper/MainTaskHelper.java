@@ -14,6 +14,7 @@ import com.hokol.R;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.bean.VTaskMainAll;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.DropMenuWidget;
 import com.hokol.medium.widget.FlowAbleWidget;
@@ -243,7 +244,12 @@ public class MainTaskHelper
 		taskRecycleAdapter.setOnRecyclerItemClickListener(listener);
 	}
 
-	private class TaskRecycleAdapter extends HeadFootRecyclerAdapter<String>
+	public void setRecyclerData(List<VTaskMainAll.TaskMainAllOne> result)
+	{
+		taskRecycleAdapter.setDataList(result);
+	}
+
+	private class TaskRecycleAdapter extends HeadFootRecyclerAdapter<VTaskMainAll.TaskMainAllOne>
 	{
 		private OnRecyclerItemClickListener listener;
 

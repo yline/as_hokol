@@ -12,6 +12,7 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
+import com.hokol.medium.http.bean.VNewsRecommendBean;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
@@ -27,7 +28,7 @@ public class MainNewsFragment extends BaseFragment
 {
 	private MainNewsHelper mainNewsHelper;
 
-	private VNewsSingleBean mRecommendBean;
+	private VNewsRecommendBean mRecommendBean;
 
 	private SuperSwipeRefreshLayout superSwipeRefreshLayout;
 
@@ -71,7 +72,7 @@ public class MainNewsFragment extends BaseFragment
 			{
 				if (null != mRecommendBean)
 				{
-					NewsInfoActivity.actionStart(getContext(), mRecommendBean.getUrl());
+					NewsInfoActivity.actionStart(getContext(), mRecommendBean.getInfo());
 				}
 			}
 		});
@@ -83,10 +84,10 @@ public class MainNewsFragment extends BaseFragment
 			@Override
 			public void onAnimate()
 			{
-				XHttpUtil.doNewsRecommend(new XHttpAdapter<VNewsSingleBean>()
+				XHttpUtil.doNewsRecommend(new XHttpAdapter<VNewsRecommendBean>()
 				{
 					@Override
-					public void onSuccess(VNewsSingleBean vNewsSingleBean)
+					public void onSuccess(VNewsRecommendBean vNewsRecommendBean)
 					{
 						IApplication.toast("刷新成功");
 						superSwipeRefreshLayout.setRefreshing(false);
@@ -147,22 +148,22 @@ public class MainNewsFragment extends BaseFragment
 	private void initData()
 	{
 		// 推荐
-		XHttpUtil.doNewsRecommend(new XHttpAdapter<VNewsSingleBean>()
+		XHttpUtil.doNewsRecommend(new XHttpAdapter<VNewsRecommendBean>()
 		{
 			@Override
-			public void onSuccess(VNewsSingleBean vNewsSingleBean)
+			public void onSuccess(VNewsRecommendBean vNewsRecommendBean)
 			{
-				if (null == vNewsSingleBean)
+				if (null == vNewsRecommendBean)
 				{
 					return;
 				}
-				mRecommendBean = vNewsSingleBean;
-				mainNewsHelper.updateRecommendData(vNewsSingleBean);
+				mRecommendBean = vNewsRecommendBean;
+				mainNewsHelper.updateRecommendData(vNewsRecommendBean);
 			}
 		});
 
 		// 多条新闻
-		XHttpUtil.doNewsMultiplex(new WNewsMultiplexBean(loadedNewsNumber, DeleteConstant.defaultNumberNormal), new XHttpAdapter<VNewsMultiplexBean>()
+		XHttpUtil.doNewsMultiplex(new WNewsMultiplexBean(0, DeleteConstant.defaultNumberNormal), new XHttpAdapter<VNewsMultiplexBean>()
 		{
 			@Override
 			public void onSuccess(VNewsMultiplexBean vNewsMultiplexBean)

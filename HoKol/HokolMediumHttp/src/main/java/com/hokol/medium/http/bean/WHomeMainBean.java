@@ -19,12 +19,12 @@ public class WHomeMainBean
 	private int user_sex;
 
 	/**
-	 * 用户省份：【例：浙江省，不限:0】
+	 * 用户省份：【例：浙江省，不限】
 	 */
 	private String user_province;
 
 	/**
-	 * 用户城市：【例：杭州市，不限:0】
+	 * 用户城市：【例：杭州市，不限】
 	 */
 	private List<String> user_city;
 
@@ -47,7 +47,7 @@ public class WHomeMainBean
 	{
 		this.user_tag = userTag.getIndex();
 		this.user_sex = 0;
-		this.user_province = "0";
+		this.user_province = "不限";
 		this.user_city = new ArrayList<>();
 		this.user_adv = 0;
 		this.num1 = num1;

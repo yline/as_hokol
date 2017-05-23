@@ -469,7 +469,8 @@ public class TestTaskActivity extends BaseTestActivity
 				final int length = Integer.parseInt(editTextFive.getText().toString().trim());
 				
 				WTaskMainAll wTaskMainAll = new WTaskMainAll(num1, length);
-				
+				wTaskMainAll.setTask_province("浙江省");
+				wTaskMainAll.setTask_city(Arrays.asList("杭州市"));
 				XHttpUtil.doTaskMainAll(wTaskMainAll, new XHttpAdapter<VTaskMainAll>()
 				{
 					@Override

@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
-import com.hokol.medium.http.bean.VNewsSingleBean;
+import com.hokol.medium.http.bean.VNewsRecommendBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
 import com.hokol.test.common.BaseTestActivity;
 import com.yline.http.XHttpAdapter;
@@ -25,10 +25,10 @@ public class TestNewsActivity extends BaseTestActivity
 			@Override
 			public void onClick(View v)
 			{
-				XHttpUtil.doNewsRecommend(new XHttpAdapter<VNewsSingleBean>()
+				XHttpUtil.doNewsRecommend(new XHttpAdapter<VNewsRecommendBean>()
 				{
 					@Override
-					public void onSuccess(VNewsSingleBean vNewsSingleBean)
+					public void onSuccess(VNewsRecommendBean vNewsRecommendBean)
 					{
 
 					}

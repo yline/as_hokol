@@ -20,6 +20,8 @@ import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VAreaAllBean;
+import com.hokol.medium.http.bean.VTaskMainAll;
+import com.hokol.medium.http.bean.WTaskMainAll;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.ADWidget;
 import com.hokol.viewhelper.MainTaskHelper;
@@ -38,6 +40,10 @@ public class MainTaskFragment extends BaseFragment
 	private MainTaskHelper mainTaskHelper;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
+
+	private WTaskMainAll taskMainAll;
+
+	private int taskRefreshNumber;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -147,6 +153,10 @@ public class MainTaskFragment extends BaseFragment
 
 	private void initData()
 	{
+		// AD 广告
+
+
+		// 地区
 		XHttpUtil.doAreaAll(new XHttpAdapter<VAreaAllBean>()
 		{
 			@Override
@@ -155,6 +165,22 @@ public class MainTaskFragment extends BaseFragment
 				Map provinceMap = vAreaAllBean.getList();
 
 				mainTaskHelper.setAreaData(provinceMap);
+			}
+		});
+
+		// Recycler
+		taskMainAll = new WTaskMainAll(0, DeleteConstant.defaultNumberNormal);
+		XHttpUtil.doTaskMainAll(taskMainAll, new XHttpAdapter<VTaskMainAll>()
+		{
+			@Override
+			public void onSuccess(VTaskMainAll vTaskMainAll)
+			{
+				List<VTaskMainAll.TaskMainAllOne> result = vTaskMainAll.getList();
+				if (null != result)
+				{
+					taskRefreshNumber = result.size();
+					mainTaskHelper.setRecyclerData(result);
+				}
 			}
 		});
 	}

@@ -12,7 +12,7 @@ import com.hokol.medium.http.bean.VDynamicUserPrivateAllBean;
 import com.hokol.medium.http.bean.VHomeMainBean;
 import com.hokol.medium.http.bean.VLoginPhonePwdBean;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
-import com.hokol.medium.http.bean.VNewsSingleBean;
+import com.hokol.medium.http.bean.VNewsRecommendBean;
 import com.hokol.medium.http.bean.VTaskMainAll;
 import com.hokol.medium.http.bean.VTaskMainDetailBean;
 import com.hokol.medium.http.bean.VTaskStaffCommentedInfoBean;
@@ -121,10 +121,10 @@ public class XHttpUtil
 	/**
 	 * 推荐新闻获取
 	 */
-	public static void doNewsRecommend(XHttpAdapter<VNewsSingleBean> adapter)
+	public static void doNewsRecommend(XHttpAdapter<VNewsRecommendBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_news_recommend;
-		new XTextHttp<VNewsSingleBean>(adapter).doPost(httpUrl, null, VNewsSingleBean.class);
+		new XTextHttp<VNewsRecommendBean>(adapter).doPost(httpUrl, null, VNewsRecommendBean.class);
 	}
 
 	/**

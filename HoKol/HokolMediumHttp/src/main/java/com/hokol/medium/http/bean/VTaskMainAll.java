@@ -21,15 +21,18 @@ public class VTaskMainAll
 		/* 任务唯一标识 */
 		private String task_id;
 
-		/* 任务类型：[数组] */
-		private List<String> task_type;
+		/* 报名人数 */
+		private int employee_num;
 
 		/* 任务预算 */
 		private int task_fee;
 
 		/* 任务标题 */
 		private String task_title;
-		
+
+		/* 是否担保交易(0:未担保,1:已担保) */
+		private int is_guarantee;
+
 		/* 任务发布者昵称 */
 		private String user_nickname;
 
@@ -49,14 +52,14 @@ public class VTaskMainAll
 			this.task_id = task_id;
 		}
 
-		public List<String> getTask_type()
+		public int getEmployee_num()
 		{
-			return task_type;
+			return employee_num;
 		}
 
-		public void setTask_type(List<String> task_type)
+		public void setEmployee_num(int employee_num)
 		{
-			this.task_type = task_type;
+			this.employee_num = employee_num;
 		}
 
 		public int getTask_fee()
@@ -77,6 +80,16 @@ public class VTaskMainAll
 		public void setTask_title(String task_title)
 		{
 			this.task_title = task_title;
+		}
+
+		public int getIs_guarantee()
+		{
+			return is_guarantee;
+		}
+
+		public void setIs_guarantee(int is_guarantee)
+		{
+			this.is_guarantee = is_guarantee;
 		}
 
 		public String getUser_nickname()

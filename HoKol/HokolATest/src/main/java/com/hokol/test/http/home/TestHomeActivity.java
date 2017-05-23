@@ -13,6 +13,8 @@ import com.hokol.medium.http.bean.WHomeMainBean;
 import com.hokol.test.common.BaseTestActivity;
 import com.yline.http.XHttpAdapter;
 
+import java.util.Arrays;
+
 public class TestHomeActivity extends BaseTestActivity
 {
 	@Override
@@ -35,7 +37,10 @@ public class TestHomeActivity extends BaseTestActivity
 				final int num1 = parseInt(editTextTwo, 0);
 				final int length = parseInt(editTextThree, 1);
 
-				XHttpUtil.doHomeMain(new WHomeMainBean(userTag, num1, length), new XHttpAdapter<VHomeMainBean>()
+				WHomeMainBean wHomeMainBean = new WHomeMainBean(userTag, num1, length);
+				wHomeMainBean.setUser_province("浙江省");
+				wHomeMainBean.setUser_city(Arrays.asList("杭州市"));
+				XHttpUtil.doHomeMain(wHomeMainBean, new XHttpAdapter<VHomeMainBean>()
 				{
 					@Override
 					public void onSuccess(VHomeMainBean vHomeMainBean)

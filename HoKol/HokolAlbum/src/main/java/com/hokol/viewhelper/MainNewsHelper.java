@@ -11,9 +11,9 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.hokol.R;
+import com.hokol.medium.http.bean.VNewsRecommendBean;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
-import com.yline.log.LogFileUtil;
 import com.yline.utils.TimeConvertUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.callback.OnRecyclerItemClickListener;
@@ -73,7 +73,7 @@ public class MainNewsHelper
 	 */
 	public void setRecyclerData(List<VNewsSingleBean> dataList)
 	{
-		recyclerAdapter.addAll(dataList);
+		recyclerAdapter.setDataList(dataList);
 	}
 
 	public void setOnRecycleItemClickListener(OnRecyclerItemClickListener listener)
@@ -158,20 +158,12 @@ public class MainNewsHelper
 	/**
 	 * 更新推荐显示内容
 	 *
-	 * @param singleNewsBean
+	 * @param recommendBean
 	 */
-	public void updateRecommendData(VNewsSingleBean singleNewsBean)
+	public void updateRecommendData(VNewsRecommendBean recommendBean)
 	{
 		ImageView imageView = recommendViewHolder.get(R.id.iv_main_news_recommend);
-		Glide.with(context).load(singleNewsBean.getNews_img()).placeholder(R.drawable.global_load_failed).priority(Priority.HIGH).into(imageView);
-
-		recommendViewHolder.setText(R.id.tv_main_news_recommend_title, singleNewsBean.getNews_title());
-		recommendViewHolder.setText(R.id.tv_main_news_recommend_origin, singleNewsBean.getNews_source());
-
-		long stampTime = singleNewsBean.getNews_time();
-		LogFileUtil.v("Recommend stampTime = " + stampTime);
-		String showTime = TimeConvertUtil.stamp2FormatTime(stampTime * 1000);
-		recommendViewHolder.setText(R.id.tv_main_news_recommend_time, showTime);
+		Glide.with(context).load(recommendBean.getBanner_img()).placeholder(R.drawable.global_load_failed).priority(Priority.HIGH).into(imageView);
 	}
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 刷新布局 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 }
