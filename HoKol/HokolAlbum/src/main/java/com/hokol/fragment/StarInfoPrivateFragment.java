@@ -74,7 +74,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 			@Override
 			protected int getDivideResourceId()
 			{
-				return R.drawable.widget_recycler_divider_white_small;
+				return R.drawable.widget_solid_white_size_little;
 			}
 		});
 		starInfoPrivateAdapter = new StarInfoPrivateAdapter();
@@ -146,7 +146,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 				// 弹框, popWindow
 				View contentView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_star_info_pop_window, null);
 
-				Dialog dialog = new Dialog(getContext(), R.style.AppDialog_Default);
+				Dialog dialog = new Dialog(getContext(), R.style.Widget_Dialog_Default);
 				dialog.setContentView(contentView);
 
 				Window dialogWindow = dialog.getWindow();

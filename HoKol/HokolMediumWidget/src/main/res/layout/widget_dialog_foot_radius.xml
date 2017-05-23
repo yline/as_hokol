@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/widget_bg_white_radius_dialog"
+        android:background="@drawable/widget_shape_radiusall_solid_white"
         android:orientation="vertical">
 
         <Button
@@ -81,7 +81,7 @@
         android:id="@+id/btn_dialog_foot_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/widget_bg_white_radius_dialog"
+        android:background="@drawable/widget_shape_radiusall_solid_white"
         android:text="取消"
         android:textColor="@color/hokolGray"
         android:textSize="@dimen/default_text_size_normal"/>

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@drawable/widget_dialog_ios_bg"
+        android:background="@drawable/widget_shape_radiusall_solid_white"
         android:orientation="vertical">
 
         <LinearLayout

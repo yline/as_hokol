@@ -15,10 +15,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/view_space_normal"
+            android:paddingBottom="@dimen/default_space_normal"
             android:paddingLeft="@dimen/default_space_large"
             android:paddingRight="@dimen/default_space_large"
-            android:paddingTop="@dimen/view_space_normal">
+            android:paddingTop="@dimen/default_space_normal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -59,10 +59,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/view_space_normal"
+            android:paddingBottom="@dimen/default_space_normal"
             android:paddingLeft="@dimen/default_space_large"
             android:paddingRight="@dimen/default_space_large"
-            android:paddingTop="@dimen/view_space_normal"
+            android:paddingTop="@dimen/default_space_normal"
             android:text="标题"
             android:textColor="@color/hokolBlackSmall"
             android:textSize="@dimen/default_text_size_medium"/>
@@ -79,10 +79,10 @@
             android:background="@null"
             android:hint="如轻熟风服装模特2名"
             android:maxLines="2"
-            android:paddingBottom="@dimen/view_space_normal"
+            android:paddingBottom="@dimen/default_space_normal"
             android:paddingLeft="@dimen/default_space_large"
             android:paddingRight="@dimen/default_space_large"
-            android:paddingTop="@dimen/view_space_normal"
+            android:paddingTop="@dimen/default_space_normal"
             android:textColor="#b2b2b2"
             android:textSize="@dimen/default_text_size_medium"/>
 
@@ -96,10 +96,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/view_space_normal"
+            android:paddingBottom="@dimen/default_space_normal"
             android:paddingLeft="@dimen/default_space_large"
             android:paddingRight="@dimen/default_space_large"
-            android:paddingTop="@dimen/view_space_normal"
+            android:paddingTop="@dimen/default_space_normal"
             android:text="描述你的需求"
             android:textColor="@color/hokolBlackSmall"
             android:textSize="@dimen/default_text_size_medium"/>
@@ -117,10 +117,10 @@
             android:gravity="top|left"
             android:hint="姐想找一妹子，身高170以下，地点浙江杭州下沙女生教学楼的内置图书馆，时间随时，内容，带你开车带你飞"
             android:lines="5"
-            android:paddingBottom="@dimen/view_space_normal"
+            android:paddingBottom="@dimen/default_space_normal"
             android:paddingLeft="@dimen/default_space_large"
             android:paddingRight="@dimen/default_space_large"
-            android:paddingTop="@dimen/view_space_normal"
+            android:paddingTop="@dimen/default_space_normal"
             android:textColor="#b2b2b2"
             android:textSize="@dimen/default_text_size_small"/>
 
@@ -153,6 +153,7 @@
                 android:background="@color/hokolGrayLight">
             </View>
 
+            <!--android:background="@drawable/view_global_stroke_gray_radius_all"-->
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -161,12 +162,12 @@
                 android:layout_marginRight="@dimen/default_space_normal"
                 android:layout_marginTop="@dimen/default_space_little"
                 android:layout_weight="1"
-                android:background="@drawable/view_global_stroke_gray_radius_all"
+
                 android:gravity="center_horizontal"
                 android:hint="价格"
                 android:maxLines="1"
-                android:paddingBottom="@dimen/view_space_normal"
-                android:paddingTop="@dimen/view_space_normal"
+                android:paddingBottom="@dimen/default_space_normal"
+                android:paddingTop="@dimen/default_space_normal"
                 android:textSize="@dimen/default_text_size_medium"/>
 
             <TextView
@@ -177,6 +178,7 @@
                 android:textColor="@color/hokolGray"
                 android:textSize="@dimen/default_text_size_super"/>
 
+            <!--android:background="@drawable/view_global_stroke_gray_radius_all"-->
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -185,14 +187,14 @@
                 android:layout_marginRight="@dimen/default_space_normal"
                 android:layout_marginTop="@dimen/default_space_little"
                 android:layout_weight="1"
-                android:background="@drawable/view_global_stroke_gray_radius_all"
+
                 android:gravity="center_horizontal"
                 android:hint="人数"
                 android:maxLines="1"
-                android:paddingBottom="@dimen/view_space_normal"
-                android:paddingTop="@dimen/view_space_normal"
+                android:paddingBottom="@dimen/default_space_normal"
+                android:paddingTop="@dimen/default_space_normal"
                 android:textSize="@dimen/default_text_size_medium"/>
-
+            <!--android:background="@drawable/view_global_stroke_gray_radius_all"-->
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -201,10 +203,10 @@
                 android:layout_marginRight="@dimen/default_space_normal"
                 android:layout_marginTop="@dimen/default_space_little"
                 android:layout_weight="1"
-                android:background="@drawable/view_global_stroke_gray_radius_all"
+
                 android:gravity="center_horizontal"
-                android:paddingBottom="@dimen/view_space_normal"
-                android:paddingTop="@dimen/view_space_normal"
+                android:paddingBottom="@dimen/default_space_normal"
+                android:paddingTop="@dimen/default_space_normal"
                 android:text="面议"/>
         </LinearLayout>
 
@@ -374,7 +376,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginRight="@dimen/default_space_large"
-            android:background="@drawable/widget_bg_red_radius_normal"
+            android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
             android:text="提交"
             android:textColor="@android:color/white"
             android:textSize="@dimen/default_text_size_large"/>
@@ -383,7 +385,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/view_text_size_huge"
+            android:paddingBottom="@dimen/default_space_super"
             android:paddingLeft="@dimen/default_space_large"
             android:paddingTop="@dimen/default_space_small">
 

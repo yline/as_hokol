@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:textColor="@drawable/widget_item_drop_menu_text_color"
+        android:textColor="@drawable/widget_selector_text_red_gray"
         android:textSize="@dimen/default_text_size_normal"/>
 
     <ImageView
@@ -20,5 +20,5 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/default_space_medium"
         android:layout_toRightOf="@+id/tv_drop_down_menu"
-        android:src="@drawable/widget_item_drop_menu_icon"/>
+        android:src="@drawable/widget_selector_drawable_select"/>
 </RelativeLayout>

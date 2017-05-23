@@ -27,8 +27,9 @@ public class FlowAbleWidget extends WidgetFlowAble
 	}
 
 	/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 提供重写的方法 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */
+	@Override
 	protected int getItemResourceId()
 	{
-		return R.layout.widget_item_flow_able;
+		return super.getItemResourceId();
 	}
 }

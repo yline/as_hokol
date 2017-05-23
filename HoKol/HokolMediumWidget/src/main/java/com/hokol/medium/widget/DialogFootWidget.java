@@ -1,10 +1,8 @@
 package com.hokol.medium.widget;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 
-import com.yline.view.common.ViewHolder;
 import com.yline.widget.dialog.WidgetDialogFoot;
 
 import java.util.List;
@@ -20,42 +18,6 @@ public class DialogFootWidget extends WidgetDialogFoot
 	public DialogFootWidget(Context context, @NonNull List<String> dataList)
 	{
 		super(context, dataList);
-	}
-
-	@Override
-	public void setOnSelectedListener(WidgetDialogFoot.OnSelectedListener onSelectedListener)
-	{
-		super.setOnSelectedListener(onSelectedListener);
-	}
-
-	@Override
-	public void show()
-	{
-		super.show();
-	}
-
-	@Override
-	public void show(WidgetDialogFoot.OnSelectedListener onSelectedListener)
-	{
-		super.show(onSelectedListener);
-	}
-
-	@Override
-	public void show(WidgetDialogFoot.OnSelectedListener onSelectedListener, DialogInterface.OnDismissListener dismissListener)
-	{
-		super.show(onSelectedListener, dismissListener);
-	}
-
-	@Override
-	public void show(WidgetDialogFoot.OnSelectedListener onSelectedListener, DialogInterface.OnDismissListener dismissListener, DialogInterface.OnShowListener showListener)
-	{
-		super.show(onSelectedListener, dismissListener, showListener);
-	}
-
-	@Override
-	public ViewHolder getViewHolder()
-	{
-		return super.getViewHolder();
 	}
 
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 重写 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */

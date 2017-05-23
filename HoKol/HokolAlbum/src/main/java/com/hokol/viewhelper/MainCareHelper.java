@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.application.DeleteConstant;
 import com.hokol.medium.http.bean.VDynamicCareBean;
-import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
+import com.hokol.medium.widget.recycler.GrayLightLinearItemDecoration;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.common.HeadFootRecyclerAdapter;
@@ -39,14 +39,7 @@ public class MainCareHelper
 	public void initRecycleView(RecyclerView recyclerView)
 	{
 		recyclerView.setLayoutManager(new LinearLayoutManager(sContext));
-		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(sContext)
-		{
-			@Override
-			protected int getDivideResourceId()
-			{
-				return R.drawable.widget_recycler_divider_gray_light_normal;
-			}
-		});
+		recyclerView.addItemDecoration(new GrayLightLinearItemDecoration(sContext));
 
 		recyclerAdapter = new RecycleAdapter();
 		recyclerView.setAdapter(recyclerAdapter);

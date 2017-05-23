@@ -83,7 +83,7 @@ public class MainHomeModelFragment extends BaseFragment implements MainHomeFragm
 			@Override
 			protected int getDivideResourceId()
 			{
-				return R.drawable.widget_recycler_divider_white_small;
+				return R.drawable.widget_solid_white_size_little;
 			}
 		});
 

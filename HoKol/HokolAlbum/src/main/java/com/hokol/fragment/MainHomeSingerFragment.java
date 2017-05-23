@@ -80,7 +80,7 @@ public class MainHomeSingerFragment extends BaseFragment implements MainHomeFrag
 			@Override
 			protected int getDivideResourceId()
 			{
-				return R.drawable.widget_recycler_divider_white_small;
+				return R.drawable.widget_solid_white_size_little;
 			}
 		});
 

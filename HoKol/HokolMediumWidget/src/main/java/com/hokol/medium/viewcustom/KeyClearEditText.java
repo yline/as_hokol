@@ -3,6 +3,7 @@ package com.hokol.medium.viewcustom;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.hokol.medium.widget.R;
 import com.yline.view.custom.ViewKeyClearEditText;
 
 public class KeyClearEditText extends ViewKeyClearEditText
@@ -25,6 +26,6 @@ public class KeyClearEditText extends ViewKeyClearEditText
 	@Override
 	protected int getKeyClearDrawable()
 	{
-		return super.getKeyClearDrawable();
+		return R.drawable.widget_drawable_et_key_clear;
 	}
 }

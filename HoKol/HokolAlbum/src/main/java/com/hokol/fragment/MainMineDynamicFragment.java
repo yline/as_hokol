@@ -65,7 +65,7 @@ public class MainMineDynamicFragment extends BaseFragment
 			@Override
 			protected int getDivideResourceId()
 			{
-				return R.drawable.widget_recycler_divider_gray_light_normal;
+				return R.drawable.widget_solid_graylight_size_medium;
 			}
 		});
 

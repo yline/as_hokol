@@ -42,7 +42,7 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 			@Override
 			protected int getDivideResourceId()
 			{
-				return R.drawable.widget_recycler_divider_normal;
+				return R.drawable.widget_solid_null_size_medium;
 			}
 		};
 		recyclerView.addItemDecoration(itemDecoration);

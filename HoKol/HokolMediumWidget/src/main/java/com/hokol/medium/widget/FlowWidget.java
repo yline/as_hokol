@@ -28,8 +28,10 @@ public class FlowWidget extends WidgetFlow
 	}
 	
 	/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 提供重写的方法 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */
+
+	@Override
 	protected int getItemResourceId()
 	{
-		return R.layout.widget_item_flow;
+		return super.getItemResourceId();
 	}
 }

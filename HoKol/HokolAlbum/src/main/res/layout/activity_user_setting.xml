@@ -139,7 +139,7 @@
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginRight="@dimen/default_space_large"
             android:layout_marginTop="30dp"
-            android:background="@drawable/widget_bg_red_radius_normal"
+            android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
             android:text="退出登录"
             android:textColor="@android:color/white"/>
     </LinearLayout>

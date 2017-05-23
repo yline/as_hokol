@@ -80,7 +80,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 			@Override
 			protected int getDivideResourceId()
 			{
-				return R.drawable.widget_recycler_divider_white_small;
+				return R.drawable.widget_solid_white_size_little;
 			}
 
 			@Override

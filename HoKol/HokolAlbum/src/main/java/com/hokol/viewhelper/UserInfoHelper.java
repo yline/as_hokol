@@ -48,7 +48,7 @@ public class UserInfoHelper
 	{
 		if (null == constellationDialog)
 		{
-			constellationDialog = new Dialog(context, com.hokol.medium.widget.R.style.AppDialog_Default);
+			constellationDialog = new Dialog(context, com.hokol.medium.widget.R.style.Widget_Dialog_Default);
 			constellationDialog.setContentView(R.layout.dialog_user_info_constell);
 			constellationDialog.setCanceledOnTouchOutside(true);
 

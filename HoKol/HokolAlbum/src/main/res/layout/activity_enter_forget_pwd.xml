@@ -38,7 +38,7 @@
         android:layout_marginLeft="@dimen/default_space_large"
         android:layout_marginRight="@dimen/default_space_large"
         android:layout_marginTop="32dp"
-        android:background="@drawable/widget_bg_white_radius_normal"
+        android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
         android:hint="请输入手机号"
         android:inputType="phone"
         android:padding="@dimen/default_space_large"
@@ -53,7 +53,7 @@
         android:layout_marginLeft="@dimen/default_space_large"
         android:layout_marginRight="@dimen/default_space_large"
         android:layout_marginTop="@dimen/default_space_normal"
-        android:background="@drawable/widget_bg_white_radius_normal">
+        android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white">
 
         <com.hokol.medium.viewcustom.KeyClearEditText
             android:id="@+id/et_enter_forget_identify"
@@ -93,7 +93,7 @@
         android:layout_marginLeft="@dimen/default_space_large"
         android:layout_marginRight="@dimen/default_space_large"
         android:layout_marginTop="@dimen/default_space_normal"
-        android:background="@drawable/widget_bg_white_radius_normal"
+        android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
         android:orientation="horizontal">
 
         <com.hokol.medium.viewcustom.KeyClearEditText

@@ -1,6 +1,6 @@
 <resources>
     <!-- dialog -->
-    <style name="AppDialog.Default" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Widget.Dialog.Default" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- 设置未浮动窗口 -->
         <item name="android:windowIsFloating">true</item>
         <!--背景颜色及透明程度-->

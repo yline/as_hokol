@@ -67,7 +67,7 @@ public class StarInfoActivity extends BaseAppCompatActivity
 				IApplication.toast("点击送红豆");
 				View view = LayoutInflater.from(StarInfoActivity.this).inflate(R.layout.activity_star_info_head_gift_dialog, null);
 
-				Dialog dialog = new Dialog(StarInfoActivity.this, R.style.AppDialog_Default);// android.R.style.Theme_Holo_Light_Dialog_NoActionBar
+				Dialog dialog = new Dialog(StarInfoActivity.this, R.style.Widget_Dialog_Default);// android.R.style.Theme_Holo_Light_Dialog_NoActionBar
 				dialog.setContentView(view);
 
 				Window dialogWindow = dialog.getWindow();
