@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +13,24 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
+import com.hokol.application.AppStateManager;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VDynamicUserPrivateAllBean;
+import com.hokol.medium.http.bean.WDynamicUserPrivateAllBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
+import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.callback.OnRecyclerItemClickListener;
 import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,6 +39,8 @@ public class MainMinePrivateFragment extends BaseFragment
 	private PrivateRecycleAdapter recyclerAdapter;
 
 	private SuperSwipeRefreshLayout superSwipeRefreshLayout;
+
+	private int privateRefreshNumber;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -123,12 +131,30 @@ public class MainMinePrivateFragment extends BaseFragment
 
 	private void initData()
 	{
-		List dataList = new ArrayList();
-		for (int i = 0; i < 10; i++)
+		String userId = AppStateManager.getInstance().getUserLoginId(getContext());
+		if (TextUtils.isEmpty(userId))
 		{
-			dataList.add("i" + i);
+			recyclerAdapter.setShowEmpty(true);
 		}
-		recyclerAdapter.setDataList(dataList);
+		else
+		{
+			WDynamicUserPrivateAllBean wDynamicUserPrivateAllBean = new WDynamicUserPrivateAllBean(userId, userId, 0, DeleteConstant.defaultNumberNormal);
+			recyclerAdapter.setShowEmpty(false);
+			XHttpUtil.doDynamicUserPrivateAll(wDynamicUserPrivateAllBean, new XHttpAdapter<VDynamicUserPrivateAllBean>()
+			{
+				@Override
+				public void onSuccess(VDynamicUserPrivateAllBean vDynamicUserPrivateAllBean)
+				{
+					recyclerAdapter.setShowEmpty(true);
+					List<VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean> result = vDynamicUserPrivateAllBean.getList();
+					if (null != result)
+					{
+						privateRefreshNumber = result.size();
+						recyclerAdapter.setDataList(result);
+					}
+				}
+			});
+		}
 	}
 
 	/**
@@ -165,15 +191,8 @@ public class MainMinePrivateFragment extends BaseFragment
 		wrapperAdapter.addHeadView(cameraView);
 	}
 
-	private class PrivateRecycleAdapter extends HeadFootRecyclerAdapter<String>
+	private class PrivateRecycleAdapter extends WidgetRecyclerAdapter<VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean>
 	{
-		private OnRecyclerItemClickListener listener;
-
-		public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener listener)
-		{
-			this.listener = listener;
-		}
-
 		@Override
 		public int getItemRes()
 		{
@@ -183,17 +202,7 @@ public class MainMinePrivateFragment extends BaseFragment
 		@Override
 		public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
 		{
-			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
-				{
-					if (null != listener)
-					{
-						listener.onItemClick(viewHolder, sList.get(position), position);
-					}
-				}
-			});
+			super.onBindViewHolder(viewHolder, position);
 
 			ImageView avatarImageView = viewHolder.get(R.id.circle_item_main_mine_private_avatar);
 			Glide.with(getContext()).load(DeleteConstant.url_default_avatar).into(avatarImageView);
@@ -202,6 +211,29 @@ public class MainMinePrivateFragment extends BaseFragment
 			int width = UIScreenUtil.getScreenWidth(getContext()) - UIScreenUtil.dp2px(getContext(), 10 + 10);
 			UIResizeUtil.build().setIsHeightAdapter(false).setHeight(width).commit(contentImageView);
 			Glide.with(getContext()).load(DeleteConstant.getUrlRec()).into(contentImageView);
+		}
+
+		@Override
+		public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
+		{
+			viewHolder.get(R.id.btn_loading_cover).setVisibility(View.INVISIBLE);
+			if (isShowEmpty)
+			{
+				viewHolder.get(R.id.rl_loading_cover).setVisibility(View.VISIBLE);
+				boolean isUserLogin = AppStateManager.getInstance().isUserLogin(getContext());
+				if (isUserLogin)
+				{
+					viewHolder.setText(R.id.tv_loading_cover, "快去发布私密动态吧");
+				}
+				else
+				{
+					viewHolder.setText(R.id.tv_loading_cover, "还没登陆哦，亲");
+				}
+			}
+			else
+			{
+				viewHolder.get(R.id.rl_loading_cover).setVisibility(View.INVISIBLE);
+			}
 		}
 	}
 }

@@ -14,12 +14,15 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
+import com.hokol.activity.EnterChoiceActivity;
 import com.hokol.activity.UserInfoActivity;
-import com.hokol.application.DeleteConstant;
+import com.hokol.application.AppStateManager;
 import com.hokol.application.IApplication;
+import com.hokol.medium.http.bean.VLoginPhonePwdBean;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.FlowWidget;
 import com.yline.base.BaseFragment;
+import com.yline.view.common.ViewHolder;
 import com.yline.widget.label.FlowLayout;
 
 import java.util.ArrayList;
@@ -32,6 +35,8 @@ public class MainMineFragment extends BaseFragment
 
 	private static final String[] RES_TITLE = {"动态", "私密空间", "我的主页"};
 
+	private ViewHolder viewHolder;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
@@ -43,42 +48,10 @@ public class MainMineFragment extends BaseFragment
 	{
 		super.onViewCreated(view, savedInstanceState);
 
+		viewHolder = new ViewHolder(view);
 		initView(view);
 
-		View headView = view.findViewById(R.id.include_main_mine_head);
-		initHeaderView(headView);
-		headView.findViewById(R.id.circle_main_mine_avatar).setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				DialogFootWidget dialogFootWidget = new DialogFootWidget(getContext(), Arrays.asList("相册", "拍照"));
-				dialogFootWidget.show(new DialogFootWidget.OnSelectedListener()
-				{
-					@Override
-					public void onCancelSelected(DialogInterface dialog)
-					{
-						IApplication.toast("DisAppear");
-						dialog.dismiss();
-					}
-
-					@Override
-					public void onOptionSelected(DialogInterface dialog, int position, String content)
-					{
-						IApplication.toast("position = " + position + ", content = " + content);
-						dialog.dismiss();
-					}
-				});
-			}
-		});
-		headView.setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				UserInfoActivity.actionStart(getContext());
-			}
-		});
+		initData();
 	}
 	
 	private void initView(View view)
@@ -115,13 +88,71 @@ public class MainMineFragment extends BaseFragment
 		});
 	}
 
-	private void initHeaderView(View parentView)
+	private void initData()
 	{
-		ImageView imageView = (ImageView) parentView.findViewById(R.id.circle_main_mine_avatar);
-		Glide.with(getContext()).load(DeleteConstant.url_default_avatar).centerCrop().into(imageView);
+		// 头部数据
+		VLoginPhonePwdBean userInfoBean = AppStateManager.getInstance().getUserInfo(getContext());
+		if (null != userInfoBean)
+		{
+			viewHolder.get(R.id.ll_main_mine_head).setVisibility(View.VISIBLE);
+			viewHolder.get(R.id.tv_main_mine_head).setVisibility(View.INVISIBLE);
+			viewHolder.setOnClickListener(R.id.ll_main_mine_head, new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					UserInfoActivity.actionStart(getContext());
+				}
+			});
+			viewHolder.setOnClickListener(R.id.circle_main_mine_avatar, new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					DialogFootWidget dialogFootWidget = new DialogFootWidget(getContext(), Arrays.asList("相册", "拍照"));
+					dialogFootWidget.show(new DialogFootWidget.OnSelectedListener()
+					{
+						@Override
+						public void onCancelSelected(DialogInterface dialog)
+						{
+							IApplication.toast("DisAppear");
+							dialog.dismiss();
+						}
 
-		FlowLayout flowLayout = (FlowLayout) parentView.findViewById(R.id.flow_layout_main_mine_head_label);
-		FlowWidget flowWidget = new FlowWidget(getContext(), flowLayout);
-		flowWidget.setDataList(Arrays.asList("网红", "模特"));
+						@Override
+						public void onOptionSelected(DialogInterface dialog, int position, String content)
+						{
+							IApplication.toast("position = " + position + ", content = " + content);
+							dialog.dismiss();
+						}
+					});
+				}
+			});
+
+			// 头像
+			ImageView imageView = viewHolder.get(R.id.circle_main_mine_avatar);
+			Glide.with(getContext()).load(userInfoBean.getUser_logo()).into(imageView);
+
+			// 签名
+			viewHolder.setText(R.id.tv_main_mine_sign, userInfoBean.getUser_sign());
+
+			// 标签
+			FlowLayout flowLayout = viewHolder.get(R.id.flow_layout_main_mine_head_label);
+			FlowWidget flowWidget = new FlowWidget(getContext(), flowLayout);
+			flowWidget.setDataList(userInfoBean.getUser_tag());
+		}
+		else
+		{
+			viewHolder.get(R.id.ll_main_mine_head).setVisibility(View.INVISIBLE);
+			viewHolder.get(R.id.tv_main_mine_head).setVisibility(View.VISIBLE);
+			viewHolder.setOnClickListener(R.id.include_main_mine_head, new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					EnterChoiceActivity.actionStart(getContext());
+				}
+			});
+		}
 	}
 }

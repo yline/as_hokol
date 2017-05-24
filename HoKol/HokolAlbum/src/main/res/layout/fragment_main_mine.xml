@@ -28,6 +28,13 @@
         android:layout_height="wrap_content">
     </include>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/circle_main_mine_avatar"
+        android:background="@color/hokolGrayLight">
+    </View>
+
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout_main_mine"
         android:layout_width="match_parent"

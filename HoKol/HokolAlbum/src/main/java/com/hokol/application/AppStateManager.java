@@ -2,6 +2,8 @@ package com.hokol.application;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
+import com.hokol.medium.http.bean.VLoginPhonePwdBean;
 import com.yline.utils.SPUtil;
 
 /**
@@ -20,6 +22,8 @@ public class AppStateManager
 
 	private static final String KeyUserLoginId = "UserLoginId";
 
+	private static final String KeyUserInfo = "UserInfo";
+
 	private AppStateManager()
 	{
 	}
@@ -34,9 +38,14 @@ public class AppStateManager
 		private static AppStateManager appStateManager = new AppStateManager();
 	}
 
-	public void updateUserLogin(Context context, boolean isLogin)
+	public void setLoginUserInfo(Context context, VLoginPhonePwdBean userInfo)
 	{
-		SPUtil.put(context, KeyUserLogin, isLogin, FileName);
+		String jsonUserInfo = new Gson().toJson(userInfo);
+		SPUtil.put(context, KeyUserInfo, jsonUserInfo, FileName);
+
+		// 常用的
+		SPUtil.put(context, KeyUserLogin, true, FileName);
+		SPUtil.put(context, KeyUserLoginId, userInfo.getUser_id(), FileName);
 	}
 
 	public boolean isUserLogin(Context context)
@@ -46,13 +55,16 @@ public class AppStateManager
 	
 	public String getUserLoginId(Context context)
 	{
-		if (isUserLogin(context))
+		return (String) SPUtil.get(context, KeyUserLoginId, null, FileName);
+	}
+
+	public VLoginPhonePwdBean getUserInfo(Context context)
+	{
+		String jsonUserInfo = (String) SPUtil.get(context, KeyUserInfo, null, FileName);
+		if (null != jsonUserInfo)
 		{
-			return (String) SPUtil.get(context, KeyUserLoginId, null, FileName);
+			return new Gson().fromJson(jsonUserInfo, VLoginPhonePwdBean.class);
 		}
-		else
-		{
-			return null;
-		}
+		return null;
 	}
 }
