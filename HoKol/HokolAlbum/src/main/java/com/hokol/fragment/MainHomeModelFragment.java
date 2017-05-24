@@ -20,6 +20,7 @@ import com.hokol.medium.http.bean.VHomeMainBean;
 import com.hokol.medium.http.bean.WHomeMainBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
+import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.hokol.viewhelper.MainHomeHelper;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
@@ -27,7 +28,6 @@ import com.yline.log.LogFileUtil;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.callback.OnRecyclerItemClickListener;
-import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.ArrayList;
@@ -144,13 +144,15 @@ public class MainHomeModelFragment extends BaseFragment implements MainHomeFragm
 
 	private void initData()
 	{
-		refreshedNumber = 0;
-		WHomeMainBean wHomeMainBean = new WHomeMainBean(HttpEnum.UserTag.Model, refreshedNumber, DeleteConstant.defaultNumberLarge);
+		WHomeMainBean wHomeMainBean = new WHomeMainBean(HttpEnum.UserTag.Model, 0, DeleteConstant.defaultNumberLarge);
+		mainHomeModelAdapter.setShowEmpty(false);
 		XHttpUtil.doHomeMain(wHomeMainBean, new XHttpAdapter<VHomeMainBean>()
 		{
 			@Override
 			public void onSuccess(VHomeMainBean vHomeMainBean)
 			{
+				mainHomeModelAdapter.setShowEmpty(true);
+
 				if (null == vHomeMainBean.getList())
 				{
 					vHomeMainBean.setList(new ArrayList<VHomeMainBean.VHomeMainOneBean>());
@@ -185,14 +187,8 @@ public class MainHomeModelFragment extends BaseFragment implements MainHomeFragm
 
 	}
 
-	private class MainHomeModelAdapter extends HeadFootRecyclerAdapter<VHomeMainBean.VHomeMainOneBean>
+	private class MainHomeModelAdapter extends WidgetRecyclerAdapter<VHomeMainBean.VHomeMainOneBean>
 	{
-		private OnRecyclerItemClickListener listener;
-
-		public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener listener)
-		{
-			this.listener = listener;
-		}
 
 		@Override
 		public int getItemRes()
@@ -203,17 +199,7 @@ public class MainHomeModelFragment extends BaseFragment implements MainHomeFragm
 		@Override
 		public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
 		{
-			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
-				{
-					if (null != listener)
-					{
-						listener.onItemClick(viewHolder, sList.get(position), position);
-					}
-				}
-			});
+			super.onBindViewHolder(viewHolder, position);
 
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_home_model);
 			int width = (UIScreenUtil.getScreenWidth(getContext())) / COUNT_MODEL;
@@ -226,14 +212,18 @@ public class MainHomeModelFragment extends BaseFragment implements MainHomeFragm
 		}
 
 		@Override
-		public int getEmptyItemRes()
-		{
-			return R.layout.fragment_main_home__empty;
-		}
-
-		@Override
 		public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
 		{
+			viewHolder.get(R.id.btn_loading_cover).setVisibility(View.INVISIBLE);
+			if (isShowEmpty)
+			{
+				viewHolder.get(R.id.rl_loading_cover).setVisibility(View.VISIBLE);
+				viewHolder.setText(R.id.tv_loading_cover, "没有找到相关信息，减少筛选条件试一试^_^");
+			}
+			else
+			{
+				viewHolder.get(R.id.rl_loading_cover).setVisibility(View.INVISIBLE);
+			}
 		}
 	}
 }

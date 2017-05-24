@@ -11,7 +11,6 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
-import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.bean.VTaskMainAll;
@@ -19,8 +18,8 @@ import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.DropMenuWidget;
 import com.hokol.medium.widget.FlowAbleWidget;
 import com.hokol.medium.widget.SecondaryWidget;
+import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.view.callback.OnRecyclerItemClickListener;
-import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 import com.yline.widget.label.FlowLayout;
 import com.yline.widget.label.LabelFlowLayout;
@@ -29,8 +28,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
  * Task helper
@@ -228,7 +225,6 @@ public class MainTaskHelper
 	}
 
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% RecyclerView %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-
 	private TaskRecycleAdapter taskRecycleAdapter;
 
 	public void initRecycleView(RecyclerView recycleView)
@@ -249,15 +245,13 @@ public class MainTaskHelper
 		taskRecycleAdapter.setDataList(result);
 	}
 
-	private class TaskRecycleAdapter extends HeadFootRecyclerAdapter<VTaskMainAll.TaskMainAllOne>
+	public void setRecyclerShowEmpty(boolean isShowEmpty)
 	{
-		private OnRecyclerItemClickListener listener;
+		taskRecycleAdapter.setShowEmpty(isShowEmpty);
+	}
 
-		public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener listener)
-		{
-			this.listener = listener;
-		}
-
+	private class TaskRecycleAdapter extends WidgetRecyclerAdapter<VTaskMainAll.TaskMainAllOne>
+	{
 		@Override
 		public int getItemRes()
 		{
@@ -267,28 +261,41 @@ public class MainTaskHelper
 		@Override
 		public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
 		{
-			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
-				{
-					if (null != listener)
-					{
-						listener.onItemClick(viewHolder, sList.get(position), position);
-					}
-				}
-			});
+			super.onBindViewHolder(viewHolder, position);
 
-			// 设置点击时间
+			// 价格 + 人数
+			viewHolder.setText(R.id.tv_item_main_task_price, String.format("￥%d × %d", sList.get(position).getTask_fee(), sList.get(position).getEmployee_num()));
+
+			// 标题
+			viewHolder.setText(R.id.tv_item_main_task_title, sList.get(position).getTask_title());
+
+			// 头像
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_task_avatar);
-			Glide.with(context).load(DeleteConstant.url_default_avatar).centerCrop()
-					.bitmapTransform(new CropCircleTransformation(context)).placeholder(R.mipmap.ic_launcher)
-					.into(imageView);
+			Glide.with(context).load(sList.get(position).getUser_logo()).error(R.drawable.global_load_failed).into(imageView);
+
+			// 用户名
+			viewHolder.setText(R.id.tv_item_main_task_user, sList.get(position).getUser_nickname());
+
+			// 报名人数
+			viewHolder.setText(R.id.tv_item_main_task_sign_ups, String.format("%d人报名", sList.get(position).getEmployee_num()));
+
+			// 截至时间
+			viewHolder.setText(R.id.tv_item_main_task_time, sList.get(position).getTask_rem_time() + "");
 		}
 
 		@Override
 		public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
 		{
+			viewHolder.get(R.id.btn_loading_cover).setVisibility(View.INVISIBLE);
+			if (isShowEmpty)
+			{
+				viewHolder.get(R.id.rl_loading_cover).setVisibility(View.VISIBLE);
+				viewHolder.setText(R.id.tv_loading_cover, "没有找到相关信息，减少筛选条件试一试^_^");
+			}
+			else
+			{
+				viewHolder.get(R.id.rl_loading_cover).setVisibility(View.INVISIBLE);
+			}
 		}
 	}
 }

@@ -170,11 +170,14 @@ public class MainTaskFragment extends BaseFragment
 
 		// Recycler
 		taskMainAll = new WTaskMainAll(0, DeleteConstant.defaultNumberNormal);
+		mainTaskHelper.setRecyclerShowEmpty(false);
 		XHttpUtil.doTaskMainAll(taskMainAll, new XHttpAdapter<VTaskMainAll>()
 		{
 			@Override
 			public void onSuccess(VTaskMainAll vTaskMainAll)
 			{
+				mainTaskHelper.setRecyclerShowEmpty(true);
+
 				List<VTaskMainAll.TaskMainAllOne> result = vTaskMainAll.getList();
 				if (null != result)
 				{

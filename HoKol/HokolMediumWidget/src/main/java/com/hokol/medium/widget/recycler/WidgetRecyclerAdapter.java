@@ -2,13 +2,15 @@ package com.hokol.medium.widget.recycler;
 
 import android.view.View;
 
+import com.hokol.medium.widget.R;
 import com.yline.view.callback.OnRecyclerItemClickListener;
 import com.yline.view.common.HeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
 public abstract class WidgetRecyclerAdapter<Data> extends HeadFootRecyclerAdapter<Data>
 {
-	private boolean isLoadError;
+	// 是否 显示空白页 (需要手动使用)
+	protected boolean isShowEmpty;
 
 	private OnRecyclerItemClickListener listener;
 
@@ -17,16 +19,23 @@ public abstract class WidgetRecyclerAdapter<Data> extends HeadFootRecyclerAdapte
 		this.listener = listener;
 	}
 
-	@Override
-	public int getItemRes()
+	/**
+	 * @param isShowEmpty 是否显示 空白页内容
+	 */
+	public void setShowEmpty(boolean isShowEmpty)
 	{
-		return 0;
+		this.isShowEmpty = isShowEmpty;
+
+		if (sList.size() == 0)
+		{
+			notifyItemChanged(getHeadersCount());
+		}
 	}
 
 	@Override
 	public int getEmptyItemRes()
 	{
-		return super.getEmptyItemRes();
+		return R.layout.widget_recycler_load_error_nomal;
 	}
 
 	@Override
@@ -43,16 +52,5 @@ public abstract class WidgetRecyclerAdapter<Data> extends HeadFootRecyclerAdapte
 				}
 			}
 		});
-	}
-
-	@Override
-	public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
-	{
-		super.onBindEmptyViewHolder(viewHolder, position);
-
-		if (isLoadError)
-		{
-
-		}
 	}
 }

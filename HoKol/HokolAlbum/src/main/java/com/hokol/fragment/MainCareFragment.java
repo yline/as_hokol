@@ -26,6 +26,8 @@ import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 import com.yline.view.common.ViewHolder;
 
+import java.util.List;
+
 public class MainCareFragment extends BaseFragment
 {
 	private MainCareHelper mainCareHelper;
@@ -112,7 +114,7 @@ public class MainCareFragment extends BaseFragment
 		});
 
 		// 没有数据 或者 未登录时 状态
-		mainCareHelper.setOnRecyclerEmptyCLickListener(new View.OnClickListener()
+		mainCareHelper.setOnEmptyBtnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -138,21 +140,28 @@ public class MainCareFragment extends BaseFragment
 		String userId = AppStateManager.getInstance().getUserLoginId(getContext());
 		if (TextUtils.isEmpty(userId))
 		{
-			mainCareHelper.updateRecyclerEmptyState(false);
+			mainCareHelper.updateRecyclerEmptyState(true);
 		}
 		else
 		{
-			refreshedNumber = 0;
-			mainCareHelper.updateRecyclerEmptyState(true);
+			mainCareHelper.updateRecyclerEmptyState(false);
 
-			WDynamicCareAllBean wDynamicCareAllBean = new WDynamicCareAllBean(userId, refreshedNumber, DeleteConstant.defaultNumberSmall);
+			WDynamicCareAllBean wDynamicCareAllBean = new WDynamicCareAllBean(userId, 0, DeleteConstant.defaultNumberSmall);
 			XHttpUtil.doDynamicCareAll(wDynamicCareAllBean, new XHttpAdapter<VDynamicCareAllBean>()
 			{
 				@Override
 				public void onSuccess(VDynamicCareAllBean vDynamicCareAllBean)
 				{
-					mainCareHelper.setRecycleData(vDynamicCareAllBean.getList());
-					refreshedNumber += vDynamicCareAllBean.getList().size();
+					List<VDynamicCareBean> result = vDynamicCareAllBean.getList();
+					if (null != result)
+					{
+						mainCareHelper.updateRecyclerEmptyState(true);
+					}
+					else
+					{
+						mainCareHelper.setRecycleData(result);
+						refreshedNumber += vDynamicCareAllBean.getList().size();
+					}
 				}
 
 				@Override

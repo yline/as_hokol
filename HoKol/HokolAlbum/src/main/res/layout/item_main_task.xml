@@ -60,6 +60,7 @@
             android:textColor="#808080"/>
 
         <TextView
+            android:id="@+id/tv_item_main_task_sign_ups"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
