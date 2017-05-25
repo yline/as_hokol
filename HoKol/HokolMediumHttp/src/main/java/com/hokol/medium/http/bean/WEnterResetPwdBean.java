@@ -1,21 +1,21 @@
 package com.hokol.medium.http.bean;
 
-public class WLoginPhonePwdBean
+public class WEnterResetPwdBean
 {
-	/**
-	 * 用户手机
-	 */
+	/* 用户手机 */
 	private String user_tel;
 
-	/**
-	 * 用户密码
-	 */
+	/* 用户密码 */
 	private String user_pwd;
 
-	public WLoginPhonePwdBean(String user_tel, String user_pwd)
+	/* 手机验证码 */
+	private String check_code;
+
+	public WEnterResetPwdBean(String user_tel, String user_pwd, String check_code)
 	{
 		this.user_tel = user_tel;
 		this.user_pwd = user_pwd;
+		this.check_code = check_code;
 	}
 
 	public String getUser_tel()
@@ -38,12 +38,13 @@ public class WLoginPhonePwdBean
 		this.user_pwd = user_pwd;
 	}
 
-	@Override
-	public String toString()
+	public String getCheck_code()
 	{
-		return "WLoginPhonePwdBean{" +
-				"user_tel='" + user_tel + '\'' +
-				", user_pwd='" + user_pwd + '\'' +
-				'}';
+		return check_code;
+	}
+
+	public void setCheck_code(String check_code)
+	{
+		this.check_code = check_code;
 	}
 }

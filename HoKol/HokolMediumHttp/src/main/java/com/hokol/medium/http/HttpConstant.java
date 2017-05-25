@@ -24,8 +24,23 @@ public class HttpConstant
 	private static final String url_head = "http://120.92.35.211/wanghong/wh/index.php/Api/";
 	
 	/* --------------------------- 注册、登录、忘记密码 --------------------------- */
-	// 手机+密码登陆
-	public static final String url_login_pwd = url_head + "ApiLogin/login";
+	// 手机+ 密码登陆
+	public static final String url_enter_login_pwd = url_head + "ApiLogin/login";
+
+	// 获取 注册验证码
+	public static final String url_enter_code_register = url_head + "ApiLogin/get_regist_code";
+
+	// 用户注册
+	public static final String url_enter_register = url_head + "ApiLogin/register";
+
+	// 用户信息完善
+	public static final String url_enter_register_complete_info = url_head + "ApiLogin/add_info";
+
+	// 忘记密码之获取验证码
+	public static final String url_enter_code_forget_pwd = url_head + "ApiLogin/get_lose_pwd_code";
+	
+	// 忘记密码之重置密码
+	public static final String url_enter_reset_pwd = url_head + "ApiLogin/lose_pwd";
 
 	/* --------------------------- 新闻 --------------------------- */
 	// 多条新闻获取

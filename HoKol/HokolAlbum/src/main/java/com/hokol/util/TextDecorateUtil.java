@@ -88,7 +88,7 @@ public class TextDecorateUtil
 			public void onTextChanged(CharSequence s, int start, int before, int count)
 			{
 				String inputString = s.toString();
-				if (inputString.length() > 6 && inputString.length() < 20)
+				if (inputString.length() > 5 && inputString.length() < 21)
 				{
 					if (null != matchCallback)
 					{

@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.hokol.R;
+import com.hokol.application.AppStateManager;
 import com.hokol.fragment.MainCareFragment;
 import com.hokol.fragment.MainHomeFragment;
 import com.hokol.fragment.MainMineFragment;
@@ -204,8 +205,15 @@ public class MainActivity extends BaseAppCompatActivity
 		return super.onOptionsItemSelected(item);
 	}
 
-	public static void actionStart(Context context)
+	/**
+	 * 开启主页面, 并存入用户信息
+	 *
+	 * @param context
+	 * @param appUserInfo 用户信息
+	 */
+	public static void actionStart(Context context, AppStateManager.AppUserInfo appUserInfo)
 	{
+		AppStateManager.getInstance().setLoginUserInfo(context, appUserInfo);
 		context.startActivity(new Intent(context, MainActivity.class));
 	}
 }

@@ -8,12 +8,13 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.hokol.R;
+import com.hokol.application.AppStateManager;
 import com.hokol.application.IApplication;
-import com.hokol.medium.http.HttpConstant;
 import com.hokol.medium.http.XHttpUtil;
-import com.hokol.medium.http.bean.VLoginPhonePwdBean;
-import com.hokol.medium.http.bean.WLoginPhonePwdBean;
+import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
+import com.hokol.medium.http.bean.WEnterLoginPhonePwdBean;
 import com.hokol.util.TextDecorateUtil;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
 import com.yline.view.common.ViewHolder;
@@ -29,6 +30,8 @@ public class EnterLoginPhonePwdActivity extends BaseAppCompatActivity
 	private ViewHolder viewHolder;
 
 	private boolean isPasswordVisible = true;
+
+	private boolean isPhoneMatch, isPwdMatch;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -50,10 +53,7 @@ public class EnterLoginPhonePwdActivity extends BaseAppCompatActivity
 			@Override
 			public void onTextChange(boolean isMatch)
 			{
-				if (isMatch)
-				{
-					IApplication.toast("手机号符合规则");
-				}
+				updatePhoneMatch(isMatch);
 			}
 		});
 
@@ -63,10 +63,7 @@ public class EnterLoginPhonePwdActivity extends BaseAppCompatActivity
 			@Override
 			public void onTextChange(boolean isMatch)
 			{
-				if (isMatch)
-				{
-					IApplication.toast("密码符合规则");
-				}
+				updatePwdMatch(isMatch);
 			}
 		});
 	}
@@ -106,14 +103,12 @@ public class EnterLoginPhonePwdActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				IApplication.toast("正在登录...");
-
-				String username = viewHolder.getText(R.id.et_enter_login_phone_username);
-				String password = viewHolder.getText(R.id.et_enter_login_phone_password);
-
-				String httpUrl = HttpConstant.url_login_pwd;
-
-				doPost(httpUrl, new WLoginPhonePwdBean(username, password));
+				if (isPhoneMatch && isPwdMatch)
+				{
+					String username = viewHolder.getText(R.id.et_enter_login_phone_username);
+					String password = viewHolder.getText(R.id.et_enter_login_phone_password);
+					doPost(username, password);
+				}
 			}
 		});
 		// 眼睛
@@ -126,28 +121,92 @@ public class EnterLoginPhonePwdActivity extends BaseAppCompatActivity
 				if (isPasswordVisible)
 				{
 					editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-					viewHolder.setImageResource(R.id.iv_enter_login_phone_password, R.drawable.global_ward_open);
+					viewHolder.setImageResource(R.id.iv_enter_login_phone_password, R.drawable.global_ward_close);
 					isPasswordVisible = !isPasswordVisible;
 				}
 				else
 				{
 					editText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-					viewHolder.setImageResource(R.id.iv_enter_login_phone_password, R.drawable.global_ward_close);
+					viewHolder.setImageResource(R.id.iv_enter_login_phone_password, R.drawable.global_ward_open);
 					isPasswordVisible = !isPasswordVisible;
 				}
 			}
 		});
 	}
 
-	private void doPost(String httpUrl, final WLoginPhonePwdBean requestBean)
+	private void updatePhoneMatch(boolean isMatch)
 	{
-		XHttpUtil.doLoginPhonePwd(requestBean, new XHttpAdapter<VLoginPhonePwdBean>()
+		if (isPhoneMatch == isMatch)
+		{
+			return;
+		}
+
+		this.isPhoneMatch = isMatch;
+		if (isMatch)
+		{
+			if (isPwdMatch)
+			{
+				viewHolder.get(R.id.btn_enter_login_phone_login).setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_redhokol);
+			}
+		}
+		else
+		{
+			if (isPwdMatch)
+			{
+				viewHolder.get(R.id.btn_enter_login_phone_login).setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_pinkhokol);
+			}
+		}
+	}
+
+	private void updatePwdMatch(boolean isMatch)
+	{
+		if (isPwdMatch == isMatch)
+		{
+			return;
+		}
+
+		this.isPwdMatch = isMatch;
+		if (isMatch)
+		{
+			if (isPhoneMatch)
+			{
+				viewHolder.get(R.id.btn_enter_login_phone_login).setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_redhokol);
+			}
+		}
+		else
+		{
+			if (isPhoneMatch)
+			{
+				viewHolder.get(R.id.btn_enter_login_phone_login).setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_pinkhokol);
+			}
+		}
+	}
+
+	private void doPost(String username, String password)
+	{
+		WEnterLoginPhonePwdBean loginPhonePwdBean = new WEnterLoginPhonePwdBean(username, password);
+		XHttpUtil.doEnterLoginPhonePwd(loginPhonePwdBean, new XHttpAdapter<VEnterLoginPhonePwdBean>()
 		{
 			@Override
-			public void onSuccess(VLoginPhonePwdBean vLoginPhonePwdBean)
+			public void onSuccess(VEnterLoginPhonePwdBean vEnterLoginPhonePwdBean)
 			{
-				MainActivity.actionStart(EnterLoginPhonePwdActivity.this);
+				AppStateManager.AppUserInfo appUserInfo = new AppStateManager.AppUserInfo(vEnterLoginPhonePwdBean);
+				MainActivity.actionStart(EnterLoginPhonePwdActivity.this, appUserInfo);
 				IApplication.finishActivity();
+			}
+
+			@Override
+			public void onFailureCode(int code)
+			{
+				super.onFailureCode(code);
+				SDKManager.toast("用户名或密码错误");
+			}
+
+			@Override
+			public void onFailure(Exception ex)
+			{
+				super.onFailure(ex);
+				SDKManager.toast("登陆失败");
 			}
 		});
 	}

@@ -9,8 +9,8 @@ import com.hokol.medium.http.bean.VDynamicPraiseSingleBean;
 import com.hokol.medium.http.bean.VDynamicUserAllBean;
 import com.hokol.medium.http.bean.VDynamicUserDetailBean;
 import com.hokol.medium.http.bean.VDynamicUserPrivateAllBean;
+import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
 import com.hokol.medium.http.bean.VHomeMainBean;
-import com.hokol.medium.http.bean.VLoginPhonePwdBean;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsRecommendBean;
 import com.hokol.medium.http.bean.VTaskMainAll;
@@ -30,8 +30,12 @@ import com.hokol.medium.http.bean.WDynamicPraiseSingleBean;
 import com.hokol.medium.http.bean.WDynamicUserAllBean;
 import com.hokol.medium.http.bean.WDynamicUserDetailBean;
 import com.hokol.medium.http.bean.WDynamicUserPrivateAllBean;
+import com.hokol.medium.http.bean.WEnterCodeRegisterBean;
+import com.hokol.medium.http.bean.WEnterLoginPhonePwdBean;
+import com.hokol.medium.http.bean.WEnterRegisterBean;
+import com.hokol.medium.http.bean.WEnterRegisterCompleteInfoBean;
+import com.hokol.medium.http.bean.WEnterResetPwdBean;
 import com.hokol.medium.http.bean.WHomeMainBean;
-import com.hokol.medium.http.bean.WLoginPhonePwdBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
 import com.hokol.medium.http.bean.WSettingResetPhoneBean;
 import com.hokol.medium.http.bean.WSettingResetPwdBean;
@@ -96,17 +100,97 @@ public class XHttpUtil
 	/**
 	 * 登录接口
 	 * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况
-	 * 手机号+密码登陆 --> login --> url_login_pwd --> WLoginPhonePwdBean - VLoginPhonePwdBean --> OK
+	 * 手机号+密码登陆 --> login --> url_login_pwd --> WEnterLoginPhonePwdBean - VEnterLoginPhonePwdBean --> OK
 	 */
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 登录接口 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 
 	/**
 	 * 手机号 + 密码登陆
 	 */
-	public static void doLoginPhonePwd(final WLoginPhonePwdBean requestBean, XHttpAdapter<VLoginPhonePwdBean> adapter)
+	public static void doEnterLoginPhonePwd(final WEnterLoginPhonePwdBean requestBean, XHttpAdapter<VEnterLoginPhonePwdBean> adapter)
 	{
-		String httpUrl = HttpConstant.url_login_pwd;
-		new XTextHttp<VLoginPhonePwdBean>(adapter).doPost(httpUrl, requestBean, VLoginPhonePwdBean.class);
+		String httpUrl = HttpConstant.url_enter_login_pwd;
+		new XTextHttp<VEnterLoginPhonePwdBean>(adapter).doPost(httpUrl, requestBean, VEnterLoginPhonePwdBean.class);
+	}
+
+	/**
+	 * 获取 注册验证码
+	 */
+	public static void doEnterCodeRegister(WEnterCodeRegisterBean wEnterCodeRegisterBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_enter_code_register;
+		new XTextHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, wEnterCodeRegisterBean, String.class);
+	}
+
+	/**
+	 * 用户注册
+	 */
+	public static void doEnterRegister(WEnterRegisterBean wEnterRegisterBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_enter_register;
+		new XTextHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, wEnterRegisterBean, String.class);
+	}
+
+	/**
+	 * 用户信息完善
+	 */
+	public static void doEnterRegisterCompleteInfo(WEnterRegisterCompleteInfoBean completeInfoBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_enter_register_complete_info;
+		new XTextHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, completeInfoBean, String.class);
+	}
+
+	/**
+	 * 忘记密码之获取验证码
+	 */
+	public static void doEnterCodeForgetPwd(WEnterCodeRegisterBean codeRegisterBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_enter_code_forget_pwd;
+		new XTextHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, codeRegisterBean, String.class);
+	}
+
+	/**
+	 * 忘记密码之重置密码
+	 */
+	public static void doEnterResetPwd(WEnterResetPwdBean resetPwdBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_enter_reset_pwd;
+		new XTextHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, resetPwdBean, String.class);
 	}
 
 	/**

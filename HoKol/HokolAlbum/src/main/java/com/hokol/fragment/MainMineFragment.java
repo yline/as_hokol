@@ -18,7 +18,7 @@ import com.hokol.activity.EnterChoiceActivity;
 import com.hokol.activity.UserInfoActivity;
 import com.hokol.application.AppStateManager;
 import com.hokol.application.IApplication;
-import com.hokol.medium.http.bean.VLoginPhonePwdBean;
+import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.FlowWidget;
 import com.yline.base.BaseFragment;
@@ -91,7 +91,7 @@ public class MainMineFragment extends BaseFragment
 	private void initData()
 	{
 		// 头部数据
-		VLoginPhonePwdBean userInfoBean = AppStateManager.getInstance().getUserInfo(getContext());
+		VEnterLoginPhonePwdBean userInfoBean = AppStateManager.getInstance().getUserInfo(getContext());
 		if (null != userInfoBean)
 		{
 			viewHolder.get(R.id.ll_main_mine_head).setVisibility(View.VISIBLE);

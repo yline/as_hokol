@@ -130,7 +130,7 @@
         android:layout_marginLeft="@dimen/default_space_large"
         android:layout_marginRight="@dimen/default_space_large"
         android:layout_marginTop="32dp"
-        android:background="@drawable/enter_register_phone_finish"
+        android:background="@drawable/widget_shape_radiuall_huge_solid_pinkhokol"
         android:text="完成"
         android:textColor="@android:color/white"
         android:textSize="@dimen/default_text_size_large"/>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="hokolRed">#ff2742</color>
+    <color name="hokolPink">#fa8492</color>
     <color name="hokolGray">#FF999999</color>
     <color name="hokolGrayDrak">#666666</color>
     <color name="hokolGrayLight">#e6e6e6</color>

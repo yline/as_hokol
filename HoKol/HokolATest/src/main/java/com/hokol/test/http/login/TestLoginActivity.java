@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.hokol.medium.http.XHttpUtil;
-import com.hokol.medium.http.bean.VLoginPhonePwdBean;
-import com.hokol.medium.http.bean.WLoginPhonePwdBean;
+import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
+import com.hokol.medium.http.bean.WEnterLoginPhonePwdBean;
 import com.hokol.test.common.BaseTestActivity;
 import com.hokol.test.httpattach.AvatarActivity;
 import com.yline.http.XHttpAdapter;
@@ -31,15 +31,15 @@ public class TestLoginActivity extends BaseTestActivity
 				String username = editTextOne.getText().toString().trim();
 				String password = editTextTwo.getText().toString().trim();
 
-				final WLoginPhonePwdBean requestBean = new WLoginPhonePwdBean(username, password);
+				final WEnterLoginPhonePwdBean requestBean = new WEnterLoginPhonePwdBean(username, password);
 
 				// 这样的方法,并不会被执行
-				XHttpUtil.doLoginPhonePwd(requestBean, new XHttpAdapter<VLoginPhonePwdBean>()
+				XHttpUtil.doEnterLoginPhonePwd(requestBean, new XHttpAdapter<VEnterLoginPhonePwdBean>()
 				{
 					@Override
-					public void onSuccess(VLoginPhonePwdBean vLoginPhonePwdBean)
+					public void onSuccess(VEnterLoginPhonePwdBean vEnterLoginPhonePwdBean)
 					{
-						AvatarActivity.actionStart(TestLoginActivity.this, vLoginPhonePwdBean.getUser_logo());
+						AvatarActivity.actionStart(TestLoginActivity.this, vEnterLoginPhonePwdBean.getUser_logo());
 					}
 				});
 			}

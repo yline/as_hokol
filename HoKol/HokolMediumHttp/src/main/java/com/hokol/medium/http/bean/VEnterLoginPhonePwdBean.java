@@ -2,7 +2,7 @@ package com.hokol.medium.http.bean;
 
 import java.util.List;
 
-public class VLoginPhonePwdBean
+public class VEnterLoginPhonePwdBean
 {
 	/* 关注的人唯一标识 */
 	private String user_id;

@@ -186,7 +186,7 @@ public class EnterRegisterPhoneHelper
 				// 修改 nextButton状态
 				if (isIdentifyMatch && isAgreementChecked)
 				{
-					viewHolder.get(R.id.btn_register_phone_action_next).setBackgroundResource(R.drawable.enter_register_phone_finish_able);
+					viewHolder.get(R.id.btn_register_phone_action_next).setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_redhokol);
 				}
 			}
 			else
@@ -201,7 +201,7 @@ public class EnterRegisterPhoneHelper
 				// 修改 nextButton状态
 				if (isIdentifyMatch && isAgreementChecked)
 				{
-					viewHolder.get(R.id.btn_register_phone_action_next).setBackgroundResource(R.drawable.enter_register_phone_finish);
+					viewHolder.get(R.id.btn_register_phone_action_next).setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_pinkhokol);
 				}
 			}
 
@@ -220,7 +220,7 @@ public class EnterRegisterPhoneHelper
 				// 修改 nextButton状态
 				if (isMobileMatch && isAgreementChecked)
 				{
-					viewHolder.get(R.id.btn_register_phone_action_next).setBackgroundResource(R.drawable.enter_register_phone_finish_able);
+					viewHolder.get(R.id.btn_register_phone_action_next).setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_redhokol);
 				}
 			}
 			else
@@ -228,7 +228,7 @@ public class EnterRegisterPhoneHelper
 				// 修改 nextButton状态
 				if (isMobileMatch && isAgreementChecked)
 				{
-					viewHolder.get(R.id.btn_register_phone_action_next).setBackgroundResource(R.drawable.enter_register_phone_finish);
+					viewHolder.get(R.id.btn_register_phone_action_next).setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_pinkhokol);
 				}
 			}
 			this.isIdentifyMatch = isMatch;
@@ -253,7 +253,7 @@ public class EnterRegisterPhoneHelper
 				// 修改 nextButton状态
 				if (isMobileMatch && isIdentifyMatch)
 				{
-					viewHolder.get(R.id.btn_register_phone_action_next).setBackgroundResource(R.drawable.enter_register_phone_finish_able);
+					viewHolder.get(R.id.btn_register_phone_action_next).setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_redhokol);
 				}
 			}
 			else
@@ -268,7 +268,7 @@ public class EnterRegisterPhoneHelper
 				// 修改 nextButton状态
 				if (isMobileMatch && isIdentifyMatch)
 				{
-					viewHolder.get(R.id.btn_register_phone_action_next).setBackgroundResource(R.drawable.enter_register_phone_finish);
+					viewHolder.get(R.id.btn_register_phone_action_next).setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_pinkhokol);
 				}
 			}
 

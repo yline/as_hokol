@@ -24,6 +24,8 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 		setContentView(R.layout.activity_enter_register_phone);
 
 		registerPhoneHelper = new EnterRegisterPhoneHelper(this);
+		registerPhoneHelper.initInputView();
+
 		registerPhoneHelper.setOnFinishListener(new View.OnClickListener()
 		{
 			@Override
@@ -37,7 +39,6 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v, String mobile, String identify)
 			{
-				IApplication.toast("mobile = " + mobile + ",identify = " + identify);
 				if (mobile.equals("15958148487"))
 				{
 					new DialogIosWidget(EnterRegisterPhoneActivity.this)
@@ -82,7 +83,6 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 				IApplication.toast("已发送验证码《123456》");
 			}
 		});
-		registerPhoneHelper.initInputView();
 	}
 
 	public static void actionStart(Context context)

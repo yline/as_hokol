@@ -3,8 +3,11 @@ package com.hokol.application;
 import android.content.Context;
 
 import com.google.gson.Gson;
-import com.hokol.medium.http.bean.VLoginPhonePwdBean;
+import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
 import com.yline.utils.SPUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * App状态 管理
@@ -38,14 +41,14 @@ public class AppStateManager
 		private static AppStateManager appStateManager = new AppStateManager();
 	}
 
-	public void setLoginUserInfo(Context context, VLoginPhonePwdBean userInfo)
+	public void setLoginUserInfo(Context context, AppUserInfo userInfo)
 	{
 		String jsonUserInfo = new Gson().toJson(userInfo);
 		SPUtil.put(context, KeyUserInfo, jsonUserInfo, FileName);
 
 		// 常用的
 		SPUtil.put(context, KeyUserLogin, true, FileName);
-		SPUtil.put(context, KeyUserLoginId, userInfo.getUser_id(), FileName);
+		SPUtil.put(context, KeyUserLoginId, userInfo.getUserId(), FileName);
 	}
 
 	public boolean isUserLogin(Context context)
@@ -58,13 +61,98 @@ public class AppStateManager
 		return (String) SPUtil.get(context, KeyUserLoginId, null, FileName);
 	}
 
-	public VLoginPhonePwdBean getUserInfo(Context context)
+	public VEnterLoginPhonePwdBean getUserInfo(Context context)
 	{
 		String jsonUserInfo = (String) SPUtil.get(context, KeyUserInfo, null, FileName);
 		if (null != jsonUserInfo)
 		{
-			return new Gson().fromJson(jsonUserInfo, VLoginPhonePwdBean.class);
+			return new Gson().fromJson(jsonUserInfo, VEnterLoginPhonePwdBean.class);
 		}
 		return null;
+	}
+
+	public static class AppUserInfo
+	{
+		/* id */private String userId;
+
+		/* 头像 */private String userAvatar;
+
+		/* 昵称 */private String userNickname;
+
+		/* 标签 */private List<String> userLabel;
+
+		/* 省份 */private String userProvince;
+
+		/* 城市 */private String userCity;
+
+		public AppUserInfo(VEnterLoginPhonePwdBean vEnterLoginPhonePwdBean)
+		{
+			this.userId = vEnterLoginPhonePwdBean.getUser_id();
+			this.userAvatar = vEnterLoginPhonePwdBean.getUser_logo();
+			this.userNickname = vEnterLoginPhonePwdBean.getUser_nickname();
+			this.userLabel = new ArrayList<>(vEnterLoginPhonePwdBean.getUser_tag());
+			this.userProvince = vEnterLoginPhonePwdBean.getUser_province();
+			this.userCity = vEnterLoginPhonePwdBean.getUser_city();
+		}
+
+		public String getUserId()
+		{
+			return userId;
+		}
+
+		public void setUserId(String userId)
+		{
+			this.userId = userId;
+		}
+
+		public String getUserAvatar()
+		{
+			return userAvatar;
+		}
+
+		public void setUserAvatar(String userAvatar)
+		{
+			this.userAvatar = userAvatar;
+		}
+
+		public String getUserNickname()
+		{
+			return userNickname;
+		}
+
+		public void setUserNickname(String userNickname)
+		{
+			this.userNickname = userNickname;
+		}
+
+		public List<String> getUserLabel()
+		{
+			return userLabel;
+		}
+
+		public void setUserLabel(List<String> userLabel)
+		{
+			this.userLabel = userLabel;
+		}
+
+		public String getUserProvince()
+		{
+			return userProvince;
+		}
+
+		public void setUserProvince(String userProvince)
+		{
+			this.userProvince = userProvince;
+		}
+
+		public String getUserCity()
+		{
+			return userCity;
+		}
+
+		public void setUserCity(String userCity)
+		{
+			this.userCity = userCity;
+		}
 	}
 }
