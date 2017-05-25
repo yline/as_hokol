@@ -1,6 +1,5 @@
 package com.hokol.viewhelper;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -24,10 +23,10 @@ public class EnterRegisterPhoneHelper
 
 	private RegisterPhoneStateManager stateManager;
 
-	public EnterRegisterPhoneHelper(Activity activity)
+	public EnterRegisterPhoneHelper(Context context, ViewHolder viewHolder)
 	{
-		this.sContext = activity.getBaseContext();
-		viewHolder = new ViewHolder(activity);
+		this.sContext = context;
+		this.viewHolder = viewHolder;
 		stateManager = new RegisterPhoneStateManager();
 	}
 

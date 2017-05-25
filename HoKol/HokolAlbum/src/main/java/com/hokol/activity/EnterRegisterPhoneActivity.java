@@ -4,17 +4,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
-import com.hokol.medium.widget.DialogIosWidget;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.WEnterCodeRegisterBean;
+import com.hokol.medium.http.bean.WEnterRegisterBean;
 import com.hokol.util.TextDecorateUtil;
 import com.hokol.viewhelper.EnterRegisterPhoneHelper;
 import com.yline.base.BaseAppCompatActivity;
+import com.yline.http.XHttpAdapter;
+import com.yline.view.common.ViewHolder;
 
 public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 {
+	private ViewHolder viewHolder;
+
 	private EnterRegisterPhoneHelper registerPhoneHelper;
 
 	@Override
@@ -23,7 +28,8 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_enter_register_phone);
 
-		registerPhoneHelper = new EnterRegisterPhoneHelper(this);
+		viewHolder = new ViewHolder(this);
+		registerPhoneHelper = new EnterRegisterPhoneHelper(this, viewHolder);
 		registerPhoneHelper.initInputView();
 
 		registerPhoneHelper.setOnFinishListener(new View.OnClickListener()
@@ -39,30 +45,42 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v, String mobile, String identify)
 			{
-				if (mobile.equals("15958148487"))
-				{
-					new DialogIosWidget(EnterRegisterPhoneActivity.this)
-					{
-						@Override
-						protected void initBuilder(Builder builder)
-						{
-							super.initBuilder(builder);
-							builder.setTitle("您已经注册过红客了\n请直接登陆吧");
-							builder.setPositiveText("立即登陆");
-						}
+				String phoneNumber = viewHolder.getText(R.id.et_enter_register_phone_username);
+				String identifyCode = viewHolder.getText(R.id.et_register_phone_password);
 
-						@Override
-						protected void initMessageTextView(TextView textView, Builder builder)
-						{
-							super.initMessageTextView(textView, builder);
-							textView.setVisibility(View.GONE);
-						}
-					}.show();
-				}
-				else if (identify.equals("123456"))
+				XHttpUtil.doEnterRegister(new WEnterRegisterBean(phoneNumber, identifyCode), new XHttpAdapter<String>()
 				{
-					EnterRegisterCompleteInfoActivity.actionStart(EnterRegisterPhoneActivity.this);
-				}
+					@Override
+					public void onSuccess(String s)
+					{
+						EnterRegisterCompleteInfoActivity.actionStart(EnterRegisterPhoneActivity.this);
+					}
+
+					@Override
+					public void onFailureCode(int code)
+					{
+						super.onFailureCode(code);
+						IApplication.toast("填写信息错误");
+					}
+				});
+				/*
+				new DialogIosWidget(EnterRegisterPhoneActivity.this)
+				{
+					@Override
+					protected void initBuilder(Builder builder)
+					{
+						super.initBuilder(builder);
+						builder.setTitle("您已经注册过红客了\n请直接登陆吧");
+						builder.setPositiveText("立即登陆");
+					}
+
+					@Override
+					protected void initMessageTextView(TextView textView, Builder builder)
+					{
+						super.initMessageTextView(textView, builder);
+						textView.setVisibility(View.GONE);
+					}
+				}.show();*/
 			}
 		});
 
@@ -80,7 +98,15 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				IApplication.toast("已发送验证码《123456》");
+				String phoneNumber = viewHolder.getText(R.id.et_enter_register_phone_username);
+				XHttpUtil.doEnterCodeRegister(new WEnterCodeRegisterBean(phoneNumber), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						IApplication.toast("请查看手机短信");
+					}
+				});
 			}
 		});
 	}
