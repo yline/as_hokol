@@ -53,15 +53,25 @@
         <activity android:name=".activity.UserMessageDetailActivity"/>
         <!-- 登入Enter -->
         <activity android:name=".activity.EnterChoiceActivity">
-            <!--<intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
         <activity android:name=".activity.EnterLoginPhonePwdActivity"/>
         <activity android:name=".activity.EnterRegisterPhoneActivity"/>
         <activity android:name=".activity.EnterForgetPwdActivity"/>
         <activity android:name=".activity.EnterRegisterCompleteInfoActivity"/>
+        <activity android:name=".activity.UserSettingAccountActivity">
+        </activity>
+        <activity android:name=".activity.UserSettingAccountBindActivity">
+        </activity>
+        <activity android:name=".activity.EnterModifyPwdActivity">
+        </activity>
     </application>
+
 </manifest>

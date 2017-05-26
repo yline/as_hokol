@@ -1,6 +1,7 @@
 package com.hokol.application;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
@@ -9,8 +10,6 @@ import com.yline.utils.SPUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.yline.utils.SPUtil.get;
 
 /**
  * App状态 管理
@@ -56,20 +55,20 @@ public class AppStateManager
 
 	public boolean isUserLogin(Context context)
 	{
-		return (boolean) get(context, KeyUserLogin, false, FileName);
+		return (boolean) SPUtil.get(context, KeyUserLogin, false, FileName);
 	}
 	
 	public String getUserLoginId(Context context)
 	{
-		return (String) get(context, KeyUserLoginId, null, FileName);
+		return (String) SPUtil.get(context, KeyUserLoginId, "", FileName);
 	}
 
-	public VEnterLoginPhonePwdBean getUserInfo(Context context)
+	public AppUserInfo getUserInfo(Context context)
 	{
-		String jsonUserInfo = (String) get(context, KeyUserInfo, null, FileName);
-		if (null != jsonUserInfo)
+		String jsonUserInfo = (String) SPUtil.get(context, KeyUserInfo, "", FileName);
+		if (!TextUtils.isEmpty(jsonUserInfo))
 		{
-			return new Gson().fromJson(jsonUserInfo, VEnterLoginPhonePwdBean.class);
+			return new Gson().fromJson(jsonUserInfo, AppUserInfo.class);
 		}
 		return null;
 	}
@@ -88,6 +87,8 @@ public class AppStateManager
 
 		/* 城市 */private String userCity;
 
+		/* 签名 */private String userSign;
+
 		public AppUserInfo(VEnterLoginPhonePwdBean vEnterLoginPhonePwdBean)
 		{
 			this.userId = vEnterLoginPhonePwdBean.getUser_id();
@@ -96,6 +97,7 @@ public class AppStateManager
 			this.userLabel = new ArrayList<>(vEnterLoginPhonePwdBean.getUser_tag());
 			this.userProvince = vEnterLoginPhonePwdBean.getUser_province();
 			this.userCity = vEnterLoginPhonePwdBean.getUser_city();
+			this.userSign = vEnterLoginPhonePwdBean.getUser_sign();
 		}
 
 		public String getUserId()
@@ -156,6 +158,16 @@ public class AppStateManager
 		public void setUserCity(String userCity)
 		{
 			this.userCity = userCity;
+		}
+
+		public String getUserSign()
+		{
+			return userSign;
+		}
+
+		public void setUserSign(String userSign)
+		{
+			this.userSign = userSign;
 		}
 	}
 

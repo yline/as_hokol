@@ -18,7 +18,6 @@ import com.hokol.activity.EnterChoiceActivity;
 import com.hokol.activity.UserInfoActivity;
 import com.hokol.application.AppStateManager;
 import com.hokol.application.IApplication;
-import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.FlowWidget;
 import com.yline.base.BaseFragment;
@@ -91,8 +90,8 @@ public class MainMineFragment extends BaseFragment
 	private void initData()
 	{
 		// 头部数据
-		VEnterLoginPhonePwdBean userInfoBean = AppStateManager.getInstance().getUserInfo(getContext());
-		if (null != userInfoBean)
+		AppStateManager.AppUserInfo appUserInfo = AppStateManager.getInstance().getUserInfo(getContext());
+		if (null != appUserInfo)
 		{
 			viewHolder.get(R.id.ll_main_mine_head).setVisibility(View.VISIBLE);
 			viewHolder.get(R.id.tv_main_mine_head).setVisibility(View.INVISIBLE);
@@ -131,15 +130,15 @@ public class MainMineFragment extends BaseFragment
 
 			// 头像
 			ImageView imageView = viewHolder.get(R.id.circle_main_mine_avatar);
-			Glide.with(getContext()).load(userInfoBean.getUser_logo()).into(imageView);
+			Glide.with(getContext()).load(appUserInfo.getUserAvatar()).into(imageView);
 
 			// 签名
-			viewHolder.setText(R.id.tv_main_mine_sign, userInfoBean.getUser_sign());
+			viewHolder.setText(R.id.tv_main_mine_sign, appUserInfo.getUserSign());
 
 			// 标签
 			FlowLayout flowLayout = viewHolder.get(R.id.flow_layout_main_mine_head_label);
 			FlowWidget flowWidget = new FlowWidget(getContext(), flowLayout);
-			flowWidget.setDataList(userInfoBean.getUser_tag());
+			flowWidget.setDataList(appUserInfo.getUserLabel());
 		}
 		else
 		{

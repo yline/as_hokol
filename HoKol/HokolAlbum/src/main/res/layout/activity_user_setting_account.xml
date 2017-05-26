@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_user_setting_acount"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_user_setting_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_title_normal">
+
+        <ImageView
+            android:id="@+id/iv_user_setting_account_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingLeft="@dimen/default_space_large_b"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/default_space_normal"
+            android:src="@drawable/global_back_red_arrows"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="账号与安全"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/default_text_size_large"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGrayLight">
+    </View>
+
+    <LinearLayout
+        android:id="@+id/ll_user_setting_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/default_space_large"
+        android:paddingLeft="@dimen/default_space_large_b"
+        android:paddingTop="@dimen/default_space_large">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/user_setting_account_avatar"
+            android:drawablePadding="@dimen/default_space_small"
+            android:gravity="center_vertical"
+            android:text="账号"
+            android:textColor="@color/hokolBlackSmall"
+            android:textSize="@dimen/default_text_size_large"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/default_space_normal"
+            android:text="152*****584"
+            android:textSize="@dimen/default_text_size_medium"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGrayLight">
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/default_space_large"
+        android:paddingLeft="@dimen/default_space_large_b"
+        android:paddingTop="@dimen/default_space_large">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/user_setting_account_safety"
+            android:drawablePadding="@dimen/default_space_small"
+            android:gravity="center_vertical"
+            android:text="账号安全"
+            android:textColor="@color/hokolBlackSmall"
+            android:textSize="@dimen/default_text_size_large"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/default_space_normal"
+            android:drawablePadding="@dimen/default_space_small"
+            android:drawableRight="@drawable/user_setting_account_selected"
+            android:text="已绑定手机"
+            android:textSize="@dimen/default_text_size_medium"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGrayLight">
+    </View>
+
+    <LinearLayout
+        android:id="@+id/ll_user_setting_account_bind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/default_space_large"
+        android:paddingLeft="@dimen/default_space_large_b"
+        android:paddingTop="@dimen/default_space_large">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/user_setting_account_binding"
+            android:drawablePadding="@dimen/default_space_small"
+            android:gravity="center_vertical"
+            android:text="绑定账号"
+            android:textColor="@color/hokolBlackSmall"
+            android:textSize="@dimen/default_text_size_large"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/default_space_normal"
+            android:src="@drawable/user_setting_account_wechat_gray"
+            android:textSize="@dimen/default_text_size_medium"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGrayLight">
+    </View>
+
+    <LinearLayout
+        android:id="@+id/ll_user_setting_account_key"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/default_space_large"
+        android:paddingLeft="@dimen/default_space_large_b"
+        android:paddingTop="@dimen/default_space_large">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/user_setting_account_key"
+            android:drawablePadding="@dimen/default_space_small"
+            android:gravity="center_vertical"
+            android:text="修改密码"
+            android:textColor="@color/hokolBlackSmall"
+            android:textSize="@dimen/default_text_size_large"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/default_space_normal"
+            android:src="@drawable/global_forward_arrows_dark"
+            android:textSize="@dimen/default_text_size_medium"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGrayLight">
+    </View>
+</LinearLayout>

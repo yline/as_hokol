@@ -24,6 +24,7 @@ import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainCareHelper;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
+import com.yline.log.LogFileUtil;
 import com.yline.view.common.ViewHolder;
 
 import java.util.List;
@@ -120,6 +121,7 @@ public class MainCareFragment extends BaseFragment
 			public void onClick(View v)
 			{
 				String userId = AppStateManager.getInstance().getUserLoginId(getContext());
+				LogFileUtil.v("userId = " + userId);
 				if (TextUtils.isEmpty(userId))
 				{
 					EnterChoiceActivity.actionStart(getContext());
@@ -153,14 +155,14 @@ public class MainCareFragment extends BaseFragment
 				public void onSuccess(VDynamicCareAllBean vDynamicCareAllBean)
 				{
 					List<VDynamicCareBean> result = vDynamicCareAllBean.getList();
-					if (null != result)
+					if (null == result)
 					{
 						mainCareHelper.updateRecyclerEmptyState(true);
 					}
 					else
 					{
 						mainCareHelper.setRecycleData(result);
-						refreshedNumber += vDynamicCareAllBean.getList().size();
+						refreshedNumber += result.size();
 					}
 				}
 
