@@ -4,8 +4,8 @@ import java.util.List;
 
 public class WEnterRegisterCompleteInfoBean
 {
-	/* 用户ID */
-	private String user_id;
+	/* 用户手机号码 */
+	private String user_tel;
 
 	/* 用户密码 */
 	private String user_pwd;
@@ -13,25 +13,32 @@ public class WEnterRegisterCompleteInfoBean
 	/* 用户性别[1:男，2:女] */
 	private int user_sex;
 
-	/* 用户标签[数组形式] */
-	private List<String> user_tag;
+	/* 用户昵称 */
+	private String user_nickname;
 
-	public WEnterRegisterCompleteInfoBean(String user_id, String user_pwd, int user_sex, List<String> user_tag)
+	/* 用户标签[数组形式] */
+	private List<Integer> user_tag;
+
+	public WEnterRegisterCompleteInfoBean(String user_tel)
 	{
-		this.user_id = user_id;
+		this.user_tel = user_tel;
+	}
+
+	public WEnterRegisterCompleteInfoBean(String user_tel, String user_pwd, int user_sex)
+	{
+		this.user_tel = user_tel;
 		this.user_pwd = user_pwd;
 		this.user_sex = user_sex;
-		this.user_tag = user_tag;
 	}
 
-	public String getUser_id()
+	public String getUser_tel()
 	{
-		return user_id;
+		return user_tel;
 	}
 
-	public void setUser_id(String user_id)
+	public void setUser_tel(String user_tel)
 	{
-		this.user_id = user_id;
+		this.user_tel = user_tel;
 	}
 
 	public String getUser_pwd()
@@ -54,13 +61,35 @@ public class WEnterRegisterCompleteInfoBean
 		this.user_sex = user_sex;
 	}
 
-	public List<String> getUser_tag()
+	public List<Integer> getUser_tag()
 	{
 		return user_tag;
 	}
 
-	public void setUser_tag(List<String> user_tag)
+	public void setUser_tag(List<Integer> user_tag)
 	{
 		this.user_tag = user_tag;
+	}
+
+	public String getUser_nickname()
+	{
+		return user_nickname;
+	}
+
+	public void setUser_nickname(String user_nickname)
+	{
+		this.user_nickname = user_nickname;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "WEnterRegisterCompleteInfoBean{" +
+				"user_tel='" + user_tel + '\'' +
+				", user_pwd='" + user_pwd + '\'' +
+				", user_sex=" + user_sex +
+				", user_nickname='" + user_nickname + '\'' +
+				", user_tag=" + user_tag +
+				'}';
 	}
 }

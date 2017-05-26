@@ -62,7 +62,7 @@ public class MainNewsHelper
 		});
 
 		recyclerAdapter = new CommonNewsAdapter();
-
+		
 		recyclerView.setAdapter(recyclerAdapter);
 	}
 

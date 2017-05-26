@@ -71,6 +71,8 @@ public class TextDecorateUtil
 	}
 
 	/**
+	 * 检测 密码是否 符合规格
+	 *
 	 * @param editText
 	 * @param matchCallback
 	 */
@@ -112,7 +114,50 @@ public class TextDecorateUtil
 	}
 
 	/**
-	 * 校验手机 校验码 是否正确
+	 * 检测 昵称 是否 符合规格
+	 *
+	 * @param editText
+	 * @param matchCallback
+	 */
+	public static void isNicknameMatch(EditText editText, final OnEditMatchCallback matchCallback)
+	{
+		editText.addTextChangedListener(new TextWatcher()
+		{
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after)
+			{
+
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count)
+			{
+				String inputString = s.toString();
+				if (inputString.length() > 0 && inputString.length() < 17)
+				{
+					if (null != matchCallback)
+					{
+						matchCallback.onTextChange(true);
+					}
+					return;
+				}
+
+				if (null != matchCallback)
+				{
+					matchCallback.onTextChange(false);
+				}
+			}
+
+			@Override
+			public void afterTextChanged(Editable s)
+			{
+
+			}
+		});
+	}
+
+	/**
+	 * 校验手机 校验码 是否 符合规格
 	 *
 	 * @param editText
 	 * @param matchCallback

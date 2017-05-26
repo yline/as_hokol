@@ -28,7 +28,7 @@ public class HttpConstant
 	public static final String url_enter_login_pwd = url_head + "ApiLogin/login";
 
 	// 获取 注册验证码
-	public static final String url_enter_code_register = url_head + "ApiLogin/get_regist_code";
+	public static final String url_enter_code_register = url_head + "ApiLogin/get_register_code";
 
 	// 用户注册
 	public static final String url_enter_register = url_head + "ApiLogin/register";

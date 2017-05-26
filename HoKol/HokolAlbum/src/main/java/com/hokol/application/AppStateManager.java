@@ -4,10 +4,13 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
+import com.yline.utils.LogUtil;
 import com.yline.utils.SPUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.yline.utils.SPUtil.get;
 
 /**
  * App状态 管理
@@ -53,17 +56,17 @@ public class AppStateManager
 
 	public boolean isUserLogin(Context context)
 	{
-		return (boolean) SPUtil.get(context, KeyUserLogin, false, FileName);
+		return (boolean) get(context, KeyUserLogin, false, FileName);
 	}
 	
 	public String getUserLoginId(Context context)
 	{
-		return (String) SPUtil.get(context, KeyUserLoginId, null, FileName);
+		return (String) get(context, KeyUserLoginId, null, FileName);
 	}
 
 	public VEnterLoginPhonePwdBean getUserInfo(Context context)
 	{
-		String jsonUserInfo = (String) SPUtil.get(context, KeyUserInfo, null, FileName);
+		String jsonUserInfo = (String) get(context, KeyUserInfo, null, FileName);
 		if (null != jsonUserInfo)
 		{
 			return new Gson().fromJson(jsonUserInfo, VEnterLoginPhonePwdBean.class);
@@ -154,5 +157,16 @@ public class AppStateManager
 		{
 			this.userCity = userCity;
 		}
+	}
+
+	public void logAppState(Context context)
+	{
+		String keyUserInfo = (String) SPUtil.get(context, KeyUserInfo, "null", FileName);
+		LogUtil.v("keyUserInfo = " + keyUserInfo);
+
+		// 常用
+		boolean isUserLogin = (boolean) SPUtil.get(context, KeyUserLogin, false, FileName);
+		String userId = (String) SPUtil.get(context, KeyUserLoginId, "null", FileName);
+		LogUtil.v("isUserLogin = " + isUserLogin + ", userId = " + userId);
 	}
 }

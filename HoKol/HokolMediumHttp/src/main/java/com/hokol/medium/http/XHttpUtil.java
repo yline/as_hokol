@@ -148,17 +148,10 @@ public class XHttpUtil
 	/**
 	 * 用户信息完善
 	 */
-	public static void doEnterRegisterCompleteInfo(WEnterRegisterCompleteInfoBean completeInfoBean, XHttpAdapter<String> adapter)
+	public static void doEnterRegisterCompleteInfo(WEnterRegisterCompleteInfoBean completeInfoBean, XHttpAdapter<VEnterLoginPhonePwdBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_register_complete_info;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, completeInfoBean, String.class);
+		new XTextHttp<VEnterLoginPhonePwdBean>(adapter).doPost(httpUrl, completeInfoBean, VEnterLoginPhonePwdBean.class);
 	}
 
 	/**

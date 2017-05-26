@@ -22,5 +22,5 @@ android {
 
 dependencies {
     compile project(':HokolBase')
-    compile 'com.yline.lib:LibView:1.4.2'
+    compile 'com.yline.lib:LibView:1.4.3'
 }

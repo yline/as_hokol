@@ -10,7 +10,7 @@ public class HttpEnum
 	public enum UserTag
 	{
 		// 1:网红,2:主播,3:演员,4:模特,5:歌手,6:体育
-		All("全部", 0), Red("网红", 1), Author("主播", 2), Performer("演员", 3), Model("模特", 4), Singer("歌手", 5), Sport("体育", 6);
+		All("全部", 0), Red("网红", 1), Author("主播", 2), Performer("演员", 3), Model("模特", 4), Singer("歌手", 5), Sport("体育", 6), Other("其他", 7);
 
 		private final int index;
 
@@ -36,7 +36,13 @@ public class HttpEnum
 	public static List<String> getUserTagListAll()
 	{
 		return Arrays.asList(UserTag.All.getContent(), UserTag.Red.getContent(), UserTag.Author.getContent(),
-				UserTag.Performer.getContent(), UserTag.Model.getContent(), UserTag.Singer.getContent(), UserTag.Sport.getContent());
+				UserTag.Performer.getContent(), UserTag.Model.getContent(), UserTag.Singer.getContent(), UserTag.Sport.getContent(), UserTag.Other.getContent());
+	}
+
+	public static List<String> getUserTagListTail()
+	{
+		return Arrays.asList(UserTag.Red.getContent(), UserTag.Author.getContent(),
+				UserTag.Performer.getContent(), UserTag.Model.getContent(), UserTag.Singer.getContent(), UserTag.Sport.getContent(), UserTag.Other.getContent());
 	}
 
 	public static UserTag getUserTag(int index)

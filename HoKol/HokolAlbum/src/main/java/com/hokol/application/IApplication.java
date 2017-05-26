@@ -15,5 +15,8 @@ public class IApplication extends BaseApplication
 		super.onCreate();
 
 		XHttpUtil.init(this);
+
+		// 打印日志
+		AppStateManager.getInstance().logAppState(this);
 	}
 }

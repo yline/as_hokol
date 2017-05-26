@@ -55,6 +55,9 @@ public class VEnterLoginPhonePwdBean
 	/* 用户等级 */
 	private int user_level;
 
+	/* 等级图标链接 */
+	private String level_url;
+
 	public String getUser_id()
 	{
 		return user_id;
@@ -223,5 +226,15 @@ public class VEnterLoginPhonePwdBean
 	public void setUser_level(int user_level)
 	{
 		this.user_level = user_level;
+	}
+
+	public String getLevel_url()
+	{
+		return level_url;
+	}
+
+	public void setLevel_url(String level_url)
+	{
+		this.level_url = level_url;
 	}
 }

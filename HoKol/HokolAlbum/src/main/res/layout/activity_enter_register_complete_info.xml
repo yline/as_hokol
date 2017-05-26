@@ -49,7 +49,7 @@
             android:layout_marginRight="@dimen/default_space_large"
             android:layout_marginTop="@dimen/default_space_normal"
             android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
-            android:hint="请输入手机号"
+            android:hint="请输入昵称"
             android:inputType="text"
             android:padding="@dimen/default_space_normal"
             android:textColorHint="@color/hokolGray"
@@ -125,26 +125,30 @@
                 android:textColor="@color/hokolGrayDrak"/>
 
             <RadioGroup
+                android:id="@+id/radio_group_enter_register_complete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:checkedButton="@+id/rbtn_enter_register_complete_girl"
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:id="@+id/rbtn_enter_register_complete_girl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/default_space_large"
-                    android:button="@drawable/enter_register_conplete_girl"
+                    android:button="@drawable/enter_register_conplete_girl_zero"
                     android:paddingLeft="@dimen/default_space_normal"
                     android:text="女生"
                     android:textColor="@color/hokolGrayDrak"/>
 
                 <RadioButton
+                    android:id="@+id/rbtn_enter_register_complete_boy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/default_space_large"
-                    android:button="@drawable/enter_register_conplete_zero"
+                    android:button="@drawable/enter_register_conplete_boy_zero"
                     android:paddingLeft="@dimen/default_space_normal"
                     android:text="男生"
                     android:textColor="@color/hokolGrayDrak"/>
@@ -164,13 +168,14 @@
             android:textColor="@color/hokolGrayDrak"/>
 
         <!-- 标签 -->
-        <com.hokol.medium.widget.labellayout.LabelFlowLayout
+        <com.yline.widget.label.LabelFlowLayout
             android:id="@+id/label_flow_enter_register_complete_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_enter_register_complete_info_label"
-            android:layout_marginLeft="@dimen/default_space_large">
-        </com.hokol.medium.widget.labellayout.LabelFlowLayout>
+            android:layout_marginLeft="@dimen/default_space_large"
+            android:layout_marginRight="@dimen/default_space_large">
+        </com.yline.widget.label.LabelFlowLayout>
 
         <TextView
             android:id="@+id/tv_enter_register_complete"
@@ -192,7 +197,7 @@
             android:layout_below="@+id/tv_enter_register_complete"
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginRight="@dimen/default_space_large"
-            android:background="@drawable/enter_register_complete_unconfirm"
+            android:background="@drawable/widget_shape_radiusall_solid_graysmall"
             android:text="确认"
             android:textColor="@android:color/white"
             android:textSize="@dimen/default_text_size_large"/>

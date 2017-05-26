@@ -37,11 +37,11 @@ import java.util.Map;
  */
 public class MainTaskHelper
 {
-	private Context context;
+	private Context sContext;
 
 	public MainTaskHelper(Context context)
 	{
-		this.context = context;
+		this.sContext = context;
 	}
 
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 下拉菜单 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
@@ -51,7 +51,7 @@ public class MainTaskHelper
 
 	public void initTabDownMenuView(TabLayout menuTabLayout)
 	{
-		dropMenuWidget = new DropMenuWidget(context, menuTabLayout);
+		dropMenuWidget = new DropMenuWidget(sContext, menuTabLayout);
 
 		List<View> contentViewList = new ArrayList<>();
 
@@ -69,14 +69,12 @@ public class MainTaskHelper
 	// 分类
 	private View initClassifyView()
 	{
-		View areaView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_classify, null);
+		View areaView = LayoutInflater.from(sContext).inflate(R.layout.fragment_main_task__menu_classify, null);
 
 		final LabelFlowLayout labelFlowLayout = (LabelFlowLayout) areaView.findViewById(R.id.label_flow_main_task_menu_classify);
 		labelFlowLayout.setLabelGravity(FlowLayout.LabelGravity.EQUIDISTANT);
-		labelFlowLayout.setMaxSelectCount(1);
-		labelFlowLayout.setMinSelectCount(1);
 		labelFlowLayout.setMaxCountEachLine(4);
-		final FlowAbleWidget flowAbleWidget = new FlowAbleWidget(context, labelFlowLayout)
+		final FlowAbleWidget flowAbleWidget = new FlowAbleWidget(sContext, labelFlowLayout)
 		{
 			@Override
 			protected int getItemResourceId()
@@ -84,6 +82,8 @@ public class MainTaskHelper
 				return R.layout.activity_user_info__flow_able;
 			}
 		};
+		flowAbleWidget.setMaxSelectCount(1);
+		flowAbleWidget.setMinSelectCount(1);
 		flowAbleWidget.setDataList(HttpEnum.getUserTagListAll());
 		flowAbleWidget.addSelectedPosition(0);
 
@@ -108,12 +108,10 @@ public class MainTaskHelper
 	// 男女
 	private View initSexView()
 	{
-		View sexView = LayoutInflater.from(context).inflate(R.layout.fragment_main_task__menu_sex, null);
+		View sexView = LayoutInflater.from(sContext).inflate(R.layout.fragment_main_task__menu_sex, null);
 
 		final LabelFlowLayout labelFlowLayout = (LabelFlowLayout) sexView.findViewById(R.id.label_flow_main_task_menu_sex);
-		labelFlowLayout.setMaxSelectCount(1);
-		labelFlowLayout.setMinSelectCount(1);
-		final FlowAbleWidget labelClickableWidget = new FlowAbleWidget(context, labelFlowLayout)
+		final FlowAbleWidget labelClickableWidget = new FlowAbleWidget(sContext, labelFlowLayout)
 		{
 			@Override
 			protected int getItemResourceId()
@@ -121,9 +119,11 @@ public class MainTaskHelper
 				return R.layout.fragment_main_task__flow_able;
 			}
 		};
+		labelClickableWidget.setMaxSelectCount(1);
+		labelClickableWidget.setMinSelectCount(1);
 		labelClickableWidget.setDataList(HttpEnum.getUserSexListAll());
 		labelClickableWidget.addSelectedPosition(0);
-
+		
 		Button btnSex = (Button) sexView.findViewById(R.id.btn_main_task_menu_sex);
 		btnSex.setOnClickListener(new View.OnClickListener()
 		{
@@ -147,7 +147,7 @@ public class MainTaskHelper
 	// 地区
 	private void initAreaView(List<View> contentViewList)
 	{
-		secondaryWidget = new SecondaryWidget(context, contentViewList);
+		secondaryWidget = new SecondaryWidget(sContext, contentViewList);
 		secondaryWidget.setOnSecondaryCallback(new SecondaryWidget.OnSecondaryCallback()
 		{
 			@Override
@@ -229,7 +229,7 @@ public class MainTaskHelper
 
 	public void initRecycleView(RecyclerView recycleView)
 	{
-		recycleView.setLayoutManager(new LinearLayoutManager(context));
+		recycleView.setLayoutManager(new LinearLayoutManager(sContext));
 		taskRecycleAdapter = new TaskRecycleAdapter();
 		
 		recycleView.setAdapter(taskRecycleAdapter);
@@ -271,7 +271,7 @@ public class MainTaskHelper
 
 			// 头像
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_task_avatar);
-			Glide.with(context).load(sList.get(position).getUser_logo()).error(R.drawable.global_load_failed).into(imageView);
+			Glide.with(sContext).load(sList.get(position).getUser_logo()).error(R.drawable.global_load_failed).into(imageView);
 
 			// 用户名
 			viewHolder.setText(R.id.tv_item_main_task_user, sList.get(position).getUser_nickname());
