@@ -22,46 +22,50 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/global_load_failed"/>
 
-            <!-- 关注 -->
-            <ImageView
-                android:id="@+id/iv_star_dynamic_care"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/iv_star_dynamic_praise"
-                android:layout_toLeftOf="@+id/iv_star_dynamic_praise"
-                android:layout_toStartOf="@+id/iv_star_dynamic_praise"
-                android:padding="@dimen/default_space_normal"
-                android:src="@drawable/star_dynamic_care"/>
+                android:layout_alignBottom="@+id/iv_star_dynamic_content">
 
-            <!-- 点赞 -->
-            <ImageView
-                android:id="@+id/iv_star_dynamic_praise"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/iv_star_dynamic_give_gift"
-                android:layout_toLeftOf="@+id/iv_star_dynamic_give_gift"
-                android:layout_toStartOf="@+id/iv_star_dynamic_give_gift"
-                android:padding="@dimen/default_space_normal"
-                android:src="@drawable/star_dynamic_unlike"/>
+                <!-- 关注 -->
+                <ImageView
+                    android:id="@+id/iv_star_dynamic_care"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/iv_star_dynamic_praise"
+                    android:layout_toLeftOf="@+id/iv_star_dynamic_praise"
+                    android:layout_toStartOf="@+id/iv_star_dynamic_praise"
+                    android:padding="@dimen/default_space_normal"
+                    android:src="@drawable/star_dynamic_care"/>
 
-            <!-- 送礼 -->
-            <ImageView
-                android:id="@+id/iv_star_dynamic_give_gift"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/iv_star_dynamic_content"
-                android:layout_alignRight="@+id/iv_star_dynamic_content"
-                android:layout_marginBottom="@dimen/default_space_little"
-                android:layout_marginRight="@dimen/default_space_normal"
-                android:padding="@dimen/default_space_normal"
-                android:src="@drawable/star_dynamic_gift"/>
+                <!-- 点赞 -->
+                <ImageView
+                    android:id="@+id/iv_star_dynamic_praise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/iv_star_dynamic_give_gift"
+                    android:layout_toLeftOf="@+id/iv_star_dynamic_give_gift"
+                    android:layout_toStartOf="@+id/iv_star_dynamic_give_gift"
+                    android:padding="@dimen/default_space_normal"
+                    android:src="@drawable/star_dynamic_unlike"/>
 
-            <!-- 送礼的DialogFragment -->
+                <!-- 送礼 -->
+                <ImageView
+                    android:id="@+id/iv_star_dynamic_give_gift"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="@dimen/default_space_little"
+                    android:layout_marginRight="@dimen/default_space_normal"
+                    android:padding="@dimen/default_space_normal"
+                    android:src="@drawable/star_dynamic_gift"/>
+            </RelativeLayout>
+
+            <!-- 送礼物 界面 -->
             <FrameLayout
                 android:id="@+id/fl_star_dynamic_gift"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true">
+                android:layout_height="wrap_content">
             </FrameLayout>
         </RelativeLayout>
 

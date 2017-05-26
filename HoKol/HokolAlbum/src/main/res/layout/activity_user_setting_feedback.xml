@@ -140,7 +140,6 @@
                 android:paddingBottom="@dimen/default_space_large"
                 android:paddingLeft="@dimen/default_space_normal"
                 android:paddingTop="@dimen/default_space_large"
-
                 android:text="订单支付"
                 android:textColor="@color/hokolBlackSmall"/>
         </LinearLayout>
