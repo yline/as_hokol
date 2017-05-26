@@ -42,6 +42,15 @@ public class UserSettingActivity extends BaseAppCompatActivity
 				UserSettingAccountActivity.actionStart(UserSettingActivity.this);
 			}
 		});
+
+		viewHolder.setOnClickListener(R.id.ll_user_setting_feedback, new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				UserSettingFeedbackActivity.actionStart(UserSettingActivity.this);
+			}
+		});
 	}
 	
 	public static void actionStart(Context context)

@@ -98,17 +98,6 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/default_text_size_large"/>
 
-    <CheckBox
-        android:id="@+id/checkBox_enter_register_phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btn_register_phone_action_next"
-        android:layout_alignStart="@+id/btn_register_phone_action_next"
-        android:layout_below="@+id/btn_register_phone_action_next"
-        android:button="@null"
-        android:checked="true"
-        android:drawableRight="@drawable/enter_register_phone_check"/>
-
     <TextView
         android:id="@+id/tv_enter_register_phone"
         android:layout_width="wrap_content"
@@ -120,4 +109,15 @@
         android:paddingLeft="@dimen/default_space_small"
         android:text="我已阅读并同意《红客用户协议》"
         android:textColor="@color/hokolGrayDrak"/>
+
+    <CheckBox
+        android:id="@+id/checkBox_enter_register_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@null"
+        android:checked="true"
+        android:drawableLeft="@drawable/enter_register_phone_check"
+        android:layout_below="@+id/btn_register_phone_action_next"
+        android:layout_alignLeft="@+id/btn_register_phone_action_next"
+        android:layout_alignStart="@+id/btn_register_phone_action_next"/>
 </RelativeLayout>

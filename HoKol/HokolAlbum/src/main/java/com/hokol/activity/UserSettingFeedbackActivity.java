@@ -9,7 +9,7 @@ import com.hokol.R;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.view.common.ViewHolder;
 
-public class UserSettingAccountBindActivity extends BaseAppCompatActivity
+public class UserSettingFeedbackActivity extends BaseAppCompatActivity
 {
 	private ViewHolder viewHolder;
 
@@ -17,11 +17,11 @@ public class UserSettingAccountBindActivity extends BaseAppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_user_setting_account_bind);
+		setContentView(R.layout.activity_user_setting_feedback);
 
 		viewHolder = new ViewHolder(this);
 
-		viewHolder.setOnClickListener(R.id.iv_user_setting_account_bind_finish, new View.OnClickListener()
+		viewHolder.setOnClickListener(R.id.iv_user_setting_feedback_finish, new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -30,9 +30,9 @@ public class UserSettingAccountBindActivity extends BaseAppCompatActivity
 			}
 		});
 	}
-
+	
 	public static void actionStart(Context context)
 	{
-		context.startActivity(new Intent(context, UserSettingAccountBindActivity.class));
+		context.startActivity(new Intent(context, UserSettingFeedbackActivity.class));
 	}
 }

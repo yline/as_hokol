@@ -7,6 +7,7 @@
     <color name="hokolBlackSmall">#333333</color>
     <color name="hokolBlackLight">#4c4c4c</color>
     <color name="hokolGrayDrak">#666666</color>
+    <color name="hokolGrayHeavy">#808080</color>
     <color name="hokolGray">#FF999999</color>
     <color name="hokolGraySmall">#FFcccccc</color>
     <color name="hokolGrayLight">#e6e6e6</color>

@@ -68,6 +68,7 @@
     </View>
 
     <LinearLayout
+        android:id="@+id/ll_user_setting_feedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/default_text_size_normal"
@@ -130,12 +131,16 @@
     </View>
 
     <Button
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/default_space_large"
         android:layout_marginRight="@dimen/default_space_large"
         android:layout_marginTop="30dp"
-        android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
+        android:background="@drawable/widget_shape_radiusall_solid_redhokol"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_normal"
         android:text="退出登录"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/default_text_size_medium"/>
 </LinearLayout>

@@ -12,7 +12,7 @@
         android:layout_height="@dimen/default_title_normal">
 
         <ImageView
-            android:id="@+id/iv_user_setting_account_finish"
+            android:id="@+id/iv_user_setting_account_modify_pwd_finish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
