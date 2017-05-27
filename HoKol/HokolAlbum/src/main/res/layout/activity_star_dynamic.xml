@@ -23,6 +23,7 @@
                 android:src="@drawable/global_load_failed"/>
 
             <RelativeLayout
+                android:id="@+id/rl_star_dynamic_action"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/iv_star_dynamic_content">
@@ -60,13 +61,6 @@
                     android:padding="@dimen/default_space_normal"
                     android:src="@drawable/star_dynamic_gift"/>
             </RelativeLayout>
-
-            <!-- 送礼物 界面 -->
-            <FrameLayout
-                android:id="@+id/fl_star_dynamic_gift"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </FrameLayout>
         </RelativeLayout>
 
         <TextView
@@ -144,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/main_care_item_gift"
                 android:drawablePadding="@dimen/default_space_little"
-                android:drawableRight="@drawable/global_ormosia"
+                android:drawableRight="@drawable/global_ormosia_gray"
                 android:paddingBottom="@dimen/default_space_little"
                 android:paddingLeft="15dp"
                 android:paddingTop="@dimen/default_space_little"

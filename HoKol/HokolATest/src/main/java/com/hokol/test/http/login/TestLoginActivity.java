@@ -107,11 +107,11 @@ public class TestLoginActivity extends BaseTestActivity
 				int sex = parseInt(etCompleteSex, 1);
 
 				WEnterRegisterCompleteInfoBean completeInfoBean = new WEnterRegisterCompleteInfoBean(tel, pwd, sex);
-				completeInfoBean.setUser_tag(Arrays.asList(HttpEnum.UserTag.Other.getContent()));
-				XHttpUtil.doEnterRegisterCompleteInfo(completeInfoBean, new XHttpAdapter<String>()
+				completeInfoBean.setUser_tag(Arrays.asList(HttpEnum.UserTag.Other.getIndex()));
+				XHttpUtil.doEnterRegisterCompleteInfo(completeInfoBean, new XHttpAdapter<VEnterLoginPhonePwdBean>()
 				{
 					@Override
-					public void onSuccess(String s)
+					public void onSuccess(VEnterLoginPhonePwdBean vEnterLoginPhonePwdBean)
 					{
 
 					}

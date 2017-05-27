@@ -1,6 +1,5 @@
 package com.hokol.activity;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,22 +8,22 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.fragment.StarInfoDatumFragment;
 import com.hokol.fragment.StarInfoDynamicFragment;
 import com.hokol.fragment.StarInfoPrivateFragment;
+import com.hokol.medium.widget.HokolGiftWidget;
 import com.hokol.viewhelper.StarInfoHelper;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.base.BaseFragment;
+import com.yline.view.common.ViewHolder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -37,16 +36,38 @@ public class StarInfoActivity extends BaseAppCompatActivity
 {
 	private StarInfoHelper starInfoHelper;
 
+	private HokolGiftWidget hokolGiftWidget;
+
+	private ViewHolder viewHolder;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_star_info);
 
-		starInfoHelper = new StarInfoHelper(this);
+		viewHolder = new ViewHolder(this);
+		starInfoHelper = new StarInfoHelper(this, viewHolder);
+		hokolGiftWidget = new HokolGiftWidget(this);
+		hokolGiftWidget.setDataList(Arrays.asList(1, 10, 66, 128, 288, 520, 666, 999, 1314, 6666, 9999, 10888));
+		hokolGiftWidget.setOnSendClickListener(new HokolGiftWidget.OnSendClickListener()
+		{
+			@Override
+			public void onSendClick(View v, int position)
+			{
+				SDKManager.toast("发送");
+			}
+		});
+		hokolGiftWidget.setOnRechargeClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				SDKManager.toast("充值");
+			}
+		});
 
-		View headView = findViewById(R.id.include_start_info_head);
-		starInfoHelper.initHeadView(headView);
+		starInfoHelper.initHeadView();
 		starInfoHelper.setHeadViewListener(new StarInfoHelper.OnHeadViewClickListener()
 		{
 			@Override
@@ -64,21 +85,9 @@ public class StarInfoActivity extends BaseAppCompatActivity
 			@Override
 			public void onGiveGift()
 			{
+				hokolGiftWidget.showAtLocation(viewHolder.get(R.id.tab_layout_start_info), Gravity.BOTTOM, 0, 0);
+
 				IApplication.toast("点击送红豆");
-				View view = LayoutInflater.from(StarInfoActivity.this).inflate(R.layout.activity_star_info_head_gift_dialog, null);
-
-				Dialog dialog = new Dialog(StarInfoActivity.this, R.style.Widget_Dialog_Default);// android.R.style.Theme_Holo_Light_Dialog_NoActionBar
-				dialog.setContentView(view);
-
-				Window dialogWindow = dialog.getWindow();
-				dialogWindow.setGravity(Gravity.BOTTOM);
-
-				WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-				lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
-				lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-				dialog.onWindowAttributesChanged(lp);
-
-				dialog.show();
 			}
 		});
 

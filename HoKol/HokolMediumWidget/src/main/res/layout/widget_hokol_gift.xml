@@ -5,10 +5,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.yline.widget.label.LabelFlowLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </com.yline.widget.label.LabelFlowLayout>
+        android:layout_height="wrap_content"
+        android:background="#b3000000"
+        android:paddingLeft="@dimen/default_space_normal"
+        android:paddingRight="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_normal">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_hokol_gift"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,24 +27,45 @@
         android:background="#e5000000">
 
         <TextView
+            android:id="@+id/tv_hokol_gift"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/default_space_large"
             android:background="@drawable/widget_shape_radiuall_huge_solid_redhokol"
-            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingBottom="@dimen/default_space_small"
             android:paddingLeft="@dimen/default_space_large"
             android:paddingRight="@dimen/default_space_large"
-            android:paddingTop="@dimen/default_space_normal"
+            android:paddingTop="@dimen/default_space_small"
             android:text="充值"
             android:textColor="@android:color/white"
             android:textSize="@dimen/default_text_size_normal"/>
 
+        <ImageView
+            android:id="@+id/iv_hokol_gift_bean"
+            android:layout_width="@dimen/default_space_large_b"
+            android:layout_height="@dimen/default_space_large_b"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_space_normal"
+            android:layout_toRightOf="@+id/tv_hokol_gift"
+            android:src="@drawable/global_ormosia_red"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_space_small"
+            android:layout_toRightOf="@+id/iv_hokol_gift_bean"
+            android:text="1080"
+            android:textColor="@color/hokolRed"
+            android:textSize="@dimen/default_text_size_large"/>
+
         <Button
+            android:id="@+id/btn_hokol_gift_bean"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:background="@drawable/widget_shape_rectangle_solid_redhokol"
+            android:background="@drawable/widget_shape_rectangle_solid_pinkhokol"
             android:text="发送"
             android:textColor="@android:color/white"
             android:textSize="@dimen/default_text_size_normal"/>

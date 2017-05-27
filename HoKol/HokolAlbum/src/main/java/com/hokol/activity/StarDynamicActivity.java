@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -13,12 +14,16 @@ import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VDynamicCareSingleBean;
 import com.hokol.medium.http.bean.WDynamicCareSingleBean;
+import com.hokol.medium.widget.HokolGiftWidget;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.common.ViewHolder;
+
+import java.util.Arrays;
 
 /**
  * 动态信息详情界面
@@ -30,9 +35,11 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 {
 	private static final String KeyDynamicId = "StarKeyDynamicId";
 
-	private ViewHolder starDynamicViewHolder;
+	private ViewHolder viewHolder;
 
 	private ImageView contentImageView;
+
+	private HokolGiftWidget giftWidget;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -40,7 +47,7 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_star_dynamic);
 
-		starDynamicViewHolder = new ViewHolder(this);
+		viewHolder = new ViewHolder(this);
 
 		initView();
 		initData();
@@ -48,7 +55,7 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 
 	private void initView()
 	{
-		starDynamicViewHolder.get(R.id.iv_star_dynamic_care).setOnClickListener(new View.OnClickListener()
+		viewHolder.get(R.id.iv_star_dynamic_care).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -56,15 +63,17 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 				IApplication.toast("点击关注");
 			}
 		});
-		starDynamicViewHolder.get(R.id.iv_star_dynamic_give_gift).setOnClickListener(new View.OnClickListener()
+		viewHolder.get(R.id.iv_star_dynamic_give_gift).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
 				IApplication.toast("点击送礼物");
+
+				giftWidget.showAtLocation(viewHolder.get(R.id.iv_star_dynamic_content), Gravity.BOTTOM, 0, 0);
 			}
 		});
-		starDynamicViewHolder.get(R.id.iv_star_dynamic_praise).setOnClickListener(new View.OnClickListener()
+		viewHolder.get(R.id.iv_star_dynamic_praise).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -73,7 +82,7 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 			}
 		});
 
-		starDynamicViewHolder.get(R.id.ll_star_dynamic_user).setOnClickListener(new View.OnClickListener()
+		viewHolder.get(R.id.ll_star_dynamic_user).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -83,9 +92,28 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 		});
 
 		// 背景大小
-		contentImageView = starDynamicViewHolder.get(R.id.iv_star_dynamic_content);
+		contentImageView = viewHolder.get(R.id.iv_star_dynamic_content);
 		int width = UIScreenUtil.getScreenWidth(this);
 		UIResizeUtil.build().setHeight(width).commit(contentImageView);
+
+		giftWidget = new HokolGiftWidget(this);
+		giftWidget.setDataList(Arrays.asList(1, 10, 66, 128, 288, 520, 666, 999, 1314, 6666, 9999, 10888));
+		giftWidget.setOnRechargeClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				SDKManager.toast("充值");
+			}
+		});
+		giftWidget.setOnSendClickListener(new HokolGiftWidget.OnSendClickListener()
+		{
+			@Override
+			public void onSendClick(View v, int position)
+			{
+				SDKManager.toast("发送 position = " + position);
+			}
+		});
 	}
 
 	private void initData()
@@ -103,7 +131,7 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 					Glide.with(StarDynamicActivity.this).load(contentUrl).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).into(contentImageView);
 
 					String avatarUrl = vDynamicCareSingleBean.getUser_logo();
-					ImageView avatarImageView = starDynamicViewHolder.get(R.id.circle_star_dynamic);
+					ImageView avatarImageView = viewHolder.get(R.id.circle_star_dynamic);
 					Glide.with(StarDynamicActivity.this).load(avatarUrl).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).into(avatarImageView);
 				}
 			});

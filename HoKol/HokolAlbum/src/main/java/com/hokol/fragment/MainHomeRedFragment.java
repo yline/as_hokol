@@ -229,7 +229,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 			@Override
 			public void onPageClick(View v, int position)
 			{
-				IApplication.toast("广告位置 = " + position);
+				StarDynamicActivity.actionStart(getContext(), "2");
 			}
 
 			@Override

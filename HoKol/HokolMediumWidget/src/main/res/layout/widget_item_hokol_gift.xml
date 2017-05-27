@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_item_hokol_gift"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/default_space_normal"
+    android:layout_marginLeft="@dimen/default_space_little"
+    android:layout_marginRight="@dimen/default_space_little"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/default_space_medium"
+    android:paddingTop="@dimen/default_space_medium">
+
+    <ImageView
+        android:id="@+id/iv_item_hokol_gift"
+        android:layout_width="@dimen/default_space_large_b"
+        android:layout_height="@dimen/default_space_large_b"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/global_ormosia_red"/>
+
+    <TextView
+        android:id="@+id/tv_item_hokol_gift"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/default_space_small"
+        android:lines="1"
+        android:text="1豆"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/default_text_size_small"/>
+</LinearLayout>

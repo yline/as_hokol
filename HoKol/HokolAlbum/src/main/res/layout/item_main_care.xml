@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/main_care_item_gift"
             android:drawablePadding="@dimen/default_space_little"
-            android:drawableRight="@drawable/global_ormosia"
+            android:drawableRight="@drawable/global_ormosia_gray"
             android:paddingBottom="@dimen/default_space_little"
             android:paddingLeft="15dp"
             android:paddingTop="@dimen/default_space_little"

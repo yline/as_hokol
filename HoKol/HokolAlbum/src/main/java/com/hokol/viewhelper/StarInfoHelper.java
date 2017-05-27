@@ -20,30 +20,29 @@ public class StarInfoHelper
 {
 	private Context sContext;
 
-	public StarInfoHelper(Context context)
+	private ViewHolder viewHolder;
+
+	public StarInfoHelper(Context context, ViewHolder viewHolder)
 	{
 		this.sContext = context;
+		this.viewHolder = viewHolder;
 	}
-
-	private ViewHolder headViewHolder;
 
 	private OnHeadViewClickListener onHeadViewClickListener;
 
-	public void initHeadView(View headView)
+	public void initHeadView()
 	{
-		headViewHolder = new ViewHolder(headView);
-
 		// 背景
-		ImageView bgImageView = headViewHolder.get(R.id.iv_star_info_bg);
+		ImageView bgImageView = viewHolder.get(R.id.iv_star_info_bg);
 		Glide.with(sContext).load(DeleteConstant.getUrlSquare()).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed)
 				.bitmapTransform(new KuwaharaFilterTransformation(sContext, 25)).bitmapTransform(new ColorFilterTransformation(sContext, 0xc0000000)).into(bgImageView); //  Color.argb(99, )
 
 		// 标签
-		FlowLayout flowLayout = headViewHolder.get(R.id.label_flow_star_info);
+		FlowLayout flowLayout = viewHolder.get(R.id.label_flow_star_info);
 		FlowWidget labelWidget = new FlowWidget(sContext, flowLayout);
 		labelWidget.setDataList(Arrays.asList("网红", "模特"));
 
-		headViewHolder.get(R.id.iv_star_info_head_care_or_cancel).setOnClickListener(new View.OnClickListener()
+		viewHolder.get(R.id.iv_star_info_head_care_or_cancel).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -54,7 +53,7 @@ public class StarInfoHelper
 				}
 			}
 		});
-		headViewHolder.get(R.id.iv_star_info_head_contact).setOnClickListener(new View.OnClickListener()
+		viewHolder.get(R.id.iv_star_info_head_contact).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -65,7 +64,7 @@ public class StarInfoHelper
 				}
 			}
 		});
-		headViewHolder.get(R.id.iv_star_info_head_gift).setOnClickListener(new View.OnClickListener()
+		viewHolder.get(R.id.iv_star_info_head_gift).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -85,7 +84,7 @@ public class StarInfoHelper
 
 	public void initHeadData()
 	{
-		ImageView avatarView = headViewHolder.get(R.id.circle_star_info_avatar);
+		ImageView avatarView = viewHolder.get(R.id.circle_star_info_avatar);
 		Glide.with(sContext).load(DeleteConstant.url_default_avatar).into(avatarView);
 	}
 
