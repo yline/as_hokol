@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
@@ -105,13 +104,6 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 									super.initBuilder(builder);
 									builder.setTitle("您已经注册过红客了\n请直接登陆吧");
 									builder.setPositiveText("立即登陆");
-								}
-
-								@Override
-								protected void initMessageTextView(TextView textView, Builder builder)
-								{
-									super.initMessageTextView(textView, builder);
-									textView.setVisibility(View.GONE);
 								}
 							}.show();
 						}

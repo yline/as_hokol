@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.hokol.R;
+import com.hokol.medium.widget.DialogIosWidget;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.view.common.ViewHolder;
@@ -93,6 +94,24 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			public void onClick(View v)
 			{
 				SDKManager.toast("提交任务");
+			}
+		});
+
+		viewHolder.setOnClickListener(R.id.tv_task_publish_content_discuss, new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				new DialogIosWidget(TaskPublishActivity.this)
+				{
+					@Override
+					protected void initBuilder(Builder builder)
+					{
+						super.initBuilder(builder);
+						builder.setTitle("您选择面议将在交流成功后\n提交每个应聘者价格");
+						builder.setPositiveText("确定");
+					}
+				}.show();
 			}
 		});
 	}
