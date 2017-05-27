@@ -7,8 +7,8 @@
     <RelativeLayout
         android:id="@+id/rl_task_detail_title"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@android:color/holo_red_light">
+        android:layout_height="@dimen/default_title_normal"
+        android:background="@color/hokolRed">
 
         <TextView
             android:layout_width="wrap_content"
@@ -18,15 +18,13 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/default_text_size_large"/>
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:layout_width="@dimen/default_space_large_b"
+            android:layout_height="@dimen/default_space_large_b"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/default_space_large"
-            android:text="收藏"
-            android:textColor="@android:color/white"/>
+            android:src="@drawable/global_uncollect"/>
     </RelativeLayout>
 
     <ScrollView
@@ -45,164 +43,260 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="@dimen/default_space_normal">
+                android:paddingBottom="@dimen/default_space_normal"
+                android:paddingLeft="@dimen/default_space_large"
+                android:paddingTop="@dimen/default_space_normal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/default_space_normal"
-                    android:text="￥2000"
-                    android:textColor="@android:color/holo_red_light"/>
+                    android:text="￥2000×3"
+                    android:textColor="@color/hokolRed"
+                    android:textSize="@dimen/default_text_size_normal"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="任务标题"/>
+                    android:text="任务标题"
+                    android:textColor="@color/hokolBlackNormal"
+                    android:textSize="@dimen/default_text_size_normal"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@android:color/darker_gray"/>
+                android:background="@color/hokolGrayLight"/>
 
             <!--主要信息-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="@dimen/default_space_normal">
+                android:paddingBottom="@dimen/default_space_large"
+                android:paddingTop="@dimen/default_space_large">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="已托管押金"/>
+                    android:text="已托管押金"
+                    android:textColor="@color/hokolBlackSmall"
+                    android:textSize="@dimen/default_text_size_medium"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:text="剩17天1小时"/>
+                    android:text="剩17天1小时"
+                    android:textColor="@color/hokolBlackSmall"
+                    android:textSize="@dimen/default_text_size_medium"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_space_normal"
-                android:background="@android:color/darker_gray"/>
+                android:background="@color/hokolGrayLight"/>
 
             <!--任务详情-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/default_space_normal"
-                android:text="任务详情"/>
+                android:paddingBottom="@dimen/default_space_normal"
+                android:paddingLeft="@dimen/default_space_large"
+                android:paddingTop="@dimen/default_space_normal"
+                android:text="任务详情"
+                android:textColor="@color/hokolBlackSmall"
+                android:textSize="@dimen/default_text_size_normal"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@android:color/darker_gray"
-                android:paddingLeft="@dimen/default_space_normal"/>
+                android:layout_marginLeft="@dimen/default_space_large"
+                android:layout_marginRight="@dimen/default_space_large"
+                android:background="@color/hokolGrayLight"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minLines="5"
-                android:padding="@dimen/default_space_normal"
-                android:paddingTop="@dimen/default_space_medium"
-                android:text="姐想找一妹子，身高170以下，地点浙江杭州下沙女生教学楼的内置图书馆，时间随时，内容，带你开车带你飞"/>
+                android:layout_marginLeft="@dimen/default_space_large"
+                android:layout_marginRight="@dimen/default_space_large"
+                android:layout_marginTop="@dimen/default_space_medium"
+                android:lineSpacingExtra="@dimen/default_space_little"
+                android:minLines="4"
+                android:text="姐想找一妹子，身高170以下，地点浙江杭州下沙女生教学楼的内置图书馆，时间随时，内容，带你开车带你飞"
+                android:textColor="@color/hokolGrayDrak"
+                android:textSize="@dimen/default_text_size_medium"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:padding="@dimen/default_space_normal"
-                android:text="2017.03.06"/>
+                android:text="2017.03.06"
+                android:textColor="@color/hokolGrayDrak"
+                android:textSize="@dimen/default_text_size_medium"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_space_normal"
-                android:background="@android:color/darker_gray"/>
+                android:background="@color/hokolGrayLight"/>
 
             <!--地区-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="@dimen/default_space_normal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/default_space_normal"
-                    android:text="地区"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/default_space_normal"
-                    android:text="浙江 杭州"/>
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_space_normal"
-                android:background="@android:color/darker_gray"/>
-
-            <!--属性-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:paddingBottom="@dimen/default_space_normal"
-                android:paddingLeft="@dimen/default_space_normal"
-                android:paddingRight="@dimen/default_space_normal"
+                android:paddingLeft="@dimen/default_space_large"
                 android:paddingTop="@dimen/default_space_normal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="属性"/>
+                    android:text="地区"
+                    android:textColor="@color/hokolBlackSmall"
+                    android:textSize="@dimen/default_text_size_normal"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_weight="1"
-                    android:text="网红"/>
+                    android:paddingLeft="@dimen/default_space_super"
+                    android:text="浙江 杭州"
+                    android:textColor="@color/hokolGrayDrak"
+                    android:textSize="@dimen/default_text_size_normal"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
+                android:layout_height="@dimen/default_space_normal"
+                android:background="@color/hokolGrayLight"/>
+
+            <!--属性-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/default_space_medium"
+                android:paddingLeft="@dimen/default_space_large"
+                android:paddingRight="@dimen/default_space_large"
+                android:paddingTop="@dimen/default_space_medium">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="属性"
+                    android:textColor="@color/hokolBlackSmall"
+                    android:textSize="@dimen/default_text_size_normal"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/lib_view_shape_radiusall_stroke_red"
+                    android:paddingBottom="@dimen/default_space_medium"
+                    android:paddingLeft="@dimen/default_space_large_b"
+                    android:paddingRight="@dimen/default_space_large_b"
+                    android:paddingTop="@dimen/default_space_medium"
+                    android:text="网红"
+                    android:textColor="@color/hokolRed"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@android:color/darker_gray"
-                android:paddingLeft="@dimen/default_space_normal"
-                android:paddingRight="@dimen/default_space_normal"/>
+                android:layout_marginLeft="@dimen/default_space_large"
+                android:layout_marginRight="@dimen/default_space_large"
+                android:background="@color/hokolGrayLight"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/default_space_normal">
+                android:layout_marginTop="@dimen/default_space_normal"
+                android:paddingLeft="@dimen/default_space_large">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="女神 * 2"/>
+                    android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
+                    android:paddingBottom="@dimen/default_space_medium"
+                    android:paddingLeft="@dimen/default_space_super"
+                    android:paddingRight="@dimen/default_space_super"
+                    android:paddingTop="@dimen/default_space_medium"
+                    android:text="女"
+                    android:textColor="@color/hokolGrayDrak"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/default_space_large"
+                    android:layout_marginRight="@dimen/default_space_large"
+                    android:text="×"
+                    android:textColor="@color/hokolGrayDrak"
+                    android:textSize="@dimen/default_text_size_super"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
+                    android:paddingBottom="@dimen/default_space_medium"
+                    android:paddingLeft="@dimen/default_space_super"
+                    android:paddingRight="@dimen/default_space_super"
+                    android:paddingTop="@dimen/default_space_medium"
+                    android:text="2"
+                    android:textColor="@color/hokolGrayDrak"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/default_space_normal">
+                android:layout_marginBottom="@dimen/default_space_normal"
+                android:layout_marginTop="@dimen/default_space_normal"
+                android:paddingLeft="@dimen/default_space_large">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="男神 * 2"/>
+                    android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
+                    android:paddingBottom="@dimen/default_space_medium"
+                    android:paddingLeft="@dimen/default_space_super"
+                    android:paddingRight="@dimen/default_space_super"
+                    android:paddingTop="@dimen/default_space_medium"
+                    android:text="男"
+                    android:textColor="@color/hokolGrayDrak"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/default_space_large"
+                    android:layout_marginRight="@dimen/default_space_large"
+                    android:text="×"
+                    android:textColor="@color/hokolGrayDrak"
+                    android:textSize="@dimen/default_text_size_super"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
+                    android:paddingBottom="@dimen/default_space_medium"
+                    android:paddingLeft="@dimen/default_space_super"
+                    android:paddingRight="@dimen/default_space_super"
+                    android:paddingTop="@dimen/default_space_medium"
+                    android:text="1"
+                    android:textColor="@color/hokolGrayDrak"/>
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_space_normal"
+                android:background="@color/hokolGrayLight"/>
         </LinearLayout>
     </ScrollView>
 
@@ -211,5 +305,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="立即联系"/>
+        android:background="@drawable/widget_shape_rectangle_solid_redhokol"
+        android:text="立即报名"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/default_text_size_normal"/>
 </RelativeLayout>
