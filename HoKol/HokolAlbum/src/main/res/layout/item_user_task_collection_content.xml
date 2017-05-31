@@ -38,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_marginLeft="@dimen/default_space_normal"
+        android:layout_marginRight="@dimen/default_space_normal"
         android:background="#cccccc"></View>
 
     <LinearLayout
@@ -85,10 +86,14 @@
             android:textColor="#808080"/>
     </LinearLayout>
 
-    <Button
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/hokolRed"
+        android:gravity="center_horizontal"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_normal"
         android:text="立即报名"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/default_text_size_medium"/>
 </LinearLayout>
