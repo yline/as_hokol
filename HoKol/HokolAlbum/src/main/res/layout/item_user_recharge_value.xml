@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/default_space_large"
+    android:paddingTop="@dimen/default_space_large">
+
+    <TextView
+        android:id="@+id/tv_user_recharge_value_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="100红豆"
+        android:textColor="@color/hokolGrayDrak"
+        android:textSize="@dimen/default_text_size_large"/>
+
+    <TextView
+        android:id="@+id/tv_user_recharge_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_user_recharge_value_top"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/default_space_little"
+        android:text="￥100.00"
+        android:textColor="@color/hokolGray"
+        android:textSize="@dimen/default_text_size_small"/>
+</RelativeLayout>

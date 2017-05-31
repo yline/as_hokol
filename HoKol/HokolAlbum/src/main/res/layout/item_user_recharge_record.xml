@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/default_space_large"
+    android:paddingTop="@dimen/default_space_large">
+
+    <TextView
+        android:id="@+id/tv_user_recharge_record_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="充值100个红豆"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/default_text_size_normal"/>
+
+    <TextView
+        android:id="@+id/tv_user_recharge_record_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_user_recharge_record_title"
+        android:layout_marginTop="@dimen/default_space_little"
+        android:text="2017-05-08 15:31:49"
+        android:textColor="@color/hokolGray"
+        android:textSize="@dimen/default_text_size_normal"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingRight="@dimen/default_space_large"
+        android:text="成功"
+        android:textColor="#78c7ff"
+        android:textSize="@dimen/default_text_size_large"/>
+</RelativeLayout>

@@ -8,7 +8,7 @@
     <RelativeLayout
         android:id="@+id/rl_enter_forget_pwd_title"
         android:layout_width="match_parent"
-        android:layout_height="52dp">
+        android:layout_height="@dimen/default_title_normal">
 
         <ImageView
             android:id="@+id/iv_enter_forget_pwd_cancel"

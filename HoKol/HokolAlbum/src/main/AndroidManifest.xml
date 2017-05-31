@@ -78,6 +78,8 @@
         </activity>
         <activity android:name=".activity.EnterUpdatePhoneActivity">
         </activity>
+        <activity android:name=".activity.UserRechargeRecordActivity">
+        </activity>
     </application>
 
 </manifest>
