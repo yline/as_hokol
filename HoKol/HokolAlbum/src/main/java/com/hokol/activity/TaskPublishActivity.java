@@ -3,12 +3,15 @@ package com.hokol.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.RelativeLayout;
+import android.view.inputmethod.InputMethodManager;
 
 import com.hokol.R;
+import com.hokol.fragment.TaskPublishRightAreaFragment;
+import com.hokol.fragment.TaskPublishRightStyleFragment;
 import com.hokol.medium.widget.DialogIosWidget;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
@@ -26,7 +29,11 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 
 	private DrawerLayout drawerLayout;
 
-	private RelativeLayout relativeLayout;
+	private FragmentManager fragmentManager = getSupportFragmentManager();
+
+	private TaskPublishRightStyleFragment rightStyleFragment;
+
+	private TaskPublishRightAreaFragment rightAreaFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -45,7 +52,10 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 		drawerLayout = viewHolder.get(R.id.drawer_task_publish);
 		drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED); // 禁止手势滑动
 
-		relativeLayout = (RelativeLayout) findViewById(R.id.rl_task_publish_right);
+		rightStyleFragment = TaskPublishRightStyleFragment.newInstance();
+		rightAreaFragment = TaskPublishRightAreaFragment.newInstance();
+
+		fragmentManager.beginTransaction().add(R.id.rl_task_publish_right, rightStyleFragment).add(R.id.rl_task_publish_right, rightAreaFragment).commit();
 	}
 
 	private void initViewClick()
@@ -64,8 +74,8 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				SDKManager.toast("选择属性");
-
+				fragmentManager.beginTransaction().show(rightStyleFragment).hide(rightAreaFragment).commit();
+				closeKeyboard();
 				drawerLayout.openDrawer(Gravity.RIGHT);
 			}
 		});
@@ -75,7 +85,9 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				SDKManager.toast("选择地区");
+				fragmentManager.beginTransaction().show(rightAreaFragment).hide(rightStyleFragment).commit();
+				closeKeyboard();
+				drawerLayout.openDrawer(Gravity.RIGHT);
 			}
 		});
 
@@ -84,6 +96,7 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
+
 				SDKManager.toast("选择时间");
 			}
 		});
@@ -114,6 +127,16 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 				}.show();
 			}
 		});
+	}
+
+	private void closeKeyboard()
+	{
+		View view = getWindow().peekDecorView();
+		if (view != null)
+		{
+			InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+			inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+		}
 	}
 
 	public static void actionStart(Context context)

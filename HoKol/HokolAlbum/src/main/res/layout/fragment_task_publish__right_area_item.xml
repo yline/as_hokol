@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/default_space_medium"
+    android:paddingRight="@dimen/default_space_normal">
+
+    <TextView
+        android:id="@+id/tv_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/widget_shape_radiusall_solid_graylight"
+        android:duplicateParentState="true"
+        android:paddingBottom="@dimen/default_space_medium"
+        android:paddingLeft="@dimen/default_space_normal"
+        android:paddingRight="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_medium"
+        android:textColor="@drawable/lib_view_selector_text_redgray">
+    </TextView>
+</LinearLayout>
+
+
+
+
+

@@ -10,6 +10,17 @@
         android:layout_height="@dimen/default_title_normal"
         android:background="@color/hokolRed">
 
+        <ImageView
+            android:id="@+id/iv_task_detail_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingLeft="@dimen/default_space_large_b"
+            android:paddingRight="@dimen/default_space_large_b"
+            android:paddingTop="@dimen/default_space_normal"
+            android:src="@drawable/global_back_transparent_arrows"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -8,6 +8,10 @@ import android.support.annotation.NonNull;
 import com.yline.widget.label.LabelFlowLayout;
 import com.yline.widget.label.WidgetFlowAble;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 /**
  * 流动添加控件，
  *
@@ -24,6 +28,16 @@ public class FlowAbleWidget extends WidgetFlowAble
 	public FlowAbleWidget(Context context, @NonNull LabelFlowLayout flowLayout)
 	{
 		super(context, flowLayout);
+	}
+
+	public void setDataList(Set<String> setData)
+	{
+		List<String> dataList = new ArrayList<>();
+		for (String str : setData)
+		{
+			dataList.add(str);
+		}
+		super.setDataList(dataList);
 	}
 
 	/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 提供重写的方法 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */

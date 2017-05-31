@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_area_result_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingLeft="@dimen/default_space_large"
+        android:paddingTop="@dimen/default_space_normal"
+        android:text="所在地"
+        android:textColor="@color/hokolGrayDrak"
+        android:textSize="@dimen/default_text_size_large"/>
+
+    <TextView
+        android:id="@+id/tv_area_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_area_result_hint"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:background="@drawable/widget_shape_radiusall_solid_graylight"
+        android:paddingBottom="@dimen/default_space_medium"
+        android:paddingLeft="@dimen/default_space_normal"
+        android:paddingRight="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_medium"
+        android:text="不限"
+        android:textColor="@color/hokolGrayDrak"/>
+
+    <View
+        android:id="@+id/view_line_area_top"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/tv_area_result"
+        android:layout_marginTop="@dimen/default_space_normal"
+        android:background="@color/hokolGrayLight">
+    </View>
+
+    <RelativeLayout
+        android:id="@+id/rl_area_choose_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_line_area_top"
+        android:paddingBottom="@dimen/default_space_small"
+        android:paddingTop="@dimen/default_space_small"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/tv_area_choose_province"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/default_space_large"
+            android:textColor="@color/hokolGrayDrak"
+            android:textSize="@dimen/default_text_size_normal"/>
+
+        <TextView
+            android:id="@+id/tv_area_choose_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/default_space_large"
+            android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
+            android:paddingBottom="@dimen/default_space_small"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/default_space_small"
+            android:text="返回"
+            android:textColor="@color/hokolBlackSmall"
+            android:textSize="@dimen/default_text_size_medium"
+            android:visibility="invisible"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/view_line_bottom"
+        android:layout_below="@+id/rl_area_choose_back">
+
+        <com.yline.widget.label.LabelFlowLayout
+            android:id="@+id/label_flow_task_publish_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_space_large"
+            android:layout_marginRight="@dimen/default_space_large">
+        </com.yline.widget.label.LabelFlowLayout>
+    </ScrollView>
+
+    <View
+        android:id="@+id/view_line_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_above="@+id/ll_bottom"
+        android:background="@color/hokolGray">
+    </View>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:text="取消"
+            android:textColor="@color/hokolGray"
+            android:textSize="@dimen/default_text_size_normal"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/hokolRed"
+            android:text="完成"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/default_text_size_normal"/>
+    </LinearLayout>
+</RelativeLayout>

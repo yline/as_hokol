@@ -54,9 +54,7 @@
             android:id="@+id/rl_task_publish_right"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:layout_marginLeft="50dp"
-            android:background="@android:color/white">
+            android:layout_gravity="right">
         </RelativeLayout>
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>
