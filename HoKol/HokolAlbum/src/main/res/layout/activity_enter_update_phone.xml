@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_enter_update_phone"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_enter_update_phone_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_title_normal">
+
+        <ImageView
+            android:id="@+id/iv_enter_update_phone_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingLeft="@dimen/default_space_large_b"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/default_space_normal"
+            android:src="@drawable/global_back_red_arrows"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="更换手机号"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/default_text_size_large"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/rl_enter_update_phone_title"
+        android:background="@color/hokolGrayLight">
+    </View>
+
+    <com.hokol.medium.viewcustom.KeyClearEditText
+        android:id="@+id/et_enter_update_phone_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_enter_update_phone_title"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginRight="@dimen/default_space_large"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
+        android:hint="请输入手机号"
+        android:inputType="phone"
+        android:padding="@dimen/default_space_large"
+        android:textColorHint="@color/hokolGray"
+        android:textSize="@dimen/default_text_size_normal"/>
+
+    <LinearLayout
+        android:id="@+id/ll_enter_update_phone_identify_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_enter_update_phone_username"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginRight="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_large"
+        android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white">
+
+        <com.hokol.medium.viewcustom.KeyClearEditText
+            android:id="@+id/et_register_phone_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@null"
+            android:hint="请输入手机验证码"
+            android:inputType="number"
+            android:maxLines="1"
+            android:padding="@dimen/default_space_large"
+            android:textColorHint="@color/hokolGray"
+            android:textSize="@dimen/default_text_size_normal"/>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/hokolGray">
+        </View>
+
+        <TextView
+            android:id="@+id/tv_register_phone_identify"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="获取验证码"
+            android:textColor="@color/hokolGray"
+            android:textSize="@dimen/default_text_size_normal"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_register_phone_action_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_enter_update_phone_identify_code"
+        android:layout_marginBottom="@dimen/default_space_large"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginRight="@dimen/default_space_large"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/widget_shape_radiuall_huge_solid_pinkhokol"
+        android:text="完成"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/default_text_size_large"/>
+</RelativeLayout>

@@ -72,6 +72,7 @@
     </View>
 
     <LinearLayout
+        android:id="@+id/ll_user_setting_safety"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/default_space_large"

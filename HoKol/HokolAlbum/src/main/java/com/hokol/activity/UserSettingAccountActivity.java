@@ -25,6 +25,7 @@ public class UserSettingAccountActivity extends BaseAppCompatActivity
 
 	private void initView()
 	{
+		// 结束
 		viewHolder.setOnClickListener(R.id.iv_user_setting_account_finish, new View.OnClickListener()
 		{
 			@Override
@@ -34,6 +35,17 @@ public class UserSettingAccountActivity extends BaseAppCompatActivity
 			}
 		});
 
+		// 账号安全
+		viewHolder.setOnClickListener(R.id.ll_user_setting_safety, new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				UserSettingAccountSafetyActivity.actionStart(UserSettingAccountActivity.this);
+			}
+		});
+
+		// 账号绑定
 		viewHolder.setOnClickListener(R.id.ll_user_setting_account_bind, new View.OnClickListener()
 		{
 			@Override
@@ -43,6 +55,7 @@ public class UserSettingAccountActivity extends BaseAppCompatActivity
 			}
 		});
 
+		// 修改密码
 		viewHolder.setOnClickListener(R.id.ll_user_setting_account_key, new View.OnClickListener()
 		{
 			@Override

@@ -74,6 +74,10 @@
         </activity>
         <activity android:name=".activity.UserSettingFeedbackActivity">
         </activity>
+        <activity android:name=".activity.UserSettingAccountSafetyActivity">
+        </activity>
+        <activity android:name=".activity.EnterUpdatePhoneActivity">
+        </activity>
     </application>
 
 </manifest>
