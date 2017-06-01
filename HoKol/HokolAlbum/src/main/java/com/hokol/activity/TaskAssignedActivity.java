@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
@@ -37,16 +38,16 @@ public class TaskAssignedActivity extends BaseAppCompatActivity
 		final List<BaseFragment> fragmentList = new ArrayList<>();
 		final List<String> titleList = new ArrayList<>();
 
-		fragmentList.add(new TaskAssignedAllFragment());
+		fragmentList.add(TaskAssignedAllFragment.newInstance());
 		titleList.add("全部");
-
-		fragmentList.add(new TaskAssignedSignFragment());
+		
+		fragmentList.add(TaskAssignedSignFragment.newInstance());
 		titleList.add("待报名");
 
-		fragmentList.add(new TaskAssignedTradeFragment());
+		fragmentList.add(TaskAssignedTradeFragment.newInstance());
 		titleList.add("待交易");
 
-		fragmentList.add(new TaskAssignedEvaluateFragment());
+		fragmentList.add(TaskAssignedEvaluateFragment.newInstance());
 		titleList.add("待评价");
 
 		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout_task_assigned);
@@ -73,10 +74,10 @@ public class TaskAssignedActivity extends BaseAppCompatActivity
 			}
 		});
 		tabLayout.setupWithViewPager(viewPager);
-		tabLayout.setTabTextColors(getResources().getColor(android.R.color.darker_gray), getResources().getColor(android.R.color.holo_red_light));
-		tabLayout.setSelectedTabIndicatorHeight(0);
+		tabLayout.setTabTextColors(ContextCompat.getColor(this, R.color.hokolGrayHeavy), ContextCompat.getColor(this, R.color.hokolRed));
+		tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.hokolRed));
 
-		findViewById(R.id.tv_task_assigned_action_back).setOnClickListener(new View.OnClickListener()
+		findViewById(R.id.iv_task_assigned_cancel).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)

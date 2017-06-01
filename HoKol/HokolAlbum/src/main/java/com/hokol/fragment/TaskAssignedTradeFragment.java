@@ -11,15 +11,12 @@ import android.view.ViewGroup;
 import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
-import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseFragment;
 import com.yline.view.common.CommonRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
-import com.yline.widget.label.FlowLayout;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TaskAssignedTradeFragment extends BaseFragment
@@ -27,6 +24,15 @@ public class TaskAssignedTradeFragment extends BaseFragment
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
 	private TaskAssignedTradeAdapter taskAssignedTradeAdapter;
+
+	public static TaskAssignedTradeFragment newInstance()
+	{
+		Bundle args = new Bundle();
+
+		TaskAssignedTradeFragment fragment = new TaskAssignedTradeFragment();
+		fragment.setArguments(args);
+		return fragment;
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -111,9 +117,9 @@ public class TaskAssignedTradeFragment extends BaseFragment
 		@Override
 		public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
 		{
-			FlowLayout flowLayout = viewHolder.get(R.id.flow_task_assigned);
-			FlowWidget labelWidget = new FlowWidget(getContext(), flowLayout);
-			labelWidget.setDataList(Arrays.asList("接单详情", "确认交易"));
+			viewHolder.get(R.id.ll_task_assigned_start).setVisibility(View.INVISIBLE);
+			viewHolder.get(R.id.ll_task_assigned_trade).setVisibility(View.VISIBLE);
+			viewHolder.get(R.id.ll_task_assigned_finish).setVisibility(View.INVISIBLE);
 		}
 	}
 }
