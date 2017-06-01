@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
+import com.hokol.activity.TaskAssignedEvaluateActivity;
 import com.hokol.application.IApplication;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
@@ -107,7 +108,7 @@ public class TaskAssignedEvaluateFragment extends BaseFragment
 
 	private class TaskAssignedEvaluateAdapter extends CommonRecyclerAdapter<String>
 	{
-
+		
 		@Override
 		public int getItemRes()
 		{
@@ -126,7 +127,7 @@ public class TaskAssignedEvaluateFragment extends BaseFragment
 				@Override
 				public void onClick(View v)
 				{
-
+					TaskAssignedEvaluateActivity.actionStart(getContext());
 				}
 			});
 		}

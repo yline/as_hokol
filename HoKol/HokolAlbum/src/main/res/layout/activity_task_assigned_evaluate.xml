@@ -41,12 +41,26 @@
             android:textColor="@color/hokolRed"
             android:textSize="@dimen/default_text_size_large"/>
     </RelativeLayout>
-    <!--
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/default_space_little"
-            android:background="@color/hokolGrayLight">
-        </View>-->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_space_little"
+        android:background="@color/hokolGrayLight">
+    </View>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingLeft="@dimen/default_space_large"
+        android:paddingRight="@dimen/default_space_large"
+        android:paddingTop="@dimen/default_space_normal">
+
+        <TextView
+            android:text="评分标准"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_task_assigned_evaluate"
