@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_user_trade_record_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_title_normal">
+
+        <ImageView
+            android:id="@+id/iv_user_trade_record_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingLeft="@dimen/default_space_large_b"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/default_space_normal"
+            android:src="@drawable/global_back_red_arrows"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="交易记录"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/default_text_size_large"/>
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_user_trade_record"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

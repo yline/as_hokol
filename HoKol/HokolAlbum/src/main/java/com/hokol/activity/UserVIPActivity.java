@@ -34,6 +34,16 @@ public class UserVIPActivity extends BaseAppCompatActivity
 				finish();
 			}
 		});
+
+		// 交易记录
+		viewHolder.setOnClickListener(R.id.rl_user_vip_trade_record, new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				UserTradeRecordActivity.actionStart(UserVIPActivity.this);
+			}
+		});
 	}
 
 	public static void actionStart(Context context)
