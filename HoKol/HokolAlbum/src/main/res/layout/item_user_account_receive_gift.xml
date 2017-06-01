@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/default_space_normal"
+    android:paddingLeft="@dimen/default_space_normal"
+    android:paddingTop="@dimen/default_space_normal">
+
+    <com.hokol.medium.viewcustom.CircleView
+        android:id="@+id/circle_item_user_account_receive_gift"
+        android:layout_width="62dp"
+        android:layout_height="62dp"
+        android:src="@drawable/global_load_failed"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_item_user_account_receive_gift_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_space_normal"
+            android:lines="1"
+            android:text="收到晨曦美少女10红豆"
+            android:textColor="@color/hokolBlackSmall"
+            android:textSize="@dimen/default_text_size_normal"/>
+
+        <TextView
+            android:id="@+id/tv_item_user_account_receive_gift_sub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_space_normal"
+            android:layout_marginTop="@dimen/default_space_little"
+            android:lines="1"
+            android:text="2017-05-02 05:02:02"
+            android:textColor="@color/hokolGray"
+            android:textSize="@dimen/default_text_size_normal"/>
+    </LinearLayout>
+</LinearLayout>
