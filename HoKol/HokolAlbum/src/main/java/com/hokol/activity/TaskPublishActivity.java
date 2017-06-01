@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 
 import com.hokol.R;
 import com.hokol.fragment.TaskPublishRightAreaFragment;
@@ -15,6 +14,7 @@ import com.hokol.fragment.TaskPublishRightStyleFragment;
 import com.hokol.medium.widget.DialogIosWidget;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
+import com.yline.utils.KeyBoardUtil;
 import com.yline.view.common.ViewHolder;
 
 /**
@@ -75,7 +75,7 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			public void onClick(View v)
 			{
 				fragmentManager.beginTransaction().show(rightStyleFragment).hide(rightAreaFragment).commit();
-				closeKeyboard();
+				KeyBoardUtil.closeKeyboard(TaskPublishActivity.this);
 				drawerLayout.openDrawer(Gravity.RIGHT);
 			}
 		});
@@ -86,11 +86,11 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			public void onClick(View v)
 			{
 				fragmentManager.beginTransaction().show(rightAreaFragment).hide(rightStyleFragment).commit();
-				closeKeyboard();
+				KeyBoardUtil.closeKeyboard(TaskPublishActivity.this);
 				drawerLayout.openDrawer(Gravity.RIGHT);
 			}
 		});
-
+		
 		viewHolder.setOnClickListener(R.id.ll_task_publish_content_time, new View.OnClickListener()
 		{
 			@Override
@@ -129,7 +129,7 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 		});
 	}
 
-	private void closeKeyboard()
+	/*private void closeKeyboard()
 	{
 		View view = getWindow().peekDecorView();
 		if (view != null)
@@ -137,7 +137,7 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 			inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
 		}
-	}
+	}*/
 
 	public static void actionStart(Context context)
 	{

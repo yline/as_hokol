@@ -1,21 +1,290 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_user_vip"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.hokol.activity.UserVIPActivity">
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_user_setting_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_title_normal">
+
+        <ImageView
+            android:id="@+id/iv_user_setting_account_bind_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingBottom="@dimen/default_space_normal"
+            android:paddingLeft="@dimen/default_space_large_b"
+            android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/default_space_normal"
+            android:src="@drawable/global_back_red_arrows"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="我的VIP会员"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/default_text_size_large"/>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/rl_user_vip_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginRight="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_normal"
+        android:background="@drawable/user_vip_background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/default_space_large_b"
+            android:paddingLeft="@dimen/default_space_large_b"
+            android:paddingTop="@dimen/default_space_large_b">
+
+            <com.hokol.medium.viewcustom.CircleView
+                android:layout_width="@dimen/default_title_normal"
+                android:layout_height="@dimen/default_title_normal"
+                android:src="@drawable/global_load_failed"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:lines="1"
+                android:text="鹿宝宝lulululu"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/default_text_size_normal"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_space_small"
+                android:src="@drawable/user_vip_month"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/default_space_large_a"
+            android:paddingLeft="@dimen/default_space_large_c">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="VIP 2017-25-25到期"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/default_text_size_normal"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/default_space_large_c"
+                android:scaleType="centerCrop"
+                android:src="@drawable/user_vip_renew"/>
+        </RelativeLayout>
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_space_normal"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_large"
+        android:paddingRight="@dimen/default_space_large">
+
+        <ImageView
+            android:id="@+id/iv_user_vip_contact_volume"
+            android:layout_width="@dimen/default_space_large_c"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/user_vip_contact_volume"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_space_medium"
+            android:layout_toRightOf="@+id/iv_user_vip_contact_volume"
+            android:text="交流卷"
+            android:textColor="@color/hokolBlackSmall"
+            android:textSize="@dimen/default_text_size_medium"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/default_space_normal"
+            android:layout_toLeftOf="@+id/iv_user_vip_contact_volume_forward"
+            android:text="20张"
+            android:textColor="@color/hokolRed"
+            android:textSize="@dimen/default_text_size_normal"/>
+
+        <ImageView
+            android:id="@+id/iv_user_vip_contact_volume_forward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/global_forward_arrows_dark"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGrayLight">
+    </View>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_space_large"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_normal"
+        android:paddingRight="@dimen/default_space_large">
+
+        <ImageView
+            android:id="@+id/iv_user_vip_trade_record"
+            android:layout_width="@dimen/default_space_large_c"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/user_vip_trade_record"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_space_medium"
+            android:layout_toRightOf="@+id/iv_user_vip_trade_record"
+            android:text="交易记录"
+            android:textColor="@color/hokolBlackSmall"
+            android:textSize="@dimen/default_text_size_medium"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/global_forward_arrows_dark"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_space_medium"
+        android:background="@color/hokolGrayLight">
+    </View>
 
     <TextView
-        android:text="VIP"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textView14"/>
-</RelativeLayout>
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingLeft="@dimen/default_space_large"
+        android:paddingTop="@dimen/default_space_normal"
+        android:text="VIP专属特权"
+        android:textColor="@color/hokolBlackSmall"
+        android:textSize="@dimen/default_text_size_large"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGrayLight">
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_normal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/default_space_large">
+
+            <ImageView
+                android:id="@+id/iv_user_vip_circle_private"
+                android:layout_width="@dimen/default_title_normal"
+                android:layout_height="@dimen/default_title_normal"
+                android:src="@drawable/user_vip_circle_private"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:layout_toRightOf="@+id/iv_user_vip_circle_private"
+                android:text="私密空间"
+                android:textColor="@color/hokolBlackLight"
+                android:textSize="@dimen/default_text_size_large"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/iv_user_vip_circle_private"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:layout_toRightOf="@+id/iv_user_vip_circle_private"
+                android:text="私密专享"
+                android:textSize="@dimen/default_text_size_medium"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/default_space_large">
+
+            <ImageView
+                android:id="@+id/iv_user_vip_circle_identify"
+                android:layout_width="@dimen/default_title_normal"
+                android:layout_height="@dimen/default_title_normal"
+                android:src="@drawable/user_vip_circle_identify"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:layout_toRightOf="@+id/iv_user_vip_circle_identify"
+                android:text="尊贵身份"
+                android:textColor="@color/hokolBlackLight"
+                android:textSize="@dimen/default_text_size_large"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/iv_user_vip_circle_identify"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:layout_toRightOf="@+id/iv_user_vip_circle_identify"
+                android:text="皇冠标识"
+                android:textSize="@dimen/default_text_size_medium"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGrayLight">
+    </View>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </View>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/hokolRed"
+        android:text="立即续费"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/default_text_size_large"/>
+</LinearLayout>
