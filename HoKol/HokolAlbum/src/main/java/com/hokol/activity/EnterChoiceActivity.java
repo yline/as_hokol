@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.hokol.R;
-import com.hokol.application.IApplication;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 
 /**
@@ -51,7 +51,8 @@ public class EnterChoiceActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				IApplication.toast("we chat");
+				SDKManager.toast("we chat");
+				EnterLoginThirdActivity.actionStart(EnterChoiceActivity.this);
 			}
 		});
 	}

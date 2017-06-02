@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
+import com.hokol.activity.TaskAssignedSignDetailActivity;
 import com.hokol.application.IApplication;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
@@ -120,6 +121,15 @@ public class TaskAssignedSignFragment extends BaseFragment
 			viewHolder.get(R.id.ll_task_assigned_start).setVisibility(View.VISIBLE);
 			viewHolder.get(R.id.ll_task_assigned_trade).setVisibility(View.INVISIBLE);
 			viewHolder.get(R.id.ll_task_assigned_finish).setVisibility(View.INVISIBLE);
+
+			viewHolder.setOnClickListener(R.id.tv_task_assigned_start_detail, new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					TaskAssignedSignDetailActivity.actionStart(getContext());
+				}
+			});
 		}
 	}
 }

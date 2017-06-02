@@ -88,6 +88,14 @@
         </activity>
         <activity android:name=".activity.UserContactVolumeRecordActivity">
         </activity>
+        <activity android:name=".activity.EnterLoginThirdActivity">
+        </activity>
+        <activity android:name=".activity.TaskAssignedSignDetailActivity">
+        </activity>
+        <activity android:name=".activity.TaskAssignedTradeDetailActivity">
+        </activity>
+        <activity android:name=".activity.TaskAssignedTradeSureDetailActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
+import com.hokol.activity.TaskAssignedTradeDetailActivity;
+import com.hokol.activity.TaskAssignedTradeSureDetailActivity;
 import com.hokol.application.IApplication;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
@@ -120,6 +122,24 @@ public class TaskAssignedTradeFragment extends BaseFragment
 			viewHolder.get(R.id.ll_task_assigned_start).setVisibility(View.INVISIBLE);
 			viewHolder.get(R.id.ll_task_assigned_trade).setVisibility(View.VISIBLE);
 			viewHolder.get(R.id.ll_task_assigned_finish).setVisibility(View.INVISIBLE);
+
+			viewHolder.setOnClickListener(R.id.tv_task_assigned_trade_detail, new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					TaskAssignedTradeDetailActivity.actionStart(getContext());
+				}
+			});
+
+			viewHolder.setOnClickListener(R.id.tv_task_assigned_trade_sure_detail, new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					TaskAssignedTradeSureDetailActivity.actionStart(getContext());
+				}
+			});
 		}
 	}
 }
