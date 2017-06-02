@@ -12,4 +12,10 @@
         <!-- 设置屏幕变暗 -->
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+    <!-- 大小对应的 图片文件夹很有讲究, 系统放到的是 hdpi -->
+    <style name="Widget.ProgressBar.Evaluate" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/widget_layer_list_star_rating</item>
+        <item name="android:minHeight">36dip</item>
+        <item name="android:maxHeight">36dip</item>
+    </style>
 </resources>

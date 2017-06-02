@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.hokol.medium.viewcustom.CircleView
+            android:layout_width="@dimen/default_space_super"
+            android:layout_height="@dimen/default_space_super"
+            android:layout_marginBottom="@dimen/default_space_little"
+            android:layout_marginLeft="@dimen/default_space_large"
+            android:layout_marginTop="@dimen/default_space_little"
+            android:src="@drawable/global_load_failed"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_space_normal"
+            android:text="鹿宝宝lulululu"
+            android:textColor="@color/hokolBlackSmall"
+            android:textSize="@dimen/default_text_size_medium"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGrayLight">
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_space_small"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_space_large"
+            android:text="外貌相符"
+            android:textColor="@color/hokolGrayDrak"
+            android:textSize="@dimen/default_text_size_medium"/>
+
+        <android.support.v7.widget.AppCompatRatingBar
+            style="@style/Widget.ProgressBar.Evaluate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/default_space_large_a"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:rating="5"
+            android:stepSize="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_space_large_a"
+            android:text="非常好"
+            android:textColor="@color/hokolGrayDrak"
+            android:textSize="@dimen/default_text_size_medium"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_space_large"
+            android:text="活动能力"
+            android:textColor="@color/hokolGrayDrak"
+            android:textSize="@dimen/default_text_size_medium"/>
+
+        <android.support.v7.widget.AppCompatRatingBar
+            style="@style/Widget.ProgressBar.Evaluate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/default_space_large_a"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:rating="5"
+            android:stepSize="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_space_large_a"
+            android:text="非常好"
+            android:textColor="@color/hokolGrayDrak"
+            android:textSize="@dimen/default_text_size_medium"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_space_small"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_space_large"
+            android:text="服务态度"
+            android:textColor="@color/hokolGrayDrak"
+            android:textSize="@dimen/default_text_size_medium"/>
+
+        <android.support.v7.widget.AppCompatRatingBar
+            style="@style/Widget.ProgressBar.Evaluate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/default_space_large_a"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:rating="5"
+            android:stepSize="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_space_large_a"
+            android:text="非常好"
+            android:textColor="@color/hokolGrayDrak"
+            android:textSize="@dimen/default_text_size_medium"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGrayLight">
+    </View>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:gravity="top"
+        android:hint="态度很好，能力满足本次活动需求"
+        android:lines="4"
+        android:lineSpacingExtra="@dimen/default_space_little"
+        android:paddingBottom="@dimen/default_space_small"
+        android:paddingLeft="@dimen/default_space_large"
+        android:paddingRight="@dimen/default_space_large"
+        android:paddingTop="@dimen/default_space_medium"
+        android:textSize="@dimen/default_text_size_medium"/>
+</LinearLayout>

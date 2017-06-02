@@ -159,7 +159,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:visibility="invisible">
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_null"
+                android:paddingBottom="@dimen/default_space_small"
+                android:paddingLeft="@dimen/default_space_large"
+                android:paddingRight="@dimen/default_space_large"
+                android:paddingTop="@dimen/default_space_small"
+                android:text="取消任务"
+                android:textColor="@color/hokolGrayHeavy"
+                android:textSize="@dimen/default_text_size_small"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -192,6 +204,7 @@
             android:id="@+id/ll_task_assigned_finish"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             android:gravity="right">
 
             <TextView
