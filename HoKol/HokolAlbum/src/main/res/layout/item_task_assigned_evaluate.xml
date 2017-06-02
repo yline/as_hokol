@@ -153,11 +153,12 @@
         android:background="@null"
         android:gravity="top"
         android:hint="态度很好，能力满足本次活动需求"
-        android:lines="4"
         android:lineSpacingExtra="@dimen/default_space_little"
+        android:lines="4"
         android:paddingBottom="@dimen/default_space_small"
         android:paddingLeft="@dimen/default_space_large"
         android:paddingRight="@dimen/default_space_large"
         android:paddingTop="@dimen/default_space_medium"
+        android:textColorHint="@color/hokolGray"
         android:textSize="@dimen/default_text_size_medium"/>
 </LinearLayout>

@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="已担保交易"
+            android:text="交易成功"
             android:textColor="@color/hokolRed"
             android:textSize="@dimen/default_text_size_medium"/>
     </RelativeLayout>
@@ -121,7 +121,7 @@
                 android:paddingLeft="@dimen/default_space_large"
                 android:paddingRight="@dimen/default_space_large"
                 android:paddingTop="@dimen/default_space_small"
-                android:text="取消任务"
+                android:text="取消接单"
                 android:textColor="@color/hokolGrayHeavy"
                 android:textSize="@dimen/default_text_size_small"/>
 
@@ -129,32 +129,54 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_space_normal"
-                android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_null"
+                android:background="@drawable/widget_shape_radiusall_solid_null_stroke_redhokol"
                 android:paddingBottom="@dimen/default_space_small"
                 android:paddingLeft="@dimen/default_space_large"
                 android:paddingRight="@dimen/default_space_large"
                 android:paddingTop="@dimen/default_space_small"
-                android:text="结束报名"
-                android:textColor="@color/hokolGrayHeavy"
-                android:textSize="@dimen/default_text_size_small"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/default_space_normal"
-                android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_null"
-                android:paddingBottom="@dimen/default_space_small"
-                android:paddingLeft="@dimen/default_space_large"
-                android:paddingRight="@dimen/default_space_large"
-                android:paddingTop="@dimen/default_space_small"
-                android:text="报名详情"
-                android:textColor="@color/hokolGrayHeavy"
+                android:text="确认接单"
+                android:textColor="@color/hokolRed"
                 android:textSize="@dimen/default_text_size_small"/>
         </LinearLayout>
 
         <!-- 待交易 -->
         <LinearLayout
             android:id="@+id/ll_task_delivered_trade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:visibility="invisible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_null"
+                android:paddingBottom="@dimen/default_space_small"
+                android:paddingLeft="@dimen/default_space_large"
+                android:paddingRight="@dimen/default_space_large"
+                android:paddingTop="@dimen/default_space_small"
+                android:text="任务未完成"
+                android:textColor="@color/hokolGrayHeavy"
+                android:textSize="@dimen/default_text_size_small"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_space_normal"
+                android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_null"
+                android:paddingBottom="@dimen/default_space_small"
+                android:paddingLeft="@dimen/default_space_large"
+                android:paddingRight="@dimen/default_space_large"
+                android:paddingTop="@dimen/default_space_small"
+                android:text="任务完成"
+                android:textColor="@color/hokolGrayHeavy"
+                android:textSize="@dimen/default_text_size_small"/>
+        </LinearLayout>
+
+        <!-- 待评价 -->
+        <LinearLayout
+            android:id="@+id/ll_task_delivered_finish"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -168,19 +190,7 @@
                 android:paddingLeft="@dimen/default_space_large"
                 android:paddingRight="@dimen/default_space_large"
                 android:paddingTop="@dimen/default_space_small"
-                android:text="取消任务"
-                android:textColor="@color/hokolGrayHeavy"
-                android:textSize="@dimen/default_text_size_small"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_null"
-                android:paddingBottom="@dimen/default_space_small"
-                android:paddingLeft="@dimen/default_space_large"
-                android:paddingRight="@dimen/default_space_large"
-                android:paddingTop="@dimen/default_space_small"
-                android:text="接单详情"
+                android:text="删除任务"
                 android:textColor="@color/hokolGrayHeavy"
                 android:textSize="@dimen/default_text_size_small"/>
 
@@ -188,28 +198,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_space_normal"
-                android:background="@drawable/widget_shape_radiusall_solid_null_stroke_redhokol"
+                android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_null"
                 android:paddingBottom="@dimen/default_space_small"
                 android:paddingLeft="@dimen/default_space_large"
                 android:paddingRight="@dimen/default_space_large"
                 android:paddingTop="@dimen/default_space_small"
-                android:text="确认交易"
-                android:textColor="@color/hokolRed"
+                android:text="维权申诉"
+                android:textColor="@color/hokolGrayHeavy"
                 android:textSize="@dimen/default_text_size_small"/>
-        </LinearLayout>
-
-        <!-- 待评价 -->
-        <LinearLayout
-            android:id="@+id/ll_task_delivered_finish"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:gravity="right">
 
             <TextView
                 android:id="@+id/tv_item_task_delivered_evaluate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_space_normal"
                 android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_null"
                 android:paddingBottom="@dimen/default_space_small"
                 android:paddingLeft="@dimen/default_space_large"

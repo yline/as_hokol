@@ -9,7 +9,6 @@ import com.yline.base.BaseAppCompatActivity;
 
 public class TaskDeliveredEvaluateActivity extends BaseAppCompatActivity
 {
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
