@@ -95,6 +95,7 @@
     </FrameLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_user_vip_contact_volume"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/default_space_normal"

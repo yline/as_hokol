@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll_contact_volume_record_passed_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_space_normal"
+        android:layout_marginRight="@dimen/default_space_normal"
+        android:background="@drawable/item_contact_volume_record_top"
+        android:orientation="horizontal"
+        android:padding="@dimen/default_space_medium">
+
+        <ImageView
+            android:layout_width="@dimen/default_icon_small"
+            android:layout_height="@dimen/default_icon_small"
+            android:src="@drawable/item_contact_volume_record_unit_applyed"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_space_normal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="交流卷"
+                android:textColor="@color/hokolGrayDrak"
+                android:textSize="@dimen/default_text_size_medium"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_space_small"
+                android:text="可用于拨打任意一个用户的电话。购买会员即可得到。拨打后时长不限。"
+                android:textColor="@color/hokolGrayDrak"
+                android:textSize="@dimen/default_text_size_small"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_contact_volume_record_passed_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_contact_volume_record_passed_top"
+        android:layout_marginLeft="@dimen/default_space_normal"
+        android:layout_marginRight="@dimen/default_space_normal"
+        android:background="@drawable/item_contact_volume_record_bottom"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/default_space_medium"
+        android:paddingTop="@dimen/default_space_small">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017-05-19到期"
+            android:textColor="@color/hokolGrayHeavy"
+            android:textSize="@dimen/default_text_size_small"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(还有2天到期)"
+            android:textColor="@color/hokolRed"
+            android:textSize="@dimen/default_text_size_small"
+            android:visibility="invisible"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ll_contact_volume_record_passed_bottom"
+        android:layout_alignRight="@+id/ll_contact_volume_record_passed_bottom"
+        android:layout_marginBottom="@dimen/default_space_little"
+        android:layout_marginRight="@dimen/default_space_little"
+        android:src="@drawable/item_contact_volume_record_icon_passed"/>
+</RelativeLayout>

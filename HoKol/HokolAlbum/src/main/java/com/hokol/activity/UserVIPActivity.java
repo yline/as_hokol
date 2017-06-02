@@ -44,6 +44,16 @@ public class UserVIPActivity extends BaseAppCompatActivity
 				UserTradeRecordActivity.actionStart(UserVIPActivity.this);
 			}
 		});
+
+		// 交流卷
+		viewHolder.setOnClickListener(R.id.rl_user_vip_contact_volume, new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				UserContactVolumeRecordActivity.actionStart(UserVIPActivity.this);
+			}
+		});
 	}
 
 	public static void actionStart(Context context)

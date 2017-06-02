@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_contact_volume_record_passed_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_contact_volume_record_passed_empty"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/default_space_large_a"
+        android:src="@drawable/item_contact_volume_record_unit_passed"/>
+
+    <TextView
+        android:id="@+id/tv_contact_volume_record_passed_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="暂无过期的交流卷"
+        android:textColor="@color/hokolGrayDrak"
+        android:textSize="@dimen/default_text_size_medium"/>
+</RelativeLayout>

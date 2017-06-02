@@ -22,4 +22,10 @@
 
     <!-- 控件高度 -->
     <dimen name="default_title_normal">48dp</dimen>
+
+    <dimen name="default_icon_little">56dp</dimen>
+    <dimen name="default_icon_small">64dp</dimen>
+    <dimen name="default_icon_medium">68dp</dimen>
+    <dimen name="default_icon_normal">72dp</dimen>
+    <dimen name="default_icon_large">76dp</dimen>
 </resources>
