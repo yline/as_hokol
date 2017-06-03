@@ -42,6 +42,7 @@ public class StarInfoHelper
 		FlowWidget labelWidget = new FlowWidget(sContext, flowLayout);
 		labelWidget.setDataList(Arrays.asList("网红", "模特"));
 
+		// 关注、联系、送红豆
 		viewHolder.get(R.id.iv_star_info_head_care_or_cancel).setOnClickListener(new View.OnClickListener()
 		{
 			@Override

@@ -90,6 +90,15 @@ public class StarInfoActivity extends BaseAppCompatActivity
 				IApplication.toast("点击送红豆");
 			}
 		});
+		// 信用
+		viewHolder.setOnClickListener(R.id.iv_star_info_credit, new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				UserInfoCreditActivity.actionStart(StarInfoActivity.this);
+			}
+		});
 
 		initView();
 		starInfoHelper.initHeadData();

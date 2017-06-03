@@ -48,7 +48,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/default_space_normal"
             android:layout_toRightOf="@+id/tv_hokol_gift"
-            android:src="@drawable/global_ormosia_red"/>
+            android:src="@drawable/widget_drawable_global_ormosia_red"/>
 
         <TextView
             android:layout_width="wrap_content"

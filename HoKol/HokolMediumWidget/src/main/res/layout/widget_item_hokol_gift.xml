@@ -16,7 +16,7 @@
         android:layout_width="@dimen/default_space_large_b"
         android:layout_height="@dimen/default_space_large_b"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/global_ormosia_red"/>
+        android:src="@drawable/widget_drawable_global_ormosia_red"/>
 
     <TextView
         android:id="@+id/tv_item_hokol_gift"
