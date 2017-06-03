@@ -98,6 +98,8 @@
         </activity>
         <activity android:name=".activity.UserInfoCreditActivity">
         </activity>
+        <activity android:name=".activity.UserTaskScoreActivity">
+        </activity>
     </application>
 
 </manifest>

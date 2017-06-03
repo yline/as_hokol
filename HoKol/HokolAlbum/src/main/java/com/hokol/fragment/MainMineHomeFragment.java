@@ -16,6 +16,7 @@ import com.hokol.activity.UserRechargeActivity;
 import com.hokol.activity.UserSettingActivity;
 import com.hokol.activity.UserTaskCollectionActivity;
 import com.hokol.activity.UserTaskMessageActivity;
+import com.hokol.activity.UserTaskScoreActivity;
 import com.hokol.activity.UserVIPActivity;
 import com.yline.base.BaseFragment;
 import com.yline.view.common.ViewHolder;
@@ -109,6 +110,16 @@ public class MainMineHomeFragment extends BaseFragment
 			public void onClick(View v)
 			{
 				UserVIPActivity.actionStart(getContext());
+			}
+		});
+
+		// 我的评分
+		homeViewHolder.setOnClickListener(R.id.ll_main_min_home_score, new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				UserTaskScoreActivity.actionStart(getContext());
 			}
 		});
 

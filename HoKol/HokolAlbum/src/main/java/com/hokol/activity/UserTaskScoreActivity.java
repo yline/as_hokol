@@ -10,12 +10,12 @@ import com.yline.base.BaseAppCompatActivity;
 import com.yline.view.common.ViewHolder;
 
 /**
- * 用户信用 界面
+ * 我的评分
  *
- * @author yline 2017/6/3 -- 10:21
+ * @author yline 2017/6/3 -- 13:44
  * @version 1.0.0
  */
-public class UserInfoCreditActivity extends BaseAppCompatActivity
+public class UserTaskScoreActivity extends BaseAppCompatActivity
 {
 	private ViewHolder viewHolder;
 
@@ -23,7 +23,7 @@ public class UserInfoCreditActivity extends BaseAppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_user_info_credit);
+		setContentView(R.layout.activity_user_task_score);
 
 		viewHolder = new ViewHolder(this);
 		initView();
@@ -31,7 +31,7 @@ public class UserInfoCreditActivity extends BaseAppCompatActivity
 	
 	private void initView()
 	{
-		viewHolder.setOnClickListener(R.id.iv_task_assigned_cancel, new View.OnClickListener()
+		viewHolder.setOnClickListener(R.id.iv_task_score_cancel, new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -43,6 +43,6 @@ public class UserInfoCreditActivity extends BaseAppCompatActivity
 	
 	public static void actionStart(Context context)
 	{
-		context.startActivity(new Intent(context, UserInfoCreditActivity.class));
+		context.startActivity(new Intent(context, UserTaskScoreActivity.class));
 	}
 }
