@@ -30,26 +30,23 @@
             android:textSize="@dimen/default_text_size_large"/>
     </RelativeLayout>
 
-    <View
-        android:id="@+id/view_task_assigned_trade_sure_detail_title"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/default_space_little"
-        android:layout_below="@+id/rl_task_assigned_trade_sure_detail_title"
-        android:background="@color/hokolGrayLight">
-    </View>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_task_assigned_trade_sure_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/view_task_assigned_trade_sure_detail_title">
+        android:layout_above="@+id/tv_task_assigned_trade_sure_detail_commit"
+        android:layout_below="@+id/rl_task_assigned_trade_sure_detail_title">
     </android.support.v7.widget.RecyclerView>
 
-    <Button
+    <TextView
+        android:id="@+id/tv_task_assigned_trade_sure_detail_commit"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/default_title_normal"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/hokolRed"
+        android:gravity="center"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_normal"
         android:text="提交"
         android:textColor="@android:color/white"
         android:textSize="@dimen/default_text_size_large"/>

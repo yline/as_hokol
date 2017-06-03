@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/default_space_normal">
+
+    <com.hokol.medium.viewcustom.CircleView
+        android:id="@+id/circle_detail_un_avatar"
+        android:layout_width="@dimen/default_icon_normal"
+        android:layout_height="@dimen/default_icon_normal"
+        android:src="@drawable/global_load_failed"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/circle_detail_un_avatar"
+        android:layout_alignTop="@+id/circle_detail_un_avatar"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/default_space_normal"
+        android:layout_marginRight="@dimen/default_space_medium"
+        android:layout_toLeftOf="@+id/tv_detail_un_employ"
+        android:layout_toRightOf="@+id/circle_detail_un_avatar"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_sign_detail_un_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/circle_sign_detail_un_avatar"
+            android:layout_toLeftOf="@+id/fl_sign_detail_un_right"
+            android:layout_toRightOf="@+id/circle_sign_detail_un_avatar"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_sign_detail_un_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_toLeftOf="@+id/fl_sign_detail_un_right"
+                android:layout_toRightOf="@+id/circle_sign_detail_un_avatar"
+                android:lines="1"
+                android:text="超级奥特曼"
+                android:textColor="@color/hokolBlackNormal"
+                android:textSize="@dimen/default_text_size_medium"/>
+
+            <ImageView
+                android:id="@+id/iv_user_info_sex"
+                android:layout_width="@dimen/default_text_size_normal"
+                android:layout_height="@dimen/default_text_size_normal"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_space_little"
+                android:background="@drawable/global_sex_girl"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/default_text_size_normal"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_space_little"
+                android:background="@drawable/main_mine_head_vip"
+                android:scaleType="centerCrop"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_sign_detail_un_brief"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="@dimen/default_space_little"
+            android:layout_toLeftOf="@+id/fl_sign_detail_un_right"
+            android:layout_toRightOf="@+id/circle_sign_detail_un_avatar"
+            android:lines="1"
+            android:text="简介"
+            android:textColor="@color/hokolGray"
+            android:textSize="@dimen/default_text_size_small"/>
+
+        <com.yline.widget.label.FlowLayout
+            android:id="@+id/flow_layout_sign_detail_un"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/circle_sign_detail_un_avatar"
+            android:layout_toLeftOf="@+id/fl_sign_detail_un_right"
+            android:layout_toRightOf="@+id/circle_sign_detail_un_avatar">
+        </com.yline.widget.label.FlowLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_detail_un_employ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/default_space_normal"
+        android:background="@drawable/widget_shape_radiuall_huge_solid_redhokol"
+        android:paddingBottom="@dimen/default_space_small"
+        android:paddingLeft="@dimen/default_space_large_b"
+        android:paddingRight="@dimen/default_space_large_b"
+        android:paddingTop="@dimen/default_space_small"
+        android:text="录用"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/default_text_size_medium"/>
+</RelativeLayout>
