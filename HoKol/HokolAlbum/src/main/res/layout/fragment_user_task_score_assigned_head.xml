@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingLeft="@dimen/default_space_large"
+        android:paddingRight="@dimen/default_space_large"
+        android:paddingTop="@dimen/default_space_normal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发布任务信用评分"
+            android:textColor="@color/hokolBlackSmall"
+            android:textSize="@dimen/default_text_size_normal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(五分为满分)"
+            android:textColor="@color/hokolRed"
+            android:textSize="@dimen/default_text_size_normal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_little"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="外貌相符"
+            android:textColor="@color/hokolGrayDrak"
+            android:textSize="@dimen/default_text_size_small"/>
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="200dp"
+            android:layout_height="@dimen/default_space_normal"
+            android:layout_marginBottom="@dimen/default_space_normal"
+            android:layout_marginLeft="@dimen/default_space_large"
+            android:layout_marginTop="@dimen/default_space_normal"
+            android:max="50"
+            android:progress="50"
+            android:progressDrawable="@drawable/widget_layer_radiusall_solid_graylight_red"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_space_normal"
+            android:text="5.0"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/default_text_size_medium"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_little"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="活动能力"
+            android:textColor="@color/hokolGrayDrak"
+            android:textSize="@dimen/default_text_size_small"/>
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="200dp"
+            android:layout_height="@dimen/default_space_normal"
+            android:layout_marginBottom="@dimen/default_space_normal"
+            android:layout_marginLeft="@dimen/default_space_large"
+            android:layout_marginTop="@dimen/default_space_normal"
+            android:max="50"
+            android:progress="50"
+            android:progressDrawable="@drawable/widget_layer_radiusall_solid_graylight_red"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_space_normal"
+            android:text="5.0"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/default_text_size_medium"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_space_large"
+        android:layout_marginTop="@dimen/default_space_little"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="服务态度"
+            android:textColor="@color/hokolGrayDrak"
+            android:textSize="@dimen/default_text_size_small"/>
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="200dp"
+            android:layout_height="@dimen/default_space_normal"
+            android:layout_marginBottom="@dimen/default_space_normal"
+            android:layout_marginLeft="@dimen/default_space_large"
+            android:layout_marginTop="@dimen/default_space_normal"
+            android:max="50"
+            android:progress="50"
+            android:progressDrawable="@drawable/widget_layer_radiusall_solid_graylight_red"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_space_normal"
+            android:text="5.0"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/default_text_size_medium"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/ll_task_score_assigned_divide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_space_large"
+        android:background="@color/hokolGrayLittle"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/default_space_medium"
+        android:paddingTop="@dimen/default_space_medium">
+
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="1px"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/default_space_normal"
+            android:layout_toLeftOf="@+id/iv_task_score_assigned_divide"
+            android:background="@color/hokolGrayLight">
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_task_score_assigned_divide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/tv_task_score_assigned_divide"
+            android:src="@drawable/user_task_score_comment"/>
+
+        <TextView
+            android:id="@+id/tv_task_score_assigned_divide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/default_space_small"
+            android:text="评价"
+            android:textColor="@color/hokolGray"/>
+
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="1px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_space_normal"
+            android:layout_toRightOf="@+id/tv_task_score_assigned_divide"
+            android:background="@color/hokolGrayLight">
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_space_normal">
+    </View>
+</LinearLayout>

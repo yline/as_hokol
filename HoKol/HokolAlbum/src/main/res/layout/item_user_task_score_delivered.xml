@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/default_space_normal"
+    android:layout_marginRight="@dimen/default_space_normal"
+    android:background="@drawable/user_task_collection_content_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingLeft="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_normal">
+
+        <TextView
+            android:id="@+id/tv_task_score_delivered_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥2000×3"
+            android:textColor="@color/hokolRed"
+            android:textSize="@dimen/default_text_size_large"/>
+
+        <TextView
+            android:id="@+id/tv_task_score_delivered_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_space_large"
+            android:layout_toRightOf="@+id/tv_task_score_delivered_price"
+            android:text="网红直播"
+            android:textColor="#474747"
+            android:textSize="@dimen/default_text_size_large"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="@dimen/default_space_normal"
+        android:layout_marginRight="@dimen/default_space_normal"
+        android:background="#cccccc"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingLeft="@dimen/default_space_normal"
+        android:paddingRight="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_medium">
+
+        <com.hokol.medium.viewcustom.CircleView
+            android:id="@+id/iv_item_task_score_delivered_avatar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/global_load_failed"/>
+
+        <TextView
+            android:id="@+id/tv_item_task_score_delivered_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_space_normal"
+            android:text="用户人"
+            android:textColor="#808080"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="5人报名"
+            android:textColor="#808080"/>
+
+        <TextView
+            android:id="@+id/tv_item_task_score_delivered_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="right"
+            android:text="17天1小时后截止"
+            android:textColor="#808080"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_item_task_score_delivered_more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/hokolRed"
+        android:gravity="center_horizontal"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_normal"
+        android:text="查看商家评论"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/default_text_size_medium"/>
+</LinearLayout>

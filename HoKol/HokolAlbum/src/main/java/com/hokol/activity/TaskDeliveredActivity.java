@@ -21,6 +21,12 @@ import com.yline.base.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 已投递任务
+ *
+ * @author yline 2017/6/3 -- 15:12
+ * @version 1.0.0
+ */
 public class TaskDeliveredActivity extends BaseAppCompatActivity
 {
 	

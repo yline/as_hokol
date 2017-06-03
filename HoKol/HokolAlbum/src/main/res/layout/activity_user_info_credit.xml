@@ -126,7 +126,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="任务动态评分"
+            android:text="参加任务信用评分"
             android:textColor="@color/hokolBlackSmall"
             android:textSize="@dimen/default_text_size_normal"/>
 
@@ -272,7 +272,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="任务动态评分"
+            android:text="发布任务信用评分"
             android:textColor="@color/hokolBlackSmall"
             android:textSize="@dimen/default_text_size_normal"/>
 
