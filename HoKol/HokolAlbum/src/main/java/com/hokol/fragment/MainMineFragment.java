@@ -36,6 +36,15 @@ public class MainMineFragment extends BaseFragment
 
 	private ViewHolder viewHolder;
 
+	public static MainMineFragment newInstance()
+	{
+		Bundle args = new Bundle();
+
+		MainMineFragment fragment = new MainMineFragment();
+		fragment.setArguments(args);
+		return fragment;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{

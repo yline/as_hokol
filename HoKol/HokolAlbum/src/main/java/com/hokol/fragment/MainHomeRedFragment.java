@@ -53,6 +53,15 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 
 	private WHomeMainBean homeRedBean;
 
+	public static MainHomeRedFragment newInstance()
+	{
+		Bundle args = new Bundle();
+
+		MainHomeRedFragment fragment = new MainHomeRedFragment();
+		fragment.setArguments(args);
+		return fragment;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
@@ -203,6 +212,8 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 
 		refreshedNumber = 0;
 		homeRedBean.setNum1(refreshedNumber);
+		homeRedBean.setLength(DeleteConstant.defaultNumberSmall);
+
 		homeRedBean.setUser_sex(typeSex.getIndex());
 		homeRedBean.setUser_adv(typeRecommend.getIndex());
 

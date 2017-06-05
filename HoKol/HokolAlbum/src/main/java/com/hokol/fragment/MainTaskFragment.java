@@ -45,6 +45,15 @@ public class MainTaskFragment extends BaseFragment
 
 	private int taskRefreshNumber;
 
+	public static MainTaskFragment newInstance()
+	{
+		Bundle args = new Bundle();
+
+		MainTaskFragment fragment = new MainTaskFragment();
+		fragment.setArguments(args);
+		return fragment;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{

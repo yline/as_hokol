@@ -174,14 +174,14 @@ public class MainActivity extends BaseAppCompatActivity
 			}
 		});
 	}
-
+	
 	private void initData()
 	{
-		mainNewsFragment = new MainNewsFragment();
-		mainCareFragment = new MainCareFragment();
-		mainHomeFragment = new MainHomeFragment();
-		mainTaskFragment = new MainTaskFragment();
-		mainMineFragment = new MainMineFragment();
+		mainNewsFragment = MainNewsFragment.newInstance();
+		mainCareFragment = MainCareFragment.newInstance();
+		mainHomeFragment = MainHomeFragment.newInstance();
+		mainTaskFragment = MainTaskFragment.newInstance();
+		mainMineFragment = MainMineFragment.newInstance();
 
 		fragmentManager.beginTransaction().add(R.id.fl_main_content, mainNewsFragment).hide(mainNewsFragment)
 				.add(R.id.fl_main_content, mainCareFragment).hide(mainCareFragment)

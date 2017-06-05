@@ -45,6 +45,8 @@ public class MainHomeModelFragment extends BaseFragment implements MainHomeFragm
 
 	private GridLayoutManager gridLayoutManager;
 
+	private WHomeMainBean wHomeMainBean;
+
 	public static MainHomeModelFragment newInstance()
 	{
 		MainHomeModelFragment fragment = new MainHomeModelFragment();
@@ -144,7 +146,12 @@ public class MainHomeModelFragment extends BaseFragment implements MainHomeFragm
 
 	private void initData()
 	{
-		WHomeMainBean wHomeMainBean = new WHomeMainBean(HttpEnum.UserTag.Model, 0, DeleteConstant.defaultNumberLarge);
+		wHomeMainBean = new WHomeMainBean(HttpEnum.UserTag.Model, 0, DeleteConstant.defaultNumberLarge);
+		doRequest();
+	}
+
+	private void doRequest()
+	{
 		mainHomeModelAdapter.setShowEmpty(false);
 		XHttpUtil.doHomeMain(wHomeMainBean, new XHttpAdapter<VHomeMainBean>()
 		{
@@ -178,13 +185,31 @@ public class MainHomeModelFragment extends BaseFragment implements MainHomeFragm
 	@Override
 	public void onAreaUpdate(String first, List<String> second)
 	{
+		LogFileUtil.v("onAreaUpdate first = " + first + ",second = " + second.toString());
 
+		refreshedNumber = 0;
+		wHomeMainBean.setNum1(refreshedNumber);
+		wHomeMainBean.setLength(DeleteConstant.defaultNumberLarge);
+
+		wHomeMainBean.setUser_province(first);
+		wHomeMainBean.setUser_city(second);
+
+		doRequest();
 	}
 
 	@Override
 	public void onFilterUpdate(MainHomeHelper.FilterSex typeSex, MainHomeHelper.FilterRecommend typeRecommend)
 	{
+		LogFileUtil.v("onAreaUpdate typeSex = " + typeSex + ",typeRecommend = " + typeRecommend);
 
+		refreshedNumber = 0;
+		wHomeMainBean.setNum1(refreshedNumber);
+		wHomeMainBean.setLength(DeleteConstant.defaultNumberLarge);
+
+		wHomeMainBean.setUser_sex(typeSex.getIndex());
+		wHomeMainBean.setUser_adv(typeRecommend.getIndex());
+
+		doRequest();
 	}
 
 	private class MainHomeModelAdapter extends WidgetRecyclerAdapter<VHomeMainBean.VHomeMainOneBean>

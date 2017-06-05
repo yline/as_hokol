@@ -34,6 +34,15 @@ public class MainNewsFragment extends BaseFragment
 
 	private int loadedNewsNumber;
 
+	public static MainNewsFragment newInstance()
+	{
+		Bundle args = new Bundle();
+
+		MainNewsFragment fragment = new MainNewsFragment();
+		fragment.setArguments(args);
+		return fragment;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{

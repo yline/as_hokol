@@ -33,6 +33,15 @@ public class MainHomeFragment extends BaseFragment
 
 	private TabLayout tabLayout;
 
+	public static MainHomeFragment newInstance()
+	{
+		Bundle args = new Bundle();
+
+		MainHomeFragment fragment = new MainHomeFragment();
+		fragment.setArguments(args);
+		return fragment;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
@@ -113,12 +122,12 @@ public class MainHomeFragment extends BaseFragment
 	private void initView(View view)
 	{
 		fragmentList = new ArrayList<>();
-		fragmentList.add(new MainHomeRedFragment());
-		fragmentList.add(new MainHomeAuthorFragment());
-		fragmentList.add(new MainHomePerformerFragment());
-		fragmentList.add(new MainHomeModelFragment());
-		fragmentList.add(new MainHomeSingerFragment());
-		fragmentList.add(new MainHomeSportFragment());
+		fragmentList.add(MainHomeRedFragment.newInstance());
+		fragmentList.add(MainHomeAuthorFragment.newInstance());
+		fragmentList.add(MainHomePerformerFragment.newInstance());
+		fragmentList.add(MainHomeModelFragment.newInstance());
+		fragmentList.add(MainHomeSingerFragment.newInstance());
+		fragmentList.add(MainHomeSportFragment.newInstance());
 
 		// 主页 tab栏目
 		tabLayout = (TabLayout) view.findViewById(R.id.tab_layout_main_home);

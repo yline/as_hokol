@@ -39,6 +39,15 @@ public class MainCareFragment extends BaseFragment
 
 	private SuperSwipeRefreshLayout swipeRefreshLayout;
 
+	public static MainCareFragment newInstance()
+	{
+		Bundle args = new Bundle();
+
+		MainCareFragment fragment = new MainCareFragment();
+		fragment.setArguments(args);
+		return fragment;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
