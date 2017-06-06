@@ -42,6 +42,15 @@ public class MainMineDynamicFragment extends BaseFragment
 
 	private int dynamicRefreshNumber;
 
+	public static MainMineDynamicFragment newInstance()
+	{
+		Bundle args = new Bundle();
+
+		MainMineDynamicFragment fragment = new MainMineDynamicFragment();
+		fragment.setArguments(args);
+		return fragment;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{

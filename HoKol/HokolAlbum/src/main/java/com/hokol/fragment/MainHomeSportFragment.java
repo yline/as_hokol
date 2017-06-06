@@ -44,9 +44,10 @@ public class MainHomeSportFragment extends BaseFragment implements MainHomeFragm
 
 	public static MainHomeSportFragment newInstance()
 	{
+		Bundle args = new Bundle();
+
 		MainHomeSportFragment fragment = new MainHomeSportFragment();
-		/*Bundle args = new Bundle();
-		fragment.setArguments(args);*/
+		fragment.setArguments(args);
 		return fragment;
 	}
 
@@ -182,7 +183,7 @@ public class MainHomeSportFragment extends BaseFragment implements MainHomeFragm
 
 		doRequest();
 	}
-	
+
 	@Override
 	public void onFilterUpdate(MainHomeHelper.FilterSex typeSex, MainHomeHelper.FilterRecommend typeRecommend)
 	{

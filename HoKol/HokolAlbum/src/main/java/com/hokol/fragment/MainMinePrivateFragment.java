@@ -42,6 +42,15 @@ public class MainMinePrivateFragment extends BaseFragment
 
 	private int privateRefreshNumber;
 
+	public static MainMinePrivateFragment newInstance()
+	{
+		Bundle args = new Bundle();
+
+		MainMinePrivateFragment fragment = new MainMinePrivateFragment();
+		fragment.setArguments(args);
+		return fragment;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{

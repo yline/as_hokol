@@ -25,6 +25,15 @@ public class MainMineHomeFragment extends BaseFragment
 {
 	private ViewHolder homeViewHolder;
 
+	public static MainMineHomeFragment newInstance()
+	{
+		Bundle args = new Bundle();
+
+		MainMineHomeFragment fragment = new MainMineHomeFragment();
+		fragment.setArguments(args);
+		return fragment;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{

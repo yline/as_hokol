@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">红客</string>
+    <string name="app_name">红客APP</string>
 
     <!-- 首页标题 -->
     <string name="main_title_news">红客头条</string>

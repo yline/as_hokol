@@ -64,9 +64,9 @@ public class MainMineFragment extends BaseFragment
 	
 	private void initView(View view)
 	{
-		fragmentList.add(new MainMineDynamicFragment());
-		fragmentList.add(new MainMinePrivateFragment());
-		fragmentList.add(new MainMineHomeFragment());
+		fragmentList.add(MainMineDynamicFragment.newInstance());
+		fragmentList.add(MainMinePrivateFragment.newInstance());
+		fragmentList.add(MainMineHomeFragment.newInstance());
 
 		TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout_main_mine);
 		ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager_main_mine);

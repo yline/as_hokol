@@ -19,7 +19,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/default_space_normal"
         android:layout_marginRight="@dimen/default_space_medium"
-        android:layout_toLeftOf="@+id/tv_detail_employ"
+        android:layout_toLeftOf="@+id/iv_trade_detail_forward"
         android:layout_toRightOf="@+id/circle_detail_avatar"
         android:orientation="vertical">
 

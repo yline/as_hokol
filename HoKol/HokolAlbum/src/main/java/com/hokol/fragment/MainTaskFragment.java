@@ -126,18 +126,43 @@ public class MainTaskFragment extends BaseFragment
 			public void onFilterClassify(HttpEnum.UserTag userTag)
 			{
 				LogFileUtil.v("userTag = " + userTag);
+
+				taskRefreshNumber = 0;
+				taskMainAll.setNum1(0);
+				taskMainAll.setLength(DeleteConstant.defaultNumberNormal);
+
+				taskMainAll.setTask_tag(userTag.getIndex());
+
+				doRequest();
 			}
 
 			@Override
 			public void onFilterSex(HttpEnum.UserSex userSex)
 			{
 				LogFileUtil.v("userSex = " + userSex);
+
+				taskRefreshNumber = 0;
+				taskMainAll.setNum1(0);
+				taskMainAll.setLength(DeleteConstant.defaultNumberNormal);
+
+				taskMainAll.setTask_sex(userSex.getIndex());
+
+				doRequest();
 			}
 
 			@Override
 			public void onFilterArea(String first, List<String> second)
 			{
 				LogFileUtil.v("first = " + first + ", second = " + second.toString());
+
+				taskRefreshNumber = 0;
+				taskMainAll.setNum1(0);
+				taskMainAll.setLength(DeleteConstant.defaultNumberNormal);
+
+				taskMainAll.setTask_province(first);
+				taskMainAll.setTask_city(second);
+
+				doRequest();
 			}
 		});
 
@@ -164,7 +189,6 @@ public class MainTaskFragment extends BaseFragment
 	{
 		// AD 广告
 
-
 		// 地区
 		XHttpUtil.doAreaAll(new XHttpAdapter<VAreaAllBean>()
 		{
@@ -177,8 +201,14 @@ public class MainTaskFragment extends BaseFragment
 			}
 		});
 
-		// Recycler
+		taskRefreshNumber = 0;
 		taskMainAll = new WTaskMainAll(0, DeleteConstant.defaultNumberNormal);
+		doRequest();
+	}
+
+	private void doRequest()
+	{
+		// Recycler
 		mainTaskHelper.setRecyclerShowEmpty(false);
 		XHttpUtil.doTaskMainAll(taskMainAll, new XHttpAdapter<VTaskMainAll>()
 		{
