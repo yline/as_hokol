@@ -41,10 +41,11 @@
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
 
 #保护给定的可选属性，例如LineNumberTable, LocalVariableTable, SourceFile, Deprecated, Synthetic, Signature, InnerClass
+-keepattributes Signature
 -keepattributes *Annotation*
 
 #忽略警告，避免打包时某些警告出现
--ignorewarning
+#-ignorewarning
 
 ##记录生成的日志数据,gradle build时在本项目根目录输出##
 #apk 包内所有 class 的内部结构
@@ -64,7 +65,6 @@
 -dontwarn android.support.**
 
 ######################################### 保持哪些类不被混淆 ############################################
-
 #不混淆某个类 的子类
 -keep public class * extends android.app.Application
 -keep public class * extends android.app.Activity
@@ -73,6 +73,29 @@
 -keep public class * extends android.app.Service
 -keep public class * extends android.content.BroadcastReceiver
 -keep public class * extends android.content.ContentProvider
+-keep public class * extends android.preference.Preference
+-keep public class * extends android.support.v4.**
+-keep public class * extends android.support.annotation.**
+-keep public class * extends android.support.v7.**
+
+######################################### 保持哪些类不被混淆 ############################################
+#Gson
+-keep class sun.misc.Unsafe { *; }
+-keep class com.google.gson.stream.** { *; }
+# Application classes that will be serialized/deserialized over Gson 下面替换成自己的实体类
+-keep class com.hokol.medium.http.bean.** { *; }
+
+#OkHttp3
+-dontwarn com.squareup.okhttp3.**
+-keep class com.squareup.okhttp3.** { *;}
+-dontwarn okio.**
+
+#Glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
 
 #保持 native 方法不被混淆
 #  -keepclasseswithmembernames class * {
@@ -116,6 +139,42 @@
 #如果不想混淆 keep 掉
 #-keep class MyClass;
 
+######################################### 第三方库 ############################################
+#gson
+#-keepattributes *Annotation*   上面已经有了
+#-keep class com.google.gson.** {
+# *;
+#}
+
+#-keep class com.google.gson.examples.android.model.** { *; }
+
+#-keep class com.hokol.medium.http.** {
+# *;
+#}
+
+#-keep class com.yline.** {
+# *;
+#}
+
+#-keep class com.** {
+# *;
+#}
+
+#-keep class jp.** {
+# *;
+#}
+
+#-keep class android.support.** {
+# *;
+#}
+
+#-keep class okio.** {
+# *;
+#}
+
+#-keep class okhttp3.** {
+# *;
+#}
 
 #####混淆保护自己项目的部分代码以及引用的第三方jar包library#######
 #-libraryjars libs/umeng-analytics-v5.2.4.jar
@@ -123,5 +182,5 @@
 #-libraryjars libs/sdk-v1.0.0.jar
 #-libraryjars libs/look-v1.0.1.jar
 
--keepnames class com.hokol.config.glide.HokolGlideModule
+#-keepnames class com.hokol.config.glide.HokolGlideModule
 #-keep public class * implements com.bumptech.glide.module.GlideModule

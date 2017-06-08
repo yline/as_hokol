@@ -66,44 +66,25 @@
         <activity android:name=".activity.EnterRegisterPhoneActivity"/>
         <activity android:name=".activity.EnterForgetPwdActivity"/>
         <activity android:name=".activity.EnterRegisterCompleteInfoActivity"/>
-        <activity android:name=".activity.UserSettingAccountActivity">
-        </activity>
-        <activity android:name=".activity.UserSettingAccountBindActivity">
-        </activity>
-        <activity android:name=".activity.EnterModifyPwdActivity">
-        </activity>
-        <activity android:name=".activity.UserSettingFeedbackActivity">
-        </activity>
-        <activity android:name=".activity.UserSettingAccountSafetyActivity">
-        </activity>
-        <activity android:name=".activity.EnterUpdatePhoneActivity">
-        </activity>
-        <activity android:name=".activity.UserRechargeRecordActivity">
-        </activity>
-        <activity android:name=".activity.UserTradeRecordActivity">
-        </activity>
-        <activity android:name=".activity.TaskAssignedEvaluateActivity">
-        </activity>
-        <activity android:name=".activity.TaskDeliveredEvaluateActivity">
-        </activity>
-        <activity android:name=".activity.UserContactVolumeRecordActivity">
-        </activity>
-        <activity android:name=".activity.EnterLoginThirdActivity">
-        </activity>
-        <activity android:name=".activity.TaskAssignedSignDetailActivity">
-        </activity>
-        <activity android:name=".activity.TaskAssignedTradeDetailActivity">
-        </activity>
-        <activity android:name=".activity.TaskAssignedTradeSureDetailActivity">
-        </activity>
-        <activity android:name=".activity.UserInfoCreditActivity">
-        </activity>
-        <activity android:name=".activity.UserTaskScoreActivity">
-        </activity>
-        <activity android:name=".activity.TaskScoreAssignedDetailActivity">
-        </activity>
-        <activity android:name=".activity.TaskScoreDeliveredDetailActivity">
-        </activity>
+        <activity android:name=".activity.UserSettingAccountActivity"/>
+        <activity android:name=".activity.UserSettingAccountBindActivity"/>
+        <activity android:name=".activity.EnterModifyPwdActivity"/>
+        <activity android:name=".activity.UserSettingFeedbackActivity"/>
+        <activity android:name=".activity.UserSettingAccountSafetyActivity"/>
+        <activity android:name=".activity.EnterUpdatePhoneActivity"/>
+        <activity android:name=".activity.UserRechargeRecordActivity"/>
+        <activity android:name=".activity.UserTradeRecordActivity"/>
+        <activity android:name=".activity.TaskAssignedEvaluateActivity"/>
+        <activity android:name=".activity.TaskDeliveredEvaluateActivity"/>
+        <activity android:name=".activity.UserContactVolumeRecordActivity"/>
+        <activity android:name=".activity.EnterLoginThirdActivity"/>
+        <activity android:name=".activity.TaskAssignedSignDetailActivity"/>
+        <activity android:name=".activity.TaskAssignedTradeDetailActivity"/>
+        <activity android:name=".activity.TaskAssignedTradeSureDetailActivity"/>
+        <activity android:name=".activity.UserInfoCreditActivity"/>
+        <activity android:name=".activity.UserTaskScoreActivity"/>
+        <activity android:name=".activity.TaskScoreAssignedDetailActivity"/>
+        <activity android:name=".activity.TaskScoreDeliveredDetailActivity"/>
     </application>
 
 </manifest>
