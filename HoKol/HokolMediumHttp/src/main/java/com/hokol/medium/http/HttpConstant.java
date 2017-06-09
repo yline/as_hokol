@@ -75,7 +75,7 @@ public class HttpConstant
 	public static final String url_dynamic_publish = url_head + "ApiDongtai/dt_pub";
 
 	/* --------------------------- 任务 --------------------------- */
-	// 获取任务列表 (多条)
+	// 获取任务列表 (多条)；任务主页
 	public static final String url_task_main_all = url_head + "ApiTask/task_index";
 
 	// 获取任务详情 (单条)
@@ -94,7 +94,7 @@ public class HttpConstant
 	public static final String url_task_user_signup_detail = url_head + "ApiTask/task_join_detail";
 
 	// 用户已发布任务
-	public static final String url_task_user_published = url_head + "ApiTask/task_published";
+	public static final String url_task_user_published = url_head + "ApiTask/task_published_all";
 
 	// 任务报名
 	public static final String url_task_action_staff_signup = url_head + "ApiTask/task_join";

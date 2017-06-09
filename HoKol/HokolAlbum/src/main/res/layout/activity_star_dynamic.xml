@@ -93,11 +93,11 @@
                 app:circle_border_width="1px"/>
 
             <TextView
+                android:id="@+id/tv_star_dynamic_nickname"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingLeft="@dimen/default_space_normal"
-                android:text="昵称"
                 android:textColor="#3f3f3f"
                 android:textSize="@dimen/default_text_size_large"/>
 
@@ -109,13 +109,13 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_star_dynamic_sign"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="@dimen/default_space_little"
             android:paddingBottom="@dimen/default_space_large"
             android:paddingLeft="@dimen/default_space_normal"
             android:paddingRight="@dimen/default_space_normal"
-            android:text="签名就是要字长，字多，才能表达这就是签名；签名太短，就少了一些含义，太长久太啰嗦，所以还是以三行为标准，比较有味道"
             android:textColor="#333333"
             android:textSize="@dimen/default_text_size_normal"/>
 
@@ -129,7 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="100dp"
+            android:paddingBottom="@dimen/default_title_normal"
             android:paddingTop="@dimen/default_space_medium">
 
             <TextView

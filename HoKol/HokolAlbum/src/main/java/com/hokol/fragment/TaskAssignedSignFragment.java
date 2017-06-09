@@ -46,6 +46,12 @@ public class TaskAssignedSignFragment extends BaseFragment
 	{
 		super.onViewCreated(view, savedInstanceState);
 
+		initView(view);
+		initData();
+	}
+
+	private void initView(View view)
+	{
 		// 内容
 		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_task_assigned_sign);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -60,13 +66,6 @@ public class TaskAssignedSignFragment extends BaseFragment
 
 		taskAssignedSignAdapter = new TaskAssignedSignAdapter();
 		recyclerView.setAdapter(taskAssignedSignAdapter);
-
-		List<String> data = new ArrayList<>();
-		for (int i = 0; i < 10; i++)
-		{
-			data.add("" + i);
-		}
-		taskAssignedSignAdapter.setDataList(data);
 
 		// 刷新
 		superRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_task_assigned_sign);
@@ -106,6 +105,16 @@ public class TaskAssignedSignFragment extends BaseFragment
 		});
 	}
 
+	private void initData()
+	{
+		List<String> data = new ArrayList<>();
+		for (int i = 0; i < 10; i++)
+		{
+			data.add("" + i);
+		}
+		taskAssignedSignAdapter.setDataList(data);
+	}
+
 	private class TaskAssignedSignAdapter extends CommonRecyclerAdapter<String>
 	{
 
@@ -122,12 +131,33 @@ public class TaskAssignedSignFragment extends BaseFragment
 			viewHolder.get(R.id.ll_task_assigned_trade).setVisibility(View.INVISIBLE);
 			viewHolder.get(R.id.ll_task_assigned_finish).setVisibility(View.INVISIBLE);
 
+			// 报名详情
 			viewHolder.setOnClickListener(R.id.tv_task_assigned_start_detail, new View.OnClickListener()
 			{
 				@Override
 				public void onClick(View v)
 				{
 					TaskAssignedSignDetailActivity.actionStart(getContext());
+				}
+			});
+
+			// 结束报名
+			viewHolder.setOnClickListener(R.id.tv_task_assigned_start_over, new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					
+				}
+			});
+
+			// 取消任务
+			viewHolder.setOnClickListener(R.id.tv_task_assigned_start_cancel, new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+
 				}
 			});
 		}

@@ -10,6 +10,8 @@ import com.hokol.medium.http.bean.VAreaAllBean;
 import com.hokol.test.common.BaseTestActivity;
 import com.yline.http.XHttpAdapter;
 
+import java.util.List;
+
 public class TestAreaActivity extends BaseTestActivity
 {
 
@@ -28,7 +30,14 @@ public class TestAreaActivity extends BaseTestActivity
 					@Override
 					public void onSuccess(VAreaAllBean vAreaAllBean)
 					{
+						List<String> provinceName = vAreaAllBean.getProvinceNameList();
+						String pName = provinceName.get(0);
+						String pCode = vAreaAllBean.getProvinceCode(pName);
 
+						List<String> cityName = vAreaAllBean.getCityNameList(pCode);
+						String cName = cityName.get(0);
+						
+						vAreaAllBean.getCityCode(pName, cName);
 					}
 				});
 			}

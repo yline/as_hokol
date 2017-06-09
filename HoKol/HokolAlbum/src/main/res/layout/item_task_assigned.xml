@@ -100,6 +100,7 @@
     </RelativeLayout>
 
     <FrameLayout
+        android:id="@+id/fl_task_assigned_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/default_space_small"
@@ -112,9 +113,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:visibility="invisible">
+            android:visibility="visible">
 
             <TextView
+                android:id="@+id/tv_task_assigned_start_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_null"
@@ -127,6 +129,7 @@
                 android:textSize="@dimen/default_text_size_small"/>
 
             <TextView
+                android:id="@+id/tv_task_assigned_start_over"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_space_normal"
@@ -160,7 +163,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:visibility="visible">
+            android:visibility="invisible">
 
             <TextView
                 android:layout_width="wrap_content"
