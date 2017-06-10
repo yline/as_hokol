@@ -65,7 +65,8 @@
             android:layout_marginTop="@dimen/default_space_little"
             android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
             android:gravity="center_horizontal"
-            android:hint="价格"
+            android:hint="女"
+            android:clickable="false"
             android:maxLines="1"
             android:paddingBottom="@dimen/default_space_normal"
             android:paddingLeft="@dimen/default_space_super"
@@ -84,6 +85,7 @@
             android:textSize="@dimen/default_text_size_super"/>
 
         <EditText
+            android:id="@+id/et_task_publish_style_girl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_space_little"
@@ -112,7 +114,8 @@
             android:layout_marginTop="@dimen/default_space_little"
             android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
             android:gravity="center_horizontal"
-            android:hint="价格"
+            android:hint="男"
+            android:clickable="false"
             android:maxLines="1"
             android:paddingBottom="@dimen/default_space_normal"
             android:paddingLeft="@dimen/default_space_super"
@@ -131,6 +134,7 @@
             android:textSize="@dimen/default_text_size_super"/>
 
         <EditText
+            android:id="@+id/et_task_publish_style_boy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/default_space_little"

@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.DrawerLayout;
-import android.view.Gravity;
 import android.view.View;
 
 import com.hokol.R;
@@ -27,7 +25,7 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 {
 	private ViewHolder viewHolder;
 
-	private DrawerLayout drawerLayout;
+	// private DrawerLayout drawerLayout;
 
 	private FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -49,12 +47,41 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 
 	private void initView()
 	{
-		drawerLayout = viewHolder.get(R.id.drawer_task_publish);
+		/*drawerLayout = viewHolder.get(R.id.drawer_task_publish);
 		drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED); // 禁止手势滑动
+		drawerLayout.setClickable(false);
+
+		drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener()
+		{
+			@Override
+			public void onDrawerSlide(View drawerView, float slideOffset)
+			{
+
+			}
+
+			@Override
+			public void onDrawerOpened(View drawerView)
+			{
+
+			}
+
+			@Override
+			public void onDrawerClosed(View drawerView)
+			{
+
+			}
+
+			@Override
+			public void onDrawerStateChanged(int newState)
+			{
+
+			}
+		});*/
 
 		rightStyleFragment = TaskPublishRightStyleFragment.newInstance();
 		rightAreaFragment = TaskPublishRightAreaFragment.newInstance();
 
+		viewHolder.get(R.id.rl_task_publish_right).setVisibility(View.GONE);
 		fragmentManager.beginTransaction().add(R.id.rl_task_publish_right, rightStyleFragment).add(R.id.rl_task_publish_right, rightAreaFragment).commit();
 	}
 
@@ -76,7 +103,9 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			{
 				fragmentManager.beginTransaction().show(rightStyleFragment).hide(rightAreaFragment).commit();
 				KeyBoardUtil.closeKeyboard(TaskPublishActivity.this);
-				drawerLayout.openDrawer(Gravity.RIGHT);
+
+				viewHolder.get(R.id.rl_task_publish_right).setVisibility(View.VISIBLE);
+				// drawerLayout.openDrawer(Gravity.RIGHT);
 			}
 		});
 
@@ -87,7 +116,9 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			{
 				fragmentManager.beginTransaction().show(rightAreaFragment).hide(rightStyleFragment).commit();
 				KeyBoardUtil.closeKeyboard(TaskPublishActivity.this);
-				drawerLayout.openDrawer(Gravity.RIGHT);
+
+				viewHolder.get(R.id.rl_task_publish_right).setVisibility(View.VISIBLE);
+				// drawerLayout.openDrawer(Gravity.RIGHT);
 			}
 		});
 		
@@ -96,7 +127,6 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-
 				SDKManager.toast("选择时间");
 			}
 		});
@@ -128,16 +158,6 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			}
 		});
 	}
-
-	/*private void closeKeyboard()
-	{
-		View view = getWindow().peekDecorView();
-		if (view != null)
-		{
-			InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-			inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-		}
-	}*/
 
 	public static void actionStart(Context context)
 	{

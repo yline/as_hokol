@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -36,11 +35,12 @@
         android:background="@color/hokolGrayLight">
     </View>
 
-    <android.support.v4.widget.DrawerLayout
+    <FrameLayout
         android:id="@+id/drawer_task_publish"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:openDrawer="right">
+        android:layout_height="match_parent">
+
+        <!-- tools:openDrawer="right" -->
 
         <!-- 内容 -->
         <include
@@ -54,8 +54,11 @@
             android:id="@+id/rl_task_publish_right"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="right">
+            android:background="#4d000000"
+            android:clickable="true"
+            android:paddingLeft="100dp">
         </RelativeLayout>
-    </android.support.v4.widget.DrawerLayout>
+        <!-- android:layout_gravity="right" -->
+    </FrameLayout>
 </LinearLayout>
 
