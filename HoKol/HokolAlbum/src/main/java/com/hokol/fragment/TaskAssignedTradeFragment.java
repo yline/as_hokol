@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,26 +12,34 @@ import android.view.ViewGroup;
 import com.hokol.R;
 import com.hokol.activity.TaskAssignedTradeDetailActivity;
 import com.hokol.activity.TaskAssignedTradeSureDetailActivity;
+import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VTaskUserPublishedBean;
+import com.hokol.medium.http.bean.WTaskUserPublishedBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
 import com.yline.view.common.CommonRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskAssignedTradeFragment extends BaseFragment
 {
+	private static final String KeyUserId = "TradeUserId";
+
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
 	private TaskAssignedTradeAdapter taskAssignedTradeAdapter;
 
-	public static TaskAssignedTradeFragment newInstance()
+	private WTaskUserPublishedBean userPublishedBean;
+
+	public static TaskAssignedTradeFragment newInstance(String userId)
 	{
 		Bundle args = new Bundle();
-
+		args.putString(KeyUserId, userId);
 		TaskAssignedTradeFragment fragment = new TaskAssignedTradeFragment();
 		fragment.setArguments(args);
 		return fragment;
@@ -47,6 +56,12 @@ public class TaskAssignedTradeFragment extends BaseFragment
 	{
 		super.onViewCreated(view, savedInstanceState);
 
+		initView(view);
+		initData();
+	}
+
+	private void initView(View view)
+	{
 		// 内容
 		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_task_assigned_trade);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -61,13 +76,6 @@ public class TaskAssignedTradeFragment extends BaseFragment
 
 		taskAssignedTradeAdapter = new TaskAssignedTradeAdapter();
 		recyclerView.setAdapter(taskAssignedTradeAdapter);
-
-		List<String> data = new ArrayList<>();
-		for (int i = 0; i < 10; i++)
-		{
-			data.add("" + i);
-		}
-		taskAssignedTradeAdapter.setDataList(data);
 
 		// 刷新
 		superRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_task_assigned_trade);
@@ -107,7 +115,28 @@ public class TaskAssignedTradeFragment extends BaseFragment
 		});
 	}
 
-	private class TaskAssignedTradeAdapter extends CommonRecyclerAdapter<String>
+	private void initData()
+	{
+		String userId = getArguments().getString(KeyUserId);
+		if (!TextUtils.isEmpty(userId))
+		{
+			userPublishedBean = new WTaskUserPublishedBean(userId, 0, DeleteConstant.defaultNumberSuper);
+			XHttpUtil.doTaskUserPublishedTrade(userPublishedBean, new XHttpAdapter<VTaskUserPublishedBean>()
+			{
+				@Override
+				public void onSuccess(VTaskUserPublishedBean vTaskUserPublishedBean)
+				{
+					List<VTaskUserPublishedBean.VTaskUserPublishedOneBean> result = vTaskUserPublishedBean.getList();
+					if (null != result)
+					{
+						taskAssignedTradeAdapter.setDataList(result);
+					}
+				}
+			});
+		}
+	}
+
+	private class TaskAssignedTradeAdapter extends CommonRecyclerAdapter<VTaskUserPublishedBean.VTaskUserPublishedOneBean>
 	{
 
 		@Override

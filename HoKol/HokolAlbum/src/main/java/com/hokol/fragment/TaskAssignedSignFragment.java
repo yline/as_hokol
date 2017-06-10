@@ -4,32 +4,41 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
 import com.hokol.activity.TaskAssignedSignDetailActivity;
+import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VTaskUserPublishedBean;
+import com.hokol.medium.http.bean.WTaskUserPublishedBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
 import com.yline.view.common.CommonRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskAssignedSignFragment extends BaseFragment
 {
+	private static final String KeyUserId = "SignUserId";
+
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
 	private TaskAssignedSignAdapter taskAssignedSignAdapter;
 
-	public static TaskAssignedSignFragment newInstance()
+	private WTaskUserPublishedBean userPublishedBean;
+
+	public static TaskAssignedSignFragment newInstance(String userId)
 	{
 		Bundle args = new Bundle();
-
+		args.putString(KeyUserId, userId);
 		TaskAssignedSignFragment fragment = new TaskAssignedSignFragment();
 		fragment.setArguments(args);
 		return fragment;
@@ -107,15 +116,26 @@ public class TaskAssignedSignFragment extends BaseFragment
 
 	private void initData()
 	{
-		List<String> data = new ArrayList<>();
-		for (int i = 0; i < 10; i++)
+		String userId = getArguments().getString(KeyUserId);
+		if (!TextUtils.isEmpty(userId))
 		{
-			data.add("" + i);
+			userPublishedBean = new WTaskUserPublishedBean(userId, 0, DeleteConstant.defaultNumberSuper);
+			XHttpUtil.doTaskUserPublishedSign(userPublishedBean, new XHttpAdapter<VTaskUserPublishedBean>()
+			{
+				@Override
+				public void onSuccess(VTaskUserPublishedBean vTaskUserPublishedBean)
+				{
+					List<VTaskUserPublishedBean.VTaskUserPublishedOneBean> result = vTaskUserPublishedBean.getList();
+					if (null != result)
+					{
+						taskAssignedSignAdapter.setDataList(result);
+					}
+				}
+			});
 		}
-		taskAssignedSignAdapter.setDataList(data);
 	}
 
-	private class TaskAssignedSignAdapter extends CommonRecyclerAdapter<String>
+	private class TaskAssignedSignAdapter extends CommonRecyclerAdapter<VTaskUserPublishedBean.VTaskUserPublishedOneBean>
 	{
 
 		@Override

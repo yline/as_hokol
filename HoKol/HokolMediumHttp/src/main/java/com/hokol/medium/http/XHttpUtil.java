@@ -368,13 +368,41 @@ public class XHttpUtil
 	}
 
 	/**
-	 * 用户已发布任务
+	 * 用户已发布任务；全部
 	 */
-	public static void doTaskUserPublished(WTaskUserPublishedBean wTaskUserPublishedBean, XHttpAdapter<VTaskUserPublishedBean> adapter)
+	public static void doTaskUserPublishedAll(WTaskUserPublishedBean wTaskUserPublishedBean, XHttpAdapter<VTaskUserPublishedBean> adapter)
 	{
-		String httpUrl = HttpConstant.url_task_user_published;
+		String httpUrl = HttpConstant.url_task_user_published_all;
 		new XTextHttp<VTaskUserPublishedBean>(adapter).doPost(httpUrl, wTaskUserPublishedBean, VTaskUserPublishedBean.class);
 	}
+
+	/**
+	 * 用户已发布任务；待报名
+	 */
+	public static void doTaskUserPublishedSign(WTaskUserPublishedBean wTaskUserPublishedBean, XHttpAdapter<VTaskUserPublishedBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_user_published_sign;
+		new XTextHttp<VTaskUserPublishedBean>(adapter).doPost(httpUrl, wTaskUserPublishedBean, VTaskUserPublishedBean.class);
+	}
+
+	/**
+	 * 用户已发布任务；待交易
+	 */
+	public static void doTaskUserPublishedTrade(WTaskUserPublishedBean wTaskUserPublishedBean, XHttpAdapter<VTaskUserPublishedBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_user_published_trade;
+		new XTextHttp<VTaskUserPublishedBean>(adapter).doPost(httpUrl, wTaskUserPublishedBean, VTaskUserPublishedBean.class);
+	}
+
+	/**
+	 * 用户已发布任务；待评价
+	 */
+	public static void doTaskUserPublishedEvaluate(WTaskUserPublishedBean wTaskUserPublishedBean, XHttpAdapter<VTaskUserPublishedBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_user_published_evaluate;
+		new XTextHttp<VTaskUserPublishedBean>(adapter).doPost(httpUrl, wTaskUserPublishedBean, VTaskUserPublishedBean.class);
+	}
+
 
 	/**
 	 * 任务报名

@@ -40,6 +40,8 @@ public class MainMineDynamicFragment extends BaseFragment
 
 	private SuperSwipeRefreshLayout superSwipeRefreshLayout;
 
+	private WDynamicUserAllBean wDynamicUserAllBean;
+
 	private int dynamicRefreshNumber;
 
 	public static MainMineDynamicFragment newInstance()
@@ -147,7 +149,7 @@ public class MainMineDynamicFragment extends BaseFragment
 		}
 		else
 		{
-			WDynamicUserAllBean wDynamicUserAllBean = new WDynamicUserAllBean(userId, 0, DeleteConstant.defaultNumberNormal);
+			wDynamicUserAllBean = new WDynamicUserAllBean(userId, 0, DeleteConstant.defaultNumberNormal);
 			recyclerAdapter.setShowEmpty(false);
 			XHttpUtil.doDynamicUserAll(wDynamicUserAllBean, new XHttpAdapter<VDynamicUserAllBean>()
 			{

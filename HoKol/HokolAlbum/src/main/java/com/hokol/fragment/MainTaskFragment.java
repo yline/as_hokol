@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.hokol.R;
 import com.hokol.activity.TaskAssignedActivity;
 import com.hokol.activity.TaskDetailActivity;
 import com.hokol.activity.TaskPublishActivity;
+import com.hokol.application.AppStateManager;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
@@ -25,6 +27,7 @@ import com.hokol.medium.http.bean.WTaskMainAll;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.ADWidget;
 import com.hokol.viewhelper.MainTaskHelper;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
@@ -166,6 +169,8 @@ public class MainTaskFragment extends BaseFragment
 			}
 		});
 
+		final String userId = AppStateManager.getInstance().getUserLoginId(getContext());
+
 		// 头部
 		parentView.findViewById(R.id.iv_main_task_action_task).setOnClickListener(new View.OnClickListener()
 		{
@@ -180,7 +185,14 @@ public class MainTaskFragment extends BaseFragment
 			@Override
 			public void onClick(View v)
 			{
-				TaskAssignedActivity.actionStart(getContext());
+				if (TextUtils.isEmpty(userId))
+				{
+					SDKManager.toast("亲，请先登录");
+				}
+				else
+				{
+					TaskAssignedActivity.actionStart(getContext(), userId);
+				}
 			}
 		});
 	}

@@ -93,8 +93,17 @@ public class HttpConstant
 	// 任务报名详情
 	public static final String url_task_user_signup_detail = url_head + "ApiTask/task_join_detail";
 
-	// 用户已发布任务
-	public static final String url_task_user_published = url_head + "ApiTask/task_published_all";
+	// 用户已发布任务；全部
+	public static final String url_task_user_published_all = url_head + "ApiTask/task_published_all";
+
+	// 用户已发布任务；待报名
+	public static final String url_task_user_published_sign = url_head + "ApiTask/task_published_join";
+
+	// 用户已发布任务；待交易
+	public static final String url_task_user_published_trade = url_head + "ApiTask/task_published_confirm";
+
+	// 用户已发布任务；待评价
+	public static final String url_task_user_published_evaluate = url_head + "ApiTask/task_published_comment";
 
 	// 任务报名
 	public static final String url_task_action_staff_signup = url_head + "ApiTask/task_join";

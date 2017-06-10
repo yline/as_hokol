@@ -29,6 +29,8 @@ import java.util.List;
  */
 public class TaskAssignedActivity extends BaseAppCompatActivity
 {
+	private static final String KeyTaskAssigned = "KeyTaskAssigned";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -38,16 +40,19 @@ public class TaskAssignedActivity extends BaseAppCompatActivity
 		final List<BaseFragment> fragmentList = new ArrayList<>();
 		final List<String> titleList = new ArrayList<>();
 
-		fragmentList.add(TaskAssignedAllFragment.newInstance());
+		// 用户ID
+		String userId = getIntent().getStringExtra(KeyTaskAssigned);
+
+		fragmentList.add(TaskAssignedAllFragment.newInstance(userId));
 		titleList.add("全部");
 		
-		fragmentList.add(TaskAssignedSignFragment.newInstance());
+		fragmentList.add(TaskAssignedSignFragment.newInstance(userId));
 		titleList.add("待报名");
 
-		fragmentList.add(TaskAssignedTradeFragment.newInstance());
+		fragmentList.add(TaskAssignedTradeFragment.newInstance(userId));
 		titleList.add("待交易");
 
-		fragmentList.add(TaskAssignedEvaluateFragment.newInstance());
+		fragmentList.add(TaskAssignedEvaluateFragment.newInstance(userId));
 		titleList.add("待评价");
 
 		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout_task_assigned);
@@ -87,8 +92,8 @@ public class TaskAssignedActivity extends BaseAppCompatActivity
 		});
 	}
 	
-	public static void actionStart(Context context)
+	public static void actionStart(Context context, String userId)
 	{
-		context.startActivity(new Intent(context, TaskAssignedActivity.class));
+		context.startActivity(new Intent(context, TaskAssignedActivity.class).putExtra(KeyTaskAssigned, userId));
 	}
 }

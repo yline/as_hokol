@@ -2,6 +2,7 @@ package com.hokol.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import com.hokol.activity.UserTaskCollectionActivity;
 import com.hokol.activity.UserTaskMessageActivity;
 import com.hokol.activity.UserTaskScoreActivity;
 import com.hokol.activity.UserVIPActivity;
+import com.hokol.application.AppStateManager;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
 import com.yline.view.common.ViewHolder;
 
@@ -46,6 +49,7 @@ public class MainMineHomeFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 
 		homeViewHolder = new ViewHolder(view);
+		final String userId = AppStateManager.getInstance().getUserLoginId(getContext());
 
 		// 任务
 		homeViewHolder.get(R.id.ll_main_min_home_task_assigned).setOnClickListener(new View.OnClickListener()
@@ -53,7 +57,14 @@ public class MainMineHomeFragment extends BaseFragment
 			@Override
 			public void onClick(View v)
 			{
-				TaskAssignedActivity.actionStart(getContext());
+				if (TextUtils.isEmpty(userId))
+				{
+					SDKManager.toast("亲，请先登录");
+				}
+				else
+				{
+					TaskAssignedActivity.actionStart(getContext(), userId);
+				}
 			}
 		});
 

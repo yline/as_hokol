@@ -4,32 +4,41 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
 import com.hokol.activity.TaskAssignedEvaluateActivity;
+import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VTaskUserPublishedBean;
+import com.hokol.medium.http.bean.WTaskUserPublishedBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
 import com.yline.view.common.CommonRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskAssignedEvaluateFragment extends BaseFragment
 {
+	private static final String KeyUserId = "EvaluateUserId";
+
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
 	private TaskAssignedEvaluateAdapter taskAssignedEvaluateAdapter;
 
-	public static TaskAssignedEvaluateFragment newInstance()
+	private WTaskUserPublishedBean userPublishedBean;
+
+	public static TaskAssignedEvaluateFragment newInstance(String userId)
 	{
 		Bundle args = new Bundle();
-
+		args.putString(KeyUserId, userId);
 		TaskAssignedEvaluateFragment fragment = new TaskAssignedEvaluateFragment();
 		fragment.setArguments(args);
 		return fragment;
@@ -46,6 +55,12 @@ public class TaskAssignedEvaluateFragment extends BaseFragment
 	{
 		super.onViewCreated(view, savedInstanceState);
 
+		initView(view);
+		initData();
+	}
+
+	private void initView(View view)
+	{
 		// 内容
 		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_task_assigned_evaluate);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -60,13 +75,6 @@ public class TaskAssignedEvaluateFragment extends BaseFragment
 
 		taskAssignedEvaluateAdapter = new TaskAssignedEvaluateAdapter();
 		recyclerView.setAdapter(taskAssignedEvaluateAdapter);
-
-		List<String> data = new ArrayList<>();
-		for (int i = 0; i < 10; i++)
-		{
-			data.add("" + i);
-		}
-		taskAssignedEvaluateAdapter.setDataList(data);
 
 		// 刷新
 		superRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_task_assigned_evaluate);
@@ -106,7 +114,28 @@ public class TaskAssignedEvaluateFragment extends BaseFragment
 		});
 	}
 
-	private class TaskAssignedEvaluateAdapter extends CommonRecyclerAdapter<String>
+	private void initData()
+	{
+		String userId = getArguments().getString(KeyUserId);
+		if (!TextUtils.isEmpty(userId))
+		{
+			userPublishedBean = new WTaskUserPublishedBean(userId, 0, DeleteConstant.defaultNumberSuper);
+			XHttpUtil.doTaskUserPublishedEvaluate(userPublishedBean, new XHttpAdapter<VTaskUserPublishedBean>()
+			{
+				@Override
+				public void onSuccess(VTaskUserPublishedBean vTaskUserPublishedBean)
+				{
+					List<VTaskUserPublishedBean.VTaskUserPublishedOneBean> result = vTaskUserPublishedBean.getList();
+					if (null != result)
+					{
+						taskAssignedEvaluateAdapter.setDataList(result);
+					}
+				}
+			});
+		}
+	}
+
+	private class TaskAssignedEvaluateAdapter extends CommonRecyclerAdapter<VTaskUserPublishedBean.VTaskUserPublishedOneBean>
 	{
 		
 		@Override
