@@ -3,7 +3,9 @@ package com.hokol.medium.http.bean;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class VAreaAllBean
 {
@@ -17,6 +19,21 @@ public class VAreaAllBean
 	public void setProvince(List<VAreaProvinceBean> province)
 	{
 		this.province = province;
+	}
+
+	/**
+	 * 获取 显示的列表数据(没有经过修改的)
+	 *
+	 * @return
+	 */
+	public Map<String, List<String>> getWidgetMap()
+	{
+		Map<String, List<String>> showData = new HashMap<>();
+		for (VAreaProvinceBean bean : province)
+		{
+			showData.put(bean.getP_name(), bean.getCityNameList());
+		}
+		return showData;
 	}
 
 	/**
@@ -145,6 +162,16 @@ public class VAreaAllBean
 		public List<VAreaCityBean> getCity()
 		{
 			return city;
+		}
+
+		public List<String> getCityNameList()
+		{
+			List<String> nameList = new ArrayList<>();
+			for (VAreaCityBean cityBean : city)
+			{
+				nameList.add(cityBean.getC_name());
+			}
+			return nameList;
 		}
 
 		public void setCity(List<VAreaCityBean> city)

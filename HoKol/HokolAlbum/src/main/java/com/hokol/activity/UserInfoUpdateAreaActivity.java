@@ -15,8 +15,6 @@ import com.hokol.medium.http.bean.VAreaAllBean;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
 
-import java.util.Arrays;
-
 public class UserInfoUpdateAreaActivity extends BaseAppCompatActivity implements FragmentManager.OnBackStackChangedListener, AdapterView.OnItemClickListener
 {
 	private UserInfoUpdateAreaFragment areaFragment;
@@ -52,10 +50,7 @@ public class UserInfoUpdateAreaActivity extends BaseAppCompatActivity implements
 			{
 				areaAllBean = vAreaAllBean;
 
-				int length = vAreaAllBean.keySet().size();
-				String[] keySet = new String[length];
-				keySet = vAreaAllBean.keySet().toArray(keySet);
-				areaFragment.refresh(Arrays.asList(keySet));
+				areaFragment.refresh(areaAllBean.getProvinceNameList());
 			}
 		});
 	}
@@ -75,7 +70,9 @@ public class UserInfoUpdateAreaActivity extends BaseAppCompatActivity implements
 			firstSelectString = areaFragment.getSelectedItem(position);
 
 			areaFragment = UserInfoUpdateAreaFragment.newInstance();
-			areaFragment.refresh(areaAllBean.getList().get(firstSelectString));
+
+			String pCode = areaAllBean.getProvinceCode(firstSelectString);
+			areaFragment.refresh(areaAllBean.getCityNameList(pCode));
 			areaFragment.setOnItemClickListener(this);
 			getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, areaFragment)
 					.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).addToBackStack("second").commit();

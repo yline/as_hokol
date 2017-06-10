@@ -195,7 +195,7 @@ public class MainTaskFragment extends BaseFragment
 			@Override
 			public void onSuccess(VAreaAllBean vAreaAllBean)
 			{
-				Map provinceMap = vAreaAllBean.getList();
+				Map provinceMap = vAreaAllBean.getWidgetMap();
 
 				mainTaskHelper.setAreaData(provinceMap);
 			}

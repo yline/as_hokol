@@ -38,10 +38,10 @@ public class MainHomeHelper
 
 	private SecondaryWidget secondaryWidget;
 
-	public void initSecondaryView(SecondaryWidget.OnSecondaryCallback listener)
+	public void initSecondaryView(SecondaryWidget.OnConfirmListener listener)
 	{
 		secondaryWidget = new SecondaryWidget(context, contentViewList);
-		secondaryWidget.setOnSecondaryCallback(listener);
+		secondaryWidget.setOnConfirmListener(listener);
 	}
 
 	public void initFilterView(final OnMenuFilterCallback menuFilterCallback)
@@ -104,7 +104,7 @@ public class MainHomeHelper
 
 	public void setProvinceData(Map<String, List<String>> map)
 	{
-		secondaryWidget.setDataMap(map);
+		secondaryWidget.setData(map);
 	}
 
 	public void closeMenu()

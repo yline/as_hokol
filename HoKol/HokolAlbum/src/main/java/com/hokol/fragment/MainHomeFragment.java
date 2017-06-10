@@ -56,31 +56,31 @@ public class MainHomeFragment extends BaseFragment
 		initView(view);
 
 		// 下拉菜单栏
-		mainHomeHelper.initSecondaryView(new SecondaryWidget.OnSecondaryCallback()
+		mainHomeHelper.initSecondaryView(new SecondaryWidget.OnConfirmListener()
 		{
 			@Override
-			public void onSecondarySelected(String first, List<String> second, String title)
+			public void onConfirmClick(String firstName, List<String> secondList, String titleName)
 			{
-				mainHomeHelper.updateProvinceTitle(title);
+				mainHomeHelper.updateProvinceTitle(titleName);
 				mainHomeHelper.closeMenu();
 
-				if (isAreaChanged(first, second))
+				if (isAreaChanged(firstName, secondList))
 				{
 					for (int i = 0; i < fragmentList.size(); i++)
 					{
 						if (fragmentList.get(i) instanceof OnHomeFilterCallback)
 						{
-							if (first.equals(SecondaryWidget.DefaultTitle))
+							if (firstName.equals(SecondaryWidget.DefaultTitle))
 							{
-								first = "0";
+								firstName = "0";
 							}
 
-							if (second.contains(SecondaryWidget.DefaultTitle))
+							if (secondList.contains(SecondaryWidget.DefaultTitle))
 							{
-								second = new ArrayList<>();
+								secondList = new ArrayList<>();
 							}
 
-							((OnHomeFilterCallback) fragmentList.get(i)).onAreaUpdate(first, second);
+							((OnHomeFilterCallback) fragmentList.get(i)).onAreaUpdate(firstName, secondList);
 						}
 					}
 				}
@@ -173,8 +173,10 @@ public class MainHomeFragment extends BaseFragment
 			@Override
 			public void onSuccess(VAreaAllBean vAreaAllBean)
 			{
-				Map provinceMap = vAreaAllBean.getList();
+				Map<String, List<String>> provinceMap = vAreaAllBean.getWidgetMap();
 				mainHomeHelper.setProvinceData(provinceMap);
+
+				vAreaAllBean.getProvinceNameList();
 			}
 		});
 	}

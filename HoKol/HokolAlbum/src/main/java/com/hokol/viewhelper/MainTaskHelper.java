@@ -148,17 +148,17 @@ public class MainTaskHelper
 	private void initAreaView(List<View> contentViewList)
 	{
 		secondaryWidget = new SecondaryWidget(sContext, contentViewList);
-		secondaryWidget.setOnSecondaryCallback(new SecondaryWidget.OnSecondaryCallback()
+		secondaryWidget.setOnConfirmListener(new SecondaryWidget.OnConfirmListener()
 		{
 			@Override
-			public void onSecondarySelected(String first, List<String> second, String title)
+			public void onConfirmClick(String firstName, List<String> secondList, String titleName)
 			{
 				if (null != taskFilterCallback)
 				{
-					taskFilterCallback.onFilterArea(first, second);
+					taskFilterCallback.onFilterArea(firstName, secondList);
 				}
 
-				dropMenuWidget.updateTitle(2, title);
+				dropMenuWidget.updateTitle(2, titleName);
 				dropMenuWidget.closeMenu();
 			}
 		});
@@ -166,7 +166,7 @@ public class MainTaskHelper
 
 	public void setAreaData(Map<String, List<String>> map)
 	{
-		secondaryWidget.setDataMap(map);
+		secondaryWidget.setData(map);
 	}
 
 	private OnTaskFilterCallback taskFilterCallback;

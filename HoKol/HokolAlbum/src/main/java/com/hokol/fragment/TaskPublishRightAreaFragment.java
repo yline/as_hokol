@@ -123,7 +123,7 @@ public class TaskPublishRightAreaFragment extends BaseFragment
 			@Override
 			public void onSuccess(VAreaAllBean vAreaAllBean)
 			{
-				areaResult = vAreaAllBean.getList();
+				areaResult = vAreaAllBean.getWidgetMap();
 				if (null != areaResult)
 				{
 					ableWidget.clearSelectedPosition();
