@@ -19,6 +19,8 @@ import com.yline.http.XHttpAdapter;
 import com.yline.utils.KeyBoardUtil;
 import com.yline.view.common.ViewHolder;
 
+import java.util.List;
+
 /**
  * 发布任务
  *
@@ -55,7 +57,29 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 	private void initView()
 	{
 		rightStyleFragment = TaskPublishRightStyleFragment.newInstance();
+		rightStyleFragment.setOnRightStyleCallback(new TaskPublishRightStyleFragment.OnPublishRightStyleCallback()
+		{
+			@Override
+			public void onRightStyleCancel()
+			{
+				viewHolder.get(R.id.rl_task_publish_right).setVisibility(View.GONE);
+				fragmentManager.popBackStack();
+			}
+
+			@Override
+			public void onRightStyleConfirm(List<Integer> taskType, int boyNum, int girlNum)
+			{
+				viewHolder.get(R.id.rl_task_publish_right).setVisibility(View.GONE);
+				fragmentManager.popBackStack();
+
+				// 设置数据
+				taskPublishBean.setTask_type(taskType);
+				taskPublishBean.setTask_man_num(boyNum);
+				taskPublishBean.setTask_woman_num(girlNum);
+			}
+		});
 		rightAreaFragment = TaskPublishRightAreaFragment.newInstance();
+
 
 		viewHolder.get(R.id.rl_task_publish_right).setVisibility(View.GONE);
 	}
@@ -124,15 +148,23 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				XHttpUtil.doTaskMainPublish(null, new XHttpAdapter<String>()
+				String result = taskPublishBean.isDataEnough();
+				if (WTaskMainPublishBean.ValueSuccessStr == result)
 				{
-					@Override
-					public void onSuccess(String s)
+					XHttpUtil.doTaskMainPublish(null, new XHttpAdapter<String>()
 					{
+						@Override
+						public void onSuccess(String s)
+						{
 
-					}
-				});
-				SDKManager.toast("提交任务");
+						}
+					});
+					SDKManager.toast("提交任务成功");
+				}
+				else
+				{
+					SDKManager.toast(result);
+				}
 			}
 		});
 

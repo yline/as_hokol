@@ -64,9 +64,9 @@
             android:layout_marginBottom="@dimen/default_space_little"
             android:layout_marginTop="@dimen/default_space_little"
             android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
+            android:clickable="false"
             android:gravity="center_horizontal"
             android:hint="女"
-            android:clickable="false"
             android:maxLines="1"
             android:paddingBottom="@dimen/default_space_normal"
             android:paddingLeft="@dimen/default_space_super"
@@ -93,6 +93,7 @@
             android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
             android:gravity="center_horizontal"
             android:hint="数量"
+            android:inputType="numberDecimal"
             android:maxLines="1"
             android:paddingBottom="@dimen/default_space_normal"
             android:paddingLeft="@dimen/default_space_super"
@@ -113,9 +114,9 @@
             android:layout_marginBottom="@dimen/default_space_little"
             android:layout_marginTop="@dimen/default_space_little"
             android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
+            android:clickable="false"
             android:gravity="center_horizontal"
             android:hint="男"
-            android:clickable="false"
             android:maxLines="1"
             android:paddingBottom="@dimen/default_space_normal"
             android:paddingLeft="@dimen/default_space_super"
@@ -142,6 +143,7 @@
             android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white"
             android:gravity="center_horizontal"
             android:hint="数量"
+            android:inputType="numberDecimal"
             android:maxLines="1"
             android:paddingBottom="@dimen/default_space_normal"
             android:paddingLeft="@dimen/default_space_super"
@@ -176,6 +178,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btn_publish_right_style_cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -185,6 +188,7 @@
             android:textSize="@dimen/default_text_size_normal"/>
 
         <Button
+            android:id="@+id/btn_publish_right_style_confirm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

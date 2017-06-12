@@ -1,5 +1,7 @@
 package com.hokol.medium.http.bean;
 
+import android.text.TextUtils;
+
 import java.util.List;
 
 /**
@@ -10,6 +12,10 @@ import java.util.List;
  */
 public class WTaskMainPublishBean
 {
+	public static final int ValueErrorInt = -1024;
+
+	public static final String ValueSuccessStr = "success";
+
 	/* 任务结束时间 (时间戳) */
 	private long task_end_time;
 
@@ -20,7 +26,7 @@ public class WTaskMainPublishBean
 	private int task_sex;
 
 	/* 任务薪酬 */
-	private float task_fee;
+	private float task_fee = ValueErrorInt;
 
 	/* 任务标题 */
 	private String task_title;
@@ -38,10 +44,10 @@ public class WTaskMainPublishBean
 	private String task_city;
 
 	/* 任务所需男性数量 */
-	private int task_man_num;
+	private int task_man_num = ValueErrorInt;
 
 	/* 任务所需女性数量 */
-	private int task_woman_num;
+	private int task_woman_num = ValueErrorInt;
 
 	public WTaskMainPublishBean(String task_user_id)
 	{
@@ -175,8 +181,49 @@ public class WTaskMainPublishBean
 		this.task_woman_num = task_woman_num;
 	}
 
-	public boolean isDataEnough()
+	public String isDataEnough()
 	{
-		return false;
+		// 地区数据为空
+		if (task_province == null && task_city == null)
+		{
+			return "地区数据未填写";
+		}
+
+		// 截止时间
+		if (task_end_time == 0)
+		{
+			return "截止时间未选择";
+		}
+
+		// 薪酬
+		if (task_fee == -1024)
+		{
+			return "报酬为空";
+		}
+
+		// 标题
+		if (TextUtils.isEmpty(task_title))
+		{
+			return "标题必须填写哦";
+		}
+
+		// 描述需求
+		if (TextUtils.isEmpty(task_content))
+		{
+			return "需求描述不能为空哦";
+		}
+
+		// 任务类型
+		if (task_type == null)
+		{
+			return "选择属性 -> 任务类型 未选择";
+		}
+
+		if (task_man_num == -1024 && task_woman_num == -1024)
+		{
+			return "选择属性 -> 人物数量为空";
+		}
+
+		return ValueSuccessStr;
 	}
 }
