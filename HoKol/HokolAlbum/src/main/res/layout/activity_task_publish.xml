@@ -54,8 +54,8 @@
             android:id="@+id/rl_task_publish_right"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#4d000000"
             android:clickable="true"
+            android:background="#4d000000"
             android:paddingLeft="100dp">
         </RelativeLayout>
         <!-- android:layout_gravity="right" -->

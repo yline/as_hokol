@@ -177,7 +177,7 @@ public class MainTaskFragment extends BaseFragment
 			@Override
 			public void onClick(View v)
 			{
-				TaskPublishActivity.actionStart(getContext());
+				TaskPublishActivity.actionStart(getContext(), "123");
 			}
 		});
 		parentView.findViewById(R.id.iv_main_task_action_history).setOnClickListener(new View.OnClickListener()

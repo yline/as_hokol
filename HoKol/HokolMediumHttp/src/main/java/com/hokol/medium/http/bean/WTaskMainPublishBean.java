@@ -43,6 +43,11 @@ public class WTaskMainPublishBean
 	/* 任务所需女性数量 */
 	private int task_woman_num;
 
+	public WTaskMainPublishBean(String task_user_id)
+	{
+		this.task_user_id = task_user_id;
+	}
+
 	public WTaskMainPublishBean(String task_user_id, List<Integer> task_type, float task_fee, int task_man_num, int task_woman_num)
 	{
 		this.task_user_id = task_user_id;
@@ -168,5 +173,10 @@ public class WTaskMainPublishBean
 	public void setTask_woman_num(int task_woman_num)
 	{
 		this.task_woman_num = task_woman_num;
+	}
+
+	public boolean isDataEnough()
+	{
+		return false;
 	}
 }

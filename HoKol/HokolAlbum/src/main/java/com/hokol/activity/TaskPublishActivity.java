@@ -4,14 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.hokol.R;
 import com.hokol.fragment.TaskPublishRightAreaFragment;
 import com.hokol.fragment.TaskPublishRightStyleFragment;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.WTaskMainPublishBean;
 import com.hokol.medium.widget.DialogIosWidget;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
+import com.yline.http.XHttpAdapter;
 import com.yline.utils.KeyBoardUtil;
 import com.yline.view.common.ViewHolder;
 
@@ -23,15 +27,17 @@ import com.yline.view.common.ViewHolder;
  */
 public class TaskPublishActivity extends BaseAppCompatActivity
 {
-	private ViewHolder viewHolder;
+	private static final String KeyUserId = "TaskPublishUserId";
 
-	// private DrawerLayout drawerLayout;
+	private ViewHolder viewHolder;
 
 	private FragmentManager fragmentManager = getSupportFragmentManager();
 
 	private TaskPublishRightStyleFragment rightStyleFragment;
 
 	private TaskPublishRightAreaFragment rightAreaFragment;
+
+	private WTaskMainPublishBean taskPublishBean;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -43,46 +49,15 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 
 		initView();
 		initViewClick();
+		initData();
 	}
 
 	private void initView()
 	{
-		/*drawerLayout = viewHolder.get(R.id.drawer_task_publish);
-		drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED); // 禁止手势滑动
-		drawerLayout.setClickable(false);
-
-		drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener()
-		{
-			@Override
-			public void onDrawerSlide(View drawerView, float slideOffset)
-			{
-
-			}
-
-			@Override
-			public void onDrawerOpened(View drawerView)
-			{
-
-			}
-
-			@Override
-			public void onDrawerClosed(View drawerView)
-			{
-
-			}
-
-			@Override
-			public void onDrawerStateChanged(int newState)
-			{
-
-			}
-		});*/
-
 		rightStyleFragment = TaskPublishRightStyleFragment.newInstance();
 		rightAreaFragment = TaskPublishRightAreaFragment.newInstance();
 
 		viewHolder.get(R.id.rl_task_publish_right).setVisibility(View.GONE);
-		fragmentManager.beginTransaction().add(R.id.rl_task_publish_right, rightStyleFragment).add(R.id.rl_task_publish_right, rightAreaFragment).commit();
 	}
 
 	private void initViewClick()
@@ -101,11 +76,17 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				fragmentManager.beginTransaction().show(rightStyleFragment).hide(rightAreaFragment).commit();
+				boolean isEmpty = fragmentManager.beginTransaction().isEmpty();
+				if (isEmpty)
+				{
+					fragmentManager.beginTransaction().add(R.id.rl_task_publish_right, rightStyleFragment).addToBackStack("Right").commit();
+				}
+				else
+				{
+					fragmentManager.beginTransaction().replace(R.id.rl_task_publish_right, rightStyleFragment).addToBackStack("Right").commit();
+				}
 				KeyBoardUtil.closeKeyboard(TaskPublishActivity.this);
-
 				viewHolder.get(R.id.rl_task_publish_right).setVisibility(View.VISIBLE);
-				// drawerLayout.openDrawer(Gravity.RIGHT);
 			}
 		});
 
@@ -114,11 +95,18 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				fragmentManager.beginTransaction().show(rightAreaFragment).hide(rightStyleFragment).commit();
-				KeyBoardUtil.closeKeyboard(TaskPublishActivity.this);
 
+				boolean isEmpty = fragmentManager.beginTransaction().isEmpty();
+				if (isEmpty)
+				{
+					fragmentManager.beginTransaction().add(R.id.rl_task_publish_right, rightAreaFragment).addToBackStack("Right").commit();
+				}
+				else
+				{
+					fragmentManager.beginTransaction().replace(R.id.rl_task_publish_right, rightAreaFragment).addToBackStack("Right").commit();
+				}
+				KeyBoardUtil.closeKeyboard(TaskPublishActivity.this);
 				viewHolder.get(R.id.rl_task_publish_right).setVisibility(View.VISIBLE);
-				// drawerLayout.openDrawer(Gravity.RIGHT);
 			}
 		});
 		
@@ -136,6 +124,14 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
+				XHttpUtil.doTaskMainPublish(null, new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+
+					}
+				});
 				SDKManager.toast("提交任务");
 			}
 		});
@@ -159,8 +155,33 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 		});
 	}
 
-	public static void actionStart(Context context)
+	private void initData()
 	{
-		context.startActivity(new Intent(context, TaskPublishActivity.class));
+		String userId = getIntent().getStringExtra(KeyUserId);
+		if (TextUtils.isEmpty(userId))
+		{
+			// 违规操作，进来了
+			finish();
+			SDKManager.toast("亲，还没登录哦");
+		}
+		else
+		{
+			taskPublishBean = new WTaskMainPublishBean(userId);
+		}
+	}
+
+	@Override
+	public void onBackPressed()
+	{
+		super.onBackPressed();
+		if (fragmentManager.getBackStackEntryCount() == 0)
+		{
+			viewHolder.get(R.id.rl_task_publish_right).setVisibility(View.GONE);
+		}
+	}
+
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, TaskPublishActivity.class).putExtra(KeyUserId, userId));
 	}
 }
