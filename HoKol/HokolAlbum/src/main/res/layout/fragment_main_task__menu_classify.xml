@@ -17,7 +17,7 @@
         android:textColor="@color/hokolGrayDrak"
         android:textSize="@dimen/default_text_size_normal"/>
 
-    <com.yline.widget.label.LabelFlowLayout
+    <com.yline.view.layout.label.LabelFlowLayout
         android:id="@+id/label_flow_main_task_menu_classify"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="@dimen/default_space_large"
         android:layout_marginRight="@dimen/default_space_large">
-    </com.yline.widget.label.LabelFlowLayout>
+    </com.yline.view.layout.label.LabelFlowLayout>
 
     <Button
         android:id="@+id/btn_main_task_menu_classify"

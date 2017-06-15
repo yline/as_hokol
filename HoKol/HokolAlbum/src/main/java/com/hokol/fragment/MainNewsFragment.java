@@ -19,8 +19,8 @@ import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainNewsHelper;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
-import com.yline.view.callback.OnRecyclerItemClickListener;
-import com.yline.view.common.RecyclerViewHolder;
+import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.List;
 

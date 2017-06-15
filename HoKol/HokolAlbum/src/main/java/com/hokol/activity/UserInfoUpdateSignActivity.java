@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.hokol.R;
 import com.hokol.medium.widget.EtMaxNumWidget;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.view.common.ViewHolder;
+import com.yline.view.recycler.holder.ViewHolder;
 
 public class UserInfoUpdateSignActivity extends BaseAppCompatActivity
 {

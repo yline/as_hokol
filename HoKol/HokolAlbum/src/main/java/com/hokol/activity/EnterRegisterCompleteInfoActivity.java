@@ -18,9 +18,9 @@ import com.hokol.util.TextDecorateUtil;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
-import com.yline.view.common.ViewHolder;
-import com.yline.widget.label.FlowLayout;
-import com.yline.widget.label.LabelAdapter;
+import com.yline.view.layout.label.FlowLayout;
+import com.yline.view.layout.label.LabelAdapter;
+import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;

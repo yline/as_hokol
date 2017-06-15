@@ -16,10 +16,10 @@ import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.utils.TimeConvertUtil;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.callback.OnRecyclerItemClickListener;
-import com.yline.view.common.HeadFootRecyclerAdapter;
-import com.yline.view.common.RecyclerViewHolder;
-import com.yline.view.common.ViewHolder;
+import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
+import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
+import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.List;
 

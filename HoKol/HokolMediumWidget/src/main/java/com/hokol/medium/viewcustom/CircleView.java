@@ -3,7 +3,7 @@ package com.hokol.medium.viewcustom;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.yline.view.custom.ViewCircle;
+import com.yline.view.view.ViewCircle;
 
 public class CircleView extends ViewCircle
 {

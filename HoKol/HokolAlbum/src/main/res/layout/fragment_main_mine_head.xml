@@ -79,7 +79,7 @@
                 android:textSize="@dimen/default_text_size_medium"/>
         </RelativeLayout>
 
-        <com.yline.widget.label.FlowLayout
+        <com.yline.view.layout.label.FlowLayout
             android:id="@+id/flow_layout_main_mine_head_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
             android:layout_marginTop="@dimen/default_space_small"
             android:layout_toLeftOf="@+id/tv_main_mine_arrow"
             android:layout_toRightOf="@+id/circle_main_mine_avatar">
-        </com.yline.widget.label.FlowLayout>
+        </com.yline.view.layout.label.FlowLayout>
     </LinearLayout>
 
     <TextView

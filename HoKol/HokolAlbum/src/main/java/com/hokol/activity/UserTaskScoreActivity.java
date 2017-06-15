@@ -15,7 +15,7 @@ import com.hokol.fragment.UserTaskScoreAssignedFragment;
 import com.hokol.fragment.UserTaskScoreDeliveredFragment;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.base.BaseFragment;
-import com.yline.view.common.ViewHolder;
+import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;

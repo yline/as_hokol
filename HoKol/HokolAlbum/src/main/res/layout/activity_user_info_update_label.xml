@@ -65,11 +65,11 @@
         android:background="@color/hokolGrayLight">
     </View>
 
-    <com.yline.widget.label.LabelFlowLayout
+    <com.yline.view.layout.label.LabelFlowLayout
         android:id="@+id/label_clickable_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/default_space_large"
         android:layout_marginRight="@dimen/default_space_large">
-    </com.yline.widget.label.LabelFlowLayout>
+    </com.yline.view.layout.label.LabelFlowLayout>
 </LinearLayout>

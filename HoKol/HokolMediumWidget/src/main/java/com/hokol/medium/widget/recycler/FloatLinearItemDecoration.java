@@ -12,7 +12,7 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.apply.SimpleLinearItemDecoration;
+import com.yline.view.recycler.simple.SimpleLinearItemDecoration;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -125,6 +125,7 @@ public class FloatLinearItemDecoration extends SimpleLinearItemDecoration
 		}
 		super.drawVerticalDivider(c, divide, currentPosition, childLeft, childTop, childRight, childBottom);
 	}
+
 
 	/**
 	 * *如果该位置没有，则往前循环去查找标题，找到说明该位置属于该分组

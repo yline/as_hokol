@@ -14,8 +14,8 @@ import com.hokol.medium.http.bean.WTaskMainPublishBean;
 import com.hokol.medium.widget.FlowAbleWidget;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
-import com.yline.view.common.ViewHolder;
-import com.yline.widget.label.LabelFlowLayout;
+import com.yline.view.layout.label.LabelFlowLayout;
+import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;

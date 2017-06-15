@@ -17,7 +17,7 @@ import com.hokol.util.TextDecorateUtil;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
-import com.yline.view.common.ViewHolder;
+import com.yline.view.recycler.holder.ViewHolder;
 
 /**
  * 登入流程，手机号+ 密码登录

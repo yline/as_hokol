@@ -3,7 +3,7 @@ package com.hokol.medium.widget;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.yline.widget.dialog.WidgetDialogFoot;
+import com.yline.view.dialog.WidgetDialogFoot;
 
 import java.util.List;
 
@@ -20,7 +20,8 @@ public class DialogFootWidget extends WidgetDialogFoot
 		super(context, dataList);
 	}
 
-	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 重写 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+	/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%重写%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+
 	protected int getResourceId()
 	{
 		return R.layout.widget_dialog_foot_radius;

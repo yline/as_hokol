@@ -3,7 +3,7 @@ package com.hokol.medium.viewcustom;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.yline.view.custom.swiperefresh.ViewSwipeRefreshLayout;
+import com.yline.view.recycler.z.swiperefresh.ViewSwipeRefreshLayout;
 
 public class SuperSwipeRefreshLayout extends ViewSwipeRefreshLayout
 {

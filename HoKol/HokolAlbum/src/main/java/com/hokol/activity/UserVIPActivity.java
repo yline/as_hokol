@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.hokol.R;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.view.common.ViewHolder;
+import com.yline.view.recycler.holder.ViewHolder;
 
 public class UserVIPActivity extends BaseAppCompatActivity
 {

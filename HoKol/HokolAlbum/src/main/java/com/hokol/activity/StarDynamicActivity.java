@@ -22,7 +22,7 @@ import com.yline.log.LogFileUtil;
 import com.yline.utils.TimeConvertUtil;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.common.ViewHolder;
+import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.Arrays;
 

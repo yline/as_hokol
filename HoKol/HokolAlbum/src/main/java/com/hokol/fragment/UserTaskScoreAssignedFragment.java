@@ -13,8 +13,8 @@ import com.hokol.activity.TaskScoreAssignedDetailActivity;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseFragment;
-import com.yline.view.common.HeadFootRecyclerAdapter;
-import com.yline.view.common.RecyclerViewHolder;
+import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 /**
  * 已发任务

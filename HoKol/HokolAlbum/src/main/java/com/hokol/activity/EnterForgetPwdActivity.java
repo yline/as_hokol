@@ -10,7 +10,7 @@ import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.util.TextDecorateUtil;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.view.common.ViewHolder;
+import com.yline.view.recycler.holder.ViewHolder;
 
 public class EnterForgetPwdActivity extends BaseAppCompatActivity
 {

@@ -20,7 +20,7 @@ import com.hokol.test.common.BaseTestFragment;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.base.BaseFragment;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.common.HeadFootRecyclerAdapter;
+import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

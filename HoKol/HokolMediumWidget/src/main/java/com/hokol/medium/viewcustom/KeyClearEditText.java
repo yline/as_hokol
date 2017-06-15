@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import com.hokol.medium.widget.R;
-import com.yline.view.custom.ViewKeyClearEditText;
+import com.yline.view.text.ViewKeyClearEditText;
 
 public class KeyClearEditText extends ViewKeyClearEditText
 {

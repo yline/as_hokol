@@ -82,13 +82,13 @@
         android:layout_above="@+id/view_line_bottom"
         android:layout_below="@+id/rl_area_choose_back">
 
-        <com.yline.widget.label.LabelFlowLayout
+        <com.yline.view.layout.label.LabelFlowLayout
             android:id="@+id/label_flow_task_publish_area"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginRight="@dimen/default_space_large">
-        </com.yline.widget.label.LabelFlowLayout>
+        </com.yline.view.layout.label.LabelFlowLayout>
     </ScrollView>
 
     <View
@@ -107,6 +107,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btn_area_result_cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -116,6 +117,7 @@
             android:textSize="@dimen/default_text_size_normal"/>
 
         <Button
+            android:id="@+id/btn_area_result_confirm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

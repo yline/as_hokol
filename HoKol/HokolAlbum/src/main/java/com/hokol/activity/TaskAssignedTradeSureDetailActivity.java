@@ -15,9 +15,9 @@ import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.common.HeadFootRecyclerAdapter;
-import com.yline.view.common.RecyclerViewHolder;
-import com.yline.widget.label.FlowLayout;
+import com.yline.view.layout.label.FlowLayout;
+import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.Arrays;
 

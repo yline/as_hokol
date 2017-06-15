@@ -11,8 +11,8 @@ import com.hokol.R;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.view.common.CommonRecyclerAdapter;
-import com.yline.view.common.RecyclerViewHolder;
+import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 /**
  * 商家发布任务，评价

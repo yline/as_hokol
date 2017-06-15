@@ -14,8 +14,8 @@ import android.widget.TextView;
 import com.hokol.test.R;
 import com.yline.base.BaseFragment;
 import com.yline.utils.UIResizeUtil;
-import com.yline.view.common.HeadFootRecyclerAdapter;
-import com.yline.view.common.RecyclerViewHolder;
+import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 public abstract class BaseTestFragment extends BaseFragment
 {

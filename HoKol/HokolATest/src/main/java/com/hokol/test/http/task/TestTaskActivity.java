@@ -305,13 +305,12 @@ public class TestTaskActivity extends BaseTestActivity
 				int num1 = parseInt(editTextThree, 0);
 				int length = parseInt(editTextFour, 2);
 				
-				WTaskUserPublishedBean wTaskUserPublishedBean = new WTaskUserPublishedBean(task_id, switchs, num1, length);
-				XHttpUtil.doTaskUserPublished(wTaskUserPublishedBean, new XHttpAdapter<VTaskUserPublishedBean>()
+				WTaskUserPublishedBean wTaskUserPublishedBean = new WTaskUserPublishedBean(task_id, num1, length);
+				XHttpUtil.doTaskUserPublishedAll(wTaskUserPublishedBean, new XHttpAdapter<VTaskUserPublishedBean>()
 				{
 					@Override
 					public void onSuccess(VTaskUserPublishedBean vTaskUserPublishedBean)
 					{
-						
 					}
 				});
 			}

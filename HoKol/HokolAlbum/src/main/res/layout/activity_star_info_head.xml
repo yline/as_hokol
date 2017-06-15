@@ -145,10 +145,10 @@
         android:textColor="@color/hokolGray"
         android:textSize="@dimen/default_text_size_medium"/>
 
-    <com.yline.widget.label.FlowLayout
+    <com.yline.view.layout.label.FlowLayout
         android:id="@+id/label_flow_star_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/default_space_normal">
-    </com.yline.widget.label.FlowLayout>
+    </com.yline.view.layout.label.FlowLayout>
 </LinearLayout>

@@ -14,10 +14,10 @@ import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
-import com.yline.view.common.ViewHolder;
-import com.yline.widget.label.FlowLayout;
-import com.yline.widget.label.LabelAdapter;
-import com.yline.widget.label.LabelFlowLayout;
+import com.yline.view.layout.label.FlowLayout;
+import com.yline.view.layout.label.LabelAdapter;
+import com.yline.view.layout.label.LabelFlowLayout;
+import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.List;
 import java.util.Map;
@@ -55,6 +55,7 @@ public class TaskPublishRightAreaFragment extends BaseFragment
 		viewHolder = new ViewHolder(view);
 
 		initView();
+		initViewClick();
 		initData();
 	}
 
@@ -116,6 +117,28 @@ public class TaskPublishRightAreaFragment extends BaseFragment
 		});
 	}
 
+	private void initViewClick()
+	{
+		// 取消
+		viewHolder.setOnClickListener(R.id.btn_area_result_cancel, new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				
+			}
+		});
+		// 完成
+		viewHolder.setOnClickListener(R.id.btn_area_result_confirm, new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+
+			}
+		});
+	}
+
 	private void initData()
 	{
 		XHttpUtil.doAreaAll(new XHttpAdapter<VAreaAllBean>()
@@ -136,5 +159,17 @@ public class TaskPublishRightAreaFragment extends BaseFragment
 				}
 			}
 		});
+	}
+
+	private OnPublishRightAreaCallback onPublishAreaCallback;
+
+	public void setOnPublishAreaCallback(OnPublishRightAreaCallback onPublishAreaCallback)
+	{
+		this.onPublishAreaCallback = onPublishAreaCallback;
+	}
+	
+	public interface OnPublishRightAreaCallback
+	{
+
 	}
 }

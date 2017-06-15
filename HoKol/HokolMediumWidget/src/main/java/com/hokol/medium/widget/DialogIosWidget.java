@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
-import com.yline.widget.dialog.WidgetDialogCenter;
+import com.yline.view.dialog.WidgetDialogCenter;
 
 public class DialogIosWidget extends WidgetDialogCenter
 {

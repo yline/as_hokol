@@ -10,8 +10,8 @@ import android.view.View;
 import com.hokol.R;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.view.common.CommonRecyclerAdapter;
-import com.yline.view.common.RecyclerViewHolder;
+import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.Arrays;
 

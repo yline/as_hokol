@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.hokol.R;
 import com.hokol.util.TextDecorateUtil;
 import com.yline.log.LogFileUtil;
-import com.yline.view.common.ViewHolder;
+import com.yline.view.recycler.holder.ViewHolder;
 
 public class EnterRegisterPhoneHelper
 {

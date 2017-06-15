@@ -8,9 +8,9 @@ import android.view.View;
 import com.hokol.R;
 import com.hokol.medium.widget.FlowAbleWidget;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.view.common.ViewHolder;
-import com.yline.widget.label.FlowLayout;
-import com.yline.widget.label.LabelAdapter;
+import com.yline.view.layout.label.FlowLayout;
+import com.yline.view.layout.label.LabelAdapter;
+import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.Arrays;
 import java.util.Deque;

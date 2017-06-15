@@ -22,7 +22,7 @@ import com.hokol.activity.UserVIPActivity;
 import com.hokol.application.AppStateManager;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
-import com.yline.view.common.ViewHolder;
+import com.yline.view.recycler.holder.ViewHolder;
 
 public class MainMineHomeFragment extends BaseFragment
 {

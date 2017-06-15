@@ -16,14 +16,14 @@
         android:textColor="@color/hokolGrayDrak"
         android:textSize="@dimen/default_text_size_normal"/>
 
-    <com.yline.widget.label.LabelFlowLayout
+    <com.yline.view.layout.label.LabelFlowLayout
         android:id="@+id/label_flow_main_home_menu_sex"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_main_home_filter_sex"
         android:layout_marginLeft="@dimen/default_space_large"
         android:layout_marginTop="@dimen/default_space_normal">
-    </com.yline.widget.label.LabelFlowLayout>
+    </com.yline.view.layout.label.LabelFlowLayout>
 
     <TextView
         android:id="@+id/tv_main_home_filter_recommend"
@@ -36,14 +36,14 @@
         android:textColor="@color/hokolGrayDrak"
         android:textSize="@dimen/default_text_size_normal"/>
 
-    <com.yline.widget.label.LabelFlowLayout
+    <com.yline.view.layout.label.LabelFlowLayout
         android:id="@+id/label_flow_main_home_menu_recommend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_main_home_filter_recommend"
         android:layout_marginLeft="@dimen/default_space_large"
         android:layout_marginTop="@dimen/default_space_normal">
-    </com.yline.widget.label.LabelFlowLayout>
+    </com.yline.view.layout.label.LabelFlowLayout>
 
     <Button
         android:id="@+id/btn_main_home_menu_commit"

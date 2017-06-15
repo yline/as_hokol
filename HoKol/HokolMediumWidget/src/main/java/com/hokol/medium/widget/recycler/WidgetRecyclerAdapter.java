@@ -3,9 +3,9 @@ package com.hokol.medium.widget.recycler;
 import android.view.View;
 
 import com.hokol.medium.widget.R;
-import com.yline.view.callback.OnRecyclerItemClickListener;
-import com.yline.view.common.HeadFootRecyclerAdapter;
-import com.yline.view.common.RecyclerViewHolder;
+import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
+import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 public abstract class WidgetRecyclerAdapter<Data> extends HeadFootRecyclerAdapter<Data>
 {

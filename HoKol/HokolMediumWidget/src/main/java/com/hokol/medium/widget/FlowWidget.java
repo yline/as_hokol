@@ -5,8 +5,8 @@ import android.content.Context;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 
-import com.yline.widget.label.FlowLayout;
-import com.yline.widget.label.WidgetFlow;
+import com.yline.view.layout.label.FlowLayout;
+import com.yline.view.layout.label.WidgetFlow;
 
 /**
  * 动态添加 控件
@@ -28,7 +28,6 @@ public class FlowWidget extends WidgetFlow
 	}
 	
 	/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 提供重写的方法 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */
-
 	@Override
 	protected int getItemResourceId()
 	{

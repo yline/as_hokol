@@ -21,7 +21,7 @@ import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
-import com.yline.view.common.RecyclerViewHolder;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.List;
 

@@ -16,7 +16,7 @@ import com.hokol.fragment.UserAccountReceiveGiftFragment;
 import com.hokol.fragment.UserAccountSendGiftFragment;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.base.BaseFragment;
-import com.yline.view.common.ViewHolder;
+import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;

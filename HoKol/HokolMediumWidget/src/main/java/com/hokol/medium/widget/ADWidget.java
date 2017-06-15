@@ -3,7 +3,7 @@ package com.hokol.medium.widget;
 import android.content.Context;
 import android.view.View;
 
-import com.yline.widget.ad.WidgetAD;
+import com.yline.view.layout.ad.WidgetAD;
 
 /**
  * 支持定制 + 动态加载图片

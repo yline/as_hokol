@@ -15,7 +15,7 @@ import com.hokol.util.TextDecorateUtil;
 import com.hokol.viewhelper.EnterRegisterPhoneHelper;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
-import com.yline.view.common.ViewHolder;
+import com.yline.view.recycler.holder.ViewHolder;
 
 public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 {

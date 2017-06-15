@@ -11,8 +11,8 @@ import com.hokol.R;
 import com.hokol.medium.widget.recycler.FloatLinearItemDecoration;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.common.CommonRecyclerAdapter;
-import com.yline.view.common.RecyclerViewHolder;
+import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;

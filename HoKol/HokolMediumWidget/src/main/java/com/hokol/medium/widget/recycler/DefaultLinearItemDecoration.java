@@ -2,7 +2,7 @@ package com.hokol.medium.widget.recycler;
 
 import android.content.Context;
 
-import com.yline.view.apply.SimpleLinearItemDecoration;
+import com.yline.view.recycler.simple.SimpleLinearItemDecoration;
 
 /**
  * 1,自定义 线性分割线

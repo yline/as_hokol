@@ -22,5 +22,5 @@ android {
 
 dependencies {
     compile project(':HokolBase')
-    compile 'com.yline.lib:LibHttp:1.4.3'
+    compile 'com.yline.lib:LibHttp:2.0.0'
 }

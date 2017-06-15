@@ -209,7 +209,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:background="@drawable/lib_view_shape_radiusall_stroke_red"
+                    android:background="@drawable/lib_view_layout_shape_radiusall_stroke_red"
                     android:paddingBottom="@dimen/default_space_medium"
                     android:paddingLeft="@dimen/default_space_large_b"
                     android:paddingRight="@dimen/default_space_large_b"

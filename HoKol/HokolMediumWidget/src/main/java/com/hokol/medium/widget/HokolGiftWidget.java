@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
 
-import com.yline.view.common.CommonRecyclerAdapter;
-import com.yline.view.common.RecyclerViewHolder;
+import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -176,7 +176,7 @@ public class HokolGiftWidget
 						isSelected[oldPosition] = false;
 						notifyItemChanged(oldPosition);
 					}
-
+					
 					oldPosition = position;
 					if (-1 != oldPosition)
 					{

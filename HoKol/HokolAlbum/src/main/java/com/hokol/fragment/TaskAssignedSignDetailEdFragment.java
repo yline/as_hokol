@@ -13,9 +13,9 @@ import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseFragment;
-import com.yline.view.common.CommonRecyclerAdapter;
-import com.yline.view.common.RecyclerViewHolder;
-import com.yline.widget.label.FlowLayout;
+import com.yline.view.layout.label.FlowLayout;
+import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.Arrays;
 

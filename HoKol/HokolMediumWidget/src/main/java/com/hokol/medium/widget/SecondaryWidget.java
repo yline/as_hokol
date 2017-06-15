@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.yline.widget.menu.secondary.WidgetSecondary;
+import com.yline.view.recycler.z.secondary.WidgetSecondary;
 
 import java.util.ArrayList;
 import java.util.List;

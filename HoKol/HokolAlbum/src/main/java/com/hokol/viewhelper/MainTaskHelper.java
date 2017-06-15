@@ -19,10 +19,10 @@ import com.hokol.medium.widget.DropMenuWidget;
 import com.hokol.medium.widget.FlowAbleWidget;
 import com.hokol.medium.widget.SecondaryWidget;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
-import com.yline.view.callback.OnRecyclerItemClickListener;
-import com.yline.view.common.RecyclerViewHolder;
-import com.yline.widget.label.FlowLayout;
-import com.yline.widget.label.LabelFlowLayout;
+import com.yline.view.layout.label.FlowLayout;
+import com.yline.view.layout.label.LabelFlowLayout;
+import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;

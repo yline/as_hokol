@@ -19,8 +19,8 @@ import com.hokol.viewhelper.UserInfoHelper;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.FileUtil;
-import com.yline.view.common.ViewHolder;
-import com.yline.widget.label.FlowLayout;
+import com.yline.view.layout.label.FlowLayout;
+import com.yline.view.recycler.holder.ViewHolder;
 
 import java.io.File;
 import java.util.Arrays;

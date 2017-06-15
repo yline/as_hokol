@@ -13,9 +13,9 @@ import com.hokol.R;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.callback.OnRecyclerItemClickListener;
-import com.yline.view.common.CommonRecyclerAdapter;
-import com.yline.view.common.RecyclerViewHolder;
+import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
+import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.Arrays;
 

@@ -14,8 +14,8 @@ import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.common.HeadFootRecyclerAdapter;
-import com.yline.view.common.RecyclerViewHolder;
+import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 public class UserTradeRecordActivity extends BaseAppCompatActivity
 {

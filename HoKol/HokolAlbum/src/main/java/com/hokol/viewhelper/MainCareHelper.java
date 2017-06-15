@@ -15,7 +15,7 @@ import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.common.RecyclerViewHolder;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.List;
 

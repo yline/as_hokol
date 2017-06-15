@@ -13,8 +13,8 @@ import com.hokol.R;
 import com.hokol.medium.http.HttpEnum;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.common.HeadFootRecyclerAdapter;
-import com.yline.view.common.RecyclerViewHolder;
+import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 public class TaskScoreAssignedDetailActivity extends BaseAppCompatActivity
 {

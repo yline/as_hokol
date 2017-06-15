@@ -20,9 +20,9 @@ import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.yline.base.BaseFragment;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.callback.OnRecyclerItemClickListener;
-import com.yline.view.common.HeadFootRecyclerAdapter;
-import com.yline.view.common.RecyclerViewHolder;
+import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
+import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
