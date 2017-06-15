@@ -177,7 +177,15 @@ public class MainTaskFragment extends BaseFragment
 			@Override
 			public void onClick(View v)
 			{
-				TaskPublishActivity.actionStart(getContext(), "123");
+				String userId = AppStateManager.getInstance().getUserLoginId(getContext());
+				if (!TextUtils.isEmpty(userId))
+				{
+					TaskPublishActivity.actionStart(getContext(), userId);
+				}
+				else
+				{
+					SDKManager.toast("亲，请先登录");
+				}
 			}
 		});
 		parentView.findViewById(R.id.iv_main_task_action_history).setOnClickListener(new View.OnClickListener()

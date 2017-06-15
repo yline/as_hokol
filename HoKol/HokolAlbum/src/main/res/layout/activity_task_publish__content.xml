@@ -84,7 +84,8 @@
             android:paddingLeft="@dimen/default_space_large"
             android:paddingRight="@dimen/default_space_large"
             android:paddingTop="@dimen/default_space_normal"
-            android:textColor="#b2b2b2"
+            android:textColor="@color/hokolBlackLight"
+            android:textColorHint="#b2b2b2"
             android:textSize="@dimen/default_text_size_medium"/>
 
         <View
@@ -124,7 +125,8 @@
             android:paddingLeft="@dimen/default_space_large"
             android:paddingRight="@dimen/default_space_large"
             android:paddingTop="@dimen/default_space_normal"
-            android:textColor="#b2b2b2"
+            android:textColor="@color/hokolBlackLight"
+            android:textColorHint="#b2b2b2"
             android:textSize="@dimen/default_text_size_small"/>
 
         <View
@@ -163,6 +165,7 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/et_task_publish_content_price"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/default_space_little"
@@ -173,6 +176,7 @@
                     android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_null"
                     android:gravity="center_horizontal"
                     android:hint="价格"
+                    android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:paddingBottom="@dimen/default_space_normal"
                     android:paddingTop="@dimen/default_space_normal"
@@ -216,6 +220,7 @@
                     android:gravity="center_horizontal"
                     android:paddingBottom="@dimen/default_space_normal"
                     android:paddingTop="@dimen/default_space_normal"
+                    android:textColor="@color/hokolGray"
                     android:text="面议"/>
             </LinearLayout>
         </LinearLayout>
@@ -258,7 +263,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/tv_task_publish_content_area"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -315,6 +320,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_task_publish_content_time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

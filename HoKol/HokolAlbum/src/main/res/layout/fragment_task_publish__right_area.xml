@@ -6,7 +6,7 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <TextView
+    <!--<TextView
         android:id="@+id/tv_area_result_hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,16 +38,15 @@
         android:layout_below="@+id/tv_area_result"
         android:layout_marginTop="@dimen/default_space_normal"
         android:background="@color/hokolGrayLight">
-    </View>
+    </View>-->
 
+    <!-- android:layout_below="@+id/view_line_area_top" -->
     <RelativeLayout
         android:id="@+id/rl_area_choose_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/view_line_area_top"
-        android:paddingBottom="@dimen/default_space_small"
-        android:paddingTop="@dimen/default_space_small"
-        android:visibility="invisible">
+        android:layout_marginTop="@dimen/default_space_small"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/tv_area_choose_province"
@@ -87,7 +86,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_space_large"
-            android:layout_marginRight="@dimen/default_space_large">
+            android:layout_marginRight="@dimen/default_space_large"
+            android:layout_marginTop="@dimen/default_space_small">
         </com.yline.view.layout.label.LabelFlowLayout>
     </ScrollView>
 

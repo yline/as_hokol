@@ -10,13 +10,14 @@
         android:id="@+id/tv_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/widget_shape_radiusall_solid_graylight"
+        android:background="@drawable/widget_selector_shape_radiusall_solid_graylight_stroke_rednull"
         android:duplicateParentState="true"
         android:paddingBottom="@dimen/default_space_medium"
         android:paddingLeft="@dimen/default_space_normal"
         android:paddingRight="@dimen/default_space_normal"
         android:paddingTop="@dimen/default_space_medium"
-        android:textColor="@drawable/lib_view_selector_color_redgray">
+        android:textColor="@drawable/lib_view_selector_color_redgray"
+        android:textSize="@dimen/default_text_size_small">
     </TextView>
 </LinearLayout>
 

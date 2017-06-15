@@ -22,9 +22,6 @@ public class WTaskMainPublishBean
 	/* 任务类型：[1:网红,2:主播,3:演员,4:模特,5:歌手,6:体育] */
 	private List<Integer> task_type;
 
-	/* 任务所需性别：[0:不限，1:男，2:女] */
-	private int task_sex;
-
 	/* 任务薪酬 */
 	private float task_fee = ValueErrorInt;
 
@@ -37,11 +34,11 @@ public class WTaskMainPublishBean
 	/* 任务发布者唯一标识 */
 	private String task_user_id;
 
-	/* 任务所在省份：【例:浙江省，不限】 */
-	private String task_province;
+	/* 任务所在省份：【例:110000】 */
+	private String p_code;
 
-	/* 任务所在城市：【例:杭州市，不限】 */
-	private String task_city;
+	/* 任务所在城市：【111001】 */
+	private String c_code;
 
 	/* 任务所需男性数量 */
 	private int task_man_num = ValueErrorInt;
@@ -64,11 +61,8 @@ public class WTaskMainPublishBean
 
 		long time = (System.currentTimeMillis() / 1000);
 		this.task_end_time = time + 3600 * 24 * 5;
-		this.task_sex = 0;
 		this.task_title = "新发布的任务标题" + time;
 		this.task_content = "新发布的任务内容" + time;
-		this.task_province = "0";
-		this.task_city = "0";
 	}
 
 	public long getTask_end_time()
@@ -89,16 +83,6 @@ public class WTaskMainPublishBean
 	public void setTask_type(List<Integer> task_type)
 	{
 		this.task_type = task_type;
-	}
-
-	public int getTask_sex()
-	{
-		return task_sex;
-	}
-
-	public void setTask_sex(int task_sex)
-	{
-		this.task_sex = task_sex;
 	}
 
 	public float getTask_fee()
@@ -141,24 +125,24 @@ public class WTaskMainPublishBean
 		this.task_user_id = task_user_id;
 	}
 
-	public String getTask_province()
+	public String getP_code()
 	{
-		return task_province;
+		return p_code;
 	}
 
-	public void setTask_province(String task_province)
+	public void setP_code(String p_code)
 	{
-		this.task_province = task_province;
+		this.p_code = p_code;
 	}
 
-	public String getTask_city()
+	public String getC_code()
 	{
-		return task_city;
+		return c_code;
 	}
 
-	public void setTask_city(String task_city)
+	public void setC_code(String c_code)
 	{
-		this.task_city = task_city;
+		this.c_code = c_code;
 	}
 
 	public int getTask_man_num()
@@ -183,12 +167,6 @@ public class WTaskMainPublishBean
 
 	public String isDataEnough()
 	{
-		// 地区数据为空
-		if (task_province == null && task_city == null)
-		{
-			return "地区数据未填写";
-		}
-
 		// 截止时间
 		if (task_end_time == 0)
 		{

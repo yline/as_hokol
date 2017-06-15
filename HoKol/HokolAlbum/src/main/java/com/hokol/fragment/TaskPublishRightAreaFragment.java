@@ -2,6 +2,7 @@ package com.hokol.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,6 @@ import com.hokol.R;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VAreaAllBean;
 import com.hokol.medium.widget.FlowAbleWidget;
-import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
@@ -19,18 +19,23 @@ import com.yline.view.layout.label.LabelAdapter;
 import com.yline.view.layout.label.LabelFlowLayout;
 import com.yline.view.recycler.holder.ViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class TaskPublishRightAreaFragment extends BaseFragment
 {
+	public final static String ValueAllChoice = "不限";
+
 	private ViewHolder viewHolder;
 
 	private FlowAbleWidget ableWidget;
 
+	private VAreaAllBean areaAllBean;
+
 	private Map<String, List<String>> areaResult;
 
-	private boolean isFirstArea;
+	private String pName, cName;
 
 	public static TaskPublishRightAreaFragment newInstance()
 	{
@@ -77,41 +82,58 @@ public class TaskPublishRightAreaFragment extends BaseFragment
 			@Override
 			public boolean onLabelClick(FlowLayout container, View view, String str, int position)
 			{
-				if (isFirstArea)
+				if (TextUtils.isEmpty(pName))
 				{
-					isFirstArea = false;
+					if (ValueAllChoice != str)
+					{
+						ableWidget.clearSelectedPosition();
 
-					ableWidget.clearSelectedPosition();
-					List<String> secondList = areaResult.get(str);
-					ableWidget.setDataList(secondList);
+						pName = str;
+						List<String> cityData = new ArrayList<>(areaResult.get(str));
+						cityData.add(0, ValueAllChoice);
+						ableWidget.setDataList(cityData);
 
-					viewHolder.get(R.id.rl_area_choose_back).setVisibility(View.VISIBLE);
-					viewHolder.get(R.id.tv_area_choose_back).setVisibility(View.VISIBLE);
-					viewHolder.setText(R.id.tv_area_choose_province, str);
+						viewHolder.get(R.id.rl_area_choose_back).setVisibility(View.VISIBLE);
+						viewHolder.get(R.id.tv_area_choose_back).setVisibility(View.VISIBLE);
+						viewHolder.setText(R.id.tv_area_choose_province, str);
+					}
 				}
 				else
 				{
-					SDKManager.toast(str);
+					if (ValueAllChoice == str)
+					{
+						// do nothing
+					}
+					else
+					{
+						cName = str;
+					}
 				}
 				return false;
 			}
 		});
 
+		// 返回按钮
 		viewHolder.setOnClickListener(R.id.tv_area_choose_back, new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				if (!isFirstArea)
+				if (!TextUtils.isEmpty(pName))
 				{
-					isFirstArea = true;
-					
+					pName = null;
 					ableWidget.clearSelectedPosition();
-					ableWidget.setDataList(areaResult.keySet());
+					List<String> provinceData = new ArrayList<>();
+					provinceData.add(0, ValueAllChoice);
+					for (String provinceStr : areaResult.keySet())
+					{
+						provinceData.add(provinceStr);
+					}
+					ableWidget.setDataList(provinceData);
 
-					viewHolder.get(R.id.rl_area_choose_back).setVisibility(View.INVISIBLE);
+					viewHolder.get(R.id.rl_area_choose_back).setVisibility(View.GONE);
 					viewHolder.setText(R.id.tv_area_choose_province, "");
-					viewHolder.get(R.id.tv_area_choose_back).setVisibility(View.INVISIBLE);
+					viewHolder.get(R.id.tv_area_choose_back).setVisibility(View.GONE);
 				}
 			}
 		});
@@ -125,7 +147,10 @@ public class TaskPublishRightAreaFragment extends BaseFragment
 			@Override
 			public void onClick(View v)
 			{
-				
+				if (null != onPublishAreaCallback)
+				{
+					onPublishAreaCallback.onRightAreaCancel();
+				}
 			}
 		});
 		// 完成
@@ -134,7 +159,15 @@ public class TaskPublishRightAreaFragment extends BaseFragment
 			@Override
 			public void onClick(View v)
 			{
-
+				if (null != onPublishAreaCallback)
+				{
+					String pCode = areaAllBean.getProvinceCode(pName);
+					String cCode = areaAllBean.getCityCode(pName, cName);
+					if (null != onPublishAreaCallback)
+					{
+						onPublishAreaCallback.onRightAreaConfirm(pCode, pName, cCode, cName);
+					}
+				}
 			}
 		});
 	}
@@ -146,12 +179,20 @@ public class TaskPublishRightAreaFragment extends BaseFragment
 			@Override
 			public void onSuccess(VAreaAllBean vAreaAllBean)
 			{
+				areaAllBean = vAreaAllBean;
 				areaResult = vAreaAllBean.getWidgetMap();
 				if (null != areaResult)
 				{
+					pName = null;
 					ableWidget.clearSelectedPosition();
-					ableWidget.setDataList(areaResult.keySet());
-					isFirstArea = true;
+
+					List<String> provinceData = new ArrayList<>();
+					provinceData.add(0, ValueAllChoice);
+					for (String provinceStr : areaResult.keySet())
+					{
+						provinceData.add(provinceStr);
+					}
+					ableWidget.setDataList(provinceData);
 				}
 				else
 				{
@@ -170,6 +211,16 @@ public class TaskPublishRightAreaFragment extends BaseFragment
 	
 	public interface OnPublishRightAreaCallback
 	{
+		void onRightAreaCancel();
 
+		/**
+		 * 获取用户选择信息
+		 *
+		 * @param pCode
+		 * @param pName
+		 * @param cCode
+		 * @param cName
+		 */
+		void onRightAreaConfirm(String pCode, String pName, String cCode, String cName);
 	}
 }
