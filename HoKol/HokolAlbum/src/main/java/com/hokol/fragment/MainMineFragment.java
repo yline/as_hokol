@@ -18,6 +18,7 @@ import com.hokol.activity.EnterChoiceActivity;
 import com.hokol.activity.UserInfoActivity;
 import com.hokol.application.AppStateManager;
 import com.hokol.application.IApplication;
+import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.FlowWidget;
 import com.yline.base.BaseFragment;
@@ -140,6 +141,25 @@ public class MainMineFragment extends BaseFragment
 			// 头像
 			ImageView imageView = viewHolder.get(R.id.circle_main_mine_avatar);
 			Glide.with(getContext()).load(appUserInfo.getUserAvatar()).into(imageView);
+
+			// 昵称
+			viewHolder.setText(R.id.tv_main_mine_head_name, appUserInfo.getUserNickname());
+
+			// 性别
+			if (HttpEnum.UserSex.Boy.equals(appUserInfo.getUserSex()))
+			{
+				viewHolder.get(R.id.iv_main_mine_head_sex).setVisibility(View.VISIBLE);
+				viewHolder.setImageResource(R.id.iv_main_mine_head_sex, R.drawable.global_sex_boy);
+			}
+			else if (HttpEnum.UserSex.Girl.equals(appUserInfo.getUserSex()))
+			{
+				viewHolder.get(R.id.iv_main_mine_head_sex).setVisibility(View.VISIBLE);
+				viewHolder.setImageResource(R.id.iv_main_mine_head_sex, R.drawable.global_sex_girl);
+			}
+			else
+			{
+				viewHolder.get(R.id.iv_main_mine_head_sex).setVisibility(View.GONE);
+			}
 
 			// 签名
 			viewHolder.setText(R.id.tv_main_mine_sign, appUserInfo.getUserSign());

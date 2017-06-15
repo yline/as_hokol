@@ -77,26 +77,35 @@ public class AppStateManager
 	{
 		/* id */private String userId;
 
+		/* 性别 */private String userSex;
+
 		/* 头像 */private String userAvatar;
 
 		/* 昵称 */private String userNickname;
 
 		/* 标签 */private List<String> userLabel;
 
-		/* 省份 */private String userProvince;
+		/* 省份 */private String userProvinceName;
 
-		/* 城市 */private String userCity;
+		/* 省份 */private String userProvinceCode;
+
+		/* 城市 */private String userCityName;
+
+		/* 城市 */private String userCityCode;
 
 		/* 签名 */private String userSign;
 
 		public AppUserInfo(VEnterLoginPhonePwdBean vEnterLoginPhonePwdBean)
 		{
+			this.userSex = vEnterLoginPhonePwdBean.getUser_sex();
 			this.userId = vEnterLoginPhonePwdBean.getUser_id();
 			this.userAvatar = vEnterLoginPhonePwdBean.getUser_logo();
 			this.userNickname = vEnterLoginPhonePwdBean.getUser_nickname();
 			this.userLabel = new ArrayList<>(vEnterLoginPhonePwdBean.getUser_tag());
-			this.userProvince = vEnterLoginPhonePwdBean.getUser_province();
-			this.userCity = vEnterLoginPhonePwdBean.getUser_city();
+			this.userProvinceName = vEnterLoginPhonePwdBean.getProvince().get(0);
+			this.userProvinceCode = vEnterLoginPhonePwdBean.getCity().get(1);
+			this.userCityName = vEnterLoginPhonePwdBean.getCity().get(0);
+			this.userCityCode = vEnterLoginPhonePwdBean.getCity().get(1);
 			this.userSign = vEnterLoginPhonePwdBean.getUser_sign();
 		}
 
@@ -108,6 +117,16 @@ public class AppStateManager
 		public void setUserId(String userId)
 		{
 			this.userId = userId;
+		}
+
+		public String getUserSex()
+		{
+			return userSex;
+		}
+
+		public void setUserSex(String userSex)
+		{
+			this.userSex = userSex;
 		}
 
 		public String getUserAvatar()
@@ -140,24 +159,44 @@ public class AppStateManager
 			this.userLabel = userLabel;
 		}
 
-		public String getUserProvince()
+		public String getUserProvinceName()
 		{
-			return userProvince;
+			return userProvinceName;
 		}
 
-		public void setUserProvince(String userProvince)
+		public void setUserProvinceName(String userProvinceName)
 		{
-			this.userProvince = userProvince;
+			this.userProvinceName = userProvinceName;
 		}
 
-		public String getUserCity()
+		public String getUserProvinceCode()
 		{
-			return userCity;
+			return userProvinceCode;
 		}
 
-		public void setUserCity(String userCity)
+		public void setUserProvinceCode(String userProvinceCode)
 		{
-			this.userCity = userCity;
+			this.userProvinceCode = userProvinceCode;
+		}
+
+		public String getUserCityName()
+		{
+			return userCityName;
+		}
+
+		public void setUserCityName(String userCityName)
+		{
+			this.userCityName = userCityName;
+		}
+
+		public String getUserCityCode()
+		{
+			return userCityCode;
+		}
+
+		public void setUserCityCode(String userCityCode)
+		{
+			this.userCityCode = userCityCode;
 		}
 
 		public String getUserSign()

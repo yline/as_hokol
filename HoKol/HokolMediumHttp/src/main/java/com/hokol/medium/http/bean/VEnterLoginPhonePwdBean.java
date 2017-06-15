@@ -7,6 +7,9 @@ public class VEnterLoginPhonePwdBean
 	/* 关注的人唯一标识 */
 	private String user_id;
 
+	/* 用户性别(男、女) */
+	private String user_sex;
+
 	/* 用户头像（链接） */
 	private String user_logo;
 
@@ -22,14 +25,14 @@ public class VEnterLoginPhonePwdBean
 	/* 用户收藏数 */
 	private int user_collect_task_num;
 
-	/* 用户所在城市 */
-	private String user_city;
+	/* 用户所在城市(name 、 code) */
+	private List<String> city;
 
 	/* 用户手机号 */
 	private String user_tel;
 
-	/* 用户所在省份 */
-	private String user_province;
+	/* 用户所在省份(name 、 code) */
+	private List<String> province;
 
 	/* 用户签名 */
 	private String user_sign;
@@ -66,6 +69,16 @@ public class VEnterLoginPhonePwdBean
 	public void setUser_id(String user_id)
 	{
 		this.user_id = user_id;
+	}
+
+	public String getUser_sex()
+	{
+		return user_sex;
+	}
+
+	public void setUser_sex(String user_sex)
+	{
+		this.user_sex = user_sex;
 	}
 
 	public String getUser_logo()
@@ -118,14 +131,14 @@ public class VEnterLoginPhonePwdBean
 		this.user_collect_task_num = user_collect_task_num;
 	}
 
-	public String getUser_city()
+	public List<String> getCity()
 	{
-		return user_city;
+		return city;
 	}
 
-	public void setUser_city(String user_city)
+	public void setCity(List<String> city)
 	{
-		this.user_city = user_city;
+		this.city = city;
 	}
 
 	public String getUser_tel()
@@ -138,14 +151,14 @@ public class VEnterLoginPhonePwdBean
 		this.user_tel = user_tel;
 	}
 
-	public String getUser_province()
+	public List<String> getProvince()
 	{
-		return user_province;
+		return province;
 	}
 
-	public void setUser_province(String user_province)
+	public void setProvince(List<String> province)
 	{
-		this.user_province = user_province;
+		this.province = province;
 	}
 
 	public String getUser_sign()
