@@ -15,6 +15,7 @@ import com.hokol.fragment.MainHomeFragment;
 import com.hokol.fragment.MainMineFragment;
 import com.hokol.fragment.MainNewsFragment;
 import com.hokol.fragment.MainTaskFragment;
+import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
 import com.hokol.viewhelper.MainHelper;
 import com.yline.base.BaseAppCompatActivity;
 
@@ -209,11 +210,11 @@ public class MainActivity extends BaseAppCompatActivity
 	 * 开启主页面, 并存入用户信息
 	 *
 	 * @param context
-	 * @param appUserInfo 用户信息
+	 * @param loginPhonePwdBean 用户信息
 	 */
-	public static void actionStart(Context context, AppStateManager.AppUserInfo appUserInfo)
+	public static void actionStart(Context context, VEnterLoginPhonePwdBean loginPhonePwdBean)
 	{
-		AppStateManager.getInstance().setLoginUserInfo(context, appUserInfo);
+		AppStateManager.getInstance().setLoginUserInfo(context, loginPhonePwdBean);
 		context.startActivity(new Intent(context, MainActivity.class));
 	}
 }

@@ -1,5 +1,7 @@
 package com.hokol.medium.http;
 
+import android.text.TextUtils;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -47,35 +49,61 @@ public class HttpEnum
 
 	public static UserTag getUserTag(int index)
 	{
-		HttpEnum.UserTag userTag;
 		switch (index)
 		{
 			case 0:
-				userTag = UserTag.All;
-				break;
+				return UserTag.All;
 			case 1:
-				userTag = HttpEnum.UserTag.Red;
-				break;
+				return HttpEnum.UserTag.Red;
 			case 2:
-				userTag = HttpEnum.UserTag.Author;
-				break;
+				return HttpEnum.UserTag.Author;
 			case 3:
-				userTag = HttpEnum.UserTag.Performer;
-				break;
+				return HttpEnum.UserTag.Performer;
 			case 4:
-				userTag = HttpEnum.UserTag.Model;
-				break;
+				return HttpEnum.UserTag.Model;
 			case 5:
-				userTag = HttpEnum.UserTag.Singer;
-				break;
+				return HttpEnum.UserTag.Singer;
 			case 6:
-				userTag = HttpEnum.UserTag.Sport;
-				break;
+				return HttpEnum.UserTag.Sport;
 			default:
-				userTag = HttpEnum.UserTag.Red;
-				break;
+				return HttpEnum.UserTag.Red;
 		}
-		return userTag;
+	}
+
+	public static UserTag getUserTag(String content)
+	{
+		if (content.equals(UserTag.All.getContent()))
+		{
+			return UserTag.All;
+		}
+		else if (content.equals(UserTag.Red.getContent()))
+		{
+			return HttpEnum.UserTag.Red;
+		}
+		else if (content.equals(UserTag.Author.getContent()))
+		{
+			return HttpEnum.UserTag.Author;
+		}
+		else if (content.equals(UserTag.Performer.getContent()))
+		{
+			return HttpEnum.UserTag.Performer;
+		}
+		else if (content.equals(UserTag.Model.getContent()))
+		{
+			return HttpEnum.UserTag.Model;
+		}
+		else if (content.equals(UserTag.Singer.getContent()))
+		{
+			return HttpEnum.UserTag.Singer;
+		}
+		else if (content.equals(UserTag.Sport.getContent()))
+		{
+			return HttpEnum.UserTag.Sport;
+		}
+		else
+		{
+			return HttpEnum.UserTag.Red;
+		}
 	}
 
 	/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 1:男,2:女 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */
@@ -112,22 +140,120 @@ public class HttpEnum
 
 	public static UserSex getUserSex(int index)
 	{
-		HttpEnum.UserSex userSex;
 		switch (index)
 		{
 			case 0:
-				userSex = HttpEnum.UserSex.All;
-				break;
+				return HttpEnum.UserSex.All;
 			case 1:
-				userSex = HttpEnum.UserSex.Boy;
-				break;
+				return HttpEnum.UserSex.Boy;
 			case 2:
-				userSex = HttpEnum.UserSex.Girl;
-				break;
+				return HttpEnum.UserSex.Girl;
 			default:
-				userSex = HttpEnum.UserSex.All;
-				break;
+				return HttpEnum.UserSex.All;
 		}
-		return userSex;
+	}
+
+	public static UserSex getUserSex(String content)
+	{
+		if (TextUtils.isEmpty(content))
+		{
+			return HttpEnum.UserSex.All;
+		}
+		else if (UserSex.Boy.getContent().equals(content))
+		{
+			return UserSex.Boy;
+		}
+		else if (UserSex.Girl.getContent().equals(content))
+		{
+			return UserSex.Girl;
+		}
+		else
+		{
+			return HttpEnum.UserSex.All;
+		}
+	}
+
+	/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 1-水瓶座，2-双鱼座，3-白羊座，4-金牛座，5-双子座，6-巨蟹座，7-狮子座，8-处女座，9-天枰座，10-天蝎座，11-射手座，12-摩羯座 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */
+	public enum UserConstell
+	{
+		// 1:男,2:女
+		Aquarius("水瓶座", 1), Pisces("双鱼座", 2), Aries("白羊座", 3), Taurus("金牛座", 4), Gemini("双子座", 5), Cancer("巨蟹座", 6),
+		Leo("狮子座", 7), Virgo("处女座", 8), Libra("天枰座", 9), Scorpio("天蝎座", 10), Sagittarius("射手座", 11), Capricorn("摩羯座", 12), Null("", -1);
+
+		private final int index;
+
+		private final String content;
+
+		public int getIndex()
+		{
+			return index;
+		}
+
+		public String getContent()
+		{
+			return content;
+		}
+
+		UserConstell(String content, int index)
+		{
+			this.index = index;
+			this.content = content;
+		}
+	}
+
+	public static UserConstell getUserConstell(String content)
+	{
+		if (content.equals(UserConstell.Aquarius.getContent()))
+		{
+			return UserConstell.Aquarius;
+		}
+		else if (content.equals(UserConstell.Pisces.getContent()))
+		{
+			return UserConstell.Pisces;
+		}
+		else if (content.equals(UserConstell.Aries.getContent()))
+		{
+			return UserConstell.Aries;
+		}
+		else if (content.equals(UserConstell.Taurus.getContent()))
+		{
+			return UserConstell.Taurus;
+		}
+		else if (content.equals(UserConstell.Gemini.getContent()))
+		{
+			return UserConstell.Gemini;
+		}
+		else if (content.equals(UserConstell.Cancer.getContent()))
+		{
+			return UserConstell.Cancer;
+		}
+		else if (content.equals(UserConstell.Leo.getContent()))
+		{
+			return UserConstell.Leo;
+		}
+		else if (content.equals(UserConstell.Virgo.getContent()))
+		{
+			return UserConstell.Virgo;
+		}
+		else if (content.equals(UserConstell.Libra.getContent()))
+		{
+			return UserConstell.Libra;
+		}
+		else if (content.equals(UserConstell.Scorpio.getContent()))
+		{
+			return UserConstell.Scorpio;
+		}
+		else if (content.equals(UserConstell.Sagittarius.getContent()))
+		{
+			return UserConstell.Sagittarius;
+		}
+		else if (content.equals(UserConstell.Capricorn.getContent()))
+		{
+			return UserConstell.Capricorn;
+		}
+		else
+		{
+			return UserConstell.Null;
+		}
 	}
 }

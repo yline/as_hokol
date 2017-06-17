@@ -20,6 +20,7 @@ import com.hokol.medium.http.bean.VTaskUserAcceptBean;
 import com.hokol.medium.http.bean.VTaskUserDeliveredBean;
 import com.hokol.medium.http.bean.VTaskUserPublishedBean;
 import com.hokol.medium.http.bean.VTaskUserSignUpDetailBean;
+import com.hokol.medium.http.bean.VUserAvatarBean;
 import com.hokol.medium.http.bean.VUserCareAllBean;
 import com.hokol.medium.http.bean.VUserFansAllBean;
 import com.hokol.medium.http.bean.VUserMessageBean;
@@ -699,20 +700,14 @@ public class XHttpUtil
 	/**
 	 * 修改用户头像
 	 */
-	public static void doSettingUpdateAvatar(final String userId, final File file, XHttpAdapter<String> adapter)
+	public static void doSettingUpdateAvatar(final String userId, final File file, XHttpAdapter<VUserAvatarBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_setting_update_avatar;
 
 		if (null != file || !file.exists())
 		{
-			new XUploadFileHttp<String>(adapter)
+			new XUploadFileHttp<VUserAvatarBean>(adapter)
 			{
-				@Override
-				protected boolean isResponseParse()
-				{
-					return false;
-				}
-
 				@Override
 				protected void initRequestForm(MultipartBody.Builder bodyBuilder)
 				{
@@ -723,7 +718,7 @@ public class XHttpUtil
 					bodyBuilder.addFormDataPart("user_id", userId);
 					bodyBuilder.addFormDataPart("user_logo", file.getName(), RequestBody.create(MediaType.parse("image"), file));
 				}
-			}.doPost(httpUrl, String.class);
+			}.doPost(httpUrl, VUserAvatarBean.class);
 		}
 		else
 		{

@@ -4,11 +4,15 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
-import com.yline.utils.LogUtil;
+import com.hokol.medium.http.bean.WSettingUpdateInfoBean;
+import com.yline.log.LogFileUtil;
 import com.yline.utils.SPUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,11 +27,32 @@ public class AppStateManager
 {
 	private static final String FileName = "HokolState";
 
-	private static final String KeyUserLogin = "UserLogin";
+	/* ------------------------------------ 用户信息 ------------------------------------- */
+	/* 是否登陆 */private static final String KeyUserLogin = "IsUserLogin";
 
-	private static final String KeyUserLoginId = "UserLoginId";
+	/* userId */private static final String KeyUserLoginId = "UserLoginId";
 
-	private static final String KeyUserInfo = "UserInfo";
+	/* 头像 */private static final String KeyUserLoginAvatar = "UserLoginAvatar";
+
+	/* 性别 */private static final String KeyUserLoginSex = "UserSex";
+
+	/* 昵称 */private static final String KeyUserLoginNickname = "UserNickname";
+
+	/* 标签 */private static final String KeyUserLoginLabel = "UserLabel";
+
+	/* 省份 */private static final String KeyUserProvinceName = "UserProvinceName";
+
+	/* 省份 */private static final String KeyUserProvinceCode = "UserProvinceCode";
+
+	/* 城市 */private static final String KeyUserCityName = "UserCityName";
+
+	/* 城市 */private static final String KeyUserCityCode = "UserCityCode";
+
+	/* 签名 */private static final String KeyUserSign = "UserSign";
+
+	/* 用户获奖 */private static final String KeyUserPrice = "UserPrice";
+
+	/* 用户星座 */private static final String KeyUserConstell = "UserSignConstell";
 
 	private AppStateManager()
 	{
@@ -43,14 +68,34 @@ public class AppStateManager
 		private static AppStateManager appStateManager = new AppStateManager();
 	}
 
-	public void setLoginUserInfo(Context context, AppUserInfo userInfo)
+	public void setLoginUserInfo(Context context, VEnterLoginPhonePwdBean loginPhonePwdBean)
 	{
-		String jsonUserInfo = new Gson().toJson(userInfo);
-		SPUtil.put(context, KeyUserInfo, jsonUserInfo, FileName);
+		if (null != loginPhonePwdBean)
+		{
+			SPUtil.put(context, KeyUserLogin, true, FileName);
+			SPUtil.put(context, KeyUserLoginId, loginPhonePwdBean.getUser_id(), FileName);
+			SPUtil.put(context, KeyUserLoginAvatar, loginPhonePwdBean.getUser_logo(), FileName);
+			SPUtil.put(context, KeyUserLoginSex, loginPhonePwdBean.getUser_sex(), FileName);
+			SPUtil.put(context, KeyUserLoginNickname, loginPhonePwdBean.getUser_nickname(), FileName);
+			SPUtil.put(context, KeyUserLoginLabel, new Gson().toJson(loginPhonePwdBean.getUser_tag()), FileName);
+			SPUtil.put(context, KeyUserProvinceName, loginPhonePwdBean.getProvince().get(0), FileName);
+			SPUtil.put(context, KeyUserProvinceCode, loginPhonePwdBean.getProvince().get(1), FileName);
+			SPUtil.put(context, KeyUserCityName, loginPhonePwdBean.getCity().get(0), FileName);
+			SPUtil.put(context, KeyUserCityCode, loginPhonePwdBean.getCity().get(1), FileName);
+			SPUtil.put(context, KeyUserSign, loginPhonePwdBean.getUser_sign(), FileName);
+			SPUtil.put(context, KeyUserPrice, loginPhonePwdBean.getUser_prize(), FileName);
+			SPUtil.put(context, KeyUserConstell, loginPhonePwdBean.getUser_constell(), FileName);
+		}
+		else
+		{
+			LogFileUtil.v("setLoginUserInfo loginPhonePwdBean is null");
+		}
+	}
 
-		// 常用的
-		SPUtil.put(context, KeyUserLogin, true, FileName);
-		SPUtil.put(context, KeyUserLoginId, userInfo.getUserId(), FileName);
+	// 更新 用户头像
+	public void updateKeyUserLoginAvatar(Context context, String avatarUrl)
+	{
+		SPUtil.put(context, KeyUserLoginAvatar, avatarUrl, FileName);
 	}
 
 	public boolean isUserLogin(Context context)
@@ -63,161 +108,139 @@ public class AppStateManager
 		return (String) SPUtil.get(context, KeyUserLoginId, "", FileName);
 	}
 
-	public AppUserInfo getUserInfo(Context context)
+	public String getUserLoginAvatar(Context context)
 	{
-		String jsonUserInfo = (String) SPUtil.get(context, KeyUserInfo, "", FileName);
-		if (!TextUtils.isEmpty(jsonUserInfo))
+		return (String) SPUtil.get(context, KeyUserLoginAvatar, "", FileName);
+	}
+
+	public String getUserLoginSex(Context context)
+	{
+		return (String) SPUtil.get(context, KeyUserLoginSex, HttpEnum.UserSex.All.getContent(), FileName);
+	}
+
+	public int getUserLoginSexInt(Context context)
+	{
+		String userSex = (String) SPUtil.get(context, KeyUserLoginSex, HttpEnum.UserSex.All.getContent(), FileName);
+		return HttpEnum.getUserSex(userSex).getIndex();
+	}
+
+	public String getUserLoginNickName(Context context)
+	{
+		return (String) SPUtil.get(context, KeyUserLoginNickname, "", FileName);
+	}
+
+	public List<String> getUserLoginLabel(Context context)
+	{
+		String jsonList = (String) SPUtil.get(context, KeyUserLoginLabel, "", FileName);
+		if (!TextUtils.isEmpty(jsonList))
 		{
-			return new Gson().fromJson(jsonUserInfo, AppUserInfo.class);
+			return new Gson().fromJson(jsonList, new TypeToken<List<String>>()
+			{
+			}.getType());
 		}
+
 		return null;
 	}
 
-	public static class AppUserInfo
+	public List<Integer> getUserLoginLabelInt(Context context)
 	{
-		/* id */private String userId;
+		List<Integer> intUserTagList = new ArrayList<>();
 
-		/* 性别 */private String userSex;
-
-		/* 头像 */private String userAvatar;
-
-		/* 昵称 */private String userNickname;
-
-		/* 标签 */private List<String> userLabel;
-
-		/* 省份 */private String userProvinceName;
-
-		/* 省份 */private String userProvinceCode;
-
-		/* 城市 */private String userCityName;
-
-		/* 城市 */private String userCityCode;
-
-		/* 签名 */private String userSign;
-
-		public AppUserInfo(VEnterLoginPhonePwdBean vEnterLoginPhonePwdBean)
+		List<String> userTagList = getUserLoginLabel(context);
+		if (null == userTagList)
 		{
-			this.userSex = vEnterLoginPhonePwdBean.getUser_sex();
-			this.userId = vEnterLoginPhonePwdBean.getUser_id();
-			this.userAvatar = vEnterLoginPhonePwdBean.getUser_logo();
-			this.userNickname = vEnterLoginPhonePwdBean.getUser_nickname();
-			this.userLabel = new ArrayList<>(vEnterLoginPhonePwdBean.getUser_tag());
-			this.userProvinceName = vEnterLoginPhonePwdBean.getProvince().get(0);
-			this.userProvinceCode = vEnterLoginPhonePwdBean.getCity().get(1);
-			this.userCityName = vEnterLoginPhonePwdBean.getCity().get(0);
-			this.userCityCode = vEnterLoginPhonePwdBean.getCity().get(1);
-			this.userSign = vEnterLoginPhonePwdBean.getUser_sign();
+			return intUserTagList;
 		}
 
-		public String getUserId()
+		for (String userTag : userTagList)
 		{
-			return userId;
+			intUserTagList.add(HttpEnum.getUserTag(userTag).getIndex());
 		}
 
-		public void setUserId(String userId)
-		{
-			this.userId = userId;
-		}
+		return intUserTagList;
+	}
 
-		public String getUserSex()
-		{
-			return userSex;
-		}
+	public String getUserLoginLabelString(Context context)
+	{
+		return (String) SPUtil.get(context, KeyUserLoginLabel, "", FileName);
+	}
 
-		public void setUserSex(String userSex)
-		{
-			this.userSex = userSex;
-		}
+	public String getUserProvinceName(Context context)
+	{
+		return (String) SPUtil.get(context, KeyUserProvinceName, "", FileName);
+	}
 
-		public String getUserAvatar()
-		{
-			return userAvatar;
-		}
+	public String getUserProvinceCode(Context context)
+	{
+		return (String) SPUtil.get(context, KeyUserProvinceCode, "", FileName);
+	}
 
-		public void setUserAvatar(String userAvatar)
-		{
-			this.userAvatar = userAvatar;
-		}
+	public String getUserCityName(Context context)
+	{
+		return (String) SPUtil.get(context, KeyUserCityName, "", FileName);
+	}
 
-		public String getUserNickname()
-		{
-			return userNickname;
-		}
+	public String getUserCityCode(Context context)
+	{
+		return (String) SPUtil.get(context, KeyUserCityCode, "", FileName);
+	}
 
-		public void setUserNickname(String userNickname)
-		{
-			this.userNickname = userNickname;
-		}
+	public String getUserSign(Context context)
+	{
+		return (String) SPUtil.get(context, KeyUserSign, "", FileName);
+	}
 
-		public List<String> getUserLabel()
-		{
-			return userLabel;
-		}
+	public String getUserPrice(Context context)
+	{
+		return (String) SPUtil.get(context, KeyUserPrice, "", FileName);
+	}
 
-		public void setUserLabel(List<String> userLabel)
-		{
-			this.userLabel = userLabel;
-		}
+	public String getUserConstell(Context context)
+	{
+		return (String) SPUtil.get(context, KeyUserConstell, "", FileName);
+	}
 
-		public String getUserProvinceName()
-		{
-			return userProvinceName;
-		}
+	public int getUserConstellInt(Context context)
+	{
+		String userConstell = (String) SPUtil.get(context, KeyUserConstell, "", FileName);
+		return HttpEnum.getUserConstell(userConstell).getIndex();
+	}
 
-		public void setUserProvinceName(String userProvinceName)
-		{
-			this.userProvinceName = userProvinceName;
-		}
+	public WSettingUpdateInfoBean getUserInfoBean(Context context, String userId)
+	{
+		String nickname = AppStateManager.getInstance().getUserLoginNickName(context);
+		int userSex = AppStateManager.getInstance().getUserLoginSexInt(context);
 
-		public String getUserProvinceCode()
-		{
-			return userProvinceCode;
-		}
+		String cCode = AppStateManager.getInstance().getUserCityCode(context);
+		String pCode = AppStateManager.getInstance().getUserProvinceCode(context);
 
-		public void setUserProvinceCode(String userProvinceCode)
-		{
-			this.userProvinceCode = userProvinceCode;
-		}
+		String userSign = AppStateManager.getInstance().getUserSign(context);
+		List<Integer> userTagList = AppStateManager.getInstance().getUserLoginLabelInt(context);
 
-		public String getUserCityName()
-		{
-			return userCityName;
-		}
+		String userPrice = AppStateManager.getInstance().getUserPrice(context);
+		int userConstell = AppStateManager.getInstance().getUserConstellInt(context);
 
-		public void setUserCityName(String userCityName)
-		{
-			this.userCityName = userCityName;
-		}
-
-		public String getUserCityCode()
-		{
-			return userCityCode;
-		}
-
-		public void setUserCityCode(String userCityCode)
-		{
-			this.userCityCode = userCityCode;
-		}
-
-		public String getUserSign()
-		{
-			return userSign;
-		}
-
-		public void setUserSign(String userSign)
-		{
-			this.userSign = userSign;
-		}
+		return new WSettingUpdateInfoBean(userId, nickname, userSex, cCode, pCode, userSign, userTagList, userPrice, userConstell);
 	}
 
 	public void logAppState(Context context)
 	{
-		String keyUserInfo = (String) SPUtil.get(context, KeyUserInfo, "null", FileName);
-		LogUtil.v("keyUserInfo = " + keyUserInfo);
+		String[] appState = new String[20];
 
-		// 常用
-		boolean isUserLogin = (boolean) SPUtil.get(context, KeyUserLogin, false, FileName);
-		String userId = (String) SPUtil.get(context, KeyUserLoginId, "null", FileName);
-		LogUtil.v("isUserLogin = " + isUserLogin + ", userId = " + userId);
+		appState[0] = String.valueOf(isUserLogin(context));
+		appState[1] = getUserLoginId(context);
+		appState[2] = getUserLoginAvatar(context);
+		appState[3] = getUserLoginSex(context);
+		appState[4] = getUserLoginNickName(context);
+		appState[5] = getUserLoginLabelString(context);
+		appState[6] = getUserProvinceName(context);
+		appState[7] = getUserProvinceCode(context);
+		appState[8] = getUserCityName(context);
+		appState[9] = getUserCityCode(context);
+		appState[10] = getUserSign(context);
+		appState[11] = getUserPrice(context);
+		appState[12] = getUserConstell(context);
+
+		LogFileUtil.v("appState =》 " + Arrays.toString(appState));
 	}
 }

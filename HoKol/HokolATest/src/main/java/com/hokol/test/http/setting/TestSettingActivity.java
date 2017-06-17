@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VUserAvatarBean;
 import com.hokol.medium.http.bean.WSettingResetPhoneBean;
 import com.hokol.medium.http.bean.WSettingResetPwdBean;
 import com.hokol.medium.http.bean.WSettingSubmitProposalBean;
@@ -189,10 +190,10 @@ public class TestSettingActivity extends BaseTestActivity
 				}
 				else
 				{
-					XHttpUtil.doSettingUpdateAvatar(userId, file, new XHttpAdapter<String>()
+					XHttpUtil.doSettingUpdateAvatar(userId, file, new XHttpAdapter<VUserAvatarBean>()
 					{
 						@Override
-						public void onSuccess(String s)
+						public void onSuccess(VUserAvatarBean vUserAvatarBean)
 						{
 
 						}

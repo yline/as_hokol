@@ -1,64 +1,48 @@
 package com.hokol.medium.http.bean;
 
+import java.util.List;
+
 public class WSettingUpdateInfoBean
 {
-	/**
-	 * 用户唯一标识
-	 */
+	/* 用户唯一标识*/
 	private String user_id;
 
-	/**
-	 * 用户昵称
-	 */
+	/* 用户昵称*/
 	private String user_nickname;
 
-	/**
-	 * 用户性别：[1:男，2:女]
-	 */
+	/* 用户性别：[1:男，2:女]*/
 	private int user_sex;
 
-	/**
-	 * 用户城市
-	 */
-	private String user_city;
+	/* 用户城市*/
+	private String c_code;
 
-	/**
-	 * 用户省份
-	 */
-	private String user_province;
+	/* 用户省份*/
+	private String p_code;
 
-	/**
-	 * 用户签名
-	 */
+	/* 用户签名*/
 	private String user_sign;
 
-	/**
-	 * 用户标签：[1:网红,2:主播,3:演员,4:模特,5:歌手,6:体育]
-	 */
-	private int user_tag;
+	/* 用户标签：[1:网红,2:主播,3:演员,4:模特,5:歌手,6:体育]*/
+	private List<Integer> user_tag;
 
-	/**
-	 * 用户获奖
-	 */
+	/* 用户获奖*/
 	private String user_prize;
 
-	/**
-	 * 用户星座：[水瓶座：1，双鱼座：2，白羊座：3，金牛座：4，双子座：5，巨蟹座：6，狮子座：7，处女座：8，天枰座：9，天蝎座：10，射手座：11，摩羯座：12]
-	 */
-	private String user_constell;
+	/* 用户星座：[水瓶座：1，双鱼座：2，白羊座：3，金牛座：4，双子座：5，巨蟹座：6，狮子座：7，处女座：8，天枰座：9，天蝎座：10，射手座：11，摩羯座：12]*/
+	private int user_constell;
 
 	public WSettingUpdateInfoBean(String user_id)
 	{
 		this.user_id = user_id;
 	}
 
-	public WSettingUpdateInfoBean(String user_id, String user_nickname, int user_sex, String user_city, String user_province, String user_sign, int user_tag, String user_prize, String user_constell)
+	public WSettingUpdateInfoBean(String user_id, String user_nickname, int user_sex, String c_code, String p_code, String user_sign, List<Integer> user_tag, String user_prize, int user_constell)
 	{
 		this.user_id = user_id;
 		this.user_nickname = user_nickname;
 		this.user_sex = user_sex;
-		this.user_city = user_city;
-		this.user_province = user_province;
+		this.c_code = c_code;
+		this.p_code = p_code;
 		this.user_sign = user_sign;
 		this.user_tag = user_tag;
 		this.user_prize = user_prize;
@@ -95,24 +79,24 @@ public class WSettingUpdateInfoBean
 		this.user_sex = user_sex;
 	}
 
-	public String getUser_city()
+	public String getC_code()
 	{
-		return user_city;
+		return c_code;
 	}
 
-	public void setUser_city(String user_city)
+	public void setC_code(String c_code)
 	{
-		this.user_city = user_city;
+		this.c_code = c_code;
 	}
 
-	public String getUser_province()
+	public String getP_code()
 	{
-		return user_province;
+		return p_code;
 	}
 
-	public void setUser_province(String user_province)
+	public void setP_code(String p_code)
 	{
-		this.user_province = user_province;
+		this.p_code = p_code;
 	}
 
 	public String getUser_sign()
@@ -125,12 +109,12 @@ public class WSettingUpdateInfoBean
 		this.user_sign = user_sign;
 	}
 
-	public int getUser_tag()
+	public List<Integer> getUser_tag()
 	{
 		return user_tag;
 	}
 
-	public void setUser_tag(int user_tag)
+	public void setUser_tag(List<Integer> user_tag)
 	{
 		this.user_tag = user_tag;
 	}
@@ -145,12 +129,12 @@ public class WSettingUpdateInfoBean
 		this.user_prize = user_prize;
 	}
 
-	public String getUser_constell()
+	public int getUser_constell()
 	{
 		return user_constell;
 	}
 
-	public void setUser_constell(String user_constell)
+	public void setUser_constell(int user_constell)
 	{
 		this.user_constell = user_constell;
 	}

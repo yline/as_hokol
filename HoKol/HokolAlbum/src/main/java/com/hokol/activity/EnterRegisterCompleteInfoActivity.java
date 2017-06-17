@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import com.hokol.R;
-import com.hokol.application.AppStateManager;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
@@ -190,7 +189,7 @@ public class EnterRegisterCompleteInfoActivity extends BaseAppCompatActivity
 						@Override
 						public void onSuccess(VEnterLoginPhonePwdBean phonePwdBean)
 						{
-							MainActivity.actionStart(EnterRegisterCompleteInfoActivity.this, new AppStateManager.AppUserInfo(phonePwdBean));
+							MainActivity.actionStart(EnterRegisterCompleteInfoActivity.this, phonePwdBean);
 						}
 					});
 				}

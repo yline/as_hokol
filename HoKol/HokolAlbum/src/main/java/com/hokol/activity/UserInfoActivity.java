@@ -6,17 +6,23 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hokol.R;
+import com.hokol.application.AppStateManager;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VUserAvatarBean;
+import com.hokol.medium.http.bean.WSettingUpdateInfoBean;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.FlowWidget;
 import com.hokol.util.IntentUtil;
 import com.hokol.viewhelper.UserInfoHelper;
 import com.yline.base.BaseAppCompatActivity;
+import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.FileUtil;
 import com.yline.view.layout.label.FlowLayout;
@@ -30,6 +36,8 @@ public class UserInfoActivity extends BaseAppCompatActivity
 	private ViewHolder viewHolder;
 
 	private UserInfoHelper userInfoHelper;
+
+	private static final String KeyUserId = "userId";
 
 	private static final String request_key = "UserInfo";
 
@@ -53,6 +61,10 @@ public class UserInfoActivity extends BaseAppCompatActivity
 
 	private static final int request_code_picture_zoom = 1003;
 
+	private boolean isInfoBeanChange;
+
+	private WSettingUpdateInfoBean updateInfoBean;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -63,6 +75,7 @@ public class UserInfoActivity extends BaseAppCompatActivity
 		userInfoHelper = new UserInfoHelper(this);
 
 		initView();
+		initData();
 	}
 
 	private void initView()
@@ -223,6 +236,24 @@ public class UserInfoActivity extends BaseAppCompatActivity
 		});
 	}
 
+	private void initData()
+	{
+		isInfoBeanChange = false;
+
+		String userId = getIntent().getStringExtra(KeyUserId);
+		updateInfoBean = AppStateManager.getInstance().getUserInfoBean(this, userId);
+
+		// 头像
+		String userAvatar = AppStateManager.getInstance().getUserLoginAvatar(this);
+		if (!TextUtils.isEmpty(userAvatar))
+		{
+			ImageView avatarImageView = viewHolder.get(R.id.circle_user_info_avatar);
+			Glide.with(this).load(userAvatar).into(avatarImageView);
+		}
+
+		// 个人资料
+	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
@@ -293,13 +324,35 @@ public class UserInfoActivity extends BaseAppCompatActivity
 						.diskCacheStrategy(DiskCacheStrategy.NONE) // 禁用磁盘缓存
 						.into(imageView);
 				LogFileUtil.v("cache file = " + zoomFile);
+
 				// 完成图片上传
+				XHttpUtil.doSettingUpdateAvatar(updateInfoBean.getUser_id(), zoomFile, new XHttpAdapter<VUserAvatarBean>()
+				{
+					@Override
+					public void onSuccess(VUserAvatarBean vUserAvatarBean)
+					{
+						LogFileUtil.v("vUserAvatarBean = " + vUserAvatarBean.getUser_logo());
+						AppStateManager.getInstance().updateKeyUserLoginAvatar(UserInfoActivity.this, vUserAvatarBean.getUser_logo());
+					}
+				});
 			}
 			else
 			{
 				LogFileUtil.v("user picture zoom cancel");
 			}
 		}
+	}
+
+	private void updateUserInfo()
+	{
+		XHttpUtil.doSettingUpdateInfo(updateInfoBean, new XHttpAdapter<String>()
+		{
+			@Override
+			public void onSuccess(String s)
+			{
+				
+			}
+		});
 	}
 
 	public static void actionResultUpdate(Activity activity, String result)
@@ -317,8 +370,8 @@ public class UserInfoActivity extends BaseAppCompatActivity
 		activity.setResult(RESULT_OK, intent);
 	}
 
-	public static void actionStart(Context context)
+	public static void actionStart(Context context, String userId)
 	{
-		context.startActivity(new Intent(context, UserInfoActivity.class));
+		context.startActivity(new Intent(context, UserInfoActivity.class).putExtra(KeyUserId, userId));
 	}
 }
