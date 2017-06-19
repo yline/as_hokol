@@ -110,7 +110,7 @@ public class HttpEnum
 	public enum UserSex
 	{
 		// 1:男,2:女
-		All("不限", 0), Boy("男", 1), Girl("女", 2);
+		All("不限", 0), Boy("男", 1), Girl("女", 2), Null("", -1);
 
 		private final int index;
 
@@ -142,6 +142,8 @@ public class HttpEnum
 	{
 		switch (index)
 		{
+			case -1:
+				return HttpEnum.UserSex.Null;
 			case 0:
 				return HttpEnum.UserSex.All;
 			case 1:
@@ -149,7 +151,7 @@ public class HttpEnum
 			case 2:
 				return HttpEnum.UserSex.Girl;
 			default:
-				return HttpEnum.UserSex.All;
+				return HttpEnum.UserSex.Null;
 		}
 	}
 
@@ -157,7 +159,7 @@ public class HttpEnum
 	{
 		if (TextUtils.isEmpty(content))
 		{
-			return HttpEnum.UserSex.All;
+			return HttpEnum.UserSex.Null;
 		}
 		else if (UserSex.Boy.getContent().equals(content))
 		{
@@ -169,7 +171,7 @@ public class HttpEnum
 		}
 		else
 		{
-			return HttpEnum.UserSex.All;
+			return HttpEnum.UserSex.Null;
 		}
 	}
 
@@ -248,6 +250,62 @@ public class HttpEnum
 			return UserConstell.Sagittarius;
 		}
 		else if (content.equals(UserConstell.Capricorn.getContent()))
+		{
+			return UserConstell.Capricorn;
+		}
+		else
+		{
+			return UserConstell.Null;
+		}
+	}
+
+	public static UserConstell getUserConstell(int index)
+	{
+		if (index == (UserConstell.Aquarius.getIndex()))
+		{
+			return UserConstell.Aquarius;
+		}
+		else if (index == (UserConstell.Pisces.getIndex()))
+		{
+			return UserConstell.Pisces;
+		}
+		else if (index == (UserConstell.Aries.getIndex()))
+		{
+			return UserConstell.Aries;
+		}
+		else if (index == (UserConstell.Taurus.getIndex()))
+		{
+			return UserConstell.Taurus;
+		}
+		else if (index == (UserConstell.Gemini.getIndex()))
+		{
+			return UserConstell.Gemini;
+		}
+		else if (index == (UserConstell.Cancer.getIndex()))
+		{
+			return UserConstell.Cancer;
+		}
+		else if (index == (UserConstell.Leo.getIndex()))
+		{
+			return UserConstell.Leo;
+		}
+		else if (index == (UserConstell.Virgo.getIndex()))
+		{
+			return UserConstell.Virgo;
+		}
+		else if (index == (UserConstell.Libra.getIndex()))
+		{
+			return UserConstell.Libra;
+		}
+		else if (index == (UserConstell.Scorpio.getIndex()))
+		{
+			return UserConstell.Scorpio;
+		}
+		else if (index == (UserConstell.Sagittarius.getIndex()))
+		{
+			return UserConstell.Sagittarius;
+		}
+		else if (index == (UserConstell.Capricorn.getIndex()))
 		{
 			return UserConstell.Capricorn;
 		}

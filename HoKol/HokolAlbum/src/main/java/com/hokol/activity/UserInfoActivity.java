@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hokol.R;
 import com.hokol.application.AppStateManager;
+import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserAvatarBean;
 import com.hokol.medium.http.bean.WSettingUpdateInfoBean;
@@ -30,6 +31,7 @@ import com.yline.view.recycler.holder.ViewHolder;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.List;
 
 public class UserInfoActivity extends BaseAppCompatActivity
 {
@@ -64,6 +66,8 @@ public class UserInfoActivity extends BaseAppCompatActivity
 	private boolean isInfoBeanChange;
 
 	private WSettingUpdateInfoBean updateInfoBean;
+
+	private FlowWidget labelWidget;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -213,8 +217,7 @@ public class UserInfoActivity extends BaseAppCompatActivity
 
 		// 修改标签
 		FlowLayout flowLayout = (FlowLayout) findViewById(R.id.flow_layout_user_info);
-		FlowWidget labelWidget = new FlowWidget(this, flowLayout);
-		labelWidget.setDataList(Arrays.asList("网红", "模特"));
+		labelWidget = new FlowWidget(this, flowLayout);
 		viewHolder.setOnClickListener(R.id.ll_label, new View.OnClickListener()
 		{
 			@Override
@@ -251,7 +254,42 @@ public class UserInfoActivity extends BaseAppCompatActivity
 			Glide.with(this).load(userAvatar).into(avatarImageView);
 		}
 
-		// 个人资料
+		// 昵称
+		viewHolder.setText(R.id.tv_user_info_nickname, updateInfoBean.getUser_nickname());
+
+		// 性别
+		String sexStr = HttpEnum.getUserSex(updateInfoBean.getUser_sex()).getContent();
+		viewHolder.setText(R.id.tv_user_info_sex, sexStr);
+
+		// 星座
+		String constellStr = HttpEnum.getUserConstell(updateInfoBean.getUser_constell()).getContent();
+		viewHolder.setText(R.id.tv_user_info_constellation, constellStr);
+
+		// 所在地
+		String provinceName = AppStateManager.getInstance().getUserProvinceName(this);
+		String cityName = AppStateManager.getInstance().getUserCityName(this);
+		if (TextUtils.isEmpty(provinceName))
+		{
+			viewHolder.setText(R.id.tv_user_info_city, "");
+		}
+		else if (TextUtils.isEmpty(cityName))
+		{
+			viewHolder.setText(R.id.tv_user_info_city, provinceName);
+		}
+		else
+		{
+			viewHolder.setText(R.id.tv_user_info_city, String.format("%s %s", provinceName, cityName));
+		}
+
+		// 个性签名
+		viewHolder.setText(R.id.tv_user_info_sign, updateInfoBean.getUser_sign());
+
+		// 标签
+		List<String> labelStrList = AppStateManager.getInstance().getUserLoginLabel(this);
+		labelWidget.setDataList(labelStrList);
+
+		// 获奖经历
+		viewHolder.setText(R.id.tv_user_info_award, updateInfoBean.getUser_prize());
 	}
 
 	@Override
@@ -283,7 +321,7 @@ public class UserInfoActivity extends BaseAppCompatActivity
 				{
 					String resultFirst = data.getStringExtra(request_key);
 					String resultSecond = data.getStringExtra(request_key_second);
-					viewHolder.setText(R.id.tv_city, resultFirst + " " + resultSecond);
+					viewHolder.setText(R.id.tv_user_info_city, resultFirst + " " + resultSecond);
 				}
 			}
 		}

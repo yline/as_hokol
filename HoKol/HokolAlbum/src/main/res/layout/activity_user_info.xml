@@ -183,7 +183,7 @@
                     android:textColor="@color/hokolGray"/>
 
                 <TextView
-                    android:id="@+id/tv_city"
+                    android:id="@+id/tv_user_info_city"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
