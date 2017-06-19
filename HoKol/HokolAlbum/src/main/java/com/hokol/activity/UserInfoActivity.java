@@ -65,7 +65,7 @@ public class UserInfoActivity extends BaseAppCompatActivity
 
 	private boolean isInfoBeanChange;
 
-	private WSettingUpdateInfoBean updateInfoBean;
+	private UserInfo updateInfoBean;
 
 	private FlowWidget labelWidget;
 
@@ -282,14 +282,24 @@ public class UserInfoActivity extends BaseAppCompatActivity
 		}
 
 		// 个性签名
-		viewHolder.setText(R.id.tv_user_info_sign, updateInfoBean.getUser_sign());
+		String signStr = updateInfoBean.getUser_sign();
+		if (TextUtils.isEmpty(signStr))
+		{
+			signStr = "";
+		}
+		viewHolder.setText(R.id.tv_user_info_sign, signStr);
 
 		// 标签
 		List<String> labelStrList = AppStateManager.getInstance().getUserLoginLabel(this);
 		labelWidget.setDataList(labelStrList);
 
 		// 获奖经历
-		viewHolder.setText(R.id.tv_user_info_award, updateInfoBean.getUser_prize());
+		String priseStr = updateInfoBean.getUser_prize();
+		if (TextUtils.isEmpty(priseStr))
+		{
+			priseStr = "";
+		}
+		viewHolder.setText(R.id.tv_user_info_award, priseStr);
 	}
 
 	@Override
@@ -388,7 +398,8 @@ public class UserInfoActivity extends BaseAppCompatActivity
 			@Override
 			public void onSuccess(String s)
 			{
-				
+				// 更新本地数据
+				AppStateManager.getInstance().updateUserInfo(UserInfoActivity.this, updateInfoBean);
 			}
 		});
 	}
@@ -411,5 +422,42 @@ public class UserInfoActivity extends BaseAppCompatActivity
 	public static void actionStart(Context context, String userId)
 	{
 		context.startActivity(new Intent(context, UserInfoActivity.class).putExtra(KeyUserId, userId));
+	}
+
+	/**
+	 * 除了上传的数据，还需要其他辅助数据
+	 */
+	public static class UserInfo extends WSettingUpdateInfoBean
+	{
+		/* 用户城市 */private String c_name;
+
+		/* 用户省份*/private String p_name;
+
+		public UserInfo(String user_id, String user_nickname, int user_sex, String c_code, String p_code, String user_sign, List<Integer> user_tag, String user_prize, int user_constell, String c_name, String p_name)
+		{
+			super(user_id, user_nickname, user_sex, c_code, p_code, user_sign, user_tag, user_prize, user_constell);
+			this.c_name = c_name;
+			this.p_name = p_name;
+		}
+
+		public String getC_name()
+		{
+			return c_name;
+		}
+
+		public void setC_name(String c_name)
+		{
+			this.c_name = c_name;
+		}
+
+		public String getP_name()
+		{
+			return p_name;
+		}
+
+		public void setP_name(String p_name)
+		{
+			this.p_name = p_name;
+		}
 	}
 }

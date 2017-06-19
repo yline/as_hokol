@@ -5,9 +5,9 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.hokol.activity.UserInfoActivity;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
-import com.hokol.medium.http.bean.WSettingUpdateInfoBean;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.SPUtil;
 
@@ -78,10 +78,12 @@ public class AppStateManager
 			SPUtil.put(context, KeyUserLoginSex, loginPhonePwdBean.getUser_sex(), FileName);
 			SPUtil.put(context, KeyUserLoginNickname, loginPhonePwdBean.getUser_nickname(), FileName);
 			SPUtil.put(context, KeyUserLoginLabel, new Gson().toJson(loginPhonePwdBean.getUser_tag()), FileName);
+
 			SPUtil.put(context, KeyUserProvinceName, loginPhonePwdBean.getProvince().get(0), FileName);
 			SPUtil.put(context, KeyUserProvinceCode, loginPhonePwdBean.getProvince().get(1), FileName);
 			SPUtil.put(context, KeyUserCityName, loginPhonePwdBean.getCity().get(0), FileName);
 			SPUtil.put(context, KeyUserCityCode, loginPhonePwdBean.getCity().get(1), FileName);
+
 			SPUtil.put(context, KeyUserSign, loginPhonePwdBean.getUser_sign(), FileName);
 			SPUtil.put(context, KeyUserPrice, loginPhonePwdBean.getUser_prize(), FileName);
 			SPUtil.put(context, KeyUserConstell, loginPhonePwdBean.getUser_constell(), FileName);
@@ -89,6 +91,42 @@ public class AppStateManager
 		else
 		{
 			LogFileUtil.v("setLoginUserInfo loginPhonePwdBean is null");
+		}
+	}
+
+	public void updateUserInfo(Context context, UserInfoActivity.UserInfo updateInfoBean)
+	{
+		if (null != updateInfoBean)
+		{
+			SPUtil.put(context, KeyUserLoginNickname, updateInfoBean.getUser_nickname(), FileName);
+			int intSex = updateInfoBean.getUser_sex();
+			String strSex = HttpEnum.getUserSex(intSex).getContent();
+			SPUtil.put(context, KeyUserLoginSex, strSex, FileName);
+
+			int intConstell = updateInfoBean.getUser_constell();
+			String strConstell = HttpEnum.getUserSex(intConstell).getContent();
+			SPUtil.put(context, KeyUserConstell, strConstell, FileName);
+
+			SPUtil.put(context, KeyUserProvinceCode, updateInfoBean.getP_code(), FileName);
+			SPUtil.put(context, KeyUserProvinceName, updateInfoBean.getP_name(), FileName);
+			SPUtil.put(context, KeyUserCityCode, updateInfoBean.getC_code(), FileName);
+			SPUtil.put(context, KeyUserCityName, updateInfoBean.getC_name(), FileName);
+
+			SPUtil.put(context, KeyUserCityName, updateInfoBean.getC_name(), FileName);
+			SPUtil.put(context, KeyUserSign, updateInfoBean.getUser_sign(), FileName);
+
+			List<Integer> intTagList = updateInfoBean.getUser_tag();
+			List<String> strTagList = new ArrayList<>();
+			for (Integer tagIndex : intTagList)
+			{
+				strTagList.add(HttpEnum.getUserTag(tagIndex).getContent());
+			}
+			SPUtil.put(context, KeyUserLoginLabel, new Gson().toJson(strTagList), FileName);
+			SPUtil.put(context, KeyUserPrice, updateInfoBean.getUser_prize(), FileName);
+		}
+		else
+		{
+			LogFileUtil.v("updateUserInfo updateInfoBean is null");
 		}
 	}
 
@@ -206,13 +244,15 @@ public class AppStateManager
 		return HttpEnum.getUserConstell(userConstell).getIndex();
 	}
 
-	public WSettingUpdateInfoBean getUserInfoBean(Context context, String userId)
+	public UserInfoActivity.UserInfo getUserInfoBean(Context context, String userId)
 	{
 		String nickname = AppStateManager.getInstance().getUserLoginNickName(context);
 		int userSex = AppStateManager.getInstance().getUserLoginSexInt(context);
 
 		String cCode = AppStateManager.getInstance().getUserCityCode(context);
+		String cName = AppStateManager.getInstance().getUserCityName(context);
 		String pCode = AppStateManager.getInstance().getUserProvinceCode(context);
+		String pName = AppStateManager.getInstance().getUserProvinceName(context);
 
 		String userSign = AppStateManager.getInstance().getUserSign(context);
 		List<Integer> userTagList = AppStateManager.getInstance().getUserLoginLabelInt(context);
@@ -220,7 +260,7 @@ public class AppStateManager
 		String userPrice = AppStateManager.getInstance().getUserPrice(context);
 		int userConstell = AppStateManager.getInstance().getUserConstellInt(context);
 
-		return new WSettingUpdateInfoBean(userId, nickname, userSex, cCode, pCode, userSign, userTagList, userPrice, userConstell);
+		return new UserInfoActivity.UserInfo(userId, nickname, userSex, cCode, pCode, userSign, userTagList, userPrice, userConstell, cName, pName);
 	}
 
 	public void logAppState(Context context)
