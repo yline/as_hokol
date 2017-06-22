@@ -1,6 +1,6 @@
 package com.hokol.medium.http.bean;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class WSettingUpdateInfoBean
 {
@@ -23,7 +23,7 @@ public class WSettingUpdateInfoBean
 	private String user_sign;
 
 	/* 用户标签：[1:网红,2:主播,3:演员,4:模特,5:歌手,6:体育]*/
-	private List<Integer> user_tag;
+	private ArrayList<Integer> user_tag;
 
 	/* 用户获奖*/
 	private String user_prize;
@@ -36,7 +36,7 @@ public class WSettingUpdateInfoBean
 		this.user_id = user_id;
 	}
 
-	public WSettingUpdateInfoBean(String user_id, String user_nickname, int user_sex, String c_code, String p_code, String user_sign, List<Integer> user_tag, String user_prize, int user_constell)
+	public WSettingUpdateInfoBean(String user_id, String user_nickname, int user_sex, String c_code, String p_code, String user_sign, ArrayList<Integer> user_tag, String user_prize, int user_constell)
 	{
 		this.user_id = user_id;
 		this.user_nickname = user_nickname;
@@ -109,12 +109,12 @@ public class WSettingUpdateInfoBean
 		this.user_sign = user_sign;
 	}
 
-	public List<Integer> getUser_tag()
+	public ArrayList<Integer> getUser_tag()
 	{
 		return user_tag;
 	}
 
-	public void setUser_tag(List<Integer> user_tag)
+	public void setUser_tag(ArrayList<Integer> user_tag)
 	{
 		this.user_tag = user_tag;
 	}

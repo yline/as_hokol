@@ -43,8 +43,14 @@ public class HttpEnum
 
 	public static List<String> getUserTagListTail()
 	{
-		return Arrays.asList(UserTag.Red.getContent(), UserTag.Author.getContent(),
-				UserTag.Performer.getContent(), UserTag.Model.getContent(), UserTag.Singer.getContent(), UserTag.Sport.getContent(), UserTag.Other.getContent());
+		return Arrays.asList(UserTag.Red.getContent(), UserTag.Author.getContent(), UserTag.Performer.getContent(),
+				UserTag.Model.getContent(), UserTag.Singer.getContent(), UserTag.Sport.getContent(), UserTag.Other.getContent());
+	}
+
+	public static List<String> getUserTagList()
+	{
+		return Arrays.asList(UserTag.Red.getContent(), UserTag.Author.getContent(), UserTag.Performer.getContent(),
+				UserTag.Model.getContent(), UserTag.Singer.getContent(), UserTag.Sport.getContent());
 	}
 
 	public static UserTag getUserTag(int index)

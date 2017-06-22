@@ -104,7 +104,7 @@ public class AppStateManager
 			SPUtil.put(context, KeyUserLoginSex, strSex, FileName);
 
 			int intConstell = updateInfoBean.getUser_constell();
-			String strConstell = HttpEnum.getUserSex(intConstell).getContent();
+			String strConstell = HttpEnum.getUserConstell(intConstell).getContent();
 			SPUtil.put(context, KeyUserConstell, strConstell, FileName);
 
 			SPUtil.put(context, KeyUserProvinceCode, updateInfoBean.getP_code(), FileName);
@@ -180,9 +180,9 @@ public class AppStateManager
 		return null;
 	}
 
-	public List<Integer> getUserLoginLabelInt(Context context)
+	public ArrayList<Integer> getUserLoginLabelInt(Context context)
 	{
-		List<Integer> intUserTagList = new ArrayList<>();
+		ArrayList<Integer> intUserTagList = new ArrayList<>();
 
 		List<String> userTagList = getUserLoginLabel(context);
 		if (null == userTagList)
@@ -255,7 +255,7 @@ public class AppStateManager
 		String pName = AppStateManager.getInstance().getUserProvinceName(context);
 
 		String userSign = AppStateManager.getInstance().getUserSign(context);
-		List<Integer> userTagList = AppStateManager.getInstance().getUserLoginLabelInt(context);
+		ArrayList<Integer> userTagList = AppStateManager.getInstance().getUserLoginLabelInt(context);
 
 		String userPrice = AppStateManager.getInstance().getUserPrice(context);
 		int userConstell = AppStateManager.getInstance().getUserConstellInt(context);

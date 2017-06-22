@@ -30,6 +30,7 @@ import com.yline.view.layout.label.FlowLayout;
 import com.yline.view.recycler.holder.ViewHolder;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -43,8 +44,6 @@ public class UserInfoActivity extends BaseAppCompatActivity
 
 	private static final String request_key = "UserInfo";
 
-	private static final String request_key_second = "UserInfoSecond";
-
 	private static final String camera_picture_name = "camera_picture.jpg";
 
 	private static final String picture_zoom_name = "picture_zoom.jpg";
@@ -56,6 +55,8 @@ public class UserInfoActivity extends BaseAppCompatActivity
 	private static final int request_code_award = 102;
 
 	private static final int request_code_area = 103;
+
+	private static final int request_code_label = 104;
 
 	private static final int request_code_camera = 1001;
 
@@ -90,6 +91,7 @@ public class UserInfoActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
+				updateUserInfo();
 				finish();
 			}
 		});
@@ -169,7 +171,14 @@ public class UserInfoActivity extends BaseAppCompatActivity
 					@Override
 					public void onOptionSelected(DialogInterface dialog, int position, String content)
 					{
-						viewHolder.setText(R.id.tv_user_info_sex, content);
+						if (!viewHolder.getText(R.id.tv_user_info_sex).equals(content))
+						{
+							isInfoBeanChange = true;
+							viewHolder.setText(R.id.tv_user_info_sex, content);
+
+							int intSex = HttpEnum.getUserSex(content).getIndex();
+							updateInfoBean.setUser_sex(intSex);
+						}
 						dialog.dismiss();
 					}
 				});
@@ -184,11 +193,18 @@ public class UserInfoActivity extends BaseAppCompatActivity
 			{
 				userInfoHelper.updateConstellation(new DialogInterface.OnDismissListener()
 				{
-
 					@Override
 					public void onDismiss(DialogInterface dialog)
 					{
-						viewHolder.setText(R.id.tv_user_info_constellation, userInfoHelper.getSelectContent());
+						String content = userInfoHelper.getSelectContent();
+						if (!viewHolder.getText(R.id.tv_user_info_constellation).equals(content))
+						{
+							isInfoBeanChange = true;
+							viewHolder.setText(R.id.tv_user_info_constellation, content);
+
+							int intConstell = HttpEnum.getUserConstell(content).getIndex();
+							updateInfoBean.setUser_constell(intConstell);
+						}
 					}
 				});
 			}
@@ -223,7 +239,7 @@ public class UserInfoActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				UserInfoUpdateLabelActivity.actionStart(UserInfoActivity.this);
+				UserInfoUpdateLabelActivity.actionStart(UserInfoActivity.this, request_code_label, updateInfoBean.getUser_tag());
 			}
 		});
 
@@ -303,6 +319,13 @@ public class UserInfoActivity extends BaseAppCompatActivity
 	}
 
 	@Override
+	public void onBackPressed()
+	{
+		updateUserInfo();
+		super.onBackPressed();
+	}
+
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		super.onActivityResult(requestCode, resultCode, data);
@@ -315,23 +338,73 @@ public class UserInfoActivity extends BaseAppCompatActivity
 				if (request_code_sign == requestCode)
 				{
 					String resultContent = data.getStringExtra(request_key);
-					viewHolder.setText(R.id.tv_user_info_sign, resultContent);
+					if (!viewHolder.getText(R.id.tv_user_info_sign).equals(resultContent))
+					{
+						isInfoBeanChange = true;
+						viewHolder.setText(R.id.tv_user_info_sign, resultContent);
+						updateInfoBean.setUser_sign(resultContent);
+					}
 				}
 				else if (request_code_award == requestCode)
 				{
 					String resultContent = data.getStringExtra(request_key);
-					viewHolder.setText(R.id.tv_user_info_award, resultContent);
+					if (!viewHolder.getText(R.id.tv_user_info_award).equals(resultContent))
+					{
+						isInfoBeanChange = true;
+						viewHolder.setText(R.id.tv_user_info_award, resultContent);
+						updateInfoBean.setUser_prize(resultContent);
+					}
 				}
 				else if (request_code_nickname == requestCode)
 				{
 					String resultContent = data.getStringExtra(request_key);
-					viewHolder.setText(R.id.tv_user_info_nickname, resultContent);
+					if (!viewHolder.getText(R.id.tv_user_info_nickname).equals(resultContent))
+					{
+						isInfoBeanChange = true;
+						viewHolder.setText(R.id.tv_user_info_nickname, resultContent);
+						updateInfoBean.setUser_nickname(resultContent);
+					}
 				}
 				else if (request_code_area == requestCode)
 				{
-					String resultFirst = data.getStringExtra(request_key);
-					String resultSecond = data.getStringExtra(request_key_second);
-					viewHolder.setText(R.id.tv_user_info_city, resultFirst + " " + resultSecond);
+					List<String> resultList = data.getStringArrayListExtra(request_key);
+					if (resultList.size() != 4)
+					{
+						return;
+					}
+
+					String pCode = resultList.get(0);
+					String pName = resultList.get(1);
+					String cCode = resultList.get(2);
+					String cName = resultList.get(3);
+
+					String resultContent = String.format("%s %s", pName, cName);
+					if (!viewHolder.getText(R.id.tv_user_info_city).equals(resultContent))
+					{
+						isInfoBeanChange = true;
+						viewHolder.setText(R.id.tv_user_info_city, resultContent);
+
+						updateInfoBean.setP_code(pCode);
+						updateInfoBean.setP_name(pName);
+						updateInfoBean.setC_code(cCode);
+						updateInfoBean.setC_name(cName);
+					}
+				}
+				else if (request_code_label == requestCode)
+				{
+					// 标签选择
+					ArrayList<Integer> dataList = data.getIntegerArrayListExtra(request_key);
+					if (!dataList.equals(updateInfoBean.getUser_tag()))
+					{
+						isInfoBeanChange = true;
+						List<String> updateStringList = new ArrayList<>();
+						for (Integer contentInt : dataList)
+						{
+							updateStringList.add(HttpEnum.getUserTag(contentInt).getContent());
+						}
+						labelWidget.setDataList(updateStringList);
+						updateInfoBean.setUser_tag(dataList);
+					}
 				}
 			}
 		}
@@ -393,15 +466,22 @@ public class UserInfoActivity extends BaseAppCompatActivity
 
 	private void updateUserInfo()
 	{
-		XHttpUtil.doSettingUpdateInfo(updateInfoBean, new XHttpAdapter<String>()
+		if (isInfoBeanChange)
 		{
-			@Override
-			public void onSuccess(String s)
+			XHttpUtil.doSettingUpdateInfo(updateInfoBean, new XHttpAdapter<String>()
 			{
-				// 更新本地数据
-				AppStateManager.getInstance().updateUserInfo(UserInfoActivity.this, updateInfoBean);
-			}
-		});
+				@Override
+				public void onSuccess(String s)
+				{
+					// 更新本地数据
+					AppStateManager.getInstance().updateUserInfo(UserInfoActivity.this, updateInfoBean);
+				}
+			});
+		}
+		else
+		{
+			LogFileUtil.v("do not update userInfo");
+		}
 	}
 
 	public static void actionResultUpdate(Activity activity, String result)
@@ -411,11 +491,17 @@ public class UserInfoActivity extends BaseAppCompatActivity
 		activity.setResult(RESULT_OK, intent);
 	}
 
-	public static void actionResultUpdate(Activity activity, String first, String second)
+	public static void actionResultUpdateStrList(Activity activity, ArrayList<String> dataList)
 	{
 		Intent intent = new Intent();
-		intent.putExtra(request_key, first);
-		intent.putExtra(request_key_second, second);
+		intent.putExtra(request_key, dataList);
+		activity.setResult(RESULT_OK, intent);
+	}
+
+	public static void actionResultUpdateIntList(Activity activity, ArrayList<Integer> dataList)
+	{
+		Intent intent = new Intent();
+		intent.putIntegerArrayListExtra(request_key, dataList);
 		activity.setResult(RESULT_OK, intent);
 	}
 
@@ -433,7 +519,7 @@ public class UserInfoActivity extends BaseAppCompatActivity
 
 		/* 用户省份*/private String p_name;
 
-		public UserInfo(String user_id, String user_nickname, int user_sex, String c_code, String p_code, String user_sign, List<Integer> user_tag, String user_prize, int user_constell, String c_name, String p_name)
+		public UserInfo(String user_id, String user_nickname, int user_sex, String c_code, String p_code, String user_sign, ArrayList<Integer> user_tag, String user_prize, int user_constell, String c_name, String p_name)
 		{
 			super(user_id, user_nickname, user_sex, c_code, p_code, user_sign, user_tag, user_prize, user_constell);
 			this.c_name = c_name;
