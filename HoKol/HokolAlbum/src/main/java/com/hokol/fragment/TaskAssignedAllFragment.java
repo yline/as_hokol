@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.hokol.R;
 import com.hokol.activity.TaskAssignedEvaluateActivity;
+import com.hokol.adapter.TaskAssignedAdapter;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
@@ -18,10 +19,8 @@ import com.hokol.medium.http.bean.VTaskUserPublishedBean;
 import com.hokol.medium.http.bean.WTaskUserPublishedBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
-import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
-import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class TaskAssignedAllFragment extends BaseFragment
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
-	private TaskAssignedAllAdapter taskAssignedAllAdapter;
+	private TaskAssignedAdapter taskAssignedAllAdapter;
 
 	private WTaskUserPublishedBean userPublishedBean;
 
@@ -73,7 +72,15 @@ public class TaskAssignedAllFragment extends BaseFragment
 			}
 		});
 
-		taskAssignedAllAdapter = new TaskAssignedAllAdapter();
+		taskAssignedAllAdapter = new TaskAssignedAdapter();
+		taskAssignedAllAdapter.setOnAssignedEvaluateCallback(new TaskAssignedAdapter.OnTaskAssignedEvaluateCallback()
+		{
+			@Override
+			public void onEvaluateClick(View view)
+			{
+				TaskAssignedEvaluateActivity.actionStart(getContext());
+			}
+		});
 		recyclerView.setAdapter(taskAssignedAllAdapter);
 
 		// 刷新
@@ -134,47 +141,6 @@ public class TaskAssignedAllFragment extends BaseFragment
 					}
 				}
 			});
-		}
-	}
-
-	private class TaskAssignedAllAdapter extends WidgetRecyclerAdapter<VTaskUserPublishedBean.VTaskUserPublishedOneBean>
-	{
-
-		@Override
-		public int getItemRes()
-		{
-			return R.layout.item_task_assigned;
-		}
-
-		@Override
-		public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
-		{
-			viewHolder.get(R.id.ll_task_assigned_start).setVisibility(View.INVISIBLE);
-			viewHolder.get(R.id.ll_task_assigned_trade).setVisibility(View.INVISIBLE);
-			viewHolder.get(R.id.ll_task_assigned_finish).setVisibility(View.VISIBLE);
-
-			viewHolder.setOnClickListener(R.id.tv_item_task_assigned_evaluate, new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
-				{
-					TaskAssignedEvaluateActivity.actionStart(getContext());
-				}
-			});
-		}
-
-		@Override
-		public int getEmptyItemRes()
-		{
-			return super.getEmptyItemRes();
-		}
-
-		@Override
-		public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
-		{
-			viewHolder.setText(R.id.tv_loading_cover, "您还没有发布任务哦");
-			// viewHolder.setText(R.id.btn_loading_cover, "发布任务");
-			viewHolder.getItemView().setVisibility(View.GONE);
 		}
 	}
 }

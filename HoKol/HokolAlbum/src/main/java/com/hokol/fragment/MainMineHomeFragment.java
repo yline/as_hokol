@@ -51,7 +51,7 @@ public class MainMineHomeFragment extends BaseFragment
 		homeViewHolder = new ViewHolder(view);
 		final String userId = AppStateManager.getInstance().getUserLoginId(getContext());
 
-		// 任务
+		// 已发，任务
 		homeViewHolder.get(R.id.ll_main_min_home_task_assigned).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -68,12 +68,20 @@ public class MainMineHomeFragment extends BaseFragment
 			}
 		});
 
+		// 已投任务
 		homeViewHolder.get(R.id.ll_main_min_home_task_delivered).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				TaskDeliveredActivity.actionStart(getContext());
+				if (TextUtils.isEmpty(userId))
+				{
+					SDKManager.toast("亲，请先登录");
+				}
+				else
+				{
+					TaskDeliveredActivity.actionStart(getContext());
+				}
 			}
 		});
 
