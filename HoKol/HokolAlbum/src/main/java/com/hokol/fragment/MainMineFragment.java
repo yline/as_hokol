@@ -59,10 +59,8 @@ public class MainMineFragment extends BaseFragment
 
 		viewHolder = new ViewHolder(view);
 		initView(view);
-
-		initData();
 	}
-	
+
 	private void initView(View view)
 	{
 		fragmentList.add(MainMineDynamicFragment.newInstance());
@@ -95,6 +93,15 @@ public class MainMineFragment extends BaseFragment
 				return RES_TITLE[position];
 			}
 		});
+	}
+
+	@Override
+	public void onStart()
+	{
+		super.onStart();
+
+		// 初始化头部数据
+		initData();
 	}
 
 	private void initData()
@@ -147,12 +154,12 @@ public class MainMineFragment extends BaseFragment
 			viewHolder.setText(R.id.tv_main_mine_head_name, appStateManager.getUserLoginNickName(getContext()));
 
 			// 性别
-			if (HttpEnum.UserSex.Boy.equals(appStateManager.getUserLoginSex(getContext())))
+			if (HttpEnum.UserSex.Boy.getContent().equals(appStateManager.getUserLoginSex(getContext())))
 			{
 				viewHolder.get(R.id.iv_main_mine_head_sex).setVisibility(View.VISIBLE);
 				viewHolder.setImageResource(R.id.iv_main_mine_head_sex, R.drawable.global_sex_boy);
 			}
-			else if (HttpEnum.UserSex.Girl.equals(appStateManager.getUserLoginSex(getContext())))
+			else if (HttpEnum.UserSex.Girl.getContent().equals(appStateManager.getUserLoginSex(getContext())))
 			{
 				viewHolder.get(R.id.iv_main_mine_head_sex).setVisibility(View.VISIBLE);
 				viewHolder.setImageResource(R.id.iv_main_mine_head_sex, R.drawable.global_sex_girl);
@@ -167,7 +174,14 @@ public class MainMineFragment extends BaseFragment
 
 			// 标签
 			FlowLayout flowLayout = viewHolder.get(R.id.flow_layout_main_mine_head_label);
-			FlowWidget flowWidget = new FlowWidget(getContext(), flowLayout);
+			FlowWidget flowWidget = new FlowWidget(getContext(), flowLayout)
+			{
+				@Override
+				protected int getItemResourceId()
+				{
+					return R.layout.widget_item_label_flow_padright_medium;
+				}
+			};
 			flowWidget.setDataList(appStateManager.getUserLoginLabel(getContext()));
 		}
 		else

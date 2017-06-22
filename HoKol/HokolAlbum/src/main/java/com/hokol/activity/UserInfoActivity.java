@@ -468,13 +468,14 @@ public class UserInfoActivity extends BaseAppCompatActivity
 	{
 		if (isInfoBeanChange)
 		{
+			// 更新本地数据
+			AppStateManager.getInstance().updateUserInfo(UserInfoActivity.this, updateInfoBean);
 			XHttpUtil.doSettingUpdateInfo(updateInfoBean, new XHttpAdapter<String>()
 			{
 				@Override
 				public void onSuccess(String s)
 				{
-					// 更新本地数据
-					AppStateManager.getInstance().updateUserInfo(UserInfoActivity.this, updateInfoBean);
+					// 数据更新，成功
 				}
 			});
 		}
