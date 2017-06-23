@@ -43,7 +43,7 @@ public class VTaskUserDeliveredBean
 		private int is_refuse;
 
 		/* 任务状态(1-待录用, 2-待接单, 3-已拒绝，4-待交易, 5-交易失败(主办方判定)，6-(自己判定),7-待评价,8-已完成,9-已结束（未被录用，但任务已结束)) */
-		private String status;
+		private int status;
 
 		/* 任务报名人数 */
 		private int join_num;
@@ -128,12 +128,12 @@ public class VTaskUserDeliveredBean
 			this.is_refuse = is_refuse;
 		}
 
-		public String getStatus()
+		public int getStatus()
 		{
 			return status;
 		}
 
-		public void setStatus(String status)
+		public void setStatus(int status)
 		{
 			this.status = status;
 		}

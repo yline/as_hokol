@@ -4,6 +4,8 @@ import java.util.List;
 
 public class VTaskUserPublishedBean
 {
+	public static final int Guaranteed = 1;
+
 	private List<VTaskUserPublishedOneBean> list;
 
 	public List<VTaskUserPublishedOneBean> getList()
@@ -18,29 +20,28 @@ public class VTaskUserPublishedBean
 
 	public static class VTaskUserPublishedOneBean
 	{
-		/* 任务ID */
-		private String task_id;
+		/* 任务ID */private String task_id;
 
-		/* 任务费用 */
-		private float task_fee;
+		/* 任务费用 */private float task_fee;
 
-		/* 任务标题 */
-		private String task_title;
+		/* 任务所需人数 */private int task_peo_num;
 
-		/* 任务结束时间(时间戳) */
-		private long task_end_time;
+		/* 任务标题 */private String task_title;
 
-		/* 任务发布者昵称 */
-		private String user_nickname;
+		/* 任务结束时间(时间戳) */private long task_end_time;
 
-		/* 任务发布者头像(链接) */
-		private String user_logo;
+		/* 是否担保(0:未担保，1:全额担保) */private int is_guarantee;
+
+		/* 任务发布者昵称 */private String user_nickname;
+
+		/* 任务发布者头像(链接) */private String user_logo;
 
 		/* 任务状态(1:待报名, 2:待交易, 3:待评价, 4:已完成，5:已结束【用户取消交易】) */
 		private int status;
 
-		/* 任务报名人数 */
-		private String join_num;
+		/* 任务报名人数 */private String join_num;
+
+		/* 任务录取人数 */private int employee_num;
 
 		public String getTask_id()
 		{
@@ -62,6 +63,16 @@ public class VTaskUserPublishedBean
 			this.task_fee = task_fee;
 		}
 
+		public int getTask_peo_num()
+		{
+			return task_peo_num;
+		}
+
+		public void setTask_peo_num(int task_peo_num)
+		{
+			this.task_peo_num = task_peo_num;
+		}
+
 		public String getTask_title()
 		{
 			return task_title;
@@ -80,6 +91,16 @@ public class VTaskUserPublishedBean
 		public void setTask_end_time(long task_end_time)
 		{
 			this.task_end_time = task_end_time;
+		}
+
+		public int getIs_guarantee()
+		{
+			return is_guarantee;
+		}
+
+		public void setIs_guarantee(int is_guarantee)
+		{
+			this.is_guarantee = is_guarantee;
 		}
 
 		public String getUser_nickname()
@@ -120,6 +141,16 @@ public class VTaskUserPublishedBean
 		public void setJoin_num(String join_num)
 		{
 			this.join_num = join_num;
+		}
+
+		public int getEmployee_num()
+		{
+			return employee_num;
+		}
+
+		public void setEmployee_num(int employee_num)
+		{
+			this.employee_num = employee_num;
 		}
 	}
 }

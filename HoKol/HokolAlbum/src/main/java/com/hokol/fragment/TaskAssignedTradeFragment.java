@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.hokol.R;
 import com.hokol.activity.TaskAssignedTradeDetailActivity;
 import com.hokol.activity.TaskAssignedTradeSureDetailActivity;
+import com.hokol.adapter.TaskAssignedAdapter;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
@@ -19,10 +20,9 @@ import com.hokol.medium.http.bean.VTaskUserPublishedBean;
 import com.hokol.medium.http.bean.WTaskUserPublishedBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
-import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
-import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class TaskAssignedTradeFragment extends BaseFragment
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
-	private TaskAssignedTradeAdapter taskAssignedTradeAdapter;
+	private TaskAssignedAdapter taskAssignedTradeAdapter;
 
 	private WTaskUserPublishedBean userPublishedBean;
 
@@ -73,8 +73,28 @@ public class TaskAssignedTradeFragment extends BaseFragment
 				return R.drawable.widget_solid_graylight_size_medium;
 			}
 		});
+		
+		taskAssignedTradeAdapter = new TaskAssignedAdapter(getContext());
+		taskAssignedTradeAdapter.setOnAssignedTradeCallback(new TaskAssignedAdapter.OnTaskAssignedTradeCallback()
+		{
+			@Override
+			public void onTradeCancelClick(View view)
+			{
+				SDKManager.toast("取消交易");
+			}
 
-		taskAssignedTradeAdapter = new TaskAssignedTradeAdapter();
+			@Override
+			public void onTradeDetailClick(View view)
+			{
+				TaskAssignedTradeDetailActivity.actionStart(getContext());
+			}
+
+			@Override
+			public void onTradeConfirmClick(View view)
+			{
+				TaskAssignedTradeSureDetailActivity.actionStart(getContext());
+			}
+		});
 		recyclerView.setAdapter(taskAssignedTradeAdapter);
 
 		// 刷新
@@ -131,42 +151,6 @@ public class TaskAssignedTradeFragment extends BaseFragment
 					{
 						taskAssignedTradeAdapter.setDataList(result);
 					}
-				}
-			});
-		}
-	}
-
-	private class TaskAssignedTradeAdapter extends CommonRecyclerAdapter<VTaskUserPublishedBean.VTaskUserPublishedOneBean>
-	{
-
-		@Override
-		public int getItemRes()
-		{
-			return R.layout.item_task_assigned;
-		}
-
-		@Override
-		public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
-		{
-			viewHolder.get(R.id.ll_task_assigned_start).setVisibility(View.INVISIBLE);
-			viewHolder.get(R.id.ll_task_assigned_trade).setVisibility(View.VISIBLE);
-			viewHolder.get(R.id.ll_task_assigned_finish).setVisibility(View.INVISIBLE);
-
-			viewHolder.setOnClickListener(R.id.tv_task_assigned_trade_detail, new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
-				{
-					TaskAssignedTradeDetailActivity.actionStart(getContext());
-				}
-			});
-
-			viewHolder.setOnClickListener(R.id.tv_task_assigned_trade_sure_detail, new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
-				{
-					TaskAssignedTradeSureDetailActivity.actionStart(getContext());
 				}
 			});
 		}

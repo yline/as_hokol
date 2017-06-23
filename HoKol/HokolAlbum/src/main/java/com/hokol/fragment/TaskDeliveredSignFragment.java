@@ -9,17 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
+import com.hokol.adapter.TaskDeliveredAdapter;
 import com.hokol.application.IApplication;
-import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
-import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
-import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 public class TaskDeliveredSignFragment extends BaseFragment
 {
-	private TaskDeliveredSignAdapter deliveredSignAdapter;
+	private TaskDeliveredAdapter deliveredSignAdapter;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
@@ -44,6 +43,7 @@ public class TaskDeliveredSignFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 
 		initView(view);
+		initData();
 	}
 
 	private void initView(View view)
@@ -60,10 +60,22 @@ public class TaskDeliveredSignFragment extends BaseFragment
 			}
 		});
 		
-		deliveredSignAdapter = new TaskDeliveredSignAdapter();
-		recyclerView.setAdapter(deliveredSignAdapter);
+		deliveredSignAdapter = new TaskDeliveredAdapter();
+		deliveredSignAdapter.setOnDeliveredSignCallback(new TaskDeliveredAdapter.OnTaskDeliveredSignCallback()
+		{
+			@Override
+			public void onSignCancelClick(View view)
+			{
+				SDKManager.toast("取消接单");
+			}
 
-		deliveredSignAdapter.setDataList(HttpEnum.getUserTagListAll());
+			@Override
+			public void onSignConfirmClick(View view)
+			{
+				SDKManager.toast("确认接单");
+			}
+		});
+		recyclerView.setAdapter(deliveredSignAdapter);
 
 		// 刷新
 		superRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_task_delivered_sign);
@@ -103,20 +115,8 @@ public class TaskDeliveredSignFragment extends BaseFragment
 		});
 	}
 
-	private class TaskDeliveredSignAdapter extends CommonRecyclerAdapter<String>
+	private void initData()
 	{
-		@Override
-		public int getItemRes()
-		{
-			return R.layout.item_task_delivered;
-		}
-
-		@Override
-		public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
-		{
-			viewHolder.get(R.id.ll_task_delivered_start).setVisibility(View.VISIBLE);
-			viewHolder.get(R.id.ll_task_delivered_trade).setVisibility(View.INVISIBLE);
-			viewHolder.get(R.id.ll_task_delivered_finish).setVisibility(View.INVISIBLE);
-		}
+		// deliveredSignAdapter.setDataList(HttpEnum.getUserTagListAll());
 	}
 }

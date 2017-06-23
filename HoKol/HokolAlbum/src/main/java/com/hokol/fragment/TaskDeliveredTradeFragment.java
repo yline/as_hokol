@@ -9,17 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
+import com.hokol.adapter.TaskDeliveredAdapter;
 import com.hokol.application.IApplication;
-import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
-import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
-import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 public class TaskDeliveredTradeFragment extends BaseFragment
 {
-	private TaskDeliveredTradeAdapter deliveredTradeAdapter;
+	private TaskDeliveredAdapter deliveredTradeAdapter;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
@@ -44,6 +43,7 @@ public class TaskDeliveredTradeFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 
 		initView(view);
+		initData();
 	}
 
 	private void initView(View view)
@@ -60,10 +60,22 @@ public class TaskDeliveredTradeFragment extends BaseFragment
 			}
 		});
 
-		deliveredTradeAdapter = new TaskDeliveredTradeAdapter();
-		recyclerView.setAdapter(deliveredTradeAdapter);
+		deliveredTradeAdapter = new TaskDeliveredAdapter();
+		deliveredTradeAdapter.setOnDeliveredTradeCallback(new TaskDeliveredAdapter.OnTaskDeliveredTradeCallback()
+		{
+			@Override
+			public void onTradeFailedClick(View view)
+			{
+				SDKManager.toast("任务未完成");
+			}
 
-		deliveredTradeAdapter.setDataList(HttpEnum.getUserTagListAll());
+			@Override
+			public void onTradeFinishedClick(View view)
+			{
+				SDKManager.toast("任务完成");
+			}
+		});
+		recyclerView.setAdapter(deliveredTradeAdapter);
 
 		// 刷新
 		superRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_task_delivered_trade);
@@ -103,20 +115,8 @@ public class TaskDeliveredTradeFragment extends BaseFragment
 		});
 	}
 
-	private class TaskDeliveredTradeAdapter extends CommonRecyclerAdapter<String>
+	private void initData()
 	{
-		@Override
-		public int getItemRes()
-		{
-			return R.layout.item_task_delivered;
-		}
-
-		@Override
-		public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
-		{
-			viewHolder.get(R.id.ll_task_delivered_start).setVisibility(View.INVISIBLE);
-			viewHolder.get(R.id.ll_task_delivered_trade).setVisibility(View.VISIBLE);
-			viewHolder.get(R.id.ll_task_delivered_finish).setVisibility(View.INVISIBLE);
-		}
+		// deliveredTradeAdapter.setDataList(HttpEnum.getUserTagListAll());
 	}
 }

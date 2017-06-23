@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.hokol.R;
 import com.hokol.activity.TaskAssignedSignDetailActivity;
+import com.hokol.adapter.TaskAssignedAdapter;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
@@ -18,10 +19,9 @@ import com.hokol.medium.http.bean.VTaskUserPublishedBean;
 import com.hokol.medium.http.bean.WTaskUserPublishedBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
-import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
-import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class TaskAssignedSignFragment extends BaseFragment
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
-	private TaskAssignedSignAdapter taskAssignedSignAdapter;
+	private TaskAssignedAdapter taskAssignedSignAdapter;
 
 	private WTaskUserPublishedBean userPublishedBean;
 
@@ -73,7 +73,27 @@ public class TaskAssignedSignFragment extends BaseFragment
 			}
 		});
 
-		taskAssignedSignAdapter = new TaskAssignedSignAdapter();
+		taskAssignedSignAdapter = new TaskAssignedAdapter(getContext());
+		taskAssignedSignAdapter.setOnAssignedSignCallback(new TaskAssignedAdapter.OnTaskAssignedSignCallback()
+		{
+			@Override
+			public void onSignCancelClick(View view)
+			{
+				SDKManager.toast("取消任务");
+			}
+
+			@Override
+			public void onSignFinishClick(View view)
+			{
+				SDKManager.toast("结束报名");
+			}
+
+			@Override
+			public void onSignDetailClick(View view)
+			{
+				TaskAssignedSignDetailActivity.actionStart(getContext());
+			}
+		});
 		recyclerView.setAdapter(taskAssignedSignAdapter);
 
 		// 刷新
@@ -130,54 +150,6 @@ public class TaskAssignedSignFragment extends BaseFragment
 					{
 						taskAssignedSignAdapter.setDataList(result);
 					}
-				}
-			});
-		}
-	}
-
-	private class TaskAssignedSignAdapter extends CommonRecyclerAdapter<VTaskUserPublishedBean.VTaskUserPublishedOneBean>
-	{
-
-		@Override
-		public int getItemRes()
-		{
-			return R.layout.item_task_assigned;
-		}
-
-		@Override
-		public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
-		{
-			viewHolder.get(R.id.ll_task_assigned_start).setVisibility(View.VISIBLE);
-			viewHolder.get(R.id.ll_task_assigned_trade).setVisibility(View.INVISIBLE);
-			viewHolder.get(R.id.ll_task_assigned_finish).setVisibility(View.INVISIBLE);
-
-			// 报名详情
-			viewHolder.setOnClickListener(R.id.tv_task_assigned_start_detail, new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
-				{
-					TaskAssignedSignDetailActivity.actionStart(getContext());
-				}
-			});
-
-			// 结束报名
-			viewHolder.setOnClickListener(R.id.tv_task_assigned_start_over, new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
-				{
-					
-				}
-			});
-
-			// 取消任务
-			viewHolder.setOnClickListener(R.id.tv_task_assigned_start_cancel, new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
-				{
-
 				}
 			});
 		}

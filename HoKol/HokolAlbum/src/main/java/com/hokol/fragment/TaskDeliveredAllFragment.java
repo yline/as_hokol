@@ -10,17 +10,16 @@ import android.view.ViewGroup;
 
 import com.hokol.R;
 import com.hokol.activity.TaskDeliveredEvaluateActivity;
+import com.hokol.adapter.TaskDeliveredAdapter;
 import com.hokol.application.IApplication;
-import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
-import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
-import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 public class TaskDeliveredAllFragment extends BaseFragment
 {
-	private TaskDeliveredAllAdapter deliveredAllAdapter;
+	private TaskDeliveredAdapter deliveredAllAdapter;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
@@ -45,6 +44,7 @@ public class TaskDeliveredAllFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 
 		initView(view);
+		initData();
 	}
 
 	private void initView(View view)
@@ -61,10 +61,28 @@ public class TaskDeliveredAllFragment extends BaseFragment
 			}
 		});
 
-		deliveredAllAdapter = new TaskDeliveredAllAdapter();
-		recyclerView.setAdapter(deliveredAllAdapter);
+		deliveredAllAdapter = new TaskDeliveredAdapter();
+		deliveredAllAdapter.setOnDeliveredEvaluateCallback(new TaskDeliveredAdapter.OnTaskDeliveredEvaluateCallback()
+		{
+			@Override
+			public void onEvaluateDeleteClick(View view)
+			{
+				SDKManager.toast("删除任务");
+			}
 
-		deliveredAllAdapter.setDataList(HttpEnum.getUserTagListAll());
+			@Override
+			public void onEvaluateAppealClick(View view)
+			{
+				SDKManager.toast("维权申诉");
+			}
+
+			@Override
+			public void onEvaluateClick(View view)
+			{
+				TaskDeliveredEvaluateActivity.actionStart(getContext());
+			}
+		});
+		recyclerView.setAdapter(deliveredAllAdapter);
 
 		// 刷新
 		superRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_task_delivered_all);
@@ -104,29 +122,8 @@ public class TaskDeliveredAllFragment extends BaseFragment
 		});
 	}
 
-	private class TaskDeliveredAllAdapter extends CommonRecyclerAdapter<String>
+	private void initData()
 	{
-		@Override
-		public int getItemRes()
-		{
-			return R.layout.item_task_delivered;
-		}
-
-		@Override
-		public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
-		{
-			viewHolder.get(R.id.ll_task_delivered_start).setVisibility(View.INVISIBLE);
-			viewHolder.get(R.id.ll_task_delivered_trade).setVisibility(View.INVISIBLE);
-			viewHolder.get(R.id.ll_task_delivered_finish).setVisibility(View.VISIBLE);
-
-			viewHolder.setOnClickListener(R.id.tv_item_task_delivered_evaluate, new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
-				{
-					TaskDeliveredEvaluateActivity.actionStart(getContext());
-				}
-			});
-		}
+		// deliveredAllAdapter.setDataList(HttpEnum.getUserTagListAll());
 	}
 }

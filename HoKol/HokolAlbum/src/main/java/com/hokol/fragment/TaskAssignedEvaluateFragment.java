@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.hokol.R;
 import com.hokol.activity.TaskAssignedEvaluateActivity;
+import com.hokol.adapter.TaskAssignedAdapter;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
@@ -20,8 +21,6 @@ import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
-import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
-import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class TaskAssignedEvaluateFragment extends BaseFragment
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
-	private TaskAssignedEvaluateAdapter taskAssignedEvaluateAdapter;
+	private TaskAssignedAdapter taskAssignedEvaluateAdapter;
 
 	private WTaskUserPublishedBean userPublishedBean;
 
@@ -73,7 +72,15 @@ public class TaskAssignedEvaluateFragment extends BaseFragment
 			}
 		});
 
-		taskAssignedEvaluateAdapter = new TaskAssignedEvaluateAdapter();
+		taskAssignedEvaluateAdapter = new TaskAssignedAdapter(getContext());
+		taskAssignedEvaluateAdapter.setOnAssignedEvaluateCallback(new TaskAssignedAdapter.OnTaskAssignedEvaluateCallback()
+		{
+			@Override
+			public void onEvaluateClick(View view)
+			{
+				TaskAssignedEvaluateActivity.actionStart(getContext());
+			}
+		});
 		recyclerView.setAdapter(taskAssignedEvaluateAdapter);
 
 		// 刷新
@@ -130,33 +137,6 @@ public class TaskAssignedEvaluateFragment extends BaseFragment
 					{
 						taskAssignedEvaluateAdapter.setDataList(result);
 					}
-				}
-			});
-		}
-	}
-
-	private class TaskAssignedEvaluateAdapter extends CommonRecyclerAdapter<VTaskUserPublishedBean.VTaskUserPublishedOneBean>
-	{
-		
-		@Override
-		public int getItemRes()
-		{
-			return R.layout.item_task_assigned;
-		}
-
-		@Override
-		public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
-		{
-			viewHolder.get(R.id.ll_task_assigned_start).setVisibility(View.INVISIBLE);
-			viewHolder.get(R.id.ll_task_assigned_trade).setVisibility(View.INVISIBLE);
-			viewHolder.get(R.id.ll_task_assigned_finish).setVisibility(View.VISIBLE);
-
-			viewHolder.setOnClickListener(R.id.tv_item_task_assigned_evaluate, new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
-				{
-					TaskAssignedEvaluateActivity.actionStart(getContext());
 				}
 			});
 		}

@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 
 import com.hokol.R;
 import com.hokol.activity.TaskAssignedEvaluateActivity;
+import com.hokol.activity.TaskAssignedSignDetailActivity;
+import com.hokol.activity.TaskAssignedTradeDetailActivity;
+import com.hokol.activity.TaskAssignedTradeSureDetailActivity;
 import com.hokol.adapter.TaskAssignedAdapter;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
@@ -19,6 +22,7 @@ import com.hokol.medium.http.bean.VTaskUserPublishedBean;
 import com.hokol.medium.http.bean.WTaskUserPublishedBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 
@@ -72,7 +76,47 @@ public class TaskAssignedAllFragment extends BaseFragment
 			}
 		});
 
-		taskAssignedAllAdapter = new TaskAssignedAdapter();
+		taskAssignedAllAdapter = new TaskAssignedAdapter(getContext());
+		taskAssignedAllAdapter.setOnAssignedSignCallback(new TaskAssignedAdapter.OnTaskAssignedSignCallback()
+		{
+			@Override
+			public void onSignCancelClick(View view)
+			{
+				SDKManager.toast("取消任务");
+			}
+
+			@Override
+			public void onSignFinishClick(View view)
+			{
+				SDKManager.toast("结束报名");
+			}
+
+			@Override
+			public void onSignDetailClick(View view)
+			{
+				TaskAssignedSignDetailActivity.actionStart(getContext());
+			}
+		});
+		taskAssignedAllAdapter.setOnAssignedTradeCallback(new TaskAssignedAdapter.OnTaskAssignedTradeCallback()
+		{
+			@Override
+			public void onTradeCancelClick(View view)
+			{
+				SDKManager.toast("取消交易");
+			}
+
+			@Override
+			public void onTradeDetailClick(View view)
+			{
+				TaskAssignedTradeDetailActivity.actionStart(getContext());
+			}
+
+			@Override
+			public void onTradeConfirmClick(View view)
+			{
+				TaskAssignedTradeSureDetailActivity.actionStart(getContext());
+			}
+		});
 		taskAssignedAllAdapter.setOnAssignedEvaluateCallback(new TaskAssignedAdapter.OnTaskAssignedEvaluateCallback()
 		{
 			@Override

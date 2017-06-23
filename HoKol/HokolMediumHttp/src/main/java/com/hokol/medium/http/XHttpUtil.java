@@ -404,7 +404,6 @@ public class XHttpUtil
 		new XTextHttp<VTaskUserPublishedBean>(adapter).doPost(httpUrl, wTaskUserPublishedBean, VTaskUserPublishedBean.class);
 	}
 
-
 	/**
 	 * 任务报名
 	 */

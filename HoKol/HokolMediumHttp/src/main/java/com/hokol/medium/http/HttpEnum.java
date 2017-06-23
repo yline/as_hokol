@@ -320,4 +320,130 @@ public class HttpEnum
 			return UserConstell.Null;
 		}
 	}
+
+	/* &&&&&&&&&&&&&&&&已发布的任务&&&&&&&&&&&&&&& (1-待报名,2-待交易,3-待评价,4-已完成,5-已取消）&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */
+	public enum AssignedStatus
+	{
+		ToBeSign("待报名", 1), ToBeTrade("待交易", 2), ToBeEvaluate("待评价", 3), Finished("已完成", 4), Canceled("已取消", 5), Null("", -1);
+
+		private final int index;
+
+		private final String content;
+
+		public int getIndex()
+		{
+			return index;
+		}
+
+		public String getContent()
+		{
+			return content;
+		}
+
+		AssignedStatus(String content, int index)
+		{
+			this.index = index;
+			this.content = content;
+		}
+	}
+
+	public static AssignedStatus getAssignedStatus(int index)
+	{
+		if (index == AssignedStatus.ToBeSign.getIndex())
+		{
+			return AssignedStatus.ToBeSign;
+		}
+		else if (index == AssignedStatus.ToBeTrade.getIndex())
+		{
+			return AssignedStatus.ToBeTrade;
+		}
+		else if (index == AssignedStatus.ToBeEvaluate.getIndex())
+		{
+			return AssignedStatus.ToBeEvaluate;
+		}
+		else if (index == AssignedStatus.Finished.getIndex())
+		{
+			return AssignedStatus.Finished;
+		}
+		else if (index == AssignedStatus.Canceled.getIndex())
+		{
+			return AssignedStatus.Canceled;
+		}
+		else
+		{
+			return AssignedStatus.Null;
+		}
+	}
+
+	/* &&&&&&&&&&&&&&&&已投递的任务&&&&&&&&&&&&&&& 1-待录用,2-待接单,3-已拒绝，4-待交易,5-交易失败(主办方判定)，6-(用户提交任务未完成),7-待评价,8-已完成,9-已结束（未被录用，但任务已结束) &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */
+	public enum DeliveredStatus
+	{
+		ToBeHired("待录用", 1), ToBeOrder("待接单", 2), Refused("已拒绝", 3), ToBeTrade("待交易", 4), TradeFailed("交易失败", 5),
+
+		UnAchieve("用户提交任务未完成", 6), ToBeEvaluate("待评价", 7), Achieved("已完成", 8), Finished("已结束", 9), Null("", -1);
+
+		private final int index;
+
+		private final String content;
+
+		public int getIndex()
+		{
+			return index;
+		}
+
+		public String getContent()
+		{
+			return content;
+		}
+
+		DeliveredStatus(String content, int index)
+		{
+			this.index = index;
+			this.content = content;
+		}
+	}
+
+	public static DeliveredStatus getDeliveredStatus(int index)
+	{
+		if (index == DeliveredStatus.ToBeHired.getIndex())
+		{
+			return DeliveredStatus.ToBeHired;
+		}
+		else if (index == DeliveredStatus.ToBeOrder.getIndex())
+		{
+			return DeliveredStatus.ToBeOrder;
+		}
+		else if (index == DeliveredStatus.Refused.getIndex())
+		{
+			return DeliveredStatus.Refused;
+		}
+		else if (index == DeliveredStatus.ToBeTrade.getIndex())
+		{
+			return DeliveredStatus.ToBeTrade;
+		}
+		else if (index == DeliveredStatus.TradeFailed.getIndex())
+		{
+			return DeliveredStatus.TradeFailed;
+		}
+		else if (index == DeliveredStatus.UnAchieve.getIndex())
+		{
+			return DeliveredStatus.UnAchieve;
+		}
+		else if (index == DeliveredStatus.ToBeEvaluate.getIndex())
+		{
+			return DeliveredStatus.ToBeEvaluate;
+		}
+		else if (index == DeliveredStatus.Achieved.getIndex())
+		{
+			return DeliveredStatus.Achieved;
+		}
+		else if (index == DeliveredStatus.Finished.getIndex())
+		{
+			return DeliveredStatus.Finished;
+		}
+		else
+		{
+			return DeliveredStatus.Null;
+		}
+	}
 }

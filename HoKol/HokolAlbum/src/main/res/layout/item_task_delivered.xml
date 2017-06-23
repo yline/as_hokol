@@ -114,6 +114,7 @@
             android:visibility="invisible">
 
             <TextView
+                android:id="@+id/tv_item_task_delivered_sign_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_null"
@@ -126,6 +127,7 @@
                 android:textSize="@dimen/default_text_size_small"/>
 
             <TextView
+                android:id="@+id/tv_item_task_delivered_sign_confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_space_normal"
@@ -148,6 +150,7 @@
             android:visibility="invisible">
 
             <TextView
+                android:id="@+id/tv_item_task_delivered_trade_failed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_space_normal"
@@ -161,6 +164,7 @@
                 android:textSize="@dimen/default_text_size_small"/>
 
             <TextView
+                android:id="@+id/tv_item_task_delivered_trade_finished"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_space_normal"
@@ -183,6 +187,7 @@
             android:visibility="visible">
 
             <TextView
+                android:id="@+id/tv_item_task_delivered_evaluate_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_null"
@@ -195,6 +200,7 @@
                 android:textSize="@dimen/default_text_size_small"/>
 
             <TextView
+                android:id="@+id/tv_item_task_delivered_evaluate_appeal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_space_normal"
