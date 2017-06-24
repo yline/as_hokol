@@ -13,6 +13,9 @@ public class VDynamicCareBean
 	/* 动态唯一标识 */
 	private String dt_id;
 
+	/* 用户ID */
+	private String user_id;
+
 	/* 关注的人头像 */
 	private String user_logo;
 
@@ -21,9 +24,6 @@ public class VDynamicCareBean
 
 	/* 动态点赞数 */
 	private int dt_total_zan;
-
-	/* 关注的人所在城市 */
-	private String user_city;
 
 	/* 关注的人昵称 */
 	private String user_nickname;
@@ -46,6 +46,12 @@ public class VDynamicCareBean
 	/* 动态图片(链接) */
 	private String dt_img;
 
+	/* 关注的人所在城市 */
+	private List<String> province;
+
+	/* 关注的人所在城市 */
+	private List<String> city;
+	
 	public String getDt_id()
 	{
 		return dt_id;
@@ -54,6 +60,16 @@ public class VDynamicCareBean
 	public void setDt_id(String dt_id)
 	{
 		this.dt_id = dt_id;
+	}
+
+	public String getUser_id()
+	{
+		return user_id;
+	}
+
+	public void setUser_id(String user_id)
+	{
+		this.user_id = user_id;
 	}
 
 	public String getUser_logo()
@@ -84,16 +100,6 @@ public class VDynamicCareBean
 	public void setDt_total_zan(int dt_total_zan)
 	{
 		this.dt_total_zan = dt_total_zan;
-	}
-
-	public String getUser_city()
-	{
-		return user_city;
-	}
-
-	public void setUser_city(String user_city)
-	{
-		this.user_city = user_city;
 	}
 
 	public String getUser_nickname()
@@ -164,5 +170,25 @@ public class VDynamicCareBean
 	public void setDt_img(String dt_img)
 	{
 		this.dt_img = dt_img;
+	}
+
+	public List<String> getProvince()
+	{
+		return province;
+	}
+
+	public void setProvince(List<String> province)
+	{
+		this.province = province;
+	}
+
+	public List<String> getCity()
+	{
+		return city;
+	}
+
+	public void setCity(List<String> city)
+	{
+		this.city = city;
 	}
 }

@@ -99,7 +99,9 @@ public class MainCareHelper
 		@Override
 		public void onBindViewHolder(RecyclerViewHolder viewHolder, final int position)
 		{
+			// 头像
 			ImageView avatarView = viewHolder.get(R.id.circle_item_main_care_avatar);
+
 			Glide.with(sContext).load(DeleteConstant.url_default_avatar).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).centerCrop().into(avatarView);
 
 			ImageView contentView = viewHolder.get(R.id.iv_item_main_care_content);
