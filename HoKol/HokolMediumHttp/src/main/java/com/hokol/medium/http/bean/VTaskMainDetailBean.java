@@ -4,14 +4,22 @@ import java.util.List;
 
 public class VTaskMainDetailBean
 {
+	public static final int Guaranteed = 1;
+
 	/* 任务唯一标识 */
 	private String task_id;
 
 	/* 任务类型：[数组] */
-	private List<String> task_type;
+	private List<String> task_tag;
 
-	/* 任务预算 */
+	/* 任务付费方式[0:全额担保，1:面议] */
+	private int fee_type;
+
+	/* 每个雇员薪水 */
 	private int task_fee;
+
+	/* 任务总额 */
+	private int task_fee_total;
 
 	/* 任务标题 */
 	private String task_title;
@@ -19,11 +27,23 @@ public class VTaskMainDetailBean
 	/* 任务内容 */
 	private String task_content;
 
+	/* 是否担保(0:未担保,1:已担保) */
+	private int is_guarantee;
+
 	/* 任务剩余时间(时间戳) */
 	private long task_rem_time;
 
 	/* 任务发布时间（时间戳） */
 	private long task_pub_time;
+
+	/* 任务所需性别 */
+	private String task_sex;
+
+	/* 任务状态(1:报名中,2:已终止报名,3:已结束) */
+	private int status;
+
+	/* 任务数量 */
+	private int task_peo_num;
 
 	/* 任务男生数量 */
 	private int task_man_num;
@@ -31,9 +51,11 @@ public class VTaskMainDetailBean
 	/* 任务女生数量 */
 	private int task_woman_num;
 
-	/* 任务数量 */
-	private int task_num;
+	/* 用户所在城市=>[石家庄市,130100] */
+	private List<String> city;
 
+	/* 用户所在省份=>[北京市,110000] */
+	private List<String> province;
 
 	public String getTask_id()
 	{
@@ -45,14 +67,24 @@ public class VTaskMainDetailBean
 		this.task_id = task_id;
 	}
 
-	public List<String> getTask_type()
+	public List<String> getTask_tag()
 	{
-		return task_type;
+		return task_tag;
 	}
 
-	public void setTask_type(List<String> task_type)
+	public void setTask_tag(List<String> task_tag)
 	{
-		this.task_type = task_type;
+		this.task_tag = task_tag;
+	}
+
+	public int getFee_type()
+	{
+		return fee_type;
+	}
+
+	public void setFee_type(int fee_type)
+	{
+		this.fee_type = fee_type;
 	}
 
 	public int getTask_fee()
@@ -65,6 +97,16 @@ public class VTaskMainDetailBean
 		this.task_fee = task_fee;
 	}
 
+	public int getTask_fee_total()
+	{
+		return task_fee_total;
+	}
+
+	public void setTask_fee_total(int task_fee_total)
+	{
+		this.task_fee_total = task_fee_total;
+	}
+
 	public String getTask_title()
 	{
 		return task_title;
@@ -73,6 +115,26 @@ public class VTaskMainDetailBean
 	public void setTask_title(String task_title)
 	{
 		this.task_title = task_title;
+	}
+
+	public String getTask_content()
+	{
+		return task_content;
+	}
+
+	public void setTask_content(String task_content)
+	{
+		this.task_content = task_content;
+	}
+
+	public int getIs_guarantee()
+	{
+		return is_guarantee;
+	}
+
+	public void setIs_guarantee(int is_guarantee)
+	{
+		this.is_guarantee = is_guarantee;
 	}
 
 	public long getTask_rem_time()
@@ -95,6 +157,36 @@ public class VTaskMainDetailBean
 		this.task_pub_time = task_pub_time;
 	}
 
+	public String getTask_sex()
+	{
+		return task_sex;
+	}
+
+	public void setTask_sex(String task_sex)
+	{
+		this.task_sex = task_sex;
+	}
+
+	public int getStatus()
+	{
+		return status;
+	}
+
+	public void setStatus(int status)
+	{
+		this.status = status;
+	}
+
+	public int getTask_peo_num()
+	{
+		return task_peo_num;
+	}
+
+	public void setTask_peo_num(int task_peo_num)
+	{
+		this.task_peo_num = task_peo_num;
+	}
+
 	public int getTask_man_num()
 	{
 		return task_man_num;
@@ -115,23 +207,23 @@ public class VTaskMainDetailBean
 		this.task_woman_num = task_woman_num;
 	}
 
-	public int getTask_num()
+	public List<String> getCity()
 	{
-		return task_num;
+		return city;
 	}
 
-	public void setTask_num(int task_num)
+	public void setCity(List<String> city)
 	{
-		this.task_num = task_num;
+		this.city = city;
 	}
 
-	public String getTask_content()
+	public List<String> getProvince()
 	{
-		return task_content;
+		return province;
 	}
 
-	public void setTask_content(String task_content)
+	public void setProvince(List<String> province)
 	{
-		this.task_content = task_content;
+		this.province = province;
 	}
 }

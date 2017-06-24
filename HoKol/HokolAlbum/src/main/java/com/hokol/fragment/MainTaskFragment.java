@@ -114,12 +114,12 @@ public class MainTaskFragment extends BaseFragment
 		// 内容
 		RecyclerView recycleView = (RecyclerView) parentView.findViewById(R.id.recycle_main_task);
 		mainTaskHelper.initRecycleView(recycleView);
-		mainTaskHelper.setOnRecyclerClickListener(new OnRecyclerItemClickListener()
+		mainTaskHelper.setOnRecyclerClickListener(new OnRecyclerItemClickListener<VTaskMainAll.TaskMainAllOne>()
 		{
 			@Override
-			public void onItemClick(RecyclerViewHolder viewHolder, Object o, int position)
+			public void onItemClick(RecyclerViewHolder viewHolder, VTaskMainAll.TaskMainAllOne taskDetailBean, int position)
 			{
-				TaskDetailActivity.actionStart(getContext());
+				TaskDetailActivity.actionStart(getContext(), taskDetailBean.getTask_id());
 			}
 		});
 

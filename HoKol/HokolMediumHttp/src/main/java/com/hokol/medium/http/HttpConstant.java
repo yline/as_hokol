@@ -69,7 +69,7 @@ public class HttpConstant
 	public static final String url_dynamic_user_all = url_head + "ApiDongtai/dt_nums";
 
 	// 请求用户多条私密动态信息
-	public static final String url_dynamic_user_private_all = url_head + "ApiDongtai/dt_private_nums";
+	public static final String url_dynamic_user_private_all = url_head + "ApiDongtai/private_nums";
 
 	// 发布动态
 	public static final String url_dynamic_publish = url_head + "ApiDongtai/dt_pub";
