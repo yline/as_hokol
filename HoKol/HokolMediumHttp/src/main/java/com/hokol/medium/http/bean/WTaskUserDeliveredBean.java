@@ -2,10 +2,18 @@ package com.hokol.medium.http.bean;
 
 public class WTaskUserDeliveredBean
 {
+	public static final int TypeAll = 0; // 全部
+
+	public static final int TypeSigned = 1; // 已报名
+
+	public static final int TypeTraded = 2; // 已接单
+
+	public static final int TypeEvaluate = 3; // 待评论
+
 	/* 用户ID */
 	private String user_id;
 
-	/* 列表选择开关(0-全部,1-待交易,2-待评论) */
+	/* 列表选择开关(0-全部,1-已报名,2-已接单,3-待评论) */
 	private int switchs;
 
 	/* 请求数据上限 */

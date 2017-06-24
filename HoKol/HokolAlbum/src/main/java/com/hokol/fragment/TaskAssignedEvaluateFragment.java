@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.hokol.R;
 import com.hokol.activity.TaskAssignedEvaluateActivity;
+import com.hokol.activity.TaskDetailActivity;
 import com.hokol.adapter.TaskAssignedAdapter;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
@@ -21,6 +22,8 @@ import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
+import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.List;
 
@@ -73,6 +76,14 @@ public class TaskAssignedEvaluateFragment extends BaseFragment
 		});
 
 		taskAssignedEvaluateAdapter = new TaskAssignedAdapter(getContext());
+		taskAssignedEvaluateAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VTaskUserPublishedBean.VTaskUserPublishedOneBean>()
+		{
+			@Override
+			public void onItemClick(RecyclerViewHolder viewHolder, VTaskUserPublishedBean.VTaskUserPublishedOneBean taskAssignedBean, int position)
+			{
+				TaskDetailActivity.actionStart(getContext(), taskAssignedBean.getTask_id());
+			}
+		});
 		taskAssignedEvaluateAdapter.setOnAssignedEvaluateCallback(new TaskAssignedAdapter.OnTaskAssignedEvaluateCallback()
 		{
 			@Override

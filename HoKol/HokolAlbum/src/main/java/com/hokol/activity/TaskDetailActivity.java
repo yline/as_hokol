@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.hokol.R;
+import com.hokol.application.AppStateManager;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskMainDetailBean;
 import com.hokol.medium.http.bean.WTaskMainDetailBean;
@@ -80,7 +81,13 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 		}
 		else
 		{
-			XHttpUtil.doTaskMainDetail(new WTaskMainDetailBean(taskId), new XHttpAdapter<VTaskMainDetailBean>()
+			String userId = AppStateManager.getInstance().getUserLoginId(this);
+			if (TextUtils.isEmpty(WTaskMainDetailBean.UnLoginState))
+			{
+				userId = WTaskMainDetailBean.UnLoginState;
+			}
+
+			XHttpUtil.doTaskMainDetail(new WTaskMainDetailBean(userId, taskId), new XHttpAdapter<VTaskMainDetailBean>()
 			{
 				@Override
 				public void onSuccess(VTaskMainDetailBean vTaskMainDetailBean)
@@ -97,7 +104,14 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 
 					// 剩余时间
 					String restTime = HokolTimeConvertUtil.stampToRestFormatTime(vTaskMainDetailBean.getTask_rem_time() * 1000 + System.currentTimeMillis());
-					viewHolder.setText(R.id.iv_task_detail_rest_time, "剩" + restTime);
+					if (TextUtils.isEmpty(restTime))
+					{
+						viewHolder.setText(R.id.iv_task_detail_rest_time, "已到期");
+					}
+					else
+					{
+						viewHolder.setText(R.id.iv_task_detail_rest_time, "剩" + restTime);
+					}
 
 					// 任务详情
 					viewHolder.setText(R.id.iv_task_detail_content, vTaskMainDetailBean.getTask_content());

@@ -20,8 +20,12 @@ public class HokolTimeConvertUtil extends TimeConvertUtil
 	 */
 	public static String stampToRestFormatTime(long oldTime)
 	{
-		long diffTime = Math.abs((System.currentTimeMillis() - oldTime) / 1000);
-		if (diffTime < 3600)
+		long diffTime = (oldTime - System.currentTimeMillis()) / 1000;
+		if (diffTime < 0)
+		{
+			return "";
+		}
+		else if (diffTime < 3600)
 		{
 			return String.format("%d分", diffTime / 60);
 		}

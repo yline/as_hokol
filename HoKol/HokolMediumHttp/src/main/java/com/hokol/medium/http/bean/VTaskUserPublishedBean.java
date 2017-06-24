@@ -22,7 +22,7 @@ public class VTaskUserPublishedBean
 	{
 		/* 任务ID */private String task_id;
 
-		/* 任务费用 */private float task_fee;
+		/* 任务费用 */private int task_fee;
 
 		/* 任务所需人数 */private int task_peo_num;
 
@@ -39,7 +39,7 @@ public class VTaskUserPublishedBean
 		/* 任务状态(1:待报名, 2:待交易, 3:待评价, 4:已完成，5:已结束【用户取消交易】) */
 		private int status;
 
-		/* 任务报名人数 */private String join_num;
+		/* 任务报名人数 */private int join_num;
 
 		/* 任务录取人数 */private int employee_num;
 
@@ -53,12 +53,12 @@ public class VTaskUserPublishedBean
 			this.task_id = task_id;
 		}
 
-		public float getTask_fee()
+		public int getTask_fee()
 		{
 			return task_fee;
 		}
 
-		public void setTask_fee(float task_fee)
+		public void setTask_fee(int task_fee)
 		{
 			this.task_fee = task_fee;
 		}
@@ -133,12 +133,12 @@ public class VTaskUserPublishedBean
 			this.status = status;
 		}
 
-		public String getJoin_num()
+		public int getJoin_num()
 		{
 			return join_num;
 		}
 
-		public void setJoin_num(String join_num)
+		public void setJoin_num(int join_num)
 		{
 			this.join_num = join_num;
 		}

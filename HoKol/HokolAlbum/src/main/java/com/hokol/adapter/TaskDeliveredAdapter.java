@@ -5,7 +5,7 @@ import android.view.View;
 import com.hokol.R;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.bean.VTaskUserDeliveredBean;
-import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
+import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 /**
@@ -14,7 +14,7 @@ import com.yline.view.recycler.holder.RecyclerViewHolder;
  * @author yline 2017/6/23 -- 10:06
  * @version 1.0.0
  */
-public class TaskDeliveredAdapter extends CommonRecyclerAdapter<VTaskUserDeliveredBean.VTaskUserDeliveredOneBean>
+public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliveredBean.VTaskUserDeliveredOneBean>
 {
 	private OnTaskDeliveredSignCallback deliveredSignCallback;
 
@@ -31,6 +31,8 @@ public class TaskDeliveredAdapter extends CommonRecyclerAdapter<VTaskUserDeliver
 	@Override
 	public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
 	{
+		onBindViewHolder(viewHolder, position);
+
 		int status = sList.get(position).getStatus();
 		HttpEnum.DeliveredStatus deliveredStatus = HttpEnum.getDeliveredStatus(status);
 		onBindViewClick(viewHolder, deliveredStatus);
@@ -144,6 +146,13 @@ public class TaskDeliveredAdapter extends CommonRecyclerAdapter<VTaskUserDeliver
 		{
 			viewHolder.get(R.id.ll_task_delivered_finish).setVisibility(View.INVISIBLE);
 		}
+	}
+	
+	@Override
+	public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
+	{
+		// super.onBindEmptyViewHolder(viewHolder, position);
+		viewHolder.getItemView().setVisibility(View.GONE);
 	}
 
 	public void setOnDeliveredSignCallback(OnTaskDeliveredSignCallback deliveredSignCallback)

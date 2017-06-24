@@ -57,6 +57,7 @@ public class TaskAssignedActivity extends BaseAppCompatActivity
 
 		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout_task_assigned);
 		ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager_task_assigned);
+		viewPager.setOffscreenPageLimit(4);
 
 		viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager())
 		{

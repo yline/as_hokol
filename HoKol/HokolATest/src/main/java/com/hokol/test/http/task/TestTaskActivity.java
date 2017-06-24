@@ -442,7 +442,7 @@ public class TestTaskActivity extends BaseTestActivity
 			{
 				final String task_id = editTextOne.getText().toString().trim();
 				
-				XHttpUtil.doTaskMainDetail(new WTaskMainDetailBean(task_id), new XHttpAdapter<VTaskMainDetailBean>()
+				XHttpUtil.doTaskMainDetail(new WTaskMainDetailBean(task_id, WTaskMainDetailBean.UnLoginState), new XHttpAdapter<VTaskMainDetailBean>()
 				{
 					@Override
 					public void onSuccess(VTaskMainDetailBean vTaskMainDetailBean)

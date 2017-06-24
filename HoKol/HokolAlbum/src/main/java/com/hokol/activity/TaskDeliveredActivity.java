@@ -29,7 +29,8 @@ import java.util.List;
  */
 public class TaskDeliveredActivity extends BaseAppCompatActivity
 {
-	
+	private static final String KeyTaskDelivered = "KeyUserId";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -39,20 +40,24 @@ public class TaskDeliveredActivity extends BaseAppCompatActivity
 		final List<BaseFragment> fragmentList = new ArrayList<>();
 		final List<String> titleList = new ArrayList<>();
 
-		fragmentList.add(TaskDeliveredAllFragment.newInstance());
+		// 用户ID
+		String userId = getIntent().getStringExtra(KeyTaskDelivered);
+
+		fragmentList.add(TaskDeliveredAllFragment.newInstance(userId));
 		titleList.add("全部");
 
-		fragmentList.add(TaskDeliveredSignFragment.newInstance());
+		fragmentList.add(TaskDeliveredSignFragment.newInstance(userId));
 		titleList.add("已报名");
 
-		fragmentList.add(TaskDeliveredTradeFragment.newInstance());
+		fragmentList.add(TaskDeliveredTradeFragment.newInstance(userId));
 		titleList.add("已接单");
 		
-		fragmentList.add(TaskDeliveredEvaluateFragment.newInstance());
+		fragmentList.add(TaskDeliveredEvaluateFragment.newInstance(userId));
 		titleList.add("待评价");
 
 		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout_task_delivered);
 		ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager_task_delivered);
+		viewPager.setOffscreenPageLimit(4);
 
 		viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager())
 		{
@@ -88,8 +93,8 @@ public class TaskDeliveredActivity extends BaseAppCompatActivity
 		});
 	}
 	
-	public static void actionStart(Context context)
+	public static void actionStart(Context context, String userId)
 	{
-		context.startActivity(new Intent(context, TaskDeliveredActivity.class));
+		context.startActivity(new Intent(context, TaskDeliveredActivity.class).putExtra(KeyTaskDelivered, userId));
 	}
 }

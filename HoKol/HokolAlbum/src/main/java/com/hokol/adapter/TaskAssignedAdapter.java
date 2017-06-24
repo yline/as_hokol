@@ -1,6 +1,7 @@
 package com.hokol.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -9,7 +10,7 @@ import com.hokol.R;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.bean.VTaskUserPublishedBean;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
-import com.yline.utils.TimeConvertUtil;
+import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 /**
@@ -42,9 +43,11 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 	@Override
 	public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
 	{
+		super.onBindViewHolder(viewHolder, position);
+
 		VTaskUserPublishedBean.VTaskUserPublishedOneBean taskBean = sList.get(position);
 		// 初始化数据
-		viewHolder.setText(R.id.tv_item_main_task_price, String.format("￥%f × %d", taskBean.getTask_fee(), taskBean.getTask_peo_num()));
+		viewHolder.setText(R.id.tv_item_main_task_price, String.format("￥%d × %d", taskBean.getTask_fee(), taskBean.getTask_peo_num()));
 		viewHolder.setText(R.id.tv_item_main_task_title, taskBean.getTask_title());
 
 		// 右侧状态
@@ -59,11 +62,18 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		viewHolder.setText(R.id.tv_item_main_task_user, taskBean.getUser_nickname());
 
 		// 报名 状态
-		viewHolder.setText(R.id.tv_item_main_task_user_state, String.format("5人报名，1人录用", taskBean.getJoin_num(), taskBean.getEmployee_num()));
+		viewHolder.setText(R.id.tv_item_main_task_user_state, String.format("%d人报名，%d人录用", taskBean.getJoin_num(), taskBean.getEmployee_num()));
 
 		// 截止时间
-		String showTime = TimeConvertUtil.stamp2FormatTime(taskBean.getTask_end_time() * 1000);
-		viewHolder.setText(R.id.tv_item_main_task_time, showTime);
+		String showTime = HokolTimeConvertUtil.stampToRestFormatTime(taskBean.getTask_end_time() * 1000);
+		if (TextUtils.isEmpty(showTime))
+		{
+			viewHolder.setText(R.id.tv_item_main_task_time, "已到期");
+		}
+		else
+		{
+			viewHolder.setText(R.id.tv_item_main_task_time, "剩" + showTime);
+		}
 
 		// 初始状态
 		int status = taskBean.getStatus();

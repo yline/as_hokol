@@ -4,28 +4,43 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
+import com.hokol.activity.TaskDetailActivity;
 import com.hokol.adapter.TaskDeliveredAdapter;
+import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VTaskUserDeliveredBean;
+import com.hokol.medium.http.bean.WTaskUserDeliveredBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
+import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
+
+import java.util.List;
 
 public class TaskDeliveredSignFragment extends BaseFragment
 {
+	private static final String KeyUserId = "TaskId";
+
 	private TaskDeliveredAdapter deliveredSignAdapter;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
-	public static TaskDeliveredSignFragment newInstance()
+	private WTaskUserDeliveredBean deliveredSignBean;
+
+	public static TaskDeliveredSignFragment newInstance(String userId)
 	{
 		Bundle args = new Bundle();
-
+		args.putString(KeyUserId, userId);
 		TaskDeliveredSignFragment fragment = new TaskDeliveredSignFragment();
 		fragment.setArguments(args);
 		return fragment;
@@ -61,6 +76,14 @@ public class TaskDeliveredSignFragment extends BaseFragment
 		});
 		
 		deliveredSignAdapter = new TaskDeliveredAdapter();
+		deliveredSignAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VTaskUserDeliveredBean.VTaskUserDeliveredOneBean>()
+		{
+			@Override
+			public void onItemClick(RecyclerViewHolder viewHolder, VTaskUserDeliveredBean.VTaskUserDeliveredOneBean deliveredOneBean, int position)
+			{
+				TaskDetailActivity.actionStart(getContext(), deliveredOneBean.getTask_id());
+			}
+		});
 		deliveredSignAdapter.setOnDeliveredSignCallback(new TaskDeliveredAdapter.OnTaskDeliveredSignCallback()
 		{
 			@Override
@@ -117,6 +140,24 @@ public class TaskDeliveredSignFragment extends BaseFragment
 
 	private void initData()
 	{
-		// deliveredSignAdapter.setDataList(HttpEnum.getUserTagListAll());
+		String userId = getArguments().getString(KeyUserId);
+		if (!TextUtils.isEmpty(userId))
+		{
+			deliveredSignAdapter.setShowEmpty(false);
+			deliveredSignBean = new WTaskUserDeliveredBean(userId, WTaskUserDeliveredBean.TypeSigned, 0, DeleteConstant.defaultNumberSuper);
+			XHttpUtil.doTaskUserDelivered(deliveredSignBean, new XHttpAdapter<VTaskUserDeliveredBean>()
+			{
+				@Override
+				public void onSuccess(VTaskUserDeliveredBean vTaskUserDeliveredBean)
+				{
+					deliveredSignAdapter.setShowEmpty(true);
+					List<VTaskUserDeliveredBean.VTaskUserDeliveredOneBean> resultList = vTaskUserDeliveredBean.getList();
+					if (null != resultList)
+					{
+						deliveredSignAdapter.setDataList(resultList);
+					}
+				}
+			});
+		}
 	}
 }

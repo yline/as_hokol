@@ -80,7 +80,7 @@ public class MainMineHomeFragment extends BaseFragment
 				}
 				else
 				{
-					TaskDeliveredActivity.actionStart(getContext());
+					TaskDeliveredActivity.actionStart(getContext(), userId);
 				}
 			}
 		});

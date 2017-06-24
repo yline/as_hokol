@@ -30,6 +30,9 @@ public class VTaskMainDetailBean
 	/* 是否担保(0:未担保,1:已担保) */
 	private int is_guarantee;
 
+	/* 是否已收藏(0:未收藏，1:已收藏) */
+	private int is_collect;
+
 	/* 任务剩余时间(时间戳) */
 	private long task_rem_time;
 
@@ -41,6 +44,9 @@ public class VTaskMainDetailBean
 
 	/* 任务状态(1:报名中,2:已终止报名,3:已结束) */
 	private int status;
+
+	/* 用户是否已报名(0:未报名，1:已报名) */
+	private int user_is_join;
 
 	/* 任务数量 */
 	private int task_peo_num;
@@ -56,6 +62,11 @@ public class VTaskMainDetailBean
 
 	/* 用户所在省份=>[北京市,110000] */
 	private List<String> province;
+
+	public static int getGuaranteed()
+	{
+		return Guaranteed;
+	}
 
 	public String getTask_id()
 	{
@@ -137,6 +148,16 @@ public class VTaskMainDetailBean
 		this.is_guarantee = is_guarantee;
 	}
 
+	public int getIs_collect()
+	{
+		return is_collect;
+	}
+
+	public void setIs_collect(int is_collect)
+	{
+		this.is_collect = is_collect;
+	}
+
 	public long getTask_rem_time()
 	{
 		return task_rem_time;
@@ -175,6 +196,16 @@ public class VTaskMainDetailBean
 	public void setStatus(int status)
 	{
 		this.status = status;
+	}
+
+	public int getUser_is_join()
+	{
+		return user_is_join;
+	}
+
+	public void setUser_is_join(int user_is_join)
+	{
+		this.user_is_join = user_is_join;
 	}
 
 	public int getTask_peo_num()
