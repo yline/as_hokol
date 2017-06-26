@@ -8,6 +8,10 @@ package com.hokol.medium.http.bean;
  */
 public class WDynamicPraiseSingleBean
 {
+	public static final int actionPraise = 1;
+
+	public static final int actionPraiseCancel = 0;
+
 	public WDynamicPraiseSingleBean(String user_id, String dt_id, int zan)
 	{
 		this.user_id = user_id;

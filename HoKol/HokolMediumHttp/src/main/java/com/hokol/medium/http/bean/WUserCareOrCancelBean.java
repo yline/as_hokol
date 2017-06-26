@@ -2,6 +2,10 @@ package com.hokol.medium.http.bean;
 
 public class WUserCareOrCancelBean
 {
+	public static final int actionCare = 1;
+
+	public static final int actionCancelCare = 0;
+
 	/**
 	 * 用户唯一标识
 	 */

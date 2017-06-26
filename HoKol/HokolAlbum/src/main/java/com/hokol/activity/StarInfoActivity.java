@@ -11,15 +11,20 @@ import android.view.Gravity;
 import android.view.View;
 
 import com.hokol.R;
+import com.hokol.application.AppStateManager;
 import com.hokol.application.IApplication;
 import com.hokol.fragment.StarInfoDatumFragment;
 import com.hokol.fragment.StarInfoDynamicFragment;
 import com.hokol.fragment.StarInfoPrivateFragment;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VDynamicUserDetailBean;
+import com.hokol.medium.http.bean.WDynamicUserDetailBean;
 import com.hokol.medium.widget.HokolGiftWidget;
 import com.hokol.viewhelper.StarInfoHelper;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.ArrayList;
@@ -34,6 +39,8 @@ import java.util.List;
  */
 public class StarInfoActivity extends BaseAppCompatActivity
 {
+	private static final String KeyStarId = "StarUserId";
+
 	private StarInfoHelper starInfoHelper;
 
 	private HokolGiftWidget hokolGiftWidget;
@@ -47,6 +54,14 @@ public class StarInfoActivity extends BaseAppCompatActivity
 		setContentView(R.layout.activity_star_info);
 
 		viewHolder = new ViewHolder(this);
+
+		initView();
+		initTabView();
+		initData();
+	}
+
+	private void initView()
+	{
 		starInfoHelper = new StarInfoHelper(this, viewHolder);
 		hokolGiftWidget = new HokolGiftWidget(this);
 		hokolGiftWidget.setDataList(Arrays.asList(1, 10, 66, 128, 288, 520, 666, 999, 1314, 6666, 9999, 10888));
@@ -99,12 +114,9 @@ public class StarInfoActivity extends BaseAppCompatActivity
 				UserInfoCreditActivity.actionStart(StarInfoActivity.this);
 			}
 		});
-
-		initView();
-		starInfoHelper.initHeadData();
 	}
 
-	private void initView()
+	private void initTabView()
 	{
 		final List<BaseFragment> fragmentList = new ArrayList<>();
 		final List<String> titleList = new ArrayList<>();
@@ -146,8 +158,23 @@ public class StarInfoActivity extends BaseAppCompatActivity
 		tabLayout.setTabTextColors(getResources().getColor(android.R.color.black), getResources().getColor(android.R.color.holo_red_light));
 	}
 
-	public static void actionStart(Context context)
+	private void initData()
 	{
-		context.startActivity(new Intent(context, StarInfoActivity.class));
+		String userId = AppStateManager.getInstance().getUserLoginId(this);
+		String starId = getIntent().getStringExtra(KeyStarId);
+
+		XHttpUtil.doDynamicUserDetail(new WDynamicUserDetailBean(userId, starId), new XHttpAdapter<VDynamicUserDetailBean>()
+		{
+			@Override
+			public void onSuccess(VDynamicUserDetailBean vDynamicUserDetailBean)
+			{
+				starInfoHelper.initHeadData(vDynamicUserDetailBean);
+			}
+		});
+	}
+	
+	public static void actionStart(Context context, String starId)
+	{
+		context.startActivity(new Intent(context, StarInfoActivity.class).putExtra(KeyStarId, starId));
 	}
 }

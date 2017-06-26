@@ -105,14 +105,16 @@ public class TestDynamicActivity extends BaseTestActivity
 	private void testdt_one()
 	{
 		final EditText editTextOne = addEditNumber("动态id", "2");
+		final EditText editTextTwo = addEditNumber("用户id", "2");
 		addButton("请求单条动态的信息", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
 				final String dt_id = editTextOne.getText().toString().trim();
+				final String user_id = editTextTwo.getText().toString().trim();
 
-				XHttpUtil.doDynamicSingle(new WDynamicCareSingleBean(dt_id), new XHttpAdapter<VDynamicCareSingleBean>()
+				XHttpUtil.doDynamicSingle(new WDynamicCareSingleBean(user_id, dt_id), new XHttpAdapter<VDynamicCareSingleBean>()
 				{
 					@Override
 					public void onSuccess(VDynamicCareSingleBean vDynamicCareSingleBean)

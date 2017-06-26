@@ -4,6 +4,10 @@ import java.util.List;
 
 public class VDynamicCareSingleBean
 {
+	public static final int Praised = 1;
+
+	public static final int Cared = 1;
+
 	/* 用户昵称 */
 	private String user_nickname;
 
@@ -30,6 +34,22 @@ public class VDynamicCareSingleBean
 
 	/* 动态大图片：(链接) */
 	private String dt_img;
+
+	/* 是否关注该用户(0:未关注,1:已关注) */
+	private int is_care;
+
+	/* 是否点赞该评论(0:未点赞，1:已点赞) */
+	private int is_zan;
+
+	public static int getPraised()
+	{
+		return Praised;
+	}
+
+	public static int getCared()
+	{
+		return Cared;
+	}
 
 	public String getUser_nickname()
 	{
@@ -119,5 +139,25 @@ public class VDynamicCareSingleBean
 	public void setDt_img(String dt_img)
 	{
 		this.dt_img = dt_img;
+	}
+
+	public int getIs_care()
+	{
+		return is_care;
+	}
+
+	public void setIs_care(int is_care)
+	{
+		this.is_care = is_care;
+	}
+
+	public int getIs_zan()
+	{
+		return is_zan;
+	}
+
+	public void setIs_zan(int is_zan)
+	{
+		this.is_zan = is_zan;
 	}
 }

@@ -4,6 +4,10 @@ import java.util.List;
 
 public class VDynamicUserDetailBean
 {
+	public static final int unCare = 0;
+
+	public static final int cared = 1;
+
 	/* 关注的人唯一标识 */
 	private String user_id;
 
@@ -19,20 +23,23 @@ public class VDynamicUserDetailBean
 	/* 标签：[数组] */
 	private List<String> user_tag;
 
+	/* 用户性别(男，女) */
+	private String user_sex;
+
 	/* 是否关注:0[未关注],1[已关注],2[自己的主页] */
-	private String is_care;
+	private int is_care;
 
 	/* 用户收藏数 */
-	private String user_collect_task_num;
+	private int user_collect_task_num;
 
-	/* 用户所在城市 */
-	private String user_city;
+	/* 用户所在城市 [石家庄市，130100] */
+	private List<String> city;
 
 	/* 用户手机号 */
 	private String user_tel;
 
-	/* 用户所在省份 */
-	private String user_province;
+	/* 用户所在省份 [北京市，110000] */
+	private List<String> province;
 
 	/* 用户签名 */
 	private String user_sign;
@@ -44,16 +51,32 @@ public class VDynamicUserDetailBean
 	private String user_constell;
 
 	/* 用户点赞数 */
-	private String user_zan;
+	private int user_zan;
 
 	/* 用户红豆数 */
-	private String user_coin;
+	private int user_coin;
 
 	/* 用户关注数 */
-	private String user_care_num;
+	private int user_care_num;
 
 	/* 用户粉丝数 */
-	private String user_fans_num;
+	private int user_fans_num;
+
+	/* 用户等级 */
+	private int user_level;
+
+	/* 用户等级图像 */
+	private String level_url;
+
+	public static int getUnCare()
+	{
+		return unCare;
+	}
+
+	public static int getCared()
+	{
+		return cared;
+	}
 
 	public String getUser_id()
 	{
@@ -105,34 +128,44 @@ public class VDynamicUserDetailBean
 		this.user_tag = user_tag;
 	}
 
-	public String getIs_care()
+	public String getUser_sex()
+	{
+		return user_sex;
+	}
+
+	public void setUser_sex(String user_sex)
+	{
+		this.user_sex = user_sex;
+	}
+
+	public int getIs_care()
 	{
 		return is_care;
 	}
 
-	public void setIs_care(String is_care)
+	public void setIs_care(int is_care)
 	{
 		this.is_care = is_care;
 	}
 
-	public String getUser_collect_task_num()
+	public int getUser_collect_task_num()
 	{
 		return user_collect_task_num;
 	}
 
-	public void setUser_collect_task_num(String user_collect_task_num)
+	public void setUser_collect_task_num(int user_collect_task_num)
 	{
 		this.user_collect_task_num = user_collect_task_num;
 	}
 
-	public String getUser_city()
+	public List<String> getCity()
 	{
-		return user_city;
+		return city;
 	}
 
-	public void setUser_city(String user_city)
+	public void setCity(List<String> city)
 	{
-		this.user_city = user_city;
+		this.city = city;
 	}
 
 	public String getUser_tel()
@@ -145,14 +178,14 @@ public class VDynamicUserDetailBean
 		this.user_tel = user_tel;
 	}
 
-	public String getUser_province()
+	public List<String> getProvince()
 	{
-		return user_province;
+		return province;
 	}
 
-	public void setUser_province(String user_province)
+	public void setProvince(List<String> province)
 	{
-		this.user_province = user_province;
+		this.province = province;
 	}
 
 	public String getUser_sign()
@@ -185,43 +218,63 @@ public class VDynamicUserDetailBean
 		this.user_constell = user_constell;
 	}
 
-	public String getUser_zan()
+	public int getUser_zan()
 	{
 		return user_zan;
 	}
 
-	public void setUser_zan(String user_zan)
+	public void setUser_zan(int user_zan)
 	{
 		this.user_zan = user_zan;
 	}
 
-	public String getUser_coin()
+	public int getUser_coin()
 	{
 		return user_coin;
 	}
 
-	public void setUser_coin(String user_coin)
+	public void setUser_coin(int user_coin)
 	{
 		this.user_coin = user_coin;
 	}
 
-	public String getUser_care_num()
+	public int getUser_care_num()
 	{
 		return user_care_num;
 	}
 
-	public void setUser_care_num(String user_care_num)
+	public void setUser_care_num(int user_care_num)
 	{
 		this.user_care_num = user_care_num;
 	}
 
-	public String getUser_fans_num()
+	public int getUser_fans_num()
 	{
 		return user_fans_num;
 	}
 
-	public void setUser_fans_num(String user_fans_num)
+	public void setUser_fans_num(int user_fans_num)
 	{
 		this.user_fans_num = user_fans_num;
+	}
+
+	public int getUser_level()
+	{
+		return user_level;
+	}
+
+	public void setUser_level(int user_level)
+	{
+		this.user_level = user_level;
+	}
+
+	public String getLevel_url()
+	{
+		return level_url;
+	}
+
+	public void setLevel_url(String level_url)
+	{
+		this.level_url = level_url;
 	}
 }

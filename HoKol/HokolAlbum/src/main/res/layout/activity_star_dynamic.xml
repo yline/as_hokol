@@ -19,8 +19,7 @@
                 android:id="@+id/iv_star_dynamic_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/global_load_failed"/>
+                android:scaleType="centerCrop"/>
 
             <RelativeLayout
                 android:id="@+id/rl_star_dynamic_action"
@@ -36,8 +35,7 @@
                     android:layout_alignBottom="@+id/iv_star_dynamic_praise"
                     android:layout_toLeftOf="@+id/iv_star_dynamic_praise"
                     android:layout_toStartOf="@+id/iv_star_dynamic_praise"
-                    android:padding="@dimen/default_space_normal"
-                    android:src="@drawable/star_dynamic_care"/>
+                    android:padding="@dimen/default_space_normal"/>
 
                 <!-- 点赞 -->
                 <ImageView
@@ -47,8 +45,7 @@
                     android:layout_alignBottom="@+id/iv_star_dynamic_give_gift"
                     android:layout_toLeftOf="@+id/iv_star_dynamic_give_gift"
                     android:layout_toStartOf="@+id/iv_star_dynamic_give_gift"
-                    android:padding="@dimen/default_space_normal"
-                    android:src="@drawable/star_dynamic_unlike"/>
+                    android:padding="@dimen/default_space_normal"/>
 
                 <!-- 送礼 -->
                 <ImageView
@@ -71,7 +68,7 @@
             android:paddingBottom="@dimen/default_space_large"
             android:paddingRight="@dimen/default_space_normal"
             android:paddingTop="@dimen/default_space_medium"
-            android:text="1天前"
+            android:text=""
             android:textColor="#a6a6a6"/>
 
         <LinearLayout
@@ -88,7 +85,6 @@
                 android:id="@+id/circle_star_dynamic"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/global_load_failed"
                 app:circle_border_color="@android:color/darker_gray"
                 app:circle_border_width="1px"/>
 
@@ -142,7 +138,7 @@
                 android:paddingBottom="@dimen/default_space_little"
                 android:paddingLeft="15dp"
                 android:paddingTop="@dimen/default_space_little"
-                android:text="1000"/>
+                android:text=""/>
 
             <TextView
                 android:id="@+id/tv_star_dynamic_laud"
@@ -153,7 +149,7 @@
                 android:paddingBottom="@dimen/default_space_little"
                 android:paddingLeft="15dp"
                 android:paddingTop="@dimen/default_space_little"
-                android:text="3"/>
+                android:text=""/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

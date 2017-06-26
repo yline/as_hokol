@@ -10,10 +10,14 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
+import com.hokol.application.AppStateManager;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VDynamicCareSingleBean;
+import com.hokol.medium.http.bean.VDynamicPraiseSingleBean;
 import com.hokol.medium.http.bean.WDynamicCareSingleBean;
+import com.hokol.medium.http.bean.WDynamicPraiseSingleBean;
+import com.hokol.medium.http.bean.WUserCareOrCancelBean;
 import com.hokol.medium.widget.HokolGiftWidget;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
@@ -42,6 +46,12 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 
 	private HokolGiftWidget giftWidget;
 
+	private String starId;
+
+	private String dynamicId;
+
+	private boolean isPraised;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -68,30 +78,56 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 
 	private void initViewClick()
 	{
+		// 关注
 		viewHolder.get(R.id.iv_star_dynamic_care).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				IApplication.toast("点击关注");
+				String userId = AppStateManager.getInstance().getUserLoginId(StarDynamicActivity.this);
+				XHttpUtil.doUserCareOrCancel(new WUserCareOrCancelBean(userId, starId, WUserCareOrCancelBean.actionCare), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						SDKManager.toast("关注成功");
+						viewHolder.get(R.id.iv_star_dynamic_care).setVisibility(View.GONE);
+					}
 
+					@Override
+					public void onFailureCode(int code)
+					{
+						super.onFailureCode(code);
+						SDKManager.toast("code = " + code);
+					}
+				});
 			}
 		});
+		// 点赞
 		viewHolder.get(R.id.iv_star_dynamic_praise).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				IApplication.toast("点击点赞");
+				String userId = AppStateManager.getInstance().getUserLoginId(StarDynamicActivity.this);
+				int actionPraise = isPraised ? WDynamicPraiseSingleBean.actionPraiseCancel : WDynamicPraiseSingleBean.actionPraise;
 
-				/*XHttpUtil.doDynamicPraiseSingle(new WDynamicPraiseSingleBean(), new XHttpAdapter<VDynamicPraiseSingleBean>()
+				XHttpUtil.doDynamicPraiseSingle(new WDynamicPraiseSingleBean(userId, dynamicId, actionPraise), new XHttpAdapter<VDynamicPraiseSingleBean>()
 				{
 					@Override
 					public void onSuccess(VDynamicPraiseSingleBean vDynamicPraiseSingleBean)
 					{
-
+						isPraised = !isPraised;
+						if (isPraised)
+						{
+							viewHolder.setImageResource(R.id.iv_star_dynamic_praise, R.drawable.star_dynamic_liked);
+						}
+						else
+						{
+							viewHolder.setImageResource(R.id.iv_star_dynamic_praise, R.drawable.star_dynamic_unlike);
+						}
 					}
-				});*/
+				});
 			}
 		});
 		viewHolder.get(R.id.iv_star_dynamic_give_gift).setOnClickListener(new View.OnClickListener()
@@ -110,7 +146,10 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				StarInfoActivity.actionStart(StarDynamicActivity.this);
+				if (!TextUtils.isEmpty(starId))
+				{
+					StarInfoActivity.actionStart(StarDynamicActivity.this, starId);
+				}
 			}
 		});
 
@@ -134,23 +173,27 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 
 	private void initData()
 	{
-		String dynamicId = getIntent().getStringExtra(KeyDynamicId);
+		dynamicId = getIntent().getStringExtra(KeyDynamicId);
 		if (!TextUtils.isEmpty(dynamicId))
 		{
-			WDynamicCareSingleBean wDynamicSingleBean = new WDynamicCareSingleBean(dynamicId);
+			String userId = AppStateManager.getInstance().getUserLoginId(this);
+			WDynamicCareSingleBean wDynamicSingleBean = new WDynamicCareSingleBean(userId, dynamicId);
 			XHttpUtil.doDynamicSingle(wDynamicSingleBean, new XHttpAdapter<VDynamicCareSingleBean>()
 			{
 				@Override
 				public void onSuccess(VDynamicCareSingleBean vDynamicCareSingleBean)
 				{
+					// 赋值
+					starId = vDynamicCareSingleBean.getDt_user_id();
+
 					// 内容
 					String contentUrl = vDynamicCareSingleBean.getDt_img();
-					Glide.with(StarDynamicActivity.this).load(contentUrl).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).into(contentImageView);
+					Glide.with(StarDynamicActivity.this).load(contentUrl).error(R.drawable.global_load_failed).into(contentImageView);
 
 					// 头像
 					String avatarUrl = vDynamicCareSingleBean.getUser_logo();
 					ImageView avatarImageView = viewHolder.get(R.id.circle_star_dynamic);
-					Glide.with(StarDynamicActivity.this).load(avatarUrl).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).into(avatarImageView);
+					Glide.with(StarDynamicActivity.this).load(avatarUrl).error(R.drawable.global_load_failed).into(avatarImageView);
 
 					// 昵称
 					viewHolder.setText(R.id.tv_star_dynamic_nickname, vDynamicCareSingleBean.getUser_nickname());
@@ -167,6 +210,28 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 					// 时间
 					long startTime = vDynamicCareSingleBean.getDt_pub_time();
 					viewHolder.setText(R.id.tv_star_dynamic_time, TimeConvertUtil.stamp2FormatTime(startTime * 1000));
+
+					// 是否关注
+					boolean isCared = vDynamicCareSingleBean.getIs_care() == VDynamicCareSingleBean.Cared ? true : false;
+					if (isCared)
+					{
+						viewHolder.get(R.id.iv_star_dynamic_care).setVisibility(View.GONE);
+					}
+					else
+					{
+						viewHolder.get(R.id.iv_star_dynamic_care).setVisibility(View.VISIBLE);
+					}
+					
+					// 是否点赞
+					isPraised = vDynamicCareSingleBean.getIs_zan() == VDynamicCareSingleBean.Praised ? true : false;
+					if (isPraised)
+					{
+						viewHolder.setImageResource(R.id.iv_star_dynamic_praise, R.drawable.star_dynamic_liked);
+					}
+					else
+					{
+						viewHolder.setImageResource(R.id.iv_star_dynamic_praise, R.drawable.star_dynamic_unlike);
+					}
 				}
 			});
 		}

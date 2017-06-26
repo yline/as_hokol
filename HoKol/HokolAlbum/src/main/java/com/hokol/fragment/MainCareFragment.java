@@ -76,7 +76,10 @@ public class MainCareFragment extends BaseFragment
 			@Override
 			public void onAvatarClick(VDynamicCareBean bean)
 			{
-				StarInfoActivity.actionStart(getContext());
+				if (!TextUtils.isEmpty(bean.getDt_user_id()))
+				{
+					StarInfoActivity.actionStart(getContext(), bean.getDt_user_id());
+				}
 			}
 
 			@Override

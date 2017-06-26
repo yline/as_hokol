@@ -3,15 +3,15 @@ package com.hokol.viewhelper;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
-import com.hokol.application.DeleteConstant;
+import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.bean.VDynamicUserDetailBean;
 import com.hokol.medium.widget.FlowWidget;
 import com.yline.view.layout.label.FlowLayout;
 import com.yline.view.recycler.holder.ViewHolder;
-
-import java.util.Arrays;
 
 import jp.wasabeef.glide.transformations.ColorFilterTransformation;
 import jp.wasabeef.glide.transformations.gpu.KuwaharaFilterTransformation;
@@ -21,6 +21,8 @@ public class StarInfoHelper
 	private Context sContext;
 
 	private ViewHolder viewHolder;
+
+	private FlowWidget labelWidget;
 
 	public StarInfoHelper(Context context, ViewHolder viewHolder)
 	{
@@ -32,15 +34,9 @@ public class StarInfoHelper
 
 	public void initHeadView()
 	{
-		// 背景
-		ImageView bgImageView = viewHolder.get(R.id.iv_star_info_bg);
-		Glide.with(sContext).load(DeleteConstant.getUrlSquare()).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed)
-				.bitmapTransform(new KuwaharaFilterTransformation(sContext, 25)).bitmapTransform(new ColorFilterTransformation(sContext, 0xc0000000)).into(bgImageView); //  Color.argb(99, )
-
 		// 标签
 		FlowLayout flowLayout = viewHolder.get(R.id.label_flow_star_info);
-		FlowWidget labelWidget = new FlowWidget(sContext, flowLayout);
-		labelWidget.setDataList(Arrays.asList("网红", "模特"));
+		labelWidget = new FlowWidget(sContext, flowLayout);
 
 		// 关注、联系、送红豆
 		viewHolder.get(R.id.iv_star_info_head_care_or_cancel).setOnClickListener(new View.OnClickListener()
@@ -83,10 +79,59 @@ public class StarInfoHelper
 		this.onHeadViewClickListener = listener;
 	}
 
-	public void initHeadData()
+	public void initHeadData(VDynamicUserDetailBean vDetailBean)
 	{
+		// 背景
+		ImageView bgImageView = viewHolder.get(R.id.iv_star_info_bg);
+		Glide.with(sContext).load(vDetailBean.getUser_big_logo()).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed)
+				.bitmapTransform(new KuwaharaFilterTransformation(sContext, 25)).bitmapTransform(new ColorFilterTransformation(sContext, 0xc0000000)).into(bgImageView); //  Color.argb(99, )
+
+		// 头像
 		ImageView avatarView = viewHolder.get(R.id.circle_star_info_avatar);
-		Glide.with(sContext).load(DeleteConstant.url_default_avatar).into(avatarView);
+		Glide.with(sContext).load(vDetailBean.getUser_logo()).error(R.drawable.global_load_failed).into(avatarView);
+
+		// 昵称 + 性别
+		TextView textView = viewHolder.get(R.id.tv_star_info_nickname);
+		textView.setText(vDetailBean.getUser_nickname());
+		if (HttpEnum.UserSex.Girl.getContent().equals(vDetailBean.getUser_sex()))
+		{
+			textView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.global_sex_girl, 0);
+		}
+		else if (HttpEnum.UserSex.Boy.getContent().equals(vDetailBean.getUser_sex()))
+		{
+			textView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.global_sex_boy, 0);
+		}
+		else
+		{
+			textView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+		}
+
+		// 等级
+		ImageView vipLevelImageView = viewHolder.get(R.id.iv_star_info_vip);
+		Glide.with(sContext).load(vDetailBean.getLevel_url()).into(vipLevelImageView);
+
+		// 关注人数
+		viewHolder.setText(R.id.tv_star_info_cared_number, String.format("关注 %d", vDetailBean.getUser_care_num()));
+
+		// 粉丝数
+		viewHolder.setText(R.id.tv_star_info_fans_number, String.format("粉丝 %d", vDetailBean.getUser_fans_num()));
+
+		// 关注
+		boolean isCared = vDetailBean.getIs_care() == VDynamicUserDetailBean.cared ? true : false;
+		if (isCared)
+		{
+			viewHolder.setImageResource(R.id.iv_star_info_head_care_or_cancel, R.drawable.star_info_followed);
+		}
+		else
+		{
+			viewHolder.setImageResource(R.id.iv_star_info_head_care_or_cancel, R.drawable.star_info_unfollow);
+		}
+
+		// 签名
+		viewHolder.setText(R.id.tv_star_info_head_sign, vDetailBean.getUser_sign());
+
+		// 标签
+		labelWidget.setDataList(vDetailBean.getUser_tag());
 	}
 
 	public interface OnHeadViewClickListener

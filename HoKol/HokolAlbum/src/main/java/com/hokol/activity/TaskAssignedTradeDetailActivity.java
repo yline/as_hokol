@@ -82,7 +82,7 @@ public class TaskAssignedTradeDetailActivity extends BaseAppCompatActivity
 		}
 
 		@Override
-		public void onBindViewHolder(RecyclerViewHolder holder, int position)
+		public void onBindViewHolder(RecyclerViewHolder holder, final int position)
 		{
 			FlowLayout flowLayout = holder.get(R.id.flow_layout_trade_detail);
 			FlowWidget flowWidget = new FlowWidget(TaskAssignedTradeDetailActivity.this, flowLayout);
@@ -93,7 +93,7 @@ public class TaskAssignedTradeDetailActivity extends BaseAppCompatActivity
 				@Override
 				public void onClick(View v)
 				{
-					StarInfoActivity.actionStart(TaskAssignedTradeDetailActivity.this);
+					// StarInfoActivity.actionStart(TaskAssignedTradeDetailActivity.this, sList.get(position));
 				}
 			});
 		}

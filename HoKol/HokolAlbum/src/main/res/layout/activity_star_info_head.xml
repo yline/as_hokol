@@ -26,7 +26,6 @@
             android:layout_height="52dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/default_space_large"
-            android:src="@drawable/global_load_failed"
             app:circle_border_color="@android:color/darker_gray"
             app:circle_border_width="1px"/>
 
@@ -39,8 +38,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/default_space_small"
             android:drawablePadding="@dimen/default_space_little"
-            android:drawableRight="@drawable/global_sex_girl"
-            android:text="昵称"
+            android:text=""
             android:textColor="@android:color/white"/>
 
         <!-- 身份标识 -->
@@ -54,15 +52,14 @@
 
             <ImageView
                 android:id="@+id/iv_star_info_vip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/default_space_little"
-                android:src="@drawable/star_info_vip"/>
+                android:layout_width="@dimen/default_title_normal"
+                android:layout_height="@dimen/default_space_large_b"
+                android:layout_marginRight="@dimen/default_space_little"/>
 
             <ImageView
                 android:id="@+id/iv_star_info_credit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/default_title_normal"
+                android:layout_height="@dimen/default_space_large_b"
                 android:layout_marginLeft="@dimen/default_space_little"
                 android:src="@drawable/star_info_credit"/>
         </LinearLayout>
@@ -83,7 +80,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="关注 100"
+                android:text=""
                 android:textColor="@android:color/white"/>
 
             <TextView
@@ -93,7 +90,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:text="粉丝 200"
+                android:text=""
                 android:textColor="@android:color/white"/>
         </LinearLayout>
 
@@ -136,12 +133,13 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/tv_star_info_head_sign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="3"
         android:padding="@dimen/default_space_normal"
-        android:text="个性签名，你猜是不是这样"
+        android:text=""
         android:textColor="@color/hokolGray"
         android:textSize="@dimen/default_text_size_medium"/>
 
