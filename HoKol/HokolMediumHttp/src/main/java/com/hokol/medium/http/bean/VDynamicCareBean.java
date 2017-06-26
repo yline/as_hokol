@@ -29,7 +29,7 @@ public class VDynamicCareBean
 	private String user_nickname;
 
 	/* 关注的人红豆数 */
-	private String user_coin;
+	private int user_coin;
 
 	/* 动态发布者 */
 	private String dt_user_id;
@@ -112,12 +112,12 @@ public class VDynamicCareBean
 		this.user_nickname = user_nickname;
 	}
 
-	public String getUser_coin()
+	public int getUser_coin()
 	{
 		return user_coin;
 	}
 
-	public void setUser_coin(String user_coin)
+	public void setUser_coin(int user_coin)
 	{
 		this.user_coin = user_coin;
 	}

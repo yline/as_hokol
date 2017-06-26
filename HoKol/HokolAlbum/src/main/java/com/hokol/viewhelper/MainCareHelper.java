@@ -9,10 +9,10 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.application.AppStateManager;
-import com.hokol.application.DeleteConstant;
 import com.hokol.medium.http.bean.VDynamicCareBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
+import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
@@ -99,16 +99,41 @@ public class MainCareHelper
 		@Override
 		public void onBindViewHolder(RecyclerViewHolder viewHolder, final int position)
 		{
+			VDynamicCareBean careBean = sList.get(position);
+
 			// 头像
 			ImageView avatarView = viewHolder.get(R.id.circle_item_main_care_avatar);
+			Glide.with(sContext).load(careBean.getUser_logo()).error(R.drawable.global_load_failed).into(avatarView);
 
-			Glide.with(sContext).load(DeleteConstant.url_default_avatar).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).centerCrop().into(avatarView);
+			// 昵称
+			viewHolder.setText(R.id.tv_item_main_care_name, careBean.getUser_nickname());
 
+			// 时间
+			String timeStr = HokolTimeConvertUtil.stamp2FormatTime(careBean.getDt_pub_time() * 1000);
+			viewHolder.setText(R.id.tv_item_main_care_time, timeStr);
+
+			// 地点
+			if (null != careBean.getCity())
+			{
+				viewHolder.setText(R.id.tv_item_main_care_location, careBean.getCity().get(0));
+			}
+
+			// 图片内容
 			ImageView contentView = viewHolder.get(R.id.iv_item_main_care_content);
-			int width = UIScreenUtil.getScreenWidth(sContext) - UIScreenUtil.dp2px(sContext, 20);
-			UIResizeUtil.build().setHeight(width).commit(contentView);
-			Glide.with(sContext).load(DeleteConstant.getUrlRec()).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).into(contentView);
-			
+			int width = UIScreenUtil.getScreenWidth(sContext) * 7 / 8;
+			UIResizeUtil.build().setWidth(width).setHeight(width).commit(contentView);
+			Glide.with(sContext).load(careBean.getDt_img()).error(R.drawable.global_load_failed).into(contentView);
+
+			// 动态文字
+			viewHolder.setText(R.id.tv_item_main_care_scrap, careBean.getDt_content());
+
+			// 礼物个数
+			viewHolder.setText(R.id.tv_item_main_care_coin, careBean.getUser_coin() + "");
+
+			// 点赞个数
+			viewHolder.setText(R.id.tv_item_main_care_laud, careBean.getDt_total_zan() + "");
+
+			// 点击事件
 			viewHolder.get(R.id.rl_item_main_care).setOnClickListener(new View.OnClickListener()
 			{
 				@Override
@@ -120,7 +145,7 @@ public class MainCareHelper
 					}
 				}
 			});
-
+			
 			viewHolder.get(R.id.iv_item_main_care_content).setOnClickListener(new View.OnClickListener()
 			{
 				@Override
@@ -180,8 +205,18 @@ public class MainCareHelper
 
 	public interface OnCareRecycleClickListener
 	{
+		/**
+		 * 点击头像
+		 *
+		 * @param bean
+		 */
 		void onAvatarClick(VDynamicCareBean bean);
 
+		/**
+		 * 点击图片内容
+		 *
+		 * @param bean
+		 */
 		void onPictureClick(VDynamicCareBean bean);
 	}
 }
