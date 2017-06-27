@@ -10,6 +10,7 @@ import com.hokol.R;
 import com.hokol.application.AppStateManager;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskMainDetailBean;
+import com.hokol.medium.http.bean.WTaskMainCollectionBean;
 import com.hokol.medium.http.bean.WTaskMainDetailBean;
 import com.hokol.medium.widget.FlowWidget;
 import com.hokol.util.HokolTimeConvertUtil;
@@ -29,6 +30,10 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 	private static final String KeyTaskId = "TaskUserId";
 
 	private ViewHolder viewHolder;
+
+	private String taskId;
+
+	private boolean isCollected;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -57,7 +62,24 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				SDKManager.toast("收藏");
+				String userId = AppStateManager.getInstance().getUserLoginId(TaskDetailActivity.this);
+				int actionCollect = isCollected ? WTaskMainCollectionBean.actionCollectCancel : WTaskMainCollectionBean.actionCollect;
+				XHttpUtil.doTaskMainCollection(new WTaskMainCollectionBean(userId, taskId, actionCollect), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						isCollected = !isCollected;
+						if (isCollected)
+						{
+							viewHolder.setImageResource(R.id.iv_task_detail_collect, R.drawable.global_collected);
+						}
+						else
+						{
+							viewHolder.setImageResource(R.id.iv_task_detail_collect, R.drawable.global_uncollect);
+						}
+					}
+				});
 			}
 		});
 
@@ -73,7 +95,7 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 
 	private void initData()
 	{
-		String taskId = getIntent().getStringExtra(KeyTaskId);
+		taskId = getIntent().getStringExtra(KeyTaskId);
 		if (TextUtils.isEmpty(taskId))
 		{
 			SDKManager.toast("点击的任务出错啦");
@@ -92,6 +114,17 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 				@Override
 				public void onSuccess(VTaskMainDetailBean vTaskMainDetailBean)
 				{
+					// 是否收藏
+					isCollected = vTaskMainDetailBean.getIs_collect() == VTaskMainDetailBean.Collected ? true : false;
+					if (isCollected)
+					{
+						viewHolder.setImageResource(R.id.iv_task_detail_collect, R.drawable.global_collected);
+					}
+					else
+					{
+						viewHolder.setImageResource(R.id.iv_task_detail_collect, R.drawable.global_uncollect);
+					}
+
 					// 标价
 					viewHolder.setText(R.id.iv_task_detail_price, String.format("￥%d × %d", vTaskMainDetailBean.getTask_fee(), vTaskMainDetailBean.getTask_peo_num()));
 

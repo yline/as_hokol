@@ -2,19 +2,17 @@ package com.hokol.medium.http.bean;
 
 public class WTaskMainCollectionBean
 {
-	/**
-	 * 用户唯一标识
-	 */
+	public static final int actionCollect = 1;
+
+	public static final int actionCollectCancel = 0;
+
+	/* 用户唯一标识 */
 	private String user_id;
 
-	/**
-	 * 任务唯一标识
-	 */
+	/* 任务唯一标识 */
 	private String task_id;
 
-	/**
-	 * 任务收藏开关：[0:取消收藏，1：收藏]
-	 */
+	/* 任务收藏开关：[0:取消收藏，1：收藏] */
 	private int collect;
 
 	public WTaskMainCollectionBean(String user_id, String task_id, int collect)

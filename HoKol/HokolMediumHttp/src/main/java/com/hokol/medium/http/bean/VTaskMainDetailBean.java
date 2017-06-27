@@ -6,6 +6,8 @@ public class VTaskMainDetailBean
 {
 	public static final int Guaranteed = 1;
 
+	public static final int Collected = 1;
+
 	/* 任务唯一标识 */
 	private String task_id;
 

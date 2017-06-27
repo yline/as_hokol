@@ -84,13 +84,22 @@ public class MainMineHomeFragment extends BaseFragment
 				}
 			}
 		});
-
+		
+		// 我的收藏
 		homeViewHolder.get(R.id.ll_main_min_home_task_collection).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				UserTaskCollectionActivity.actionStart(getContext());
+
+				if (TextUtils.isEmpty(userId))
+				{
+					SDKManager.toast("亲，请先登录");
+				}
+				else
+				{
+					UserTaskCollectionActivity.actionStart(getContext(), userId);
+				}
 			}
 		});
 

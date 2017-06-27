@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/default_space_normal"
     android:layout_marginRight="@dimen/default_space_normal"
+    android:layout_marginTop="@dimen/default_space_medium"
     android:background="@drawable/user_task_collection_content_bg"
     android:orientation="vertical">
 
@@ -65,15 +66,18 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/default_space_normal"
             android:text="用户人"
-            android:textColor="#808080"/>
+            android:textColor="#808080"
+            android:textSize="@dimen/default_text_size_medium"/>
 
         <TextView
+            android:id="@+id/tv_item_main_task_state"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:text="5人报名"
-            android:textColor="#808080"/>
+            android:textColor="#808080"
+            android:textSize="@dimen/default_text_size_medium"/>
 
         <TextView
             android:id="@+id/tv_item_main_task_time"
@@ -83,10 +87,12 @@
             android:layout_centerVertical="true"
             android:gravity="right"
             android:text="17天1小时后截止"
-            android:textColor="#808080"/>
+            android:textColor="#808080"
+            android:textSize="@dimen/default_text_size_medium"/>
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_item_main_task_action"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/hokolRed"

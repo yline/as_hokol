@@ -2,19 +2,13 @@ package com.hokol.medium.http.bean;
 
 public class WUserTaskCollectionBean
 {
-	/**
-	 * 用户唯一标识
-	 */
+	/* 用户唯一标识 */
 	private String user_id;
 
-	/**
-	 * 开始号
-	 */
+	/* 开始号 */
 	private int num1;
 
-	/**
-	 * 数据长度
-	 */
+	/* 数据长度 */
 	private int length;
 
 	public WUserTaskCollectionBean(String user_id, int num1, int length)

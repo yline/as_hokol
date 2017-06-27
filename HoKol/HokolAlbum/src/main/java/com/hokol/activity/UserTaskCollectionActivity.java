@@ -6,22 +6,30 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hokol.R;
-import com.hokol.medium.widget.recycler.FloatLinearItemDecoration;
+import com.hokol.application.DeleteConstant;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VUserTaskCollectionBean;
+import com.hokol.medium.http.bean.WUserTaskCollectionBean;
+import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
+import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
+import com.hokol.util.HokolTimeConvertUtil;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.utils.UIScreenUtil;
-import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
+import com.yline.http.XHttpAdapter;
+import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class UserTaskCollectionActivity extends BaseAppCompatActivity
 {
+	private static final String KeyCollectUserId = "TaskCollectionUserId";
+
 	private CollectionAdapter collectionAdapter;
 
 	@Override
@@ -30,31 +38,8 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_task_collection);
 
-		RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_task_collection);
-		FloatLinearItemDecoration itemDecoration = new FloatLinearItemDecoration(this)
-		{
-			@Override
-			public int getTitleHeight()
-			{
-				return UIScreenUtil.dp2px(UserTaskCollectionActivity.this, 30);
-			}
-
-			@Override
-			protected int getDivideResourceId()
-			{
-				return R.drawable.widget_solid_null_size_medium;
-			}
-		};
-		recyclerView.addItemDecoration(itemDecoration);
-
-		recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-		collectionAdapter = new CollectionAdapter();
-		recyclerView.setAdapter(collectionAdapter);
-
+		initView();
 		initData();
-
-		itemDecoration.setKeys(keys);
 
 		findViewById(R.id.iv_task_collection).setOnClickListener(new View.OnClickListener()
 		{
@@ -66,33 +51,127 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 		});
 	}
 
-	private Map<Integer, String> keys;//存放所有key的位置和内容
+	private void initView()
+	{
+		RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_task_collection);
+		DefaultLinearItemDecoration itemDecoration = new DefaultLinearItemDecoration(this)
+		{
+			@Override
+			protected int getHeadNumber()
+			{
+				return 1;
+			}
 
-	private List<String> itemDoubleList;
+			@Override
+			protected int getDivideResourceId()
+			{
+				return R.drawable.widget_solid_null_size_medium;
+			}
+		};
+		recyclerView.setLayoutManager(new LinearLayoutManager(this));
+		// recyclerView.addItemDecoration(itemDecoration);
+
+		collectionAdapter = new CollectionAdapter();
+		recyclerView.setAdapter(collectionAdapter);
+
+		collectionAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VUserTaskCollectionBean.VUserCollectionOneBean>()
+		{
+			@Override
+			public void onItemClick(RecyclerViewHolder viewHolder, VUserTaskCollectionBean.VUserCollectionOneBean collectBean, int position)
+			{
+				TaskDetailActivity.actionStart(UserTaskCollectionActivity.this, collectBean.getTask_id());
+			}
+		});
+		collectionAdapter.setOnTaskCollectCallback(new OnTaskCollectCallback()
+		{
+			@Override
+			public void onSignClick(View view, boolean isSign)
+			{
+				SDKManager.toast(isSign ? "已报名" : "未报名");
+			}
+		});
+	}
 
 	private void initData()
 	{
-		keys = new HashMap<>();
+		String userId = getIntent().getStringExtra(KeyCollectUserId);
+		WUserTaskCollectionBean collectionBean = new WUserTaskCollectionBean(userId, 0, DeleteConstant.defaultNumberLarge);
 
-		itemDoubleList = new ArrayList<>();
-		List tempA = Arrays.asList("汉庭", "7天", "如家", "速8", "锦江之星", "飘HOME", "海友", "锦江", "世纪金源");
-		keys.put(0, "A");
-		itemDoubleList.addAll(tempA);
-
-		List tempB = Arrays.asList("天安门商圈", "中关村商圈", "西直门商圈", "前门/崇文门", "首都机场地区", "西单/金融街", "奥体中心地区", "公主坟商圈", "西站/丽泽区", "国贸地区", "东直门/工体",
-				"南站/永定门", "建国门区域", "劲松/潘家园", "三里屯商圈", "国展区域");
-		keys.put(tempA.size(), "B");
-		itemDoubleList.addAll(tempB);
-
-		collectionAdapter.setDataList(itemDoubleList);
+		collectionAdapter.setShowEmpty(false);
+		XHttpUtil.doUserCollection(collectionBean, new XHttpAdapter<VUserTaskCollectionBean>()
+		{
+			@Override
+			public void onSuccess(VUserTaskCollectionBean vUserTaskCollectionBean)
+			{
+				collectionAdapter.setShowEmpty(true);
+				List<VUserTaskCollectionBean.VUserCollectionOneBean> result = vUserTaskCollectionBean.getList();
+				if (null != result)
+				{
+					collectionAdapter.setDataList(result);
+				}
+			}
+		});
 	}
 
-	private class CollectionAdapter extends CommonRecyclerAdapter<String>
+	private class CollectionAdapter extends WidgetRecyclerAdapter<VUserTaskCollectionBean.VUserCollectionOneBean>
 	{
+		private OnTaskCollectCallback onTaskCollectCallback;
+
+		public void setOnTaskCollectCallback(OnTaskCollectCallback onTaskCollectCallback)
+		{
+			this.onTaskCollectCallback = onTaskCollectCallback;
+		}
+
 		@Override
 		public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
 		{
-			viewHolder.setText(R.id.tv_collection_title, position + " - " + sList.get(position));
+			super.onBindViewHolder(viewHolder, position);
+
+			VUserTaskCollectionBean.VUserCollectionOneBean collectionBean = sList.get(position);
+			// 价格
+			viewHolder.setText(R.id.tv_collection_price, String.format("￥%d×%d", collectionBean.getTask_fee(), collectionBean.getTask_peo_num()));
+
+			// 标题
+			viewHolder.setText(R.id.tv_collection_title, collectionBean.getTask_title());
+
+			// 头像
+			ImageView avatarImageView = viewHolder.get(R.id.iv_item_main_task_avatar);
+			Glide.with(UserTaskCollectionActivity.this).load(collectionBean.getUser_logo()).error(R.drawable.global_load_failed).into(avatarImageView);
+
+			// 用户名
+			viewHolder.setText(R.id.tv_item_main_task_user, collectionBean.getUser_nickname());
+
+			// 报名人数
+			viewHolder.setText(R.id.tv_item_main_task_state, String.format("报名%d人，录取%d人", collectionBean.getTask_join_num(), collectionBean.getTask_employee_num()));
+
+			// 截止时间
+			String deadLineTimeStr = HokolTimeConvertUtil.stampToRestFormatTime(System.currentTimeMillis() + collectionBean.getTask_rem_time() * 1000);
+			viewHolder.setText(R.id.tv_item_main_task_time, deadLineTimeStr);
+
+			// 是否报名
+			final boolean isSign = collectionBean.getIs_join() == VUserTaskCollectionBean.Signed ? true : false;
+			TextView actionTextView = viewHolder.get(R.id.tv_item_main_task_action);
+			if (isSign)
+			{
+				actionTextView.setText("已报名");
+				actionTextView.setBackgroundResource(R.color.hokolPink);
+			}
+			else
+			{
+				actionTextView.setText("立即报名");
+				actionTextView.setBackgroundResource(R.color.hokolRed);
+			}
+			actionTextView.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					if (null != onTaskCollectCallback)
+					{
+						onTaskCollectCallback.onSignClick(v, isSign);
+					}
+				}
+			});
 		}
 
 		@Override
@@ -102,8 +181,13 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 		}
 	}
 
-	public static void actionStart(Context context)
+	public static void actionStart(Context context, String userId)
 	{
-		context.startActivity(new Intent(context, UserTaskCollectionActivity.class));
+		context.startActivity(new Intent(context, UserTaskCollectionActivity.class).putExtra(KeyCollectUserId, userId));
+	}
+
+	public interface OnTaskCollectCallback
+	{
+		void onSignClick(View view, boolean isSign);
 	}
 }
