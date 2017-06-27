@@ -47,6 +47,8 @@ public class StarInfoActivity extends BaseAppCompatActivity
 
 	private ViewHolder viewHolder;
 
+	private StarInfoDatumFragment starInfoDatumFragment;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -54,15 +56,15 @@ public class StarInfoActivity extends BaseAppCompatActivity
 		setContentView(R.layout.activity_star_info);
 
 		viewHolder = new ViewHolder(this);
+		starInfoHelper = new StarInfoHelper(this, viewHolder);
 
 		initView();
 		initTabView();
 		initData();
 	}
-
+	
 	private void initView()
 	{
-		starInfoHelper = new StarInfoHelper(this, viewHolder);
 		hokolGiftWidget = new HokolGiftWidget(this);
 		hokolGiftWidget.setDataList(Arrays.asList(1, 10, 66, 128, 288, 520, 666, 999, 1314, 6666, 9999, 10888));
 		hokolGiftWidget.setOnSendClickListener(new HokolGiftWidget.OnSendClickListener()
@@ -86,9 +88,9 @@ public class StarInfoActivity extends BaseAppCompatActivity
 		starInfoHelper.setHeadViewListener(new StarInfoHelper.OnHeadViewClickListener()
 		{
 			@Override
-			public void onCareOrCancel()
+			public void onCareOrCancel(boolean isCared)
 			{
-				IApplication.toast("点击关注");
+				IApplication.toast(isCared ? "已关注" : "未关注");
 			}
 
 			@Override
@@ -114,6 +116,15 @@ public class StarInfoActivity extends BaseAppCompatActivity
 				UserInfoCreditActivity.actionStart(StarInfoActivity.this);
 			}
 		});
+		// 等级
+		viewHolder.setOnClickListener(R.id.iv_star_info_vip, new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				SDKManager.toast("等级点击");
+			}
+		});
 	}
 
 	private void initTabView()
@@ -127,7 +138,8 @@ public class StarInfoActivity extends BaseAppCompatActivity
 		fragmentList.add(StarInfoPrivateFragment.newInstance());
 		titleList.add("私密空间");
 
-		fragmentList.add(StarInfoDatumFragment.newInstance());
+		starInfoDatumFragment = StarInfoDatumFragment.newInstance();
+		fragmentList.add(starInfoDatumFragment);
 		titleList.add("个人资料");
 
 		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout_start_info);
@@ -169,10 +181,20 @@ public class StarInfoActivity extends BaseAppCompatActivity
 			public void onSuccess(VDynamicUserDetailBean vDynamicUserDetailBean)
 			{
 				starInfoHelper.initHeadData(vDynamicUserDetailBean);
+
+				int fans = vDynamicUserDetailBean.getUser_fans_num();
+				int care = vDynamicUserDetailBean.getUser_care_num();
+				int praise = vDynamicUserDetailBean.getUser_zan();
+				String constell = vDynamicUserDetailBean.getUser_constell();
+				ArrayList<String> province = vDynamicUserDetailBean.getProvince();
+				ArrayList<String> city = vDynamicUserDetailBean.getCity();
+				String sign = vDynamicUserDetailBean.getUser_sign();
+				String prize = vDynamicUserDetailBean.getUser_prize();
+				starInfoDatumFragment.updateStarInfo(fans, care, praise, constell, province, city, sign, prize);
 			}
 		});
 	}
-	
+
 	public static void actionStart(Context context, String starId)
 	{
 		context.startActivity(new Intent(context, StarInfoActivity.class).putExtra(KeyStarId, starId));

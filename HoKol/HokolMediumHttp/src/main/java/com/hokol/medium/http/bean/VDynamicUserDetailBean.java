@@ -1,5 +1,6 @@
 package com.hokol.medium.http.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VDynamicUserDetailBean
@@ -33,18 +34,18 @@ public class VDynamicUserDetailBean
 	private int user_collect_task_num;
 
 	/* 用户所在城市 [石家庄市，130100] */
-	private List<String> city;
+	private ArrayList<String> city;
 
 	/* 用户手机号 */
 	private String user_tel;
 
 	/* 用户所在省份 [北京市，110000] */
-	private List<String> province;
+	private ArrayList<String> province;
 
 	/* 用户签名 */
 	private String user_sign;
 
-	/* 用户获奖经历：[数组] */
+	/* 用户获奖经历 */
 	private String user_prize;
 
 	/* 用户星座 */
@@ -158,12 +159,12 @@ public class VDynamicUserDetailBean
 		this.user_collect_task_num = user_collect_task_num;
 	}
 
-	public List<String> getCity()
+	public ArrayList<String> getCity()
 	{
 		return city;
 	}
 
-	public void setCity(List<String> city)
+	public void setCity(ArrayList<String> city)
 	{
 		this.city = city;
 	}
@@ -178,12 +179,12 @@ public class VDynamicUserDetailBean
 		this.user_tel = user_tel;
 	}
 
-	public List<String> getProvince()
+	public ArrayList<String> getProvince()
 	{
 		return province;
 	}
 
-	public void setProvince(List<String> province)
+	public void setProvince(ArrayList<String> province)
 	{
 		this.province = province;
 	}

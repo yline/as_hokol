@@ -24,6 +24,8 @@ public class StarInfoHelper
 
 	private FlowWidget labelWidget;
 
+	private boolean isCared;
+
 	public StarInfoHelper(Context context, ViewHolder viewHolder)
 	{
 		this.sContext = context;
@@ -46,7 +48,7 @@ public class StarInfoHelper
 			{
 				if (null != onHeadViewClickListener)
 				{
-					onHeadViewClickListener.onCareOrCancel();
+					onHeadViewClickListener.onCareOrCancel(isCared);
 				}
 			}
 		});
@@ -77,6 +79,11 @@ public class StarInfoHelper
 	public void setHeadViewListener(OnHeadViewClickListener listener)
 	{
 		this.onHeadViewClickListener = listener;
+	}
+
+	public void setCared(boolean cared)
+	{
+		this.isCared = cared;
 	}
 
 	public void initHeadData(VDynamicUserDetailBean vDetailBean)
@@ -117,7 +124,7 @@ public class StarInfoHelper
 		viewHolder.setText(R.id.tv_star_info_fans_number, String.format("粉丝 %d", vDetailBean.getUser_fans_num()));
 
 		// 关注
-		boolean isCared = vDetailBean.getIs_care() == VDynamicUserDetailBean.cared ? true : false;
+		isCared = vDetailBean.getIs_care() == VDynamicUserDetailBean.cared ? true : false;
 		if (isCared)
 		{
 			viewHolder.setImageResource(R.id.iv_star_info_head_care_or_cancel, R.drawable.star_info_followed);
@@ -139,7 +146,7 @@ public class StarInfoHelper
 		/**
 		 * 点击关注
 		 */
-		void onCareOrCancel();
+		void onCareOrCancel(boolean isCared);
 
 		/**
 		 * 点击联系

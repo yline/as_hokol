@@ -16,7 +16,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_marginTop="@dimen/default_space_normal"
+        android:layout_marginTop="@dimen/default_space_small"
         android:background="@color/hokolGrayLight"></View>
 
     <android.support.design.widget.TabLayout

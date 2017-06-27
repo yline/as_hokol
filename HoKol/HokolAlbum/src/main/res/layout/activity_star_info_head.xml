@@ -138,7 +138,10 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="3"
-        android:padding="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_medium"
+        android:paddingLeft="@dimen/default_space_normal"
+        android:paddingRight="@dimen/default_space_normal"
+        android:paddingBottom="@dimen/default_space_small"
         android:text=""
         android:textColor="@color/hokolGray"
         android:textSize="@dimen/default_text_size_medium"/>

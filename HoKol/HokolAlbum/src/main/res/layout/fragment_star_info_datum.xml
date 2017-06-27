@@ -32,6 +32,7 @@
                 android:textColor="@color/hokolGrayDrak"/>
 
             <TextView
+                android:id="@+id/tv_star_info_datum_fans_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="200"
@@ -67,6 +68,7 @@
                 android:textColor="@color/hokolGrayDrak"/>
 
             <TextView
+                android:id="@+id/tv_star_info_datum_cares_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="28"
@@ -102,6 +104,7 @@
                 android:textColor="@color/hokolGrayDrak"/>
 
             <TextView
+                android:id="@+id/tv_star_info_datum_praise_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="4656156"
@@ -131,6 +134,7 @@
                 android:textColor="@color/hokolGrayDrak"/>
 
             <TextView
+                android:id="@+id/tv_star_info_datum_constell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="处女座"
@@ -160,6 +164,7 @@
                 android:textColor="@color/hokolGrayDrak"/>
 
             <TextView
+                android:id="@+id/tv_star_info_datum_area"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="浙江 杭州"
@@ -188,6 +193,7 @@
                 android:textColor="@color/hokolGrayDrak"/>
 
             <TextView
+                android:id="@+id/tv_star_info_datum_sign"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -222,6 +228,7 @@
                 android:textColor="@color/hokolGrayDrak"/>
 
             <TextView
+                android:id="@+id/tv_star_info_datum_prize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
