@@ -23,7 +23,8 @@ import com.hokol.medium.http.bean.VTaskUserSignUpDetailBean;
 import com.hokol.medium.http.bean.VUserAvatarBean;
 import com.hokol.medium.http.bean.VUserCareAllBean;
 import com.hokol.medium.http.bean.VUserFansAllBean;
-import com.hokol.medium.http.bean.VUserMessageBean;
+import com.hokol.medium.http.bean.VUserMessageSystemBean;
+import com.hokol.medium.http.bean.VUserMessageSystemOutlineBean;
 import com.hokol.medium.http.bean.VUserTaskCollectionBean;
 import com.hokol.medium.http.bean.WDynamicCareAllBean;
 import com.hokol.medium.http.bean.WDynamicCareSingleBean;
@@ -62,7 +63,8 @@ import com.hokol.medium.http.bean.WUserCareAllBean;
 import com.hokol.medium.http.bean.WUserCareOrCancelBean;
 import com.hokol.medium.http.bean.WUserCoinGiftBean;
 import com.hokol.medium.http.bean.WUserFansAllBean;
-import com.hokol.medium.http.bean.WUserMessageBean;
+import com.hokol.medium.http.bean.WUserMessageSystemBean;
+import com.hokol.medium.http.bean.WUserMessageSystemOutlineBean;
 import com.hokol.medium.http.bean.WUserTaskCollectionBean;
 import com.yline.http.XHttpAdapter;
 import com.yline.http.XHttpConfig;
@@ -613,14 +615,23 @@ public class XHttpUtil
 	}
 
 	/**
-	 * 我的消息
+	 * 我的消息，所有
 	 */
-	public static void doUserMessage(WUserMessageBean wUserMessageBean, XHttpAdapter<VUserMessageBean> adapter)
+	public static void doUserMessageSystem(WUserMessageSystemBean wUserMessageBean, XHttpAdapter<VUserMessageSystemBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_message;
-		new XTextHttp<VUserMessageBean>(adapter).doPost(httpUrl, wUserMessageBean, VUserMessageBean.class);
+		new XTextHttp<VUserMessageSystemBean>(adapter).doPost(httpUrl, wUserMessageBean, VUserMessageSystemBean.class);
 	}
 
+	/**
+	 * 我的消息，概要
+	 */
+	public static void doUserSystemMessageOutline(WUserMessageSystemOutlineBean outlineBean, XHttpAdapter<VUserMessageSystemOutlineBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_user_message_system_all;
+		new XTextHttp<VUserMessageSystemOutlineBean>(adapter).doPost(httpUrl, outlineBean, VUserMessageSystemOutlineBean.class);
+	}
+	
 	/**
 	 * 设置页面
 	 * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况

@@ -10,17 +10,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.hokol.R;
+import com.hokol.application.DeleteConstant;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VUserMessageSystemBean;
+import com.hokol.medium.http.bean.WUserMessageSystemBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
+import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
+import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.base.BaseAppCompatActivity;
+import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class UserMessageSystemActivity extends BaseAppCompatActivity
 {
+	private static final String KeyMessageUserId = "MessageSystemUserId";
+
 	private MessageSystemAdapter messageSystemAdapter;
 
 	@Override
@@ -29,6 +37,12 @@ public class UserMessageSystemActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_message_system);
 
+		initView();
+		initData();
+	}
+
+	private void initView()
+	{
 		RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_message_system);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(this)
@@ -66,44 +80,67 @@ public class UserMessageSystemActivity extends BaseAppCompatActivity
 				finish();
 			}
 		});
-
-		messageSystemAdapter.addAll(Arrays.asList("A", "B", "C", "D"));
 	}
 
-	private class MessageSystemAdapter extends CommonRecyclerAdapter<String>
+	private void initData()
 	{
-		private OnRecyclerItemClickListener listener;
+		String userId = getIntent().getStringExtra(KeyMessageUserId);
 
-		public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener listener)
+		messageSystemAdapter.setShowEmpty(false);
+		XHttpUtil.doUserMessageSystem(new WUserMessageSystemBean(userId, 0, DeleteConstant.defaultNumberLarge), new XHttpAdapter<VUserMessageSystemBean>()
 		{
-			this.listener = listener;
-		}
-
-		@Override
-		public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
-		{
-			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
+			@Override
+			public void onSuccess(VUserMessageSystemBean vUserMessageSystemBean)
 			{
-				@Override
-				public void onClick(View v)
+				List<VUserMessageSystemBean.VUserMessageOneBean> result = vUserMessageSystemBean.getList();
+				if (null != result)
 				{
-					if (null != listener)
-					{
-						listener.onItemClick(viewHolder, sList.get(position), position);
-					}
+					messageSystemAdapter.setDataList(vUserMessageSystemBean.getList());
 				}
-			});
-		}
+			}
+		});
+	}
 
+	private class MessageSystemAdapter extends WidgetRecyclerAdapter<VUserMessageSystemBean.VUserMessageOneBean>
+	{
 		@Override
 		public int getItemRes()
 		{
 			return R.layout.item_user_message_system;
 		}
+
+		@Override
+		public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
+		{
+			super.onBindViewHolder(viewHolder, position);
+
+			VUserMessageSystemBean.VUserMessageOneBean messageBean = sList.get(position);
+
+			// 标题
+			viewHolder.setText(R.id.tv_message_system_title, messageBean.getMess_title());
+
+			// 时间
+			String timeStr = HokolTimeConvertUtil.stamp2FormatTime(messageBean.getPub_time() * 1000);
+			viewHolder.setText(R.id.tv_message_system_time, timeStr);
+
+			// 内容
+			viewHolder.setText(R.id.tv_message_system_content, messageBean.getMess_content());
+
+			// 是否已读
+			boolean haveRead = VUserMessageSystemBean.MessageHaveRead == messageBean.getIs_read() ? true : false;
+			if (haveRead)
+			{
+				viewHolder.get(R.id.view_message_system_bubble).setVisibility(View.GONE);
+			}
+			else
+			{
+				viewHolder.get(R.id.view_message_system_bubble).setVisibility(View.VISIBLE);
+			}
+		}
 	}
 
-	public static void actionStart(Context context)
+	public static void actionStart(Context context, String userId)
 	{
-		context.startActivity(new Intent(context, UserMessageSystemActivity.class));
+		context.startActivity(new Intent(context, UserMessageSystemActivity.class).putExtra(KeyMessageUserId, userId));
 	}
 }

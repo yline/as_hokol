@@ -2,8 +2,10 @@ package com.hokol.medium.http.bean;
 
 import java.util.List;
 
-public class VUserMessageBean
+public class VUserMessageSystemBean
 {
+	public static final int MessageHaveRead = 1;
+
 	private List<VUserMessageOneBean> list;
 
 	public static class VUserMessageOneBean

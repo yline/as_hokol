@@ -8,12 +8,12 @@ import android.widget.EditText;
 
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserFansAllBean;
-import com.hokol.medium.http.bean.VUserMessageBean;
+import com.hokol.medium.http.bean.VUserMessageSystemBean;
 import com.hokol.medium.http.bean.VUserTaskCollectionBean;
 import com.hokol.medium.http.bean.WUserCareOrCancelBean;
 import com.hokol.medium.http.bean.WUserCoinGiftBean;
 import com.hokol.medium.http.bean.WUserFansAllBean;
-import com.hokol.medium.http.bean.WUserMessageBean;
+import com.hokol.medium.http.bean.WUserMessageSystemBean;
 import com.hokol.medium.http.bean.WUserTaskCollectionBean;
 import com.hokol.test.common.BaseTestActivity;
 import com.yline.http.XHttpAdapter;
@@ -35,11 +35,11 @@ public class TestUserActivity extends BaseTestActivity
 				String receiverUserId = editTextTwo.getText().toString().trim();
 				String dynamicId = editTextThree.getText().toString().trim();
 
-				WUserMessageBean wUserMessageBean = new WUserMessageBean(userId, receiverUserId, dynamicId);
-				XHttpUtil.doUserMessage(wUserMessageBean, new XHttpAdapter<VUserMessageBean>()
+				WUserMessageSystemBean wUserMessageBean = new WUserMessageSystemBean(userId, receiverUserId, dynamicId);
+				XHttpUtil.doUserMessageSystem(wUserMessageBean, new XHttpAdapter<VUserMessageSystemBean>()
 				{
 					@Override
-					public void onSuccess(VUserMessageBean vUserMessageBean)
+					public void onSuccess(VUserMessageSystemBean vUserMessageBean)
 					{
 
 					}

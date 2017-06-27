@@ -149,8 +149,11 @@ public class HttpConstant
 	// 用户赠送红豆
 	public static final String url_user_coin_gift = url_head + "ApiMine/present_coin";
 
-	// 我的消息
+	// 我的消息, 单条
 	public static final String url_user_message = url_head + "ApiMine/mine_message";
+
+	// 我的系统消息
+	public static final String url_user_message_system_all = url_head + "ApiMine/message_sys";
 
 	/* --------------------------- 设置接口 --------------------------- */
 	// 用户发表意见

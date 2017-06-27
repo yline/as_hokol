@@ -53,4 +53,17 @@ public abstract class WidgetRecyclerAdapter<Data> extends HeadFootRecyclerAdapte
 			}
 		});
 	}
+	
+	@Override
+	public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
+	{
+		if (isShowEmpty)
+		{
+			viewHolder.getItemView().setVisibility(View.VISIBLE);
+		}
+		else
+		{
+			viewHolder.getItemView().setVisibility(View.GONE);
+		}
+	}
 }

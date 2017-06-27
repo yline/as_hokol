@@ -146,8 +146,8 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 
 			// 截止时间
 			String deadLineTimeStr = HokolTimeConvertUtil.stampToRestFormatTime(System.currentTimeMillis() + collectionBean.getTask_rem_time() * 1000);
-			viewHolder.setText(R.id.tv_item_main_task_time, deadLineTimeStr);
-
+			viewHolder.setText(R.id.tv_item_main_task_time, "剩" + deadLineTimeStr);
+			
 			// 是否报名
 			final boolean isSign = collectionBean.getIs_join() == VUserTaskCollectionBean.Signed ? true : false;
 			TextView actionTextView = viewHolder.get(R.id.tv_item_main_task_action);

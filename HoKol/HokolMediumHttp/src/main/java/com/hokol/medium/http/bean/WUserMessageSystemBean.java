@@ -1,17 +1,17 @@
 package com.hokol.medium.http.bean;
 
-public class WUserMessageBean
+public class WUserMessageSystemBean
 {
 	/* 用户唯一标识 */
 	private String user_id;
 
 	/* 开始号 */
-	private String num1;
+	private int num1;
 
 	/* 数据长度 */
-	private String length;
+	private int length;
 
-	public WUserMessageBean(String user_id, String num1, String length)
+	public WUserMessageSystemBean(String user_id, int num1, int length)
 	{
 		this.user_id = user_id;
 		this.num1 = num1;
@@ -28,22 +28,22 @@ public class WUserMessageBean
 		this.user_id = user_id;
 	}
 
-	public String getNum1()
+	public int getNum1()
 	{
 		return num1;
 	}
 
-	public void setNum1(String num1)
+	public void setNum1(int num1)
 	{
 		this.num1 = num1;
 	}
 
-	public String getLength()
+	public int getLength()
 	{
 		return length;
 	}
 
-	public void setLength(String length)
+	public void setLength(int length)
 	{
 		this.length = length;
 	}

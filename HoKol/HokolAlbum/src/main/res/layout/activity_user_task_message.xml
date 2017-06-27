@@ -66,9 +66,9 @@
             android:id="@+id/tv_task_message_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/tv_task_message_content"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:text="今天10:43"
+            android:text=""
             android:textColor="#cccccc"/>
 
         <View
@@ -82,18 +82,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/iv_task_message_avatar"
-            android:layout_marginBottom="@dimen/default_space_small"
+            android:layout_marginBottom="@dimen/default_space_little"
             android:layout_marginLeft="@dimen/default_space_normal"
             android:layout_toEndOf="@+id/iv_task_message_avatar"
             android:layout_toRightOf="@+id/iv_task_message_avatar"
             android:ellipsize="end"
             android:maxLines="1"
             android:paddingRight="@dimen/default_space_large"
-            android:text="内部消息标题"
+            android:text=""
             android:textColor="@color/hokolGray"
             android:textSize="@dimen/default_text_size_medium"/>
 
         <TextView
+            android:id="@+id/tv_task_message_bubble"
             android:layout_width="@dimen/default_text_size_normal"
             android:layout_height="@dimen/default_text_size_normal"
             android:layout_alignParentTop="true"
@@ -102,8 +103,9 @@
             android:layout_toLeftOf="@+id/tv_task_message_title"
             android:background="@drawable/user_task_message_bubble"
             android:gravity="center"
-            android:text="2"
+            android:text="0"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/default_text_size_small"/>
+            android:textSize="@dimen/default_text_size_small"
+            android:visibility="gone"/>
     </RelativeLayout>
 </LinearLayout>
