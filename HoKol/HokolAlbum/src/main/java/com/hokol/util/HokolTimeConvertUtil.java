@@ -53,4 +53,35 @@ public class HokolTimeConvertUtil extends TimeConvertUtil
 		instance.setTimeInMillis(time);
 		return String.format("%s.%s.%s", instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH));
 	}
+
+	/**
+	 * @param time     时间，单位毫秒
+	 * @param minField the given calendar field.
+	 * @return
+	 */
+	public static String stampToFormatDate(long time, int minField)
+	{
+		Calendar instance = Calendar.getInstance();
+		instance.setTimeInMillis(time);
+		if (minField == Calendar.DAY_OF_MONTH)
+		{
+			return String.format("%s.%s.%s", instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH));
+		}
+		else if (minField == Calendar.HOUR_OF_DAY)
+		{
+			return String.format("%s.%s.%s %s", instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH), instance.get(Calendar.HOUR_OF_DAY));
+		}
+		else if (minField == Calendar.MINUTE)
+		{
+			return String.format("%s.%s.%s %s:%s", instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH), instance.get(Calendar.HOUR_OF_DAY), instance.get(Calendar.MINUTE));
+		}
+		else if (minField == Calendar.SECOND)
+		{
+			return String.format("%s.%s.%s %s:%s:%s", instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH), instance.get(Calendar.HOUR_OF_DAY), instance.get(Calendar.MINUTE), instance.get(Calendar.SECOND));
+		}
+		else
+		{
+			return String.format("%s.%s.%s", instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH));
+		}
+	}
 }

@@ -49,6 +49,12 @@ public class MainMineHomeFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 
 		homeViewHolder = new ViewHolder(view);
+		initViewClick();
+		initData();
+	}
+
+	private void initViewClick()
+	{
 		final String userId = AppStateManager.getInstance().getUserLoginId(getContext());
 
 		// 已发，任务
@@ -84,7 +90,7 @@ public class MainMineHomeFragment extends BaseFragment
 				}
 			}
 		});
-		
+
 		// 我的收藏
 		homeViewHolder.get(R.id.ll_main_min_home_task_collection).setOnClickListener(new View.OnClickListener()
 		{
@@ -184,7 +190,20 @@ public class MainMineHomeFragment extends BaseFragment
 				UserSettingActivity.actionStart(getContext());
 			}
 		});
+	}
 
+	private void initData()
+	{
+		// 我的粉丝
+		int fansNum = AppStateManager.getInstance().getUserFansNum(getContext());
+		homeViewHolder.setText(R.id.tv_main_mine_home_fans_num, fansNum + "");
 
+		// 关注的人
+		int caresNum = AppStateManager.getInstance().getUserCareNum(getContext());
+		homeViewHolder.setText(R.id.tv_main_mine_home_cares_num, caresNum + "");
+		
+		// 点赞
+		int praiseNum = AppStateManager.getInstance().getUserPraiseNum(getContext());
+		homeViewHolder.setText(R.id.tv_main_mine_home_praise_num, praiseNum + "");
 	}
 }

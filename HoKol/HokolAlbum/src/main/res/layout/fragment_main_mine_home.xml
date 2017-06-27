@@ -139,7 +139,7 @@
                 android:textColor="@color/hokolBlackNormal"/>
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/tv_main_mine_home_fans_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -173,6 +173,7 @@
                 android:textColor="@color/hokolBlackNormal"/>
 
             <TextView
+                android:id="@+id/tv_main_mine_home_cares_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -192,7 +193,6 @@
             android:background="@color/hokolGrayLight"></View>
 
         <LinearLayout
-            android:id="@+id/linear_layout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -206,6 +206,7 @@
                 android:textColor="@color/hokolBlackNormal"/>
 
             <TextView
+                android:id="@+id/tv_main_mine_home_praise_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="212546"/>

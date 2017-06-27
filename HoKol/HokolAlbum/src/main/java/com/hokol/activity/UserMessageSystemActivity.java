@@ -25,6 +25,14 @@ import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.List;
 
+/**
+ * 我的消息删除（系统）
+ * 我的消息读取(系统)
+ * 这两个还没做
+ *
+ * @author yline 2017/6/27 -- 14:44
+ * @version 1.0.0
+ */
 public class UserMessageSystemActivity extends BaseAppCompatActivity
 {
 	private static final String KeyMessageUserId = "MessageSystemUserId";
@@ -63,12 +71,12 @@ public class UserMessageSystemActivity extends BaseAppCompatActivity
 		messageSystemAdapter = new MessageSystemAdapter();
 		recyclerView.setAdapter(messageSystemAdapter);
 
-		messageSystemAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener()
+		messageSystemAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VUserMessageSystemBean.VUserMessageOneBean>()
 		{
 			@Override
-			public void onItemClick(RecyclerViewHolder viewHolder, Object o, int position)
+			public void onItemClick(RecyclerViewHolder viewHolder, VUserMessageSystemBean.VUserMessageOneBean messageBean, int position)
 			{
-				UserMessageDetailActivity.actionStart(UserMessageSystemActivity.this);
+				UserMessageDetailActivity.actionStart(UserMessageSystemActivity.this, messageBean.getMess_title(), messageBean.getMess_content(), messageBean.getPub_time());
 			}
 		});
 

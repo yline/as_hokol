@@ -47,19 +47,19 @@
 
             <ImageView
                 android:id="@+id/iv_main_mine_head_sex"
-                android:layout_width="@dimen/default_text_size_large"
-                android:layout_height="@dimen/default_text_size_large"
+                android:layout_width="@dimen/default_space_large_a"
+                android:layout_height="@dimen/default_space_large_a"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/default_space_little"
                 android:background="@drawable/global_sex_girl"/>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/default_text_size_large"
+                android:id="@+id/iv_main_mine_head_vip"
+                android:layout_width="@dimen/default_title_normal"
+                android:layout_height="@dimen/default_space_large_a"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/default_space_little"
-                android:background="@drawable/main_mine_head_vip"
-                android:scaleType="centerCrop"/>
+                android:src="@drawable/star_info_vip"
+                android:scaleType="centerInside"/>
         </LinearLayout>
 
         <RelativeLayout

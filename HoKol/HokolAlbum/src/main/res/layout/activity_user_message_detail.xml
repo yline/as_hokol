@@ -57,6 +57,7 @@
             android:background="@color/hokolGrayLight"></View>
 
         <TextView
+            android:id="@+id/tv_message_detail_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="@dimen/default_space_little"
@@ -68,6 +69,7 @@
             android:textSize="@dimen/default_text_size_medium"/>
 
         <TextView
+            android:id="@+id/tv_message_detail_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="45dp"

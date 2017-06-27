@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -167,6 +168,19 @@ public class MainMineFragment extends BaseFragment
 			else
 			{
 				viewHolder.get(R.id.iv_main_mine_head_sex).setVisibility(View.GONE);
+			}
+
+			// 等级
+			ImageView vipImageView = viewHolder.get(R.id.iv_main_mine_head_vip);
+			String vipUrl = appStateManager.getUserVipUrl(getContext());
+			if (!TextUtils.isEmpty(vipUrl))
+			{
+				vipImageView.setVisibility(View.VISIBLE);
+				Glide.with(getContext()).load(vipUrl).error(R.drawable.main_mine_head_vip).into(vipImageView);
+			}
+			else
+			{
+				vipImageView.setVisibility(View.INVISIBLE);
 			}
 
 			// 签名

@@ -32,10 +32,10 @@ public class TestUserActivity extends BaseTestActivity
 			public void onClick(View v)
 			{
 				String userId = editTextOne.getText().toString().trim();
-				String receiverUserId = editTextTwo.getText().toString().trim();
-				String dynamicId = editTextThree.getText().toString().trim();
+				int receiverNum = parseInt(editTextTwo, 0);
+				int receiverLength = parseInt(editTextThree, 23);
 
-				WUserMessageSystemBean wUserMessageBean = new WUserMessageSystemBean(userId, receiverUserId, dynamicId);
+				WUserMessageSystemBean wUserMessageBean = new WUserMessageSystemBean(userId, receiverNum, receiverLength);
 				XHttpUtil.doUserMessageSystem(wUserMessageBean, new XHttpAdapter<VUserMessageSystemBean>()
 				{
 					@Override
