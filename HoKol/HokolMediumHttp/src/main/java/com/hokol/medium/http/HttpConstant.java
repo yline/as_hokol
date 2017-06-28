@@ -155,6 +155,15 @@ public class HttpConstant
 	// 我的系统消息
 	public static final String url_user_message_system_all = url_head + "ApiMine/message_sys";
 
+	// 接收的礼物
+	public static final String url_user_gift_receivve = url_head + "ApiMine/recive_gift";
+
+	// 送出的红豆
+	public static final String url_user_gift_send = url_head + "ApiMine/post_gift";
+
+	// 我的会员
+	public static final String url_user_vip_info = url_head + "ApiMine/mine_member";
+
 	/* --------------------------- 设置接口 --------------------------- */
 	// 用户发表意见
 	public static final String url_setting_submit_proposal = url_head + "ApiSetting/user_advice";

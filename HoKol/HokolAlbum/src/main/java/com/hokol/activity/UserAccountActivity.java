@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.hokol.R;
+import com.hokol.application.AppStateManager;
 import com.hokol.fragment.UserAccountProfitFragment;
 import com.hokol.fragment.UserAccountReceiveGiftFragment;
 import com.hokol.fragment.UserAccountSendGiftFragment;
@@ -23,6 +24,8 @@ import java.util.List;
 
 public class UserAccountActivity extends BaseAppCompatActivity
 {
+	private static final String KeyAccountUserId = "AccountUserId";
+
 	private ViewHolder viewHolder;
 
 	@Override
@@ -33,6 +36,7 @@ public class UserAccountActivity extends BaseAppCompatActivity
 
 		viewHolder = new ViewHolder(this);
 		initView();
+		initTabView();
 	}
 
 	private void initView()
@@ -45,7 +49,6 @@ public class UserAccountActivity extends BaseAppCompatActivity
 				finish();
 			}
 		});
-
 		viewHolder.setOnClickListener(R.id.tv_user_account_record, new View.OnClickListener()
 		{
 			@Override
@@ -55,13 +58,21 @@ public class UserAccountActivity extends BaseAppCompatActivity
 			}
 		});
 
+		int coinNum = AppStateManager.getInstance().getUserCoinNum(this);
+		viewHolder.setText(R.id.tv_user_account_value, coinNum + "");
+	}
+
+	private void initTabView()
+	{
+		String userId = getIntent().getStringExtra(KeyAccountUserId);
+
 		final List<BaseFragment> fragmentList = new ArrayList<>();
 		final List<String> titleList = new ArrayList<>();
 
-		fragmentList.add(UserAccountReceiveGiftFragment.newInstance());
+		fragmentList.add(UserAccountReceiveGiftFragment.newInstance(userId));
 		titleList.add("收到礼物");
 
-		fragmentList.add(UserAccountSendGiftFragment.newInstance());
+		fragmentList.add(UserAccountSendGiftFragment.newInstance(userId));
 		titleList.add("送出礼物");
 
 		fragmentList.add(UserAccountProfitFragment.newInstance());
@@ -126,8 +137,8 @@ public class UserAccountActivity extends BaseAppCompatActivity
 		tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.hokolRed));
 	}
 	
-	public static void actionStart(Context context)
+	public static void actionStart(Context context, String userId)
 	{
-		context.startActivity(new Intent(context, UserAccountActivity.class));
+		context.startActivity(new Intent(context, UserAccountActivity.class).putExtra(KeyAccountUserId, userId));
 	}
 }

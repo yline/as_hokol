@@ -7,24 +7,35 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.hokol.R;
-import com.hokol.medium.http.HttpEnum;
+import com.hokol.application.DeleteConstant;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VUserGiftSendBean;
+import com.hokol.medium.http.bean.WUserGiftSendBean;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
+import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
+import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.base.BaseFragment;
-import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
+import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
+
+import java.util.Calendar;
+import java.util.List;
 
 public class UserAccountSendGiftFragment extends BaseFragment
 {
+	private static final String KeyGiftSendUserId = "GiftSendUserId";
+
 	private SendGiftAdapter sendGiftAdapter;
 
-	public static UserAccountSendGiftFragment newInstance()
+	public static UserAccountSendGiftFragment newInstance(String userId)
 	{
-		
 		Bundle args = new Bundle();
-		
 		UserAccountSendGiftFragment fragment = new UserAccountSendGiftFragment();
+		args.putString(KeyGiftSendUserId, userId);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -41,6 +52,7 @@ public class UserAccountSendGiftFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 
 		initView(view);
+		initData();
 	}
 
 	private void initView(View view)
@@ -51,12 +63,27 @@ public class UserAccountSendGiftFragment extends BaseFragment
 
 		sendGiftAdapter = new SendGiftAdapter();
 		recyclerView.setAdapter(sendGiftAdapter);
-
-		// 临时数据
-		sendGiftAdapter.setDataList(HttpEnum.getUserSexListAll());
 	}
 
-	private class SendGiftAdapter extends CommonRecyclerAdapter<String>
+	private void initData()
+	{
+		String userId = getArguments().getString(KeyGiftSendUserId);
+
+		XHttpUtil.doUserGiftSend(new WUserGiftSendBean(userId, 0, DeleteConstant.defaultNumberLarge), new XHttpAdapter<VUserGiftSendBean>()
+		{
+			@Override
+			public void onSuccess(VUserGiftSendBean vUserGiftSend)
+			{
+				List<VUserGiftSendBean.VUserGiftOneSendBean> resultList = vUserGiftSend.getList();
+				if (null != resultList)
+				{
+					sendGiftAdapter.setDataList(resultList);
+				}
+			}
+		});
+	}
+
+	private class SendGiftAdapter extends WidgetRecyclerAdapter<VUserGiftSendBean.VUserGiftOneSendBean>
 	{
 
 		@Override
@@ -68,7 +95,20 @@ public class UserAccountSendGiftFragment extends BaseFragment
 		@Override
 		public void onBindViewHolder(RecyclerViewHolder holder, int position)
 		{
+			super.onBindViewHolder(holder, position);
 
+			VUserGiftSendBean.VUserGiftOneSendBean sendBean = sList.get(position);
+
+			// 头像
+			ImageView avatarImageView = holder.get(R.id.circle_item_user_account_send_gift);
+			Glide.with(getContext()).load(sendBean.getUser_logo()).error(R.drawable.global_load_failed).into(avatarImageView);
+
+			// 内容
+			holder.setText(R.id.tv_item_user_account_send_gift_title, String.format("送给%s %d红豆", sendBean.getUser_nickname(), sendBean.getCoin_num()));
+
+			// 时间
+			String dateStr = HokolTimeConvertUtil.stampToFormatDate(sendBean.getAdd_time() * 1000, Calendar.SECOND);
+			holder.setText(R.id.tv_item_user_account_send_gift_sub, dateStr);
 		}
 	}
 }

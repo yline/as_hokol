@@ -23,9 +23,12 @@ import com.hokol.medium.http.bean.VTaskUserSignUpDetailBean;
 import com.hokol.medium.http.bean.VUserAvatarBean;
 import com.hokol.medium.http.bean.VUserCareAllBean;
 import com.hokol.medium.http.bean.VUserFansAllBean;
+import com.hokol.medium.http.bean.VUserGiftReceiveBean;
+import com.hokol.medium.http.bean.VUserGiftSendBean;
 import com.hokol.medium.http.bean.VUserMessageSystemBean;
 import com.hokol.medium.http.bean.VUserMessageSystemOutlineBean;
 import com.hokol.medium.http.bean.VUserTaskCollectionBean;
+import com.hokol.medium.http.bean.VUserVipInfoBean;
 import com.hokol.medium.http.bean.WDynamicCareAllBean;
 import com.hokol.medium.http.bean.WDynamicCareSingleBean;
 import com.hokol.medium.http.bean.WDynamicPraiseSingleBean;
@@ -63,9 +66,12 @@ import com.hokol.medium.http.bean.WUserCareAllBean;
 import com.hokol.medium.http.bean.WUserCareOrCancelBean;
 import com.hokol.medium.http.bean.WUserCoinGiftBean;
 import com.hokol.medium.http.bean.WUserFansAllBean;
+import com.hokol.medium.http.bean.WUserGiftReceiveBean;
+import com.hokol.medium.http.bean.WUserGiftSendBean;
 import com.hokol.medium.http.bean.WUserMessageSystemBean;
 import com.hokol.medium.http.bean.WUserMessageSystemOutlineBean;
 import com.hokol.medium.http.bean.WUserTaskCollectionBean;
+import com.hokol.medium.http.bean.WUserVipInfoBean;
 import com.yline.http.XHttpAdapter;
 import com.yline.http.XHttpConfig;
 import com.yline.http.XHttpConstant;
@@ -631,7 +637,34 @@ public class XHttpUtil
 		String httpUrl = HttpConstant.url_user_message_system_all;
 		new XTextHttp<VUserMessageSystemOutlineBean>(adapter).doPost(httpUrl, outlineBean, VUserMessageSystemOutlineBean.class);
 	}
+
+	/**
+	 * 接收的礼物
+	 */
+	public static void doUserGiftReceive(WUserGiftReceiveBean receiveBean, XHttpAdapter<VUserGiftReceiveBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_user_gift_receivve;
+		new XTextHttp<VUserGiftReceiveBean>(adapter).doPost(httpUrl, receiveBean, VUserGiftReceiveBean.class);
+	}
 	
+	/**
+	 * 送出的红豆
+	 */
+	public static void doUserGiftSend(WUserGiftSendBean sendBean, XHttpAdapter<VUserGiftSendBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_user_gift_send;
+		new XTextHttp<VUserGiftSendBean>(adapter).doPost(httpUrl, sendBean, VUserGiftSendBean.class);
+	}
+
+	/**
+	 * 我的会员
+	 */
+	public static void doUserVipInfo(WUserVipInfoBean vipInfoBean, XHttpAdapter<VUserVipInfoBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_user_vip_info;
+		new XTextHttp<VUserVipInfoBean>(adapter).doPost(httpUrl, vipInfoBean, VUserVipInfoBean.class);
+	}
+
 	/**
 	 * 设置页面
 	 * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况
