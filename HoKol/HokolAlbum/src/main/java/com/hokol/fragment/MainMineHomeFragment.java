@@ -180,7 +180,14 @@ public class MainMineHomeFragment extends BaseFragment
 			@Override
 			public void onClick(View v)
 			{
-				UserVIPActivity.actionStart(getContext());
+				if (TextUtils.isEmpty(userId))
+				{
+					SDKManager.toast("亲，请先登录");
+				}
+				else
+				{
+					UserVIPActivity.actionStart(getContext(), userId);
+				}
 			}
 		});
 

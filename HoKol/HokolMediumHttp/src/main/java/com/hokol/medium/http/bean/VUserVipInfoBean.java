@@ -2,6 +2,20 @@ package com.hokol.medium.http.bean;
 
 public class VUserVipInfoBean
 {
+	// 该用户不是会员
+	public static final int CodeVipNone = 2006;
+
+	// 会员已到期
+	public static final int CodeVipPass = 2007;
+
+	public static final int TypeNull = -1; // 非会员
+
+	public static final int TypeMonth = 1; // 包月
+
+	public static final int TypeSeason = 2; // 包季
+
+	public static final int TypeYear = 3; // 包年
+
 	/* 交流券数量 */
 	private int call_card_num;
 

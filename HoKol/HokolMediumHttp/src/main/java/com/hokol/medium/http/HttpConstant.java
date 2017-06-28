@@ -164,6 +164,9 @@ public class HttpConstant
 	// 我的会员
 	public static final String url_user_vip_info = url_head + "ApiMine/mine_member";
 
+	// 我的会员
+	public static final String url_user_vip_recharge_record = url_head + "ApiMine/recharge_vip_record";
+	
 	/* --------------------------- 设置接口 --------------------------- */
 	// 用户发表意见
 	public static final String url_setting_submit_proposal = url_head + "ApiSetting/user_advice";

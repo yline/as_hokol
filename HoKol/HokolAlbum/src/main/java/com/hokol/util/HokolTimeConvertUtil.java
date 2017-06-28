@@ -49,9 +49,7 @@ public class HokolTimeConvertUtil extends TimeConvertUtil
 	 */
 	public static String stampToFormatDate(long time)
 	{
-		Calendar instance = Calendar.getInstance();
-		instance.setTimeInMillis(time);
-		return String.format("%s.%s.%s", instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH));
+		return stampToFormatDate(time, Calendar.DAY_OF_MONTH);
 	}
 
 	/**

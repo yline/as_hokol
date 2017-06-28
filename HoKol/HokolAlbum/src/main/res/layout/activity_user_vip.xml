@@ -47,11 +47,13 @@
             android:paddingTop="@dimen/default_space_large_b">
 
             <com.hokol.medium.viewcustom.CircleView
+                android:id="@+id/iv_user_setting_account_bind_avatar"
                 android:layout_width="@dimen/default_title_normal"
                 android:layout_height="@dimen/default_title_normal"
                 android:src="@drawable/global_load_failed"/>
 
             <TextView
+                android:id="@+id/tv_user_setting_account_bind_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -62,6 +64,7 @@
                 android:textSize="@dimen/default_text_size_normal"/>
 
             <ImageView
+                android:id="@+id/iv_user_setting_account_bind_vip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -77,6 +80,7 @@
             android:paddingLeft="@dimen/default_space_large_c">
 
             <TextView
+                android:id="@+id/tv_user_setting_account_bind_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -85,6 +89,7 @@
                 android:textSize="@dimen/default_text_size_normal"/>
 
             <ImageView
+                android:id="@+id/iv_user_setting_account_bind_recharge_top"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -121,6 +126,7 @@
             android:textSize="@dimen/default_text_size_medium"/>
 
         <TextView
+            android:id="@+id/tv_user_vip_contact_volume_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/default_space_normal"
@@ -283,6 +289,7 @@
     </View>
 
     <Button
+        android:id="@+id/btn_user_setting_account_bind_recharge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/hokolRed"

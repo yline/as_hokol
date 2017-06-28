@@ -29,6 +29,7 @@ import com.hokol.medium.http.bean.VUserMessageSystemBean;
 import com.hokol.medium.http.bean.VUserMessageSystemOutlineBean;
 import com.hokol.medium.http.bean.VUserTaskCollectionBean;
 import com.hokol.medium.http.bean.VUserVipInfoBean;
+import com.hokol.medium.http.bean.VUserVipRechargeRecordBean;
 import com.hokol.medium.http.bean.WDynamicCareAllBean;
 import com.hokol.medium.http.bean.WDynamicCareSingleBean;
 import com.hokol.medium.http.bean.WDynamicPraiseSingleBean;
@@ -72,6 +73,7 @@ import com.hokol.medium.http.bean.WUserMessageSystemBean;
 import com.hokol.medium.http.bean.WUserMessageSystemOutlineBean;
 import com.hokol.medium.http.bean.WUserTaskCollectionBean;
 import com.hokol.medium.http.bean.WUserVipInfoBean;
+import com.hokol.medium.http.bean.WUserVipRechargeRecordBean;
 import com.yline.http.XHttpAdapter;
 import com.yline.http.XHttpConfig;
 import com.yline.http.XHttpConstant;
@@ -663,6 +665,15 @@ public class XHttpUtil
 	{
 		String httpUrl = HttpConstant.url_user_vip_info;
 		new XTextHttp<VUserVipInfoBean>(adapter).doPost(httpUrl, vipInfoBean, VUserVipInfoBean.class);
+	}
+
+	/**
+	 * 会员充值记录
+	 */
+	public static void doUserVipRechargeRecord(WUserVipRechargeRecordBean recordBean, XHttpAdapter<VUserVipRechargeRecordBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_user_vip_recharge_record;
+		new XTextHttp<VUserVipRechargeRecordBean>(adapter).doPost(httpUrl, recordBean, VUserVipRechargeRecordBean.class);
 	}
 
 	/**

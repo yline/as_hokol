@@ -10,15 +10,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
-import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VUserVipRechargeRecordBean;
+import com.hokol.medium.http.bean.WUserVipRechargeRecordBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseAppCompatActivity;
+import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
+import java.util.List;
+
 public class UserTradeRecordActivity extends BaseAppCompatActivity
 {
+	private static final String KeyTradeRecordUserId = "TradeRecordUserId";
+
 	private TradeRecordAdapter tradeRecordAdapter;
 
 	@Override
@@ -28,6 +35,7 @@ public class UserTradeRecordActivity extends BaseAppCompatActivity
 		setContentView(R.layout.activity_user_trade_record);
 
 		initView();
+		initData();
 	}
 
 	private void initView()
@@ -71,11 +79,27 @@ public class UserTradeRecordActivity extends BaseAppCompatActivity
 		headView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(this, 8)));
 		headView.setBackgroundColor(ContextCompat.getColor(this, R.color.hokolGrayLight));
 		tradeRecordAdapter.addHeadView(headView);
-
-		tradeRecordAdapter.setDataList(HttpEnum.getUserTagListAll());
 	}
 
-	private class TradeRecordAdapter extends HeadFootRecyclerAdapter<String>
+	private void initData()
+	{
+		String userId = getIntent().getStringExtra(KeyTradeRecordUserId);
+
+		XHttpUtil.doUserVipRechargeRecord(new WUserVipRechargeRecordBean(userId), new XHttpAdapter<VUserVipRechargeRecordBean>()
+		{
+			@Override
+			public void onSuccess(VUserVipRechargeRecordBean vUserVipRechargeRecordBean)
+			{
+				List<VUserVipRechargeRecordBean.VUserVipRechargeRecordOneBean> resultList = vUserVipRechargeRecordBean.getList();
+				if (null != resultList)
+				{
+					tradeRecordAdapter.setDataList(resultList);
+				}
+			}
+		});
+	}
+
+	private class TradeRecordAdapter extends HeadFootRecyclerAdapter<VUserVipRechargeRecordBean.VUserVipRechargeRecordOneBean>
 	{
 		@Override
 		public int getItemRes()
