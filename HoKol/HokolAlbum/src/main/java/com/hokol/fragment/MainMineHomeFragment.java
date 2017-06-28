@@ -130,16 +130,31 @@ public class MainMineHomeFragment extends BaseFragment
 			@Override
 			public void onClick(View v)
 			{
-				UserFansActivity.actionStart(getContext());
+				if (TextUtils.isEmpty(userId))
+				{
+					SDKManager.toast("亲，请先登录");
+				}
+				else
+				{
+					UserFansActivity.actionStart(getContext(), userId);
+				}
 			}
 		});
 
+		// 关注的人
 		homeViewHolder.get(R.id.ll_main_mine_home_care).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				UserCareActivity.actionStart(getContext());
+				if (TextUtils.isEmpty(userId))
+				{
+					SDKManager.toast("亲，请先登录");
+				}
+				else
+				{
+					UserCareActivity.actionStart(getContext(), userId);
+				}
 			}
 		});
 
@@ -201,7 +216,7 @@ public class MainMineHomeFragment extends BaseFragment
 		// 关注的人
 		int caresNum = AppStateManager.getInstance().getUserCareNum(getContext());
 		homeViewHolder.setText(R.id.tv_main_mine_home_cares_num, caresNum + "");
-		
+
 		// 点赞
 		int praiseNum = AppStateManager.getInstance().getUserPraiseNum(getContext());
 		homeViewHolder.setText(R.id.tv_main_mine_home_praise_num, praiseNum + "");

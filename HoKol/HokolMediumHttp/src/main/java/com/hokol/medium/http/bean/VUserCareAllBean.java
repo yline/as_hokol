@@ -27,7 +27,7 @@ public class VUserCareAllBean
 		/* 签名 */
 		private String user_sign;
 
-		/* 用户性别 */
+		/* 用户性别(男，女) */
 		private String user_sex;
 
 		/* 昵称 */
@@ -38,6 +38,9 @@ public class VUserCareAllBean
 
 		/* 用户获得的赞 */
 		private int user_zan;
+
+		/* 链接地址 */
+		private String level_url;
 
 		public String getUser_id()
 		{
@@ -57,6 +60,26 @@ public class VUserCareAllBean
 		public void setUser_logo(String user_logo)
 		{
 			this.user_logo = user_logo;
+		}
+
+		public String getUser_sign()
+		{
+			return user_sign;
+		}
+
+		public void setUser_sign(String user_sign)
+		{
+			this.user_sign = user_sign;
+		}
+
+		public String getUser_sex()
+		{
+			return user_sex;
+		}
+
+		public void setUser_sex(String user_sex)
+		{
+			this.user_sex = user_sex;
 		}
 
 		public String getUser_nickname()
@@ -79,16 +102,6 @@ public class VUserCareAllBean
 			this.user_tag = user_tag;
 		}
 
-		public String getUser_sex()
-		{
-			return user_sex;
-		}
-
-		public void setUser_sex(String user_sex)
-		{
-			this.user_sex = user_sex;
-		}
-
 		public int getUser_zan()
 		{
 			return user_zan;
@@ -99,14 +112,14 @@ public class VUserCareAllBean
 			this.user_zan = user_zan;
 		}
 
-		public String getUser_sign()
+		public String getLevel_url()
 		{
-			return user_sign;
+			return level_url;
 		}
 
-		public void setUser_sign(String user_sign)
+		public void setLevel_url(String level_url)
 		{
-			this.user_sign = user_sign;
+			this.level_url = level_url;
 		}
 	}
 }

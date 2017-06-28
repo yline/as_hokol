@@ -9,8 +9,8 @@ import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 public abstract class WidgetRecyclerAdapter<Data> extends HeadFootRecyclerAdapter<Data>
 {
-	// 是否 显示空白页 (需要手动使用)
-	protected boolean isShowEmpty;
+	// 是否 显示空白页 (需要手动使用); 默认显示
+	protected boolean isShowEmpty = true;
 
 	private OnRecyclerItemClickListener listener;
 

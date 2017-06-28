@@ -32,20 +32,21 @@
             android:textColor="@color/hokolBlackNormal"/>
 
         <ImageView
-            android:id="@+id/iv_user_info_sex"
-            android:layout_width="@dimen/default_text_size_large"
-            android:layout_height="@dimen/default_text_size_large"
+            android:id="@+id/iv_user_care_sex"
+            android:layout_width="@dimen/default_space_large"
+            android:layout_height="@dimen/default_space_large"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/default_space_little"
             android:background="@drawable/global_sex_girl"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/default_text_size_large"
+            android:id="@+id/iv_user_care_vip"
+            android:layout_width="@dimen/default_space_super"
+            android:layout_height="@dimen/default_space_large"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/default_space_little"
-            android:background="@drawable/main_mine_head_vip"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerInside"
+            android:src="@drawable/main_mine_head_vip"/>
     </LinearLayout>
 
     <TextView

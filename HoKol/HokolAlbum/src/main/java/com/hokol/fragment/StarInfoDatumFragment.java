@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.hokol.R;
 import com.hokol.activity.UserCareActivity;
 import com.hokol.activity.UserFansActivity;
+import com.hokol.application.AppStateManager;
 import com.yline.base.BaseFragment;
 import com.yline.view.recycler.holder.ViewHolder;
 
@@ -67,12 +68,14 @@ public class StarInfoDatumFragment extends BaseFragment
 		viewHolder = new ViewHolder(view);
 		updateStarInfo();
 
+		final String userId = AppStateManager.getInstance().getUserLoginId(getContext());
+
 		viewHolder.setOnClickListener(R.id.ll_star_info_datum_fans, new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				UserFansActivity.actionStart(getContext());
+				UserFansActivity.actionStart(getContext(), userId);
 			}
 		});
 
@@ -81,7 +84,7 @@ public class StarInfoDatumFragment extends BaseFragment
 			@Override
 			public void onClick(View v)
 			{
-				UserCareActivity.actionStart(getContext());
+				UserCareActivity.actionStart(getContext(), userId);
 			}
 		});
 	}

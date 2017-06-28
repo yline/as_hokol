@@ -33,19 +33,20 @@
 
         <ImageView
             android:id="@+id/iv_user_info_sex"
-            android:layout_width="@dimen/default_text_size_large"
-            android:layout_height="@dimen/default_text_size_large"
+            android:layout_width="@dimen/default_space_large"
+            android:layout_height="@dimen/default_space_large"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/default_space_little"
             android:background="@drawable/global_sex_girl"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/default_text_size_large"
+            android:id="@+id/iv_user_info_vip"
+            android:layout_width="@dimen/default_space_super"
+            android:layout_height="@dimen/default_space_large"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/default_space_little"
-            android:background="@drawable/main_mine_head_vip"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerInside"
+            android:src="@drawable/main_mine_head_vip"/>
     </LinearLayout>
 
     <TextView
@@ -56,8 +57,10 @@
         android:layout_marginBottom="@dimen/default_space_little"
         android:layout_toLeftOf="@+id/fl_user_fans_right"
         android:layout_toRightOf="@+id/circle_user_fans_avatar"
+        android:maxLines="1"
         android:text="简介"
-        android:textColor="@color/hokolGray"/>
+        android:textColor="@color/hokolGray"
+        android:textSize="@dimen/default_text_size_medium"/>
 
     <com.yline.view.layout.label.FlowLayout
         android:id="@+id/flow_layout_user_fans"
