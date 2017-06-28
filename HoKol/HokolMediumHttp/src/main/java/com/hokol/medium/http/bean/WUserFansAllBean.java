@@ -2,19 +2,13 @@ package com.hokol.medium.http.bean;
 
 public class WUserFansAllBean
 {
-	/**
-	 * 用户唯一标识
-	 */
+	/* 用户唯一标 */
 	private String user_id;
 
-	/**
-	 * 开始号
-	 */
+	/* 开始 */
 	private int num1;
 
-	/**
-	 * 数据长度
-	 */
+	/* 数据长 */
 	private int length;
 
 	public WUserFansAllBean(String user_id, int num1, int length)

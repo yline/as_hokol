@@ -53,11 +53,12 @@
         android:id="@+id/tv_user_care_brief"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/flow_layout_user_care"
         android:layout_below="@+id/ll_user_care_name"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="@dimen/default_space_little"
+        android:layout_marginTop="@dimen/default_space_little"
         android:layout_toLeftOf="@+id/iv_user_care_arrow"
         android:layout_toRightOf="@+id/circle_user_care_avatar"
+        android:gravity="center_vertical"
         android:text="简介"
         android:textColor="@color/hokolGray"/>
 

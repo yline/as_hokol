@@ -2,6 +2,8 @@ package com.hokol.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,16 +13,24 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
+import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserCareAllBean;
+import com.hokol.medium.http.bean.WUserCareAllBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.base.BaseAppCompatActivity;
+import com.yline.http.XHttpAdapter;
+import com.yline.utils.UIScreenUtil;
 import com.yline.view.layout.label.FlowLayout;
+import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
+
+import java.util.List;
 
 public class UserCareActivity extends BaseAppCompatActivity
 {
@@ -39,6 +49,7 @@ public class UserCareActivity extends BaseAppCompatActivity
 		setContentView(R.layout.activity_user_care);
 
 		initView();
+		initData();
 	}
 
 	private void initView()
@@ -48,7 +59,26 @@ public class UserCareActivity extends BaseAppCompatActivity
 
 		recyclerView.setAdapter(userCareAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
-		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(this));
+		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(this)
+		{
+			@Override
+			public void drawVerticalDivider(Canvas c, Drawable divide, int currentPosition, int childLeft, int childTop, int childRight, int childBottom)
+			{
+				super.drawVerticalDivider(c, divide, currentPosition, childLeft + UIScreenUtil.dp2px(UserCareActivity.this, 10), childTop, childRight, childBottom);
+			}
+		});
+
+		userCareAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VUserCareAllBean.UserCareAllOneBean>()
+		{
+			@Override
+			public void onItemClick(RecyclerViewHolder viewHolder, VUserCareAllBean.UserCareAllOneBean careBean, int position)
+			{
+				if (!TextUtils.isEmpty(careBean.getUser_id()))
+				{
+					StarInfoActivity.actionStart(UserCareActivity.this, careBean.getUser_id());
+				}
+			}
+		});
 
 		// 结束
 		findViewById(R.id.iv_user_care_finish).setOnClickListener(new View.OnClickListener()
@@ -97,6 +127,26 @@ public class UserCareActivity extends BaseAppCompatActivity
 			}
 		});
 	}
+	
+	private void initData()
+	{
+		final String userId = getIntent().getStringExtra(KeyCareUserId);
+
+		userCareAdapter.setShowEmpty(false);
+		XHttpUtil.doUserCareAll(new WUserCareAllBean(userId, 0, DeleteConstant.defaultNumberSuper), new XHttpAdapter<VUserCareAllBean>()
+		{
+			@Override
+			public void onSuccess(VUserCareAllBean vUserCareAllBean)
+			{
+				userCareAdapter.setShowEmpty(true);
+				List<VUserCareAllBean.UserCareAllOneBean> resultList = vUserCareAllBean.getList();
+				if (null != resultList)
+				{
+					userCareAdapter.setDataList(resultList);
+				}
+			}
+		});
+	}
 
 	private class UserCareAdapter extends WidgetRecyclerAdapter<VUserCareAllBean.UserCareAllOneBean>
 	{
@@ -105,10 +155,12 @@ public class UserCareActivity extends BaseAppCompatActivity
 		{
 			return R.layout.item_user_care;
 		}
-		
+
 		@Override
 		public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
 		{
+			super.onBindViewHolder(viewHolder, position);
+
 			VUserCareAllBean.UserCareAllOneBean careBean = sList.get(position);
 
 			// 头像
@@ -149,7 +201,14 @@ public class UserCareActivity extends BaseAppCompatActivity
 
 			// 标签
 			FlowLayout flowLayout = viewHolder.get(R.id.flow_layout_user_care);
-			FlowWidget labelWidget = new FlowWidget(UserCareActivity.this, flowLayout);
+			FlowWidget labelWidget = new FlowWidget(UserCareActivity.this, flowLayout)
+			{
+				@Override
+				protected int getItemResourceId()
+				{
+					return R.layout.widget_item_label_flow_padright_medium;
+				}
+			};
 			labelWidget.setDataList(careBean.getUser_tag());
 		}
 	}
