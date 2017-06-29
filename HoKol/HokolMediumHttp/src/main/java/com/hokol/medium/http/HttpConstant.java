@@ -166,7 +166,17 @@ public class HttpConstant
 
 	// 我的会员
 	public static final String url_user_vip_recharge_record = url_head + "ApiMine/recharge_vip_record";
-	
+
+	// 获取未使用的交流券
+	public static final String url_user_contact_volume_unapply = url_head + "ApiMine/rem_call_card";
+
+	// 获取已使用的交流券
+	public static final String url_user_vip_recharge_applied = url_head + "ApiMine/used_call_card";
+
+	// 获取已过期的交流券
+	public static final String url_user_vip_recharge_expired = url_head + "ApiMine/expire_call_card";
+
+
 	/* --------------------------- 设置接口 --------------------------- */
 	// 用户发表意见
 	public static final String url_setting_submit_proposal = url_head + "ApiSetting/user_advice";

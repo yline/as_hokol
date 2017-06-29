@@ -30,6 +30,12 @@
             android:textSize="@dimen/default_text_size_large"/>
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGrayLight">
+    </View>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_user_trade_record"
         android:layout_width="match_parent"

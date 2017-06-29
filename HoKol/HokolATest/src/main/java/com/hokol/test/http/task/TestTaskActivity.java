@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.hokol.medium.http.XHttpUtil;
-import com.hokol.medium.http.bean.VTaskMainAll;
+import com.hokol.medium.http.bean.VTaskMainAllBean;
 import com.hokol.medium.http.bean.VTaskMainDetailBean;
 import com.hokol.medium.http.bean.VTaskStaffCommentedInfoBean;
 import com.hokol.medium.http.bean.VTaskUserAcceptBean;
@@ -21,7 +21,7 @@ import com.hokol.medium.http.bean.WTaskActionMasterTradeBean;
 import com.hokol.medium.http.bean.WTaskActionStaffConfirmBean;
 import com.hokol.medium.http.bean.WTaskActionStaffSignUpBean;
 import com.hokol.medium.http.bean.WTaskActionStaffTradeBean;
-import com.hokol.medium.http.bean.WTaskMainAll;
+import com.hokol.medium.http.bean.WTaskMainAllBean;
 import com.hokol.medium.http.bean.WTaskMainCollectionBean;
 import com.hokol.medium.http.bean.WTaskMainDetailBean;
 import com.hokol.medium.http.bean.WTaskMainPublishBean;
@@ -467,13 +467,13 @@ public class TestTaskActivity extends BaseTestActivity
 				final int num1 = Integer.parseInt(editTextFour.getText().toString().trim());
 				final int length = Integer.parseInt(editTextFive.getText().toString().trim());
 				
-				WTaskMainAll wTaskMainAll = new WTaskMainAll(num1, length);
+				WTaskMainAllBean wTaskMainAll = new WTaskMainAllBean(num1, length);
 				wTaskMainAll.setTask_province("浙江省");
 				wTaskMainAll.setTask_city(Arrays.asList("杭州市"));
-				XHttpUtil.doTaskMainAll(wTaskMainAll, new XHttpAdapter<VTaskMainAll>()
+				XHttpUtil.doTaskMainAll(wTaskMainAll, new XHttpAdapter<VTaskMainAllBean>()
 				{
 					@Override
-					public void onSuccess(VTaskMainAll vTaskMainAll)
+					public void onSuccess(VTaskMainAllBean vTaskMainAll)
 					{
 						
 					}

@@ -2,7 +2,7 @@ package com.hokol.medium.http.bean;
 
 import java.util.List;
 
-public class VTaskMainAll
+public class VTaskMainAllBean
 {
 	private List<TaskMainAllOne> list;
 

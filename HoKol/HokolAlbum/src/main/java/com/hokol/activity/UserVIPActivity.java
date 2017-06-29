@@ -60,7 +60,7 @@ public class UserVIPActivity extends BaseAppCompatActivity
 			{
 				if (!TextUtils.isEmpty(userId))
 				{
-					UserTradeRecordActivity.actionStart(UserVIPActivity.this);
+					UserTradeRecordActivity.actionStart(UserVIPActivity.this, userId);
 				}
 			}
 		});
@@ -71,7 +71,10 @@ public class UserVIPActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				UserContactVolumeRecordActivity.actionStart(UserVIPActivity.this);
+				if (!TextUtils.isEmpty(userId))
+				{
+					UserContactVolumeRecordActivity.actionStart(UserVIPActivity.this, userId);
+				}
 			}
 		});
 

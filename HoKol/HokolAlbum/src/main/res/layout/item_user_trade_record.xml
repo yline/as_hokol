@@ -31,6 +31,7 @@
             android:textSize="@dimen/default_text_size_large"/>
 
         <TextView
+            android:id="@+id/tv_user_trade_record_coin_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -48,6 +49,7 @@
     </View>
 
     <TextView
+        android:id="@+id/tv_user_trade_record_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/default_space_normal"
@@ -58,6 +60,7 @@
         android:textSize="@dimen/default_text_size_normal"/>
 
     <TextView
+        android:id="@+id/tv_user_trade_record_trade_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/default_space_normal"
@@ -67,6 +70,7 @@
         android:textSize="@dimen/default_text_size_normal"/>
 
     <TextView
+        android:id="@+id/tv_user_trade_record_valid_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/default_space_large"
@@ -74,4 +78,10 @@
         android:text="会员有效时间：2017-02-18 到 2017-03-18"
         android:textColor="@color/hokolGrayDrak"
         android:textSize="@dimen/default_text_size_normal"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/hokolGrayLight">
+    </View>
 </LinearLayout>

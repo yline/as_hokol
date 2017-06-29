@@ -12,21 +12,29 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hokol.R;
-import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VUserContactVolumeBean;
+import com.hokol.medium.http.bean.WUserContactVolumeBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
+import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
+
+import java.util.Calendar;
+import java.util.List;
 
 public class ContactVolumeRecordUnapplyFragment extends BaseFragment
 {
+	private static final String KeyContactUnapplyUserId = "UnapplyUserId";
+
 	private VolumeRecordUnapplyAdapter recordUnapplyAdapter;
 
-	public static ContactVolumeRecordUnapplyFragment newInstance()
+	public static ContactVolumeRecordUnapplyFragment newInstance(String userId)
 	{
 		Bundle args = new Bundle();
-
+		args.putString(KeyContactUnapplyUserId, userId);
 		ContactVolumeRecordUnapplyFragment fragment = new ContactVolumeRecordUnapplyFragment();
 		fragment.setArguments(args);
 		return fragment;
@@ -44,6 +52,7 @@ public class ContactVolumeRecordUnapplyFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 
 		initView(view);
+		initData();
 	}
 
 	private void initView(View view)
@@ -91,11 +100,32 @@ public class ContactVolumeRecordUnapplyFragment extends BaseFragment
 		textViewFoot.setGravity(Gravity.CENTER_HORIZONTAL);
 		textViewFoot.setTextColor(ContextCompat.getColor(getContext(), R.color.hokolGray));
 		recordUnapplyAdapter.addFootView(textViewFoot);
-
-		recordUnapplyAdapter.setDataList(HttpEnum.getUserTagListAll());
 	}
 
-	private class VolumeRecordUnapplyAdapter extends HeadFootRecyclerAdapter<String>
+	private void initData()
+	{
+		recordUnapplyAdapter.setShowEmpty(false);
+
+		String userId = getArguments().getString(KeyContactUnapplyUserId);
+		XHttpUtil.doUserContactVolumeUnapply(new WUserContactVolumeBean(userId), new XHttpAdapter<VUserContactVolumeBean>()
+		{
+			@Override
+			public void onSuccess(VUserContactVolumeBean vUserContactVolumeBean)
+			{
+				List<VUserContactVolumeBean.VUserContactVolumeOneBean> result = vUserContactVolumeBean.getList();
+				if (null != result)
+				{
+					if (getActivity() instanceof OnLoadRecordFinishCallback)
+					{
+						((OnLoadRecordFinishCallback) getActivity()).onLoadFinish(result.size(), 0);
+					}
+					recordUnapplyAdapter.setDataList(result);
+				}
+			}
+		});
+	}
+
+	private class VolumeRecordUnapplyAdapter extends WidgetRecyclerAdapter<VUserContactVolumeBean.VUserContactVolumeOneBean>
 	{
 		@Override
 		public int getItemRes()
@@ -106,7 +136,25 @@ public class ContactVolumeRecordUnapplyFragment extends BaseFragment
 		@Override
 		public void onBindViewHolder(RecyclerViewHolder holder, int position)
 		{
+			long expireTime = sList.get(position).getExpire_time();
 
+			// 到期时间
+			Calendar instance = Calendar.getInstance();
+			instance.setTimeInMillis(expireTime * 1000);
+			holder.setText(R.id.tv_contact_volume_record_unpply_time, String.format("%d-%d-%d到期", instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH)));
+
+			// 剩余时间
+			long diffTime = expireTime - System.currentTimeMillis() / 1000;
+			holder.setText(R.id.tv_contact_volume_record_unpply_remainder, String.format("(还有%d天到期)", diffTime / 86400));
 		}
+	}
+
+	public interface OnLoadRecordFinishCallback
+	{
+		/**
+		 * @param number   加载的个数
+		 * @param position 对应TabLayout的位置
+		 */
+		void onLoadFinish(int number, int position);
 	}
 }

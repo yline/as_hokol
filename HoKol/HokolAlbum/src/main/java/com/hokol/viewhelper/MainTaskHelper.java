@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
-import com.hokol.medium.http.bean.VTaskMainAll;
+import com.hokol.medium.http.bean.VTaskMainAllBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.DropMenuWidget;
 import com.hokol.medium.widget.FlowAbleWidget;
@@ -240,7 +240,7 @@ public class MainTaskHelper
 		taskRecycleAdapter.setOnRecyclerItemClickListener(listener);
 	}
 
-	public void setRecyclerData(List<VTaskMainAll.TaskMainAllOne> result)
+	public void setRecyclerData(List<VTaskMainAllBean.TaskMainAllOne> result)
 	{
 		taskRecycleAdapter.setDataList(result);
 	}
@@ -250,7 +250,7 @@ public class MainTaskHelper
 		taskRecycleAdapter.setShowEmpty(isShowEmpty);
 	}
 
-	private class TaskRecycleAdapter extends WidgetRecyclerAdapter<VTaskMainAll.TaskMainAllOne>
+	private class TaskRecycleAdapter extends WidgetRecyclerAdapter<VTaskMainAllBean.TaskMainAllOne>
 	{
 		@Override
 		public int getItemRes()

@@ -13,7 +13,7 @@ import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
 import com.hokol.medium.http.bean.VHomeMainBean;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsRecommendBean;
-import com.hokol.medium.http.bean.VTaskMainAll;
+import com.hokol.medium.http.bean.VTaskMainAllBean;
 import com.hokol.medium.http.bean.VTaskMainDetailBean;
 import com.hokol.medium.http.bean.VTaskStaffCommentedInfoBean;
 import com.hokol.medium.http.bean.VTaskUserAcceptBean;
@@ -22,6 +22,7 @@ import com.hokol.medium.http.bean.VTaskUserPublishedBean;
 import com.hokol.medium.http.bean.VTaskUserSignUpDetailBean;
 import com.hokol.medium.http.bean.VUserAvatarBean;
 import com.hokol.medium.http.bean.VUserCareAllBean;
+import com.hokol.medium.http.bean.VUserContactVolumeBean;
 import com.hokol.medium.http.bean.VUserFansAllBean;
 import com.hokol.medium.http.bean.VUserGiftReceiveBean;
 import com.hokol.medium.http.bean.VUserGiftSendBean;
@@ -54,7 +55,7 @@ import com.hokol.medium.http.bean.WTaskActionMasterTradeBean;
 import com.hokol.medium.http.bean.WTaskActionStaffConfirmBean;
 import com.hokol.medium.http.bean.WTaskActionStaffSignUpBean;
 import com.hokol.medium.http.bean.WTaskActionStaffTradeBean;
-import com.hokol.medium.http.bean.WTaskMainAll;
+import com.hokol.medium.http.bean.WTaskMainAllBean;
 import com.hokol.medium.http.bean.WTaskMainCollectionBean;
 import com.hokol.medium.http.bean.WTaskMainDetailBean;
 import com.hokol.medium.http.bean.WTaskMainPublishBean;
@@ -66,6 +67,7 @@ import com.hokol.medium.http.bean.WTaskUserSignUpDetailBean;
 import com.hokol.medium.http.bean.WUserCareAllBean;
 import com.hokol.medium.http.bean.WUserCareOrCancelBean;
 import com.hokol.medium.http.bean.WUserCoinGiftBean;
+import com.hokol.medium.http.bean.WUserContactVolumeBean;
 import com.hokol.medium.http.bean.WUserFansAllBean;
 import com.hokol.medium.http.bean.WUserGiftReceiveBean;
 import com.hokol.medium.http.bean.WUserGiftSendBean;
@@ -303,7 +305,7 @@ public class XHttpUtil
 	/**
 	 * 任务接口
 	 * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况
-	 * 获取任务列表(多条)--> task_index --> url_task_main_all --> WTaskMainAll - VTaskMainAll --> ok
+	 * 获取任务列表(多条)--> task_index --> url_task_main_all --> WTaskMainAllBean - VTaskMainAllBean --> ok
 	 * 获取任务详情(单条)--> task_detail --> url_task_main_detail --> WTaskMainDetailBean - VTaskMainDetailBean --> ok
 	 * 任务发布--> 暂时不测
 	 * 任务收藏/取消收藏--> task_collect_switch --> url_task_main_collection --> WTaskMainCollectionBean - null --> ok
@@ -313,10 +315,10 @@ public class XHttpUtil
 	/**
 	 * 请求关注的人的信息（多条）
 	 */
-	public static void doTaskMainAll(WTaskMainAll wTaskMainAll, XHttpAdapter<VTaskMainAll> adapter)
+	public static void doTaskMainAll(WTaskMainAllBean wTaskMainAll, XHttpAdapter<VTaskMainAllBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_main_all;
-		new XTextHttp<VTaskMainAll>(adapter).doPost(httpUrl, wTaskMainAll, VTaskMainAll.class);
+		new XTextHttp<VTaskMainAllBean>(adapter).doPost(httpUrl, wTaskMainAll, VTaskMainAllBean.class);
 	}
 
 	/**
@@ -674,6 +676,33 @@ public class XHttpUtil
 	{
 		String httpUrl = HttpConstant.url_user_vip_recharge_record;
 		new XTextHttp<VUserVipRechargeRecordBean>(adapter).doPost(httpUrl, recordBean, VUserVipRechargeRecordBean.class);
+	}
+
+	/**
+	 * 未使用的交流卷
+	 */
+	public static void doUserContactVolumeUnapply(WUserContactVolumeBean bean, XHttpAdapter<VUserContactVolumeBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_user_contact_volume_unapply;
+		new XTextHttp<VUserContactVolumeBean>(adapter).doPost(httpUrl, bean, VUserContactVolumeBean.class);
+	}
+
+	/**
+	 * 已使用的交流卷
+	 */
+	public static void doUserContactVolumeApplied(WUserContactVolumeBean bean, XHttpAdapter<VUserContactVolumeBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_user_vip_recharge_applied;
+		new XTextHttp<VUserContactVolumeBean>(adapter).doPost(httpUrl, bean, VUserContactVolumeBean.class);
+	}
+
+	/**
+	 * 已过期的交流卷
+	 */
+	public static void doUserContactVolumePassed(WUserContactVolumeBean bean, XHttpAdapter<VUserContactVolumeBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_user_vip_recharge_expired;
+		new XTextHttp<VUserContactVolumeBean>(adapter).doPost(httpUrl, bean, VUserContactVolumeBean.class);
 	}
 
 	/**

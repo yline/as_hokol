@@ -22,8 +22,8 @@ import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VAreaAllBean;
-import com.hokol.medium.http.bean.VTaskMainAll;
-import com.hokol.medium.http.bean.WTaskMainAll;
+import com.hokol.medium.http.bean.VTaskMainAllBean;
+import com.hokol.medium.http.bean.WTaskMainAllBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.ADWidget;
 import com.hokol.viewhelper.MainTaskHelper;
@@ -44,7 +44,7 @@ public class MainTaskFragment extends BaseFragment
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
-	private WTaskMainAll taskMainAll;
+	private WTaskMainAllBean taskMainAll;
 
 	private int taskRefreshNumber;
 
@@ -114,10 +114,10 @@ public class MainTaskFragment extends BaseFragment
 		// 内容
 		RecyclerView recycleView = (RecyclerView) parentView.findViewById(R.id.recycle_main_task);
 		mainTaskHelper.initRecycleView(recycleView);
-		mainTaskHelper.setOnRecyclerClickListener(new OnRecyclerItemClickListener<VTaskMainAll.TaskMainAllOne>()
+		mainTaskHelper.setOnRecyclerClickListener(new OnRecyclerItemClickListener<VTaskMainAllBean.TaskMainAllOne>()
 		{
 			@Override
-			public void onItemClick(RecyclerViewHolder viewHolder, VTaskMainAll.TaskMainAllOne taskDetailBean, int position)
+			public void onItemClick(RecyclerViewHolder viewHolder, VTaskMainAllBean.TaskMainAllOne taskDetailBean, int position)
 			{
 				TaskDetailActivity.actionStart(getContext(), taskDetailBean.getTask_id());
 			}
@@ -222,7 +222,7 @@ public class MainTaskFragment extends BaseFragment
 		});
 
 		taskRefreshNumber = 0;
-		taskMainAll = new WTaskMainAll(0, DeleteConstant.defaultNumberNormal);
+		taskMainAll = new WTaskMainAllBean(0, DeleteConstant.defaultNumberNormal);
 		doRequest();
 	}
 
@@ -230,14 +230,14 @@ public class MainTaskFragment extends BaseFragment
 	{
 		// Recycler
 		mainTaskHelper.setRecyclerShowEmpty(false);
-		XHttpUtil.doTaskMainAll(taskMainAll, new XHttpAdapter<VTaskMainAll>()
+		XHttpUtil.doTaskMainAll(taskMainAll, new XHttpAdapter<VTaskMainAllBean>()
 		{
 			@Override
-			public void onSuccess(VTaskMainAll vTaskMainAll)
+			public void onSuccess(VTaskMainAllBean vTaskMainAll)
 			{
 				mainTaskHelper.setRecyclerShowEmpty(true);
 
-				List<VTaskMainAll.TaskMainAllOne> result = vTaskMainAll.getList();
+				List<VTaskMainAllBean.TaskMainAllOne> result = vTaskMainAll.getList();
 				if (null != result)
 				{
 					taskRefreshNumber = result.size();

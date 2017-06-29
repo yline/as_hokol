@@ -12,21 +12,29 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hokol.R;
-import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VUserContactVolumeBean;
+import com.hokol.medium.http.bean.WUserContactVolumeBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
+import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
+
+import java.util.Calendar;
+import java.util.List;
 
 public class ContactVolumeRecordPassedFragment extends BaseFragment
 {
+	private static final String KeyContactPassedUserId = "PassedUserId";
+
 	private VolumeRecordPassedAdapter recordPassedAdapter;
 
-	public static ContactVolumeRecordPassedFragment newInstance()
+	public static ContactVolumeRecordPassedFragment newInstance(String userId)
 	{
 		Bundle args = new Bundle();
-
+		args.putString(KeyContactPassedUserId, userId);
 		ContactVolumeRecordPassedFragment fragment = new ContactVolumeRecordPassedFragment();
 		fragment.setArguments(args);
 		return fragment;
@@ -44,6 +52,7 @@ public class ContactVolumeRecordPassedFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 
 		initView(view);
+		initData();
 	}
 
 	private void initView(View view)
@@ -87,11 +96,31 @@ public class ContactVolumeRecordPassedFragment extends BaseFragment
 		textViewFoot.setGravity(Gravity.CENTER_HORIZONTAL);
 		textViewFoot.setTextColor(ContextCompat.getColor(getContext(), R.color.hokolGray));
 		recordPassedAdapter.addFootView(textViewFoot);
-
-		recordPassedAdapter.setDataList(HttpEnum.getUserTagListAll());
 	}
 
-	private class VolumeRecordPassedAdapter extends HeadFootRecyclerAdapter<String>
+	private void initData()
+	{
+		String userId = getArguments().getString(KeyContactPassedUserId);
+		XHttpUtil.doUserContactVolumeUnapply(new WUserContactVolumeBean(userId), new XHttpAdapter<VUserContactVolumeBean>()
+		{
+			@Override
+			public void onSuccess(VUserContactVolumeBean vUserContactVolumeBean)
+			{
+				List<VUserContactVolumeBean.VUserContactVolumeOneBean> result = vUserContactVolumeBean.getList();
+				if (null != result)
+				{
+					if (getActivity() instanceof ContactVolumeRecordUnapplyFragment.OnLoadRecordFinishCallback)
+					{
+						((ContactVolumeRecordUnapplyFragment.OnLoadRecordFinishCallback) getActivity()).onLoadFinish(result.size(), 2);
+					}
+					recordPassedAdapter.setDataList(result);
+				}
+			}
+		});
+	}
+
+
+	private class VolumeRecordPassedAdapter extends WidgetRecyclerAdapter<VUserContactVolumeBean.VUserContactVolumeOneBean>
 	{
 
 		@Override
@@ -103,7 +132,14 @@ public class ContactVolumeRecordPassedFragment extends BaseFragment
 		@Override
 		public void onBindViewHolder(RecyclerViewHolder holder, int position)
 		{
+			super.onBindViewHolder(holder, position);
 
+			long expireTime = sList.get(position).getExpire_time();
+
+			// 到期时间
+			Calendar instance = Calendar.getInstance();
+			instance.setTimeInMillis(expireTime * 1000);
+			holder.setText(R.id.tv_contact_volume_record_passed_time, String.format("%d-%d-%d到期", instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH)));
 		}
 
 		@Override

@@ -54,6 +54,7 @@
         android:paddingTop="@dimen/default_space_small">
 
         <TextView
+            android:id="@+id/tv_contact_volume_record_unpply_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2017-05-19到期"
@@ -61,6 +62,7 @@
             android:textSize="@dimen/default_text_size_small"/>
 
         <TextView
+            android:id="@+id/tv_contact_volume_record_unpply_remainder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="(还有2天到期)"

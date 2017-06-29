@@ -4,6 +4,16 @@ import java.util.List;
 
 public class VUserVipRechargeRecordBean
 {
+	public static final int VipTypeMonth = 1; // 包月
+
+	public static final int VipTypeSeason = 2; // 包季
+
+	public static final int VipTypeYear = 3; // 包年
+
+	public static final int VipTypeOnceCall = 4; // 一次打电话
+
+	public static final int VipTypeOnceSpace = 5; // 一次看空间
+
 	private List<VUserVipRechargeRecordOneBean> list;
 
 	public List<VUserVipRechargeRecordOneBean> getList()

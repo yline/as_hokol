@@ -12,21 +12,29 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hokol.R;
-import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VUserContactVolumeBean;
+import com.hokol.medium.http.bean.WUserContactVolumeBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
+import java.util.Calendar;
+import java.util.List;
+
 public class ContactVolumeRecordApplyedFragment extends BaseFragment
 {
+	private static final String KeyContactApplyedUserId = "ApplyedUserId";
+
 	private VolumeRecordApplyedAdapter recordApplyedAdapter;
 
-	public static ContactVolumeRecordApplyedFragment newInstance()
+	public static ContactVolumeRecordApplyedFragment newInstance(String userId)
 	{
 		Bundle args = new Bundle();
-
+		args.putString(KeyContactApplyedUserId, userId);
 		ContactVolumeRecordApplyedFragment fragment = new ContactVolumeRecordApplyedFragment();
 		fragment.setArguments(args);
 		return fragment;
@@ -44,6 +52,7 @@ public class ContactVolumeRecordApplyedFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 
 		initView(view);
+		initData();
 	}
 
 	private void initView(View view)
@@ -87,11 +96,31 @@ public class ContactVolumeRecordApplyedFragment extends BaseFragment
 		textViewFoot.setGravity(Gravity.CENTER_HORIZONTAL);
 		textViewFoot.setTextColor(ContextCompat.getColor(getContext(), R.color.hokolGray));
 		recordApplyedAdapter.addFootView(textViewFoot);
-
-		recordApplyedAdapter.setDataList(HttpEnum.getUserTagListAll());
 	}
 
-	private class VolumeRecordApplyedAdapter extends HeadFootRecyclerAdapter<String>
+
+	private void initData()
+	{
+		String userId = getArguments().getString(KeyContactApplyedUserId);
+		XHttpUtil.doUserContactVolumeApplied(new WUserContactVolumeBean(userId), new XHttpAdapter<VUserContactVolumeBean>()
+		{
+			@Override
+			public void onSuccess(VUserContactVolumeBean vUserContactVolumeBean)
+			{
+				List<VUserContactVolumeBean.VUserContactVolumeOneBean> result = vUserContactVolumeBean.getList();
+				if (null != result)
+				{
+					if (getActivity() instanceof ContactVolumeRecordUnapplyFragment.OnLoadRecordFinishCallback)
+					{
+						((ContactVolumeRecordUnapplyFragment.OnLoadRecordFinishCallback) getActivity()).onLoadFinish(result.size(), 1);
+					}
+					recordApplyedAdapter.setDataList(result);
+				}
+			}
+		});
+	}
+
+	private class VolumeRecordApplyedAdapter extends HeadFootRecyclerAdapter<VUserContactVolumeBean.VUserContactVolumeOneBean>
 	{
 
 		@Override
@@ -103,7 +132,12 @@ public class ContactVolumeRecordApplyedFragment extends BaseFragment
 		@Override
 		public void onBindViewHolder(RecyclerViewHolder holder, int position)
 		{
+			long expireTime = sList.get(position).getExpire_time();
 
+			// 到期时间
+			Calendar instance = Calendar.getInstance();
+			instance.setTimeInMillis(expireTime * 1000);
+			holder.setText(R.id.tv_contact_volume_record_applied_time, String.format("%d-%d-%d到期", instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH)));
 		}
 	}
 }
