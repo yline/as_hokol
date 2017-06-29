@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 
@@ -48,6 +49,8 @@ public class StarInfoActivity extends BaseAppCompatActivity
 	private ViewHolder viewHolder;
 
 	private StarInfoDatumFragment starInfoDatumFragment;
+
+	private String starId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -107,13 +110,17 @@ public class StarInfoActivity extends BaseAppCompatActivity
 				IApplication.toast("点击送红豆");
 			}
 		});
+		
 		// 信用
 		viewHolder.setOnClickListener(R.id.iv_star_info_credit, new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				UserInfoCreditActivity.actionStart(StarInfoActivity.this);
+				if (!TextUtils.isEmpty(starId))
+				{
+					UserInfoCreditActivity.actionStart(StarInfoActivity.this, starId);
+				}
 			}
 		});
 		// 等级
@@ -173,7 +180,7 @@ public class StarInfoActivity extends BaseAppCompatActivity
 	private void initData()
 	{
 		String userId = AppStateManager.getInstance().getUserLoginId(this);
-		String starId = getIntent().getStringExtra(KeyStarId);
+		starId = getIntent().getStringExtra(KeyStarId);
 
 		XHttpUtil.doDynamicUserDetail(new WDynamicUserDetailBean(userId, starId), new XHttpAdapter<VDynamicUserDetailBean>()
 		{

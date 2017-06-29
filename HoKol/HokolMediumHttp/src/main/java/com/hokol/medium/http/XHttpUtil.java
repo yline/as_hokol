@@ -723,7 +723,7 @@ public class XHttpUtil
 		String httpUrl = HttpConstant.url_user_credit;
 		new XTextHttp<VUserCreditBean>(adapter).doPost(httpUrl, creditBean, VUserCreditBean.class);
 	}
-
+	
 	/**
 	 * 我的评分(已发任务)
 	 */

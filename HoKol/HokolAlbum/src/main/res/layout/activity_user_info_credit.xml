@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="我的信用"
+            android:text="信用"
             android:textColor="@android:color/black"
             android:textSize="@dimen/default_text_size_large"/>
     </RelativeLayout>
@@ -51,6 +51,7 @@
             android:textSize="@dimen/default_text_size_normal"/>
 
         <TextView
+            android:id="@+id/tv_user_info_credit_datum_improve"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -61,6 +62,7 @@
             android:paddingRight="@dimen/default_space_medium"
             android:paddingTop="@dimen/default_space_little"
             android:text="完善资料"
+            android:visibility="invisible"
             android:textColor="@color/hokolRed"/>
     </RelativeLayout>
 
@@ -84,11 +86,12 @@
             android:layout_height="@dimen/default_space_normal"
             android:layout_marginBottom="@dimen/default_space_normal"
             android:layout_marginTop="@dimen/default_space_normal"
-            android:max="50"
-            android:progress="25"
+            android:max="100"
+            android:progress="50"
             android:progressDrawable="@drawable/widget_layer_radiusall_solid_graylight_red"/>
 
         <TextView
+            android:id="@+id/tv_user_info_credit_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -161,6 +164,7 @@
             android:textSize="@dimen/default_text_size_small"/>
 
         <ProgressBar
+            android:id="@+id/progress_user_info_credit_sub_outlook"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="200dp"
             android:layout_height="@dimen/default_space_normal"
@@ -168,10 +172,11 @@
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginTop="@dimen/default_space_normal"
             android:max="50"
-            android:progress="50"
+            android:progress="25"
             android:progressDrawable="@drawable/widget_layer_radiusall_solid_graylight_red"/>
 
         <TextView
+            android:id="@+id/tv_user_info_credit_sub_outlook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -197,6 +202,7 @@
             android:textSize="@dimen/default_text_size_small"/>
 
         <ProgressBar
+            android:id="@+id/progress_user_info_credit_sub_action"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="200dp"
             android:layout_height="@dimen/default_space_normal"
@@ -204,10 +210,11 @@
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginTop="@dimen/default_space_normal"
             android:max="50"
-            android:progress="50"
+            android:progress="25"
             android:progressDrawable="@drawable/widget_layer_radiusall_solid_graylight_red"/>
 
         <TextView
+            android:id="@+id/tv_user_info_credit_sub_action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -233,6 +240,7 @@
             android:textSize="@dimen/default_text_size_small"/>
 
         <ProgressBar
+            android:id="@+id/progress_user_info_credit_sub_server"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="200dp"
             android:layout_height="@dimen/default_space_normal"
@@ -240,10 +248,11 @@
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginTop="@dimen/default_space_normal"
             android:max="50"
-            android:progress="50"
+            android:progress="25"
             android:progressDrawable="@drawable/widget_layer_radiusall_solid_graylight_red"/>
 
         <TextView
+            android:id="@+id/tv_user_info_credit_sub_server"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -302,11 +311,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="外貌相符"
+            android:text="活动相符"
             android:textColor="@color/hokolGrayDrak"
             android:textSize="@dimen/default_text_size_small"/>
 
         <ProgressBar
+            android:id="@+id/progress_user_info_credit_host_action"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="200dp"
             android:layout_height="@dimen/default_space_normal"
@@ -314,10 +324,11 @@
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginTop="@dimen/default_space_normal"
             android:max="50"
-            android:progress="50"
+            android:progress="25"
             android:progressDrawable="@drawable/widget_layer_radiusall_solid_graylight_red"/>
 
         <TextView
+            android:id="@+id/tv_user_info_credit_host_action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -338,11 +349,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="活动能力"
+            android:text="交流态度"
             android:textColor="@color/hokolGrayDrak"
             android:textSize="@dimen/default_text_size_small"/>
 
         <ProgressBar
+            android:id="@+id/progress_user_info_credit_host_communication"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="200dp"
             android:layout_height="@dimen/default_space_normal"
@@ -350,10 +362,11 @@
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginTop="@dimen/default_space_normal"
             android:max="50"
-            android:progress="50"
+            android:progress="25"
             android:progressDrawable="@drawable/widget_layer_radiusall_solid_graylight_red"/>
 
         <TextView
+            android:id="@+id/tv_user_info_credit_host_communication"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -374,11 +387,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="服务态度"
+            android:text="诚信经营"
             android:textColor="@color/hokolGrayDrak"
             android:textSize="@dimen/default_text_size_small"/>
 
         <ProgressBar
+            android:id="@+id/progress_user_info_credit_host_sincerity"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="200dp"
             android:layout_height="@dimen/default_space_normal"
@@ -386,10 +400,11 @@
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginTop="@dimen/default_space_normal"
             android:max="50"
-            android:progress="50"
+            android:progress="25"
             android:progressDrawable="@drawable/widget_layer_radiusall_solid_graylight_red"/>
 
         <TextView
+            android:id="@+id/tv_user_info_credit_host_sincerity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
