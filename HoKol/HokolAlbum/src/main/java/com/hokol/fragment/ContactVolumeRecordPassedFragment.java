@@ -101,7 +101,7 @@ public class ContactVolumeRecordPassedFragment extends BaseFragment
 	private void initData()
 	{
 		String userId = getArguments().getString(KeyContactPassedUserId);
-		XHttpUtil.doUserContactVolumeUnapply(new WUserContactVolumeBean(userId), new XHttpAdapter<VUserContactVolumeBean>()
+		XHttpUtil.doUserContactVolumePassed(new WUserContactVolumeBean(userId), new XHttpAdapter<VUserContactVolumeBean>()
 		{
 			@Override
 			public void onSuccess(VUserContactVolumeBean vUserContactVolumeBean)

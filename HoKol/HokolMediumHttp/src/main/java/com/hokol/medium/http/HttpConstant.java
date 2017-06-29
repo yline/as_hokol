@@ -176,6 +176,21 @@ public class HttpConstant
 	// 获取已过期的交流券
 	public static final String url_user_vip_recharge_expired = url_head + "ApiMine/expire_call_card";
 
+	// 用户信用
+	public static final String url_user_credit = url_head + "ApiMine/user_credit";
+
+	// 我的评分(已发任务)
+	public static final String url_user_task_score_assigned = url_head + "ApiMine/mine_score_pub";
+
+	// 我的评分(已投任务)
+	public static final String url_user_task_score_delivered = url_head + "ApiMine/mine_score_post";
+
+	// 查看评论(已发任务)
+	public static final String url_user_task_comment_assigned = url_head + "ApiMine/find_comment_pub";
+
+	// 查看评论(已投任务)
+	public static final String url_user_task_comment_delivered = url_head + "ApiMine/find_comment_post";
+
 
 	/* --------------------------- 设置接口 --------------------------- */
 	// 用户发表意见

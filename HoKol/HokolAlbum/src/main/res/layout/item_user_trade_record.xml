@@ -21,6 +21,7 @@
             android:src="@drawable/user_vip_identify_light"/>
 
         <TextView
+            android:id="@+id/tv_user_trade_record_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

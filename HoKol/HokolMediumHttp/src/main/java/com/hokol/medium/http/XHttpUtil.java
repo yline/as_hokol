@@ -23,12 +23,17 @@ import com.hokol.medium.http.bean.VTaskUserSignUpDetailBean;
 import com.hokol.medium.http.bean.VUserAvatarBean;
 import com.hokol.medium.http.bean.VUserCareAllBean;
 import com.hokol.medium.http.bean.VUserContactVolumeBean;
+import com.hokol.medium.http.bean.VUserCreditBean;
 import com.hokol.medium.http.bean.VUserFansAllBean;
 import com.hokol.medium.http.bean.VUserGiftReceiveBean;
 import com.hokol.medium.http.bean.VUserGiftSendBean;
 import com.hokol.medium.http.bean.VUserMessageSystemBean;
 import com.hokol.medium.http.bean.VUserMessageSystemOutlineBean;
 import com.hokol.medium.http.bean.VUserTaskCollectionBean;
+import com.hokol.medium.http.bean.VUserTaskCommentAssignedBean;
+import com.hokol.medium.http.bean.VUserTaskCommentDeliveredBean;
+import com.hokol.medium.http.bean.VUserTaskScoreAssignedBean;
+import com.hokol.medium.http.bean.VUserTaskScoreDeliveredBean;
 import com.hokol.medium.http.bean.VUserVipInfoBean;
 import com.hokol.medium.http.bean.VUserVipRechargeRecordBean;
 import com.hokol.medium.http.bean.WDynamicCareAllBean;
@@ -68,12 +73,17 @@ import com.hokol.medium.http.bean.WUserCareAllBean;
 import com.hokol.medium.http.bean.WUserCareOrCancelBean;
 import com.hokol.medium.http.bean.WUserCoinGiftBean;
 import com.hokol.medium.http.bean.WUserContactVolumeBean;
+import com.hokol.medium.http.bean.WUserCreditBean;
 import com.hokol.medium.http.bean.WUserFansAllBean;
 import com.hokol.medium.http.bean.WUserGiftReceiveBean;
 import com.hokol.medium.http.bean.WUserGiftSendBean;
 import com.hokol.medium.http.bean.WUserMessageSystemBean;
 import com.hokol.medium.http.bean.WUserMessageSystemOutlineBean;
 import com.hokol.medium.http.bean.WUserTaskCollectionBean;
+import com.hokol.medium.http.bean.WUserTaskCommentAssignedBean;
+import com.hokol.medium.http.bean.WUserTaskCommentDeliveredBean;
+import com.hokol.medium.http.bean.WUserTaskScoreAssignedBean;
+import com.hokol.medium.http.bean.WUserTaskScoreDeliveredBean;
 import com.hokol.medium.http.bean.WUserVipInfoBean;
 import com.hokol.medium.http.bean.WUserVipRechargeRecordBean;
 import com.yline.http.XHttpAdapter;
@@ -703,6 +713,51 @@ public class XHttpUtil
 	{
 		String httpUrl = HttpConstant.url_user_vip_recharge_expired;
 		new XTextHttp<VUserContactVolumeBean>(adapter).doPost(httpUrl, bean, VUserContactVolumeBean.class);
+	}
+
+	/**
+	 * 用户信用
+	 */
+	public static void doUserCredit(WUserCreditBean creditBean, XHttpAdapter<VUserCreditBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_user_credit;
+		new XTextHttp<VUserCreditBean>(adapter).doPost(httpUrl, creditBean, VUserCreditBean.class);
+	}
+
+	/**
+	 * 我的评分(已发任务)
+	 */
+	public static void doUserTaskScoreAssigned(WUserTaskScoreAssignedBean assignedBean, XHttpAdapter<VUserTaskScoreAssignedBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_user_task_score_assigned;
+		new XTextHttp<VUserTaskScoreAssignedBean>(adapter).doPost(httpUrl, assignedBean, VUserTaskScoreAssignedBean.class);
+	}
+
+	/**
+	 * 我的评分(已投任务)
+	 */
+	public static void doUserTaskScoreDelivered(WUserTaskScoreDeliveredBean deliveredBean, XHttpAdapter<VUserTaskScoreDeliveredBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_user_task_score_delivered;
+		new XTextHttp<VUserTaskScoreDeliveredBean>(adapter).doPost(httpUrl, deliveredBean, VUserTaskScoreDeliveredBean.class);
+	}
+
+	/**
+	 * 查看评论(已发任务)
+	 */
+	public static void doUserTaskCommentAssigned(WUserTaskCommentAssignedBean assignedBean, XHttpAdapter<VUserTaskCommentAssignedBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_user_task_comment_assigned;
+		new XTextHttp<VUserTaskCommentAssignedBean>(adapter).doPost(httpUrl, assignedBean, VUserTaskCommentAssignedBean.class);
+	}
+
+	/**
+	 * 查看评论(已投任务)
+	 */
+	public static void doUserTaskCommentDelivered(WUserTaskCommentDeliveredBean creditBean, XHttpAdapter<VUserTaskCommentDeliveredBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_user_task_comment_delivered;
+		new XTextHttp<VUserTaskCommentDeliveredBean>(adapter).doPost(httpUrl, creditBean, VUserTaskCommentDeliveredBean.class);
 	}
 
 	/**

@@ -37,6 +37,9 @@ public class VUserVipRechargeRecordBean
 		/* 会员类型(1:包月, 2:包季, 3:包年, 4:一次打电话, 5:一次看空间) */
 		private int member_type;
 
+		/* 充值红豆数 */
+		private int recharge_fee;
+
 		/* 过期时间, 为0则表示期限为永久 */
 		private long expire_time;
 
@@ -71,6 +74,16 @@ public class VUserVipRechargeRecordBean
 		public void setMember_type(int member_type)
 		{
 			this.member_type = member_type;
+		}
+
+		public int getRecharge_fee()
+		{
+			return recharge_fee;
+		}
+
+		public void setRecharge_fee(int recharge_fee)
+		{
+			this.recharge_fee = recharge_fee;
 		}
 
 		public long getExpire_time()

@@ -98,7 +98,6 @@ public class ContactVolumeRecordApplyedFragment extends BaseFragment
 		recordApplyedAdapter.addFootView(textViewFoot);
 	}
 
-
 	private void initData()
 	{
 		String userId = getArguments().getString(KeyContactApplyedUserId);

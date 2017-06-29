@@ -121,6 +121,13 @@ public class ContactVolumeRecordUnapplyFragment extends BaseFragment
 					}
 					recordUnapplyAdapter.setDataList(result);
 				}
+				else
+				{
+					if (getActivity() instanceof OnLoadRecordFinishCallback)
+					{
+						((OnLoadRecordFinishCallback) getActivity()).onLoadFinish(0, 0);
+					}
+				}
 			}
 		});
 	}

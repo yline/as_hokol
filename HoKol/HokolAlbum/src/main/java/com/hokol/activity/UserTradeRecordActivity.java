@@ -86,32 +86,38 @@ public class UserTradeRecordActivity extends BaseAppCompatActivity
 			VUserVipRechargeRecordBean.VUserVipRechargeRecordOneBean recordBean = sList.get(position);
 
 			// 购买价格
-			holder.setText(R.id.tv_user_trade_record_coin_num, "");
+			holder.setText(R.id.tv_user_trade_record_coin_num, String.format("￥%d红豆", recordBean.getRecharge_fee()));
 
 			// 标题 + 购买内容
 			int contentInt = recordBean.getMember_type();
 			if (contentInt == VUserVipRechargeRecordBean.VipTypeMonth)
 			{
+				holder.setText(R.id.tv_user_trade_record_title, "尊贵VIP会员");
 				holder.setText(R.id.tv_user_trade_record_content, "购买内容：一个月会员");
 			}
 			else if (contentInt == VUserVipRechargeRecordBean.VipTypeSeason)
 			{
+				holder.setText(R.id.tv_user_trade_record_title, "尊贵VIP会员");
 				holder.setText(R.id.tv_user_trade_record_content, "购买内容：三个月会员");
 			}
 			else if (contentInt == VUserVipRechargeRecordBean.VipTypeYear)
 			{
+				holder.setText(R.id.tv_user_trade_record_title, "尊贵VIP会员");
 				holder.setText(R.id.tv_user_trade_record_content, "购买内容：一年会员");
 			}
 			else if (contentInt == VUserVipRechargeRecordBean.VipTypeOnceCall)
 			{
+				holder.setText(R.id.tv_user_trade_record_title, "交流卷");
 				holder.setText(R.id.tv_user_trade_record_content, "购买内容：单张交流卷");
 			}
 			else if (contentInt == VUserVipRechargeRecordBean.VipTypeOnceSpace)
 			{
+				holder.setText(R.id.tv_user_trade_record_title, "私密空间");
 				holder.setText(R.id.tv_user_trade_record_content, "购买内容：单次查看私密空间");
 			}
 			else
 			{
+				holder.setText(R.id.tv_user_trade_record_title, "尊贵VIP会员");
 				holder.setText(R.id.tv_user_trade_record_content, "购买内容：一个月会员");
 			}
 

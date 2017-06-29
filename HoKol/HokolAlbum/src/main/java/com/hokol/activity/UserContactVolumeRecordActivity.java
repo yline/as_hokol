@@ -52,16 +52,17 @@ public class UserContactVolumeRecordActivity extends BaseAppCompatActivity imple
 		final List<String> titleList = new ArrayList<>();
 
 		fragmentList.add(ContactVolumeRecordUnapplyFragment.newInstance(userId));
-		titleList.add("未使用(0)");
+		titleList.add("未使用");
 
 		fragmentList.add(ContactVolumeRecordApplyedFragment.newInstance(userId));
-		titleList.add("已使用(0)");
+		titleList.add("已使用");
 		
 		fragmentList.add(ContactVolumeRecordPassedFragment.newInstance(userId));
-		titleList.add("已过期(0)");
+		titleList.add("已过期");
 
 		tabLayout = (TabLayout) findViewById(R.id.tab_layout_contact_volume);
 		ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager_contact_volume);
+		viewPager.setOffscreenPageLimit(3);
 
 		viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager())
 		{
