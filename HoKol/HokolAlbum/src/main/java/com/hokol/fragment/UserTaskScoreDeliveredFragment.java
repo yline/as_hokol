@@ -11,10 +11,12 @@ import android.view.ViewGroup;
 import com.hokol.R;
 import com.hokol.activity.TaskScoreDeliveredDetailActivity;
 import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.bean.VUserCreditBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseFragment;
 import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
+import com.yline.view.recycler.holder.ViewHolder;
 
 /**
  * 已投任务
@@ -24,12 +26,19 @@ import com.yline.view.recycler.holder.RecyclerViewHolder;
  */
 public class UserTaskScoreDeliveredFragment extends BaseFragment
 {
+	private static final String ScoreOutlook = "outlook"; // 外貌相符
+
+	private static final String ScoreAction = "action"; // 活动能力
+
+	private static final String ScoreServer = "server"; // 服务态度
+
+	private ViewHolder headViewHolder;
+
 	private UserTaskScoreDeliveredAdapter taskScoreDeliveredAdapter;
 
 	public static UserTaskScoreDeliveredFragment newInstance()
 	{
 		Bundle args = new Bundle();
-		
 		UserTaskScoreDeliveredFragment fragment = new UserTaskScoreDeliveredFragment();
 		fragment.setArguments(args);
 		return fragment;
@@ -78,11 +87,51 @@ public class UserTaskScoreDeliveredFragment extends BaseFragment
 		recyclerView.setAdapter(taskScoreDeliveredAdapter);
 
 		// 头部
-
 		View headView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_user_task_score_delivered_head, null);
 		taskScoreDeliveredAdapter.addHeadView(headView);
+		headViewHolder = new ViewHolder(headView);
+		updateSubCredit();
 
 		taskScoreDeliveredAdapter.setDataList(HttpEnum.getUserTagListAll());
+	}
+
+	public void updateSubCredit()
+	{
+		Bundle bundle = getArguments();
+		if (null != bundle)
+		{
+			headViewHolder.setProgress(R.id.progress_user_task_score_delivered_sub_outlook, (int) (10 * bundle.getFloat(ScoreOutlook)));
+			headViewHolder.setText(R.id.tv_user_task_score_delivered_sub_outlook, String.format("%3.1f", bundle.getFloat(ScoreOutlook)));
+
+			headViewHolder.setProgress(R.id.progress_user_task_score_delivered_sub_action, (int) (10 * bundle.getFloat(ScoreAction)));
+			headViewHolder.setText(R.id.tv_user_task_score_delivered_sub_action, String.format("%3.1f", bundle.getFloat(ScoreAction)));
+
+			headViewHolder.setProgress(R.id.progress_user_task_score_delivered_sub_server, (int) (10 * bundle.getFloat(ScoreServer)));
+			headViewHolder.setText(R.id.tv_user_task_score_delivered_sub_server, String.format("%3.1f", bundle.getFloat(ScoreServer)));
+		}
+	}
+
+	public void updateSubCredit(VUserCreditBean.VUserCreditSubBean subBean)
+	{
+		if (null != headViewHolder)
+		{
+			headViewHolder.setProgress(R.id.progress_user_task_score_delivered_sub_outlook, (int) (10 * subBean.getConformity_score()));
+			headViewHolder.setText(R.id.tv_user_task_score_delivered_sub_outlook, String.format("%3.1f", subBean.getConformity_score()));
+
+			headViewHolder.setProgress(R.id.progress_user_task_score_delivered_sub_action, (int) (10 * subBean.getAction_capacity_score()));
+			headViewHolder.setText(R.id.tv_user_task_score_delivered_sub_action, String.format("%3.1f", subBean.getAction_capacity_score()));
+
+			headViewHolder.setProgress(R.id.progress_user_task_score_delivered_sub_server, (int) (10 * subBean.getAttitude_score()));
+			headViewHolder.setText(R.id.tv_user_task_score_delivered_sub_server, String.format("%3.1f", subBean.getAttitude_score()));
+		}
+		else
+		{
+			Bundle args = new Bundle();
+			args.putFloat(ScoreOutlook, subBean.getConformity_score());
+			args.putFloat(ScoreAction, subBean.getAction_capacity_score());
+			args.putFloat(ScoreServer, subBean.getAttitude_score());
+			setArguments(args);
+		}
 	}
 
 	private class UserTaskScoreDeliveredAdapter extends HeadFootRecyclerAdapter<String>

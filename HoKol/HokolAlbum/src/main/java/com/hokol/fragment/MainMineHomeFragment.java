@@ -197,7 +197,14 @@ public class MainMineHomeFragment extends BaseFragment
 			@Override
 			public void onClick(View v)
 			{
-				UserTaskScoreActivity.actionStart(getContext());
+				if (TextUtils.isEmpty(userId))
+				{
+					SDKManager.toast("亲，请先登录");
+				}
+				else
+				{
+					UserTaskScoreActivity.actionStart(getContext(), userId);
+				}
 			}
 		});
 

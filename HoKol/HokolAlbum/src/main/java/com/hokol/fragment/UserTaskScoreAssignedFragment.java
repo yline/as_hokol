@@ -11,10 +11,12 @@ import android.view.ViewGroup;
 import com.hokol.R;
 import com.hokol.activity.TaskScoreAssignedDetailActivity;
 import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.bean.VUserCreditBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseFragment;
 import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
+import com.yline.view.recycler.holder.ViewHolder;
 
 /**
  * 已发任务
@@ -24,7 +26,15 @@ import com.yline.view.recycler.holder.RecyclerViewHolder;
  */
 public class UserTaskScoreAssignedFragment extends BaseFragment
 {
+	private static final String ScoreAction = "action"; // 活动相符
+
+	private static final String ScoreCommunication = "communication"; // 交流态度
+
+	private static final String ScoreSincerity = "sincerity"; // 诚信经营
+
 	private UserTaskScoreAssignedAdapter taskScoreAssignedAdapter;
+
+	private ViewHolder headViewHolder;
 
 	public static UserTaskScoreAssignedFragment newInstance()
 	{
@@ -80,8 +90,55 @@ public class UserTaskScoreAssignedFragment extends BaseFragment
 		// 头部
 		View headView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_user_task_score_assigned_head, null);
 		taskScoreAssignedAdapter.addHeadView(headView);
+		headViewHolder = new ViewHolder(headView);
+		updateHostCredit();
 
 		taskScoreAssignedAdapter.setDataList(HttpEnum.getUserTagListAll());
+	}
+
+	public void updateHostCredit()
+	{
+		Bundle bundle = getArguments();
+		if (null != bundle)
+		{
+			// 活动相符
+			headViewHolder.setProgress(R.id.progress_user_task_score_assigned_host_action, (int) (10 * bundle.getFloat(ScoreAction)));
+			headViewHolder.setText(R.id.tv_user_task_score_assigned_host_action, String.format("%3.1f", bundle.getFloat(ScoreAction)));
+
+			// 交流态度
+			headViewHolder.setProgress(R.id.progress_user_task_score_assigned_host_communication, (int) (10 * bundle.getFloat(ScoreCommunication)));
+			headViewHolder.setText(R.id.tv_user_task_score_assigned_host_communication, String.format("%3.1f", bundle.getFloat(ScoreCommunication)));
+
+			// 诚信经营
+			headViewHolder.setProgress(R.id.progress_user_task_score_assigned_host_sincerity, (int) (10 * bundle.getFloat(ScoreSincerity)));
+			headViewHolder.setText(R.id.tv_user_task_score_assigned_host_sincerity, String.format("%3.1f", bundle.getFloat(ScoreSincerity)));
+		}
+	}
+
+	public void updateHostCredit(VUserCreditBean.VUserCreditHostBean hostBean)
+	{
+		if (null != headViewHolder)
+		{
+			// 活动相符
+			headViewHolder.setProgress(R.id.progress_user_task_score_assigned_host_action, (int) (10 * hostBean.getConformity_score()));
+			headViewHolder.setText(R.id.tv_user_task_score_assigned_host_action, String.format("%3.1f", hostBean.getConformity_score()));
+
+			// 交流态度
+			headViewHolder.setProgress(R.id.progress_user_task_score_assigned_host_communication, (int) (10 * hostBean.getCommunion_score()));
+			headViewHolder.setText(R.id.tv_user_task_score_assigned_host_communication, String.format("%3.1f", hostBean.getCommunion_score()));
+
+			// 诚信经营
+			headViewHolder.setProgress(R.id.progress_user_task_score_assigned_host_sincerity, (int) (10 * hostBean.getCredibility_score()));
+			headViewHolder.setText(R.id.tv_user_task_score_assigned_host_sincerity, String.format("%3.1f", hostBean.getCredibility_score()));
+		}
+		else
+		{
+			Bundle args = new Bundle();
+			args.putFloat(ScoreAction, hostBean.getConformity_score());
+			args.putFloat(ScoreCommunication, hostBean.getCommunion_score());
+			args.putFloat(ScoreSincerity, hostBean.getCredibility_score());
+			setArguments(args);
+		}
 	}
 
 	private class UserTaskScoreAssignedAdapter extends HeadFootRecyclerAdapter<String>

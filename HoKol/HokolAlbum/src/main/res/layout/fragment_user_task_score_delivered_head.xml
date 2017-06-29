@@ -15,12 +15,12 @@
         android:paddingTop="@dimen/default_space_normal">
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="参加任务信用评分"
             android:textColor="@color/hokolBlackSmall"
-            android:textSize="@dimen/default_text_size_normal"
-            android:id="@+id/textView"/>
+            android:textSize="@dimen/default_text_size_normal"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -46,6 +46,7 @@
             android:textSize="@dimen/default_text_size_small"/>
 
         <ProgressBar
+            android:id="@+id/progress_user_task_score_delivered_sub_outlook"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="200dp"
             android:layout_height="@dimen/default_space_normal"
@@ -53,10 +54,11 @@
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginTop="@dimen/default_space_normal"
             android:max="50"
-            android:progress="50"
+            android:progress="25"
             android:progressDrawable="@drawable/widget_layer_radiusall_solid_graylight_red"/>
 
         <TextView
+            android:id="@+id/tv_user_task_score_delivered_sub_outlook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -82,6 +84,7 @@
             android:textSize="@dimen/default_text_size_small"/>
 
         <ProgressBar
+            android:id="@+id/progress_user_task_score_delivered_sub_action"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="200dp"
             android:layout_height="@dimen/default_space_normal"
@@ -89,10 +92,11 @@
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginTop="@dimen/default_space_normal"
             android:max="50"
-            android:progress="50"
+            android:progress="25"
             android:progressDrawable="@drawable/widget_layer_radiusall_solid_graylight_red"/>
 
         <TextView
+            android:id="@+id/tv_user_task_score_delivered_sub_action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -118,6 +122,7 @@
             android:textSize="@dimen/default_text_size_small"/>
 
         <ProgressBar
+            android:id="@+id/progress_user_task_score_delivered_sub_server"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="200dp"
             android:layout_height="@dimen/default_space_normal"
@@ -125,10 +130,11 @@
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginTop="@dimen/default_space_normal"
             android:max="50"
-            android:progress="50"
+            android:progress="25"
             android:progressDrawable="@drawable/widget_layer_radiusall_solid_graylight_red"/>
 
         <TextView
+            android:id="@+id/tv_user_task_score_delivered_sub_server"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -182,4 +188,9 @@
             android:background="@color/hokolGrayLight">
         </LinearLayout>
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_space_normal">
+    </View>
 </LinearLayout>

@@ -13,8 +13,12 @@ import android.view.View;
 import com.hokol.R;
 import com.hokol.fragment.UserTaskScoreAssignedFragment;
 import com.hokol.fragment.UserTaskScoreDeliveredFragment;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VUserCreditBean;
+import com.hokol.medium.http.bean.WUserCreditBean;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.ArrayList;
@@ -28,7 +32,13 @@ import java.util.List;
  */
 public class UserTaskScoreActivity extends BaseAppCompatActivity
 {
+	private static final String KeyUserTaskScoreUserId = "UserTaskScoreUserId";
+
 	private ViewHolder viewHolder;
+
+	private UserTaskScoreAssignedFragment assignedFragment;
+
+	private UserTaskScoreDeliveredFragment deliveredFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -38,6 +48,7 @@ public class UserTaskScoreActivity extends BaseAppCompatActivity
 
 		viewHolder = new ViewHolder(this);
 		initView();
+		initData();
 	}
 
 	private void initView()
@@ -45,10 +56,12 @@ public class UserTaskScoreActivity extends BaseAppCompatActivity
 		final List<BaseFragment> fragmentList = new ArrayList<>();
 		final List<String> titleList = new ArrayList<>();
 
-		fragmentList.add(UserTaskScoreAssignedFragment.newInstance());
+		assignedFragment = UserTaskScoreAssignedFragment.newInstance();
+		fragmentList.add(assignedFragment);
 		titleList.add("已发任务");
 
-		fragmentList.add(UserTaskScoreDeliveredFragment.newInstance());
+		deliveredFragment = UserTaskScoreDeliveredFragment.newInstance();
+		fragmentList.add(deliveredFragment);
 		titleList.add("已投任务");
 
 		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout_user_task_score);
@@ -87,9 +100,28 @@ public class UserTaskScoreActivity extends BaseAppCompatActivity
 			}
 		});
 	}
-	
-	public static void actionStart(Context context)
+
+	private void initData()
 	{
-		context.startActivity(new Intent(context, UserTaskScoreActivity.class));
+		String userId = getIntent().getStringExtra(KeyUserTaskScoreUserId);
+		XHttpUtil.doUserCredit(new WUserCreditBean(userId), new XHttpAdapter<VUserCreditBean>()
+		{
+			@Override
+			public void onSuccess(VUserCreditBean vUserCreditBean)
+			{
+				// host
+				VUserCreditBean.VUserCreditHostBean hostBean = vUserCreditBean.getScore2();
+				assignedFragment.updateHostCredit(hostBean);
+
+				// sub
+				VUserCreditBean.VUserCreditSubBean subBean = vUserCreditBean.getScore3();
+				deliveredFragment.updateSubCredit(subBean);
+			}
+		});
+	}
+
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, UserTaskScoreActivity.class).putExtra(KeyUserTaskScoreUserId, userId));
 	}
 }
