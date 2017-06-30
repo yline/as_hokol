@@ -28,6 +28,8 @@ public class UserAccountActivity extends BaseAppCompatActivity
 
 	private ViewHolder viewHolder;
 
+	private String userId;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -54,7 +56,7 @@ public class UserAccountActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				UserRechargeActivity.actionStart(UserAccountActivity.this);
+				UserRechargeActivity.actionStart(UserAccountActivity.this, userId);
 			}
 		});
 
@@ -64,7 +66,7 @@ public class UserAccountActivity extends BaseAppCompatActivity
 
 	private void initTabView()
 	{
-		String userId = getIntent().getStringExtra(KeyAccountUserId);
+		userId = getIntent().getStringExtra(KeyAccountUserId);
 
 		final List<BaseFragment> fragmentList = new ArrayList<>();
 		final List<String> titleList = new ArrayList<>();

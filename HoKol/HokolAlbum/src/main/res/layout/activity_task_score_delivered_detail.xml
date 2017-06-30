@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/default_space_normal"
-            android:text="鹿宝宝lululu"
+            android:text=""
             android:textColor="@color/hokolBlackSmall"
             android:textSize="@dimen/default_text_size_medium"/>
     </LinearLayout>
@@ -67,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/default_space_large"
-        android:text="2017-05-28"
+        android:text=""
         android:textColor="@color/hokolGray"
         android:textSize="@dimen/default_text_size_small"/>
 
@@ -78,7 +78,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/default_space_large"
         android:layout_marginTop="@dimen/default_space_normal"
-        android:text="鹿宝宝lululu"
+        android:text=""
         android:textColor="@color/hokolBlackSmall"
         android:textSize="@dimen/default_text_size_medium"/>
 

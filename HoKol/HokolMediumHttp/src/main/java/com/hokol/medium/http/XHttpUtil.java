@@ -29,6 +29,7 @@ import com.hokol.medium.http.bean.VUserGiftReceiveBean;
 import com.hokol.medium.http.bean.VUserGiftSendBean;
 import com.hokol.medium.http.bean.VUserMessageSystemBean;
 import com.hokol.medium.http.bean.VUserMessageSystemOutlineBean;
+import com.hokol.medium.http.bean.VUserRechargeRecordBean;
 import com.hokol.medium.http.bean.VUserTaskCollectionBean;
 import com.hokol.medium.http.bean.VUserTaskCommentAssignedBean;
 import com.hokol.medium.http.bean.VUserTaskCommentDeliveredBean;
@@ -79,6 +80,7 @@ import com.hokol.medium.http.bean.WUserGiftReceiveBean;
 import com.hokol.medium.http.bean.WUserGiftSendBean;
 import com.hokol.medium.http.bean.WUserMessageSystemBean;
 import com.hokol.medium.http.bean.WUserMessageSystemOutlineBean;
+import com.hokol.medium.http.bean.WUserRechargeRecordBean;
 import com.hokol.medium.http.bean.WUserTaskCollectionBean;
 import com.hokol.medium.http.bean.WUserTaskCommentAssignedBean;
 import com.hokol.medium.http.bean.WUserTaskCommentDeliveredBean;
@@ -668,6 +670,15 @@ public class XHttpUtil
 	{
 		String httpUrl = HttpConstant.url_user_gift_send;
 		new XTextHttp<VUserGiftSendBean>(adapter).doPost(httpUrl, sendBean, VUserGiftSendBean.class);
+	}
+
+	/**
+	 * 充值记录
+	 */
+	public static void doUserRechargeRecord(WUserRechargeRecordBean recordBean, XHttpAdapter<VUserRechargeRecordBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_user_recharge_record;
+		new XTextHttp<VUserRechargeRecordBean>(adapter).doPost(httpUrl, recordBean, VUserRechargeRecordBean.class);
 	}
 
 	/**

@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.yline.utils.SPUtil.get;
 
 /**
  * App状态 管理
@@ -55,6 +54,8 @@ public class AppStateManager
 	/* 用户获奖 */private static final String KeyUserPrice = "UserPrice";
 
 	/* 用户星座 */private static final String KeyUserConstell = "UserConstell";
+
+	/* 用户手机号 */private static final String KeyUserTel = "UserTel";
 
 	// 其他数据，分割线
 	/* 用户粉丝数 */private static final String KeyUserFansNum = "UserFansNum";
@@ -102,6 +103,8 @@ public class AppStateManager
 			SPUtil.put(context, KeyUserSign, loginPhonePwdBean.getUser_sign(), FileName);
 			SPUtil.put(context, KeyUserPrice, loginPhonePwdBean.getUser_prize(), FileName);
 			SPUtil.put(context, KeyUserConstell, loginPhonePwdBean.getUser_constell(), FileName);
+
+			SPUtil.put(context, KeyUserTel, loginPhonePwdBean.getUser_tel(), FileName);
 
 			// 其他数据
 			SPUtil.put(context, KeyUserFansNum, loginPhonePwdBean.getUser_fans_num(), FileName);
@@ -161,38 +164,38 @@ public class AppStateManager
 
 	public boolean isUserLogin(Context context)
 	{
-		return (boolean) get(context, KeyUserLogin, false, FileName);
+		return (boolean) SPUtil.get(context, KeyUserLogin, false, FileName);
 	}
 	
 	public String getUserLoginId(Context context)
 	{
-		return (String) get(context, KeyUserLoginId, "", FileName);
+		return (String) SPUtil.get(context, KeyUserLoginId, "", FileName);
 	}
 
 	public String getUserLoginAvatar(Context context)
 	{
-		return (String) get(context, KeyUserLoginAvatar, "", FileName);
+		return (String) SPUtil.get(context, KeyUserLoginAvatar, "", FileName);
 	}
 
 	public String getUserLoginSex(Context context)
 	{
-		return (String) get(context, KeyUserLoginSex, HttpEnum.UserSex.All.getContent(), FileName);
+		return (String) SPUtil.get(context, KeyUserLoginSex, HttpEnum.UserSex.All.getContent(), FileName);
 	}
 
 	public int getUserLoginSexInt(Context context)
 	{
-		String userSex = (String) get(context, KeyUserLoginSex, HttpEnum.UserSex.All.getContent(), FileName);
+		String userSex = (String) SPUtil.get(context, KeyUserLoginSex, HttpEnum.UserSex.All.getContent(), FileName);
 		return HttpEnum.getUserSex(userSex).getIndex();
 	}
 
 	public String getUserLoginNickName(Context context)
 	{
-		return (String) get(context, KeyUserLoginNickname, "", FileName);
+		return (String) SPUtil.get(context, KeyUserLoginNickname, "", FileName);
 	}
 
 	public List<String> getUserLoginLabel(Context context)
 	{
-		String jsonList = (String) get(context, KeyUserLoginLabel, "", FileName);
+		String jsonList = (String) SPUtil.get(context, KeyUserLoginLabel, "", FileName);
 		if (!TextUtils.isEmpty(jsonList))
 		{
 			return new Gson().fromJson(jsonList, new TypeToken<List<String>>()
@@ -223,48 +226,54 @@ public class AppStateManager
 
 	public String getUserLoginLabelString(Context context)
 	{
-		return (String) get(context, KeyUserLoginLabel, "", FileName);
+		return (String) SPUtil.get(context, KeyUserLoginLabel, "", FileName);
 	}
 
 	public String getUserProvinceName(Context context)
 	{
-		return (String) get(context, KeyUserProvinceName, "", FileName);
+		return (String) SPUtil.get(context, KeyUserProvinceName, "", FileName);
 	}
 
 	public String getUserProvinceCode(Context context)
 	{
-		return (String) get(context, KeyUserProvinceCode, "", FileName);
+		return (String) SPUtil.get(context, KeyUserProvinceCode, "", FileName);
 	}
 
 	public String getUserCityName(Context context)
 	{
-		return (String) get(context, KeyUserCityName, "", FileName);
+		return (String) SPUtil.get(context, KeyUserCityName, "", FileName);
 	}
 
 	public String getUserCityCode(Context context)
 	{
-		return (String) get(context, KeyUserCityCode, "", FileName);
+		return (String) SPUtil.get(context, KeyUserCityCode, "", FileName);
 	}
 
 	public String getUserSign(Context context)
 	{
-		return (String) get(context, KeyUserSign, "", FileName);
+		return (String) SPUtil.get(context, KeyUserSign, "", FileName);
 	}
 
 	public String getUserPrice(Context context)
 	{
-		return (String) get(context, KeyUserPrice, "", FileName);
+		return (String) SPUtil.get(context, KeyUserPrice, "", FileName);
 	}
 
 	public String getUserConstell(Context context)
 	{
-		return (String) get(context, KeyUserConstell, "", FileName);
+		return (String) SPUtil.get(context, KeyUserConstell, "", FileName);
 	}
 
 	public int getUserConstellInt(Context context)
 	{
-		String userConstell = (String) get(context, KeyUserConstell, "", FileName);
+		String userConstell = (String) SPUtil.get(context, KeyUserConstell, "", FileName);
 		return HttpEnum.getUserConstell(userConstell).getIndex();
+	}
+
+	public String getUserTel(Context context)
+	{
+		String userTel = (String) SPUtil.get(context, KeyUserTel, "", FileName);
+		return userTel;
 	}
 
 	public UserInfoActivity.UserInfo getUserInfoBean(Context context, String userId)

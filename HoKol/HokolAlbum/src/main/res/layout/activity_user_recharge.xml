@@ -57,17 +57,21 @@
         android:paddingTop="@dimen/default_space_normal">
 
         <TextView
+            android:id="@+id/tv_user_recharge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="充值账号: 15958148974"
+            android:text="充值账号：15958148974"
             android:textColor="@color/hokolGrayDrak"
             android:textSize="@dimen/default_text_size_normal"/>
 
         <TextView
+            android:id="@+id/tv_user_coin_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="余额: 1265红豆"
+            android:layout_alignParentTop="true"
+            android:text="余额：1265红豆"
             android:textColor="@color/hokolGrayDrak"
             android:textSize="@dimen/default_text_size_normal"/>
     </RelativeLayout>
@@ -113,6 +117,7 @@
         android:paddingRight="@dimen/default_space_large">
 
         <ImageView
+            android:id="@+id/iv_user_recharge_wechat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/default_space_small"
@@ -121,6 +126,7 @@
             android:src="@drawable/user_recharge_wechat"/>
 
         <ImageView
+            android:id="@+id/iv_user_recharge_ali_pay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_space_small"

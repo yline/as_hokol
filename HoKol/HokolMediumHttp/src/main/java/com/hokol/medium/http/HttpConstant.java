@@ -161,6 +161,9 @@ public class HttpConstant
 	// 送出的红豆
 	public static final String url_user_gift_send = url_head + "ApiMine/post_gift";
 
+	// 充值记录
+	public static final String url_user_recharge_record = url_head + "ApiMine/recharge_record";
+
 	// 我的会员
 	public static final String url_user_vip_info = url_head + "ApiMine/mine_member";
 
