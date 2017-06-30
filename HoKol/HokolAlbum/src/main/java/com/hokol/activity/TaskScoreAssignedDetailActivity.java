@@ -8,13 +8,21 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.hokol.R;
-import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VUserTaskCommentAssignedBean;
+import com.hokol.medium.http.bean.WUserTaskCommentAssignedBean;
+import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.base.BaseAppCompatActivity;
+import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
+
+import java.util.List;
 
 public class TaskScoreAssignedDetailActivity extends BaseAppCompatActivity
 {
@@ -30,6 +38,12 @@ public class TaskScoreAssignedDetailActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_task_score_assigned_detail);
 
+		initView();
+		initData();
+	}
+
+	private void initView()
+	{
 		RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_task_score_assigned_detail);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -41,8 +55,6 @@ public class TaskScoreAssignedDetailActivity extends BaseAppCompatActivity
 		headView.setBackgroundColor(ContextCompat.getColor(this, R.color.hokolGrayLight));
 		assignedDetailAdapter.addHeadView(headView);
 
-		assignedDetailAdapter.setDataList(HttpEnum.getUserTagListAll());
-
 		findViewById(R.id.iv_task_score_assigned_detail_cancel).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -53,7 +65,27 @@ public class TaskScoreAssignedDetailActivity extends BaseAppCompatActivity
 		});
 	}
 
-	private class ScoreAssignedDetailAdapter extends HeadFootRecyclerAdapter<String>
+	private void initData()
+	{
+		String userId = getIntent().getStringExtra(KeyAssignedUserId);
+		String taskId = getIntent().getStringExtra(KeyAssignedTaskId);
+
+		XHttpUtil.doUserTaskCommentAssigned(new WUserTaskCommentAssignedBean(userId, taskId), new XHttpAdapter<VUserTaskCommentAssignedBean>()
+		{
+			@Override
+			public void onSuccess(VUserTaskCommentAssignedBean vUserTaskCommentAssignedBean)
+			{
+				// 后台提供的数据 是单条
+				List<VUserTaskCommentAssignedBean.VUserTaskCommentAssignedOneBean> resultList = vUserTaskCommentAssignedBean.getList();
+				if (null != resultList)
+				{
+					assignedDetailAdapter.setDataList(resultList);
+				}
+			}
+		});
+	}
+
+	private class ScoreAssignedDetailAdapter extends HeadFootRecyclerAdapter<VUserTaskCommentAssignedBean.VUserTaskCommentAssignedOneBean>
 	{
 		@Override
 		public int getItemRes()
@@ -64,7 +96,21 @@ public class TaskScoreAssignedDetailActivity extends BaseAppCompatActivity
 		@Override
 		public void onBindViewHolder(RecyclerViewHolder holder, int position)
 		{
+			VUserTaskCommentAssignedBean.VUserTaskCommentAssignedOneBean assignedBean = sList.get(position);
 
+			// 头像
+			ImageView avatarImageView = holder.get(R.id.circle_task_score_delivered_detail);
+			Glide.with(TaskScoreAssignedDetailActivity.this).load(assignedBean.getUser_logo()).error(R.drawable.global_load_failed).into(avatarImageView);
+
+			// 昵称
+			holder.setText(R.id.circle_task_score_delivered_nickname, assignedBean.getUser_nickname());
+
+			// 时间
+			String timeStr = HokolTimeConvertUtil.stampToFormatDate(assignedBean.getComment_pub_time() * 1000);
+			holder.setText(R.id.circle_task_score_delivered_time, timeStr);
+
+			// 信息
+			holder.setText(R.id.circle_task_score_delivered_content, assignedBean.getUser_comment());
 		}
 	}
 

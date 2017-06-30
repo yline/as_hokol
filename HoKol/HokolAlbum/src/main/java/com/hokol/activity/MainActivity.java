@@ -28,7 +28,7 @@ import com.yline.base.BaseAppCompatActivity;
  */
 public class MainActivity extends BaseAppCompatActivity
 {
-	private MainHelper mainHelper = new MainHelper();
+	private MainHelper mainHelper;
 
 	private FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -93,6 +93,7 @@ public class MainActivity extends BaseAppCompatActivity
 
 		tabLayout = (TabLayout) findViewById(R.id.tab_layout_main);
 
+		mainHelper = new MainHelper();
 		mainHelper.initFlashAnimator(imageFlashView);
 
 		initView();
