@@ -68,6 +68,7 @@
             android:textColor="#808080"/>
 
         <TextView
+            android:id="@+id/tv_item_task_score_delivered_state"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -82,7 +83,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:gravity="right"
-            android:text="17天1小时后截止"
+            android:text="报名已截止"
             android:textColor="#808080"/>
     </LinearLayout>
 

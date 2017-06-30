@@ -18,6 +18,10 @@ import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 public class TaskScoreAssignedDetailActivity extends BaseAppCompatActivity
 {
+	private static final String KeyAssignedUserId = "UserId";
+
+	private static final String KeyAssignedTaskId = "TaskId";
+
 	private ScoreAssignedDetailAdapter assignedDetailAdapter;
 
 	@Override
@@ -64,8 +68,8 @@ public class TaskScoreAssignedDetailActivity extends BaseAppCompatActivity
 		}
 	}
 
-	public static void actionStart(Context context)
+	public static void actionStart(Context context, String userId, String taskId)
 	{
-		context.startActivity(new Intent(context, TaskScoreAssignedDetailActivity.class));
+		context.startActivity(new Intent(context, TaskScoreAssignedDetailActivity.class).putExtra(KeyAssignedUserId, userId).putExtra(KeyAssignedTaskId, taskId));
 	}
 }

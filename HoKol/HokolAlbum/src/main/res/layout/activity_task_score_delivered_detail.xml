@@ -46,11 +46,13 @@
         android:paddingTop="@dimen/default_space_medium">
 
         <com.hokol.medium.viewcustom.CircleView
+            android:id="@+id/circle_task_score_delivered_detail"
             android:layout_width="@dimen/default_space_super"
             android:layout_height="@dimen/default_space_super"
             android:src="@drawable/global_load_failed"/>
 
         <TextView
+            android:id="@+id/circle_task_score_delivered_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -61,6 +63,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/circle_task_score_delivered_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/default_space_large"
@@ -69,6 +72,7 @@
         android:textSize="@dimen/default_text_size_small"/>
 
     <TextView
+        android:id="@+id/circle_task_score_delivered_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"

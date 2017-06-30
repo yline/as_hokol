@@ -4,19 +4,28 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.activity.TaskScoreDeliveredDetailActivity;
-import com.hokol.medium.http.HttpEnum;
+import com.hokol.application.AppStateManager;
+import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserCreditBean;
+import com.hokol.medium.http.bean.VUserTaskScoreDeliveredBean;
+import com.hokol.medium.http.bean.WUserTaskScoreDeliveredBean;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 import com.yline.view.recycler.holder.ViewHolder;
+
+import java.util.List;
 
 /**
  * 已投任务
@@ -36,11 +45,11 @@ public class UserTaskScoreDeliveredFragment extends BaseFragment
 
 	private UserTaskScoreDeliveredAdapter taskScoreDeliveredAdapter;
 
+	private String userId;
+
 	public static UserTaskScoreDeliveredFragment newInstance()
 	{
-		Bundle args = new Bundle();
 		UserTaskScoreDeliveredFragment fragment = new UserTaskScoreDeliveredFragment();
-		fragment.setArguments(args);
 		return fragment;
 	}
 	
@@ -56,6 +65,7 @@ public class UserTaskScoreDeliveredFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 
 		initView(view);
+		initData();
 	}
 	
 	private void initView(View view)
@@ -90,9 +100,25 @@ public class UserTaskScoreDeliveredFragment extends BaseFragment
 		View headView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_user_task_score_delivered_head, null);
 		taskScoreDeliveredAdapter.addHeadView(headView);
 		headViewHolder = new ViewHolder(headView);
+	}
+
+	private void initData()
+	{
 		updateSubCredit();
 
-		taskScoreDeliveredAdapter.setDataList(HttpEnum.getUserTagListAll());
+		userId = AppStateManager.getInstance().getUserLoginId(getContext());
+		XHttpUtil.doUserTaskScoreDelivered(new WUserTaskScoreDeliveredBean(userId), new XHttpAdapter<VUserTaskScoreDeliveredBean>()
+		{
+			@Override
+			public void onSuccess(VUserTaskScoreDeliveredBean vUserTaskScoreDeliveredBean)
+			{
+				List<VUserTaskScoreDeliveredBean.VUserTaskScoreDeliveredOneBean> resultList = vUserTaskScoreDeliveredBean.getList();
+				if (null != resultList)
+				{
+					taskScoreDeliveredAdapter.setDataList(resultList);
+				}
+			}
+		});
 	}
 
 	public void updateSubCredit()
@@ -134,7 +160,7 @@ public class UserTaskScoreDeliveredFragment extends BaseFragment
 		}
 	}
 
-	private class UserTaskScoreDeliveredAdapter extends HeadFootRecyclerAdapter<String>
+	private class UserTaskScoreDeliveredAdapter extends HeadFootRecyclerAdapter<VUserTaskScoreDeliveredBean.VUserTaskScoreDeliveredOneBean>
 	{
 		@Override
 		public int getItemRes()
@@ -145,14 +171,35 @@ public class UserTaskScoreDeliveredFragment extends BaseFragment
 		@Override
 		public void onBindViewHolder(RecyclerViewHolder holder, int position)
 		{
+			final VUserTaskScoreDeliveredBean.VUserTaskScoreDeliveredOneBean deliveredBean = sList.get(position);
+
 			holder.setOnClickListener(R.id.tv_item_task_score_delivered_more, new View.OnClickListener()
 			{
 				@Override
 				public void onClick(View v)
 				{
-					TaskScoreDeliveredDetailActivity.actionStart(getContext());
+					if (!TextUtils.isEmpty(deliveredBean.getTask_id()))
+					{
+						TaskScoreDeliveredDetailActivity.actionStart(getContext(), userId, deliveredBean.getTask_id());
+					}
 				}
 			});
+
+			// 价格
+			holder.setText(R.id.tv_task_score_delivered_price, String.format("￥%d×%d", deliveredBean.getTask_fee(), deliveredBean.getTask_peo_num()));
+
+			// 标题
+			holder.setText(R.id.tv_task_score_delivered_title, deliveredBean.getTask_title());
+
+			// 头像
+			ImageView avatarImageView = holder.get(R.id.iv_item_task_score_delivered_avatar);
+			Glide.with(getContext()).load(deliveredBean.getUser_logo()).error(R.drawable.global_load_failed).into(avatarImageView);
+
+			// 昵称
+			holder.setText(R.id.tv_item_task_score_delivered_user, deliveredBean.getUser_nickname());
+
+			// 状态
+			holder.setText(R.id.tv_item_task_score_delivered_state, String.format("%d人报名", deliveredBean.getTask_join_peo()));
 		}
 	}
 }
