@@ -64,14 +64,7 @@ public class EnterUpdatePhoneActivity extends BaseAppCompatActivity
 			@Override
 			public void onTextChange(boolean isMatch)
 			{
-				if (isMatch)
-				{
-					classState.setPhoneMatch(true);
-				}
-				else
-				{
-					classState.setPhoneMatch(false);
-				}
+				classState.setPhoneMatch(true);
 			}
 		});
 
@@ -82,14 +75,7 @@ public class EnterUpdatePhoneActivity extends BaseAppCompatActivity
 			@Override
 			public void onTextChange(boolean isMatch)
 			{
-				if (isMatch)
-				{
-					classState.setIdentifyMatch(true);
-				}
-				else
-				{
-					classState.setIdentifyMatch(false);
-				}
+				classState.setIdentifyMatch(true);
 			}
 		});
 

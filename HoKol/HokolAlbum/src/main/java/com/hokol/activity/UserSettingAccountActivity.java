@@ -3,6 +3,7 @@ package com.hokol.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.hokol.R;
@@ -72,7 +73,15 @@ public class UserSettingAccountActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				EnterModifyPwdActivity.actionStart(UserSettingAccountActivity.this);
+				String userId = AppStateManager.getInstance().getUserLoginId(UserSettingAccountActivity.this);
+				if (!TextUtils.isEmpty(userId))
+				{
+					EnterModifyPwdActivity.actionStart(UserSettingAccountActivity.this, userId);
+				}
+				else
+				{
+					SDKManager.toast("您还未登录");
+				}
 			}
 		});
 	}

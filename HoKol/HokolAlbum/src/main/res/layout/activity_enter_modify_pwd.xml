@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="账号与安全"
+            android:text="修改密码"
             android:textColor="@android:color/black"
             android:textSize="@dimen/default_text_size_large"/>
     </RelativeLayout>
@@ -42,6 +42,7 @@
         android:orientation="horizontal">
 
         <com.hokol.medium.viewcustom.KeyClearEditText
+            android:id="@+id/et_enter_forget_pwd_old"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -65,6 +66,7 @@
         android:orientation="horizontal">
 
         <com.hokol.medium.viewcustom.KeyClearEditText
+            android:id="@+id/et_enter_forget_pwd_new"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -77,6 +79,7 @@
             android:textSize="@dimen/default_text_size_normal"/>
 
         <ImageView
+            android:id="@+id/iv_enter_forget_pwd_new"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -84,7 +87,7 @@
             android:paddingRight="@dimen/default_space_normal"
             android:paddingTop="@dimen/default_space_large"
             android:scaleType="centerCrop"
-            android:src="@drawable/global_ward_close"/>
+            android:src="@drawable/global_ward_open"/>
     </LinearLayout>
 
     <LinearLayout
@@ -98,6 +101,7 @@
         android:orientation="horizontal">
 
         <com.hokol.medium.viewcustom.KeyClearEditText
+            android:id="@+id/et_enter_forget_pwd_new_sure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -110,6 +114,7 @@
             android:textSize="@dimen/default_text_size_normal"/>
 
         <ImageView
+            android:id="@+id/iv_enter_forget_pwd_new_sure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -117,7 +122,7 @@
             android:paddingRight="@dimen/default_space_normal"
             android:paddingTop="@dimen/default_space_large"
             android:scaleType="centerCrop"
-            android:src="@drawable/global_ward_close"/>
+            android:src="@drawable/global_ward_open"/>
     </LinearLayout>
 
     <Button

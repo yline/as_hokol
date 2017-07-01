@@ -211,9 +211,6 @@ public class HttpConstant
 	// 用户重置密码
 	public static final String url_setting_reset_pwd = url_head + "ApiSetting/reset_pwd";
 
-	// 用户重置手机
-	public static final String url_setting_reset_phone = url_head + "ApiSetting/reset_tel";
-
 	// 用户信息修改
 	public static final String url_setting_update_info = url_head + "ApiSetting/reset_user_info";
 

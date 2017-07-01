@@ -9,7 +9,6 @@ import android.widget.EditText;
 
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserAvatarBean;
-import com.hokol.medium.http.bean.WSettingResetPhoneBean;
 import com.hokol.medium.http.bean.WSettingResetPwdBean;
 import com.hokol.medium.http.bean.WSettingSubmitProposalBean;
 import com.hokol.medium.http.bean.WSettingUpdateInfoBean;

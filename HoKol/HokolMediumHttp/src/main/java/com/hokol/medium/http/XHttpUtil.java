@@ -54,7 +54,6 @@ import com.hokol.medium.http.bean.WEnterResetPwdBean;
 import com.hokol.medium.http.bean.WHomeMainBean;
 import com.hokol.medium.http.bean.WInitHokolBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
-import com.hokol.medium.http.bean.WSettingResetPhoneBean;
 import com.hokol.medium.http.bean.WSettingResetPwdBean;
 import com.hokol.medium.http.bean.WSettingSubmitProposalBean;
 import com.hokol.medium.http.bean.WSettingUpdateInfoBean;
@@ -857,22 +856,6 @@ public class XHttpUtil
 				return false;
 			}
 		}.doPost(httpUrl, wSettingResetPwdBean, String.class);
-	}
-
-	/**
-	 * 用户重置手机
-	 */
-	public static void doSettingResetPhone(WSettingResetPhoneBean wSettingResetPhoneBean, XHttpAdapter<String> adapter)
-	{
-		String httpUrl = HttpConstant.url_setting_reset_phone;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wSettingResetPhoneBean, String.class);
 	}
 
 	/**
