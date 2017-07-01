@@ -11,6 +11,7 @@ import com.hokol.medium.http.bean.VDynamicUserDetailBean;
 import com.hokol.medium.http.bean.VDynamicUserPrivateAllBean;
 import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
 import com.hokol.medium.http.bean.VHomeMainBean;
+import com.hokol.medium.http.bean.VInitHokolBean;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsRecommendBean;
 import com.hokol.medium.http.bean.VTaskMainAllBean;
@@ -49,6 +50,7 @@ import com.hokol.medium.http.bean.WEnterRegisterBean;
 import com.hokol.medium.http.bean.WEnterRegisterCompleteInfoBean;
 import com.hokol.medium.http.bean.WEnterResetPwdBean;
 import com.hokol.medium.http.bean.WHomeMainBean;
+import com.hokol.medium.http.bean.WInitHokolBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
 import com.hokol.medium.http.bean.WSettingResetPhoneBean;
 import com.hokol.medium.http.bean.WSettingResetPwdBean;
@@ -120,6 +122,15 @@ public class XHttpUtil
 		config.init(context);
 
 		XHttpConstant.setIsInterceptorDebug(false);
+	}
+
+	/**
+	 * 网络请求，用户初始化
+	 */
+	public static void doInitHokol(WInitHokolBean hokolBean, XHttpAdapter<VInitHokolBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_enter_hokol_init;
+		new XTextHttp<VInitHokolBean>(adapter).doPost(httpUrl, hokolBean, VInitHokolBean.class);
 	}
 
 	/**

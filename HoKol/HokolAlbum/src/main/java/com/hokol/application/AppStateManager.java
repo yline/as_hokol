@@ -356,6 +356,35 @@ public class AppStateManager
 		return (String) object;
 	}
 
+	public void clearLoginUserInfo(Context context)
+	{
+		SPUtil.put(context, KeyUserLogin, false, FileName);
+		SPUtil.put(context, KeyUserLoginId, "", FileName);
+		SPUtil.put(context, KeyUserLoginAvatar, "", FileName);
+		SPUtil.put(context, KeyUserLoginSex, "", FileName);
+		SPUtil.put(context, KeyUserLoginNickname, "", FileName);
+		SPUtil.put(context, KeyUserLoginLabel, "", FileName);
+
+		SPUtil.put(context, KeyUserProvinceName, "", FileName);
+		SPUtil.put(context, KeyUserProvinceCode, "", FileName);
+		SPUtil.put(context, KeyUserCityName, "", FileName);
+		SPUtil.put(context, KeyUserCityCode, "", FileName);
+
+		SPUtil.put(context, KeyUserSign, "", FileName);
+		SPUtil.put(context, KeyUserPrice, "", FileName);
+		SPUtil.put(context, KeyUserConstell, "", FileName);
+
+		SPUtil.put(context, KeyUserTel, "", FileName);
+
+		// 其他数据
+		SPUtil.put(context, KeyUserFansNum, 0, FileName);
+		SPUtil.put(context, KeyUserCareNum, 0, FileName);
+		SPUtil.put(context, KeyUserPraiseNum, 0, FileName);
+		SPUtil.put(context, KeyUserCoinNum, 0, FileName);
+		SPUtil.put(context, KeyUserVipLevel, 0, FileName);
+		SPUtil.put(context, KeyUserVipUrl, "", FileName);
+	}
+
 	public void logAppState(Context context)
 	{
 		String[] appState = new String[20];
@@ -382,5 +411,18 @@ public class AppStateManager
 		appState[18] = getUserVipUrl(context);
 
 		LogFileUtil.v("appState =》 " + Arrays.toString(appState));
+	}
+
+	/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 储存非 用户的数据 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */
+	private boolean isFirstFlash = true;
+
+	public boolean isFirstFlash()
+	{
+		return isFirstFlash;
+	}
+
+	public void setFirstFlash(boolean firstFlash)
+	{
+		isFirstFlash = firstFlash;
 	}
 }

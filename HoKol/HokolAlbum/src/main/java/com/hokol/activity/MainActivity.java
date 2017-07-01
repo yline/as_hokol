@@ -17,6 +17,7 @@ import com.hokol.fragment.MainNewsFragment;
 import com.hokol.fragment.MainTaskFragment;
 import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
 import com.hokol.viewhelper.MainHelper;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 
 
@@ -29,37 +30,37 @@ import com.yline.base.BaseAppCompatActivity;
 public class MainActivity extends BaseAppCompatActivity
 {
 	private MainHelper mainHelper;
-
+	
 	private FragmentManager fragmentManager = getSupportFragmentManager();
-
+	
 	private MainNewsFragment mainNewsFragment;
-
+	
 	private MainCareFragment mainCareFragment;
-
+	
 	private MainHomeFragment mainHomeFragment;
-
+	
 	private MainTaskFragment mainTaskFragment;
-
+	
 	private MainMineFragment mainMineFragment;
-
+	
 	private TabLayout tabLayout;
-
+	
 	public enum TAB
 	{
 		News(0, R.drawable.main_tab_news),
-
+		
 		Care(1, R.drawable.main_tab_care),
-
+		
 		Home(2, R.drawable.main_tab_home),
-
+		
 		Task(3, R.drawable.main_tab_task),
-
+		
 		Mine(4, R.drawable.main_tab_mine);
-
+		
 		private final int position;
-
+		
 		private final int icon;
-
+		
 		/**
 		 * @param position 位置
 		 * @param icon     tab资源
@@ -69,36 +70,39 @@ public class MainActivity extends BaseAppCompatActivity
 			this.position = position;
 			this.icon = icon;
 		}
-
+		
 		public int getPosition()
 		{
 			return position;
 		}
-
+		
 		public int getIcon()
 		{
 			return icon;
 		}
 	}
-
+	
 	private ImageView imageFlashView;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		
 		imageFlashView = (ImageView) findViewById(R.id.iv_main_logo);
-
+		
 		tabLayout = (TabLayout) findViewById(R.id.tab_layout_main);
-
+		
 		mainHelper = new MainHelper();
-		mainHelper.initFlashAnimator(imageFlashView);
+		if (AppStateManager.getInstance().isFirstFlash())
+		{
+			mainHelper.initFlashAnimator(imageFlashView);
+		}
 
 		initView();
 		initData();
-
+		
 		initShowData();
 	}
 	
@@ -109,12 +113,12 @@ public class MainActivity extends BaseAppCompatActivity
 	{
 		doSelected(TAB.Task.position);
 	}
-
+	
 	private void initView()
 	{
 		int[] icons = {TAB.News.icon, TAB.Care.icon, TAB.Home.icon, TAB.Task.icon, TAB.Mine.icon};
 		mainHelper.initTabLayout(this, tabLayout, icons);
-
+		
 		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
 		{
 			@Override
@@ -142,7 +146,7 @@ public class MainActivity extends BaseAppCompatActivity
 					fragmentManager.beginTransaction().show(mainMineFragment).commit();
 				}
 			}
-
+			
 			@Override
 			public void onTabUnselected(TabLayout.Tab tab)
 			{
@@ -168,11 +172,11 @@ public class MainActivity extends BaseAppCompatActivity
 					fragmentManager.beginTransaction().hide(mainMineFragment).commit();
 				}
 			}
-
+			
 			@Override
 			public void onTabReselected(TabLayout.Tab tab)
 			{
-
+				
 			}
 		});
 	}
@@ -184,19 +188,19 @@ public class MainActivity extends BaseAppCompatActivity
 		mainHomeFragment = MainHomeFragment.newInstance();
 		mainTaskFragment = MainTaskFragment.newInstance();
 		mainMineFragment = MainMineFragment.newInstance();
-
+		
 		fragmentManager.beginTransaction().add(R.id.fl_main_content, mainNewsFragment).hide(mainNewsFragment)
 				.add(R.id.fl_main_content, mainCareFragment).hide(mainCareFragment)
 				.add(R.id.fl_main_content, mainHomeFragment).hide(mainHomeFragment)
 				.add(R.id.fl_main_content, mainTaskFragment).hide(mainTaskFragment)
 				.add(R.id.fl_main_content, mainMineFragment).hide(mainMineFragment).commit();
 	}
-
+	
 	public void doSelected(int index)
 	{
 		tabLayout.getTabAt(index).select();
 	}
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
@@ -206,7 +210,7 @@ public class MainActivity extends BaseAppCompatActivity
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+	
 	/**
 	 * 开启主页面, 并存入用户信息
 	 *
@@ -215,7 +219,29 @@ public class MainActivity extends BaseAppCompatActivity
 	 */
 	public static void actionStart(Context context, VEnterLoginPhonePwdBean loginPhonePwdBean)
 	{
+		// 设置本地数据
 		AppStateManager.getInstance().setLoginUserInfo(context, loginPhonePwdBean);
+
+		// 设置 做动画
+		AppStateManager.getInstance().setFirstFlash(true);
+
+		context.startActivity(new Intent(context, MainActivity.class));
+	}
+
+	/**
+	 * 退出登录
+	 * 重新开启主界面
+	 *
+	 * @param context
+	 */
+	public static void actionStart(Context context)
+	{
+		AppStateManager.getInstance().clearLoginUserInfo(context); // 清除本地数据
+		SDKManager.finishActivity();
+
+		// 设置不做动画
+		AppStateManager.getInstance().setFirstFlash(false);
+
 		context.startActivity(new Intent(context, MainActivity.class));
 	}
 }

@@ -18,5 +18,9 @@ public class IApplication extends BaseApplication
 
 		// 打印日志
 		AppStateManager.getInstance().logAppState(this);
+
+		// 初始化数据
+		HokolInitManager initManager = new HokolInitManager();
+		initManager.initData(this);
 	}
 }

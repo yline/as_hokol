@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
@@ -12,9 +13,6 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * EditText装饰模式
@@ -239,11 +237,23 @@ public class TextDecorateUtil
 		textView.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 
+	/**
+	 * 检测手机号；11 位
+	 *
+	 * @param mobile
+	 * @return
+	 */
 	public static boolean isMobileNumber(String mobile)
 	{
-		Pattern pattern = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+		if (TextUtils.isEmpty(mobile))
+		{
+			return false;
+		}
+
+		return (mobile.length() == 11);
+		/*Pattern pattern = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
 		Matcher matcher = pattern.matcher(mobile);
-		return matcher.matches();
+		return matcher.matches();*/
 	}
 
 	public interface OnEditMatchCallback

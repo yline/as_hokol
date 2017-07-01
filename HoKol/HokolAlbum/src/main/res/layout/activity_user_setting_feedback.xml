@@ -31,194 +31,197 @@
             android:textSize="@dimen/default_text_size_large"/>
     </RelativeLayout>
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/hokolGrayLittle"
-        android:paddingBottom="@dimen/default_space_normal"
-        android:paddingLeft="@dimen/default_space_large_b"
-        android:paddingTop="@dimen/default_space_normal"
-        android:text="反馈类型(必选)"
-        android:textColor="@color/hokolGrayHeavy"
-        android:textSize="@dimen/default_text_size_normal">
-    </TextView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/default_space_large_b">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <CheckBox
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:button="@drawable/user_setting_feedback_checkable"
-                android:paddingBottom="@dimen/default_space_large"
-                android:paddingLeft="@dimen/default_space_normal"
-                android:paddingTop="@dimen/default_space_large"
-                android:text="应用崩溃"
-                android:textColor="@color/hokolBlackSmall"/>
-        </LinearLayout>
+                android:background="@color/hokolGrayLittle"
+                android:paddingBottom="@dimen/default_space_medium"
+                android:paddingLeft="@dimen/default_space_large_a"
+                android:paddingTop="@dimen/default_space_medium"
+                android:text="反馈类型(必选)"
+                android:textColor="@color/hokolGrayHeavy"
+                android:textSize="@dimen/default_text_size_medium">
+            </TextView>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+            <com.hokol.medium.viewcustom.RadioGroupNestLinear
+                android:id="@+id/radio_group_user_setting_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <CheckBox
-                android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radio_user_setting_type_crash"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/default_space_normal"
+                        android:layout_weight="1"
+                        android:paddingBottom="@dimen/default_space_large"
+                        android:paddingTop="@dimen/default_space_large"
+                        android:text="应用崩溃"
+                        android:textColor="@color/hokolBlackSmall"/>
+
+                    <RadioButton
+                        android:id="@+id/radio_user_setting_type_function"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingBottom="@dimen/default_space_large"
+                        android:paddingTop="@dimen/default_space_large"
+                        android:text="功能问题"
+                        android:textColor="@color/hokolBlackSmall"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radio_user_setting_type_enter"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/default_space_normal"
+                        android:layout_weight="1"
+                        android:paddingBottom="@dimen/default_space_large"
+                        android:paddingTop="@dimen/default_space_large"
+                        android:text="注册登录"
+                        android:textColor="@color/hokolBlackSmall"/>
+
+                    <RadioButton
+                        android:id="@+id/radio_user_setting_type_improve"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:paddingBottom="@dimen/default_space_large"
+                        android:paddingTop="@dimen/default_space_large"
+                        android:text="改善建议"
+                        android:textColor="@color/hokolBlackSmall"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radio_user_setting_type_pay"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/default_space_normal"
+                        android:layout_weight="1"
+                        android:paddingBottom="@dimen/default_space_large"
+                        android:paddingTop="@dimen/default_space_large"
+                        android:text="订单支付"
+                        android:textColor="@color/hokolBlackSmall"/>
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingBottom="@dimen/default_space_large"
+                        android:paddingTop="@dimen/default_space_large"
+                        android:textColor="@color/hokolBlackSmall"
+                        android:visibility="invisible"/>
+                </LinearLayout>
+            </com.hokol.medium.viewcustom.RadioGroupNestLinear>
+
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:button="@drawable/user_setting_feedback_checkable"
-                android:paddingBottom="@dimen/default_space_large"
-                android:paddingLeft="@dimen/default_space_normal"
-                android:paddingTop="@dimen/default_space_large"
-                android:text="功能问题"
-                android:textColor="@color/hokolBlackSmall"/>
-        </LinearLayout>
-    </LinearLayout>
+                android:background="@color/hokolGrayLittle"
+                android:paddingBottom="@dimen/default_space_medium"
+                android:paddingLeft="@dimen/default_space_large_a"
+                android:paddingTop="@dimen/default_space_medium"
+                android:text="反馈内容"
+                android:textColor="@color/hokolGrayHeavy"
+                android:textSize="@dimen/default_text_size_medium">
+            </TextView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/default_space_large_b">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <CheckBox
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/et_user_setting_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:button="@drawable/user_setting_feedback_checkable"
-                android:paddingBottom="@dimen/default_space_large"
-                android:paddingLeft="@dimen/default_space_normal"
-                android:paddingTop="@dimen/default_space_large"
-                android:text="注册登录"
-                android:textColor="@color/hokolBlackSmall"/>
-        </LinearLayout>
+                android:background="@null"
+                android:gravity="top"
+                android:hint="请输入您的问题和意见"
+                android:lines="5"
+                android:paddingBottom="@dimen/default_space_normal"
+                android:paddingLeft="@dimen/default_space_large_b"
+                android:paddingRight="@dimen/default_space_normal"
+                android:paddingTop="@dimen/default_space_normal"
+                android:textColor="@color/hokolBlackSmall"
+                android:textColorHint="#b2b2b2"
+                android:textSize="@dimen/default_text_size_medium"/>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <CheckBox
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:button="@drawable/user_setting_feedback_checkable"
-                android:paddingBottom="@dimen/default_space_large"
-                android:paddingLeft="@dimen/default_space_normal"
-                android:paddingTop="@dimen/default_space_large"
-                android:text="改善建议"
-                android:textColor="@color/hokolBlackSmall"/>
-        </LinearLayout>
-    </LinearLayout>
+                android:background="@color/hokolGrayLittle"
+                android:paddingBottom="@dimen/default_space_medium"
+                android:paddingLeft="@dimen/default_space_large_a"
+                android:paddingTop="@dimen/default_space_medium"
+                android:text="您的联系方式(选填)"
+                android:textColor="@color/hokolGrayHeavy"
+                android:textSize="@dimen/default_text_size_medium">
+            </TextView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/default_space_large_b">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <CheckBox
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/et_user_setting_contact"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:button="@drawable/user_setting_feedback_checkable"
-                android:gravity="center_vertical"
-                android:paddingBottom="@dimen/default_space_large"
-                android:paddingLeft="@dimen/default_space_normal"
-                android:paddingTop="@dimen/default_space_large"
-                android:text="订单支付"
-                android:textColor="@color/hokolBlackSmall"/>
+                android:background="@null"
+                android:gravity="top"
+                android:hint="手机、邮箱或QQ"
+                android:lines="1"
+                android:paddingBottom="@dimen/default_space_normal"
+                android:paddingLeft="@dimen/default_space_large_a"
+                android:paddingRight="@dimen/default_space_normal"
+                android:paddingTop="@dimen/default_space_normal"
+                android:textColor="@color/hokolBlackSmall"
+                android:textColorHint="#b2b2b2"
+                android:textSize="@dimen/default_text_size_normal"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_space_super"
+                android:background="@color/hokolGrayLittle"
+                android:paddingBottom="@dimen/default_space_normal"
+                android:paddingLeft="@dimen/default_space_large_b"
+                android:paddingTop="@dimen/default_space_normal">
+            </View>
+
+            <Button
+                android:id="@+id/btn_user_setting_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_space_large"
+                android:layout_marginRight="@dimen/default_space_large"
+                android:layout_marginTop="@dimen/default_space_super"
+                android:background="@drawable/widget_shape_radiuall_huge_solid_pinkhokol"
+                android:paddingBottom="@dimen/default_space_normal"
+                android:paddingTop="@dimen/default_space_normal"
+                android:text="提交"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/default_text_size_normal"/>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/hokolGrayLittle"
-        android:paddingBottom="@dimen/default_space_normal"
-        android:paddingLeft="@dimen/default_space_large_b"
-        android:paddingTop="@dimen/default_space_normal"
-        android:text="反馈内容"
-        android:textColor="@color/hokolGrayHeavy"
-        android:textSize="@dimen/default_text_size_normal">
-    </TextView>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:gravity="top"
-        android:hint="请输入您的问题和意见"
-        android:lines="5"
-        android:paddingBottom="@dimen/default_space_normal"
-        android:paddingLeft="@dimen/default_space_large_b"
-        android:paddingRight="@dimen/default_space_normal"
-        android:paddingTop="@dimen/default_space_normal"
-        android:textColor="@color/hokolBlackSmall"
-        android:textColorHint="#b2b2b2"
-        android:textSize="@dimen/default_text_size_normal"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/hokolGrayLittle"
-        android:paddingBottom="@dimen/default_space_normal"
-        android:paddingLeft="@dimen/default_space_large_b"
-        android:paddingTop="@dimen/default_space_normal"
-        android:text="您的联系方式(选填)"
-        android:textColor="@color/hokolGrayHeavy"
-        android:textSize="@dimen/default_text_size_normal">
-    </TextView>
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:gravity="top"
-        android:hint="手机、邮箱或QQ"
-        android:lines="1"
-        android:paddingBottom="@dimen/default_space_normal"
-        android:paddingLeft="@dimen/default_space_large_b"
-        android:paddingRight="@dimen/default_space_normal"
-        android:paddingTop="@dimen/default_space_normal"
-        android:textColor="@color/hokolBlackSmall"
-        android:textColorHint="#b2b2b2"
-        android:textSize="@dimen/default_text_size_normal"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/default_space_super"
-        android:background="@color/hokolGrayLittle"
-        android:paddingBottom="@dimen/default_space_normal"
-        android:paddingLeft="@dimen/default_space_large_b"
-        android:paddingTop="@dimen/default_space_normal">
-    </View>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/default_space_large"
-        android:layout_marginRight="@dimen/default_space_large"
-        android:layout_marginTop="@dimen/default_space_super"
-        android:background="@drawable/widget_shape_radiuall_huge_solid_pinkhokol"
-        android:paddingBottom="@dimen/default_space_normal"
-        android:paddingTop="@dimen/default_space_normal"
-        android:text="提交"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/default_text_size_normal"/>
 </LinearLayout>

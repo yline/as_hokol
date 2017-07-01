@@ -29,7 +29,7 @@ public class HokolGlideModule implements GlideModule
 	{
 		// 设置内存缓存大小
 		int maxMemory = (int) Runtime.getRuntime().maxMemory(); // 获取系统分配给应用的总内存大小
-		int memoryCacheSize = maxMemory / 4;
+		int memoryCacheSize = maxMemory / 8;
 		builder.setMemoryCache(new LruResourceCache(memoryCacheSize));
 		
 		// 设置 磁盘缓存大小

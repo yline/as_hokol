@@ -22,7 +22,10 @@ public class HttpConstant
 
 	// Http Url 信息
 	private static final String url_head = "http://120.92.35.211/wanghong/wh/index.php/Api/";
-	
+
+	// 手机+ 密码登陆
+	public static final String url_enter_hokol_init = url_head + "ApiLogin/init";
+
 	/* --------------------------- 注册、登录、忘记密码 --------------------------- */
 	// 手机+ 密码登陆
 	public static final String url_enter_login_pwd = url_head + "ApiLogin/login";

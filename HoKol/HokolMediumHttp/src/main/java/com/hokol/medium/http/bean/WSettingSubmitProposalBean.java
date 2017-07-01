@@ -2,6 +2,18 @@ package com.hokol.medium.http.bean;
 
 public class WSettingSubmitProposalBean
 {
+	public static final int TypeNull = 0; // 应用崩溃
+
+	public static final int TypeCrash = 1; // 应用崩溃
+
+	public static final int TypeFunction = 2; // 功能问题
+
+	public static final int TypeEnter = 3; // 注册登录
+
+	public static final int TypeImprove = 4; // 改善建议
+
+	public static final int TypePay = 5; // 订单支付
+
 	/**
 	 * 用户唯一标识
 	 */
