@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.hokol.R;
+import com.hokol.application.AppStateManager;
+import com.hokol.util.TextDecorateUtil;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.view.recycler.holder.ViewHolder;
 
@@ -41,7 +44,15 @@ public class UserSettingAccountActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				UserSettingAccountSafetyActivity.actionStart(UserSettingAccountActivity.this);
+				String phoneNumber = AppStateManager.getInstance().getUserTel(UserSettingAccountActivity.this);
+				if (TextDecorateUtil.isMobileNumber(phoneNumber))
+				{
+					UserSettingAccountSafetyActivity.actionStart(UserSettingAccountActivity.this, phoneNumber);
+				}
+				else
+				{
+					SDKManager.toast("您还未绑定手机号");
+				}
 			}
 		});
 

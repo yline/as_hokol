@@ -45,6 +45,12 @@ public class HttpConstant
 	// 忘记密码之重置密码
 	public static final String url_enter_reset_pwd = url_head + "ApiLogin/lose_pwd";
 
+	// 修改号码 获取验证码
+	public static final String url_enter_code_update_phone = url_head + "ApiSetting/get_reset_tel_code";
+
+	// 修改号码
+	public static final String url_enter_update_phone = url_head + "ApiSetting/reset_tel";
+
 	/* --------------------------- 新闻 --------------------------- */
 	// 多条新闻获取
 	public static final String url_news_multiplex = url_head + "ApiNews/news";

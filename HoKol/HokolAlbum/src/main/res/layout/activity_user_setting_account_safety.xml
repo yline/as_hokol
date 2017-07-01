@@ -45,6 +45,7 @@
         android:src="@drawable/user_setting_account_safety_phone_lock"/>
 
     <TextView
+        android:id="@+id/tv_user_setting_account_safety_update_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

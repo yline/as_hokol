@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.hokol.R;
+import com.hokol.application.AppStateManager;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 
@@ -60,5 +61,17 @@ public class EnterChoiceActivity extends BaseAppCompatActivity
 	public static void actionStart(Context context)
 	{
 		context.startActivity(new Intent(context, EnterChoiceActivity.class));
+	}
+
+	public static void actionStartJump(Context context)
+	{
+		AppStateManager.getInstance().clearLoginUserInfo(context); // 清除本地数据
+		SDKManager.finishActivity();
+
+		// 开启本Activity
+		context.startActivity(new Intent(context, EnterChoiceActivity.class));
+
+		// 开启登录页面
+		EnterLoginPhonePwdActivity.actionStart(context);
 	}
 }

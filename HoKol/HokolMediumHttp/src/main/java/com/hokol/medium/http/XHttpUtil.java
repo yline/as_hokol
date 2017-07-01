@@ -45,7 +45,9 @@ import com.hokol.medium.http.bean.WDynamicUserAllBean;
 import com.hokol.medium.http.bean.WDynamicUserDetailBean;
 import com.hokol.medium.http.bean.WDynamicUserPrivateAllBean;
 import com.hokol.medium.http.bean.WEnterCodeRegisterBean;
+import com.hokol.medium.http.bean.WEnterCodeUpdatePhoneBean;
 import com.hokol.medium.http.bean.WEnterLoginPhonePwdBean;
+import com.hokol.medium.http.bean.WEnterPhoneUpdateBean;
 import com.hokol.medium.http.bean.WEnterRegisterBean;
 import com.hokol.medium.http.bean.WEnterRegisterCompleteInfoBean;
 import com.hokol.medium.http.bean.WEnterResetPwdBean;
@@ -166,6 +168,54 @@ public class XHttpUtil
 	}
 
 	/**
+	 * 忘记密码之获取验证码
+	 */
+	public static void doEnterCodeForgetPwd(WEnterCodeRegisterBean codeRegisterBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_enter_code_forget_pwd;
+		new XTextHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, codeRegisterBean, String.class);
+	}
+
+	/**
+	 * 修改号码 获取验证码
+	 */
+	public static void doEnterCodeUpdatePhone(WEnterCodeUpdatePhoneBean codeUpdateBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_enter_code_update_phone;
+		new XTextHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, codeUpdateBean, String.class);
+	}
+
+	/**
+	 * 修改号码
+	 */
+	public static void doEnterPhoneUpdate(WEnterPhoneUpdateBean updateBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_enter_update_phone;
+		new XTextHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, updateBean, String.class);
+	}
+
+	/**
 	 * 用户注册
 	 */
 	public static void doEnterRegister(WEnterRegisterBean wEnterRegisterBean, XHttpAdapter<String> adapter)
@@ -188,22 +238,6 @@ public class XHttpUtil
 	{
 		String httpUrl = HttpConstant.url_enter_register_complete_info;
 		new XTextHttp<VEnterLoginPhonePwdBean>(adapter).doPost(httpUrl, completeInfoBean, VEnterLoginPhonePwdBean.class);
-	}
-
-	/**
-	 * 忘记密码之获取验证码
-	 */
-	public static void doEnterCodeForgetPwd(WEnterCodeRegisterBean codeRegisterBean, XHttpAdapter<String> adapter)
-	{
-		String httpUrl = HttpConstant.url_enter_code_forget_pwd;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, codeRegisterBean, String.class);
 	}
 
 	/**

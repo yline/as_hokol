@@ -63,7 +63,7 @@
         android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_white">
 
         <com.hokol.medium.viewcustom.KeyClearEditText
-            android:id="@+id/et_register_phone_password"
+            android:id="@+id/et_register_phone_identify"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
