@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_user_dynamic_publish_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_title_normal"
+        android:background="@color/hokolRed">
+
+        <TextView
+            android:id="@+id/tv_user_dynamic_publish_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_large"
+            android:text="取消"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/default_text_size_large"/>
+
+        <TextView
+            android:id="@+id/tv_user_dynamic_publish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/default_space_large"
+            android:paddingRight="@dimen/default_space_large"
+            android:text="发布"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/default_text_size_large"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/default_space_normal"
+        android:paddingLeft="@dimen/default_space_large"
+        android:paddingRight="@dimen/default_space_large"
+        android:paddingTop="@dimen/default_space_normal">
+
+        <ImageView
+            android:id="@+id/iv_user_dynamic_publish_icon"
+            android:layout_width="@dimen/default_icon_super"
+            android:layout_height="@dimen/default_icon_super"/>
+
+        <EditText
+            android:id="@+id/et_user_dynamic_publish_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/default_space_large"
+            android:background="@null"
+            android:gravity="top|left"
+            android:hint="说点什么"
+            android:paddingBottom="@dimen/default_space_small"
+            android:paddingTop="@dimen/default_space_small"
+            android:textColor="@color/hokolBlackSmall"
+            android:textColorHint="@color/hokolGraySmall"
+            android:textSize="@dimen/default_text_size_medium"/>
+    </LinearLayout>
+</LinearLayout>

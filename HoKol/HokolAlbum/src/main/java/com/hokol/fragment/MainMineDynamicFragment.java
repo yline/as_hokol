@@ -70,6 +70,12 @@ public class MainMineDynamicFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 
 		initView(view);
+	}
+
+	@Override
+	public void onStart()
+	{
+		super.onStart();
 		initData();
 	}
 

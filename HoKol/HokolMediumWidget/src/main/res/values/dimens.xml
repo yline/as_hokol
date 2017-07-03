@@ -28,4 +28,5 @@
     <dimen name="default_icon_medium">68dp</dimen>
     <dimen name="default_icon_normal">72dp</dimen>
     <dimen name="default_icon_large">76dp</dimen>
+    <dimen name="default_icon_super">96dp</dimen>
 </resources>

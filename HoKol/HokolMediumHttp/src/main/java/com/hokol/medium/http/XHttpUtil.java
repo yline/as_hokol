@@ -361,6 +361,88 @@ public class XHttpUtil
 	}
 
 	/**
+	 * 发布动态
+	 *
+	 * @param userId  用户id
+	 * @param content 发布内容
+	 * @param file    图片的文件
+	 * @param adapter
+	 */
+	public static void doDynamicPublish(final String userId, final String content, final File file, XHttpAdapter<VUserAvatarBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_dynamic_publish;
+
+		if (null != file || !file.exists())
+		{
+			new XUploadFileHttp<VUserAvatarBean>(adapter)
+			{
+				@Override
+				protected void initRequestForm(MultipartBody.Builder bodyBuilder)
+				{
+					if (isDebug())
+					{
+						LogFileUtil.v("user_id = " + userId + ", content = " + content + ", user_logo = " + file.getAbsolutePath());
+					}
+					bodyBuilder.addFormDataPart("dt_user_id", userId);
+					bodyBuilder.addFormDataPart("dt_content", content);
+					bodyBuilder.addFormDataPart("dt_img", file.getName(), RequestBody.create(MediaType.parse("image"), file));
+				}
+
+				@Override
+				protected boolean isResponseParse()
+				{
+					return true;
+				}
+			}.doPost(httpUrl, VUserAvatarBean.class);
+		}
+		else
+		{
+			LogFileUtil.e(TAG, "Dynamic Publish file is null or not exists");
+		}
+	}
+
+	/**
+	 * 发布私密空间
+	 *
+	 * @param userId  用户id
+	 * @param content 发布内容
+	 * @param file    图片的文件
+	 * @param adapter
+	 */
+	public static void doDynamicPrivatePublish(final String userId, final String content, final File file, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_dynamic_private_publish;
+
+		if (null != file || !file.exists())
+		{
+			new XUploadFileHttp<String>(adapter)
+			{
+				@Override
+				protected void initRequestForm(MultipartBody.Builder bodyBuilder)
+				{
+					if (isDebug())
+					{
+						LogFileUtil.v("user_id = " + userId + ", content = " + content + ", user_logo = " + file.getAbsolutePath());
+					}
+					bodyBuilder.addFormDataPart("pri_user_id", userId);
+					bodyBuilder.addFormDataPart("pri_content", content);
+					bodyBuilder.addFormDataPart("pri_img", file.getName(), RequestBody.create(MediaType.parse("image"), file));
+				}
+
+				@Override
+				protected boolean isResponseParse()
+				{
+					return true;
+				}
+			}.doPost(httpUrl, String.class);
+		}
+		else
+		{
+			LogFileUtil.e(TAG, "Dynamic Private Publish  file is null or not exists");
+		}
+	}
+
+	/**
 	 * 任务接口
 	 * Button名称 --> API后缀 --> HttpConstant --> Bean名称 - Bean名称 --> 情况
 	 * 获取任务列表(多条)--> task_index --> url_task_main_all --> WTaskMainAllBean - VTaskMainAllBean --> ok

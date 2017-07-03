@@ -83,6 +83,9 @@ public class HttpConstant
 	// 发布动态
 	public static final String url_dynamic_publish = url_head + "ApiDongtai/dt_pub";
 
+	// 发布私密动态
+	public static final String url_dynamic_private_publish = url_head + "ApiDongtai/private_space_pub";
+
 	/* --------------------------- 任务 --------------------------- */
 	// 获取任务列表 (多条)；任务主页
 	public static final String url_task_main_all = url_head + "ApiTask/task_index";

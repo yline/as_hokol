@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.activity.EnterChoiceActivity;
+import com.hokol.activity.UserDynamicPublishActivity;
 import com.hokol.activity.UserInfoActivity;
 import com.hokol.application.AppStateManager;
 import com.hokol.application.IApplication;
@@ -25,7 +26,6 @@ import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.FlowWidget;
 import com.hokol.util.IntentUtil;
-import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.FileUtil;
@@ -266,7 +266,7 @@ public class MainMineFragment extends BaseFragment
 		}
 		else if (requestCode == KeyDynamicAlbumCode)
 		{
-			if (null != data.getData())
+			if (null != data && null != data.getData())
 			{
 				IntentUtil.openPictureZoom(MainMineFragment.this, data.getData(), KeyPictureZoomFileName, KeyDynamicPictureZoomCode);
 			}
@@ -277,7 +277,10 @@ public class MainMineFragment extends BaseFragment
 		}
 		else if (requestCode == KeyDynamicPictureZoomCode)
 		{
-			SDKManager.toast("个人动态 发布 开启");
+			if (null != data)
+			{
+				UserDynamicPublishActivity.actionStart(getContext(), KeyDynamicPictureZoomCode, KeyPictureZoomFileName);
+			}
 		}
 		else if (requestCode == KeyPrivateCameraCode)
 		{
@@ -293,7 +296,7 @@ public class MainMineFragment extends BaseFragment
 		}
 		else if (requestCode == KeyPrivateAlbumCode)
 		{
-			if (null != data.getData())
+			if (null != data && null != data.getData())
 			{
 				IntentUtil.openPictureZoom(MainMineFragment.this, data.getData(), KeyPictureZoomFileName, KeyPrivatePictureZoomCode);
 			}
@@ -304,7 +307,10 @@ public class MainMineFragment extends BaseFragment
 		}
 		else if (requestCode == KeyPrivatePictureZoomCode)
 		{
-			SDKManager.toast("私密空间动态 发布 开启");
+			if (null != data)
+			{
+				UserDynamicPublishActivity.actionStart(getContext(), KeyPrivatePictureZoomCode, KeyPictureZoomFileName);
+			}
 		}
 	}
 }

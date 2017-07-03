@@ -85,6 +85,8 @@
         <activity android:name=".activity.UserTaskScoreActivity"/>
         <activity android:name=".activity.TaskScoreAssignedDetailActivity"/>
         <activity android:name=".activity.TaskScoreDeliveredDetailActivity"/>
+        <activity android:name=".activity.UserDynamicPublishActivity">
+        </activity>
     </application>
 
 </manifest>

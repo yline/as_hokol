@@ -450,7 +450,7 @@ public class UserInfoActivity extends BaseAppCompatActivity
 		}
 		else if (request_code_album == requestCode)
 		{
-			if (null != data.getData())
+			if (null != data && null != data.getData())
 			{
 				IntentUtil.openPictureZoom(UserInfoActivity.this, data.getData(), picture_zoom_name, request_code_picture_zoom);
 			}
