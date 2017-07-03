@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_space_normal"
+        android:background="@color/hokolGrayLight"/>
+
+    <LinearLayout
+        android:id="@+id/ll_user_account_profit_money"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/default_space_normal">
+
+        <TextView
+            android:id="@+id/tv_user_account_profit_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="可提现金额"
+            android:textColor="@color/hokolBlackNormal"/>
+
+        <TextView
+            android:id="@+id/tv_user_account_profit_money_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="0.0元"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGrayLight"></View>
+
+    <LinearLayout
+        android:id="@+id/ll_user_account_profit_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/default_space_normal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="请选择到账账户"
+            android:textColor="@color/hokolBlackNormal"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="支付宝账号(152*****253)"
+            android:textColor="#02a9f0"
+            android:textSize="@dimen/default_text_size_medium"/>
+
+        <!-- 未绑定支付宝时，显示 -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_space_normal"
+            android:src="@drawable/global_forward_arrows_dark"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGrayLight"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/default_space_normal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="提现金额"
+            android:textColor="@color/hokolBlackNormal"/>
+
+        <com.hokol.medium.viewcustom.KeyClearEditText
+            android:id="@+id/et_user_account_profit_praise_num"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@null"
+            android:hint="单笔最高提现800元"
+            android:textColorHint="@color/hokolGraySmall"
+            android:textSize="@dimen/default_text_size_medium"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGrayLight"></View>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/default_space_small"
+        android:paddingLeft="@dimen/default_space_normal"
+        android:paddingTop="@dimen/default_space_small"
+        android:text="手续费￥0.6"
+        android:textColor="@color/hokolGrayDrak"
+        android:textSize="@dimen/default_text_size_small"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_space_normal"
+        android:layout_marginRight="@dimen/default_space_normal"
+        android:background="@drawable/widget_shape_radiuall_huge_solid_redhokol"
+        android:text="收益提现"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/default_text_size_normal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/default_space_large"
+        android:paddingTop="@dimen/default_space_large">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:checked="true"
+            android:drawableRight="@drawable/enter_register_phone_check"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/default_space_small"
+            android:text="我已阅读并同意《用户兑换协议》"
+            android:textColor="@color/hokolGrayDrak"/>
+    </LinearLayout>
+</LinearLayout>
