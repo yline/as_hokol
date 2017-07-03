@@ -18,6 +18,7 @@ import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserFansAllBean;
+import com.hokol.medium.http.bean.WUserCareOrCancelBean;
 import com.hokol.medium.http.bean.WUserFansAllBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.FlowWidget;
@@ -42,6 +43,13 @@ public class UserFansActivity extends BaseAppCompatActivity
 	private UserFansAdapter userFansAdapter;
 
 	private SuperSwipeRefreshLayout swipeRefreshLayout;
+
+	private String userId;
+
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, UserFansActivity.class).putExtra(KeyFansUserId, userId));
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -93,13 +101,18 @@ public class UserFansActivity extends BaseAppCompatActivity
 		userFansAdapter.setOnUserFansCallback(new OnUserFansCallback()
 		{
 			@Override
-			public void onAttentionClick(RecyclerViewHolder viewHolder, VUserFansAllBean.VUserFansAllOneBean fansBean)
+			public void onAttentionClick(final RecyclerViewHolder holder, VUserFansAllBean.VUserFansAllOneBean fansBean, final int position)
 			{
 				SDKManager.toast("加关注");
-				/*
-				viewHolder.get(R.id.iv_user_fans_attention).setVisibility(View.GONE);
-				viewHolder.get(R.id.iv_user_fans_arrow).setVisibility(View.VISIBLE);
-				*/
+
+				XHttpUtil.doUserCareOrCancel(new WUserCareOrCancelBean(userId, fansBean.getUser_id(), WUserCareOrCancelBean.actionCare), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						userFansAdapter.changeIsCareState(position);
+					}
+				});
 			}
 		});
 
@@ -143,7 +156,7 @@ public class UserFansActivity extends BaseAppCompatActivity
 
 	private void initData()
 	{
-		String userId = getIntent().getStringExtra(KeyFansUserId);
+		userId = getIntent().getStringExtra(KeyFansUserId);
 
 		userFansAdapter.setShowEmpty(false);
 		XHttpUtil.doUserFansAll(new WUserFansAllBean(userId, 0, DeleteConstant.defaultNumberSuper), new XHttpAdapter<VUserFansAllBean>()
@@ -161,6 +174,11 @@ public class UserFansActivity extends BaseAppCompatActivity
 		});
 	}
 
+	public interface OnUserFansCallback
+	{
+		void onAttentionClick(RecyclerViewHolder viewHolder, VUserFansAllBean.VUserFansAllOneBean fansBean, int position);
+	}
+
 	private class UserFansAdapter extends WidgetRecyclerAdapter<VUserFansAllBean.VUserFansAllOneBean>
 	{
 		private OnUserFansCallback onUserFansCallback;
@@ -168,6 +186,17 @@ public class UserFansActivity extends BaseAppCompatActivity
 		public void setOnUserFansCallback(OnUserFansCallback onUserFansCallback)
 		{
 			this.onUserFansCallback = onUserFansCallback;
+		}
+
+		/**
+		 * 修改某个位置的信息
+		 *
+		 * @param position
+		 */
+		public void changeIsCareState(int position)
+		{
+			sList.get(position).setIs_care(VUserFansAllBean.Cared);
+			notifyItemChanged(position);
 		}
 
 		@Override
@@ -249,21 +278,11 @@ public class UserFansActivity extends BaseAppCompatActivity
 					{
 						if (null != onUserFansCallback)
 						{
-							onUserFansCallback.onAttentionClick(viewHolder, sList.get(position));
+							onUserFansCallback.onAttentionClick(viewHolder, sList.get(position), position);
 						}
 					}
 				});
 			}
 		}
-	}
-
-	public interface OnUserFansCallback
-	{
-		void onAttentionClick(RecyclerViewHolder viewHolder, VUserFansAllBean.VUserFansAllOneBean fansBean);
-	}
-
-	public static void actionStart(Context context, String userId)
-	{
-		context.startActivity(new Intent(context, UserFansActivity.class).putExtra(KeyFansUserId, userId));
 	}
 }
