@@ -14,6 +14,8 @@ import com.hokol.medium.http.bean.VHomeMainBean;
 import com.hokol.medium.http.bean.VInitHokolBean;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsRecommendBean;
+import com.hokol.medium.http.bean.VRecommendHomeBean;
+import com.hokol.medium.http.bean.VRecommendTaskBean;
 import com.hokol.medium.http.bean.VTaskMainAllBean;
 import com.hokol.medium.http.bean.VTaskMainDetailBean;
 import com.hokol.medium.http.bean.VTaskStaffCommentedInfoBean;
@@ -618,6 +620,24 @@ public class XHttpUtil
 	{
 		String httpUrl = HttpConstant.url_home_main;
 		new XTextHttp<VHomeMainBean>(adapter).doPost(httpUrl, wHomeMainBean, VHomeMainBean.class);
+	}
+
+	/**
+	 * 主页推荐
+	 */
+	public static void doRecommendHome(XHttpAdapter<VRecommendHomeBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_recommend_home;
+		new XTextHttp<VRecommendHomeBean>(adapter).doPost(httpUrl, null, VRecommendHomeBean.class);
+	}
+
+	/**
+	 * 任务推荐
+	 */
+	public static void doRecommendTask(XHttpAdapter<VRecommendTaskBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_recommend_task;
+		new XTextHttp<VRecommendTaskBean>(adapter).doPost(httpUrl, null, VRecommendTaskBean.class);
 	}
 
 	/**

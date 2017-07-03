@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
@@ -17,12 +18,14 @@ import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VHomeMainBean;
+import com.hokol.medium.http.bean.VRecommendHomeBean;
 import com.hokol.medium.http.bean.WHomeMainBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.ADWidget;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.hokol.viewhelper.MainHomeHelper;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
@@ -52,6 +55,8 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 	private GridLayoutManager gridLayoutManager;
 
 	private WHomeMainBean homeRedBean;
+
+	private ViewGroup adViewGroup;
 
 	public static MainHomeRedFragment newInstance()
 	{
@@ -156,6 +161,51 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 	{
 		homeRedBean = new WHomeMainBean(HttpEnum.UserTag.Red, 0, DeleteConstant.defaultNumberSmall);
 		doRequest();
+
+		// 请求 头部数据
+		XHttpUtil.doRecommendHome(new XHttpAdapter<VRecommendHomeBean>()
+		{
+			@Override
+			public void onSuccess(final VRecommendHomeBean vRecommendHomeBean)
+			{
+				final List<VRecommendHomeBean.VRecommendHomeOneBean> resultList = vRecommendHomeBean.getList();
+				if (null != resultList && 0 != resultList.size())
+				{
+					adViewGroup.removeAllViews(); // 清除所有数据
+
+					ADWidget adWidget = new ADWidget()
+					{
+						@Override
+						protected int getViewPagerHeight()
+						{
+							return UIScreenUtil.dp2px(getContext(), 150);
+						}
+					};
+					View adView = adWidget.start(getContext(), resultList.size());
+					adViewGroup.addView(adView);
+
+					adWidget.setListener(new ADWidget.OnPageListener()
+					{
+						@Override
+						public void onPageClick(View v, int position)
+						{
+							// StarDynamicActivity.actionStart(getContext(), "2");
+							SDKManager.toast("数据啊数据啊");
+						}
+
+						@Override
+						public void onPageInstance(ImageView imageView, int position)
+						{
+							Glide.with(getContext()).load(resultList.get(position).getBanner_img()).centerCrop().error(R.drawable.global_load_failed).into(imageView);
+						}
+					});
+				}
+				else
+				{
+					LogFileUtil.v("Home Recommend list is null or size is zero");
+				}
+			}
+		});
 	}
 
 	private void doRequest()
@@ -226,30 +276,8 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 	private void initRecycleViewHead(HeadFootRecyclerAdapter wrapperAdapter)
 	{
 		// AD
-		ADWidget adWidget = new ADWidget()
-		{
-			@Override
-			protected int getViewPagerHeight()
-			{
-				return UIScreenUtil.dp2px(getContext(), 150);
-			}
-		};
-		View adView = adWidget.start(getContext(), 3);
-		adWidget.setListener(new ADWidget.OnPageListener()
-		{
-			@Override
-			public void onPageClick(View v, int position)
-			{
-				StarDynamicActivity.actionStart(getContext(), "2");
-			}
-
-			@Override
-			public void onPageInstance(ImageView imageView, int position)
-			{
-				Glide.with(getContext()).load(DeleteConstant.getUrlRec()).centerCrop().error(R.drawable.global_load_failed).into(imageView);
-			}
-		});
-		wrapperAdapter.addHeadView(adView);
+		adViewGroup = new LinearLayout(getContext());
+		wrapperAdapter.addHeadView(adViewGroup);
 
 		// 分割线
 		View divideView = new View(getContext());
@@ -257,7 +285,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 		divideView.setBackgroundResource(R.color.hokolGrayLight);
 		wrapperAdapter.addHeadView(divideView);
 	}
-
+	
 	private class MainHomeRedAdapter extends WidgetRecyclerAdapter<VHomeMainBean.VHomeMainOneBean>
 	{
 		@Override
@@ -272,10 +300,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 			super.onBindViewHolder(viewHolder, position);
 
 			ImageView ivPic = viewHolder.get(R.id.iv_main_news_hot_pic);
-			Glide.with(getContext()).load(sList.get(position).getDt_img()).centerCrop()
-					.placeholder(R.drawable.global_load_failed)
-					.error(R.drawable.global_load_failed)
-					.into(ivPic);
+			Glide.with(getContext()).load(sList.get(position).getDt_img()).centerCrop().placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).into(ivPic);
 		}
 
 		@Override

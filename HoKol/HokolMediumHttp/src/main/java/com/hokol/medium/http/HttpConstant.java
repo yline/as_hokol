@@ -145,6 +145,12 @@ public class HttpConstant
 	// 请求主页动态数据
 	public static final String url_home_main = url_head + "ApiIndex/index";
 
+	// 主页推荐
+	public static final String url_recommend_home = url_head + "ApiIndex/index_recommend";
+
+	// 任务推荐
+	public static final String url_recommend_task = url_head + "ApiTask/task_recommend";
+
 	/* --------------------------- 我的页面 --------------------------- */
 	// 请求用户粉丝的信息（多条）
 	public static final String url_user_fans_all = url_head + "ApiMine/user_fans_info";

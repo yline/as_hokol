@@ -22,6 +22,7 @@ import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VAreaAllBean;
+import com.hokol.medium.http.bean.VRecommendTaskBean;
 import com.hokol.medium.http.bean.VTaskMainAllBean;
 import com.hokol.medium.http.bean.WTaskMainAllBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
@@ -47,6 +48,8 @@ public class MainTaskFragment extends BaseFragment
 	private WTaskMainAllBean taskMainAll;
 
 	private int taskRefreshNumber;
+
+	private LinearLayout adLinearLayout;
 
 	public static MainTaskFragment newInstance()
 	{
@@ -77,31 +80,7 @@ public class MainTaskFragment extends BaseFragment
 	private void initView(View parentView)
 	{
 		// 广告
-		LinearLayout linearLayout = (LinearLayout) parentView.findViewById(R.id.ll_main_task_ad);
-		ADWidget adWidget = new ADWidget()
-		{
-			@Override
-			protected int getViewPagerHeight()
-			{
-				return UIScreenUtil.dp2px(getContext(), 150);
-			}
-		};
-		View adView = adWidget.start(getContext(), 3);
-		adWidget.setListener(new ADWidget.OnPageListener()
-		{
-			@Override
-			public void onPageClick(View v, int position)
-			{
-				IApplication.toast("position = " + position);
-			}
-
-			@Override
-			public void onPageInstance(ImageView imageView, int position)
-			{
-				Glide.with(getContext()).load(DeleteConstant.getUrlRec()).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).into(imageView);
-			}
-		});
-		linearLayout.addView(adView);
+		adLinearLayout = (LinearLayout) parentView.findViewById(R.id.ll_main_task_ad);
 
 		// 下拉菜单
 		TabLayout menuTabLayout = (TabLayout) parentView.findViewById(R.id.tab_main_task_menu);
@@ -208,6 +187,47 @@ public class MainTaskFragment extends BaseFragment
 	private void initData()
 	{
 		// AD 广告
+		XHttpUtil.doRecommendTask(new XHttpAdapter<VRecommendTaskBean>()
+		{
+			@Override
+			public void onSuccess(VRecommendTaskBean vRecommendTaskBean)
+			{
+				final List<VRecommendTaskBean.VRecommendTaskOneBean> resultList = vRecommendTaskBean.getList();
+				if (null != resultList && 0 != resultList.size())
+				{
+					adLinearLayout.removeAllViews(); // 清除所有的View
+
+					ADWidget adWidget = new ADWidget()
+					{
+						@Override
+						protected int getViewPagerHeight()
+						{
+							return UIScreenUtil.dp2px(getContext(), 150);
+						}
+					};
+					View adView = adWidget.start(getContext(), resultList.size());
+					adLinearLayout.addView(adView);
+					adWidget.setListener(new ADWidget.OnPageListener()
+					{
+						@Override
+						public void onPageClick(View v, int position)
+						{
+							IApplication.toast("position = " + position);
+						}
+
+						@Override
+						public void onPageInstance(ImageView imageView, int position)
+						{
+							Glide.with(getContext()).load(resultList.get(position).getBanner_img()).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).into(imageView);
+						}
+					});
+				}
+				else
+				{
+					LogFileUtil.v("Task Recommend list is null or size is zero");
+				}
+			}
+		});
 
 		// 地区
 		XHttpUtil.doAreaAll(new XHttpAdapter<VAreaAllBean>()
