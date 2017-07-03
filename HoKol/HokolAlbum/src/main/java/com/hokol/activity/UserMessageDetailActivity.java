@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.hokol.R;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.WUserSystemMessageSignReadBean;
 import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.base.BaseAppCompatActivity;
+import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.Calendar;
@@ -15,6 +18,8 @@ import java.util.Calendar;
 public class UserMessageDetailActivity extends BaseAppCompatActivity
 {
 	private static final String KeyMsgDetailUserId = "MsgDetailUserId";
+
+	private static final String KeyMsgDetailMsgId = "MsgDetailMsgId";
 
 	private static final String KeyMsgDetailTitle = "MsgDetailTitle";
 
@@ -24,11 +29,12 @@ public class UserMessageDetailActivity extends BaseAppCompatActivity
 
 	private ViewHolder viewHolder;
 
-	public static void actionStart(Context context, String userId, String title, String content, long publishTime)
+	public static void actionStart(Context context, String userId, String msgId, String title, String content, long publishTime)
 	{
 		Intent intent = new Intent();
 		intent.setClass(context, UserMessageDetailActivity.class);
 		intent.putExtra(KeyMsgDetailUserId, userId);
+		intent.putExtra(KeyMsgDetailMsgId, msgId);
 		intent.putExtra(KeyMsgDetailTitle, title);
 		intent.putExtra(KeyMsgDetailContent, content);
 		intent.putExtra(KeyMsgDetailDate, publishTime);
@@ -75,6 +81,14 @@ public class UserMessageDetailActivity extends BaseAppCompatActivity
 
 		// id
 		String userId = getIntent().getStringExtra(KeyMsgDetailUserId);
-
+		String msgId = getIntent().getStringExtra(KeyMsgDetailMsgId);
+		XHttpUtil.doUserSystemMessageSignRead(new WUserSystemMessageSignReadBean(userId, msgId), new XHttpAdapter<String>()
+		{
+			@Override
+			public void onSuccess(String s)
+			{
+				// setResult(RESULT_OK); 标记已读
+			}
+		});
 	}
 }

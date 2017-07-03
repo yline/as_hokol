@@ -37,8 +37,15 @@ public class UserMessageSystemActivity extends BaseAppCompatActivity
 {
 	private static final String KeyMessageUserId = "MessageSystemUserId";
 
+	private static final int KeyMessageRequestCode = 1;
+
 	private MessageSystemAdapter messageSystemAdapter;
 
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, UserMessageSystemActivity.class).putExtra(KeyMessageUserId, userId));
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -46,6 +53,12 @@ public class UserMessageSystemActivity extends BaseAppCompatActivity
 		setContentView(R.layout.activity_user_message_system);
 
 		initView();
+	}
+
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
 		initData();
 	}
 
@@ -76,7 +89,7 @@ public class UserMessageSystemActivity extends BaseAppCompatActivity
 			@Override
 			public void onItemClick(RecyclerViewHolder viewHolder, VUserMessageSystemBean.VUserMessageOneBean messageBean, int position)
 			{
-				UserMessageDetailActivity.actionStart(UserMessageSystemActivity.this, messageBean.getMess_title(), messageBean.getMess_content(), messageBean.getPub_time());
+				UserMessageDetailActivity.actionStart(UserMessageSystemActivity.this, messageBean.getUser_id(), messageBean.getMess_id(), messageBean.getMess_title(), messageBean.getMess_content(), messageBean.getPub_time());
 			}
 		});
 
@@ -145,10 +158,5 @@ public class UserMessageSystemActivity extends BaseAppCompatActivity
 				viewHolder.get(R.id.view_message_system_bubble).setVisibility(View.VISIBLE);
 			}
 		}
-	}
-
-	public static void actionStart(Context context, String userId)
-	{
-		context.startActivity(new Intent(context, UserMessageSystemActivity.class).putExtra(KeyMessageUserId, userId));
 	}
 }
