@@ -173,6 +173,12 @@ public class HttpConstant
 	// 我的系统消息
 	public static final String url_user_message_system_all = url_head + "ApiMine/message_sys";
 
+	// 我的系统消息，读取
+	public static final String url_user_message_system_readed = url_head + "ApiMine/message_read";
+
+	// 我的系统消息，删除
+	public static final String url_user_message_system_delete = url_head + "ApiMine/message_delete";
+
 	// 接收的礼物
 	public static final String url_user_gift_receivve = url_head + "ApiMine/recive_gift";
 

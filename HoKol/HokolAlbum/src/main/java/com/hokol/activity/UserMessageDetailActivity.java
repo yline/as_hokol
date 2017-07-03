@@ -14,6 +14,8 @@ import java.util.Calendar;
 
 public class UserMessageDetailActivity extends BaseAppCompatActivity
 {
+	private static final String KeyMsgDetailUserId = "MsgDetailUserId";
+
 	private static final String KeyMsgDetailTitle = "MsgDetailTitle";
 
 	private static final String KeyMsgDetailContent = "MsgDetailContent";
@@ -21,6 +23,17 @@ public class UserMessageDetailActivity extends BaseAppCompatActivity
 	private static final String KeyMsgDetailDate = "MsgDetailDate";
 
 	private ViewHolder viewHolder;
+
+	public static void actionStart(Context context, String userId, String title, String content, long publishTime)
+	{
+		Intent intent = new Intent();
+		intent.setClass(context, UserMessageDetailActivity.class);
+		intent.putExtra(KeyMsgDetailUserId, userId);
+		intent.putExtra(KeyMsgDetailTitle, title);
+		intent.putExtra(KeyMsgDetailContent, content);
+		intent.putExtra(KeyMsgDetailDate, publishTime);
+		context.startActivity(intent);
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -44,7 +57,7 @@ public class UserMessageDetailActivity extends BaseAppCompatActivity
 			}
 		});
 	}
-
+	
 	private void initData()
 	{
 		// 标题
@@ -59,15 +72,9 @@ public class UserMessageDetailActivity extends BaseAppCompatActivity
 		long msgPublishDate = getIntent().getLongExtra(KeyMsgDetailDate, System.currentTimeMillis() / 1000);
 		String dateTime = HokolTimeConvertUtil.stampToFormatDate(msgPublishDate * 1000, Calendar.MINUTE);
 		viewHolder.setText(R.id.tv_message_detail_date, dateTime);
-	}
-	
-	public static void actionStart(Context context, String title, String content, long publishTime)
-	{
-		Intent intent = new Intent();
-		intent.setClass(context, UserMessageDetailActivity.class);
-		intent.putExtra(KeyMsgDetailTitle, title);
-		intent.putExtra(KeyMsgDetailContent, content);
-		intent.putExtra(KeyMsgDetailDate, publishTime);
-		context.startActivity(intent);
+
+		// id
+		String userId = getIntent().getStringExtra(KeyMsgDetailUserId);
+
 	}
 }

@@ -86,6 +86,8 @@ import com.hokol.medium.http.bean.WUserGiftSendBean;
 import com.hokol.medium.http.bean.WUserMessageSystemBean;
 import com.hokol.medium.http.bean.WUserMessageSystemOutlineBean;
 import com.hokol.medium.http.bean.WUserRechargeRecordBean;
+import com.hokol.medium.http.bean.WUserSystemMessageSignDeleteBean;
+import com.hokol.medium.http.bean.WUserSystemMessageSignReadBean;
 import com.hokol.medium.http.bean.WUserTaskCollectionBean;
 import com.hokol.medium.http.bean.WUserTaskCommentAssignedBean;
 import com.hokol.medium.http.bean.WUserTaskCommentDeliveredBean;
@@ -798,6 +800,24 @@ public class XHttpUtil
 	{
 		String httpUrl = HttpConstant.url_user_message_system_all;
 		new XTextHttp<VUserMessageSystemOutlineBean>(adapter).doPost(httpUrl, outlineBean, VUserMessageSystemOutlineBean.class);
+	}
+
+	/**
+	 * 我的消息，读取
+	 */
+	public static void doUserSystemMessageSignRead(WUserSystemMessageSignReadBean signReadBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_user_message_system_readed;
+		new XTextHttp<String>(adapter).doPost(httpUrl, signReadBean, String.class);
+	}
+
+	/**
+	 * 我的消息，删除
+	 */
+	public static void doUserSystemMessageSignDelete(WUserSystemMessageSignDeleteBean signDeleteBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_user_message_system_delete;
+		new XTextHttp<String>(adapter).doPost(httpUrl, signDeleteBean, String.class);
 	}
 
 	/**

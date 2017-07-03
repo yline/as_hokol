@@ -23,6 +23,11 @@ public class UserTaskMessageActivity extends BaseAppCompatActivity
 
 	private String userId;
 
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, UserTaskMessageActivity.class).putExtra(KeyMessageUserId, userId));
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -46,7 +51,6 @@ public class UserTaskMessageActivity extends BaseAppCompatActivity
 				{
 					UserMessageSystemActivity.actionStart(UserTaskMessageActivity.this, userId);
 				}
-
 			}
 		});
 
@@ -59,7 +63,7 @@ public class UserTaskMessageActivity extends BaseAppCompatActivity
 			}
 		});
 	}
-
+	
 	private void initData()
 	{
 		userId = getIntent().getStringExtra(KeyMessageUserId);
@@ -85,10 +89,5 @@ public class UserTaskMessageActivity extends BaseAppCompatActivity
 				}
 			}
 		});
-	}
-	
-	public static void actionStart(Context context, String userId)
-	{
-		context.startActivity(new Intent(context, UserTaskMessageActivity.class).putExtra(KeyMessageUserId, userId));
 	}
 }
