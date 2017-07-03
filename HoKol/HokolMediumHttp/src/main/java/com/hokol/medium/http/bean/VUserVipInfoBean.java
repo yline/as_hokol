@@ -8,7 +8,9 @@ public class VUserVipInfoBean
 	// 会员已到期
 	public static final int CodeVipPass = 2007;
 
-	public static final int TypeNull = -1; // 非会员
+	public static final int TypePass = -2; // 会员已过期
+
+	public static final int TypeNull = -1; // 未开通会员
 
 	public static final int TypeMonth = 1; // 包月
 

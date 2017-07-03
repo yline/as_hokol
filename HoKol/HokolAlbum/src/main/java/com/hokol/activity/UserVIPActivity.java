@@ -29,6 +29,11 @@ public class UserVIPActivity extends BaseAppCompatActivity
 
 	private String userId;
 
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, UserVIPActivity.class).putExtra(KeyVipUserId, userId));
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -119,11 +124,12 @@ public class UserVIPActivity extends BaseAppCompatActivity
 				super.onFailureCode(code);
 				if (code == VUserVipInfoBean.CodeVipNone)
 				{
-					updateVipInfoView(VUserVipInfoBean.TypeNull, "您还不是会员", 0);
+					updateVipInfoView(VUserVipInfoBean.TypeNull, "至尊VIP特权", 0);
+					viewHolder.setText(R.id.btn_user_setting_account_bind_recharge, "立即开通");
 				}
 				else if (code == VUserVipInfoBean.CodeVipPass)
 				{
-					updateVipInfoView(VUserVipInfoBean.TypeNull, "会员已到期", 0);
+					updateVipInfoView(VUserVipInfoBean.TypeNull, "VIP 已到期", 0); // ??? 到期时间拿不到了
 				}
 			}
 
@@ -166,10 +172,11 @@ public class UserVIPActivity extends BaseAppCompatActivity
 
 		// 交流卷张数
 		viewHolder.setText(R.id.tv_user_vip_contact_volume_num, String.format("%d张", cardNum));
-	}
 
-	public static void actionStart(Context context, String userId)
-	{
-		context.startActivity(new Intent(context, UserVIPActivity.class).putExtra(KeyVipUserId, userId));
+		// 下方字体
+		viewHolder.setText(R.id.btn_user_setting_account_bind_recharge, "立即续费");
+
+		// 卡片按钮
+		viewHolder.setImageResource(R.id.iv_user_setting_account_bind_recharge_top, R.drawable.user_vip_renew);
 	}
 }
