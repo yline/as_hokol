@@ -20,6 +20,7 @@ import com.hokol.fragment.StarInfoPrivateFragment;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VDynamicUserDetailBean;
 import com.hokol.medium.http.bean.WDynamicUserDetailBean;
+import com.hokol.medium.widget.DialogIosWidget;
 import com.hokol.medium.widget.HokolGiftWidget;
 import com.hokol.viewhelper.StarInfoHelper;
 import com.yline.application.SDKManager;
@@ -105,7 +106,36 @@ public class StarInfoActivity extends BaseAppCompatActivity
 			@Override
 			public void onContact()
 			{
-				IApplication.toast("点击联系");
+				// ？ 如果 它还有交流卷呢？
+				DialogIosWidget dialogIosWidget = new DialogIosWidget(StarInfoActivity.this)
+				{
+					@Override
+					protected void initBuilder(Builder builder)
+					{
+						super.initBuilder(builder);
+						builder.setTitle("会员享有更多优惠哦");
+						builder.setNegativeText("单次购买");
+						builder.setPositiveText("开通会员");
+						builder.setCanceledOnTouchOutside(true);
+						builder.setNegativeListener(new View.OnClickListener()
+						{
+							@Override
+							public void onClick(View v)
+							{
+								IApplication.toast("单次购买");
+							}
+						});
+						builder.setPositiveListener(new View.OnClickListener()
+						{
+							@Override
+							public void onClick(View v)
+							{
+								IApplication.toast("开通会员");
+							}
+						});
+					}
+				};
+				dialogIosWidget.show();
 			}
 
 			@Override
@@ -136,6 +166,7 @@ public class StarInfoActivity extends BaseAppCompatActivity
 			public void onClick(View v)
 			{
 				SDKManager.toast("等级点击");
+				UserVipLevelActivity.actionStart(StarInfoActivity.this);
 			}
 		});
 	}

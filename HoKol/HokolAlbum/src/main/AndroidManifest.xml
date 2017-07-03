@@ -87,6 +87,8 @@
         <activity android:name=".activity.TaskScoreDeliveredDetailActivity"/>
         <activity android:name=".activity.UserDynamicPublishActivity">
         </activity>
+        <activity android:name=".activity.UserVipLevelActivity">
+        </activity>
     </application>
 
 </manifest>
