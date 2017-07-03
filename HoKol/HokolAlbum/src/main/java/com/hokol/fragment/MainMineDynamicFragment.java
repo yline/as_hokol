@@ -1,6 +1,7 @@
 package com.hokol.fragment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +24,8 @@ import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
+import com.hokol.util.IntentUtil;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIResizeUtil;
@@ -43,6 +46,8 @@ public class MainMineDynamicFragment extends BaseFragment
 	private WDynamicUserAllBean wDynamicUserAllBean;
 
 	private int dynamicRefreshNumber;
+
+	private String userId;
 
 	public static MainMineDynamicFragment newInstance()
 	{
@@ -142,7 +147,7 @@ public class MainMineDynamicFragment extends BaseFragment
 
 	private void initData()
 	{
-		String userId = AppStateManager.getInstance().getUserLoginId(getContext());
+		userId = AppStateManager.getInstance().getUserLoginId(getContext());
 		if (TextUtils.isEmpty(userId))
 		{
 			recyclerAdapter.setShowEmpty(true);
@@ -173,7 +178,6 @@ public class MainMineDynamicFragment extends BaseFragment
 	 *
 	 * @param wrapperAdapter
 	 */
-
 	private void initRecyclerHeadView(HeadFootRecyclerAdapter wrapperAdapter)
 	{
 		View cameraView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main_mine_dynamic_camera, null);
@@ -182,7 +186,13 @@ public class MainMineDynamicFragment extends BaseFragment
 			@Override
 			public void onClick(View v)
 			{
-				DialogFootWidget dialogFootWidget = new DialogFootWidget(getContext(), Arrays.asList("从手机相册选择", "拍照", "小视频"));
+				if (TextUtils.isEmpty(userId))
+				{
+					SDKManager.toast("亲, 请先登录");
+					return;
+				}
+
+				DialogFootWidget dialogFootWidget = new DialogFootWidget(getContext(), Arrays.asList("从手机相册选择", "拍照"));
 				dialogFootWidget.show(new DialogFootWidget.OnSelectedListener()
 				{
 					@Override
@@ -194,12 +204,27 @@ public class MainMineDynamicFragment extends BaseFragment
 					@Override
 					public void onOptionSelected(DialogInterface dialog, int position, String content)
 					{
+						if (content.equals("拍照"))
+						{
+							IntentUtil.openCamera(MainMineDynamicFragment.this, MainMineFragment.KeyDynamicFileName, MainMineFragment.KeyDynamicCameraCode);
+						}
+						else // 相册
+						{
+							IntentUtil.openAlbum(MainMineDynamicFragment.this, MainMineFragment.KeyDynamicAlbumCode);
+						}
 						dialog.dismiss();
 					}
 				});
 			}
 		});
 		wrapperAdapter.addHeadView(cameraView);
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		super.onActivityResult(requestCode, resultCode, data);
+		getParentFragment().onActivityResult(requestCode, resultCode, data);
 	}
 
 	private class DynamicRecycleAdapter extends WidgetRecyclerAdapter<VDynamicUserAllBean.VDynamicUserAllOneBean>

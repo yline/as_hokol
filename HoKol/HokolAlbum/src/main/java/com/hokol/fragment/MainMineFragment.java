@@ -1,6 +1,8 @@
 package com.hokol.fragment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -22,7 +24,12 @@ import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.FlowWidget;
+import com.hokol.util.IntentUtil;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
+import com.yline.log.LogFileUtil;
+import com.yline.utils.FileUtil;
+import com.yline.utils.LogUtil;
 import com.yline.view.layout.label.FlowLayout;
 import com.yline.view.recycler.holder.ViewHolder;
 
@@ -32,9 +39,27 @@ import java.util.List;
 
 public class MainMineFragment extends BaseFragment
 {
-	private List<BaseFragment> fragmentList = new ArrayList<>();
+	public static final String KeyDynamicFileName = "MainMineDynamic_camera_picture.jpg";
+
+	public static final int KeyDynamicCameraCode = 1;
+
+	public static final int KeyDynamicAlbumCode = 2;
+
+	public static final int KeyDynamicPictureZoomCode = 3;
+
+	public static final String KeyPrivateFileName = "MainMinePrivate_camera_picture.jpg";
+
+	public static final int KeyPrivateCameraCode = 11;
+
+	public static final int KeyPrivateAlbumCode = 12;
+
+	public static final int KeyPrivatePictureZoomCode = 13;
+
+	public static final String KeyPictureZoomFileName = "MainMineDynamic_zoom_picture.jpg";
 
 	private static final String[] RES_TITLE = {"动态", "私密空间", "我的主页"};
+
+	private List<BaseFragment> fragmentList = new ArrayList<>();
 
 	private ViewHolder viewHolder;
 
@@ -52,7 +77,7 @@ public class MainMineFragment extends BaseFragment
 	{
 		return inflater.inflate(R.layout.fragment_main_mine, container, false);
 	}
-	
+
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
 	{
@@ -70,7 +95,7 @@ public class MainMineFragment extends BaseFragment
 
 		TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout_main_mine);
 		ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager_main_mine);
-		
+
 		tabLayout.setupWithViewPager(viewPager);
 		tabLayout.setTabTextColors(getResources().getColor(R.color.hokolGrayDrak), getResources().getColor(R.color.hokolRed));
 		tabLayout.setSelectedTabIndicatorColor(getResources().getColor(android.R.color.holo_red_light));
@@ -210,6 +235,76 @@ public class MainMineFragment extends BaseFragment
 					EnterChoiceActivity.actionStart(getContext());
 				}
 			});
+		}
+	}
+
+	/**
+	 * 子Fragment的回调也在这里处理
+	 *
+	 * @param requestCode
+	 * @param resultCode
+	 * @param data
+	 */
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		super.onActivityResult(requestCode, resultCode, data);
+
+		LogUtil.v("requestCode = " + requestCode + ", resultCode = " + resultCode + ", data = " + data);
+		// 调用系统的 应用
+		if (requestCode == KeyDynamicCameraCode)
+		{
+			if (null == data)
+			{
+				Uri cacheUri = Uri.fromFile(FileUtil.create(getActivity().getExternalCacheDir(), KeyDynamicFileName));
+				IntentUtil.openPictureZoom(MainMineFragment.this, cacheUri, KeyPictureZoomFileName, KeyDynamicPictureZoomCode);
+			}
+			else
+			{
+				LogFileUtil.v("user camera cancel");
+			}
+		}
+		else if (requestCode == KeyDynamicAlbumCode)
+		{
+			if (null != data.getData())
+			{
+				IntentUtil.openPictureZoom(MainMineFragment.this, data.getData(), KeyPictureZoomFileName, KeyDynamicPictureZoomCode);
+			}
+			else
+			{
+				LogFileUtil.v("user album choose cancel");
+			}
+		}
+		else if (requestCode == KeyDynamicPictureZoomCode)
+		{
+			SDKManager.toast("个人动态 发布 开启");
+		}
+		else if (requestCode == KeyPrivateCameraCode)
+		{
+			if (null == data)
+			{
+				Uri cacheUri = Uri.fromFile(FileUtil.create(getActivity().getExternalCacheDir(), KeyPrivateFileName));
+				IntentUtil.openPictureZoom(MainMineFragment.this, cacheUri, KeyPictureZoomFileName, KeyPrivatePictureZoomCode);
+			}
+			else
+			{
+				LogFileUtil.v("private user camera cancel");
+			}
+		}
+		else if (requestCode == KeyPrivateAlbumCode)
+		{
+			if (null != data.getData())
+			{
+				IntentUtil.openPictureZoom(MainMineFragment.this, data.getData(), KeyPictureZoomFileName, KeyPrivatePictureZoomCode);
+			}
+			else
+			{
+				LogFileUtil.v("user album choose cancel");
+			}
+		}
+		else if (requestCode == KeyPrivatePictureZoomCode)
+		{
+			SDKManager.toast("私密空间动态 发布 开启");
 		}
 	}
 }

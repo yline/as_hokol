@@ -35,6 +35,11 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 
 	private boolean isCollected;
 
+	public static void actionStart(Context context, String taskId)
+	{
+		context.startActivity(new Intent(context, TaskDetailActivity.class).putExtra(KeyTaskId, taskId));
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -92,7 +97,7 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 			}
 		});
 	}
-
+	
 	private void initData()
 	{
 		taskId = getIntent().getStringExtra(KeyTaskId);
@@ -172,12 +177,24 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 					// 男
 					viewHolder.setText(R.id.iv_task_detail_num_boy, vTaskMainDetailBean.getTask_man_num() + "");
 				}
+
+				@Override
+				public void onFailureCode(int code)
+				{
+					super.onFailureCode(code);
+					if (code == 2003)
+					{
+						SDKManager.getHandler().postDelayed(new Runnable()
+						{
+							@Override
+							public void run()
+							{
+								finish();
+							}
+						}, 2000);
+					}
+				}
 			});
 		}
-	}
-	
-	public static void actionStart(Context context, String taskId)
-	{
-		context.startActivity(new Intent(context, TaskDetailActivity.class).putExtra(KeyTaskId, taskId));
 	}
 }

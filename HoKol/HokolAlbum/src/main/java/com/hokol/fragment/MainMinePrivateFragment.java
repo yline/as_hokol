@@ -1,6 +1,7 @@
 package com.hokol.fragment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +24,7 @@ import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
+import com.hokol.util.IntentUtil;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIResizeUtil;
@@ -166,6 +168,13 @@ public class MainMinePrivateFragment extends BaseFragment
 		}
 	}
 
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		super.onActivityResult(requestCode, resultCode, data);
+		getParentFragment().onActivityResult(requestCode, resultCode, data);
+	}
+
 	/**
 	 * 初始化 Recycler 头部
 	 *
@@ -180,7 +189,7 @@ public class MainMinePrivateFragment extends BaseFragment
 			@Override
 			public void onClick(View v)
 			{
-				DialogFootWidget dialogFootWidget = new DialogFootWidget(getContext(), Arrays.asList("从手机相册选择", "拍照", "小视频"));
+				DialogFootWidget dialogFootWidget = new DialogFootWidget(getContext(), Arrays.asList("从手机相册选择", "拍照"));
 				dialogFootWidget.show(new DialogFootWidget.OnSelectedListener()
 				{
 					@Override
@@ -192,6 +201,14 @@ public class MainMinePrivateFragment extends BaseFragment
 					@Override
 					public void onOptionSelected(DialogInterface dialog, int position, String content)
 					{
+						if (content.equals("拍照"))
+						{
+							IntentUtil.openCamera(MainMinePrivateFragment.this, MainMineFragment.KeyPrivateFileName, MainMineFragment.KeyPrivateCameraCode);
+						}
+						else // 相册
+						{
+							IntentUtil.openAlbum(MainMinePrivateFragment.this, MainMineFragment.KeyPrivateAlbumCode);
+						}
 						dialog.dismiss();
 					}
 				});

@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.activity.StarDynamicActivity;
+import com.hokol.activity.StarInfoActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
@@ -24,8 +25,8 @@ import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.ADWidget;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
+import com.hokol.util.IntentUtil;
 import com.hokol.viewhelper.MainHomeHelper;
-import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
@@ -189,8 +190,20 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 						@Override
 						public void onPageClick(View v, int position)
 						{
-							// StarDynamicActivity.actionStart(getContext(), "2");
-							SDKManager.toast("数据啊数据啊");
+							VRecommendHomeBean.VRecommendHomeOneBean recommendBean = resultList.get(position);
+
+							if (recommendBean.getType() == VRecommendHomeBean.TypeUser)
+							{
+								StarInfoActivity.actionStart(getContext(), recommendBean.getInfo());
+							}
+							else if (recommendBean.getType() == VRecommendHomeBean.TypeUrl)
+							{
+								IntentUtil.openBrower(getContext(), recommendBean.getInfo());
+							}
+							else
+							{
+								LogFileUtil.v("Home Recommend type error");
+							}
 						}
 
 						@Override
@@ -285,7 +298,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 		divideView.setBackgroundResource(R.color.hokolGrayLight);
 		wrapperAdapter.addHeadView(divideView);
 	}
-	
+
 	private class MainHomeRedAdapter extends WidgetRecyclerAdapter<VHomeMainBean.VHomeMainOneBean>
 	{
 		@Override

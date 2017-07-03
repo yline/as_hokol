@@ -45,55 +45,52 @@ public class MainActivity extends BaseAppCompatActivity
 	
 	private TabLayout tabLayout;
 	
-	public enum TAB
+	private ImageView imageFlashView;
+	
+	/**
+	 * 开启主页面, 并存入用户信息
+	 *
+	 * @param context
+	 * @param loginPhonePwdBean 用户信息
+	 */
+	public static void actionStart(Context context, VEnterLoginPhonePwdBean loginPhonePwdBean)
 	{
-		News(0, R.drawable.main_tab_news),
-		
-		Care(1, R.drawable.main_tab_care),
-		
-		Home(2, R.drawable.main_tab_home),
-		
-		Task(3, R.drawable.main_tab_task),
-		
-		Mine(4, R.drawable.main_tab_mine);
-		
-		private final int position;
-		
-		private final int icon;
-		
-		/**
-		 * @param position 位置
-		 * @param icon     tab资源
-		 */
-		TAB(int position, int icon)
-		{
-			this.position = position;
-			this.icon = icon;
-		}
-		
-		public int getPosition()
-		{
-			return position;
-		}
-		
-		public int getIcon()
-		{
-			return icon;
-		}
+		// 设置本地数据
+		AppStateManager.getInstance().setLoginUserInfo(context, loginPhonePwdBean);
+
+		// 设置 做动画
+		AppStateManager.getInstance().setFirstFlash(true);
+
+		context.startActivity(new Intent(context, MainActivity.class));
 	}
 	
-	private ImageView imageFlashView;
+	/**
+	 * 退出登录
+	 * 重新开启主界面
+	 *
+	 * @param context
+	 */
+	public static void actionStart(Context context)
+	{
+		AppStateManager.getInstance().clearLoginUserInfo(context); // 清除本地数据
+		SDKManager.finishActivity();
+
+		// 设置不做动画
+		AppStateManager.getInstance().setFirstFlash(false);
+
+		context.startActivity(new Intent(context, MainActivity.class));
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		imageFlashView = (ImageView) findViewById(R.id.iv_main_logo);
-		
+
 		tabLayout = (TabLayout) findViewById(R.id.tab_layout_main);
-		
+
 		mainHelper = new MainHelper();
 		if (AppStateManager.getInstance().isFirstFlash())
 		{
@@ -102,7 +99,7 @@ public class MainActivity extends BaseAppCompatActivity
 
 		initView();
 		initData();
-		
+
 		initShowData();
 	}
 	
@@ -118,7 +115,7 @@ public class MainActivity extends BaseAppCompatActivity
 	{
 		int[] icons = {TAB.News.icon, TAB.Care.icon, TAB.Home.icon, TAB.Task.icon, TAB.Mine.icon};
 		mainHelper.initTabLayout(this, tabLayout, icons);
-		
+
 		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
 		{
 			@Override
@@ -146,7 +143,7 @@ public class MainActivity extends BaseAppCompatActivity
 					fragmentManager.beginTransaction().show(mainMineFragment).commit();
 				}
 			}
-			
+
 			@Override
 			public void onTabUnselected(TabLayout.Tab tab)
 			{
@@ -172,11 +169,11 @@ public class MainActivity extends BaseAppCompatActivity
 					fragmentManager.beginTransaction().hide(mainMineFragment).commit();
 				}
 			}
-			
+
 			@Override
 			public void onTabReselected(TabLayout.Tab tab)
 			{
-				
+
 			}
 		});
 	}
@@ -188,12 +185,8 @@ public class MainActivity extends BaseAppCompatActivity
 		mainHomeFragment = MainHomeFragment.newInstance();
 		mainTaskFragment = MainTaskFragment.newInstance();
 		mainMineFragment = MainMineFragment.newInstance();
-		
-		fragmentManager.beginTransaction().add(R.id.fl_main_content, mainNewsFragment).hide(mainNewsFragment)
-				.add(R.id.fl_main_content, mainCareFragment).hide(mainCareFragment)
-				.add(R.id.fl_main_content, mainHomeFragment).hide(mainHomeFragment)
-				.add(R.id.fl_main_content, mainTaskFragment).hide(mainTaskFragment)
-				.add(R.id.fl_main_content, mainMineFragment).hide(mainMineFragment).commit();
+
+		fragmentManager.beginTransaction().add(R.id.fl_main_content, mainNewsFragment).hide(mainNewsFragment).add(R.id.fl_main_content, mainCareFragment).hide(mainCareFragment).add(R.id.fl_main_content, mainHomeFragment).hide(mainHomeFragment).add(R.id.fl_main_content, mainTaskFragment).hide(mainTaskFragment).add(R.id.fl_main_content, mainMineFragment).hide(mainMineFragment).commit();
 	}
 	
 	public void doSelected(int index)
@@ -210,38 +203,41 @@ public class MainActivity extends BaseAppCompatActivity
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	/**
-	 * 开启主页面, 并存入用户信息
-	 *
-	 * @param context
-	 * @param loginPhonePwdBean 用户信息
-	 */
-	public static void actionStart(Context context, VEnterLoginPhonePwdBean loginPhonePwdBean)
+
+	public enum TAB
 	{
-		// 设置本地数据
-		AppStateManager.getInstance().setLoginUserInfo(context, loginPhonePwdBean);
+		News(0, R.drawable.main_tab_news),
 
-		// 设置 做动画
-		AppStateManager.getInstance().setFirstFlash(true);
+		Care(1, R.drawable.main_tab_care),
 
-		context.startActivity(new Intent(context, MainActivity.class));
-	}
+		Home(2, R.drawable.main_tab_home),
 
-	/**
-	 * 退出登录
-	 * 重新开启主界面
-	 *
-	 * @param context
-	 */
-	public static void actionStart(Context context)
-	{
-		AppStateManager.getInstance().clearLoginUserInfo(context); // 清除本地数据
-		SDKManager.finishActivity();
+		Task(3, R.drawable.main_tab_task),
 
-		// 设置不做动画
-		AppStateManager.getInstance().setFirstFlash(false);
+		Mine(4, R.drawable.main_tab_mine);
 
-		context.startActivity(new Intent(context, MainActivity.class));
+		private final int position;
+
+		private final int icon;
+
+		/**
+		 * @param position 位置
+		 * @param icon     tab资源
+		 */
+		TAB(int position, int icon)
+		{
+			this.position = position;
+			this.icon = icon;
+		}
+
+		public int getPosition()
+		{
+			return position;
+		}
+
+		public int getIcon()
+		{
+			return icon;
+		}
 	}
 }

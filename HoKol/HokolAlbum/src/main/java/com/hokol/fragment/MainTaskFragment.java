@@ -18,15 +18,16 @@ import com.hokol.activity.TaskDetailActivity;
 import com.hokol.activity.TaskPublishActivity;
 import com.hokol.application.AppStateManager;
 import com.hokol.application.DeleteConstant;
-import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VAreaAllBean;
+import com.hokol.medium.http.bean.VRecommendHomeBean;
 import com.hokol.medium.http.bean.VRecommendTaskBean;
 import com.hokol.medium.http.bean.VTaskMainAllBean;
 import com.hokol.medium.http.bean.WTaskMainAllBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.ADWidget;
+import com.hokol.util.IntentUtil;
 import com.hokol.viewhelper.MainTaskHelper;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
@@ -212,7 +213,20 @@ public class MainTaskFragment extends BaseFragment
 						@Override
 						public void onPageClick(View v, int position)
 						{
-							IApplication.toast("position = " + position);
+							VRecommendTaskBean.VRecommendTaskOneBean recommendBean = resultList.get(position);
+
+							if (recommendBean.getType() == VRecommendHomeBean.TypeUser)
+							{
+								TaskDetailActivity.actionStart(getContext(), recommendBean.getInfo());
+							}
+							else if (recommendBean.getType() == VRecommendHomeBean.TypeUrl)
+							{
+								IntentUtil.openBrower(getContext(), recommendBean.getInfo());
+							}
+							else
+							{
+								LogFileUtil.v("Task Recommend type error");
+							}
 						}
 
 						@Override

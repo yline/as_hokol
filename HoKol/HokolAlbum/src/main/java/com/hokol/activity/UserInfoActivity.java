@@ -36,15 +36,11 @@ import java.util.List;
 
 public class UserInfoActivity extends BaseAppCompatActivity
 {
-	private ViewHolder viewHolder;
-
-	private UserInfoHelper userInfoHelper;
-
 	private static final String KeyUserId = "userId";
 
 	private static final String request_key = "UserInfo";
 
-	private static final String camera_picture_name = "camera_picture.jpg";
+	private static final String camera_picture_name = "UserInfo_camera_picture.jpg";
 
 	private static final String picture_zoom_name = "picture_zoom.jpg";
 
@@ -64,11 +60,41 @@ public class UserInfoActivity extends BaseAppCompatActivity
 
 	private static final int request_code_picture_zoom = 1003;
 
+	private ViewHolder viewHolder;
+
+	private UserInfoHelper userInfoHelper;
+
 	private boolean isInfoBeanChange;
 
 	private UserInfo updateInfoBean;
 
 	private FlowWidget labelWidget;
+
+	public static void actionResultUpdate(Activity activity, String result)
+	{
+		Intent intent = new Intent();
+		intent.putExtra(request_key, result);
+		activity.setResult(RESULT_OK, intent);
+	}
+
+	public static void actionResultUpdateStrList(Activity activity, ArrayList<String> dataList)
+	{
+		Intent intent = new Intent();
+		intent.putExtra(request_key, dataList);
+		activity.setResult(RESULT_OK, intent);
+	}
+
+	public static void actionResultUpdateIntList(Activity activity, ArrayList<Integer> dataList)
+	{
+		Intent intent = new Intent();
+		intent.putIntegerArrayListExtra(request_key, dataList);
+		activity.setResult(RESULT_OK, intent);
+	}
+
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, UserInfoActivity.class).putExtra(KeyUserId, userId));
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -440,8 +466,7 @@ public class UserInfoActivity extends BaseAppCompatActivity
 				File zoomFile = FileUtil.create(getExternalCacheDir(), picture_zoom_name);
 
 				ImageView imageView = viewHolder.get(R.id.circle_user_info_avatar);
-				Glide.with(this).load(zoomFile)
-						.skipMemoryCache(true) // 跳过内存缓存
+				Glide.with(this).load(zoomFile).skipMemoryCache(true) // 跳过内存缓存
 						.diskCacheStrategy(DiskCacheStrategy.NONE) // 禁用磁盘缓存
 						.into(imageView);
 				LogFileUtil.v("cache file = " + zoomFile);
@@ -483,32 +508,6 @@ public class UserInfoActivity extends BaseAppCompatActivity
 		{
 			LogFileUtil.v("do not update userInfo");
 		}
-	}
-
-	public static void actionResultUpdate(Activity activity, String result)
-	{
-		Intent intent = new Intent();
-		intent.putExtra(request_key, result);
-		activity.setResult(RESULT_OK, intent);
-	}
-
-	public static void actionResultUpdateStrList(Activity activity, ArrayList<String> dataList)
-	{
-		Intent intent = new Intent();
-		intent.putExtra(request_key, dataList);
-		activity.setResult(RESULT_OK, intent);
-	}
-
-	public static void actionResultUpdateIntList(Activity activity, ArrayList<Integer> dataList)
-	{
-		Intent intent = new Intent();
-		intent.putIntegerArrayListExtra(request_key, dataList);
-		activity.setResult(RESULT_OK, intent);
-	}
-
-	public static void actionStart(Context context, String userId)
-	{
-		context.startActivity(new Intent(context, UserInfoActivity.class).putExtra(KeyUserId, userId));
 	}
 
 	/**

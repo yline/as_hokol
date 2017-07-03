@@ -26,6 +26,7 @@ import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
+import com.yline.log.LogFileUtil;
 import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.ArrayList;
@@ -52,6 +53,11 @@ public class StarInfoActivity extends BaseAppCompatActivity
 
 	private String starId;
 
+	public static void actionStart(Context context, String starId)
+	{
+		context.startActivity(new Intent(context, StarInfoActivity.class).putExtra(KeyStarId, starId));
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -65,7 +71,7 @@ public class StarInfoActivity extends BaseAppCompatActivity
 		initTabView();
 		initData();
 	}
-	
+
 	private void initView()
 	{
 		hokolGiftWidget = new HokolGiftWidget(this);
@@ -110,7 +116,7 @@ public class StarInfoActivity extends BaseAppCompatActivity
 				IApplication.toast("点击送红豆");
 			}
 		});
-		
+
 		// 信用
 		viewHolder.setOnClickListener(R.id.iv_star_info_credit, new View.OnClickListener()
 		{
@@ -141,7 +147,7 @@ public class StarInfoActivity extends BaseAppCompatActivity
 
 		fragmentList.add(StarInfoDynamicFragment.newInstance());
 		titleList.add("她的动态");
-		
+
 		fragmentList.add(StarInfoPrivateFragment.newInstance());
 		titleList.add("私密空间");
 
@@ -199,11 +205,24 @@ public class StarInfoActivity extends BaseAppCompatActivity
 				String prize = vDynamicUserDetailBean.getUser_prize();
 				starInfoDatumFragment.updateStarInfo(fans, care, praise, constell, province, city, sign, prize);
 			}
-		});
-	}
 
-	public static void actionStart(Context context, String starId)
-	{
-		context.startActivity(new Intent(context, StarInfoActivity.class).putExtra(KeyStarId, starId));
+			@Override
+			public void onFailureCode(int code)
+			{
+				super.onFailureCode(code);
+				if (code == 2001)
+				{
+					LogFileUtil.v("Star info failed; user do not exist");
+					SDKManager.getHandler().postDelayed(new Runnable()
+					{
+						@Override
+						public void run()
+						{
+							finish();
+						}
+					}, 2000);
+				}
+			}
+		});
 	}
 }
