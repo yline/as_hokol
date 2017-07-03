@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,8 +15,9 @@ import com.hokol.R;
 import com.hokol.application.DeleteConstant;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserTaskCollectionBean;
+import com.hokol.medium.http.bean.WTaskActionStaffSignUpBean;
 import com.hokol.medium.http.bean.WUserTaskCollectionBean;
-import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
+import com.hokol.medium.widget.DialogIosWidget;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.application.SDKManager;
@@ -32,6 +34,13 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 
 	private CollectionAdapter collectionAdapter;
 
+	private String userId;
+
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, UserTaskCollectionActivity.class).putExtra(KeyCollectUserId, userId));
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -39,7 +48,6 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 		setContentView(R.layout.activity_user_task_collection);
 
 		initView();
-		initData();
 
 		findViewById(R.id.iv_task_collection).setOnClickListener(new View.OnClickListener()
 		{
@@ -51,25 +59,17 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 		});
 	}
 
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		initData();
+	}
+
 	private void initView()
 	{
 		RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_task_collection);
-		DefaultLinearItemDecoration itemDecoration = new DefaultLinearItemDecoration(this)
-		{
-			@Override
-			protected int getHeadNumber()
-			{
-				return 1;
-			}
-
-			@Override
-			protected int getDivideResourceId()
-			{
-				return R.drawable.widget_solid_null_size_medium;
-			}
-		};
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
-		// recyclerView.addItemDecoration(itemDecoration);
 
 		collectionAdapter = new CollectionAdapter();
 		recyclerView.setAdapter(collectionAdapter);
@@ -82,19 +82,51 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 				TaskDetailActivity.actionStart(UserTaskCollectionActivity.this, collectBean.getTask_id());
 			}
 		});
-		collectionAdapter.setOnTaskCollectCallback(new OnTaskCollectCallback()
+		collectionAdapter.setOnTaskCollectCallback(new OnTaskCollectCallback<VUserTaskCollectionBean.VUserCollectionOneBean>()
 		{
 			@Override
-			public void onSignClick(View view, boolean isSign)
+			public void onSignClick(View view, VUserTaskCollectionBean.VUserCollectionOneBean vUserCollectionOneBean, boolean isSign)
 			{
-				SDKManager.toast(isSign ? "已报名" : "未报名");
+				// 未报名状态
+				if (!isSign)
+				{
+					final String taskId = vUserCollectionOneBean.getTask_id();
+
+					DialogIosWidget dialogIosWidget = new DialogIosWidget(UserTaskCollectionActivity.this)
+					{
+						@Override
+						protected void initBuilder(Builder builder)
+						{
+							super.initBuilder(builder);
+							builder.setNegativeText("取消");
+							builder.setPositiveText("确认");
+							builder.setTitle("确认立即报名嘛?");
+							builder.setPositiveListener(new View.OnClickListener()
+							{
+								@Override
+								public void onClick(View v)
+								{
+									XHttpUtil.doTaskActionStaffSignUp(new WTaskActionStaffSignUpBean(userId, taskId), new XHttpAdapter<String>()
+									{
+										@Override
+										public void onSuccess(String s)
+										{
+											SDKManager.toast("报名成功");
+										}
+									});
+								}
+							});
+						}
+					};
+					dialogIosWidget.show();
+				}
 			}
 		});
 	}
 
 	private void initData()
 	{
-		String userId = getIntent().getStringExtra(KeyCollectUserId);
+		userId = getIntent().getStringExtra(KeyCollectUserId);
 		WUserTaskCollectionBean collectionBean = new WUserTaskCollectionBean(userId, 0, DeleteConstant.defaultNumberLarge);
 
 		collectionAdapter.setShowEmpty(false);
@@ -113,17 +145,22 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 		});
 	}
 
+	public interface OnTaskCollectCallback<T>
+	{
+		void onSignClick(View view, T t, boolean isSign);
+	}
+
 	private class CollectionAdapter extends WidgetRecyclerAdapter<VUserTaskCollectionBean.VUserCollectionOneBean>
 	{
-		private OnTaskCollectCallback onTaskCollectCallback;
+		private OnTaskCollectCallback<VUserTaskCollectionBean.VUserCollectionOneBean> onTaskCollectCallback;
 
-		public void setOnTaskCollectCallback(OnTaskCollectCallback onTaskCollectCallback)
+		public void setOnTaskCollectCallback(OnTaskCollectCallback<VUserTaskCollectionBean.VUserCollectionOneBean> onTaskCollectCallback)
 		{
 			this.onTaskCollectCallback = onTaskCollectCallback;
 		}
 
 		@Override
-		public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
+		public void onBindViewHolder(RecyclerViewHolder viewHolder, final int position)
 		{
 			super.onBindViewHolder(viewHolder, position);
 
@@ -146,32 +183,48 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 
 			// 截止时间
 			String deadLineTimeStr = HokolTimeConvertUtil.stampToRestFormatTime(System.currentTimeMillis() + collectionBean.getTask_rem_time() * 1000);
-			viewHolder.setText(R.id.tv_item_main_task_time, "剩" + deadLineTimeStr);
-			
+			if (TextUtils.isEmpty(deadLineTimeStr))
+			{
+				viewHolder.setText(R.id.tv_item_main_task_time, "报名已截止");
+			}
+			else
+			{
+				viewHolder.setText(R.id.tv_item_main_task_time, "剩" + deadLineTimeStr);
+			}
+
 			// 是否报名
 			final boolean isSign = collectionBean.getIs_join() == VUserTaskCollectionBean.Signed ? true : false;
 			TextView actionTextView = viewHolder.get(R.id.tv_item_main_task_action);
-			if (isSign)
+			if (TextUtils.isEmpty(deadLineTimeStr))
 			{
-				actionTextView.setText("已报名");
+				actionTextView.setText("报名已截止");
 				actionTextView.setBackgroundResource(R.color.hokolPink);
 			}
 			else
 			{
-				actionTextView.setText("立即报名");
-				actionTextView.setBackgroundResource(R.color.hokolRed);
-			}
-			actionTextView.setOnClickListener(new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
+				if (isSign)
 				{
-					if (null != onTaskCollectCallback)
-					{
-						onTaskCollectCallback.onSignClick(v, isSign);
-					}
+					actionTextView.setText("已报名");
+					actionTextView.setBackgroundResource(R.color.hokolPink);
 				}
-			});
+				else
+				{
+					actionTextView.setText("立即报名");
+					actionTextView.setBackgroundResource(R.color.hokolRed);
+				}
+
+				actionTextView.setOnClickListener(new View.OnClickListener()
+				{
+					@Override
+					public void onClick(View v)
+					{
+						if (null != onTaskCollectCallback)
+						{
+							onTaskCollectCallback.onSignClick(v, sList.get(position), isSign);
+						}
+					}
+				});
+			}
 		}
 
 		@Override
@@ -179,15 +232,5 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 		{
 			return R.layout.item_user_task_collection_content;
 		}
-	}
-
-	public static void actionStart(Context context, String userId)
-	{
-		context.startActivity(new Intent(context, UserTaskCollectionActivity.class).putExtra(KeyCollectUserId, userId));
-	}
-
-	public interface OnTaskCollectCallback
-	{
-		void onSignClick(View view, boolean isSign);
 	}
 }

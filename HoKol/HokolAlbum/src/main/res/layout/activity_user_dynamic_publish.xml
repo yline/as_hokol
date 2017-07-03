@@ -16,8 +16,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:paddingBottom="@dimen/default_space_normal"
             android:paddingLeft="@dimen/default_space_large"
             android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/default_space_normal"
             android:text="取消"
             android:textColor="@android:color/white"
             android:textSize="@dimen/default_text_size_large"/>
@@ -28,8 +30,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:paddingBottom="@dimen/default_space_normal"
             android:paddingLeft="@dimen/default_space_large"
             android:paddingRight="@dimen/default_space_large"
+            android:paddingTop="@dimen/default_space_normal"
             android:text="发布"
             android:textColor="@android:color/white"
             android:textSize="@dimen/default_text_size_large"/>

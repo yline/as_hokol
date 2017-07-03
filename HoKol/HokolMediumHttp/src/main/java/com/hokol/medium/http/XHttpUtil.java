@@ -391,7 +391,7 @@ public class XHttpUtil
 				@Override
 				protected boolean isResponseParse()
 				{
-					return true;
+					return false;
 				}
 			}.doPost(httpUrl, VUserAvatarBean.class);
 		}
@@ -432,7 +432,7 @@ public class XHttpUtil
 				@Override
 				protected boolean isResponseParse()
 				{
-					return true;
+					return false;
 				}
 			}.doPost(httpUrl, String.class);
 		}

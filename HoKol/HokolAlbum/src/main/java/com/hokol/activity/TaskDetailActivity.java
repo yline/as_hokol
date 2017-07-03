@@ -10,6 +10,7 @@ import com.hokol.R;
 import com.hokol.application.AppStateManager;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskMainDetailBean;
+import com.hokol.medium.http.bean.WTaskActionStaffSignUpBean;
 import com.hokol.medium.http.bean.WTaskMainCollectionBean;
 import com.hokol.medium.http.bean.WTaskMainDetailBean;
 import com.hokol.medium.widget.FlowWidget;
@@ -17,6 +18,7 @@ import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
+import com.yline.log.LogFileUtil;
 import com.yline.view.recycler.holder.ViewHolder;
 
 /**
@@ -93,7 +95,22 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				SDKManager.toast("立即报名");
+				String userId = AppStateManager.getInstance().getUserLoginId(TaskDetailActivity.this);
+				if (TextUtils.isEmpty(userId))
+				{
+					LogFileUtil.v("userId = " + userId + ", taskId = " + taskId);
+					return;
+				}
+
+				XHttpUtil.doTaskActionStaffSignUp(new WTaskActionStaffSignUpBean(userId, taskId), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						SDKManager.toast("报名成功");
+						finish();
+					}
+				});
 			}
 		});
 	}

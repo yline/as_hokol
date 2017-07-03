@@ -14,6 +14,7 @@ import com.hokol.fragment.MainMineFragment;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserAvatarBean;
 import com.hokol.medium.widget.DialogIosWidget;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
@@ -29,6 +30,8 @@ public class UserDynamicPublishActivity extends BaseAppCompatActivity
 	private static final String KeyInnerFileName = "InnerFileName";
 
 	private ViewHolder viewHolder;
+
+	private long lastPublishClickTime;
 
 	public static void actionStart(Context context, int innerCode, String filename)
 	{
@@ -91,36 +94,45 @@ public class UserDynamicPublishActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				String userId = AppStateManager.getInstance().getUserLoginId(UserDynamicPublishActivity.this);
-				String content = viewHolder.getText(R.id.tv_user_dynamic_publish);
+				if (System.currentTimeMillis() - lastPublishClickTime > 6000)
+				{
+					lastPublishClickTime = System.currentTimeMillis();
 
-				if (zoomCode == MainMineFragment.KeyDynamicPictureZoomCode)
-				{
-					XHttpUtil.doDynamicPublish(userId, content, zoomFile, new XHttpAdapter<VUserAvatarBean>()
+					String userId = AppStateManager.getInstance().getUserLoginId(UserDynamicPublishActivity.this);
+					String content = viewHolder.getText(R.id.tv_user_dynamic_publish);
+
+					if (zoomCode == MainMineFragment.KeyDynamicPictureZoomCode)
 					{
-						@Override
-						public void onSuccess(VUserAvatarBean vUserAvatarBean)
+						XHttpUtil.doDynamicPublish(userId, content, zoomFile, new XHttpAdapter<VUserAvatarBean>()
 						{
-							finish();
-						}
-					});
-				}
-				else if (zoomCode == MainMineFragment.KeyPrivatePictureZoomCode)
-				{
-					XHttpUtil.doDynamicPrivatePublish(userId, content, zoomFile, new XHttpAdapter<String>()
+							@Override
+							public void onSuccess(VUserAvatarBean vUserAvatarBean)
+							{
+								finish();
+							}
+						});
+					}
+					else if (zoomCode == MainMineFragment.KeyPrivatePictureZoomCode)
 					{
-						@Override
-						public void onSuccess(String s)
+						XHttpUtil.doDynamicPrivatePublish(userId, content, zoomFile, new XHttpAdapter<String>()
 						{
-							finish();
-						}
-					});
+							@Override
+							public void onSuccess(String s)
+							{
+								finish();
+							}
+						});
+					}
+					else
+					{
+						// 有 bug 才走这个
+						LogFileUtil.e("UserDynamicPublish", "zoomCode error");
+						finish();
+					}
 				}
 				else
 				{
-					// 有 bug 才走这个
-					LogFileUtil.e("UserDynamicPublish", "zoomCode error");
-					finish();
+					SDKManager.toast("正在发布...");
 				}
 			}
 		});
