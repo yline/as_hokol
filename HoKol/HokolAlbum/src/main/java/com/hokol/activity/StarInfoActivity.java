@@ -20,7 +20,6 @@ import com.hokol.fragment.StarInfoPrivateFragment;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VDynamicUserDetailBean;
 import com.hokol.medium.http.bean.WDynamicUserDetailBean;
-import com.hokol.medium.widget.DialogIosWidget;
 import com.hokol.medium.widget.HokolGiftWidget;
 import com.hokol.viewhelper.StarInfoHelper;
 import com.yline.application.SDKManager;
@@ -68,6 +67,7 @@ public class StarInfoActivity extends BaseAppCompatActivity
 		viewHolder = new ViewHolder(this);
 		starInfoHelper = new StarInfoHelper(this, viewHolder);
 
+		starId = getIntent().getStringExtra(KeyStarId);
 		initView();
 		initTabView();
 		initData();
@@ -106,36 +106,7 @@ public class StarInfoActivity extends BaseAppCompatActivity
 			@Override
 			public void onContact()
 			{
-				// ？ 如果 它还有交流卷呢？
-				DialogIosWidget dialogIosWidget = new DialogIosWidget(StarInfoActivity.this)
-				{
-					@Override
-					protected void initBuilder(Builder builder)
-					{
-						super.initBuilder(builder);
-						builder.setTitle("会员享有更多优惠哦");
-						builder.setNegativeText("单次购买");
-						builder.setPositiveText("开通会员");
-						builder.setCanceledOnTouchOutside(true);
-						builder.setNegativeListener(new View.OnClickListener()
-						{
-							@Override
-							public void onClick(View v)
-							{
-								IApplication.toast("单次购买");
-							}
-						});
-						builder.setPositiveListener(new View.OnClickListener()
-						{
-							@Override
-							public void onClick(View v)
-							{
-								IApplication.toast("开通会员");
-							}
-						});
-					}
-				};
-				dialogIosWidget.show();
+				SDKManager.toast("点击联系");
 			}
 
 			@Override
@@ -176,10 +147,10 @@ public class StarInfoActivity extends BaseAppCompatActivity
 		final List<BaseFragment> fragmentList = new ArrayList<>();
 		final List<String> titleList = new ArrayList<>();
 
-		fragmentList.add(StarInfoDynamicFragment.newInstance());
+		fragmentList.add(StarInfoDynamicFragment.newInstance(starId));
 		titleList.add("她的动态");
 
-		fragmentList.add(StarInfoPrivateFragment.newInstance());
+		fragmentList.add(StarInfoPrivateFragment.newInstance(starId));
 		titleList.add("私密空间");
 
 		starInfoDatumFragment = StarInfoDatumFragment.newInstance();
@@ -217,7 +188,6 @@ public class StarInfoActivity extends BaseAppCompatActivity
 	private void initData()
 	{
 		String userId = AppStateManager.getInstance().getUserLoginId(this);
-		starId = getIntent().getStringExtra(KeyStarId);
 
 		XHttpUtil.doDynamicUserDetail(new WDynamicUserDetailBean(userId, starId), new XHttpAdapter<VDynamicUserDetailBean>()
 		{

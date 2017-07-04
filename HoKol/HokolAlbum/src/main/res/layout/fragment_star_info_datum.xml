@@ -11,8 +11,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="@color/hokolGrayLight"></View>
+            android:layout_height="6dp"
+            android:background="@color/hokolGrayLittle"></View>
 
         <LinearLayout
             android:id="@+id/ll_star_info_datum_fans"
@@ -35,7 +35,7 @@
                 android:id="@+id/tv_star_info_datum_fans_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="200"
+                android:text=""
                 android:textColor="@color/hokolGrayDrak"/>
 
             <ImageView
@@ -71,7 +71,7 @@
                 android:id="@+id/tv_star_info_datum_cares_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="28"
+                android:text=""
                 android:textColor="@color/hokolGrayDrak"/>
 
             <ImageView
@@ -107,7 +107,7 @@
                 android:id="@+id/tv_star_info_datum_praise_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4656156"
+                android:text=""
                 android:textColor="@color/hokolGrayDrak"/>
         </LinearLayout>
 
@@ -137,7 +137,7 @@
                 android:id="@+id/tv_star_info_datum_constell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="处女座"
+                android:text=""
                 android:textColor="@color/hokolGrayDrak"/>
         </LinearLayout>
 
@@ -167,7 +167,7 @@
                 android:id="@+id/tv_star_info_datum_area"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="浙江 杭州"
+                android:text=""
                 android:textColor="@color/hokolGrayDrak"/>
         </LinearLayout>
 
@@ -202,7 +202,7 @@
                 android:ellipsize="end"
                 android:gravity="end"
                 android:maxLines="1"
-                android:text="当一首船，沉入海底，当一个人，成了谜，你不知道，为何..."
+                android:text=""
                 android:textColor="@color/hokolGrayDrak"/>
         </RelativeLayout>
 
@@ -237,7 +237,7 @@
                 android:ellipsize="end"
                 android:gravity="end"
                 android:maxLines="1"
-                android:text="你猜我有什么奖，也许有，也许没有呢"
+                android:text=""
                 android:textColor="@color/hokolGrayDrak"/>
         </RelativeLayout>
 

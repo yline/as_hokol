@@ -14,30 +14,35 @@ import com.hokol.R;
 import com.hokol.activity.StarDynamicActivity;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
-import com.hokol.medium.http.bean.VHomeMainBean;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VDynamicUserAllBean;
+import com.hokol.medium.http.bean.WDynamicUserAllBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
+import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StarInfoDynamicFragment extends BaseFragment
 {
+	private static final String KeyStarId = "DynamicStarId";
+
 	private StarInfoDynamicAdapter starInfoDynamicAdapter;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
-	public static StarInfoDynamicFragment newInstance()
+	public static StarInfoDynamicFragment newInstance(String starId)
 	{
 		StarInfoDynamicFragment fragment = new StarInfoDynamicFragment();
-		/*Bundle args = new Bundle();
-		fragment.setArguments(args);*/
+		Bundle args = new Bundle();
+		args.putString(KeyStarId, starId);
+		fragment.setArguments(args);
 		return fragment;
 	}
 
@@ -51,7 +56,9 @@ public class StarInfoDynamicFragment extends BaseFragment
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
 	{
 		super.onViewCreated(view, savedInstanceState);
+
 		initView(view);
+		initData();
 	}
 
 	private void initView(View view)
@@ -75,26 +82,19 @@ public class StarInfoDynamicFragment extends BaseFragment
 
 		starInfoDynamicAdapter = new StarInfoDynamicAdapter();
 		recyclerView.setAdapter(starInfoDynamicAdapter);
-		starInfoDynamicAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VHomeMainBean.VHomeMainOneBean>()
+		starInfoDynamicAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VDynamicUserAllBean.VDynamicUserAllOneBean>()
 		{
 			@Override
-			public void onItemClick(RecyclerViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
+			public void onItemClick(RecyclerViewHolder viewHolder, VDynamicUserAllBean.VDynamicUserAllOneBean vDynamicUserAllOneBean, int position)
 			{
-				StarDynamicActivity.actionStart(getContext(), bean.getDt_id());
+				StarDynamicActivity.actionStart(getContext(), vDynamicUserAllOneBean.getDt_id());
 			}
 		});
 		
 		View headView = new View(getContext());
-		headView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 8)));
-		headView.setBackgroundResource(R.color.hokolGrayLight);
+		headView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIScreenUtil.dp2px(getContext(), 6)));
+		headView.setBackgroundResource(R.color.hokolGrayLittle);
 		starInfoDynamicAdapter.addHeadView(headView);
-
-		List<String> data = new ArrayList<>();
-		for (int i = 0; i < 35; i++)
-		{
-			data.add(DeleteConstant.getUrlSquare());
-		}
-		starInfoDynamicAdapter.addAll(data);
 
 		superRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_star_info_dynamic);
 		superRefreshLayout.setOnRefreshListener(new SuperSwipeRefreshLayout.OnSwipeListener()
@@ -133,16 +133,27 @@ public class StarInfoDynamicFragment extends BaseFragment
 		});
 	}
 
-	private class StarInfoDynamicAdapter extends HeadFootRecyclerAdapter<String>
+	private void initData()
+	{
+		String starId = getArguments().getString(KeyStarId);
+
+		XHttpUtil.doDynamicUserAll(new WDynamicUserAllBean(starId, 0, DeleteConstant.defaultNumberSuper), new XHttpAdapter<VDynamicUserAllBean>()
+		{
+			@Override
+			public void onSuccess(VDynamicUserAllBean vDynamicUserAllBean)
+			{
+				List<VDynamicUserAllBean.VDynamicUserAllOneBean> resultList = vDynamicUserAllBean.getList();
+				if (null != resultList)
+				{
+					starInfoDynamicAdapter.setDataList(resultList);
+				}
+			}
+		});
+	}
+
+	private class StarInfoDynamicAdapter extends WidgetRecyclerAdapter<VDynamicUserAllBean.VDynamicUserAllOneBean>
 	{
 		private final int border_square;
-
-		private OnRecyclerItemClickListener listener;
-
-		public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener listener)
-		{
-			this.listener = listener;
-		}
 
 		public StarInfoDynamicAdapter()
 		{
@@ -156,25 +167,15 @@ public class StarInfoDynamicFragment extends BaseFragment
 		}
 
 		@Override
-		public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
+		public void onBindViewHolder(final RecyclerViewHolder holder, final int position)
 		{
-			viewHolder.getItemView().setOnClickListener(new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
-				{
-					if (null != listener)
-					{
-						listener.onItemClick(viewHolder, sList.get(position), position);
-					}
-				}
-			});
+			super.onBindViewHolder(holder, position);
 
-			ImageView imageView = viewHolder.get(R.id.iv_item_star_info_dynamic);
+			VDynamicUserAllBean.VDynamicUserAllOneBean dynamicBean = sList.get(position);
 
+			ImageView imageView = holder.get(R.id.iv_item_star_info_dynamic);
 			UIResizeUtil.build().setWidth(border_square).setHeight(border_square).commit(imageView);
-
-			Glide.with(getContext()).load(sList.get(position)).into(imageView);
+			Glide.with(getContext()).load(dynamicBean.getDt_small_img()).into(imageView);
 		}
 	}
 }
