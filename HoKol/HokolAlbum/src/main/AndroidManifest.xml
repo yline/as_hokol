@@ -89,6 +89,10 @@
         </activity>
         <activity android:name=".activity.UserVipLevelActivity">
         </activity>
+        <activity android:name=".activity.VipSinglePrivateActivity">
+        </activity>
+        <activity android:name=".activity.VipHokolActivity">
+        </activity>
     </application>
 
 </manifest>

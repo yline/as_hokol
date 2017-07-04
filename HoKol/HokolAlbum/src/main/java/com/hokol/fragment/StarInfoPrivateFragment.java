@@ -14,6 +14,8 @@ import android.widget.RelativeLayout;
 import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.activity.StarDynamicActivity;
+import com.hokol.activity.VipHokolActivity;
+import com.hokol.activity.VipSinglePrivateActivity;
 import com.hokol.application.AppStateManager;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
@@ -197,7 +199,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 										@Override
 										public void onClick(View v)
 										{
-											IApplication.toast("单次购买");
+											VipSinglePrivateActivity.actionStart(getContext());
 										}
 									});
 									builder.setOnPositiveListener(new View.OnClickListener()
@@ -205,7 +207,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 										@Override
 										public void onClick(View v)
 										{
-											IApplication.toast("开通会员");
+											VipHokolActivity.actionStart(getContext());
 										}
 									});
 								}

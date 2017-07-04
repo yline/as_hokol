@@ -112,12 +112,12 @@ public class RadioGroupNestLinear extends LinearLayout
 				}
 			});
 		}
-		else if (child instanceof LinearLayout)
+		else if (child instanceof ViewGroup)
 		{
-			int childCount = ((LinearLayout) child).getChildCount();
+			int childCount = ((ViewGroup) child).getChildCount();
 			for (int i = 0; i < childCount; i++)
 			{
-				View view = ((LinearLayout) child).getChildAt(i);
+				View view = ((ViewGroup) child).getChildAt(i);
 				if (view instanceof RadioButton)
 				{
 					final RadioButton button = (RadioButton) view;
@@ -162,12 +162,12 @@ public class RadioGroupNestLinear extends LinearLayout
 					((RadioButton) child).setChecked(false);
 				}
 			}
-			else if (child instanceof LinearLayout)
+			else if (child instanceof ViewGroup)
 			{
-				int childCount = ((LinearLayout) child).getChildCount();
+				int childCount = ((ViewGroup) child).getChildCount();
 				for (int j = 0; j < childCount; j++)
 				{
-					View view = ((LinearLayout) child).getChildAt(j);
+					View view = ((ViewGroup) child).getChildAt(j);
 					if (view instanceof RadioButton)
 					{
 						final RadioButton button = (RadioButton) view;
@@ -306,6 +306,23 @@ public class RadioGroupNestLinear extends LinearLayout
 	}
 
 	/**
+	 * <p>Interface definition for a callback to be invoked when the checked
+	 * radio button changed in this group.</p>
+	 */
+	public interface OnCheckedChangeListener
+	{
+		/**
+		 * 经过测试:每次点击,会调用2或3次
+		 * <p>Called when the checked radio button has changed. When the
+		 * selection is cleared, checkedId is -1.</p>
+		 *
+		 * @param group     the group in which the checked radio button has changed
+		 * @param checkedId the unique identifier of the newly checked radio button
+		 */
+		public void onCheckedChanged(RadioGroupNestLinear group, int checkedId);
+	}
+
+	/**
 	 * <p>This set of layout parameters defaults the width and the height of
 	 * the children to {@link #WRAP_CONTENT} when they are not specified in the
 	 * XML file. Otherwise, this class ussed the value read from the XML file.</p>
@@ -388,23 +405,6 @@ public class RadioGroupNestLinear extends LinearLayout
 				height = WRAP_CONTENT;
 			}
 		}
-	}
-
-	/**
-	 * <p>Interface definition for a callback to be invoked when the checked
-	 * radio button changed in this group.</p>
-	 */
-	public interface OnCheckedChangeListener
-	{
-		/**
-		 * 经过测试:每次点击,会调用2或3次
-		 * <p>Called when the checked radio button has changed. When the
-		 * selection is cleared, checkedId is -1.</p>
-		 *
-		 * @param group     the group in which the checked radio button has changed
-		 * @param checkedId the unique identifier of the newly checked radio button
-		 */
-		public void onCheckedChanged(RadioGroupNestLinear group, int checkedId);
 	}
 
 	private class CheckedStateTracker implements CompoundButton.OnCheckedChangeListener
