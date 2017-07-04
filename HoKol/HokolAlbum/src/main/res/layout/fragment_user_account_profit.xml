@@ -7,8 +7,9 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/default_space_normal"
-        android:background="@color/hokolGrayLight"/>
+        android:layout_height="@dimen/default_space_little"
+        android:background="@color/hokolGrayLight">
+    </View>
 
     <LinearLayout
         android:id="@+id/ll_user_account_profit_money"
@@ -53,21 +54,24 @@
             android:textColor="@color/hokolBlackNormal"/>
 
         <TextView
+            android:id="@+id/tv_user_account_profit_account"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="支付宝账号(152*****253)"
             android:textColor="#02a9f0"
-            android:textSize="@dimen/default_text_size_medium"/>
+            android:textSize="@dimen/default_text_size_medium"
+            android:visibility="gone"/>
 
         <!-- 未绑定支付宝时，显示 -->
         <ImageView
+            android:id="@+id/iv_user_account_profit_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/default_space_normal"
             android:src="@drawable/global_forward_arrows_dark"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
     </LinearLayout>
 
     <View
@@ -95,8 +99,10 @@
             android:layout_weight="2"
             android:background="@null"
             android:hint="单笔最高提现800元"
+            android:inputType="number"
             android:textColorHint="@color/hokolGraySmall"
-            android:textSize="@dimen/default_text_size_medium"/>
+            android:textSize="@dimen/default_text_size_medium"
+            android:visibility="invisible"/>
     </LinearLayout>
 
     <View
@@ -110,11 +116,13 @@
         android:paddingBottom="@dimen/default_space_small"
         android:paddingLeft="@dimen/default_space_normal"
         android:paddingTop="@dimen/default_space_small"
-        android:text="手续费￥0.6"
+        android:text="手续费 0.1%"
         android:textColor="@color/hokolGrayDrak"
-        android:textSize="@dimen/default_text_size_small"/>
+        android:textSize="@dimen/default_text_size_small"
+        android:visibility="invisible"/>
 
     <Button
+        android:id="@+id/btn_user_account_profit_withdraw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/default_space_normal"

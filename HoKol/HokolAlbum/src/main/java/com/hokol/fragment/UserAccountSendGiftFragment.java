@@ -69,11 +69,13 @@ public class UserAccountSendGiftFragment extends BaseFragment
 	{
 		String userId = getArguments().getString(KeyGiftSendUserId);
 
+		sendGiftAdapter.setShowEmpty(false);
 		XHttpUtil.doUserGiftSend(new WUserGiftSendBean(userId, 0, DeleteConstant.defaultNumberLarge), new XHttpAdapter<VUserGiftSendBean>()
 		{
 			@Override
 			public void onSuccess(VUserGiftSendBean vUserGiftSend)
 			{
+				sendGiftAdapter.setShowEmpty(true);
 				List<VUserGiftSendBean.VUserGiftOneSendBean> resultList = vUserGiftSend.getList();
 				if (null != resultList)
 				{

@@ -124,12 +124,11 @@ public class UserVIPActivity extends BaseAppCompatActivity
 				super.onFailureCode(code);
 				if (code == VUserVipInfoBean.CodeVipNone)
 				{
-					updateVipInfoView(VUserVipInfoBean.TypeNull, "至尊VIP特权", 0);
-					viewHolder.setText(R.id.btn_user_setting_account_bind_recharge, "立即开通");
+					updateVipInfoView(VUserVipInfoBean.TypeNull, "至尊VIP特权", "立即开通", 0);
 				}
 				else if (code == VUserVipInfoBean.CodeVipPass)
 				{
-					updateVipInfoView(VUserVipInfoBean.TypeNull, "VIP 已到期", 0); // ??? 到期时间拿不到了
+					updateVipInfoView(VUserVipInfoBean.TypePass, "VIP 已到期", "立即续费", 0); // ??? 到期时间拿不到了
 				}
 			}
 
@@ -137,7 +136,7 @@ public class UserVIPActivity extends BaseAppCompatActivity
 			public void onSuccess(VUserVipInfoBean vUserVipInfoBean)
 			{
 				String expireTimeStr = HokolTimeConvertUtil.stampToFormatDate(vUserVipInfoBean.getExpire_time() * 1000, Calendar.DAY_OF_MONTH);
-				updateVipInfoView(vUserVipInfoBean.getMember_type(), String.format("VIP %s 到期", expireTimeStr), vUserVipInfoBean.getCall_card_num());
+				updateVipInfoView(vUserVipInfoBean.getMember_type(), String.format("VIP %s 到期", expireTimeStr), "立即续费", vUserVipInfoBean.getCall_card_num());
 			}
 		});
 	}
@@ -145,38 +144,50 @@ public class UserVIPActivity extends BaseAppCompatActivity
 	/**
 	 * @param vipType       vip类型
 	 * @param expireTimeStr 会员时间显示
+	 * @param btnStr        按钮字体，内容
 	 * @param cardNum       交流卷数量
 	 */
-	private void updateVipInfoView(int vipType, String expireTimeStr, int cardNum)
+	private void updateVipInfoView(int vipType, String expireTimeStr, String btnStr, int cardNum)
 	{
 		// 会员类型
 		if (vipType == VUserVipInfoBean.TypeMonth)
 		{
 			viewHolder.setImageResource(R.id.iv_user_setting_account_bind_vip, R.drawable.user_vip_month).setVisibility(View.VISIBLE);
+			// 卡片按钮
+			viewHolder.setImageResource(R.id.iv_user_setting_account_bind_recharge_top, R.drawable.user_vip_renew);
 		}
 		else if (vipType == VUserVipInfoBean.TypeSeason)
 		{
 			viewHolder.setImageResource(R.id.iv_user_setting_account_bind_vip, R.drawable.user_vip_quarter).setVisibility(View.VISIBLE);
+			// 卡片按钮
+			viewHolder.setImageResource(R.id.iv_user_setting_account_bind_recharge_top, R.drawable.user_vip_renew);
 		}
 		else if (vipType == VUserVipInfoBean.TypeYear)
 		{
 			viewHolder.setImageResource(R.id.iv_user_setting_account_bind_vip, R.drawable.user_vip_year).setVisibility(View.VISIBLE);
+			// 卡片按钮
+			viewHolder.setImageResource(R.id.iv_user_setting_account_bind_recharge_top, R.drawable.user_vip_renew);
+		}
+		else if (vipType == VUserVipInfoBean.TypePass)
+		{
+			viewHolder.get(R.id.iv_user_setting_account_bind_vip).setVisibility(View.GONE);
+			// 卡片按钮
+			viewHolder.setImageResource(R.id.iv_user_setting_account_bind_recharge_top, R.drawable.user_vip_renew);
 		}
 		else
 		{
 			viewHolder.get(R.id.iv_user_setting_account_bind_vip).setVisibility(View.GONE);
+			// 卡片按钮
+			viewHolder.setImageResource(R.id.iv_user_setting_account_bind_recharge_top, R.drawable.user_vip_open);
 		}
+
+		// 下方按钮字体
+		viewHolder.setText(R.id.btn_user_setting_account_bind_recharge, btnStr);
 
 		// 会员时间显示
 		viewHolder.setText(R.id.tv_user_setting_account_bind_time, expireTimeStr);
 
 		// 交流卷张数
 		viewHolder.setText(R.id.tv_user_vip_contact_volume_num, String.format("%d张", cardNum));
-
-		// 下方字体
-		viewHolder.setText(R.id.btn_user_setting_account_bind_recharge, "立即续费");
-
-		// 卡片按钮
-		viewHolder.setImageResource(R.id.iv_user_setting_account_bind_recharge_top, R.drawable.user_vip_renew);
 	}
 }

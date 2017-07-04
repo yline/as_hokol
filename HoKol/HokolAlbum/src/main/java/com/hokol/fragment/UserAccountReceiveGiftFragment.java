@@ -75,6 +75,7 @@ public class UserAccountReceiveGiftFragment extends BaseFragment
 			@Override
 			public void onSuccess(VUserGiftReceiveBean vUserGiftReceiveBean)
 			{
+				receiveGiftAdapter.setShowEmpty(true);
 				List<VUserGiftReceiveBean.VUserGiftReceiveOneBean> resultList = vUserGiftReceiveBean.getList();
 				if (null != resultList)
 				{

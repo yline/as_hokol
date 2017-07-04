@@ -49,8 +49,7 @@
             <com.hokol.medium.viewcustom.CircleView
                 android:id="@+id/iv_user_setting_account_bind_avatar"
                 android:layout_width="@dimen/default_title_normal"
-                android:layout_height="@dimen/default_title_normal"
-                android:src="@drawable/global_load_failed"/>
+                android:layout_height="@dimen/default_title_normal"/>
 
             <TextView
                 android:id="@+id/tv_user_setting_account_bind_nickname"
@@ -59,7 +58,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/default_space_normal"
                 android:lines="1"
-                android:text="鹿宝宝lulululu"
+                android:text=""
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/default_text_size_normal"/>
 
@@ -68,8 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/default_space_small"
-                android:src="@drawable/user_vip_month"/>
+                android:layout_marginLeft="@dimen/default_space_small"/>
         </LinearLayout>
 
         <RelativeLayout
@@ -84,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="VIP 2017-25-25到期"
+                android:text=""
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/default_text_size_normal"/>
 
@@ -94,8 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/default_space_large_c"
-                android:scaleType="centerCrop"
-                android:src="@drawable/user_vip_renew"/>
+                android:scaleType="centerCrop"/>
         </RelativeLayout>
     </FrameLayout>
 

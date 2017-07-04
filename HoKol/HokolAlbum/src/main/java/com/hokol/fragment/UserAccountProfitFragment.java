@@ -41,6 +41,7 @@ public class UserAccountProfitFragment extends BaseFragment
 
 	private void initView()
 	{
-
+		viewHolder.setText(R.id.btn_user_account_profit_withdraw, "功能尚未开通");
+		viewHolder.setText(R.id.tv_user_account_profit_money_num, "");
 	}
 }

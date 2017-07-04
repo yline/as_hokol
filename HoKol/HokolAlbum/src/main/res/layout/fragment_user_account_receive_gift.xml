@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_space_little"
+        android:background="@color/hokolGrayLight">
+    </View>
+
+    <TextView
+        android:id="@+id/tv_user_account_receive_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_space_normal"
+        android:text="近三个月收到礼物"
+        android:textColor="@color/hokolGrayDrak"
+        android:textSize="@dimen/default_text_size_normal"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/hokolGrayLight"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_receive_gift"

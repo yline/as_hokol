@@ -12,7 +12,6 @@ import android.view.View;
 
 import com.hokol.R;
 import com.hokol.application.AppStateManager;
-import com.hokol.fragment.UserAccountProfitFragment;
 import com.hokol.fragment.UserAccountReceiveGiftFragment;
 import com.hokol.fragment.UserAccountSendGiftFragment;
 import com.yline.base.BaseAppCompatActivity;
@@ -29,6 +28,11 @@ public class UserAccountActivity extends BaseAppCompatActivity
 	private ViewHolder viewHolder;
 
 	private String userId;
+
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, UserAccountActivity.class).putExtra(KeyAccountUserId, userId));
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -63,7 +67,7 @@ public class UserAccountActivity extends BaseAppCompatActivity
 		int coinNum = AppStateManager.getInstance().getUserCoinNum(this);
 		viewHolder.setText(R.id.tv_user_account_value, coinNum + "");
 	}
-
+	
 	private void initTabView()
 	{
 		userId = getIntent().getStringExtra(KeyAccountUserId);
@@ -76,43 +80,12 @@ public class UserAccountActivity extends BaseAppCompatActivity
 
 		fragmentList.add(UserAccountSendGiftFragment.newInstance(userId));
 		titleList.add("送出礼物");
-
+		/*
 		fragmentList.add(UserAccountProfitFragment.newInstance());
 		titleList.add("收益提现");
-
+		*/
 		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout_user_account);
 		ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager_user_account);
-		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
-		{
-			@Override
-			public void onTabSelected(TabLayout.Tab tab)
-			{
-				if (tab.getPosition() == 0)
-				{
-					viewHolder.setText(R.id.tv_user_account_type_hint, "近三个月收到礼物");
-				}
-				else if (tab.getPosition() == 1)
-				{
-					viewHolder.setText(R.id.tv_user_account_type_hint, "近三个月送出礼物");
-				}
-				else
-				{
-					viewHolder.setText(R.id.tv_user_account_type_hint, "收益体现");
-				}
-			}
-
-			@Override
-			public void onTabUnselected(TabLayout.Tab tab)
-			{
-
-			}
-
-			@Override
-			public void onTabReselected(TabLayout.Tab tab)
-			{
-
-			}
-		});
 
 		viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager())
 		{
@@ -137,10 +110,5 @@ public class UserAccountActivity extends BaseAppCompatActivity
 		tabLayout.setupWithViewPager(viewPager);
 		tabLayout.setTabTextColors(ContextCompat.getColor(this, R.color.hokolGrayDrak), ContextCompat.getColor(this, R.color.hokolRed));
 		tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.hokolRed));
-	}
-	
-	public static void actionStart(Context context, String userId)
-	{
-		context.startActivity(new Intent(context, UserAccountActivity.class).putExtra(KeyAccountUserId, userId));
 	}
 }
