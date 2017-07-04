@@ -101,7 +101,7 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 							builder.setNegativeText("取消");
 							builder.setPositiveText("确认");
 							builder.setTitle("确认立即报名嘛?");
-							builder.setPositiveListener(new View.OnClickListener()
+							builder.setOnPositiveListener(new View.OnClickListener()
 							{
 								@Override
 								public void onClick(View v)

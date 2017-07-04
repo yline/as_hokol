@@ -88,6 +88,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 			}
 		});
 		starInfoPrivateAdapter = new StarInfoPrivateAdapter();
+		starInfoPrivateAdapter.setShowEmpty(false);
 		recyclerView.setAdapter(starInfoPrivateAdapter);
 
 		View headView = new View(getContext());
@@ -141,45 +142,8 @@ public class StarInfoPrivateFragment extends BaseFragment
 			}
 		});
 
+		// 锁屏
 		lockRelativeLayout = (RelativeLayout) view.findViewById(R.id.rl_star_info_private_lock);
-		lockRelativeLayout.setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				DialogIosWidget dialogIosWidget = new DialogIosWidget(getContext())
-				{
-					@Override
-					protected void initBuilder(Builder builder)
-					{
-						super.initBuilder(builder);
-						builder.setTitle("会员享有更多优惠哦");
-						builder.setNegativeText("单次购买");
-						builder.setPositiveText("开通会员");
-						builder.setCanceledOnTouchOutside(true);
-						builder.setNegativeListener(new View.OnClickListener()
-						{
-							@Override
-							public void onClick(View v)
-							{
-								IApplication.toast("单次购买");
-							}
-						});
-						builder.setPositiveListener(new View.OnClickListener()
-						{
-							@Override
-							public void onClick(View v)
-							{
-								IApplication.toast("开通会员");
-							}
-						});
-					}
-				};
-				dialogIosWidget.show();
-
-				// lockRelativeLayout.setVisibility(View.GONE);
-			}
-		});
 	}
 
 	private void initData()
@@ -198,6 +162,8 @@ public class StarInfoPrivateFragment extends BaseFragment
 				@Override
 				public void onSuccess(VDynamicUserPrivateAllBean vDynamicUserPrivateAllBean)
 				{
+					lockRelativeLayout.setVisibility(View.GONE);
+
 					List<VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean> resultList = vDynamicUserPrivateAllBean.getList();
 					if (null != resultList)
 					{
@@ -209,6 +175,44 @@ public class StarInfoPrivateFragment extends BaseFragment
 				public void onFailureCode(int code)
 				{
 					super.onFailureCode(code);
+					lockRelativeLayout.setVisibility(View.VISIBLE);
+
+					lockRelativeLayout.setOnClickListener(new View.OnClickListener()
+					{
+						@Override
+						public void onClick(View v)
+						{
+							DialogIosWidget dialogIosWidget = new DialogIosWidget(getContext())
+							{
+								@Override
+								protected void initBuilder(Builder builder)
+								{
+									super.initBuilder(builder);
+									builder.setTitle("会员享有更多优惠哦");
+									builder.setNegativeText("单次购买");
+									builder.setPositiveText("开通会员");
+									builder.setCanceledOnTouchOutside(true);
+									builder.setOnNegativeListener(new View.OnClickListener()
+									{
+										@Override
+										public void onClick(View v)
+										{
+											IApplication.toast("单次购买");
+										}
+									});
+									builder.setOnPositiveListener(new View.OnClickListener()
+									{
+										@Override
+										public void onClick(View v)
+										{
+											IApplication.toast("开通会员");
+										}
+									});
+								}
+							};
+							dialogIosWidget.show();
+						}
+					});
 				}
 			});
 		}

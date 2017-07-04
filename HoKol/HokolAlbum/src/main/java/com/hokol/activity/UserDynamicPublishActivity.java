@@ -73,7 +73,7 @@ public class UserDynamicPublishActivity extends BaseAppCompatActivity
 						builder.setTitle("退出此次编辑?");
 						builder.setNegativeText("取消");
 						builder.setPositiveText("退出");
-						builder.setPositiveListener(new View.OnClickListener()
+						builder.setOnPositiveListener(new View.OnClickListener()
 						{
 							@Override
 							public void onClick(View v)

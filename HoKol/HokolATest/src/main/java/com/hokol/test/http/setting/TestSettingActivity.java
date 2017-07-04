@@ -22,9 +22,14 @@ import java.io.File;
 
 public class TestSettingActivity extends BaseTestActivity
 {
+	private static final int ResetUserLogoRequestCode = 1;
+
 	private EditText editTextResetUserLogo;
 
-	private static final int ResetUserLogoRequestCode = 1;
+	public static void actionStart(Context context)
+	{
+		context.startActivity(new Intent(context, TestSettingActivity.class));
+	}
 
 	private void testreset_user_logo()
 	{
@@ -88,7 +93,7 @@ public class TestSettingActivity extends BaseTestActivity
 			@Override
 			public void onClick(View v)
 			{
-				WSettingResetPhoneBean wSettingResetPhoneBean = null;
+				/*WSettingResetPhoneBean wSettingResetPhoneBean = null;
 				XHttpUtil.doSettingResetPhone(wSettingResetPhoneBean, new XHttpAdapter<String>()
 				{
 					@Override
@@ -96,7 +101,7 @@ public class TestSettingActivity extends BaseTestActivity
 					{
 
 					}
-				});
+				});*/
 			}
 		});
 	}
@@ -200,10 +205,5 @@ public class TestSettingActivity extends BaseTestActivity
 				}
 			}
 		}
-	}
-
-	public static void actionStart(Context context)
-	{
-		context.startActivity(new Intent(context, TestSettingActivity.class));
 	}
 }

@@ -76,11 +76,12 @@ public class StarInfoDynamicFragment extends BaseFragment
 			@Override
 			protected int getDivideResourceId()
 			{
-				return R.drawable.widget_solid_white_size_little;
+				return R.drawable.widget_solid_null_size_little;
 			}
 		});
 
 		starInfoDynamicAdapter = new StarInfoDynamicAdapter();
+		starInfoDynamicAdapter.setShowEmpty(false);
 		recyclerView.setAdapter(starInfoDynamicAdapter);
 		starInfoDynamicAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VDynamicUserAllBean.VDynamicUserAllOneBean>()
 		{
@@ -157,7 +158,7 @@ public class StarInfoDynamicFragment extends BaseFragment
 
 		public StarInfoDynamicAdapter()
 		{
-			border_square = UIScreenUtil.getScreenWidth(getContext()) / 3 - 10;
+			border_square = UIScreenUtil.getScreenWidth(getContext()) / 3;
 		}
 
 		@Override
@@ -174,7 +175,7 @@ public class StarInfoDynamicFragment extends BaseFragment
 			VDynamicUserAllBean.VDynamicUserAllOneBean dynamicBean = sList.get(position);
 
 			ImageView imageView = holder.get(R.id.iv_item_star_info_dynamic);
-			UIResizeUtil.build().setWidth(border_square).setHeight(border_square).commit(imageView);
+			UIResizeUtil.build().setHeight(border_square).setWidth(border_square).commit(imageView);
 			Glide.with(getContext()).load(dynamicBean.getDt_small_img()).into(imageView);
 		}
 	}

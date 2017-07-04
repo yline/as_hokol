@@ -53,6 +53,11 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 
 	private boolean isPriceDiscuss = false;
 
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, TaskPublishActivity.class).putExtra(KeyUserId, userId));
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -178,7 +183,7 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 						super.initBuilder(builder);
 						builder.setTitle("您选择面议将在交流成功后\n提交每个应聘者价格");
 						builder.setPositiveText("确定");
-						builder.setPositiveListener(new View.OnClickListener()
+						builder.setOnPositiveListener(new View.OnClickListener()
 						{
 							@Override
 							public void onClick(View v)
@@ -367,10 +372,5 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			textViewDiscuss.setBackgroundResource(R.drawable.widget_shape_radiusall_stroke_gray_solid_null);
 			textViewDiscuss.setTextColor(ContextCompat.getColor(this, R.color.hokolGray));
 		}
-	}
-
-	public static void actionStart(Context context, String userId)
-	{
-		context.startActivity(new Intent(context, TaskPublishActivity.class).putExtra(KeyUserId, userId));
 	}
 }
