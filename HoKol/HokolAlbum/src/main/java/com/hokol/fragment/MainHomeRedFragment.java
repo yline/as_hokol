@@ -254,16 +254,16 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 	}
 
 	@Override
-	public void onAreaUpdate(String first, List<String> second)
+	public void onAreaUpdate(String firstCode, List<String> secondCodeList)
 	{
-		LogFileUtil.v("onAreaUpdate first = " + first + ",second = " + second.toString());
+		LogFileUtil.v("onAreaUpdate first = " + firstCode + ",second = " + secondCodeList.toString());
 
 		refreshedNumber = 0;
 		homeRedBean.setNum1(refreshedNumber);
 		homeRedBean.setLength(DeleteConstant.defaultNumberSmall);
 
-		homeRedBean.setUser_province(first);
-		homeRedBean.setUser_city(second);
+		homeRedBean.setP_code(firstCode);
+		homeRedBean.setC_code(secondCodeList);
 
 		doRequest();
 	}

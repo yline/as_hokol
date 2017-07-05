@@ -101,11 +101,6 @@ public class SecondaryWidget extends WidgetSecondary
 
 	}
 
-	public interface OnConfirmListener
-	{
-		void onConfirmClick(String firstName, List<String> secondList, String titleName);
-	}
-
 	/* ---------------------------------------------------- 从这里开始设置参数；这些参数都是可以被重写的 ---------------------------------------------------- */
 	protected String getResultTitle(String first, List<String> second)
 	{
@@ -142,5 +137,10 @@ public class SecondaryWidget extends WidgetSecondary
 	protected int getSecondItemResource()
 	{
 		return R.layout.widget_item_secondary_second;
+	}
+
+	public interface OnConfirmListener
+	{
+		void onConfirmClick(String firstName, List<String> secondNameList, String titleName);
 	}
 }

@@ -2,54 +2,34 @@ package com.hokol.medium.http.bean;
 
 import com.hokol.medium.http.HttpEnum;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WHomeMainBean
 {
-	/**
-	 * 用户标签
-	 * 【必填 1:网红,2:主播,3:演员,4:模特,5:歌手,6:体育】
-	 */
+	/* 用户标签 * 【必填 1:网红,2:主播,3:演员,4:模特,5:歌手,6:体育】 */
 	private int user_tag;
 
-	/**
-	 * 用户性别：【0:不限,1:男，2:女】
-	 */
+	/* 用户性别：【0:不限,1:男，2:女】 */
 	private int user_sex;
 
-	/**
-	 * 用户省份：【例：浙江省，不限】
-	 */
-	private String user_province;
+	/* 用户省份编码 */
+	private String p_code;
 
-	/**
-	 * 用户城市：【例：杭州市，不限】
-	 */
-	private List<String> user_city;
+	/* 用户城市编码(数组) */
+	private List<String> c_code;
 
-	/**
-	 * 用户筛选推荐：【不限：0,人气:1，最新:2】
-	 */
+	/* 用户筛选推荐：【0-不限,1-人气，2-最新】 */
 	private int user_adv;
 
-	/**
-	 * 数据筛选上限：【必填】
-	 */
+	/* 数据筛选上限：【必填】 */
 	private int num1;
 
-	/**
-	 * 数据筛选长度：【必填】
-	 */
+	/* 数据筛选长度：【必填】 */
 	private int length;
 
-	public WHomeMainBean(HttpEnum.UserTag userTag, int num1, int length)
+	public WHomeMainBean(HttpEnum.UserTag tag, int num1, int length)
 	{
-		this.user_tag = userTag.getIndex();
-		this.user_sex = 0;
-		this.user_province = "不限";
-		this.user_city = new ArrayList<>();
-		this.user_adv = 0;
+		this.user_tag = tag.getIndex();
 		this.num1 = num1;
 		this.length = length;
 	}
@@ -74,24 +54,24 @@ public class WHomeMainBean
 		this.user_sex = user_sex;
 	}
 
-	public String getUser_province()
+	public String getP_code()
 	{
-		return user_province;
+		return p_code;
 	}
 
-	public void setUser_province(String user_province)
+	public void setP_code(String p_code)
 	{
-		this.user_province = user_province;
+		this.p_code = p_code;
 	}
 
-	public List<String> getUser_city()
+	public List<String> getC_code()
 	{
-		return user_city;
+		return c_code;
 	}
 
-	public void setUser_city(List<String> user_city)
+	public void setC_code(List<String> c_code)
 	{
-		this.user_city = user_city;
+		this.c_code = c_code;
 	}
 
 	public int getUser_adv()

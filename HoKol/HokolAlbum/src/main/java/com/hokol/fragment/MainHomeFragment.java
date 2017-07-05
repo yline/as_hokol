@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,16 @@ public class MainHomeFragment extends BaseFragment
 
 	private TabLayout tabLayout;
 
+	private String oldAreaFirst;
+
+	private List<String> oldSecondList;
+
+	private VAreaAllBean areaAllBean;
+	
+	private MainHomeHelper.FilterSex oldTypeSex;
+	
+	private MainHomeHelper.FilterRecommend oldTypeRecommend;
+
 	public static MainHomeFragment newInstance()
 	{
 		Bundle args = new Bundle();
@@ -47,7 +58,7 @@ public class MainHomeFragment extends BaseFragment
 	{
 		return inflater.inflate(R.layout.fragment_main_home, container, false);
 	}
-	
+
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
 	{
@@ -70,17 +81,31 @@ public class MainHomeFragment extends BaseFragment
 					{
 						if (fragmentList.get(i) instanceof OnHomeFilterCallback)
 						{
-							if (firstName.equals(SecondaryWidget.DefaultTitle))
+							// 省份过滤
+							if (SecondaryWidget.DefaultFirst.equals(firstName) || TextUtils.isEmpty(firstName))
 							{
-								firstName = "0";
+								((OnHomeFilterCallback) fragmentList.get(i)).onAreaUpdate(null, new ArrayList<String>());
 							}
-
-							if (secondList.contains(SecondaryWidget.DefaultTitle))
+							else
 							{
-								secondList = new ArrayList<>();
+								String firstCode = areaAllBean.getProvinceCode(firstName);
+								// 城市过滤
+								if (secondList.contains(SecondaryWidget.DefaultFirst))
+								{
+									((OnHomeFilterCallback) fragmentList.get(i)).onAreaUpdate(firstCode, new ArrayList<String>());
+								}
+								else
+								{
+									List<String> secondCodeList = new ArrayList<>();
+									String secondCode;
+									for (String secondName : secondList)
+									{
+										secondCode = areaAllBean.getCityCode(firstName, secondName);
+										secondCodeList.add(secondCode);
+									}
+									((OnHomeFilterCallback) fragmentList.get(i)).onAreaUpdate(firstCode, secondCodeList);
+								}
 							}
-
-							((OnHomeFilterCallback) fragmentList.get(i)).onAreaUpdate(firstName, secondList);
 						}
 					}
 				}
@@ -118,7 +143,7 @@ public class MainHomeFragment extends BaseFragment
 
 		initData();
 	}
-	
+
 	private void initView(View view)
 	{
 		fragmentList = new ArrayList<>();
@@ -173,17 +198,12 @@ public class MainHomeFragment extends BaseFragment
 			@Override
 			public void onSuccess(VAreaAllBean vAreaAllBean)
 			{
+				areaAllBean = vAreaAllBean;
 				Map<String, List<String>> provinceMap = vAreaAllBean.getWidgetMap();
 				mainHomeHelper.setProvinceData(provinceMap);
-
-				vAreaAllBean.getProvinceNameList();
 			}
 		});
 	}
-
-	private String oldAreaFirst;
-
-	private List<String> oldSecondList;
 
 	private boolean isAreaChanged(String first, List<String> second)
 	{
@@ -199,10 +219,6 @@ public class MainHomeFragment extends BaseFragment
 		oldSecondList = second;
 		return true;
 	}
-
-	private MainHomeHelper.FilterSex oldTypeSex;
-
-	private MainHomeHelper.FilterRecommend oldTypeRecommend;
 
 	private boolean isFilterChanged(MainHomeHelper.FilterSex typeSex, MainHomeHelper.FilterRecommend typeRecommend)
 	{
@@ -223,12 +239,10 @@ public class MainHomeFragment extends BaseFragment
 	public interface OnHomeFilterCallback
 	{
 		/**
-		 * 地区选择，更新
-		 *
-		 * @param first
-		 * @param second
+		 * @param firstCode      null if choose is no-limit; else return the code
+		 * @param secondCodeList return the code list, size is zero if choose is no limit
 		 */
-		void onAreaUpdate(String first, List<String> second);
+		void onAreaUpdate(String firstCode, List<String> secondCodeList);
 
 		/**
 		 * 筛选选择，更新

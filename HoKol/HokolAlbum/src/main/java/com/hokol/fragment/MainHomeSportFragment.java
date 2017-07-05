@@ -170,16 +170,16 @@ public class MainHomeSportFragment extends BaseFragment implements MainHomeFragm
 	}
 
 	@Override
-	public void onAreaUpdate(String first, List<String> second)
+	public void onAreaUpdate(String firstCode, List<String> secondCodeList)
 	{
-		LogFileUtil.v("onAreaUpdate first = " + first + ",second = " + second.toString());
+		LogFileUtil.v("onAreaUpdate first = " + firstCode + ",second = " + secondCodeList.toString());
 
 		refreshedNumber = 0;
 		wHomeMainBean.setNum1(refreshedNumber);
 		wHomeMainBean.setLength(DeleteConstant.defaultNumberLarge);
 
-		wHomeMainBean.setUser_province(first);
-		wHomeMainBean.setUser_city(second);
+		wHomeMainBean.setP_code(firstCode);
+		wHomeMainBean.setC_code(secondCodeList);
 
 		doRequest();
 	}
@@ -213,10 +213,7 @@ public class MainHomeSportFragment extends BaseFragment implements MainHomeFragm
 			super.onBindViewHolder(viewHolder, position);
 
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_home_sport);
-			Glide.with(getContext()).load(sList.get(position).getDt_img()).centerCrop()
-					.placeholder(R.drawable.global_load_failed)
-					.error(R.drawable.global_load_failed)
-					.into(imageView);
+			Glide.with(getContext()).load(sList.get(position).getDt_img()).centerCrop().placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).into(imageView);
 		}
 
 		@Override
