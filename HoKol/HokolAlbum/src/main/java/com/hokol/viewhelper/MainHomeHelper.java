@@ -24,11 +24,6 @@ public class MainHomeHelper
 {
 	private Context context;
 
-	public MainHomeHelper(Context context)
-	{
-		this.context = context;
-	}
-
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%% 下拉菜单 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 	private String headers[] = {"地区", "筛选"};
 
@@ -37,6 +32,11 @@ public class MainHomeHelper
 	private List<View> contentViewList = new ArrayList<>();
 
 	private SecondaryWidget secondaryWidget;
+
+	public MainHomeHelper(Context context)
+	{
+		this.context = context;
+	}
 
 	public void initSecondaryView(SecondaryWidget.OnConfirmListener listener)
 	{
@@ -57,7 +57,7 @@ public class MainHomeHelper
 				return R.layout.item_main_home__filter;
 			}
 		};
-		sexFlowAbleWidget.setDataList(Arrays.asList(All.content, Girl.content, Boy.content));
+		sexFlowAbleWidget.setDataList(Arrays.asList(All.content, Boy.content, Girl.content));
 		sexFlowAbleWidget.setMaxSelectCount(1);
 		sexFlowAbleWidget.setMinSelectCount(1);
 		sexFlowAbleWidget.addSelectedPosition(0);
@@ -110,11 +110,6 @@ public class MainHomeHelper
 	public void closeMenu()
 	{
 		dropMenuWidget.closeMenu();
-	}
-
-	public interface OnMenuFilterCallback
-	{
-		void onEnumFilterCommit(FilterSex typeSex, FilterRecommend typeRecommend);
 	}
 
 	public enum FilterSex
@@ -196,5 +191,10 @@ public class MainHomeHelper
 		{
 			return index;
 		}
+	}
+
+	public interface OnMenuFilterCallback
+	{
+		void onEnumFilterCommit(FilterSex typeSex, FilterRecommend typeRecommend);
 	}
 }
