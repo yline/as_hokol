@@ -53,11 +53,11 @@ public class VTaskMainDetailBean
 	/* 任务数量 */
 	private int task_peo_num;
 
-	/* 任务男生数量 */
-	private int task_man_num;
-
 	/* 任务女生数量 */
 	private int task_woman_num;
+
+	/* 任务男生数量 */
+	private int task_man_num;
 
 	/* 用户所在城市=>[石家庄市,130100] */
 	private List<String> city;

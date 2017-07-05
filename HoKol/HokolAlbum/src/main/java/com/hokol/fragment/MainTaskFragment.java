@@ -37,10 +37,10 @@ import com.yline.utils.UIScreenUtil;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class MainTaskFragment extends BaseFragment
+public class MainTaskFragment extends BaseFragment implements MainTaskHelper.OnTaskFilterCallback
 {
 	private MainTaskHelper mainTaskHelper;
 
@@ -74,7 +74,6 @@ public class MainTaskFragment extends BaseFragment
 
 		mainTaskHelper = new MainTaskHelper(getContext());
 		initView(view);
-
 		initData();
 	}
 
@@ -103,51 +102,7 @@ public class MainTaskFragment extends BaseFragment
 			}
 		});
 
-		mainTaskHelper.setOnTaskFilterCallback(new MainTaskHelper.OnTaskFilterCallback()
-		{
-			@Override
-			public void onFilterClassify(HttpEnum.UserTag userTag)
-			{
-				LogFileUtil.v("userTag = " + userTag);
-
-				taskRefreshNumber = 0;
-				taskMainAll.setNum1(0);
-				taskMainAll.setLength(DeleteConstant.defaultNumberNormal);
-
-				taskMainAll.setTask_tag(userTag.getIndex());
-
-				doRequest();
-			}
-
-			@Override
-			public void onFilterSex(HttpEnum.UserSex userSex)
-			{
-				LogFileUtil.v("userSex = " + userSex);
-
-				taskRefreshNumber = 0;
-				taskMainAll.setNum1(0);
-				taskMainAll.setLength(DeleteConstant.defaultNumberNormal);
-
-				taskMainAll.setTask_sex(userSex.getIndex());
-
-				doRequest();
-			}
-
-			@Override
-			public void onFilterArea(String first, List<String> second)
-			{
-				LogFileUtil.v("first = " + first + ", second = " + second.toString());
-
-				taskRefreshNumber = 0;
-				taskMainAll.setNum1(0);
-				taskMainAll.setLength(DeleteConstant.defaultNumberNormal);
-
-				taskMainAll.setTask_province(first);
-				taskMainAll.setTask_city(second);
-
-				doRequest();
-			}
-		});
+		mainTaskHelper.setOnTaskFilterCallback(this);
 
 		final String userId = AppStateManager.getInstance().getUserLoginId(getContext());
 
@@ -249,9 +204,7 @@ public class MainTaskFragment extends BaseFragment
 			@Override
 			public void onSuccess(VAreaAllBean vAreaAllBean)
 			{
-				Map provinceMap = vAreaAllBean.getWidgetMap();
-
-				mainTaskHelper.setAreaData(provinceMap);
+				mainTaskHelper.setAreaData(vAreaAllBean);
 			}
 		});
 
@@ -277,7 +230,55 @@ public class MainTaskFragment extends BaseFragment
 					taskRefreshNumber = result.size();
 					mainTaskHelper.setRecyclerData(result);
 				}
+				else
+				{
+					taskRefreshNumber = 0;
+					mainTaskHelper.setRecyclerData(new ArrayList<VTaskMainAllBean.TaskMainAllOne>());
+				}
 			}
 		});
+	}
+
+	@Override
+	public void onFilterClassify(HttpEnum.UserTag userTag)
+	{
+		LogFileUtil.v("userTag = " + userTag);
+
+		taskRefreshNumber = 0;
+		taskMainAll.setNum1(0);
+		taskMainAll.setLength(DeleteConstant.defaultNumberNormal);
+
+		taskMainAll.setTask_tag(userTag.getIndex());
+
+		doRequest();
+	}
+
+	@Override
+	public void onFilterSex(HttpEnum.UserSex userSex)
+	{
+		LogFileUtil.v("userSex = " + userSex);
+
+		taskRefreshNumber = 0;
+		taskMainAll.setNum1(0);
+		taskMainAll.setLength(DeleteConstant.defaultNumberNormal);
+
+		taskMainAll.setTask_sex(userSex.getIndex());
+
+		doRequest();
+	}
+
+	@Override
+	public void onFilterArea(String firstCode, List<String> secondCodeList)
+	{
+		LogFileUtil.v("first = " + firstCode + ", second = " + secondCodeList.toString());
+
+		taskRefreshNumber = 0;
+		taskMainAll.setNum1(0);
+		taskMainAll.setLength(DeleteConstant.defaultNumberNormal);
+
+		taskMainAll.setP_code(firstCode);
+		taskMainAll.setC_code(secondCodeList);
+
+		doRequest();
 	}
 }

@@ -17,6 +17,11 @@ import java.util.Arrays;
 
 public class TestHomeActivity extends BaseTestActivity
 {
+	public static void actionStart(Context context)
+	{
+		context.startActivity(new Intent(context, TestHomeActivity.class));
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -38,8 +43,8 @@ public class TestHomeActivity extends BaseTestActivity
 				final int length = parseInt(editTextThree, 1);
 
 				WHomeMainBean wHomeMainBean = new WHomeMainBean(userTag, num1, length);
-				wHomeMainBean.setUser_province("浙江省");
-				wHomeMainBean.setUser_city(Arrays.asList("杭州市"));
+				wHomeMainBean.setP_code("浙江省");
+				wHomeMainBean.setC_code(Arrays.asList("杭州市"));
 				XHttpUtil.doHomeMain(wHomeMainBean, new XHttpAdapter<VHomeMainBean>()
 				{
 					@Override
@@ -50,10 +55,5 @@ public class TestHomeActivity extends BaseTestActivity
 				});
 			}
 		});
-	}
-
-	public static void actionStart(Context context)
-	{
-		context.startActivity(new Intent(context, TestHomeActivity.class));
 	}
 }

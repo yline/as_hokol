@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -13,12 +14,14 @@ import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.bean.VAreaAllBean;
 import com.hokol.medium.http.bean.VTaskMainAllBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.DropMenuWidget;
 import com.hokol.medium.widget.FlowAbleWidget;
 import com.hokol.medium.widget.SecondaryWidget;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
+import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.view.layout.label.FlowLayout;
 import com.yline.view.layout.label.LabelFlowLayout;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
@@ -39,15 +42,24 @@ public class MainTaskHelper
 {
 	private Context sContext;
 
-	public MainTaskHelper(Context context)
-	{
-		this.sContext = context;
-	}
-
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 下拉菜单 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 	private String headers[] = {"分类", "男/女", "地区"};
 
 	private DropMenuWidget dropMenuWidget;
+
+	private SecondaryWidget secondaryWidget;
+
+	private OnTaskFilterCallback taskFilterCallback;
+
+	private VAreaAllBean areaAllBean;
+
+	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% RecyclerView %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+	private TaskRecycleAdapter taskRecycleAdapter;
+
+	public MainTaskHelper(Context context)
+	{
+		this.sContext = context;
+	}
 
 	public void initTabDownMenuView(TabLayout menuTabLayout)
 	{
@@ -84,7 +96,7 @@ public class MainTaskHelper
 		};
 		flowAbleWidget.setMaxSelectCount(1);
 		flowAbleWidget.setMinSelectCount(1);
-		flowAbleWidget.setDataList(HttpEnum.getUserTagListAll());
+		flowAbleWidget.setDataList(Arrays.asList(HttpEnum.UserTag.All.getContent(), HttpEnum.UserTag.Red.getContent(), HttpEnum.UserTag.Author.getContent(), HttpEnum.UserTag.Performer.getContent(), HttpEnum.UserTag.Model.getContent(), HttpEnum.UserTag.Singer.getContent(), HttpEnum.UserTag.Sport.getContent()));
 		flowAbleWidget.addSelectedPosition(0);
 
 		Button btnClassify = (Button) areaView.findViewById(R.id.btn_main_task_menu_classify);
@@ -93,19 +105,20 @@ public class MainTaskHelper
 			@Override
 			public void onClick(View v)
 			{
+				dropMenuWidget.closeMenu();
+
 				if (null != taskFilterCallback)
 				{
 					int position = flowAbleWidget.getSelectedFirst();
 					taskFilterCallback.onFilterClassify(HttpEnum.getUserTag(position));
 				}
-				dropMenuWidget.closeMenu();
 			}
 		});
 
 		return areaView;
 	}
 
-	// 男女
+	// 男、女 过滤
 	private View initSexView()
 	{
 		View sexView = LayoutInflater.from(sContext).inflate(R.layout.fragment_main_task__menu_sex, null);
@@ -123,26 +136,25 @@ public class MainTaskHelper
 		labelClickableWidget.setMinSelectCount(1);
 		labelClickableWidget.setDataList(HttpEnum.getUserSexListAll());
 		labelClickableWidget.addSelectedPosition(0);
-		
+
 		Button btnSex = (Button) sexView.findViewById(R.id.btn_main_task_menu_sex);
 		btnSex.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
+				dropMenuWidget.closeMenu();
+
 				if (null != taskFilterCallback)
 				{
 					int position = labelClickableWidget.getSelectedFirst();
 					taskFilterCallback.onFilterSex(HttpEnum.getUserSex(position));
 				}
-				dropMenuWidget.closeMenu();
 			}
 		});
 
 		return sexView;
 	}
-
-	private SecondaryWidget secondaryWidget;
 
 	// 地区
 	private void initAreaView(List<View> contentViewList)
@@ -153,36 +165,51 @@ public class MainTaskHelper
 			@Override
 			public void onConfirmClick(String firstName, List<String> secondList, String titleName)
 			{
-				if (null != taskFilterCallback)
-				{
-					taskFilterCallback.onFilterArea(firstName, secondList);
-				}
-
 				dropMenuWidget.updateTitle(2, titleName);
 				dropMenuWidget.closeMenu();
+
+				if (null != taskFilterCallback)
+				{
+					// 省份过滤
+					if (SecondaryWidget.DefaultFirst.equals(firstName) || TextUtils.isEmpty(firstName))
+					{
+						taskFilterCallback.onFilterArea(null, new ArrayList<String>());
+					}
+					else
+					{
+						String firstCode = areaAllBean.getProvinceCode(firstName);
+						// 城市过滤
+						if (secondList.contains(SecondaryWidget.DefaultFirst))
+						{
+							taskFilterCallback.onFilterArea(firstCode, new ArrayList<String>());
+						}
+						else
+						{
+							List<String> secondCodeList = new ArrayList<>();
+							String secondCode;
+							for (String secondName : secondList)
+							{
+								secondCode = areaAllBean.getCityCode(firstName, secondName);
+								secondCodeList.add(secondCode);
+							}
+							taskFilterCallback.onFilterArea(firstCode, secondCodeList);
+						}
+					}
+				}
 			}
 		});
 	}
 
-	public void setAreaData(Map<String, List<String>> map)
+	public void setAreaData(VAreaAllBean vAreaAllBean)
 	{
-		secondaryWidget.setData(map);
+		this.areaAllBean = vAreaAllBean;
+		Map provinceMap = vAreaAllBean.getWidgetMap();
+		secondaryWidget.setData(provinceMap);
 	}
-
-	private OnTaskFilterCallback taskFilterCallback;
 
 	public void setOnTaskFilterCallback(OnTaskFilterCallback taskFilterCallback)
 	{
 		this.taskFilterCallback = taskFilterCallback;
-	}
-
-	public interface OnTaskFilterCallback
-	{
-		void onFilterClassify(HttpEnum.UserTag userTag);
-
-		void onFilterSex(HttpEnum.UserSex userSex);
-
-		void onFilterArea(String first, List<String> second);
 	}
 
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Refresh %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
@@ -224,14 +251,11 @@ public class MainTaskHelper
 		});
 	}
 
-	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% RecyclerView %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-	private TaskRecycleAdapter taskRecycleAdapter;
-
 	public void initRecycleView(RecyclerView recycleView)
 	{
 		recycleView.setLayoutManager(new LinearLayoutManager(sContext));
 		taskRecycleAdapter = new TaskRecycleAdapter();
-		
+
 		recycleView.setAdapter(taskRecycleAdapter);
 	}
 
@@ -250,6 +274,25 @@ public class MainTaskHelper
 		taskRecycleAdapter.setShowEmpty(isShowEmpty);
 	}
 
+	public interface OnTaskFilterCallback
+	{
+		/**
+		 * @param userTag 分类(网红等)
+		 */
+		void onFilterClassify(HttpEnum.UserTag userTag);
+
+		/**
+		 * @param userSex 用户性别
+		 */
+		void onFilterSex(HttpEnum.UserSex userSex);
+
+		/**
+		 * @param firstCode      null if choose is no-limit; else return the code
+		 * @param secondCodeList return the code list, size is zero if choose is no limit
+		 */
+		void onFilterArea(String firstCode, List<String> secondCodeList);
+	}
+
 	private class TaskRecycleAdapter extends WidgetRecyclerAdapter<VTaskMainAllBean.TaskMainAllOne>
 	{
 		@Override
@@ -263,24 +306,36 @@ public class MainTaskHelper
 		{
 			super.onBindViewHolder(viewHolder, position);
 
+			VTaskMainAllBean.TaskMainAllOne taskBean = sList.get(position);
+
 			// 价格 + 人数
-			viewHolder.setText(R.id.tv_item_main_task_price, String.format("￥%d × %d", sList.get(position).getTask_fee(), sList.get(position).getEmployee_num()));
+			viewHolder.setText(R.id.tv_item_main_task_price, String.format("￥%d × %d", taskBean.getTask_fee(), taskBean.getEmployee_num()));
 
 			// 标题
-			viewHolder.setText(R.id.tv_item_main_task_title, sList.get(position).getTask_title());
+			viewHolder.setText(R.id.tv_item_main_task_title, taskBean.getTask_title());
 
 			// 头像
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_task_avatar);
-			Glide.with(sContext).load(sList.get(position).getUser_logo()).error(R.drawable.global_load_failed).into(imageView);
+			Glide.with(sContext).load(taskBean.getUser_logo()).error(R.drawable.global_load_failed).into(imageView);
 
 			// 用户名
-			viewHolder.setText(R.id.tv_item_main_task_user, sList.get(position).getUser_nickname());
+			viewHolder.setText(R.id.tv_item_main_task_user, taskBean.getUser_nickname());
 
 			// 报名人数
-			viewHolder.setText(R.id.tv_item_main_task_sign_ups, String.format("%d人报名", sList.get(position).getEmployee_num()));
+			viewHolder.setText(R.id.tv_item_main_task_sign_ups, String.format("%d人报名", taskBean.getEmployee_num()));
 
 			// 截至时间
-			viewHolder.setText(R.id.tv_item_main_task_time, sList.get(position).getTask_rem_time() + "");
+			long restTime = taskBean.getTask_rem_time();
+			if (restTime > 0)
+			{
+				long deadLineTime = System.currentTimeMillis() + restTime * 1000;
+				String deadLineTimeStr = HokolTimeConvertUtil.stampToRestFormatTime(deadLineTime);
+				viewHolder.setText(R.id.tv_item_main_task_time, "剩余" + deadLineTimeStr);
+			}
+			else
+			{
+				viewHolder.setText(R.id.tv_item_main_task_time, "任务已截止");
+			}
 		}
 
 		@Override

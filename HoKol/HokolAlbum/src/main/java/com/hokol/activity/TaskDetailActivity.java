@@ -14,6 +14,7 @@ import com.hokol.medium.http.bean.WTaskActionStaffSignUpBean;
 import com.hokol.medium.http.bean.WTaskMainCollectionBean;
 import com.hokol.medium.http.bean.WTaskMainDetailBean;
 import com.hokol.medium.widget.FlowWidget;
+import com.hokol.medium.widget.SecondaryWidget;
 import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
@@ -126,7 +127,7 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 		else
 		{
 			String userId = AppStateManager.getInstance().getUserLoginId(this);
-			if (TextUtils.isEmpty(WTaskMainDetailBean.UnLoginState))
+			if (TextUtils.isEmpty(userId))
 			{
 				userId = WTaskMainDetailBean.UnLoginState;
 			}
@@ -175,8 +176,21 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 					viewHolder.setText(R.id.iv_task_detail_publish_time, HokolTimeConvertUtil.stampToFormatDate(vTaskMainDetailBean.getTask_pub_time() * 1000));
 
 					// 地区
-					viewHolder.setText(R.id.iv_task_detail_area, String.format("%s %s", vTaskMainDetailBean.getProvince().get(0), vTaskMainDetailBean.getCity().get(0)));
-
+					String provinceName = vTaskMainDetailBean.getProvince().get(0);
+					String cityName = vTaskMainDetailBean.getCity().get(0);
+					if (TextUtils.isEmpty(provinceName) || SecondaryWidget.DefaultFirst.equals(provinceName))
+					{
+						viewHolder.setText(R.id.iv_task_detail_area, "不限");
+					}
+					else if (TextUtils.isEmpty(cityName) || SecondaryWidget.DefaultFirst.equals(cityName))
+					{
+						viewHolder.setText(R.id.iv_task_detail_area, provinceName);
+					}
+					else
+					{
+						viewHolder.setText(R.id.iv_task_detail_area, String.format("%s %s", provinceName, cityName));
+					}
+					
 					// 属性
 					FlowWidget flowWidget = new FlowWidget(TaskDetailActivity.this, R.id.lable_flow_task_detail)
 					{

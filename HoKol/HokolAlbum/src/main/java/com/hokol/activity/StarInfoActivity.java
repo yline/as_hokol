@@ -170,6 +170,7 @@ public class StarInfoActivity extends BaseAppCompatActivity
 
 		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout_start_info);
 		ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager_start_info);
+		viewPager.setOffscreenPageLimit(3);
 
 		viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager())
 		{

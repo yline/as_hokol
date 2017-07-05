@@ -7,11 +7,11 @@ public class WTaskMainAllBean
 	/* 任务类型：【0:不限,1:网红,2:主播,3:演员,4:模特,5:歌手,6:体育】 */
 	private int task_tag = 0;
 
-	/* 任务所在省份：【例：浙江省，不限】 */
-	private String task_province;
+	/* 用户省份编码 */
+	private String p_code;
 
-	/* 任务所在城市:【例：杭州市】 */
-	private List<String> task_city;
+	/* 用户城市编码(数组) */
+	private List<String> c_code;
 
 	/* 获取任务数量(上限)： */
 	private int num1;
@@ -27,17 +27,7 @@ public class WTaskMainAllBean
 		this.num1 = num1;
 		this.length = length;
 	}
-
-	public WTaskMainAllBean(int task_tag, String task_province, List<String> task_city, int num1, int length, int task_sex)
-	{
-		this.task_tag = task_tag;
-		this.task_province = task_province;
-		this.task_city = task_city;
-		this.num1 = num1;
-		this.length = length;
-		this.task_sex = task_sex;
-	}
-
+	
 	public int getTask_tag()
 	{
 		return task_tag;
@@ -48,24 +38,24 @@ public class WTaskMainAllBean
 		this.task_tag = task_tag;
 	}
 
-	public String getTask_province()
+	public String getP_code()
 	{
-		return task_province;
+		return p_code;
 	}
 
-	public void setTask_province(String task_province)
+	public void setP_code(String p_code)
 	{
-		this.task_province = task_province;
+		this.p_code = p_code;
 	}
 
-	public List<String> getTask_city()
+	public List<String> getC_code()
 	{
-		return task_city;
+		return c_code;
 	}
 
-	public void setTask_city(List<String> task_city)
+	public void setC_code(List<String> c_code)
 	{
-		this.task_city = task_city;
+		this.c_code = c_code;
 	}
 
 	public int getNum1()
