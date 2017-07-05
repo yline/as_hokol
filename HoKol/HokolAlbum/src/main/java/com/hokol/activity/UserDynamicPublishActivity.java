@@ -12,7 +12,6 @@ import com.hokol.R;
 import com.hokol.application.AppStateManager;
 import com.hokol.fragment.MainMineFragment;
 import com.hokol.medium.http.XHttpUtil;
-import com.hokol.medium.http.bean.VUserAvatarBean;
 import com.hokol.medium.widget.DialogIosWidget;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
@@ -103,10 +102,10 @@ public class UserDynamicPublishActivity extends BaseAppCompatActivity
 
 					if (zoomCode == MainMineFragment.KeyDynamicPictureZoomCode)
 					{
-						XHttpUtil.doDynamicPublish(userId, content, zoomFile, new XHttpAdapter<VUserAvatarBean>()
+						XHttpUtil.doDynamicPublish(userId, content, zoomFile, new XHttpAdapter<String>()
 						{
 							@Override
-							public void onSuccess(VUserAvatarBean vUserAvatarBean)
+							public void onSuccess(String str)
 							{
 								finish();
 							}

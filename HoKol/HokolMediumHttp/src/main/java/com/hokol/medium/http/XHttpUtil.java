@@ -370,13 +370,13 @@ public class XHttpUtil
 	 * @param file    图片的文件
 	 * @param adapter
 	 */
-	public static void doDynamicPublish(final String userId, final String content, final File file, XHttpAdapter<VUserAvatarBean> adapter)
+	public static void doDynamicPublish(final String userId, final String content, final File file, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_publish;
 
 		if (null != file || !file.exists())
 		{
-			new XUploadFileHttp<VUserAvatarBean>(adapter)
+			new XUploadFileHttp<String>(adapter)
 			{
 				@Override
 				protected void initRequestForm(MultipartBody.Builder bodyBuilder)
@@ -395,7 +395,7 @@ public class XHttpUtil
 				{
 					return false;
 				}
-			}.doPost(httpUrl, VUserAvatarBean.class);
+			}.doPost(httpUrl, String.class);
 		}
 		else
 		{

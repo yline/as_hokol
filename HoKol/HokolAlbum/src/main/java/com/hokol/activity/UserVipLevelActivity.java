@@ -28,7 +28,7 @@ public class UserVipLevelActivity extends BaseAppCompatActivity
 		initView();
 		initData();
 	}
-
+	
 	private void initView()
 	{
 		viewHolder.setOnClickListener(R.id.iv_user_vip_level_cancel, new View.OnClickListener()

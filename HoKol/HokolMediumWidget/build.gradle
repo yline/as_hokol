@@ -22,7 +22,7 @@ android {
 
 dependencies {
     compile project(':HokolBase')
-    compile 'com.yline.lib:LibViewDialog:1.0.2'
+    compile 'com.yline.lib:LibViewDialog:1.0.3'
     compile 'com.yline.lib:LibViewLayout:1.0.1'
     compile 'com.yline.lib:LibViewRecycler:1.0.1'
     compile 'com.yline.lib:LibViewText:1.0.0'
