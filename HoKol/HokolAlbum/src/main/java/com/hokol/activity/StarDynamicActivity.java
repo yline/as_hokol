@@ -11,13 +11,13 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.application.AppStateManager;
-import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VDynamicCareSingleBean;
 import com.hokol.medium.http.bean.VDynamicPraiseSingleBean;
 import com.hokol.medium.http.bean.WDynamicCareSingleBean;
 import com.hokol.medium.http.bean.WDynamicPraiseSingleBean;
 import com.hokol.medium.http.bean.WUserCareOrCancelBean;
+import com.hokol.medium.http.bean.WUserCoinGiftBean;
 import com.hokol.medium.widget.HokolGiftWidget;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
@@ -52,6 +52,16 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 
 	private boolean isPraised;
 
+	// 用户 coin数目
+	private int userCoin;
+
+	public static void actionStart(Context context, String dynamicId)
+	{
+		Intent intent = new Intent(context, StarDynamicActivity.class);
+		intent.putExtra(KeyDynamicId, dynamicId);
+		context.startActivity(intent);
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -72,6 +82,7 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 		int width = UIScreenUtil.getScreenWidth(this);
 		UIResizeUtil.build().setHeight(width).commit(contentImageView);
 
+		// 初始化弹框控件
 		giftWidget = new HokolGiftWidget(this);
 		giftWidget.setDataList(Arrays.asList(1, 10, 66, 128, 288, 520, 666, 999, 1314, 6666, 9999, 10888));
 	}
@@ -135,9 +146,12 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				IApplication.toast("点击送礼物");
-
-				giftWidget.showAtLocation(viewHolder.get(R.id.iv_star_dynamic_content), Gravity.BOTTOM, 0, 0);
+				if (!giftWidget.isShowing())
+				{
+					userCoin = AppStateManager.getInstance().getUserCoinNum(StarDynamicActivity.this);
+					giftWidget.setPopupWindowBeanNum(userCoin); // 更新用户 红豆数目
+					giftWidget.showAtLocation(viewHolder.get(R.id.iv_star_dynamic_content), Gravity.BOTTOM, 0, 0);
+				}
 			}
 		});
 
@@ -153,20 +167,53 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 			}
 		});
 
+		// 充值
 		giftWidget.setOnRechargeClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				SDKManager.toast("充值");
+				String userId = AppStateManager.getInstance().getUserLoginId(StarDynamicActivity.this);
+				UserRechargeActivity.actionStart(StarDynamicActivity.this, userId);
 			}
 		});
-		giftWidget.setOnSendClickListener(new HokolGiftWidget.OnSendClickListener()
+		// 发送礼物
+		giftWidget.setOnSendClickListener(new HokolGiftWidget.OnSendClickListener<Integer>()
 		{
 			@Override
-			public void onSendClick(View v, int position)
+			public void onSendClick(View v, Integer integer, int position)
 			{
-				SDKManager.toast("发送 position = " + position);
+				if (integer > userCoin)
+				{
+					SDKManager.toast("您余额不足，请先充值");
+				}
+				else
+				{
+					userCoinGift(integer);
+				}
+			}
+		});
+	}
+
+	private void userCoinGift(final int giftCoinNum)
+	{
+		String userId = AppStateManager.getInstance().getUserLoginId(this);
+		if (TextUtils.isEmpty(userId) || TextUtils.isEmpty(starId) || TextUtils.isEmpty(dynamicId))
+		{
+			LogFileUtil.v("user = " + userId + ", star = " + starId + ", dynamic = " + dynamicId);
+			return;
+		}
+
+		XHttpUtil.doUserCoinGift(new WUserCoinGiftBean(userId, starId, dynamicId, giftCoinNum, false), new XHttpAdapter<String>()
+		{
+			@Override
+			public void onSuccess(String s)
+			{
+				LogFileUtil.v("发送礼物成功");
+				SDKManager.toast("礼物赠送成功");
+
+				int restCoinNum = userCoin - giftCoinNum;
+				AppStateManager.getInstance().updateKeyUserCoinNum(StarDynamicActivity.this, restCoinNum);
 			}
 		});
 	}
@@ -221,7 +268,7 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 					{
 						viewHolder.get(R.id.iv_star_dynamic_care).setVisibility(View.VISIBLE);
 					}
-					
+
 					// 是否点赞
 					isPraised = vDynamicCareSingleBean.getIs_zan() == VDynamicCareSingleBean.Praised ? true : false;
 					if (isPraised)
@@ -239,12 +286,5 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 		{
 			LogFileUtil.e("Procedure Error", "Dynamic is Empty");
 		}
-	}
-
-	public static void actionStart(Context context, String dynamicId)
-	{
-		Intent intent = new Intent(context, StarDynamicActivity.class);
-		intent.putExtra(KeyDynamicId, dynamicId);
-		context.startActivity(intent);
 	}
 }

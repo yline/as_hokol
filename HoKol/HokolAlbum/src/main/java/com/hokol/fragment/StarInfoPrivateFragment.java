@@ -85,7 +85,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 			@Override
 			protected int getDivideResourceId()
 			{
-				return R.drawable.widget_solid_white_size_little;
+				return R.drawable.widget_solid_null_size_little;
 			}
 		});
 		starInfoPrivateAdapter = new StarInfoPrivateAdapter();
@@ -243,7 +243,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 
 			ImageView imageView = viewHolder.get(R.id.iv_item_star_info_dynamic);
 			UIResizeUtil.build().setWidth(border_square).setHeight(border_square).commit(imageView);
-			Glide.with(getContext()).load(dynamicPrivateBean.getPri_img()).into(imageView);
+			Glide.with(getContext()).load(dynamicPrivateBean.getPri_img()).error(R.drawable.global_load_failed).into(imageView);
 		}
 	}
 }

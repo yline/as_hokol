@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
@@ -52,7 +53,8 @@ public class HokolGiftWidget
 			{
 				if (null != onSendClickListener && -1 != giftAdapter.getOldPosition())
 				{
-					onSendClickListener.onSendClick(v, giftAdapter.getOldPosition());
+					int position = giftAdapter.getOldPosition();
+					onSendClickListener.onSendClick(v, giftAdapter.getItem(position), position);
 					popupWindow.dismiss();
 				}
 			}
@@ -123,6 +125,40 @@ public class HokolGiftWidget
 		giftAdapter.initSelect();
 	}
 
+	public boolean isShowing()
+	{
+		if (null != popupWindow)
+		{
+			return popupWindow.isShowing();
+		}
+		return false;
+	}
+
+	public void setPopupWindowBeanNum(int num)
+	{
+		if (null != popupWindow)
+		{
+			TextView textView = (TextView) popupWindow.getContentView().findViewById(R.id.tv_widget_hokol_gift_num);
+			textView.setText(num + "");
+		}
+	}
+
+	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 重写 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+	protected int getResourceId()
+	{
+		return R.layout.widget_hokol_gift;
+	}
+
+	protected int getItemResourceId()
+	{
+		return R.layout.widget_item_hokol_gift;
+	}
+
+	public interface OnSendClickListener<T>
+	{
+		void onSendClick(View v, T t, int position);
+	}
+
 	private class GiftAdapter extends CommonRecyclerAdapter<Integer>
 	{
 		private boolean[] isSelected;
@@ -176,7 +212,7 @@ public class HokolGiftWidget
 						isSelected[oldPosition] = false;
 						notifyItemChanged(oldPosition);
 					}
-					
+
 					oldPosition = position;
 					if (-1 != oldPosition)
 					{
@@ -185,21 +221,5 @@ public class HokolGiftWidget
 				}
 			});
 		}
-	}
-
-	public interface OnSendClickListener
-	{
-		void onSendClick(View v, int position);
-	}
-
-	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 重写 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-	protected int getResourceId()
-	{
-		return R.layout.widget_hokol_gift;
-	}
-
-	protected int getItemResourceId()
-	{
-		return R.layout.widget_item_hokol_gift;
 	}
 }

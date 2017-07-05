@@ -20,6 +20,7 @@ import com.hokol.fragment.StarInfoPrivateFragment;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VDynamicUserDetailBean;
 import com.hokol.medium.http.bean.WDynamicUserDetailBean;
+import com.hokol.medium.http.bean.WUserCoinGiftBean;
 import com.hokol.medium.widget.HokolGiftWidget;
 import com.hokol.viewhelper.StarInfoHelper;
 import com.yline.application.SDKManager;
@@ -53,6 +54,10 @@ public class StarInfoActivity extends BaseAppCompatActivity
 
 	private String starId;
 
+	private int userCoinNum;
+
+	private String userId;
+
 	public static void actionStart(Context context, String starId)
 	{
 		context.startActivity(new Intent(context, StarInfoActivity.class).putExtra(KeyStarId, starId));
@@ -77,12 +82,19 @@ public class StarInfoActivity extends BaseAppCompatActivity
 	{
 		hokolGiftWidget = new HokolGiftWidget(this);
 		hokolGiftWidget.setDataList(Arrays.asList(1, 10, 66, 128, 288, 520, 666, 999, 1314, 6666, 9999, 10888));
-		hokolGiftWidget.setOnSendClickListener(new HokolGiftWidget.OnSendClickListener()
+		hokolGiftWidget.setOnSendClickListener(new HokolGiftWidget.OnSendClickListener<Integer>()
 		{
 			@Override
-			public void onSendClick(View v, int position)
+			public void onSendClick(View v, Integer integer, int position)
 			{
-				SDKManager.toast("发送");
+				if (integer > userCoinNum)
+				{
+					SDKManager.toast("您余额不足，请先充值");
+				}
+				else
+				{
+					userCoinGift(integer);
+				}
 			}
 		});
 		hokolGiftWidget.setOnRechargeClickListener(new View.OnClickListener()
@@ -90,7 +102,7 @@ public class StarInfoActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				SDKManager.toast("充值");
+				UserRechargeActivity.actionStart(StarInfoActivity.this, userId);
 			}
 		});
 
@@ -112,9 +124,8 @@ public class StarInfoActivity extends BaseAppCompatActivity
 			@Override
 			public void onGiveGift()
 			{
+				hokolGiftWidget.setPopupWindowBeanNum(userCoinNum);
 				hokolGiftWidget.showAtLocation(viewHolder.get(R.id.tab_layout_start_info), Gravity.BOTTOM, 0, 0);
-
-				IApplication.toast("点击送红豆");
 			}
 		});
 
@@ -187,7 +198,8 @@ public class StarInfoActivity extends BaseAppCompatActivity
 
 	private void initData()
 	{
-		String userId = AppStateManager.getInstance().getUserLoginId(this);
+		userCoinNum = AppStateManager.getInstance().getUserCoinNum(this);
+		userId = AppStateManager.getInstance().getUserLoginId(this);
 
 		XHttpUtil.doDynamicUserDetail(new WDynamicUserDetailBean(userId, starId), new XHttpAdapter<VDynamicUserDetailBean>()
 		{
@@ -223,6 +235,28 @@ public class StarInfoActivity extends BaseAppCompatActivity
 						}
 					}, 2000);
 				}
+			}
+		});
+	}
+
+	private void userCoinGift(final int giftCoinNum)
+	{
+		if (TextUtils.isEmpty(userId) || TextUtils.isEmpty(starId))
+		{
+			LogFileUtil.v("user = " + userId + ", star = " + starId);
+			return;
+		}
+
+		XHttpUtil.doUserCoinGift(new WUserCoinGiftBean(userId, starId, giftCoinNum), new XHttpAdapter<String>()
+		{
+			@Override
+			public void onSuccess(String s)
+			{
+				LogFileUtil.v("发送礼物成功");
+				SDKManager.toast("礼物赠送成功");
+				
+				userCoinNum = userCoinNum - giftCoinNum;
+				AppStateManager.getInstance().updateKeyUserCoinNum(StarInfoActivity.this, userCoinNum);
 			}
 		});
 	}

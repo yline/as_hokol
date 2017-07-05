@@ -51,6 +51,7 @@
             android:src="@drawable/widget_drawable_global_ormosia_red"/>
 
         <TextView
+            android:id="@+id/tv_widget_hokol_gift_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

@@ -70,6 +70,9 @@ public class AppStateManager
 
 	/* 等级图标链接 */private static final String KeyUserVipUrl = "UserVipUrl";
 
+	/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 储存非 用户的数据 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */
+	private boolean isFirstFlash = true;
+
 	private AppStateManager()
 	{
 	}
@@ -77,11 +80,6 @@ public class AppStateManager
 	public static AppStateManager getInstance()
 	{
 		return AppStateManagerHolder.appStateManager;
-	}
-
-	private static class AppStateManagerHolder
-	{
-		private static AppStateManager appStateManager = new AppStateManager();
 	}
 
 	public void setLoginUserInfo(Context context, VEnterLoginPhonePwdBean loginPhonePwdBean)
@@ -156,10 +154,20 @@ public class AppStateManager
 		}
 	}
 
-	// 更新 用户头像
+	/**
+	 * 更新 用户头像
+	 */
 	public void updateKeyUserLoginAvatar(Context context, String avatarUrl)
 	{
 		SPUtil.put(context, KeyUserLoginAvatar, avatarUrl, FileName);
+	}
+
+	/**
+	 * 更新用户的coin数目
+	 */
+	public void updateKeyUserCoinNum(Context context, int coinNum)
+	{
+		SPUtil.put(context, KeyUserCoinNum, coinNum, FileName);
 	}
 
 	public boolean isUserLogin(Context context)
@@ -389,32 +397,29 @@ public class AppStateManager
 	{
 		String[] appState = new String[20];
 
-		appState[0] = String.valueOf(isUserLogin(context));
-		appState[1] = getUserLoginId(context);
-		appState[2] = getUserLoginAvatar(context);
-		appState[3] = getUserLoginSex(context);
-		appState[4] = getUserLoginNickName(context);
-		appState[5] = getUserLoginLabelString(context);
-		appState[6] = getUserProvinceName(context);
-		appState[7] = getUserProvinceCode(context);
-		appState[8] = getUserCityName(context);
-		appState[9] = getUserCityCode(context);
-		appState[10] = getUserSign(context);
-		appState[11] = getUserPrice(context);
-		appState[12] = getUserConstell(context);
+		appState[0] = "0-" + String.valueOf(isUserLogin(context));
+		appState[1] = "1-" + getUserLoginId(context);
+		appState[2] = "2-" + getUserLoginAvatar(context);
+		appState[3] = "3-" + getUserLoginSex(context);
+		appState[4] = "4-" + getUserLoginNickName(context);
+		appState[5] = "5-" + getUserLoginLabelString(context);
+		appState[6] = "6-" + getUserProvinceName(context);
+		appState[7] = "7-" + getUserProvinceCode(context);
+		appState[8] = "8-" + getUserCityName(context);
+		appState[9] = "9-" + getUserCityCode(context);
+		appState[10] = "10-" + getUserSign(context);
+		appState[11] = "11-" + getUserPrice(context);
+		appState[12] = "12-" + getUserConstell(context);
 		// 分割线
-		appState[13] = getUserFansNum(context) + "";
-		appState[14] = getUserCareNum(context) + "";
-		appState[15] = getUserPraiseNum(context) + "";
-		appState[16] = getUserCoinNum(context) + "";
-		appState[17] = getUserVipLevel(context) + "";
-		appState[18] = getUserVipUrl(context);
+		appState[13] = "13-" + getUserFansNum(context) + "";
+		appState[14] = "14-" + getUserCareNum(context) + "";
+		appState[15] = "15-" + getUserPraiseNum(context) + "";
+		appState[16] = "16-" + getUserCoinNum(context) + "";
+		appState[17] = "17-" + getUserVipLevel(context) + "";
+		appState[18] = "18-" + getUserVipUrl(context);
 
 		LogFileUtil.v("appState =》 " + Arrays.toString(appState));
 	}
-
-	/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 储存非 用户的数据 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */
-	private boolean isFirstFlash = true;
 
 	public boolean isFirstFlash()
 	{
@@ -424,5 +429,10 @@ public class AppStateManager
 	public void setFirstFlash(boolean firstFlash)
 	{
 		isFirstFlash = firstFlash;
+	}
+
+	private static class AppStateManagerHolder
+	{
+		private static AppStateManager appStateManager = new AppStateManager();
 	}
 }
