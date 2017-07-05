@@ -295,6 +295,12 @@ public class MainMineDynamicFragment extends BaseFragment
 			// super.onBindViewHolder(viewHolder, position);
 			VDynamicUserAllBean.VDynamicUserAllOneBean dynamicBean = sList.get(position);
 
+			// 图片内容
+			ImageView contentImageView = viewHolder.get(R.id.iv_item_main_mine_dynamic_content);
+			int width = UIScreenUtil.getScreenWidth(getContext()) - UIScreenUtil.dp2px(getContext(), 10 + 10) * 7 / 8;
+			UIResizeUtil.build().setWidth(width).setHeight(width).commit(contentImageView);
+			Glide.with(MainMineDynamicFragment.this).load(dynamicBean.getDt_img()).error(R.drawable.global_load_failed).into(contentImageView);
+
 			// 头像
 			ImageView avatarImageView = viewHolder.get(R.id.circle_item_main_mine_dynamic_avatar);
 			Glide.with(getContext()).load(dynamicBean.getUser_logo()).error(R.drawable.global_load_failed).into(avatarImageView);
@@ -311,12 +317,6 @@ public class MainMineDynamicFragment extends BaseFragment
 			{
 				viewHolder.setText(R.id.tv_item_main_mine_dynamic_location, dynamicBean.getCity().get(0));
 			}
-
-			// 图片内容
-			ImageView contentImageView = viewHolder.get(R.id.iv_item_main_mine_dynamic_content);
-			int width = UIScreenUtil.getScreenWidth(getContext()) - UIScreenUtil.dp2px(getContext(), 10 + 10) * 7 / 8;
-			UIResizeUtil.build().setWidth(width).setHeight(width).commit(contentImageView);
-			Glide.with(getContext()).load(dynamicBean.getDt_small_img()).error(R.drawable.global_load_failed).into(contentImageView);
 
 			// 动态文字
 			viewHolder.setText(R.id.tv_item_main_mine_dynamic_scrap, dynamicBean.getDt_content());

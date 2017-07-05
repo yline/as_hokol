@@ -176,7 +176,7 @@ public class StarInfoDynamicFragment extends BaseFragment
 
 			ImageView imageView = holder.get(R.id.iv_item_star_info_dynamic);
 			UIResizeUtil.build().setHeight(border_square).setWidth(border_square).commit(imageView);
-			Glide.with(getContext()).load(dynamicBean.getDt_small_img()).into(imageView);
+			Glide.with(getContext()).load(dynamicBean.getDt_img()).into(imageView);
 		}
 	}
 }

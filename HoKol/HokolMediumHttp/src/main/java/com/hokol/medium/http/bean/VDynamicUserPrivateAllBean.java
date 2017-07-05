@@ -22,7 +22,7 @@ public class VDynamicUserPrivateAllBean
 		private String pri_id;
 
 		/* 动态小图(链接) */
-		private String pri_small_img;
+		private String pri_img;
 
 		/* 动态点赞数 */
 		private int pri_total_zan;
@@ -64,14 +64,14 @@ public class VDynamicUserPrivateAllBean
 			this.pri_id = pri_id;
 		}
 
-		public String getPri_small_img()
+		public String getPri_img()
 		{
-			return pri_small_img;
+			return pri_img;
 		}
 
-		public void setPri_small_img(String pri_small_img)
+		public void setPri_img(String pri_img)
 		{
-			this.pri_small_img = pri_small_img;
+			this.pri_img = pri_img;
 		}
 
 		public int getPri_total_zan()

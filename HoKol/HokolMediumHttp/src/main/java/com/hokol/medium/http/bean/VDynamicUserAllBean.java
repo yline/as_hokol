@@ -22,7 +22,7 @@ public class VDynamicUserAllBean
 		private String dt_id;
 
 		/* 动态小图(链接) */
-		private String dt_small_img;
+		private String dt_img;
 
 		/* 动态点赞数 */
 		private int dt_total_zan;
@@ -64,14 +64,14 @@ public class VDynamicUserAllBean
 			this.dt_id = dt_id;
 		}
 
-		public String getDt_small_img()
+		public String getDt_img()
 		{
-			return dt_small_img;
+			return dt_img;
 		}
 
-		public void setDt_small_img(String dt_small_img)
+		public void setDt_img(String dt_img)
 		{
-			this.dt_small_img = dt_small_img;
+			this.dt_img = dt_img;
 		}
 
 		public int getDt_total_zan()

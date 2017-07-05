@@ -21,7 +21,6 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VDynamicUserPrivateAllBean;
-import com.hokol.medium.http.bean.VHomeMainBean;
 import com.hokol.medium.http.bean.WDynamicUserPrivateAllBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.DialogIosWidget;
@@ -98,12 +97,12 @@ public class StarInfoPrivateFragment extends BaseFragment
 		headView.setBackgroundResource(R.color.hokolGrayLittle);
 		starInfoPrivateAdapter.addHeadView(headView);
 
-		starInfoPrivateAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VHomeMainBean.VHomeMainOneBean>()
+		starInfoPrivateAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean>()
 		{
 			@Override
-			public void onItemClick(RecyclerViewHolder viewHolder, VHomeMainBean.VHomeMainOneBean bean, int position)
+			public void onItemClick(RecyclerViewHolder viewHolder, VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean bean, int position)
 			{
-				StarDynamicActivity.actionStart(getContext(), bean.getDt_id());
+				StarDynamicActivity.actionStart(getContext(), bean.getPri_id());
 			}
 		});
 
@@ -244,7 +243,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 
 			ImageView imageView = viewHolder.get(R.id.iv_item_star_info_dynamic);
 			UIResizeUtil.build().setWidth(border_square).setHeight(border_square).commit(imageView);
-			Glide.with(getContext()).load(dynamicPrivateBean.getPri_small_img()).into(imageView);
+			Glide.with(getContext()).load(dynamicPrivateBean.getPri_img()).into(imageView);
 		}
 	}
 }
