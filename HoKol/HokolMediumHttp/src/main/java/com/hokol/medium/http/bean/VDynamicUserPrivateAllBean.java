@@ -19,16 +19,13 @@ public class VDynamicUserPrivateAllBean
 	public static class VDynamicUserPrivateSingleBean
 	{
 		/* 动态唯一标识 */
-		private String dt_id;
+		private String pri_id;
 
 		/* 动态小图(链接) */
-		private String dt_small_img;
-
-		/* 动态中等图(链接) */
-		private String dt_mid_img;
+		private String pri_small_img;
 
 		/* 动态点赞数 */
-		private int dt_total_zan;
+		private int pri_total_zan;
 
 		/* 用户唯一标识 */
 		private String user_id;
@@ -42,56 +39,49 @@ public class VDynamicUserPrivateAllBean
 		/* 用户红豆数 */
 		private int user_coin;
 
-		/* 用户城市 */
-		private String user_city;
-
 		/* 动态内容 */
-		private String dt_content;
+		private String pri_content;
 
 		/* 动态发布时间 */
-		private long dt_pub_time;
+		private long pri_pub_time;
 
 		/* 点赞人的昵称：[数组] */
-		private List<String> dt_zan_people_nickname;
+		private List<String> pri_zan_people_nickname;
 
-		public String getDt_id()
+		/* 用户城市 石家庄市，130100 */
+		private List<String> city;
+
+		/* 用户省份 北京市，110000 */
+		private List<String> province;
+
+		public String getPri_id()
 		{
-			return dt_id;
+			return pri_id;
 		}
 
-		public void setDt_id(String dt_id)
+		public void setPri_id(String pri_id)
 		{
-			this.dt_id = dt_id;
+			this.pri_id = pri_id;
 		}
 
-		public String getDt_small_img()
+		public String getPri_small_img()
 		{
-			return dt_small_img;
+			return pri_small_img;
 		}
 
-		public void setDt_small_img(String dt_small_img)
+		public void setPri_small_img(String pri_small_img)
 		{
-			this.dt_small_img = dt_small_img;
+			this.pri_small_img = pri_small_img;
 		}
 
-		public String getDt_mid_img()
+		public int getPri_total_zan()
 		{
-			return dt_mid_img;
+			return pri_total_zan;
 		}
 
-		public void setDt_mid_img(String dt_mid_img)
+		public void setPri_total_zan(int pri_total_zan)
 		{
-			this.dt_mid_img = dt_mid_img;
-		}
-
-		public int getDt_total_zan()
-		{
-			return dt_total_zan;
-		}
-
-		public void setDt_total_zan(int dt_total_zan)
-		{
-			this.dt_total_zan = dt_total_zan;
+			this.pri_total_zan = pri_total_zan;
 		}
 
 		public String getUser_id()
@@ -134,44 +124,54 @@ public class VDynamicUserPrivateAllBean
 			this.user_coin = user_coin;
 		}
 
-		public String getUser_city()
+		public String getPri_content()
 		{
-			return user_city;
+			return pri_content;
 		}
 
-		public void setUser_city(String user_city)
+		public void setPri_content(String pri_content)
 		{
-			this.user_city = user_city;
+			this.pri_content = pri_content;
 		}
 
-		public String getDt_content()
+		public long getPri_pub_time()
 		{
-			return dt_content;
+			return pri_pub_time;
 		}
 
-		public void setDt_content(String dt_content)
+		public void setPri_pub_time(long pri_pub_time)
 		{
-			this.dt_content = dt_content;
+			this.pri_pub_time = pri_pub_time;
 		}
 
-		public long getDt_pub_time()
+		public List<String> getPri_zan_people_nickname()
 		{
-			return dt_pub_time;
+			return pri_zan_people_nickname;
 		}
 
-		public void setDt_pub_time(long dt_pub_time)
+		public void setPri_zan_people_nickname(List<String> pri_zan_people_nickname)
 		{
-			this.dt_pub_time = dt_pub_time;
+			this.pri_zan_people_nickname = pri_zan_people_nickname;
 		}
 
-		public List<String> getDt_zan_people_nickname()
+		public List<String> getCity()
 		{
-			return dt_zan_people_nickname;
+			return city;
 		}
 
-		public void setDt_zan_people_nickname(List<String> dt_zan_people_nickname)
+		public void setCity(List<String> city)
 		{
-			this.dt_zan_people_nickname = dt_zan_people_nickname;
+			this.city = city;
+		}
+
+		public List<String> getProvince()
+		{
+			return province;
+		}
+
+		public void setProvince(List<String> province)
+		{
+			this.province = province;
 		}
 	}
 }

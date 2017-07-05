@@ -74,6 +74,19 @@ public class MainCareHelper
 		recyclerAdapter.setDataList(dataList);
 	}
 
+	public interface OnCareRecycleClickListener<T>
+	{
+		/**
+		 * 点击头像
+		 */
+		void onAvatarClick(RecyclerViewHolder viewHolder, T bean, int position);
+
+		/**
+		 * 点击图片内容
+		 */
+		void onPictureClick(RecyclerViewHolder viewHolder, T bean, int position);
+	}
+
 	private class RecycleAdapter extends WidgetRecyclerAdapter<VDynamicCareBean>
 	{
 		private View.OnClickListener onEmptyBtnClickListener;
@@ -97,7 +110,7 @@ public class MainCareHelper
 		}
 
 		@Override
-		public void onBindViewHolder(RecyclerViewHolder viewHolder, final int position)
+		public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
 		{
 			VDynamicCareBean careBean = sList.get(position);
 
@@ -141,11 +154,11 @@ public class MainCareHelper
 				{
 					if (null != onCareRecycleClickListener)
 					{
-						onCareRecycleClickListener.onAvatarClick(sList.get(position));
+						onCareRecycleClickListener.onAvatarClick(viewHolder, sList.get(position), position);
 					}
 				}
 			});
-			
+
 			viewHolder.get(R.id.iv_item_main_care_content).setOnClickListener(new View.OnClickListener()
 			{
 				@Override
@@ -153,7 +166,7 @@ public class MainCareHelper
 				{
 					if (null != onCareRecycleClickListener)
 					{
-						onCareRecycleClickListener.onPictureClick(sList.get(position));
+						onCareRecycleClickListener.onPictureClick(viewHolder, sList.get(position), position);
 					}
 				}
 			});
@@ -201,22 +214,5 @@ public class MainCareHelper
 				viewHolder.get(R.id.rl_loading_cover).setVisibility(View.INVISIBLE);
 			}
 		}
-	}
-
-	public interface OnCareRecycleClickListener
-	{
-		/**
-		 * 点击头像
-		 *
-		 * @param bean
-		 */
-		void onAvatarClick(VDynamicCareBean bean);
-
-		/**
-		 * 点击图片内容
-		 *
-		 * @param bean
-		 */
-		void onPictureClick(VDynamicCareBean bean);
 	}
 }

@@ -39,9 +39,6 @@ public class VDynamicUserAllBean
 		/* 用户红豆数 */
 		private String user_coin;
 
-		/* 用户城市 */
-		private String user_city;
-
 		/* 动态内容 */
 		private String dt_content;
 
@@ -50,6 +47,12 @@ public class VDynamicUserAllBean
 
 		/* 点赞人的昵称：[数组] */
 		private List<String> dt_zan_people_nickname;
+
+		/* 用户城市 石家庄市，130100 */
+		private List<String> city;
+
+		/* 用户城市 石家庄市，130100 */
+		private List<String> province;
 
 		public String getDt_id()
 		{
@@ -121,16 +124,6 @@ public class VDynamicUserAllBean
 			this.user_coin = user_coin;
 		}
 
-		public String getUser_city()
-		{
-			return user_city;
-		}
-
-		public void setUser_city(String user_city)
-		{
-			this.user_city = user_city;
-		}
-
 		public String getDt_content()
 		{
 			return dt_content;
@@ -159,6 +152,26 @@ public class VDynamicUserAllBean
 		public void setDt_zan_people_nickname(List<String> dt_zan_people_nickname)
 		{
 			this.dt_zan_people_nickname = dt_zan_people_nickname;
+		}
+
+		public List<String> getCity()
+		{
+			return city;
+		}
+
+		public void setCity(List<String> city)
+		{
+			this.city = city;
+		}
+
+		public List<String> getProvince()
+		{
+			return province;
+		}
+
+		public void setProvince(List<String> province)
+		{
+			this.province = province;
 		}
 	}
 }

@@ -42,7 +42,9 @@ import com.hokol.medium.http.bean.VUserVipInfoBean;
 import com.hokol.medium.http.bean.VUserVipRechargeRecordBean;
 import com.hokol.medium.http.bean.WDynamicCareAllBean;
 import com.hokol.medium.http.bean.WDynamicCareSingleBean;
+import com.hokol.medium.http.bean.WDynamicDeleteBean;
 import com.hokol.medium.http.bean.WDynamicPraiseSingleBean;
+import com.hokol.medium.http.bean.WDynamicPrivateDeleteBean;
 import com.hokol.medium.http.bean.WDynamicUserAllBean;
 import com.hokol.medium.http.bean.WDynamicUserDetailBean;
 import com.hokol.medium.http.bean.WDynamicUserPrivateAllBean;
@@ -442,6 +444,38 @@ public class XHttpUtil
 		{
 			LogFileUtil.e(TAG, "Dynamic Private Publish  file is null or not exists");
 		}
+	}
+
+	/**
+	 * 删除动态
+	 */
+	public static void doDynamicDelete(WDynamicDeleteBean deleteBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_dynamic_delete;
+		new XTextHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, deleteBean, String.class);
+	}
+
+	/**
+	 * 删除私密动态
+	 */
+	public static void doDynamicPrivateDelete(WDynamicPrivateDeleteBean deleteBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_dynamic_private_delete;
+		new XTextHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, deleteBean, String.class);
 	}
 
 	/**

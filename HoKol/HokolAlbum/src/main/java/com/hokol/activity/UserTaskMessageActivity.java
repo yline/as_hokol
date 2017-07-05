@@ -37,6 +37,12 @@ public class UserTaskMessageActivity extends BaseAppCompatActivity
 		viewHolder = new ViewHolder(this);
 
 		initView();
+	}
+
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
 		initData();
 	}
 

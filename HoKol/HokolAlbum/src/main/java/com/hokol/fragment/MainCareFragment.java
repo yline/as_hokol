@@ -25,6 +25,7 @@ import com.hokol.viewhelper.MainCareHelper;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
+import com.yline.view.recycler.holder.RecyclerViewHolder;
 import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.List;
@@ -71,10 +72,11 @@ public class MainCareFragment extends BaseFragment
 		// 内容
 		RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycle_main_care);
 		mainCareHelper.initRecycleView(recyclerView);
-		mainCareHelper.setOnRecycleItemClickListener(new MainCareHelper.OnCareRecycleClickListener()
+		mainCareHelper.setOnRecycleItemClickListener(new MainCareHelper.OnCareRecycleClickListener<VDynamicCareBean>()
 		{
+
 			@Override
-			public void onAvatarClick(VDynamicCareBean bean)
+			public void onAvatarClick(RecyclerViewHolder viewHolder, VDynamicCareBean bean, int position)
 			{
 				if (!TextUtils.isEmpty(bean.getDt_user_id()))
 				{
@@ -83,7 +85,7 @@ public class MainCareFragment extends BaseFragment
 			}
 
 			@Override
-			public void onPictureClick(VDynamicCareBean bean)
+			public void onPictureClick(RecyclerViewHolder viewHolder, VDynamicCareBean bean, int position)
 			{
 				StarDynamicActivity.actionStart(getContext(), bean.getDt_id());
 			}

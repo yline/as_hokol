@@ -11,26 +11,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
+import com.hokol.activity.StarDynamicActivity;
+import com.hokol.activity.StarInfoActivity;
 import com.hokol.application.AppStateManager;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
+import com.hokol.medium.callback.OnRecyclerDeleteCallback;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VDynamicUserPrivateAllBean;
+import com.hokol.medium.http.bean.WDynamicPrivateDeleteBean;
 import com.hokol.medium.http.bean.WDynamicUserPrivateAllBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
+import com.hokol.util.HokolTimeConvertUtil;
 import com.hokol.util.IntentUtil;
+import com.hokol.viewhelper.MainCareHelper;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
+import com.yline.view.pop.WidgetDeleteMenu;
 import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
-import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.Arrays;
@@ -96,12 +103,39 @@ public class MainMinePrivateFragment extends BaseFragment
 
 		recyclerAdapter = new PrivateRecycleAdapter();
 		recyclerView.setAdapter(recyclerAdapter);
-		recyclerAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener()
+		recyclerAdapter.setOnCareRecycleClickListener(new MainCareHelper.OnCareRecycleClickListener<VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean>()
 		{
 			@Override
-			public void onItemClick(RecyclerViewHolder viewHolder, Object o, int position)
+			public void onAvatarClick(RecyclerViewHolder viewHolder, VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean bean, int position)
 			{
-				IApplication.toast("position = " + position);
+				if (!TextUtils.isEmpty(bean.getUser_id()))
+				{
+					StarInfoActivity.actionStart(getContext(), bean.getUser_id());
+				}
+			}
+
+			@Override
+			public void onPictureClick(RecyclerViewHolder viewHolder, VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean bean, int position)
+			{
+				if (!TextUtils.isEmpty(bean.getPri_id()))
+				{
+					StarDynamicActivity.actionStart(getContext(), bean.getPri_id());
+				}
+			}
+		});
+		recyclerAdapter.setOnRecyclerDeleteCallback(new OnRecyclerDeleteCallback<VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean>()
+		{
+			@Override
+			public void onDelete(RecyclerViewHolder viewHolder, VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean dynamicBean, final int position)
+			{
+				XHttpUtil.doDynamicPrivateDelete(new WDynamicPrivateDeleteBean(dynamicBean.getPri_id(), dynamicBean.getUser_id()), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						recyclerAdapter.remove(position);
+					}
+				});
 			}
 		});
 
@@ -225,6 +259,20 @@ public class MainMinePrivateFragment extends BaseFragment
 
 	private class PrivateRecycleAdapter extends WidgetRecyclerAdapter<VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean>
 	{
+		private MainCareHelper.OnCareRecycleClickListener<VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean> onCareRecycleClickListener;
+
+		private OnRecyclerDeleteCallback<VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean> onRecyclerDeleteCallback;
+
+		public void setOnCareRecycleClickListener(MainCareHelper.OnCareRecycleClickListener<VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean> onCareRecycleClickListener)
+		{
+			this.onCareRecycleClickListener = onCareRecycleClickListener;
+		}
+
+		public void setOnRecyclerDeleteCallback(OnRecyclerDeleteCallback<VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean> onRecyclerDeleteCallback)
+		{
+			this.onRecyclerDeleteCallback = onRecyclerDeleteCallback;
+		}
+
 		@Override
 		public int getItemRes()
 		{
@@ -234,15 +282,86 @@ public class MainMinePrivateFragment extends BaseFragment
 		@Override
 		public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
 		{
-			super.onBindViewHolder(viewHolder, position);
+			// super.onBindViewHolder(viewHolder, position);
+			VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean dynamicBean = sList.get(position);
 
+			// 头像
 			ImageView avatarImageView = viewHolder.get(R.id.circle_item_main_mine_private_avatar);
-			Glide.with(getContext()).load(DeleteConstant.url_default_avatar).into(avatarImageView);
+			Glide.with(getContext()).load(dynamicBean.getUser_logo()).error(R.drawable.global_load_failed).into(avatarImageView);
 
+			// 昵称
+			viewHolder.setText(R.id.tv_item_main_mine_private_name, dynamicBean.getUser_nickname());
+
+			// 时间
+			String timeStr = HokolTimeConvertUtil.stamp2FormatTime(dynamicBean.getPri_pub_time() * 1000);
+			viewHolder.setText(R.id.tv_item_main_mine_private_time, timeStr);
+
+			// 地点
+			if (null != dynamicBean.getCity())
+			{
+				viewHolder.setText(R.id.tv_item_main_mine_private_location, dynamicBean.getCity().get(0));
+			}
+
+			// 图片内容
 			ImageView contentImageView = viewHolder.get(R.id.iv_item_main_mine_private_content);
-			int width = UIScreenUtil.getScreenWidth(getContext()) - UIScreenUtil.dp2px(getContext(), 10 + 10);
-			UIResizeUtil.build().setIsHeightAdapter(false).setHeight(width).commit(contentImageView);
-			Glide.with(getContext()).load(DeleteConstant.getUrlRec()).into(contentImageView);
+			int width = UIScreenUtil.getScreenWidth(getContext()) - UIScreenUtil.dp2px(getContext(), 10 + 10) * 7 / 8;
+			UIResizeUtil.build().setWidth(width).setHeight(width).commit(contentImageView);
+			Glide.with(getContext()).load(dynamicBean.getPri_small_img()).error(R.drawable.global_load_failed).into(contentImageView);
+
+			// 动态文字
+			viewHolder.setText(R.id.tv_item_main_mine_private_scrap, dynamicBean.getPri_content());
+
+			// 礼物个数
+			viewHolder.setText(R.id.tv_item_main_private_coin, dynamicBean.getUser_coin() + "");
+
+			// 点赞个数
+			viewHolder.setText(R.id.tv_item_main_private_laud, dynamicBean.getPri_total_zan() + "");
+
+			// 头部点击事件
+			viewHolder.setOnClickListener(R.id.circle_item_main_mine_private_avatar, new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					if (null != onCareRecycleClickListener)
+					{
+						onCareRecycleClickListener.onAvatarClick(viewHolder, sList.get(position), position);
+					}
+				}
+			});
+			// 内容点击事件
+			viewHolder.setOnClickListener(R.id.iv_item_main_mine_private_content, new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					if (null != onCareRecycleClickListener)
+					{
+						onCareRecycleClickListener.onPictureClick(viewHolder, sList.get(position), position);
+					}
+				}
+			});
+			// 长按点击事件； 有点击事件，则不会显示
+			WidgetDeleteMenu widgetDeleteMenu = new WidgetDeleteMenu(getContext());
+			widgetDeleteMenu.setOnWidgetListener(new WidgetDeleteMenu.OnWidgetListener()
+			{
+				@Override
+				public void onDismiss(PopupWindow popupWindow)
+				{
+
+				}
+
+				@Override
+				public void onOptionSelected(View view, int index, String content)
+				{
+					VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean dynamicBean = recyclerAdapter.getItem(position);
+					if (content.equals("删除") && null != onRecyclerDeleteCallback)
+					{
+						onRecyclerDeleteCallback.onDelete(viewHolder, dynamicBean, position);
+					}
+				}
+			});
+			widgetDeleteMenu.showAtLocation(Arrays.asList("删除"), viewHolder.getItemView());
 		}
 
 		@Override
