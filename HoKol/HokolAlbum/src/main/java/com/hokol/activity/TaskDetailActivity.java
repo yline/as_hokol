@@ -166,7 +166,7 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 					}
 					else
 					{
-						viewHolder.setText(R.id.iv_task_detail_rest_time, "剩" + restTime);
+						viewHolder.setText(R.id.iv_task_detail_rest_time, "剩余" + restTime);
 					}
 
 					// 任务详情
