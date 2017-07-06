@@ -18,8 +18,10 @@ import com.hokol.activity.TaskDetailActivity;
 import com.hokol.adapter.TaskAssignedAdapter;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
+import com.hokol.medium.callback.OnRecyclerDeleteCallback;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskUserPublishedBean;
+import com.hokol.medium.http.bean.WTaskDeleteBean;
 import com.hokol.medium.http.bean.WTaskUserPublishedBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
@@ -40,6 +42,8 @@ public class TaskAssignedAllFragment extends BaseFragment
 	private TaskAssignedAdapter taskAssignedAllAdapter;
 
 	private WTaskUserPublishedBean userPublishedBean;
+
+	private String userId;
 
 	public static TaskAssignedAllFragment newInstance(String userId)
 	{
@@ -136,6 +140,22 @@ public class TaskAssignedAllFragment extends BaseFragment
 				TaskAssignedEvaluateActivity.actionStart(getContext());
 			}
 		});
+		// 删除任务
+		taskAssignedAllAdapter.setOnRecyclerDeleteCallback(new OnRecyclerDeleteCallback<VTaskUserPublishedBean.VTaskUserPublishedOneBean>()
+		{
+			@Override
+			public void onDelete(RecyclerViewHolder viewHolder, VTaskUserPublishedBean.VTaskUserPublishedOneBean vTaskBean, final int position)
+			{
+				XHttpUtil.doTaskDelete(new WTaskDeleteBean(userId, vTaskBean.getTask_id()), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						taskAssignedAllAdapter.remove(position);
+					}
+				});
+			}
+		});
 		recyclerView.setAdapter(taskAssignedAllAdapter);
 
 		// 刷新
@@ -178,7 +198,7 @@ public class TaskAssignedAllFragment extends BaseFragment
 
 	private void initData()
 	{
-		String userId = getArguments().getString(KeyUserId);
+		userId = getArguments().getString(KeyUserId);
 		if (!TextUtils.isEmpty(userId))
 		{
 			taskAssignedAllAdapter.setShowEmpty(false);

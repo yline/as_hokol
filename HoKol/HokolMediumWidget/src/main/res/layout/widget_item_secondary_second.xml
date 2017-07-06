@@ -15,7 +15,7 @@
         android:textColor="@drawable/widget_selector_text_red_gray"
         android:textSize="18dp"/>
 
-    <!--android:background="@drawable/lib_view_selector_drawable_onoff"-->
+    <!--  android:background="@drawable/lib_view_selector_drawable_onoff" -->
     <CheckBox
         android:id="@+id/checkbox_item_second"
         android:layout_width="24dp"
@@ -25,6 +25,7 @@
         android:layout_gravity="center"
         android:layout_marginRight="30dp"
         android:layout_weight="1"
+        android:background="@drawable/lib_view_recycler_selector_drawable_onoff"
         android:button="@null"
         android:clickable="false"/>
 </RelativeLayout>

@@ -69,6 +69,9 @@ public class VDynamicUserDetailBean
 	/* 用户等级图像 */
 	private String level_url;
 
+	/* 用户充值红豆数 */
+	private int user_recharge_coin;
+
 	public static int getUnCare()
 	{
 		return unCare;
@@ -277,5 +280,15 @@ public class VDynamicUserDetailBean
 	public void setLevel_url(String level_url)
 	{
 		this.level_url = level_url;
+	}
+
+	public int getUser_recharge_coin()
+	{
+		return user_recharge_coin;
+	}
+
+	public void setUser_recharge_coin(int user_recharge_coin)
+	{
+		this.user_recharge_coin = user_recharge_coin;
 	}
 }

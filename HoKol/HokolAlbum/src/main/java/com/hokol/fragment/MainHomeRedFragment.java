@@ -157,7 +157,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 			}
 		});
 	}
-
+	
 	private void initData()
 	{
 		homeRedBean = new WHomeMainBean(HttpEnum.UserTag.Red, 0, DeleteConstant.defaultNumberSmall);
@@ -179,7 +179,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 						@Override
 						protected int getViewPagerHeight()
 						{
-							return UIScreenUtil.dp2px(getContext(), 150);
+							return UIScreenUtil.dp2px(getContext(), 120);
 						}
 					};
 					View adView = adWidget.start(getContext(), resultList.size());

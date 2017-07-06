@@ -61,6 +61,15 @@ public class VEnterLoginPhonePwdBean
 	/* 等级图标链接 */
 	private String level_url;
 
+	/* 是否有支付功能(0:无，1:有) */
+	private int is_pay;
+
+	/* 等级区间  */
+	private List<Integer> level_area;
+
+	/* 用户充值红豆数 */
+	private int user_recharge_coin;
+
 	public String getUser_id()
 	{
 		return user_id;
@@ -249,5 +258,35 @@ public class VEnterLoginPhonePwdBean
 	public void setLevel_url(String level_url)
 	{
 		this.level_url = level_url;
+	}
+
+	public int getIs_pay()
+	{
+		return is_pay;
+	}
+
+	public void setIs_pay(int is_pay)
+	{
+		this.is_pay = is_pay;
+	}
+
+	public List<Integer> getLevel_area()
+	{
+		return level_area;
+	}
+
+	public void setLevel_area(List<Integer> level_area)
+	{
+		this.level_area = level_area;
+	}
+
+	public int getUser_recharge_coin()
+	{
+		return user_recharge_coin;
+	}
+
+	public void setUser_recharge_coin(int user_recharge_coin)
+	{
+		this.user_recharge_coin = user_recharge_coin;
 	}
 }

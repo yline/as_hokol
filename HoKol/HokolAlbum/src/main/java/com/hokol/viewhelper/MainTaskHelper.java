@@ -316,7 +316,7 @@ public class MainTaskHelper
 
 			// 头像
 			ImageView imageView = viewHolder.get(R.id.iv_item_main_task_avatar);
-			Glide.with(sContext).load(taskBean.getUser_logo()).error(R.drawable.global_load_failed).into(imageView);
+			Glide.with(sContext).load(taskBean.getUser_logo()).error(R.drawable.global_load_avatar).into(imageView);
 
 			// 用户名
 			viewHolder.setText(R.id.tv_item_main_task_user, taskBean.getUser_nickname());

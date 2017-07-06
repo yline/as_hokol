@@ -98,7 +98,7 @@ public class UserDynamicPublishActivity extends BaseAppCompatActivity
 					lastPublishClickTime = System.currentTimeMillis();
 
 					String userId = AppStateManager.getInstance().getUserLoginId(UserDynamicPublishActivity.this);
-					String content = viewHolder.getText(R.id.tv_user_dynamic_publish);
+					String content = viewHolder.getText(R.id.et_user_dynamic_publish_content);
 
 					if (zoomCode == MainMineFragment.KeyDynamicPictureZoomCode)
 					{

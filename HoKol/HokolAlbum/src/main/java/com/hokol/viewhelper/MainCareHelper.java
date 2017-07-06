@@ -116,7 +116,7 @@ public class MainCareHelper
 
 			// 头像
 			ImageView avatarView = viewHolder.get(R.id.circle_item_main_care_avatar);
-			Glide.with(sContext).load(careBean.getUser_logo()).error(R.drawable.global_load_failed).into(avatarView);
+			Glide.with(sContext).load(careBean.getUser_logo()).error(R.drawable.global_load_avatar).into(avatarView);
 
 			// 昵称
 			viewHolder.setText(R.id.tv_item_main_care_name, careBean.getUser_nickname());

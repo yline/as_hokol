@@ -4,7 +4,13 @@ import java.util.List;
 
 public class VTaskUserPublishedBean
 {
+	// 已担保
 	public static final int Guaranteed = 1;
+
+	// 任务状态
+	public static final int StateFinish = 4;
+
+	public static final int StateCancel = 5;
 
 	private List<VTaskUserPublishedOneBean> list;
 

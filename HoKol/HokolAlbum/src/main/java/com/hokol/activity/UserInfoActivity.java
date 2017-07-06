@@ -290,10 +290,14 @@ public class UserInfoActivity extends BaseAppCompatActivity
 
 		// 头像
 		String userAvatar = AppStateManager.getInstance().getUserLoginAvatar(this);
+		ImageView avatarImageView = viewHolder.get(R.id.circle_user_info_avatar);
 		if (!TextUtils.isEmpty(userAvatar))
 		{
-			ImageView avatarImageView = viewHolder.get(R.id.circle_user_info_avatar);
-			Glide.with(this).load(userAvatar).into(avatarImageView);
+			Glide.with(this).load(userAvatar).error(R.drawable.global_load_avatar).into(avatarImageView);
+		}
+		else
+		{
+			Glide.with(this).load(R.drawable.global_load_avatar).into(avatarImageView);
 		}
 
 		// 昵称

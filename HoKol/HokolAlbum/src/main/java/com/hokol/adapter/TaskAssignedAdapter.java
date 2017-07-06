@@ -4,14 +4,19 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
+import com.hokol.medium.callback.OnRecyclerDeleteCallback;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.bean.VTaskUserPublishedBean;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.hokol.util.HokolTimeConvertUtil;
+import com.yline.view.pop.WidgetDeleteMenu;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
+
+import java.util.Arrays;
 
 /**
  * 已发任务
@@ -21,11 +26,17 @@ import com.yline.view.recycler.holder.RecyclerViewHolder;
  */
 public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishedBean.VTaskUserPublishedOneBean>
 {
+	// 待报名 回调
 	private OnTaskAssignedSignCallback assignedSignCallback;
 
+	// 待交易 回调
 	private OnTaskAssignedTradeCallback assignedTradeCallback;
 
+	// 评价 回调
 	private OnTaskAssignedEvaluateCallback assignedEvaluateCallback;
+
+	// 长按回调, 只有过期的，并且结束的按钮，才能出现删除按钮
+	private OnRecyclerDeleteCallback<VTaskUserPublishedBean.VTaskUserPublishedOneBean> onRecyclerDeleteCallback;
 
 	private Context sContext;
 
@@ -41,7 +52,7 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 	}
 
 	@Override
-	public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
+	public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
 	{
 		super.onBindViewHolder(viewHolder, position);
 
@@ -69,16 +80,46 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		if (TextUtils.isEmpty(showTime))
 		{
 			viewHolder.setText(R.id.tv_item_main_task_time, "已到期");
+
 		}
 		else
 		{
 			viewHolder.setText(R.id.tv_item_main_task_time, "剩" + showTime);
+
 		}
 
 		// 初始状态
 		int status = taskBean.getStatus();
 		HttpEnum.AssignedStatus assignedStatus = HttpEnum.getAssignedStatus(status);
 		onBindViewClick(viewHolder, assignedStatus);
+
+		// 依据状态，判断是否能够删除记录
+		if (status == VTaskUserPublishedBean.StateFinish || status == VTaskUserPublishedBean.StateCancel)
+		{
+			// 长按点击事件【只有过期的任务 才能删除】
+			WidgetDeleteMenu widgetDeleteMenu = new WidgetDeleteMenu(sContext);
+			widgetDeleteMenu.setOnWidgetListener(new WidgetDeleteMenu.OnWidgetListener()
+			{
+				@Override
+				public void onDismiss(PopupWindow popupWindow)
+				{
+
+				}
+
+				@Override
+				public void onOptionSelected(View view, int index, String content)
+				{
+					if (content.equals("删除"))
+					{
+						if (null != onRecyclerDeleteCallback)
+						{
+							onRecyclerDeleteCallback.onDelete(viewHolder, sList.get(position), position);
+						}
+					}
+				}
+			});
+			widgetDeleteMenu.showAtLocation(Arrays.asList("删除"), viewHolder.getItemView());
+		}
 	}
 
 	@Override
@@ -218,6 +259,11 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 	public void setOnAssignedEvaluateCallback(OnTaskAssignedEvaluateCallback assignedEvaluateCallback)
 	{
 		this.assignedEvaluateCallback = assignedEvaluateCallback;
+	}
+
+	public void setOnRecyclerDeleteCallback(OnRecyclerDeleteCallback<VTaskUserPublishedBean.VTaskUserPublishedOneBean> onRecyclerDeleteCallback)
+	{
+		this.onRecyclerDeleteCallback = onRecyclerDeleteCallback;
 	}
 
 	/**

@@ -68,6 +68,7 @@ import com.hokol.medium.http.bean.WTaskActionMasterTradeBean;
 import com.hokol.medium.http.bean.WTaskActionStaffConfirmBean;
 import com.hokol.medium.http.bean.WTaskActionStaffSignUpBean;
 import com.hokol.medium.http.bean.WTaskActionStaffTradeBean;
+import com.hokol.medium.http.bean.WTaskDeleteBean;
 import com.hokol.medium.http.bean.WTaskMainAllBean;
 import com.hokol.medium.http.bean.WTaskMainCollectionBean;
 import com.hokol.medium.http.bean.WTaskMainDetailBean;
@@ -722,6 +723,21 @@ public class XHttpUtil
 		}.doPost(httpUrl, wTaskActionStaffTradeBean, String.class);
 	}
 
+	/**
+	 * 删除任务，仅仅有删除记录的功能
+	 */
+	public static void doTaskDelete(WTaskDeleteBean taskDeleteBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_action_delete;
+		new XTextHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, taskDeleteBean, String.class);
+	}
 
 	/**
 	 * 主页接口

@@ -175,7 +175,8 @@ public class MainMineFragment extends BaseFragment
 
 			// 头像
 			ImageView imageView = viewHolder.get(R.id.circle_main_mine_avatar);
-			Glide.with(getContext()).load(appStateManager.getUserLoginAvatar(getContext())).into(imageView);
+			String avatarString = appStateManager.getUserLoginAvatar(getContext());
+			Glide.with(getContext()).load(avatarString).error(R.drawable.global_load_avatar).into(imageView);
 
 			// 昵称
 			viewHolder.setText(R.id.tv_main_mine_head_name, appStateManager.getUserLoginNickName(getContext()));

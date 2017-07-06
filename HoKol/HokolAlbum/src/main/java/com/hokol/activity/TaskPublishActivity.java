@@ -295,6 +295,7 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 						public void onSuccess(String s)
 						{
 							SDKManager.toast("提交任务成功");
+							finish();
 						}
 					});
 				}

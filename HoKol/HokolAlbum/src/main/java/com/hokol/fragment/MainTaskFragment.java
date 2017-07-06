@@ -158,7 +158,7 @@ public class MainTaskFragment extends BaseFragment implements MainTaskHelper.OnT
 						@Override
 						protected int getViewPagerHeight()
 						{
-							return UIScreenUtil.dp2px(getContext(), 150);
+							return UIScreenUtil.dp2px(getContext(), 120);
 						}
 					};
 					View adView = adWidget.start(getContext(), resultList.size());

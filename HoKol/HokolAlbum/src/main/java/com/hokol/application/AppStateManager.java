@@ -93,10 +93,19 @@ public class AppStateManager
 			SPUtil.put(context, KeyUserLoginNickname, loginPhonePwdBean.getUser_nickname(), FileName);
 			SPUtil.put(context, KeyUserLoginLabel, new Gson().toJson(loginPhonePwdBean.getUser_tag()), FileName);
 
-			SPUtil.put(context, KeyUserProvinceName, loginPhonePwdBean.getProvince().get(0), FileName);
-			SPUtil.put(context, KeyUserProvinceCode, loginPhonePwdBean.getProvince().get(1), FileName);
-			SPUtil.put(context, KeyUserCityName, loginPhonePwdBean.getCity().get(0), FileName);
-			SPUtil.put(context, KeyUserCityCode, loginPhonePwdBean.getCity().get(1), FileName);
+			List<String> provinceList = loginPhonePwdBean.getProvince();
+			if (null != provinceList && provinceList.size() >= 2)
+			{
+				SPUtil.put(context, KeyUserProvinceName, provinceList.get(0), FileName);
+				SPUtil.put(context, KeyUserProvinceCode, provinceList.get(1), FileName);
+			}
+
+			List<String> cityList = loginPhonePwdBean.getCity();
+			if (null != cityList && cityList.size() >= 2)
+			{
+				SPUtil.put(context, KeyUserCityName, cityList.get(0), FileName);
+				SPUtil.put(context, KeyUserCityCode, cityList.get(1), FileName);
+			}
 
 			SPUtil.put(context, KeyUserSign, loginPhonePwdBean.getUser_sign(), FileName);
 			SPUtil.put(context, KeyUserPrice, loginPhonePwdBean.getUser_prize(), FileName);

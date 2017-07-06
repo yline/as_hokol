@@ -150,6 +150,9 @@ public class HttpConstant
 	// 雇员确认交易
 	public static final String url_task_action_staff_trade = url_head + "ApiTask/is_success_task";
 
+	// 删除任务
+	public static final String url_task_action_delete = url_head + "ApiTask/del_task";
+
 	/* --------------------------- 主页 --------------------------- */
 	// 请求主页动态数据
 	public static final String url_home_main = url_head + "ApiIndex/index";
