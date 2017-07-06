@@ -123,8 +123,8 @@
                     android:layout_gravity="left"
                     android:layout_marginRight="@dimen/default_space_little"
                     android:layout_weight="1"
-                    android:background="@drawable/vip_single_contact"
-                    android:button="@drawable/vip_selector_usuall_forground"
+                    android:background="@drawable/vip_selector_single_contact"
+                    android:button="@null"
                     android:checked="true"/>
 
                 <RadioButton
@@ -134,8 +134,8 @@
                     android:layout_gravity="right"
                     android:layout_marginLeft="@dimen/default_space_little"
                     android:layout_weight="1"
-                    android:background="@drawable/vip_single_private"
-                    android:button="@drawable/vip_selector_usuall_forground"/>
+                    android:background="@drawable/vip_selector_single_private"
+                    android:button="@null"/>
             </LinearLayout>
         </com.hokol.medium.viewcustom.RadioGroupNestLinear>
 

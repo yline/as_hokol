@@ -128,8 +128,8 @@
                         android:layout_gravity="left"
                         android:layout_marginRight="@dimen/default_space_little"
                         android:layout_weight="1"
-                        android:background="@drawable/vip_pack_month"
-                        android:button="@drawable/vip_selector_usuall_forground"
+                        android:background="@drawable/vip_selector_pack_month"
+                        android:button="@null"
                         android:checked="true"/>
 
                     <RadioButton
@@ -139,8 +139,8 @@
                         android:layout_gravity="right"
                         android:layout_marginLeft="@dimen/default_space_little"
                         android:layout_weight="1"
-                        android:background="@drawable/vip_pack_season"
-                        android:button="@drawable/vip_selector_usuall_forground"/>
+                        android:background="@drawable/vip_selector_pack_season"
+                        android:button="@null"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -158,8 +158,8 @@
                         android:layout_gravity="left"
                         android:layout_marginRight="@dimen/default_space_little"
                         android:layout_weight="1"
-                        android:background="@drawable/vip_pack_year"
-                        android:button="@drawable/vip_selector_usuall_forground"/>
+                        android:background="@drawable/vip_selector_pack_year"
+                        android:button="@null"/>
 
                     <RadioButton
                         android:id="@+id/rb_vip_single_private"
@@ -169,7 +169,7 @@
                         android:layout_marginLeft="@dimen/default_space_little"
                         android:layout_weight="1"
                         android:background="@drawable/vip_pack_year"
-                        android:button="@drawable/vip_selector_usuall_forground"
+                        android:button="@null"
                         android:visibility="invisible"/>
                 </LinearLayout>
             </com.hokol.medium.viewcustom.RadioGroupNestLinear>

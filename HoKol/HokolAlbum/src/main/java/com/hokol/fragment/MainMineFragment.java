@@ -95,6 +95,7 @@ public class MainMineFragment extends BaseFragment
 
 		TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout_main_mine);
 		ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager_main_mine);
+		viewPager.setOffscreenPageLimit(3);
 
 		tabLayout.setupWithViewPager(viewPager);
 		tabLayout.setTabTextColors(getResources().getColor(R.color.hokolGrayDrak), getResources().getColor(R.color.hokolRed));

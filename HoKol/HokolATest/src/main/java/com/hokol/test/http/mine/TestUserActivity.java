@@ -20,6 +20,11 @@ import com.yline.http.XHttpAdapter;
 
 public class TestUserActivity extends BaseTestActivity
 {
+	public static void actionStart(Context context)
+	{
+		context.startActivity(new Intent(context, TestUserActivity.class));
+	}
+
 	private void testmine_message()
 	{
 		final EditText editTextOne = addEditNumber("user_id", "2");
@@ -63,7 +68,7 @@ public class TestUserActivity extends BaseTestActivity
 				String receiverUserId = editTextTwo.getText().toString().trim();
 				String dynamicId = editTextThree.getText().toString().trim();
 				int coinNum = parseInt(editTextFour, 0);
-				XHttpUtil.doUserCoinGift(new WUserCoinGiftBean(userId, receiverUserId, dynamicId, coinNum), new XHttpAdapter<String>()
+				XHttpUtil.doUserCoinGift(new WUserCoinGiftBean(userId, receiverUserId, coinNum), new XHttpAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -163,10 +168,5 @@ public class TestUserActivity extends BaseTestActivity
 		testuser_care_switch();
 		testpresent_coin();
 		testmine_message();
-	}
-
-	public static void actionStart(Context context)
-	{
-		context.startActivity(new Intent(context, TestUserActivity.class));
 	}
 }
