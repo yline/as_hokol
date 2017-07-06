@@ -27,6 +27,8 @@ public class TaskPublishRightStyleFragment extends BaseFragment
 
 	private ViewHolder viewHolder;
 
+	private OnPublishRightStyleCallback rightStyleCallback;
+
 	public static TaskPublishRightStyleFragment newInstance()
 	{
 		Bundle args = new Bundle();
@@ -63,8 +65,7 @@ public class TaskPublishRightStyleFragment extends BaseFragment
 			}
 		};
 		flowAbleWidget.setMaxCountEachLine(3);
-		flowAbleWidget.setDataList(Arrays.asList(HttpEnum.UserTag.Red.getContent(), HttpEnum.UserTag.Author.getContent(),
-				HttpEnum.UserTag.Performer.getContent(), HttpEnum.UserTag.Model.getContent(), HttpEnum.UserTag.Singer.getContent(), HttpEnum.UserTag.Sport.getContent()));
+		flowAbleWidget.setDataList(Arrays.asList(HttpEnum.UserTag.Red.getContent(), HttpEnum.UserTag.Author.getContent(), HttpEnum.UserTag.Performer.getContent(), HttpEnum.UserTag.Model.getContent(), HttpEnum.UserTag.Singer.getContent(), HttpEnum.UserTag.Sport.getContent()));
 		flowAbleWidget.getSelectedList();
 	}
 
@@ -90,10 +91,10 @@ public class TaskPublishRightStyleFragment extends BaseFragment
 			{
 				if (null != rightStyleCallback)
 				{
-					List<Integer> taskType = new ArrayList<>();
+					List<HttpEnum.UserTag> taskType = new ArrayList<>();
 					for (Integer integer : flowAbleWidget.getSelectedList())
 					{
-						taskType.add(integer);
+						taskType.add(HttpEnum.getUserTag(integer + 1));
 					}
 
 					int girlNum = parseTextInt((TextView) viewHolder.get(R.id.et_task_publish_style_girl));
@@ -125,7 +126,7 @@ public class TaskPublishRightStyleFragment extends BaseFragment
 		}
 	}
 
-	private boolean isDataEnough(List<Integer> taskType, int boyNum, int girlNum)
+	private boolean isDataEnough(List<HttpEnum.UserTag> taskType, int boyNum, int girlNum)
 	{
 		if (0 == taskType.size() || WTaskMainPublishBean.ValueErrorInt == boyNum || WTaskMainPublishBean.ValueErrorInt == girlNum)
 		{
@@ -141,8 +142,6 @@ public class TaskPublishRightStyleFragment extends BaseFragment
 		}
 	}
 
-	private OnPublishRightStyleCallback rightStyleCallback;
-
 	public void setOnRightStyleCallback(OnPublishRightStyleCallback rightStyleCallback)
 	{
 		this.rightStyleCallback = rightStyleCallback;
@@ -152,6 +151,6 @@ public class TaskPublishRightStyleFragment extends BaseFragment
 	{
 		void onRightStyleCancel();
 
-		void onRightStyleConfirm(List<Integer> taskType, int boyNum, int girlNum);
+		void onRightStyleConfirm(List<HttpEnum.UserTag> taskType, int boyNum, int girlNum);
 	}
 }

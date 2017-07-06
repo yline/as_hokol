@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.hokol.R;
 import com.hokol.fragment.TaskPublishRightAreaFragment;
 import com.hokol.fragment.TaskPublishRightStyleFragment;
+import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.WTaskMainPublishBean;
 import com.hokol.medium.widget.DialogIosWidget;
@@ -26,6 +27,7 @@ import com.yline.http.XHttpAdapter;
 import com.yline.utils.KeyBoardUtil;
 import com.yline.view.recycler.holder.ViewHolder;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -84,13 +86,18 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			}
 
 			@Override
-			public void onRightStyleConfirm(List<Integer> taskType, int boyNum, int girlNum)
+			public void onRightStyleConfirm(List<HttpEnum.UserTag> taskType, int boyNum, int girlNum)
 			{
 				viewHolder.get(R.id.rl_task_publish_right).setVisibility(View.GONE);
 				fragmentManager.popBackStack();
 
 				// 设置数据
-				taskPublishBean.setTask_type(taskType);
+				List<Integer> tagTypeList = new ArrayList<>();
+				for (HttpEnum.UserTag tag : taskType)
+				{
+					tagTypeList.add(tag.getIndex());
+				}
+				taskPublishBean.setTask_type(tagTypeList);
 				taskPublishBean.setTask_man_num(boyNum);
 				taskPublishBean.setTask_woman_num(girlNum);
 
@@ -252,12 +259,23 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 					@Override
 					public void onDateSet(DatePicker view, int year, int month, int dayOfMonth)
 					{
+						month += 1; // 月份需要加一，进行适配
+
 						Calendar sInstance = Calendar.getInstance();
 						sInstance.set(year, month, dayOfMonth, 12, 0, 0);
 						Long endTime = sInstance.getTimeInMillis();
-
-						taskPublishBean.setTask_end_time(endTime);
-						viewHolder.setText(R.id.tv_task_publish_content_time, String.format("%d年%d月%d日", year, month, dayOfMonth));
+						
+						if (endTime > System.currentTimeMillis())
+						{
+							endTime /= 1000;
+							taskPublishBean.setTask_end_time(endTime);
+							viewHolder.setText(R.id.tv_task_publish_content_time, String.format("%d年%d月%d日", year, month, dayOfMonth));
+						}
+						else
+						{
+							taskPublishBean.setTask_end_time(0);
+							SDKManager.toast("请选择有效的时间");
+						}
 					}
 				}, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH)).show();
 			}
