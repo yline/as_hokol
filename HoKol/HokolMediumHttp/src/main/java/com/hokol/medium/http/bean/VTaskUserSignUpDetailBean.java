@@ -1,23 +1,62 @@
 package com.hokol.medium.http.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class VTaskUserSignUpDetailBean
 {
-	private List<VTaskUserSignUpDetailOneBean> list;
+	private ArrayList<VTaskUserSignUpDetailOneBean> list;
 
-	public List<VTaskUserSignUpDetailOneBean> getList()
+	public ArrayList<VTaskUserSignUpDetailOneBean> getList()
 	{
 		return list;
 	}
 
-	public void setList(List<VTaskUserSignUpDetailOneBean> list)
+	public void setList(ArrayList<VTaskUserSignUpDetailOneBean> list)
 	{
 		this.list = list;
 	}
 
-	public static class VTaskUserSignUpDetailOneBean
+	public static class VTaskUserSignUpDetailOneBean implements Parcelable
 	{
+		/**
+		 * 注意这里读取的顺序一定要和刚才写出的顺序完全相同
+		 */
+		public static final Parcelable.Creator<VTaskUserSignUpDetailOneBean> CREATOR = new Parcelable.Creator<VTaskUserSignUpDetailOneBean>()
+		{
+
+			@Override
+			public VTaskUserSignUpDetailOneBean createFromParcel(Parcel source)
+			{
+				VTaskUserSignUpDetailOneBean bean = new VTaskUserSignUpDetailOneBean();
+				bean.user_id = source.readString(); // 读取name
+				bean.user_nickname = source.readString(); // 读取age
+				bean.user_logo = source.readString();
+				bean.user_sign = source.readString();
+
+				if (null == bean.user_tag)
+				{
+					bean.user_tag = new ArrayList<>();
+				}
+				source.readStringList(bean.user_tag);
+
+				bean.is_employe = source.readInt();
+				bean.user_sex = source.readString();
+				bean.user_level = source.readInt();
+				bean.level_url = source.readString();
+				return bean;
+			}
+
+			@Override
+			public VTaskUserSignUpDetailOneBean[] newArray(int size)
+			{
+				return new VTaskUserSignUpDetailOneBean[size];
+			}
+		};
+
 		/* 用户id */
 		private String user_id;
 
@@ -35,6 +74,15 @@ public class VTaskUserSignUpDetailBean
 
 		/* 是否录用 */
 		private int is_employe;
+
+		/* 用户性别 */
+		private String user_sex;
+
+		/* 用户等级 */
+		private int user_level;
+
+		/* 用户等级图片 */
+		private String level_url;
 
 		public String getUser_id()
 		{
@@ -94,6 +142,56 @@ public class VTaskUserSignUpDetailBean
 		public void setIs_employe(int is_employe)
 		{
 			this.is_employe = is_employe;
+		}
+
+		public String getUser_sex()
+		{
+			return user_sex;
+		}
+
+		public void setUser_sex(String user_sex)
+		{
+			this.user_sex = user_sex;
+		}
+
+		public int getUser_level()
+		{
+			return user_level;
+		}
+
+		public void setUser_level(int user_level)
+		{
+			this.user_level = user_level;
+		}
+
+		public String getLevel_url()
+		{
+			return level_url;
+		}
+
+		public void setLevel_url(String level_url)
+		{
+			this.level_url = level_url;
+		}
+
+		@Override
+		public int describeContents()
+		{
+			return 0;
+		}
+
+		@Override
+		public void writeToParcel(Parcel dest, int flags)
+		{
+			dest.writeString(user_id);
+			dest.writeString(user_nickname);
+			dest.writeString(user_logo);
+			dest.writeString(user_sign);
+			dest.writeStringList(user_tag);
+			dest.writeInt(is_employe);
+			dest.writeString(user_sex);
+			dest.writeInt(user_level);
+			dest.writeString(level_url);
 		}
 	}
 }

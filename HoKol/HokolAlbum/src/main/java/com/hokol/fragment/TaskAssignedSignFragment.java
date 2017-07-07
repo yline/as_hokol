@@ -100,9 +100,9 @@ public class TaskAssignedSignFragment extends BaseFragment
 			}
 
 			@Override
-			public void onSignDetailClick(View view)
+			public void onSignDetailClick(View view, String taskId)
 			{
-				TaskAssignedSignDetailActivity.actionStart(getContext());
+				TaskAssignedSignDetailActivity.actionStart(getContext(), taskId);
 			}
 		});
 		recyclerView.setAdapter(taskAssignedSignAdapter);

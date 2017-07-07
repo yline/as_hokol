@@ -9,18 +9,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
-import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.bean.VTaskUserSignUpDetailBean;
 import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
+import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.base.BaseFragment;
 import com.yline.view.layout.label.FlowLayout;
-import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TaskAssignedSignDetailUnFragment extends BaseFragment
 {
+	private static final String KeyDataValue = "AssignedUn";
+
 	private SignDetailUnAdapter signDetailUnAdapter;
 
 	public static TaskAssignedSignDetailUnFragment newInstance()
@@ -44,6 +47,7 @@ public class TaskAssignedSignDetailUnFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 
 		initView(view);
+		initData();
 	}
 
 	private void initView(View view)
@@ -60,12 +64,39 @@ public class TaskAssignedSignDetailUnFragment extends BaseFragment
 		});
 
 		signDetailUnAdapter = new SignDetailUnAdapter();
+		signDetailUnAdapter.setShowEmpty(false);
 		recyclerView.setAdapter(signDetailUnAdapter);
-
-		signDetailUnAdapter.setDataList(HttpEnum.getUserTagListAll());
 	}
 
-	private class SignDetailUnAdapter extends CommonRecyclerAdapter<String>
+	private void initData()
+	{
+		updateData();
+	}
+
+	private void updateData()
+	{
+		Bundle arg = getArguments();
+		if (null != arg)
+		{
+			signDetailUnAdapter.setDataList(arg.<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean>getParcelableArrayList(KeyDataValue));
+		}
+	}
+
+	public void updateData(ArrayList<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean> beanList)
+	{
+		if (null != signDetailUnAdapter)
+		{
+			signDetailUnAdapter.setDataList(beanList);
+		}
+		else
+		{
+			Bundle arg = new Bundle();
+			arg.putParcelableArrayList(KeyDataValue, beanList);
+			setArguments(arg);
+		}
+	}
+
+	private class SignDetailUnAdapter extends WidgetRecyclerAdapter<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean>
 	{
 		@Override
 		public int getItemRes()

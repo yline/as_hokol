@@ -91,10 +91,10 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		// 初始状态
 		int status = taskBean.getStatus();
 		HttpEnum.AssignedStatus assignedStatus = HttpEnum.getAssignedStatus(status);
-		onBindViewClick(viewHolder, assignedStatus);
+		onBindViewClick(viewHolder, sList.get(position), assignedStatus);
 
 		// 依据状态，判断是否能够删除记录
-		if (status == VTaskUserPublishedBean.StateFinish || status == VTaskUserPublishedBean.StateCancel)
+		if (status == VTaskUserPublishedBean.StateFinish || status == VTaskUserPublishedBean.StateCancel || status == VTaskUserPublishedBean.StatePassed)
 		{
 			// 长按点击事件【只有过期的任务 才能删除】
 			WidgetDeleteMenu widgetDeleteMenu = new WidgetDeleteMenu(sContext);
@@ -136,7 +136,7 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		viewHolder.getItemView().setVisibility(View.GONE);
 	}
 
-	private void onBindViewClick(RecyclerViewHolder viewHolder, HttpEnum.AssignedStatus assignedStatus)
+	private void onBindViewClick(RecyclerViewHolder viewHolder, final VTaskUserPublishedBean.VTaskUserPublishedOneBean bean, final HttpEnum.AssignedStatus assignedStatus)
 	{
 		// 待报名
 		if (assignedStatus.equals(HttpEnum.AssignedStatus.ToBeSign))
@@ -171,7 +171,7 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 				{
 					if (null != assignedSignCallback)
 					{
-						assignedSignCallback.onSignDetailClick(v);
+						assignedSignCallback.onSignDetailClick(v, bean.getTask_id());
 					}
 				}
 			});
@@ -290,7 +290,7 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		 *
 		 * @param view
 		 */
-		void onSignDetailClick(View view);
+		void onSignDetailClick(View view, String taskId);
 	}
 
 	/**

@@ -11,10 +11,16 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.hokol.R;
+import com.hokol.application.DeleteConstant;
 import com.hokol.fragment.TaskAssignedSignDetailEdFragment;
 import com.hokol.fragment.TaskAssignedSignDetailUnFragment;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VTaskUserSignUpDetailBean;
+import com.hokol.medium.http.bean.WTaskUserSignUpDetailBean;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
+import com.yline.log.LogFileUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +33,16 @@ import java.util.List;
  */
 public class TaskAssignedSignDetailActivity extends BaseAppCompatActivity
 {
+	private static final String KeyTaskId = "TaskId";
+
+	private TaskAssignedSignDetailUnFragment unFragment;
+
+	private TaskAssignedSignDetailEdFragment edFragment;
+
+	public static void actionStart(Context context, String taskId)
+	{
+		context.startActivity(new Intent(context, TaskAssignedSignDetailActivity.class).putExtra(KeyTaskId, taskId));
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -34,13 +50,35 @@ public class TaskAssignedSignDetailActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_task_assigned_sign_detail);
 
+		initView();
+		initTabView();
+		initData();
+	}
+
+	private void initView()
+	{
+		// 结束
+		findViewById(R.id.iv_task_assigned_sign_detail_cancel).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				finish();
+			}
+		});
+	}
+
+	private void initTabView()
+	{
 		final List<BaseFragment> fragmentList = new ArrayList<>();
 		final List<String> titleList = new ArrayList<>();
 
-		fragmentList.add(TaskAssignedSignDetailUnFragment.newInstance());
+		unFragment = TaskAssignedSignDetailUnFragment.newInstance();
+		fragmentList.add(unFragment);
 		titleList.add("待录用");
 
-		fragmentList.add(TaskAssignedSignDetailEdFragment.newInstance());
+		edFragment = TaskAssignedSignDetailEdFragment.newInstance();
+		fragmentList.add(edFragment);
 		titleList.add("已录用");
 
 		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout_task_assigned_sign_detail);
@@ -69,19 +107,27 @@ public class TaskAssignedSignDetailActivity extends BaseAppCompatActivity
 		tabLayout.setupWithViewPager(viewPager);
 		tabLayout.setTabTextColors(ContextCompat.getColor(this, R.color.hokolGrayHeavy), ContextCompat.getColor(this, R.color.hokolRed));
 		tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.hokolRed));
-
-		findViewById(R.id.iv_task_assigned_sign_detail_cancel).setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				finish();
-			}
-		});
 	}
 
-	public static void actionStart(Context context)
+	private void initData()
 	{
-		context.startActivity(new Intent(context, TaskAssignedSignDetailActivity.class));
+		String taskId = getIntent().getStringExtra(KeyTaskId);
+		XHttpUtil.doTaskUserSignUpDetail(new WTaskUserSignUpDetailBean(taskId, 0, DeleteConstant.defaultNumberLarge), new XHttpAdapter<VTaskUserSignUpDetailBean>()
+		{
+			@Override
+			public void onSuccess(VTaskUserSignUpDetailBean signUpDetailBean)
+			{
+				ArrayList<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean> resultList = signUpDetailBean.getList();
+				if (null != resultList)
+				{
+					unFragment.updateData(resultList);
+					edFragment.updateData(resultList);
+				}
+				else
+				{
+					LogFileUtil.v("Task Assigned Sign Detail Data is Null");
+				}
+			}
+		});
 	}
 }

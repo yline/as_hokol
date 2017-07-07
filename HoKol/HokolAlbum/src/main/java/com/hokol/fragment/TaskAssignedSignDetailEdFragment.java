@@ -9,18 +9,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hokol.R;
-import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.bean.VTaskUserSignUpDetailBean;
 import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
+import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.base.BaseFragment;
 import com.yline.view.layout.label.FlowLayout;
-import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TaskAssignedSignDetailEdFragment extends BaseFragment
 {
+	private static final String KeyDataValue = "AssignedEd";
+
+	private SignDetailEdAdapter signDetailEdAdapter;
+
 	public static TaskAssignedSignDetailEdFragment newInstance()
 	{
 		Bundle args = new Bundle();
@@ -29,8 +34,6 @@ public class TaskAssignedSignDetailEdFragment extends BaseFragment
 		fragment.setArguments(args);
 		return fragment;
 	}
-
-	private SignDetailEdAdapter signDetailEdAdapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -44,6 +47,7 @@ public class TaskAssignedSignDetailEdFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 
 		initView(view);
+		initData();
 	}
 
 	private void initView(View view)
@@ -60,12 +64,39 @@ public class TaskAssignedSignDetailEdFragment extends BaseFragment
 		});
 
 		signDetailEdAdapter = new SignDetailEdAdapter();
+		signDetailEdAdapter.setShowEmpty(false);
 		recyclerView.setAdapter(signDetailEdAdapter);
-
-		signDetailEdAdapter.setDataList(HttpEnum.getUserTagListAll());
 	}
 
-	private class SignDetailEdAdapter extends CommonRecyclerAdapter<String>
+	private void initData()
+	{
+		updateData();
+	}
+
+	private void updateData()
+	{
+		Bundle arg = getArguments();
+		if (null != arg)
+		{
+			signDetailEdAdapter.setDataList(arg.<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean>getParcelableArrayList(KeyDataValue));
+		}
+	}
+
+	public void updateData(ArrayList<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean> beanList)
+	{
+		if (null != signDetailEdAdapter)
+		{
+			signDetailEdAdapter.setDataList(beanList);
+		}
+		else
+		{
+			Bundle arg = new Bundle();
+			arg.putParcelableArrayList(KeyDataValue, beanList);
+			setArguments(arg);
+		}
+	}
+
+	private class SignDetailEdAdapter extends WidgetRecyclerAdapter<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean>
 	{
 		@Override
 		public int getItemRes()

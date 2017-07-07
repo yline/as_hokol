@@ -1,26 +1,27 @@
 package com.hokol.medium.http.bean;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class WTaskDeleteBean
 {
+	// 雇员
+	public static final int TypeStaff = 0;
+
+	// 雇主
+	public static final int TypeEmployer = 1;
+
 	/* 用户id */
 	private String user_id;
 
-	/* 要删除的任务(数组形式) */
-	private List<String> task_ids;
+	/* 要删除的任务id */
+	private String task_id;
 
-	public WTaskDeleteBean(String user_id, String taskId)
+	/* 删除类型(0雇主删除发布的任务,1:雇员删除投递的任务) */
+	private int type;
+
+	public WTaskDeleteBean(String user_id, String task_id, int type)
 	{
 		this.user_id = user_id;
-		this.task_ids = Arrays.asList(taskId);
-	}
-
-	public WTaskDeleteBean(String user_id, List<String> task_ids)
-	{
-		this.user_id = user_id;
-		this.task_ids = task_ids;
+		this.task_id = task_id;
+		this.type = type;
 	}
 
 	public String getUser_id()
@@ -33,13 +34,23 @@ public class WTaskDeleteBean
 		this.user_id = user_id;
 	}
 
-	public List<String> getTask_ids()
+	public String getTask_id()
 	{
-		return task_ids;
+		return task_id;
 	}
 
-	public void setTask_ids(List<String> task_ids)
+	public void setTask_id(String task_id)
 	{
-		this.task_ids = task_ids;
+		this.task_id = task_id;
+	}
+
+	public int getType()
+	{
+		return type;
+	}
+
+	public void setType(int type)
+	{
+		this.type = type;
 	}
 }

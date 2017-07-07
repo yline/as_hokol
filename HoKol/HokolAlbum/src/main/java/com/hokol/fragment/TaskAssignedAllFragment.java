@@ -107,9 +107,9 @@ public class TaskAssignedAllFragment extends BaseFragment
 			}
 
 			@Override
-			public void onSignDetailClick(View view)
+			public void onSignDetailClick(View view, String taskId)
 			{
-				TaskAssignedSignDetailActivity.actionStart(getContext());
+				TaskAssignedSignDetailActivity.actionStart(getContext(), taskId);
 			}
 		});
 		taskAssignedAllAdapter.setOnAssignedTradeCallback(new TaskAssignedAdapter.OnTaskAssignedTradeCallback()
@@ -146,7 +146,7 @@ public class TaskAssignedAllFragment extends BaseFragment
 			@Override
 			public void onDelete(RecyclerViewHolder viewHolder, VTaskUserPublishedBean.VTaskUserPublishedOneBean vTaskBean, final int position)
 			{
-				XHttpUtil.doTaskDelete(new WTaskDeleteBean(userId, vTaskBean.getTask_id()), new XHttpAdapter<String>()
+				XHttpUtil.doTaskDelete(new WTaskDeleteBean(userId, vTaskBean.getTask_id(), WTaskDeleteBean.TypeStaff), new XHttpAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
