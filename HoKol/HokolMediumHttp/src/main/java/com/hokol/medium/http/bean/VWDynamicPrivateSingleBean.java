@@ -4,6 +4,10 @@ import java.util.List;
 
 public class VWDynamicPrivateSingleBean
 {
+	public static final int Praised = 1;
+
+	public static final int Cared = 1;
+
 	/* 用户昵称 */
 	private String user_nickname;
 
@@ -30,6 +34,12 @@ public class VWDynamicPrivateSingleBean
 
 	/* 动态大图片(链接) */
 	private String pri_img;
+
+	/* 是否关注动态发布者(0:未关注,1:已关注) */
+	private int is_care;
+
+	/* 是否赞过该动态(0:未赞过,1:已赞过) */
+	private int is_zan;
 
 	public String getUser_nickname()
 	{
@@ -119,5 +129,25 @@ public class VWDynamicPrivateSingleBean
 	public void setPri_img(String pri_img)
 	{
 		this.pri_img = pri_img;
+	}
+
+	public int getIs_care()
+	{
+		return is_care;
+	}
+
+	public void setIs_care(int is_care)
+	{
+		this.is_care = is_care;
+	}
+
+	public int getIs_zan()
+	{
+		return is_zan;
+	}
+
+	public void setIs_zan(int is_zan)
+	{
+		this.is_zan = is_zan;
 	}
 }

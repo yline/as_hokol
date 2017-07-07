@@ -253,9 +253,9 @@ public class StarDynamicPrivateActivity extends BaseAppCompatActivity
 					// 时间
 					long startTime = privateSingleBean1.getPri_pub_time();
 					viewHolder.setText(R.id.tv_star_dynamic_private_time, TimeConvertUtil.stamp2FormatTime(startTime * 1000));
-					/*
+
 					// 是否关注
-					boolean isCared = privateSingleBean1.getIs_care() == VDynamicCareSingleBean.Cared ? true : false;
+					boolean isCared = privateSingleBean1.getIs_care() == VWDynamicPrivateSingleBean.Cared ? true : false;
 					if (isCared)
 					{
 						viewHolder.get(R.id.iv_star_dynamic_private_care).setVisibility(View.GONE);
@@ -264,9 +264,9 @@ public class StarDynamicPrivateActivity extends BaseAppCompatActivity
 					{
 						viewHolder.get(R.id.iv_star_dynamic_private_care).setVisibility(View.VISIBLE);
 					}
-
+					
 					// 是否点赞
-					isPraised = privateSingleBean1.getIs_zan() == VDynamicCareSingleBean.Praised ? true : false;
+					isPraised = privateSingleBean1.getIs_zan() == VWDynamicPrivateSingleBean.Praised ? true : false;
 					if (isPraised)
 					{
 						viewHolder.setImageResource(R.id.iv_star_dynamic_private_praise, R.drawable.star_dynamic_liked);
@@ -274,7 +274,7 @@ public class StarDynamicPrivateActivity extends BaseAppCompatActivity
 					else
 					{
 						viewHolder.setImageResource(R.id.iv_star_dynamic_private_praise, R.drawable.star_dynamic_unlike);
-					}*/
+					}
 
 				}
 			});

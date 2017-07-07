@@ -3,6 +3,7 @@ package com.hokol.activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -10,6 +11,8 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,9 +24,11 @@ import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.WTaskMainPublishBean;
 import com.hokol.medium.widget.DialogIosWidget;
+import com.hokol.util.TextDecorateUtil;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
+import com.yline.log.LogFileUtil;
 import com.yline.utils.KeyBoardUtil;
 import com.yline.view.recycler.holder.ViewHolder;
 
@@ -54,6 +59,8 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 	private WTaskMainPublishBean taskPublishBean;
 
 	private boolean isPriceDiscuss = false;
+
+	private boolean isProtocolChecked = true;
 
 	public static void actionStart(Context context, String userId)
 	{
@@ -143,6 +150,16 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 		});
 
 		viewHolder.get(R.id.rl_task_publish_right).setVisibility(View.GONE);
+
+		// 用户 协议
+		initProtocolView(new TextDecorateUtil.OnTextSpannableCallback()
+		{
+			@Override
+			public void onClick(View widget)
+			{
+				HokolProtocolActivity.actionStart(TaskPublishActivity.this, HokolProtocolActivity.TypeProtocol.Charge);
+			}
+		});
 	}
 
 	private void initViewClick()
@@ -264,7 +281,7 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 						Calendar sInstance = Calendar.getInstance();
 						sInstance.set(year, month, dayOfMonth, 12, 0, 0);
 						Long endTime = sInstance.getTimeInMillis();
-						
+
 						if (endTime > System.currentTimeMillis())
 						{
 							endTime /= 1000;
@@ -287,6 +304,13 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
+				// 协议是否同意
+				if (!isProtocolChecked)
+				{
+					SDKManager.toast("未同意发布任务协议");
+					return;
+				}
+
 				// 填入数据
 				String taskTitle = viewHolder.getText(R.id.tv_task_publish_content_title); // 标题
 				taskPublishBean.setTask_title(taskTitle);
@@ -342,6 +366,31 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 		{
 			taskPublishBean = new WTaskMainPublishBean(userId);
 		}
+	}
+
+	private void initProtocolView(TextDecorateUtil.OnTextSpannableCallback spannableCallback)
+	{
+		TextView textView = viewHolder.get(R.id.tv_task_publish_content_protocol);
+		int length = textView.length();
+
+		final int clickable_length = 12;
+		if (length <= clickable_length)
+		{
+			LogFileUtil.e("checkBox text span", "too short");
+			return;
+		}
+
+		TextDecorateUtil.decorateTextSpan(textView, false, length - clickable_length, length, Color.RED, spannableCallback);
+
+		CheckBox checkBox = viewHolder.get(R.id.checkbox_task_publish_content_protocol);
+		checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+		{
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+			{
+				isProtocolChecked = isChecked;
+			}
+		});
 	}
 
 	@Override

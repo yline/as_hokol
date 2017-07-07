@@ -20,6 +20,9 @@ public class HttpConstant
 
 	public static final String MEDIA_TYPE_JSON = "application/json; charset=utf-8";
 
+	// 本地asset目录的 前缀
+	public static final String LocalUrlHead = "file:///android_asset/";
+
 	// Http Url 信息
 	private static final String url_head = "http://120.92.35.211/wanghong/wh/index.php/Api/";
 
