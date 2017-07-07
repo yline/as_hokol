@@ -82,7 +82,7 @@ public class TaskDeliveredEvaluateFragment extends BaseFragment
 			@Override
 			public void onItemClick(RecyclerViewHolder viewHolder, VTaskUserDeliveredBean.VTaskUserDeliveredOneBean deliveredOneBean, int position)
 			{
-				TaskDetailActivity.actionStart(getContext(), deliveredOneBean.getTask_id());
+				TaskDetailActivity.actionStart(getContext(), deliveredOneBean.getTask_id(), false);
 			}
 		});
 		deliveredEvaluateAdapter.setOnDeliveredEvaluateCallback(new TaskDeliveredAdapter.OnTaskDeliveredEvaluateCallback()

@@ -82,19 +82,19 @@ public class TaskAssignedSignFragment extends BaseFragment
 			@Override
 			public void onItemClick(RecyclerViewHolder viewHolder, VTaskUserPublishedBean.VTaskUserPublishedOneBean taskAssignedBean, int position)
 			{
-				TaskDetailActivity.actionStart(getContext(), taskAssignedBean.getTask_id());
+				TaskDetailActivity.actionStart(getContext(), taskAssignedBean.getTask_id(), true);
 			}
 		});
 		taskAssignedSignAdapter.setOnAssignedSignCallback(new TaskAssignedAdapter.OnTaskAssignedSignCallback()
 		{
 			@Override
-			public void onSignCancelClick(View view)
+			public void onSignCancelClick(View view, String taskId)
 			{
 				SDKManager.toast("取消任务");
 			}
 
 			@Override
-			public void onSignFinishClick(View view)
+			public void onSignFinishClick(View view, String taskId)
 			{
 				SDKManager.toast("结束报名");
 			}

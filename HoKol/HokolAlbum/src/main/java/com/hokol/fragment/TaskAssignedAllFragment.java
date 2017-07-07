@@ -21,6 +21,7 @@ import com.hokol.application.IApplication;
 import com.hokol.medium.callback.OnRecyclerDeleteCallback;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskUserPublishedBean;
+import com.hokol.medium.http.bean.WTaskActionMasterFinishBean;
 import com.hokol.medium.http.bean.WTaskDeleteBean;
 import com.hokol.medium.http.bean.WTaskUserPublishedBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
@@ -89,21 +90,37 @@ public class TaskAssignedAllFragment extends BaseFragment
 			@Override
 			public void onItemClick(RecyclerViewHolder viewHolder, VTaskUserPublishedBean.VTaskUserPublishedOneBean taskAssignedBean, int position)
 			{
-				TaskDetailActivity.actionStart(getContext(), taskAssignedBean.getTask_id());
+				TaskDetailActivity.actionStart(getContext(), taskAssignedBean.getTask_id(), true);
 			}
 		});
 		taskAssignedAllAdapter.setOnAssignedSignCallback(new TaskAssignedAdapter.OnTaskAssignedSignCallback()
 		{
 			@Override
-			public void onSignCancelClick(View view)
+			public void onSignCancelClick(View view, String taskId)
 			{
-				SDKManager.toast("取消任务");
+
+				XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId, WTaskActionMasterFinishBean.ActionCancel), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						SDKManager.toast("取消任务成功");
+					}
+				});
 			}
 
 			@Override
-			public void onSignFinishClick(View view)
+			public void onSignFinishClick(View view, String taskId)
 			{
-				SDKManager.toast("结束报名");
+				XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId, WTaskActionMasterFinishBean.ActionFinish), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						SDKManager.toast("结束报名成功");
+						// taskAssignedAllAdapter.update()
+					}
+				});
 			}
 
 			@Override

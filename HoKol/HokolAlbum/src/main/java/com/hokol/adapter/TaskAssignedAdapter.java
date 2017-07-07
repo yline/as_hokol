@@ -149,7 +149,7 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 				{
 					if (null != assignedSignCallback)
 					{
-						assignedSignCallback.onSignCancelClick(v);
+						assignedSignCallback.onSignCancelClick(v, bean.getTask_id());
 					}
 				}
 			});
@@ -160,7 +160,7 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 				{
 					if (null != assignedSignCallback)
 					{
-						assignedSignCallback.onSignFinishClick(v);
+						assignedSignCallback.onSignFinishClick(v, bean.getTask_id());
 					}
 				}
 			});
@@ -246,6 +246,18 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		}
 	}
 
+	/**
+	 * 更新任务 数据
+	 * 并不调用item更新
+	 *
+	 * @param position
+	 * @param newStatus
+	 */
+	public void updateStatus(int position, int newStatus)
+	{
+		sList.get(position).setStatus(newStatus);
+	}
+
 	public void setOnAssignedSignCallback(OnTaskAssignedSignCallback assignedSignCallback)
 	{
 		this.assignedSignCallback = assignedSignCallback;
@@ -276,14 +288,14 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		 *
 		 * @param view
 		 */
-		void onSignCancelClick(View view);
+		void onSignCancelClick(View view, String taskId);
 
 		/**
 		 * 结束报名
 		 *
 		 * @param view
 		 */
-		void onSignFinishClick(View view);
+		void onSignFinishClick(View view, String taskId);
 
 		/**
 		 * 报名详情

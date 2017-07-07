@@ -98,7 +98,7 @@ public class MainTaskFragment extends BaseFragment implements MainTaskHelper.OnT
 			@Override
 			public void onItemClick(RecyclerViewHolder viewHolder, VTaskMainAllBean.TaskMainAllOne taskDetailBean, int position)
 			{
-				TaskDetailActivity.actionStart(getContext(), taskDetailBean.getTask_id());
+				TaskDetailActivity.actionStart(getContext(), taskDetailBean.getTask_id(), false);
 			}
 		});
 
@@ -172,7 +172,7 @@ public class MainTaskFragment extends BaseFragment implements MainTaskHelper.OnT
 
 							if (recommendBean.getType() == VRecommendHomeBean.TypeUser)
 							{
-								TaskDetailActivity.actionStart(getContext(), recommendBean.getInfo());
+								TaskDetailActivity.actionStart(getContext(), recommendBean.getInfo(), false);
 							}
 							else if (recommendBean.getType() == VRecommendHomeBean.TypeUrl)
 							{

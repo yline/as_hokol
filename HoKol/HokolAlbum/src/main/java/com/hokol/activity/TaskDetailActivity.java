@@ -32,15 +32,19 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 {
 	private static final String KeyTaskId = "TaskUserId";
 
+	private static final String KeyIsMaster = "TaskIsMaster";
+
 	private ViewHolder viewHolder;
 
 	private String taskId;
 
+	private boolean isMaster;
+
 	private boolean isCollected;
 
-	public static void actionStart(Context context, String taskId)
+	public static void actionStart(Context context, String taskId, boolean isMaster)
 	{
-		context.startActivity(new Intent(context, TaskDetailActivity.class).putExtra(KeyTaskId, taskId));
+		context.startActivity(new Intent(context, TaskDetailActivity.class).putExtra(KeyTaskId, taskId).putExtra(KeyIsMaster, isMaster));
 	}
 
 	@Override
@@ -56,6 +60,14 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 
 	private void initView()
 	{
+		taskId = getIntent().getStringExtra(KeyTaskId);
+		isMaster = getIntent().getBooleanExtra(KeyIsMaster, false);
+		if (isMaster)
+		{
+			viewHolder.get(R.id.iv_task_detail_collect).setVisibility(View.GONE);
+			viewHolder.get(R.id.btn_task_detail_contact).setVisibility(View.GONE);
+		}
+
 		viewHolder.setOnClickListener(R.id.iv_task_detail_back, new View.OnClickListener()
 		{
 			@Override
@@ -118,7 +130,6 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 	
 	private void initData()
 	{
-		taskId = getIntent().getStringExtra(KeyTaskId);
 		if (TextUtils.isEmpty(taskId))
 		{
 			SDKManager.toast("点击的任务出错啦");
@@ -138,14 +149,17 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 				public void onSuccess(VTaskMainDetailBean vTaskMainDetailBean)
 				{
 					// 是否收藏
-					isCollected = vTaskMainDetailBean.getIs_collect() == VTaskMainDetailBean.Collected ? true : false;
-					if (isCollected)
+					if (!isMaster)
 					{
-						viewHolder.setImageResource(R.id.iv_task_detail_collect, R.drawable.global_collected);
-					}
-					else
-					{
-						viewHolder.setImageResource(R.id.iv_task_detail_collect, R.drawable.global_uncollect);
+						isCollected = vTaskMainDetailBean.getIs_collect() == VTaskMainDetailBean.Collected ? true : false;
+						if (isCollected)
+						{
+							viewHolder.setImageResource(R.id.iv_task_detail_collect, R.drawable.global_collected);
+						}
+						else
+						{
+							viewHolder.setImageResource(R.id.iv_task_detail_collect, R.drawable.global_uncollect);
+						}
 					}
 
 					// 标价

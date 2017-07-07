@@ -2,6 +2,12 @@ package com.hokol.medium.http.bean;
 
 public class WTaskActionMasterFinishBean
 {
+	// 取消任务
+	public static final int ActionCancel = 1;
+
+	// 结束报名
+	public static final int ActionFinish = 0;
+
 	/* 用户ID */
 	private String user_id;
 

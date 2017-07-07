@@ -79,7 +79,7 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 			@Override
 			public void onItemClick(RecyclerViewHolder viewHolder, VUserTaskCollectionBean.VUserCollectionOneBean collectBean, int position)
 			{
-				TaskDetailActivity.actionStart(UserTaskCollectionActivity.this, collectBean.getTask_id());
+				TaskDetailActivity.actionStart(UserTaskCollectionActivity.this, collectBean.getTask_id(), false);
 			}
 		});
 		collectionAdapter.setOnTaskCollectCallback(new OnTaskCollectCallback<VUserTaskCollectionBean.VUserCollectionOneBean>()

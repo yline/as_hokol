@@ -81,7 +81,7 @@ public class TaskAssignedEvaluateFragment extends BaseFragment
 			@Override
 			public void onItemClick(RecyclerViewHolder viewHolder, VTaskUserPublishedBean.VTaskUserPublishedOneBean taskAssignedBean, int position)
 			{
-				TaskDetailActivity.actionStart(getContext(), taskAssignedBean.getTask_id());
+				TaskDetailActivity.actionStart(getContext(), taskAssignedBean.getTask_id(), true);
 			}
 		});
 		taskAssignedEvaluateAdapter.setOnAssignedEvaluateCallback(new TaskAssignedAdapter.OnTaskAssignedEvaluateCallback()
