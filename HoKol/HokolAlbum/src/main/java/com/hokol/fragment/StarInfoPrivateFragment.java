@@ -13,7 +13,7 @@ import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
-import com.hokol.activity.StarDynamicActivity;
+import com.hokol.activity.StarDynamicPrivateActivity;
 import com.hokol.activity.VipHokolActivity;
 import com.hokol.activity.VipSinglePrivateActivity;
 import com.hokol.application.AppStateManager;
@@ -102,7 +102,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 			@Override
 			public void onItemClick(RecyclerViewHolder viewHolder, VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean bean, int position)
 			{
-				StarDynamicActivity.actionStart(getContext(), bean.getPri_id());
+				StarDynamicPrivateActivity.actionStart(getContext(), bean.getPri_id());
 			}
 		});
 

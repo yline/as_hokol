@@ -15,7 +15,7 @@ import android.widget.PopupWindow;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
-import com.hokol.activity.StarDynamicActivity;
+import com.hokol.activity.StarDynamicPrivateActivity;
 import com.hokol.activity.StarInfoActivity;
 import com.hokol.application.AppStateManager;
 import com.hokol.application.DeleteConstant;
@@ -119,7 +119,7 @@ public class MainMinePrivateFragment extends BaseFragment
 			{
 				if (!TextUtils.isEmpty(bean.getPri_id()))
 				{
-					StarDynamicActivity.actionStart(getContext(), bean.getPri_id());
+					StarDynamicPrivateActivity.actionStart(getContext(), bean.getPri_id());
 				}
 			}
 		});

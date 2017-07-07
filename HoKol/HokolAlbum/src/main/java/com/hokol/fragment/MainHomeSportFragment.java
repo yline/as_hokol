@@ -81,7 +81,7 @@ public class MainHomeSportFragment extends BaseFragment implements MainHomeFragm
 			@Override
 			protected int getDivideResourceId()
 			{
-				return R.drawable.widget_solid_white_size_little;
+				return R.drawable.widget_solid_null_size_little;
 			}
 		});
 

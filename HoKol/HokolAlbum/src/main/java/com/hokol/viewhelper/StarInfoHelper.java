@@ -26,13 +26,13 @@ public class StarInfoHelper
 
 	private boolean isCared;
 
+	private OnHeadViewClickListener onHeadViewClickListener;
+
 	public StarInfoHelper(Context context, ViewHolder viewHolder)
 	{
 		this.sContext = context;
 		this.viewHolder = viewHolder;
 	}
-
-	private OnHeadViewClickListener onHeadViewClickListener;
 
 	public void initHeadView()
 	{
@@ -90,12 +90,11 @@ public class StarInfoHelper
 	{
 		// 背景
 		ImageView bgImageView = viewHolder.get(R.id.iv_star_info_bg);
-		Glide.with(sContext).load(vDetailBean.getUser_big_logo()).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed)
-				.bitmapTransform(new KuwaharaFilterTransformation(sContext, 25)).bitmapTransform(new ColorFilterTransformation(sContext, 0xc0000000)).into(bgImageView); //  Color.argb(99, )
+		Glide.with(sContext).load(vDetailBean.getUser_big_logo()).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).bitmapTransform(new KuwaharaFilterTransformation(sContext, 25)).bitmapTransform(new ColorFilterTransformation(sContext, 0xc0000000)).into(bgImageView); //  Color.argb(99, )
 
 		// 头像
 		ImageView avatarView = viewHolder.get(R.id.circle_star_info_avatar);
-		Glide.with(sContext).load(vDetailBean.getUser_logo()).error(R.drawable.global_load_failed).into(avatarView);
+		Glide.with(sContext).load(vDetailBean.getUser_logo()).error(R.drawable.global_load_avatar).into(avatarView);
 
 		// 昵称 + 性别
 		TextView textView = viewHolder.get(R.id.tv_star_info_nickname);

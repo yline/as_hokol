@@ -93,6 +93,8 @@
         </activity>
         <activity android:name=".activity.VipHokolActivity">
         </activity>
+        <activity android:name=".activity.StarDynamicPrivateActivity">
+        </activity>
     </application>
 
 </manifest>

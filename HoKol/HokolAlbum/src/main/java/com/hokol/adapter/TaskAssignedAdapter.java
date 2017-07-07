@@ -178,7 +178,7 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		}
 		else
 		{
-			viewHolder.get(R.id.ll_task_assigned_start).setVisibility(View.INVISIBLE);
+			viewHolder.get(R.id.ll_task_assigned_start).setVisibility(View.GONE);
 		}
 
 		// 待交易
@@ -221,7 +221,7 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		}
 		else
 		{
-			viewHolder.get(R.id.ll_task_assigned_trade).setVisibility(View.INVISIBLE);
+			viewHolder.get(R.id.ll_task_assigned_trade).setVisibility(View.GONE);
 		}
 
 		// 评论
@@ -242,7 +242,7 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		}
 		else
 		{
-			viewHolder.get(R.id.ll_task_assigned_finish).setVisibility(View.INVISIBLE);
+			viewHolder.get(R.id.ll_task_assigned_finish).setVisibility(View.GONE);
 		}
 	}
 

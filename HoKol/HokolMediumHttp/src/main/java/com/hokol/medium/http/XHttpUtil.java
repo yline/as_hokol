@@ -40,11 +40,13 @@ import com.hokol.medium.http.bean.VUserTaskScoreAssignedBean;
 import com.hokol.medium.http.bean.VUserTaskScoreDeliveredBean;
 import com.hokol.medium.http.bean.VUserVipInfoBean;
 import com.hokol.medium.http.bean.VUserVipRechargeRecordBean;
+import com.hokol.medium.http.bean.VWDynamicPrivateSingleBean;
 import com.hokol.medium.http.bean.WDynamicCareAllBean;
 import com.hokol.medium.http.bean.WDynamicCareSingleBean;
 import com.hokol.medium.http.bean.WDynamicDeleteBean;
 import com.hokol.medium.http.bean.WDynamicPraiseSingleBean;
 import com.hokol.medium.http.bean.WDynamicPrivateDeleteBean;
+import com.hokol.medium.http.bean.WDynamicPrivateSingleBean;
 import com.hokol.medium.http.bean.WDynamicUserAllBean;
 import com.hokol.medium.http.bean.WDynamicUserDetailBean;
 import com.hokol.medium.http.bean.WDynamicUserPrivateAllBean;
@@ -336,6 +338,15 @@ public class XHttpUtil
 	{
 		String httpUrl = HttpConstant.url_dynamic_single;
 		new XTextHttp<VDynamicCareSingleBean>(adapter).doPost(httpUrl, wDynamicCareSingleBean, VDynamicCareSingleBean.class);
+	}
+
+	/**
+	 * 请求单条 私密动态 的信息
+	 */
+	public static void doDynamicPrivateSingle(WDynamicPrivateSingleBean privateSingleBean, XHttpAdapter<VWDynamicPrivateSingleBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_dynamic_private_single;
+		new XTextHttp<VWDynamicPrivateSingleBean>(adapter).doPost(httpUrl, privateSingleBean, VWDynamicPrivateSingleBean.class);
 	}
 
 	/**

@@ -74,6 +74,9 @@ public class HttpConstant
 	// 请求单条动态信息
 	public static final String url_dynamic_single = url_head + "ApiDongtai/dt_one";
 
+	// 请求单条动态信息
+	public static final String url_dynamic_private_single = url_head + "ApiDongtai/private_one";
+
 	// 请求用户自己的，多条动态信息
 	public static final String url_dynamic_user_all = url_head + "ApiDongtai/dt_nums";
 

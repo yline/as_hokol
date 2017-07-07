@@ -240,7 +240,7 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 					// 头像
 					String avatarUrl = vDynamicCareSingleBean.getUser_logo();
 					ImageView avatarImageView = viewHolder.get(R.id.circle_star_dynamic);
-					Glide.with(StarDynamicActivity.this).load(avatarUrl).error(R.drawable.global_load_failed).into(avatarImageView);
+					Glide.with(StarDynamicActivity.this).load(avatarUrl).error(R.drawable.global_load_avatar).into(avatarImageView);
 
 					// 昵称
 					viewHolder.setText(R.id.tv_star_dynamic_nickname, vDynamicCareSingleBean.getUser_nickname());
