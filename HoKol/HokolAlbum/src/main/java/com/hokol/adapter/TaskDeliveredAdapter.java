@@ -31,18 +31,28 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 	@Override
 	public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
 	{
-		onBindViewHolder(viewHolder, position);
+		super.onBindViewHolder(viewHolder, position);
 
 		int status = sList.get(position).getStatus();
 		HttpEnum.DeliveredStatus deliveredStatus = HttpEnum.getDeliveredStatus(status);
-		onBindViewClick(viewHolder, deliveredStatus);
+		onBindSignViewClick(viewHolder, sList.get(position), deliveredStatus);
+		onBindWorkViewClick(viewHolder, sList.get(position), deliveredStatus);
+		onBindPassViewClick(viewHolder, sList.get(position), deliveredStatus);
 	}
-
-	private void onBindViewClick(RecyclerViewHolder viewHolder, HttpEnum.DeliveredStatus deliveredStatus)
+	
+	/**
+	 * 待报名
+	 */
+	private void onBindSignViewClick(RecyclerViewHolder viewHolder, VTaskUserDeliveredBean.VTaskUserDeliveredOneBean bean, HttpEnum.DeliveredStatus deliveredStatus)
 	{
-		// 待报名
-		if (deliveredStatus.equals(HttpEnum.DeliveredStatus.ToBeHired) || deliveredStatus.equals(HttpEnum.DeliveredStatus.ToBeOrder))
+		if (deliveredStatus.equals(HttpEnum.DeliveredStatus.ToBeHired)) // 待录用
 		{
+			viewHolder.setText(R.id.tv_item_main_task_state, "已报名");
+			viewHolder.get(R.id.ll_task_delivered_start).setVisibility(View.GONE);
+		}
+		else if (deliveredStatus.equals(HttpEnum.DeliveredStatus.ToBeOrder)) // 已录用，待接单
+		{
+			viewHolder.setText(R.id.tv_item_main_task_state, "待接单");
 			viewHolder.get(R.id.ll_task_delivered_start).setVisibility(View.VISIBLE);
 			viewHolder.setOnClickListener(R.id.tv_item_task_delivered_sign_cancel, new View.OnClickListener()
 			{
@@ -67,14 +77,25 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 				}
 			});
 		}
+		else if (deliveredStatus.equals(HttpEnum.DeliveredStatus.Refused))
+		{
+			viewHolder.setText(R.id.tv_item_main_task_state, "已取消接单");
+			viewHolder.get(R.id.ll_task_delivered_start).setVisibility(View.GONE);
+		}
 		else
 		{
-			viewHolder.get(R.id.ll_task_delivered_start).setVisibility(View.INVISIBLE);
+			viewHolder.get(R.id.ll_task_delivered_start).setVisibility(View.GONE);
 		}
+	}
 
-		// 待交易
+	/**
+	 * 待交易
+	 */
+	private void onBindWorkViewClick(RecyclerViewHolder viewHolder, VTaskUserDeliveredBean.VTaskUserDeliveredOneBean bean, HttpEnum.DeliveredStatus deliveredStatus)
+	{
 		if (deliveredStatus.equals(HttpEnum.DeliveredStatus.ToBeTrade))
 		{
+			viewHolder.setText(R.id.tv_item_main_task_state, "待交易");
 			viewHolder.get(R.id.ll_task_delivered_trade).setVisibility(View.VISIBLE);
 			viewHolder.setOnClickListener(R.id.tv_item_task_delivered_trade_failed, new View.OnClickListener()
 			{
@@ -101,12 +122,18 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 		}
 		else
 		{
-			viewHolder.get(R.id.ll_task_delivered_trade).setVisibility(View.INVISIBLE);
+			viewHolder.get(R.id.ll_task_delivered_trade).setVisibility(View.GONE);
 		}
+	}
 
-		// 待评论
+	/**
+	 * 待评论
+	 */
+	private void onBindPassViewClick(RecyclerViewHolder viewHolder, VTaskUserDeliveredBean.VTaskUserDeliveredOneBean bean, HttpEnum.DeliveredStatus deliveredStatus)
+	{
 		if (deliveredStatus.equals(HttpEnum.DeliveredStatus.ToBeEvaluate))
 		{
+			viewHolder.setText(R.id.tv_item_main_task_state, "待评价");
 			viewHolder.get(R.id.ll_task_delivered_finish).setVisibility(View.VISIBLE);
 			viewHolder.setOnClickListener(R.id.tv_item_task_delivered_evaluate_delete, new View.OnClickListener()
 			{
@@ -144,10 +171,10 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 		}
 		else
 		{
-			viewHolder.get(R.id.ll_task_delivered_finish).setVisibility(View.INVISIBLE);
+			viewHolder.get(R.id.ll_task_delivered_finish).setVisibility(View.GONE);
 		}
 	}
-	
+
 	@Override
 	public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
 	{

@@ -8,9 +8,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.hokol.R;
+import com.hokol.adapter.TaskAssignedAdapter;
 import com.hokol.fragment.TaskAssignedAllFragment;
 import com.hokol.fragment.TaskAssignedEvaluateFragment;
 import com.hokol.fragment.TaskAssignedSignFragment;
@@ -27,32 +29,64 @@ import java.util.List;
  * @author yline 2017/4/1 -- 17:54
  * @version 1.0.0
  */
-public class TaskAssignedActivity extends BaseAppCompatActivity
+public class TaskAssignedActivity extends BaseAppCompatActivity implements TaskAssignedAdapter.OnTaskAssignedRefreshCallback
 {
 	private static final String KeyTaskAssigned = "KeyTaskAssigned";
 
+	private TaskAssignedAllFragment taskAssignedAllFragment;
+
+	private TaskAssignedSignFragment taskAssignedSignFragment;
+
+	private TaskAssignedTradeFragment taskAssignedTradeFragment;
+
+	private TaskAssignedEvaluateFragment taskAssignedEvaluateFragment;
+
+	private String userId;
+
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, TaskAssignedActivity.class).putExtra(KeyTaskAssigned, userId));
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_task_assigned);
 
+		// 用户ID
+		userId = getIntent().getStringExtra(KeyTaskAssigned);
+		initTabView();
+
+		findViewById(R.id.iv_task_assigned_cancel).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				finish();
+			}
+		});
+	}
+
+	private void initTabView()
+	{
 		final List<BaseFragment> fragmentList = new ArrayList<>();
 		final List<String> titleList = new ArrayList<>();
 
-		// 用户ID
-		String userId = getIntent().getStringExtra(KeyTaskAssigned);
-
-		fragmentList.add(TaskAssignedAllFragment.newInstance(userId));
+		taskAssignedAllFragment = TaskAssignedAllFragment.newInstance(userId);
+		fragmentList.add(taskAssignedAllFragment);
 		titleList.add("全部");
-		
-		fragmentList.add(TaskAssignedSignFragment.newInstance(userId));
+
+		taskAssignedSignFragment = TaskAssignedSignFragment.newInstance(userId);
+		fragmentList.add(taskAssignedSignFragment);
 		titleList.add("待报名");
 
-		fragmentList.add(TaskAssignedTradeFragment.newInstance(userId));
+		taskAssignedTradeFragment = TaskAssignedTradeFragment.newInstance(userId);
+		fragmentList.add(taskAssignedTradeFragment);
 		titleList.add("待交易");
 
-		fragmentList.add(TaskAssignedEvaluateFragment.newInstance(userId));
+		taskAssignedEvaluateFragment = TaskAssignedEvaluateFragment.newInstance(userId);
+		fragmentList.add(taskAssignedEvaluateFragment);
 		titleList.add("待评价");
 
 		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout_task_assigned);
@@ -82,19 +116,41 @@ public class TaskAssignedActivity extends BaseAppCompatActivity
 		tabLayout.setupWithViewPager(viewPager);
 		tabLayout.setTabTextColors(ContextCompat.getColor(this, R.color.hokolGrayHeavy), ContextCompat.getColor(this, R.color.hokolRed));
 		tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.hokolRed));
-
-		findViewById(R.id.iv_task_assigned_cancel).setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				finish();
-			}
-		});
 	}
-	
-	public static void actionStart(Context context, String userId)
+
+	@Override
+	public void onAllRefresh(int start, int length)
 	{
-		context.startActivity(new Intent(context, TaskAssignedActivity.class).putExtra(KeyTaskAssigned, userId));
+		if (!TextUtils.isEmpty(userId))
+		{
+			taskAssignedAllFragment.onRefreshData(userId, start, length);
+		}
+	}
+
+	@Override
+	public void onSignRefresh(int start, int length)
+	{
+		if (!TextUtils.isEmpty(userId))
+		{
+			taskAssignedSignFragment.onRefreshData(userId, start, length);
+		}
+	}
+
+	@Override
+	public void onTradeRefresh(int start, int length)
+	{
+		if (!TextUtils.isEmpty(userId))
+		{
+			taskAssignedTradeFragment.onRefreshData(userId, start, length);
+		}
+	}
+
+	@Override
+	public void onEvaluateRefresh(int start, int length)
+	{
+		if (!TextUtils.isEmpty(userId))
+		{
+			taskAssignedEvaluateFragment.onRefreshData(userId, start, length);
+		}
 	}
 }

@@ -141,8 +141,11 @@ public class HttpConstant
 	// 获取被评价雇员信息
 	public static final String url_task_master_comment_info = url_head + "ApiTask/task_comment_peo_info";
 
-	// 雇主结束报名/取消任务
-	public static final String url_task_action_master_finish = url_head + "ApiTask/finish_task_employe";
+	// 雇主结束报名
+	public static final String url_task_action_master_finish = url_head + "ApiTask/end_employe";
+
+	// 雇主取消报名
+	public static final String url_task_action_master_cancel = url_head + "ApiTask/cancel_task";
 
 	// 雇主确定交易
 	public static final String url_task_action_master_trade = url_head + "ApiTask/confirm_task";

@@ -94,7 +94,7 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		onBindViewClick(viewHolder, sList.get(position), assignedStatus);
 
 		// 依据状态，判断是否能够删除记录
-		if (status == VTaskUserPublishedBean.StateFinish || status == VTaskUserPublishedBean.StateCancel || status == VTaskUserPublishedBean.StatePassed)
+		if (status == HttpEnum.AssignedStatus.Finished.getIndex() || status == HttpEnum.AssignedStatus.Canceled.getIndex() || status == HttpEnum.AssignedStatus.Passed.getIndex())
 		{
 			// 长按点击事件【只有过期的任务 才能删除】
 			WidgetDeleteMenu widgetDeleteMenu = new WidgetDeleteMenu(sContext);
@@ -343,5 +343,39 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		 * @param view
 		 */
 		void onEvaluateClick(View view);
+	}
+
+	/**
+	 * 刷新数据
+	 */
+	public interface OnTaskAssignedRefreshCallback
+	{
+		/**
+		 * 重新刷新 "全部"中的数据
+		 */
+		void onAllRefresh(int start, int length);
+
+		/**
+		 * 重新刷新 "待报名" 中的数据
+		 */
+		void onSignRefresh(int start, int length);
+
+		/**
+		 * 重新刷新 "待交易" 中的数据
+		 */
+		void onTradeRefresh(int start, int length);
+
+		/**
+		 * 重新刷新 "待评价" 中的数据
+		 */
+		void onEvaluateRefresh(int start, int length);
+	}
+
+	public interface OnTaskAssignedRefreshListener
+	{
+		/**
+		 * 重新刷新数据
+		 */
+		void onRefreshData(String userId, int start, int length);
 	}
 }

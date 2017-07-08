@@ -42,6 +42,8 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 
 	private boolean isCollected;
 
+	private VTaskMainDetailBean taskDetailBean;
+
 	public static void actionStart(Context context, String taskId, boolean isMaster)
 	{
 		context.startActivity(new Intent(context, TaskDetailActivity.class).putExtra(KeyTaskId, taskId).putExtra(KeyIsMaster, isMaster));
@@ -115,15 +117,18 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 					return;
 				}
 
-				XHttpUtil.doTaskActionStaffSignUp(new WTaskActionStaffSignUpBean(userId, taskId), new XHttpAdapter<String>()
+				if (null != taskDetailBean && VTaskMainDetailBean.StatusAssigning == taskDetailBean.getStatus() && VTaskMainDetailBean.UserAssignNull == taskDetailBean.getUser_is_join())
 				{
-					@Override
-					public void onSuccess(String s)
+					XHttpUtil.doTaskActionStaffSignUp(new WTaskActionStaffSignUpBean(userId, taskId), new XHttpAdapter<String>()
 					{
-						SDKManager.toast("报名成功");
-						finish();
-					}
-				});
+						@Override
+						public void onSuccess(String s)
+						{
+							SDKManager.toast("报名成功");
+							finish();
+						}
+					});
+				}
 			}
 		});
 	}
@@ -148,9 +153,9 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 				@Override
 				public void onSuccess(VTaskMainDetailBean vTaskMainDetailBean)
 				{
-					// 是否收藏
 					if (!isMaster)
 					{
+						// 是否收藏
 						isCollected = vTaskMainDetailBean.getIs_collect() == VTaskMainDetailBean.Collected ? true : false;
 						if (isCollected)
 						{
@@ -159,6 +164,38 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 						else
 						{
 							viewHolder.setImageResource(R.id.iv_task_detail_collect, R.drawable.global_uncollect);
+						}
+
+						// 是否报名 、 任务状态
+						if (VTaskMainDetailBean.UserAssignNull == vTaskMainDetailBean.getUser_is_join())
+						{
+							if (VTaskMainDetailBean.StatusAssigning == vTaskMainDetailBean.getStatus())
+							{
+								viewHolder.setText(R.id.btn_task_detail_contact, "立即报名").setBackgroundResource(R.drawable.widget_shape_rectangle_solid_redhokol);
+							}
+							else if (VTaskMainDetailBean.StatusAssignPass == vTaskMainDetailBean.getStatus())
+							{
+								viewHolder.setText(R.id.btn_task_detail_contact, "已终止报名").setBackgroundResource(R.drawable.widget_shape_rectangle_solid_pinkhokol);
+							}
+							else
+							{
+								viewHolder.setText(R.id.btn_task_detail_contact, "已结束").setBackgroundResource(R.drawable.widget_shape_rectangle_solid_pinkhokol);
+							}
+						}
+						else
+						{
+							if (VTaskMainDetailBean.StatusAssigning == vTaskMainDetailBean.getStatus())
+							{
+								viewHolder.setText(R.id.btn_task_detail_contact, "已报名").setBackgroundResource(R.drawable.widget_shape_rectangle_solid_pinkhokol);
+							}
+							else if (VTaskMainDetailBean.StatusAssignPass == vTaskMainDetailBean.getStatus())
+							{
+								viewHolder.setText(R.id.btn_task_detail_contact, "已报名").setBackgroundResource(R.drawable.widget_shape_rectangle_solid_pinkhokol);
+							}
+							else
+							{
+								viewHolder.setText(R.id.btn_task_detail_contact, "已结束").setBackgroundResource(R.drawable.widget_shape_rectangle_solid_pinkhokol);
+							}
 						}
 					}
 

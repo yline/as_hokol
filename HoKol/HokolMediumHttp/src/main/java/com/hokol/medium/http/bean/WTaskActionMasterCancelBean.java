@@ -1,6 +1,6 @@
 package com.hokol.medium.http.bean;
 
-public class WTaskActionMasterFinishBean
+public class WTaskActionMasterCancelBean
 {
 	/* 用户ID */
 	private String user_id;
@@ -8,7 +8,7 @@ public class WTaskActionMasterFinishBean
 	/* 任务唯一标识 */
 	private String task_id;
 
-	public WTaskActionMasterFinishBean(String user_id, String task_id)
+	public WTaskActionMasterCancelBean(String user_id, String task_id)
 	{
 		this.user_id = user_id;
 		this.task_id = task_id;

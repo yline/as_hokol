@@ -2,104 +2,7 @@ package com.hokol.medium.http;
 
 import android.content.Context;
 
-import com.hokol.medium.http.bean.VAreaAllBean;
-import com.hokol.medium.http.bean.VDynamicCareAllBean;
-import com.hokol.medium.http.bean.VDynamicCareSingleBean;
-import com.hokol.medium.http.bean.VDynamicPraiseSingleBean;
-import com.hokol.medium.http.bean.VDynamicUserAllBean;
-import com.hokol.medium.http.bean.VDynamicUserDetailBean;
-import com.hokol.medium.http.bean.VDynamicUserPrivateAllBean;
-import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
-import com.hokol.medium.http.bean.VHomeMainBean;
-import com.hokol.medium.http.bean.VInitHokolBean;
-import com.hokol.medium.http.bean.VNewsMultiplexBean;
-import com.hokol.medium.http.bean.VNewsRecommendBean;
-import com.hokol.medium.http.bean.VRecommendHomeBean;
-import com.hokol.medium.http.bean.VRecommendTaskBean;
-import com.hokol.medium.http.bean.VTaskMainAllBean;
-import com.hokol.medium.http.bean.VTaskMainDetailBean;
-import com.hokol.medium.http.bean.VTaskStaffCommentedInfoBean;
-import com.hokol.medium.http.bean.VTaskUserAcceptBean;
-import com.hokol.medium.http.bean.VTaskUserDeliveredBean;
-import com.hokol.medium.http.bean.VTaskUserPublishedBean;
-import com.hokol.medium.http.bean.VTaskUserSignUpDetailBean;
-import com.hokol.medium.http.bean.VUserAvatarBean;
-import com.hokol.medium.http.bean.VUserCareAllBean;
-import com.hokol.medium.http.bean.VUserContactVolumeBean;
-import com.hokol.medium.http.bean.VUserCreditBean;
-import com.hokol.medium.http.bean.VUserFansAllBean;
-import com.hokol.medium.http.bean.VUserGiftReceiveBean;
-import com.hokol.medium.http.bean.VUserGiftSendBean;
-import com.hokol.medium.http.bean.VUserMessageSystemBean;
-import com.hokol.medium.http.bean.VUserMessageSystemOutlineBean;
-import com.hokol.medium.http.bean.VUserRechargeRecordBean;
-import com.hokol.medium.http.bean.VUserTaskCollectionBean;
-import com.hokol.medium.http.bean.VUserTaskCommentAssignedBean;
-import com.hokol.medium.http.bean.VUserTaskCommentDeliveredBean;
-import com.hokol.medium.http.bean.VUserTaskScoreAssignedBean;
-import com.hokol.medium.http.bean.VUserTaskScoreDeliveredBean;
-import com.hokol.medium.http.bean.VUserVipInfoBean;
-import com.hokol.medium.http.bean.VUserVipRechargeRecordBean;
-import com.hokol.medium.http.bean.VWDynamicPrivateSingleBean;
-import com.hokol.medium.http.bean.WDynamicCareAllBean;
-import com.hokol.medium.http.bean.WDynamicCareSingleBean;
-import com.hokol.medium.http.bean.WDynamicDeleteBean;
-import com.hokol.medium.http.bean.WDynamicPraiseSingleBean;
-import com.hokol.medium.http.bean.WDynamicPrivateDeleteBean;
-import com.hokol.medium.http.bean.WDynamicPrivateSingleBean;
-import com.hokol.medium.http.bean.WDynamicUserAllBean;
-import com.hokol.medium.http.bean.WDynamicUserDetailBean;
-import com.hokol.medium.http.bean.WDynamicUserPrivateAllBean;
-import com.hokol.medium.http.bean.WEnterCodeRegisterBean;
-import com.hokol.medium.http.bean.WEnterCodeUpdatePhoneBean;
-import com.hokol.medium.http.bean.WEnterLoginPhonePwdBean;
-import com.hokol.medium.http.bean.WEnterPhoneUpdateBean;
-import com.hokol.medium.http.bean.WEnterRegisterBean;
-import com.hokol.medium.http.bean.WEnterRegisterCompleteInfoBean;
-import com.hokol.medium.http.bean.WEnterResetPwdBean;
-import com.hokol.medium.http.bean.WHomeMainBean;
-import com.hokol.medium.http.bean.WInitHokolBean;
-import com.hokol.medium.http.bean.WNewsMultiplexBean;
-import com.hokol.medium.http.bean.WSettingResetPwdBean;
-import com.hokol.medium.http.bean.WSettingSubmitProposalBean;
-import com.hokol.medium.http.bean.WSettingUpdateInfoBean;
-import com.hokol.medium.http.bean.WTaskActionMasterCommentBean;
-import com.hokol.medium.http.bean.WTaskActionMasterFinishBean;
-import com.hokol.medium.http.bean.WTaskActionMasterTakeOnBean;
-import com.hokol.medium.http.bean.WTaskActionMasterTradeBean;
-import com.hokol.medium.http.bean.WTaskActionStaffConfirmBean;
-import com.hokol.medium.http.bean.WTaskActionStaffSignUpBean;
-import com.hokol.medium.http.bean.WTaskActionStaffTradeBean;
-import com.hokol.medium.http.bean.WTaskDeleteBean;
-import com.hokol.medium.http.bean.WTaskMainAllBean;
-import com.hokol.medium.http.bean.WTaskMainCollectionBean;
-import com.hokol.medium.http.bean.WTaskMainDetailBean;
-import com.hokol.medium.http.bean.WTaskMainPublishBean;
-import com.hokol.medium.http.bean.WTaskStaffCommentedInfoBean;
-import com.hokol.medium.http.bean.WTaskUserAcceptBean;
-import com.hokol.medium.http.bean.WTaskUserDeliveredBean;
-import com.hokol.medium.http.bean.WTaskUserPublishedBean;
-import com.hokol.medium.http.bean.WTaskUserSignUpDetailBean;
-import com.hokol.medium.http.bean.WUserCareAllBean;
-import com.hokol.medium.http.bean.WUserCareOrCancelBean;
-import com.hokol.medium.http.bean.WUserCoinGiftBean;
-import com.hokol.medium.http.bean.WUserContactVolumeBean;
-import com.hokol.medium.http.bean.WUserCreditBean;
-import com.hokol.medium.http.bean.WUserFansAllBean;
-import com.hokol.medium.http.bean.WUserGiftReceiveBean;
-import com.hokol.medium.http.bean.WUserGiftSendBean;
-import com.hokol.medium.http.bean.WUserMessageSystemBean;
-import com.hokol.medium.http.bean.WUserMessageSystemOutlineBean;
-import com.hokol.medium.http.bean.WUserRechargeRecordBean;
-import com.hokol.medium.http.bean.WUserSystemMessageSignDeleteBean;
-import com.hokol.medium.http.bean.WUserSystemMessageSignReadBean;
-import com.hokol.medium.http.bean.WUserTaskCollectionBean;
-import com.hokol.medium.http.bean.WUserTaskCommentAssignedBean;
-import com.hokol.medium.http.bean.WUserTaskCommentDeliveredBean;
-import com.hokol.medium.http.bean.WUserTaskScoreAssignedBean;
-import com.hokol.medium.http.bean.WUserTaskScoreDeliveredBean;
-import com.hokol.medium.http.bean.WUserVipInfoBean;
-import com.hokol.medium.http.bean.WUserVipRechargeRecordBean;
+import com.hokol.medium.http.bean.*;
 import com.yline.http.XHttpAdapter;
 import com.yline.http.XHttpConfig;
 import com.yline.http.XHttpConstant;
@@ -662,7 +565,7 @@ public class XHttpUtil
 	}
 
 	/**
-	 * 雇主结束报名/取消任务
+	 * 雇主结束任务
 	 */
 	public static void doTaskActionMasterFinish(WTaskActionMasterFinishBean wTaskActionMasterFinishBean, XHttpAdapter<String> adapter)
 	{
@@ -675,6 +578,22 @@ public class XHttpUtil
 				return false;
 			}
 		}.doPost(httpUrl, wTaskActionMasterFinishBean, String.class);
+	}
+
+	/**
+	 * 雇主结束任务
+	 */
+	public static void doTaskActionMasterCancel(WTaskActionMasterCancelBean wTaskActionMasterCancelBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_action_master_cancel;
+		new XTextHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, wTaskActionMasterCancelBean, String.class);
 	}
 
 	/**

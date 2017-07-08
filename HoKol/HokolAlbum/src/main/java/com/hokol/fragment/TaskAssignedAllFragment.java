@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +20,7 @@ import com.hokol.application.IApplication;
 import com.hokol.medium.callback.OnRecyclerDeleteCallback;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskUserPublishedBean;
+import com.hokol.medium.http.bean.WTaskActionMasterCancelBean;
 import com.hokol.medium.http.bean.WTaskActionMasterFinishBean;
 import com.hokol.medium.http.bean.WTaskDeleteBean;
 import com.hokol.medium.http.bean.WTaskUserPublishedBean;
@@ -34,7 +34,7 @@ import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.List;
 
-public class TaskAssignedAllFragment extends BaseFragment
+public class TaskAssignedAllFragment extends BaseFragment implements TaskAssignedAdapter.OnTaskAssignedRefreshListener
 {
 	private static final String KeyUserId = "AllUserId";
 
@@ -67,6 +67,7 @@ public class TaskAssignedAllFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 
 		initView(view);
+		initViewClick();
 		initData();
 	}
 
@@ -85,6 +86,48 @@ public class TaskAssignedAllFragment extends BaseFragment
 		});
 
 		taskAssignedAllAdapter = new TaskAssignedAdapter(getContext());
+		recyclerView.setAdapter(taskAssignedAllAdapter);
+
+		// 刷新
+		superRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_task_assigned_all);
+		superRefreshLayout.setOnRefreshListener(new SuperSwipeRefreshLayout.OnSwipeListener()
+		{
+			@Override
+			public void onAnimate()
+			{
+				IApplication.toast("正在加载");
+				IApplication.getHandler().postDelayed(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						IApplication.toast("刷新结束");
+						superRefreshLayout.setRefreshing(false);
+					}
+				}, 2000);
+			}
+		});
+		superRefreshLayout.setOnLoadListener(new SuperSwipeRefreshLayout.OnSwipeListener()
+		{
+			@Override
+			public void onAnimate()
+			{
+				IApplication.toast("正在加载");
+				IApplication.getHandler().postDelayed(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						IApplication.toast("刷新结束");
+						superRefreshLayout.setLoadMore(false);
+					}
+				}, 2000);
+			}
+		});
+	}
+
+	private void initViewClick()
+	{
 		taskAssignedAllAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VTaskUserPublishedBean.VTaskUserPublishedOneBean>()
 		{
 			@Override
@@ -98,8 +141,7 @@ public class TaskAssignedAllFragment extends BaseFragment
 			@Override
 			public void onSignCancelClick(View view, String taskId)
 			{
-
-				XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId, WTaskActionMasterFinishBean.ActionCancel), new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionMasterCancel(new WTaskActionMasterCancelBean(userId, taskId), new XHttpAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -112,13 +154,12 @@ public class TaskAssignedAllFragment extends BaseFragment
 			@Override
 			public void onSignFinishClick(View view, String taskId)
 			{
-				XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId, WTaskActionMasterFinishBean.ActionFinish), new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new XHttpAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
 					{
 						SDKManager.toast("结束报名成功");
-						// taskAssignedAllAdapter.update()
 					}
 				});
 			}
@@ -173,66 +214,31 @@ public class TaskAssignedAllFragment extends BaseFragment
 				});
 			}
 		});
-		recyclerView.setAdapter(taskAssignedAllAdapter);
-
-		// 刷新
-		superRefreshLayout = (SuperSwipeRefreshLayout) view.findViewById(R.id.super_swipe_task_assigned_all);
-		superRefreshLayout.setOnRefreshListener(new SuperSwipeRefreshLayout.OnSwipeListener()
-		{
-			@Override
-			public void onAnimate()
-			{
-				IApplication.toast("正在加载");
-				IApplication.getHandler().postDelayed(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						IApplication.toast("刷新结束");
-						superRefreshLayout.setRefreshing(false);
-					}
-				}, 2000);
-			}
-		});
-		superRefreshLayout.setOnLoadListener(new SuperSwipeRefreshLayout.OnSwipeListener()
-		{
-			@Override
-			public void onAnimate()
-			{
-				IApplication.toast("正在加载");
-				IApplication.getHandler().postDelayed(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						IApplication.toast("刷新结束");
-						superRefreshLayout.setLoadMore(false);
-					}
-				}, 2000);
-			}
-		});
 	}
 
 	private void initData()
 	{
 		userId = getArguments().getString(KeyUserId);
-		if (!TextUtils.isEmpty(userId))
+		onRefreshData(userId, 0, DeleteConstant.defaultNumberSuper);
+	}
+
+	@Override
+	public void onRefreshData(String userId, int start, int length)
+	{
+		taskAssignedAllAdapter.setShowEmpty(false);
+		userPublishedBean = new WTaskUserPublishedBean(userId, 0, DeleteConstant.defaultNumberSuper);
+		XHttpUtil.doTaskUserPublishedAll(userPublishedBean, new XHttpAdapter<VTaskUserPublishedBean>()
 		{
-			taskAssignedAllAdapter.setShowEmpty(false);
-			userPublishedBean = new WTaskUserPublishedBean(userId, 0, DeleteConstant.defaultNumberSuper);
-			XHttpUtil.doTaskUserPublishedAll(userPublishedBean, new XHttpAdapter<VTaskUserPublishedBean>()
+			@Override
+			public void onSuccess(VTaskUserPublishedBean vTaskUserPublishedBean)
 			{
-				@Override
-				public void onSuccess(VTaskUserPublishedBean vTaskUserPublishedBean)
+				taskAssignedAllAdapter.setShowEmpty(true);
+				List<VTaskUserPublishedBean.VTaskUserPublishedOneBean> result = vTaskUserPublishedBean.getList();
+				if (null != result)
 				{
-					taskAssignedAllAdapter.setShowEmpty(true);
-					List<VTaskUserPublishedBean.VTaskUserPublishedOneBean> result = vTaskUserPublishedBean.getList();
-					if (null != result)
-					{
-						taskAssignedAllAdapter.setDataList(result);
-					}
+					taskAssignedAllAdapter.setDataList(result);
 				}
-			});
-		}
+			}
+		});
 	}
 }

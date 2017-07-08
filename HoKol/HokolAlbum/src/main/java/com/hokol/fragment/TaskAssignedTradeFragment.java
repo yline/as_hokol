@@ -29,7 +29,7 @@ import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.List;
 
-public class TaskAssignedTradeFragment extends BaseFragment
+public class TaskAssignedTradeFragment extends BaseFragment implements TaskAssignedAdapter.OnTaskAssignedRefreshListener
 {
 	private static final String KeyUserId = "TradeUserId";
 
@@ -60,6 +60,7 @@ public class TaskAssignedTradeFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 
 		initView(view);
+		initViewClick();
 		initData();
 	}
 
@@ -78,34 +79,6 @@ public class TaskAssignedTradeFragment extends BaseFragment
 		});
 		
 		taskAssignedTradeAdapter = new TaskAssignedAdapter(getContext());
-		taskAssignedTradeAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VTaskUserPublishedBean.VTaskUserPublishedOneBean>()
-		{
-			@Override
-			public void onItemClick(RecyclerViewHolder viewHolder, VTaskUserPublishedBean.VTaskUserPublishedOneBean taskAssignedBean, int position)
-			{
-				TaskDetailActivity.actionStart(getContext(), taskAssignedBean.getTask_id(), true);
-			}
-		});
-		taskAssignedTradeAdapter.setOnAssignedTradeCallback(new TaskAssignedAdapter.OnTaskAssignedTradeCallback()
-		{
-			@Override
-			public void onTradeCancelClick(View view)
-			{
-				SDKManager.toast("取消交易");
-			}
-
-			@Override
-			public void onTradeDetailClick(View view)
-			{
-				TaskAssignedTradeDetailActivity.actionStart(getContext());
-			}
-
-			@Override
-			public void onTradeConfirmClick(View view)
-			{
-				TaskAssignedTradeSureDetailActivity.actionStart(getContext());
-			}
-		});
 		recyclerView.setAdapter(taskAssignedTradeAdapter);
 
 		// 刷新
@@ -146,24 +119,62 @@ public class TaskAssignedTradeFragment extends BaseFragment
 		});
 	}
 
+	private void initViewClick()
+	{
+		taskAssignedTradeAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VTaskUserPublishedBean.VTaskUserPublishedOneBean>()
+		{
+			@Override
+			public void onItemClick(RecyclerViewHolder viewHolder, VTaskUserPublishedBean.VTaskUserPublishedOneBean taskAssignedBean, int position)
+			{
+				TaskDetailActivity.actionStart(getContext(), taskAssignedBean.getTask_id(), true);
+			}
+		});
+		taskAssignedTradeAdapter.setOnAssignedTradeCallback(new TaskAssignedAdapter.OnTaskAssignedTradeCallback()
+		{
+			@Override
+			public void onTradeCancelClick(View view)
+			{
+				SDKManager.toast("取消交易");
+			}
+
+			@Override
+			public void onTradeDetailClick(View view)
+			{
+				TaskAssignedTradeDetailActivity.actionStart(getContext());
+			}
+
+			@Override
+			public void onTradeConfirmClick(View view)
+			{
+				TaskAssignedTradeSureDetailActivity.actionStart(getContext());
+			}
+		});
+	}
+
 	private void initData()
 	{
 		String userId = getArguments().getString(KeyUserId);
 		if (!TextUtils.isEmpty(userId))
 		{
-			userPublishedBean = new WTaskUserPublishedBean(userId, 0, DeleteConstant.defaultNumberSuper);
-			XHttpUtil.doTaskUserPublishedTrade(userPublishedBean, new XHttpAdapter<VTaskUserPublishedBean>()
-			{
-				@Override
-				public void onSuccess(VTaskUserPublishedBean vTaskUserPublishedBean)
-				{
-					List<VTaskUserPublishedBean.VTaskUserPublishedOneBean> result = vTaskUserPublishedBean.getList();
-					if (null != result)
-					{
-						taskAssignedTradeAdapter.setDataList(result);
-					}
-				}
-			});
+			onRefreshData(userId, 0, DeleteConstant.defaultNumberSuper);
 		}
+	}
+
+	@Override
+	public void onRefreshData(String userId, int start, int length)
+	{
+		userPublishedBean = new WTaskUserPublishedBean(userId, start, length);
+		XHttpUtil.doTaskUserPublishedTrade(userPublishedBean, new XHttpAdapter<VTaskUserPublishedBean>()
+		{
+			@Override
+			public void onSuccess(VTaskUserPublishedBean vTaskUserPublishedBean)
+			{
+				List<VTaskUserPublishedBean.VTaskUserPublishedOneBean> result = vTaskUserPublishedBean.getList();
+				if (null != result)
+				{
+					taskAssignedTradeAdapter.setDataList(result);
+				}
+			}
+		});
 	}
 }

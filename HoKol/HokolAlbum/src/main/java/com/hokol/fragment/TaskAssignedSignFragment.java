@@ -28,7 +28,7 @@ import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.List;
 
-public class TaskAssignedSignFragment extends BaseFragment
+public class TaskAssignedSignFragment extends BaseFragment implements TaskAssignedAdapter.OnTaskAssignedRefreshListener
 {
 	private static final String KeyUserId = "SignUserId";
 
@@ -59,6 +59,7 @@ public class TaskAssignedSignFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 
 		initView(view);
+		initViewClick();
 		initData();
 	}
 
@@ -77,34 +78,6 @@ public class TaskAssignedSignFragment extends BaseFragment
 		});
 
 		taskAssignedSignAdapter = new TaskAssignedAdapter(getContext());
-		taskAssignedSignAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VTaskUserPublishedBean.VTaskUserPublishedOneBean>()
-		{
-			@Override
-			public void onItemClick(RecyclerViewHolder viewHolder, VTaskUserPublishedBean.VTaskUserPublishedOneBean taskAssignedBean, int position)
-			{
-				TaskDetailActivity.actionStart(getContext(), taskAssignedBean.getTask_id(), true);
-			}
-		});
-		taskAssignedSignAdapter.setOnAssignedSignCallback(new TaskAssignedAdapter.OnTaskAssignedSignCallback()
-		{
-			@Override
-			public void onSignCancelClick(View view, String taskId)
-			{
-				SDKManager.toast("取消任务");
-			}
-
-			@Override
-			public void onSignFinishClick(View view, String taskId)
-			{
-				SDKManager.toast("结束报名");
-			}
-
-			@Override
-			public void onSignDetailClick(View view, String taskId)
-			{
-				TaskAssignedSignDetailActivity.actionStart(getContext(), taskId);
-			}
-		});
 		recyclerView.setAdapter(taskAssignedSignAdapter);
 
 		// 刷新
@@ -145,24 +118,62 @@ public class TaskAssignedSignFragment extends BaseFragment
 		});
 	}
 
+	private void initViewClick()
+	{
+		taskAssignedSignAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VTaskUserPublishedBean.VTaskUserPublishedOneBean>()
+		{
+			@Override
+			public void onItemClick(RecyclerViewHolder viewHolder, VTaskUserPublishedBean.VTaskUserPublishedOneBean taskAssignedBean, int position)
+			{
+				TaskDetailActivity.actionStart(getContext(), taskAssignedBean.getTask_id(), true);
+			}
+		});
+		taskAssignedSignAdapter.setOnAssignedSignCallback(new TaskAssignedAdapter.OnTaskAssignedSignCallback()
+		{
+			@Override
+			public void onSignCancelClick(View view, String taskId)
+			{
+				SDKManager.toast("取消任务");
+			}
+
+			@Override
+			public void onSignFinishClick(View view, String taskId)
+			{
+				SDKManager.toast("结束报名");
+			}
+
+			@Override
+			public void onSignDetailClick(View view, String taskId)
+			{
+				TaskAssignedSignDetailActivity.actionStart(getContext(), taskId);
+			}
+		});
+	}
+
 	private void initData()
 	{
 		String userId = getArguments().getString(KeyUserId);
 		if (!TextUtils.isEmpty(userId))
 		{
-			userPublishedBean = new WTaskUserPublishedBean(userId, 0, DeleteConstant.defaultNumberSuper);
-			XHttpUtil.doTaskUserPublishedSign(userPublishedBean, new XHttpAdapter<VTaskUserPublishedBean>()
-			{
-				@Override
-				public void onSuccess(VTaskUserPublishedBean vTaskUserPublishedBean)
-				{
-					List<VTaskUserPublishedBean.VTaskUserPublishedOneBean> result = vTaskUserPublishedBean.getList();
-					if (null != result)
-					{
-						taskAssignedSignAdapter.setDataList(result);
-					}
-				}
-			});
+			onRefreshData(userId, 0, DeleteConstant.defaultNumberSuper);
 		}
+	}
+
+	@Override
+	public void onRefreshData(String userId, int start, int length)
+	{
+		userPublishedBean = new WTaskUserPublishedBean(userId, start, length);
+		XHttpUtil.doTaskUserPublishedSign(userPublishedBean, new XHttpAdapter<VTaskUserPublishedBean>()
+		{
+			@Override
+			public void onSuccess(VTaskUserPublishedBean vTaskUserPublishedBean)
+			{
+				List<VTaskUserPublishedBean.VTaskUserPublishedOneBean> result = vTaskUserPublishedBean.getList();
+				if (null != result)
+				{
+					taskAssignedSignAdapter.setDataList(result);
+				}
+			}
+		});
 	}
 }

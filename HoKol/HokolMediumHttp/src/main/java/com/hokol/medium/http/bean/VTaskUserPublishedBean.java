@@ -7,13 +7,6 @@ public class VTaskUserPublishedBean
 	// 已担保
 	public static final int Guaranteed = 1;
 
-	// 任务状态
-	public static final int StateFinish = 4; // 已完成
-
-	public static final int StateCancel = 5; // 已取消
-
-	public static final int StatePassed = 6; // 已过期
-
 	private List<VTaskUserPublishedOneBean> list;
 
 	public List<VTaskUserPublishedOneBean> getList()

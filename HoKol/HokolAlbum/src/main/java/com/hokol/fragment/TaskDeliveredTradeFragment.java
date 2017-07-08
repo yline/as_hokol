@@ -73,6 +73,12 @@ public class TaskDeliveredTradeFragment extends BaseFragment
 			{
 				return R.drawable.widget_solid_graylight_size_medium;
 			}
+
+			@Override
+			protected boolean isDivideLastLine()
+			{
+				return true;
+			}
 		});
 
 		deliveredTradeAdapter = new TaskDeliveredAdapter();

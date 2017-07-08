@@ -27,7 +27,7 @@ import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.List;
 
-public class TaskAssignedEvaluateFragment extends BaseFragment
+public class TaskAssignedEvaluateFragment extends BaseFragment implements TaskAssignedAdapter.OnTaskAssignedRefreshListener
 {
 	private static final String KeyUserId = "EvaluateUserId";
 
@@ -58,6 +58,7 @@ public class TaskAssignedEvaluateFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 
 		initView(view);
+		initViewClick();
 		initData();
 	}
 
@@ -76,22 +77,6 @@ public class TaskAssignedEvaluateFragment extends BaseFragment
 		});
 
 		taskAssignedEvaluateAdapter = new TaskAssignedAdapter(getContext());
-		taskAssignedEvaluateAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VTaskUserPublishedBean.VTaskUserPublishedOneBean>()
-		{
-			@Override
-			public void onItemClick(RecyclerViewHolder viewHolder, VTaskUserPublishedBean.VTaskUserPublishedOneBean taskAssignedBean, int position)
-			{
-				TaskDetailActivity.actionStart(getContext(), taskAssignedBean.getTask_id(), true);
-			}
-		});
-		taskAssignedEvaluateAdapter.setOnAssignedEvaluateCallback(new TaskAssignedAdapter.OnTaskAssignedEvaluateCallback()
-		{
-			@Override
-			public void onEvaluateClick(View view)
-			{
-				TaskAssignedEvaluateActivity.actionStart(getContext());
-			}
-		});
 		recyclerView.setAdapter(taskAssignedEvaluateAdapter);
 
 		// 刷新
@@ -132,24 +117,50 @@ public class TaskAssignedEvaluateFragment extends BaseFragment
 		});
 	}
 
+	private void initViewClick()
+	{
+		taskAssignedEvaluateAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VTaskUserPublishedBean.VTaskUserPublishedOneBean>()
+		{
+			@Override
+			public void onItemClick(RecyclerViewHolder viewHolder, VTaskUserPublishedBean.VTaskUserPublishedOneBean taskAssignedBean, int position)
+			{
+				TaskDetailActivity.actionStart(getContext(), taskAssignedBean.getTask_id(), true);
+			}
+		});
+		taskAssignedEvaluateAdapter.setOnAssignedEvaluateCallback(new TaskAssignedAdapter.OnTaskAssignedEvaluateCallback()
+		{
+			@Override
+			public void onEvaluateClick(View view)
+			{
+				TaskAssignedEvaluateActivity.actionStart(getContext());
+			}
+		});
+	}
+
 	private void initData()
 	{
 		String userId = getArguments().getString(KeyUserId);
 		if (!TextUtils.isEmpty(userId))
 		{
-			userPublishedBean = new WTaskUserPublishedBean(userId, 0, DeleteConstant.defaultNumberSuper);
-			XHttpUtil.doTaskUserPublishedEvaluate(userPublishedBean, new XHttpAdapter<VTaskUserPublishedBean>()
-			{
-				@Override
-				public void onSuccess(VTaskUserPublishedBean vTaskUserPublishedBean)
-				{
-					List<VTaskUserPublishedBean.VTaskUserPublishedOneBean> result = vTaskUserPublishedBean.getList();
-					if (null != result)
-					{
-						taskAssignedEvaluateAdapter.setDataList(result);
-					}
-				}
-			});
+			onRefreshData(userId, 0, DeleteConstant.defaultNumberSuper);
 		}
+	}
+
+	@Override
+	public void onRefreshData(String userId, int start, int length)
+	{
+		userPublishedBean = new WTaskUserPublishedBean(userId, start, length);
+		XHttpUtil.doTaskUserPublishedEvaluate(userPublishedBean, new XHttpAdapter<VTaskUserPublishedBean>()
+		{
+			@Override
+			public void onSuccess(VTaskUserPublishedBean vTaskUserPublishedBean)
+			{
+				List<VTaskUserPublishedBean.VTaskUserPublishedOneBean> result = vTaskUserPublishedBean.getList();
+				if (null != result)
+				{
+					taskAssignedEvaluateAdapter.setDataList(result);
+				}
+			}
+		});
 	}
 }

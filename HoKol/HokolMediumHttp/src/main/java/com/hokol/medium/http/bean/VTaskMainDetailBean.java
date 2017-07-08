@@ -4,9 +4,19 @@ import java.util.List;
 
 public class VTaskMainDetailBean
 {
-	public static final int Guaranteed = 1;
+	public static final int Guaranteed = 1; // 已担保
 
-	public static final int Collected = 1;
+	public static final int Collected = 1; // 已收藏
+
+	public static final int StatusAssigning = 1; // 任务报名中
+
+	public static final int StatusAssignPass = 2; // 已终止报名
+
+	public static final int StatusAssignFinish = 3; // 已结束
+
+	public static final int UserAssignNull = 0; // 未报名
+
+	public static final int UserAssignEd = 1; // 已报名
 
 	/* 任务唯一标识 */
 	private String task_id;
