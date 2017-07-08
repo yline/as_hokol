@@ -74,6 +74,12 @@ public class TaskAssignedEvaluateFragment extends BaseFragment implements TaskAs
 			{
 				return R.drawable.widget_solid_graylight_size_medium;
 			}
+
+			@Override
+			protected boolean isDivideLastLine()
+			{
+				return true;
+			}
 		});
 
 		taskAssignedEvaluateAdapter = new TaskAssignedAdapter(getContext());

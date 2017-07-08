@@ -83,6 +83,12 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 			{
 				return R.drawable.widget_solid_graylight_size_medium;
 			}
+
+			@Override
+			protected boolean isDivideLastLine()
+			{
+				return true;
+			}
 		});
 
 		taskAssignedAllAdapter = new TaskAssignedAdapter(getContext());
@@ -146,7 +152,11 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 					@Override
 					public void onSuccess(String s)
 					{
-						SDKManager.toast("取消任务成功");
+						if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
+						{
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onSignRefresh(0, DeleteConstant.defaultNumberSuper);
+						}
 					}
 				});
 			}
@@ -159,7 +169,11 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 					@Override
 					public void onSuccess(String s)
 					{
-						SDKManager.toast("结束报名成功");
+						if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
+						{
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onSignRefresh(0, DeleteConstant.defaultNumberSuper);
+						}
 					}
 				});
 			}
@@ -210,6 +224,7 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 					public void onSuccess(String s)
 					{
 						taskAssignedAllAdapter.remove(position);
+						taskAssignedAllAdapter.notifyDataSetChanged(); // 更新数据，因为设置了 final int position的点击事件
 					}
 				});
 			}

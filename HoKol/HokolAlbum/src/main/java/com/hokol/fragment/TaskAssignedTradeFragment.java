@@ -76,6 +76,12 @@ public class TaskAssignedTradeFragment extends BaseFragment implements TaskAssig
 			{
 				return R.drawable.widget_solid_graylight_size_medium;
 			}
+
+			@Override
+			protected boolean isDivideLastLine()
+			{
+				return true;
+			}
 		});
 		
 		taskAssignedTradeAdapter = new TaskAssignedAdapter(getContext());

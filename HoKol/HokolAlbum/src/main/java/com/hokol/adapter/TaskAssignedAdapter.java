@@ -85,7 +85,6 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		else
 		{
 			viewHolder.setText(R.id.tv_item_main_task_time, "剩" + showTime);
-
 		}
 
 		// 初始状态

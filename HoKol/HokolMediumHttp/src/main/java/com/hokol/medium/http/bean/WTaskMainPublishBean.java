@@ -14,6 +14,8 @@ public class WTaskMainPublishBean
 {
 	public static final int ValueErrorInt = -1024;
 
+	public static final int ValueNegotiableInt = -2;
+
 	public static final String ValueSuccessStr = "success";
 
 	/* 任务结束时间 (时间戳) */

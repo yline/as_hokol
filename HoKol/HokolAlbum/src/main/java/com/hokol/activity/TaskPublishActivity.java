@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.hokol.R;
+import com.hokol.application.AppStateManager;
+import com.hokol.application.DeleteConstant;
 import com.hokol.fragment.TaskPublishRightAreaFragment;
 import com.hokol.fragment.TaskPublishRightStyleFragment;
 import com.hokol.medium.http.HttpEnum;
@@ -61,6 +63,8 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 	private boolean isPriceDiscuss = false;
 
 	private boolean isProtocolChecked = true;
+
+	private String userId;
 
 	public static void actionStart(Context context, String userId)
 	{
@@ -329,6 +333,37 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 					result = "地区数据未选择";
 				}
 
+				// 余额不足
+				final int oldCoinNum = AppStateManager.getInstance().getUserCoinNum(TaskPublishActivity.this);
+				final float taskTotalFee = taskPublishBean.getTask_fee() * (taskPublishBean.getTask_man_num() + taskPublishBean.getTask_woman_num()) * DeleteConstant.ScaleOfHokolCoin;
+				if (taskPublishBean.getTask_fee() != WTaskMainPublishBean.ValueNegotiableInt) // 非面议
+				{
+					if (oldCoinNum < taskTotalFee)
+					{
+						SDKManager.toast("你的资金不足");
+						DialogIosWidget dialogIosWidget = new DialogIosWidget(TaskPublishActivity.this)
+						{
+							@Override
+							protected void initBuilder(Builder builder)
+							{
+								super.initBuilder(builder);
+								builder.setTitle("您的余额不足");
+								builder.setPositiveText("立即充值");
+								builder.setOnPositiveListener(new View.OnClickListener()
+								{
+									@Override
+									public void onClick(View v)
+									{
+										UserRechargeActivity.actionStart(TaskPublishActivity.this, userId);
+									}
+								});
+							}
+						};
+						dialogIosWidget.show();
+						return;
+					}
+				}
+
 				if (WTaskMainPublishBean.ValueSuccessStr == result)
 				{
 					XHttpUtil.doTaskMainPublish(taskPublishBean, new XHttpAdapter<String>()
@@ -337,6 +372,9 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 						public void onSuccess(String s)
 						{
 							SDKManager.toast("提交任务成功");
+							// 更新本地数据
+							AppStateManager.getInstance().updateKeyUserCoinNum(TaskPublishActivity.this, (int) (oldCoinNum - taskTotalFee));
+
 							finish();
 						}
 					});
@@ -355,7 +393,7 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 	{
 		viewHolder.setText(R.id.tv_task_publish_content_area, ValueAreaUnChoice);
 
-		String userId = getIntent().getStringExtra(KeyUserId);
+		userId = getIntent().getStringExtra(KeyUserId);
 		if (TextUtils.isEmpty(userId))
 		{
 			// 违规操作，进来了
@@ -421,7 +459,7 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 		isPriceDiscuss = isDiscuss;
 		if (isDiscuss)
 		{
-			taskPublishBean.setTask_fee(0);
+			taskPublishBean.setTask_fee(WTaskMainPublishBean.ValueNegotiableInt);
 		}
 		else
 		{

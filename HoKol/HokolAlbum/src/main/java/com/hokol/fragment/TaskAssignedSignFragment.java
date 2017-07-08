@@ -75,6 +75,12 @@ public class TaskAssignedSignFragment extends BaseFragment implements TaskAssign
 			{
 				return R.drawable.widget_solid_graylight_size_medium;
 			}
+
+			@Override
+			protected boolean isDivideLastLine()
+			{
+				return true;
+			}
 		});
 
 		taskAssignedSignAdapter = new TaskAssignedAdapter(getContext());
