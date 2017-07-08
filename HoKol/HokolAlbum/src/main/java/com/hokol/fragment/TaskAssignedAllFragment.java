@@ -155,7 +155,6 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 						if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
 						{
 							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
-							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onSignRefresh(0, DeleteConstant.defaultNumberSuper);
 						}
 					}
 				});
@@ -172,16 +171,15 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 						if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
 						{
 							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
-							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onSignRefresh(0, DeleteConstant.defaultNumberSuper);
 						}
 					}
 				});
 			}
 
 			@Override
-			public void onSignDetailClick(View view, String taskId)
+			public void onSignDetailClick(View view, String taskId, boolean isGuarantee)
 			{
-				TaskAssignedSignDetailActivity.actionStart(getContext(), taskId);
+				TaskAssignedSignDetailActivity.actionStart(getContext(), taskId, isGuarantee);
 			}
 		});
 		taskAssignedAllAdapter.setOnAssignedTradeCallback(new TaskAssignedAdapter.OnTaskAssignedTradeCallback()
@@ -189,7 +187,7 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 			@Override
 			public void onTradeCancelClick(View view)
 			{
-				SDKManager.toast("取消交易");
+				SDKManager.toast("取消任务");
 			}
 
 			@Override

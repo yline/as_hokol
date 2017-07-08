@@ -149,9 +149,9 @@ public class TaskAssignedSignFragment extends BaseFragment implements TaskAssign
 			}
 
 			@Override
-			public void onSignDetailClick(View view, String taskId)
+			public void onSignDetailClick(View view, String taskId, boolean isGuarantee)
 			{
-				TaskAssignedSignDetailActivity.actionStart(getContext(), taskId);
+				TaskAssignedSignDetailActivity.actionStart(getContext(), taskId, isGuarantee);
 			}
 		});
 	}

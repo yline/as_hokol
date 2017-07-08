@@ -175,7 +175,7 @@ public class TestTaskActivity extends BaseTestActivity
 				String task_id = editTextTwo.getText().toString().trim();
 				int switchs = parseInt(editTextThree, 0);
 
-				WTaskActionMasterFinishBean wTaskActionMasterFinishBean = new WTaskActionMasterFinishBean(user_id, task_id, switchs);
+				WTaskActionMasterFinishBean wTaskActionMasterFinishBean = new WTaskActionMasterFinishBean(user_id, task_id);
 				XHttpUtil.doTaskActionMasterFinish(wTaskActionMasterFinishBean, new XHttpAdapter<String>()
 				{
 					@Override

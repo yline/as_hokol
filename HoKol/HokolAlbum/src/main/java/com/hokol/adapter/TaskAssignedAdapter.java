@@ -170,7 +170,14 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 				{
 					if (null != assignedSignCallback)
 					{
-						assignedSignCallback.onSignDetailClick(v, bean.getTask_id());
+						if (VTaskUserPublishedBean.TypeNegotiable == bean.getFee_type())
+						{
+							assignedSignCallback.onSignDetailClick(v, bean.getTask_id(), true);
+						}
+						else
+						{
+							assignedSignCallback.onSignDetailClick(v, bean.getTask_id(), false);
+						}
 					}
 				}
 			});
@@ -301,7 +308,7 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		 *
 		 * @param view
 		 */
-		void onSignDetailClick(View view, String taskId);
+		void onSignDetailClick(View view, String taskId, boolean isNegotiable);
 	}
 
 	/**

@@ -11,11 +11,22 @@ public class WTaskActionMasterTakeOnBean
 	/* 发布任务用户ID */
 	private String user_id;
 
+	/* :任务费用[任务为面议时提交该参数] */
+	private int task_salary;
+
 	public WTaskActionMasterTakeOnBean(String task_id, String user_id_join, String user_id)
 	{
 		this.task_id = task_id;
 		this.user_id_join = user_id_join;
 		this.user_id = user_id;
+	}
+
+	public WTaskActionMasterTakeOnBean(String task_id, String user_id_join, String user_id, int task_salary)
+	{
+		this.task_id = task_id;
+		this.user_id_join = user_id_join;
+		this.user_id = user_id;
+		this.task_salary = task_salary;
 	}
 
 	public String getTask_id()
@@ -46,5 +57,15 @@ public class WTaskActionMasterTakeOnBean
 	public void setUser_id(String user_id)
 	{
 		this.user_id = user_id;
+	}
+
+	public int getTask_salary()
+	{
+		return task_salary;
+	}
+
+	public void setTask_salary(int task_salary)
+	{
+		this.task_salary = task_salary;
 	}
 }

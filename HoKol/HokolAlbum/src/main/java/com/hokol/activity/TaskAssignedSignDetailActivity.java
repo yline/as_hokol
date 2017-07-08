@@ -35,13 +35,24 @@ public class TaskAssignedSignDetailActivity extends BaseAppCompatActivity
 {
 	private static final String KeyTaskId = "TaskId";
 
+	private static final String KeyIsNegotiable = "IsNegotiable";
+
 	private TaskAssignedSignDetailUnFragment unFragment;
 
 	private TaskAssignedSignDetailEdFragment edFragment;
 
-	public static void actionStart(Context context, String taskId)
+	private String taskId;
+
+	private boolean isNegotiable;
+
+	/**
+	 * @param context
+	 * @param taskId       任务标识
+	 * @param isNegotiable 是否担保
+	 */
+	public static void actionStart(Context context, String taskId, boolean isNegotiable)
 	{
-		context.startActivity(new Intent(context, TaskAssignedSignDetailActivity.class).putExtra(KeyTaskId, taskId));
+		context.startActivity(new Intent(context, TaskAssignedSignDetailActivity.class).putExtra(KeyTaskId, taskId).putExtra(KeyIsNegotiable, isNegotiable));
 	}
 
 	@Override
@@ -49,6 +60,9 @@ public class TaskAssignedSignDetailActivity extends BaseAppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_task_assigned_sign_detail);
+
+		taskId = getIntent().getStringExtra(KeyTaskId);
+		isNegotiable = getIntent().getBooleanExtra(KeyIsNegotiable, false);
 
 		initView();
 		initTabView();
@@ -73,11 +87,11 @@ public class TaskAssignedSignDetailActivity extends BaseAppCompatActivity
 		final List<BaseFragment> fragmentList = new ArrayList<>();
 		final List<String> titleList = new ArrayList<>();
 
-		unFragment = TaskAssignedSignDetailUnFragment.newInstance();
+		unFragment = TaskAssignedSignDetailUnFragment.newInstance(taskId, isNegotiable);
 		fragmentList.add(unFragment);
 		titleList.add("待录用");
 
-		edFragment = TaskAssignedSignDetailEdFragment.newInstance();
+		edFragment = TaskAssignedSignDetailEdFragment.newInstance(taskId);
 		fragmentList.add(edFragment);
 		titleList.add("已录用");
 
@@ -111,7 +125,6 @@ public class TaskAssignedSignDetailActivity extends BaseAppCompatActivity
 
 	private void initData()
 	{
-		String taskId = getIntent().getStringExtra(KeyTaskId);
 		XHttpUtil.doTaskUserSignUpDetail(new WTaskUserSignUpDetailBean(taskId, 0, DeleteConstant.defaultNumberLarge), new XHttpAdapter<VTaskUserSignUpDetailBean>()
 		{
 			@Override

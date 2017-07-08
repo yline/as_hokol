@@ -8,8 +8,7 @@
     <com.hokol.medium.viewcustom.CircleView
         android:id="@+id/circle_detail_un_avatar"
         android:layout_width="@dimen/default_icon_normal"
-        android:layout_height="@dimen/default_icon_normal"
-        android:src="@drawable/global_load_failed"/>
+        android:layout_height="@dimen/default_icon_normal"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,6 +52,7 @@
                 android:background="@drawable/global_sex_girl"/>
 
             <ImageView
+                android:id="@+id/iv_user_info_level"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/default_text_size_normal"
                 android:layout_gravity="center_vertical"

@@ -53,6 +53,7 @@
                 android:background="@drawable/global_sex_girl"/>
 
             <ImageView
+                android:id="@+id/iv_user_info_level"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/default_text_size_normal"
                 android:layout_gravity="center_vertical"

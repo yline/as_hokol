@@ -7,6 +7,9 @@ public class VTaskUserPublishedBean
 	// 已担保
 	public static final int Guaranteed = 1;
 
+	// 用户选择的是 面议
+	public static final int TypeNegotiable = 1;
+
 	private List<VTaskUserPublishedOneBean> list;
 
 	public List<VTaskUserPublishedOneBean> getList()
@@ -43,6 +46,8 @@ public class VTaskUserPublishedBean
 		/* 任务报名人数 */private int join_num;
 
 		/* 任务录取人数 */private int employee_num;
+
+		/* 任务付费方式[0:全额担保，1:面议] */private int fee_type;
 
 		public String getTask_id()
 		{
@@ -152,6 +157,16 @@ public class VTaskUserPublishedBean
 		public void setEmployee_num(int employee_num)
 		{
 			this.employee_num = employee_num;
+		}
+
+		public int getFee_type()
+		{
+			return fee_type;
+		}
+
+		public void setFee_type(int fee_type)
+		{
+			this.fee_type = fee_type;
 		}
 	}
 }
