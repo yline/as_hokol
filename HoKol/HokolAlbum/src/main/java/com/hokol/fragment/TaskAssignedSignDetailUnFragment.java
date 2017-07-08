@@ -173,6 +173,8 @@ public class TaskAssignedSignDetailUnFragment extends BaseFragment
 		@Override
 		public void onBindViewHolder(final RecyclerViewHolder holder, final int position)
 		{
+			super.onBindViewHolder(holder, position);
+
 			final VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean taskBean = sList.get(position);
 
 			// 头像

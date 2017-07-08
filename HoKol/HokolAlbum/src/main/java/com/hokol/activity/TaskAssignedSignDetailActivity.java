@@ -130,16 +130,32 @@ public class TaskAssignedSignDetailActivity extends BaseAppCompatActivity
 			@Override
 			public void onSuccess(VTaskUserSignUpDetailBean signUpDetailBean)
 			{
-				ArrayList<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean> resultList = signUpDetailBean.getList();
+				List<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean> resultList = signUpDetailBean.getList();
+
+				ArrayList<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean> unList = new ArrayList<>();
+				ArrayList<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean> edList = new ArrayList<>();
+
 				if (null != resultList)
 				{
-					unFragment.updateData(resultList);
-					edFragment.updateData(resultList);
+					for (VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean bean : resultList)
+					{
+						if (bean.getIs_employe() == VTaskUserSignUpDetailBean.EmployUn)
+						{
+							unList.add(bean);
+						}
+						else
+						{
+							edList.add(bean);
+						}
+					}
 				}
 				else
 				{
 					LogFileUtil.v("Task Assigned Sign Detail Data is Null");
 				}
+
+				unFragment.updateData(unList);
+				edFragment.updateData(edList);
 			}
 		});
 	}

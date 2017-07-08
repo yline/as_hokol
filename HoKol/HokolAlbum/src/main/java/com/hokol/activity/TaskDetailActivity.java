@@ -153,6 +153,8 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 				@Override
 				public void onSuccess(VTaskMainDetailBean vTaskMainDetailBean)
 				{
+					taskDetailBean = vTaskMainDetailBean;
+
 					if (!isMaster)
 					{
 						// 是否收藏

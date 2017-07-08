@@ -8,6 +8,12 @@ import java.util.List;
 
 public class VTaskUserSignUpDetailBean
 {
+	public static final int EmployUn = 0;
+
+	public static final int EmployEd = 1;
+
+	public static final int EmployRefuse = 2;
+
 	private ArrayList<VTaskUserSignUpDetailOneBean> list;
 
 	public ArrayList<VTaskUserSignUpDetailOneBean> getList()

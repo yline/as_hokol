@@ -88,10 +88,6 @@ public class StarInfoHelper
 
 	public void initHeadData(VDynamicUserDetailBean vDetailBean)
 	{
-		// 背景
-		ImageView bgImageView = viewHolder.get(R.id.iv_star_info_bg);
-		Glide.with(sContext).load(vDetailBean.getUser_big_logo()).placeholder(R.drawable.global_load_failed).error(R.drawable.global_load_failed).bitmapTransform(new KuwaharaFilterTransformation(sContext, 25)).bitmapTransform(new ColorFilterTransformation(sContext, 0xc0000000)).into(bgImageView); //  Color.argb(99, )
-
 		// 头像
 		ImageView avatarView = viewHolder.get(R.id.circle_star_info_avatar);
 		Glide.with(sContext).load(vDetailBean.getUser_logo()).error(R.drawable.global_load_avatar).into(avatarView);
@@ -138,6 +134,10 @@ public class StarInfoHelper
 
 		// 标签
 		labelWidget.setDataList(vDetailBean.getUser_tag());
+
+		// 背景
+		ImageView bgImageView = viewHolder.get(R.id.iv_star_info_bg);
+		Glide.with(sContext).load(vDetailBean.getUser_big_logo()).error(R.drawable.global_load_failed).bitmapTransform(new KuwaharaFilterTransformation(sContext, 25)).bitmapTransform(new ColorFilterTransformation(sContext, 0xc0000000)).into(bgImageView); //  Color.argb(99, )
 	}
 
 	public interface OnHeadViewClickListener
