@@ -211,7 +211,8 @@
                 android:paddingTop="@dimen/default_space_small"
                 android:text="维权申诉"
                 android:textColor="@color/hokolGrayHeavy"
-                android:textSize="@dimen/default_text_size_small"/>
+                android:textSize="@dimen/default_text_size_small"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/tv_item_task_delivered_evaluate"

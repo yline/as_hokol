@@ -184,42 +184,45 @@ public class TaskAssignedEvaluateActivity extends BaseAppCompatActivity
 
 			// 外貌相符
 			RatingBar conformityRatingBar = holder.get(R.id.rating_task_evaluate_conformity);
+			updateStarHint((TextView) holder.get(R.id.tv_task_evaluate_conformity), requestArrays[position].getConformity_score());
 			conformityRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener()
 			{
 				@Override
 				public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser)
 				{
 					requestArrays[position].setConformity_score((int) rating);
+					notifyItemChanged(position);
 				}
 			});
 
 			// 活动能力
 			RatingBar actionRatingBar = holder.get(R.id.rating_task_evaluate_action);
-			updateStarHint((TextView) holder.get(R.id.tv_task_evaluate_conformity), requestArrays[position].getConformity_score());
+			updateStarHint((TextView) holder.get(R.id.tv_task_evaluate_action), requestArrays[position].getConformity_score());
 			actionRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener()
 			{
 				@Override
 				public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser)
 				{
 					requestArrays[position].setAction_capacity_score((int) rating);
+					notifyItemChanged(position);
 				}
 			});
 
 			// 服务态度
 			RatingBar attitudeRatingBar = holder.get(R.id.rating_task_evaluate_attitude);
-			updateStarHint((TextView) holder.get(R.id.tv_task_evaluate_action), requestArrays[position].getConformity_score());
+			updateStarHint((TextView) holder.get(R.id.tv_task_evaluate_attitude), requestArrays[position].getConformity_score());
 			attitudeRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener()
 			{
 				@Override
 				public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser)
 				{
 					requestArrays[position].setAttitude_score((int) rating);
+					notifyItemChanged(position);
 				}
 			});
 
 			// 评价内容
 			EditText evaluateEditText = holder.get(R.id.et_task_evaluate);
-			updateStarHint((TextView) holder.get(R.id.tv_task_evaluate_attitude), requestArrays[position].getConformity_score());
 			evaluateEditText.addTextChangedListener(new TextWatcher()
 			{
 				@Override

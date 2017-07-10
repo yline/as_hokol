@@ -17,6 +17,10 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskUserDeliveredBean;
+import com.hokol.medium.http.bean.WTaskActionMasterTradeBean;
+import com.hokol.medium.http.bean.WTaskActionStaffConfirmBean;
+import com.hokol.medium.http.bean.WTaskActionStaffTradeBean;
+import com.hokol.medium.http.bean.WTaskDeleteBean;
 import com.hokol.medium.http.bean.WTaskUserDeliveredBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
@@ -30,13 +34,15 @@ import java.util.List;
 
 public class TaskDeliveredAllFragment extends BaseFragment
 {
-	private static final String KeyUserId = "TaskId";
+	private static final String KeyUserId = "UserId";
 
 	private TaskDeliveredAdapter deliveredAllAdapter;
 
 	private SuperSwipeRefreshLayout superRefreshLayout;
 
 	private WTaskUserDeliveredBean deliveredAllBean;
+
+	private String userId;
 
 	public static TaskDeliveredAllFragment newInstance(String userId)
 	{
@@ -74,12 +80,6 @@ public class TaskDeliveredAllFragment extends BaseFragment
 			{
 				return R.drawable.widget_solid_graylight_size_medium;
 			}
-
-			@Override
-			protected boolean isDivideLastLine()
-			{
-				return true;
-			}
 		});
 
 		deliveredAllAdapter = new TaskDeliveredAdapter();
@@ -94,47 +94,83 @@ public class TaskDeliveredAllFragment extends BaseFragment
 		deliveredAllAdapter.setOnDeliveredSignCallback(new TaskDeliveredAdapter.OnTaskDeliveredSignCallback()
 		{
 			@Override
-			public void onSignCancelClick(View view)
+			public void onSignCancelClick(View view, String taskId)
 			{
-				SDKManager.toast("取消接单");
+				XHttpUtil.doTaskActionStaffConfirm(new WTaskActionStaffConfirmBean(userId, taskId, WTaskActionStaffConfirmBean.ActionRefuse), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						SDKManager.toast("取消接单成功");
+					}
+				});
 			}
 
 			@Override
-			public void onSignConfirmClick(View view)
+			public void onSignConfirmClick(View view, String taskId)
 			{
-				SDKManager.toast("确认接单");
+				XHttpUtil.doTaskActionStaffConfirm(new WTaskActionStaffConfirmBean(userId, taskId, WTaskActionStaffConfirmBean.ActionAccept), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						SDKManager.toast("确认接单成功");
+					}
+				});
 			}
 		});
 		deliveredAllAdapter.setOnDeliveredTradeCallback(new TaskDeliveredAdapter.OnTaskDeliveredTradeCallback()
 		{
 			@Override
-			public void onTradeFailedClick(View view)
+			public void onTradeFailedClick(View view, String taskId)
 			{
-				SDKManager.toast("任务未完成");
+				XHttpUtil.doTaskActionStaffTrade(new WTaskActionStaffTradeBean(userId, taskId, WTaskActionMasterTradeBean.ActionFailed), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						SDKManager.toast("任务未完成");
+					}
+				});
 			}
 
 			@Override
-			public void onTradeFinishedClick(View view)
+			public void onTradeFinishedClick(View view, String taskId)
 			{
-				SDKManager.toast("任务完成");
+				XHttpUtil.doTaskActionStaffTrade(new WTaskActionStaffTradeBean(userId, taskId, WTaskActionMasterTradeBean.ActionFinished), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						SDKManager.toast("任务完成");
+					}
+				});
 			}
 		});
 		deliveredAllAdapter.setOnDeliveredEvaluateCallback(new TaskDeliveredAdapter.OnTaskDeliveredEvaluateCallback()
 		{
 			@Override
-			public void onEvaluateDeleteClick(View view)
+			public void onEvaluateDeleteClick(View view, String taskId)
 			{
-				SDKManager.toast("删除任务");
+				XHttpUtil.doTaskDelete(new WTaskDeleteBean(userId, taskId, WTaskDeleteBean.TypeStaff), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						SDKManager.toast("删除任务");
+					}
+				});
 			}
 
 			@Override
-			public void onEvaluateAppealClick(View view)
+			public void onEvaluateAppealClick(View view, String taskId)
 			{
-				SDKManager.toast("维权申诉");
+				// 界面上删除了
+				// SDKManager.toast("维权申诉");
 			}
 
 			@Override
-			public void onEvaluateClick(View view)
+			public void onEvaluateClick(View view, String taskId)
 			{
 				TaskDeliveredEvaluateActivity.actionStart(getContext());
 			}
@@ -181,7 +217,7 @@ public class TaskDeliveredAllFragment extends BaseFragment
 
 	private void initData()
 	{
-		String userId = getArguments().getString(KeyUserId);
+		userId = getArguments().getString(KeyUserId);
 		if (!TextUtils.isEmpty(userId))
 		{
 			deliveredAllAdapter.setShowEmpty(false);

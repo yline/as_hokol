@@ -43,7 +43,7 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 	/**
 	 * 待报名
 	 */
-	private void onBindSignViewClick(RecyclerViewHolder viewHolder, VTaskUserDeliveredBean.VTaskUserDeliveredOneBean bean, HttpEnum.DeliveredStatus deliveredStatus)
+	private void onBindSignViewClick(RecyclerViewHolder viewHolder, final VTaskUserDeliveredBean.VTaskUserDeliveredOneBean bean, HttpEnum.DeliveredStatus deliveredStatus)
 	{
 		if (deliveredStatus.equals(HttpEnum.DeliveredStatus.ToBeHired)) // 待录用
 		{
@@ -61,7 +61,7 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 				{
 					if (null != deliveredSignCallback)
 					{
-						deliveredSignCallback.onSignCancelClick(v);
+						deliveredSignCallback.onSignCancelClick(v, bean.getTask_id());
 					}
 				}
 			});
@@ -72,7 +72,7 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 				{
 					if (null != deliveredSignCallback)
 					{
-						deliveredSignCallback.onSignConfirmClick(v);
+						deliveredSignCallback.onSignConfirmClick(v, bean.getTask_id());
 					}
 				}
 			});
@@ -91,7 +91,7 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 	/**
 	 * 待交易
 	 */
-	private void onBindWorkViewClick(RecyclerViewHolder viewHolder, VTaskUserDeliveredBean.VTaskUserDeliveredOneBean bean, HttpEnum.DeliveredStatus deliveredStatus)
+	private void onBindWorkViewClick(RecyclerViewHolder viewHolder, final VTaskUserDeliveredBean.VTaskUserDeliveredOneBean bean, HttpEnum.DeliveredStatus deliveredStatus)
 	{
 		if (deliveredStatus.equals(HttpEnum.DeliveredStatus.ToBeTrade))
 		{
@@ -104,7 +104,7 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 				{
 					if (null != deliveredTradeCallback)
 					{
-						deliveredTradeCallback.onTradeFailedClick(v);
+						deliveredTradeCallback.onTradeFailedClick(v, bean.getTask_id());
 					}
 				}
 			});
@@ -115,7 +115,7 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 				{
 					if (null != deliveredTradeCallback)
 					{
-						deliveredTradeCallback.onTradeFinishedClick(v);
+						deliveredTradeCallback.onTradeFinishedClick(v, bean.getTask_id());
 					}
 				}
 			});
@@ -125,11 +125,11 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 			viewHolder.get(R.id.ll_task_delivered_trade).setVisibility(View.GONE);
 		}
 	}
-
+	
 	/**
 	 * 待评论
 	 */
-	private void onBindPassViewClick(RecyclerViewHolder viewHolder, VTaskUserDeliveredBean.VTaskUserDeliveredOneBean bean, HttpEnum.DeliveredStatus deliveredStatus)
+	private void onBindPassViewClick(RecyclerViewHolder viewHolder, final VTaskUserDeliveredBean.VTaskUserDeliveredOneBean bean, HttpEnum.DeliveredStatus deliveredStatus)
 	{
 		if (deliveredStatus.equals(HttpEnum.DeliveredStatus.ToBeEvaluate))
 		{
@@ -142,7 +142,7 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 				{
 					if (null != deliveredEvaluateCallback)
 					{
-						deliveredEvaluateCallback.onEvaluateDeleteClick(v);
+						deliveredEvaluateCallback.onEvaluateDeleteClick(v, bean.getTask_id());
 					}
 				}
 			});
@@ -153,7 +153,7 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 				{
 					if (null != deliveredEvaluateCallback)
 					{
-						deliveredEvaluateCallback.onEvaluateAppealClick(v);
+						deliveredEvaluateCallback.onEvaluateAppealClick(v, bean.getTask_id());
 					}
 				}
 			});
@@ -164,7 +164,7 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 				{
 					if (null != deliveredEvaluateCallback)
 					{
-						deliveredEvaluateCallback.onEvaluateClick(v);
+						deliveredEvaluateCallback.onEvaluateClick(v, bean.getTask_id());
 					}
 				}
 			});
@@ -207,14 +207,14 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 		 *
 		 * @param view
 		 */
-		void onSignCancelClick(View view);
+		void onSignCancelClick(View view, String taskId);
 
 		/**
 		 * 确认接单
 		 *
 		 * @param view
 		 */
-		void onSignConfirmClick(View view);
+		void onSignConfirmClick(View view, String taskId);
 	}
 
 	/**
@@ -227,14 +227,14 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 		 *
 		 * @param view
 		 */
-		void onTradeFailedClick(View view);
+		void onTradeFailedClick(View view, String taskId);
 
 		/**
 		 * 任务完成
 		 *
 		 * @param view
 		 */
-		void onTradeFinishedClick(View view);
+		void onTradeFinishedClick(View view, String taskId);
 	}
 
 	/**
@@ -247,20 +247,20 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 		 *
 		 * @param view
 		 */
-		void onEvaluateDeleteClick(View view);
+		void onEvaluateDeleteClick(View view, String taskId);
 
 		/**
 		 * 维权申诉
 		 *
 		 * @param view
 		 */
-		void onEvaluateAppealClick(View view);
+		void onEvaluateAppealClick(View view, String taskId);
 
 		/**
 		 * 用户评价
 		 *
 		 * @param view
 		 */
-		void onEvaluateClick(View view);
+		void onEvaluateClick(View view, String taskId);
 	}
 }

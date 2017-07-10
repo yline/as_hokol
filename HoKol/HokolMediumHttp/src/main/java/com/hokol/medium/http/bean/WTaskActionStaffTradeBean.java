@@ -2,6 +2,10 @@ package com.hokol.medium.http.bean;
 
 public class WTaskActionStaffTradeBean
 {
+	public static final int ActionFinish = 1;
+
+	public static final int ActionFail = 0;
+
 	/* 用户ID */
 	private String user_id;
 

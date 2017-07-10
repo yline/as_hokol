@@ -73,12 +73,6 @@ public class TaskDeliveredSignFragment extends BaseFragment
 			{
 				return R.drawable.widget_solid_graylight_size_medium;
 			}
-
-			@Override
-			protected boolean isDivideLastLine()
-			{
-				return true;
-			}
 		});
 		
 		deliveredSignAdapter = new TaskDeliveredAdapter();
@@ -93,13 +87,13 @@ public class TaskDeliveredSignFragment extends BaseFragment
 		deliveredSignAdapter.setOnDeliveredSignCallback(new TaskDeliveredAdapter.OnTaskDeliveredSignCallback()
 		{
 			@Override
-			public void onSignCancelClick(View view)
+			public void onSignCancelClick(View view, String taskId)
 			{
 				SDKManager.toast("取消接单");
 			}
 
 			@Override
-			public void onSignConfirmClick(View view)
+			public void onSignConfirmClick(View view, String taskId)
 			{
 				SDKManager.toast("确认接单");
 			}

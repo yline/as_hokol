@@ -29,6 +29,7 @@
             android:textSize="@dimen/default_text_size_large"/>
 
         <TextView
+            android:id="@+id/tv_task_delivered_evaluate_publish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -96,14 +97,15 @@
         android:orientation="horizontal">
 
         <com.hokol.medium.viewcustom.CircleView
+            android:id="@+id/iv_task_delivered_evaluate_avatar"
             android:layout_width="@dimen/default_space_super"
             android:layout_height="@dimen/default_space_super"
             android:layout_marginBottom="@dimen/default_space_little"
             android:layout_marginLeft="@dimen/default_space_large"
-            android:layout_marginTop="@dimen/default_space_little"
-            android:src="@drawable/global_load_failed"/>
+            android:layout_marginTop="@dimen/default_space_little"/>
 
         <TextView
+            android:id="@+id/tv_task_delivered_evaluate_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -142,7 +144,7 @@
             android:layout_marginLeft="@dimen/default_space_large_a"
             android:isIndicator="false"
             android:numStars="5"
-            android:rating="0"
+            android:rating="5"
             android:stepSize="1"/>
 
         <TextView
@@ -177,7 +179,7 @@
             android:layout_marginLeft="@dimen/default_space_large_a"
             android:isIndicator="false"
             android:numStars="5"
-            android:rating="0"
+            android:rating="5"
             android:stepSize="1"/>
 
         <TextView
@@ -213,7 +215,7 @@
             android:layout_marginLeft="@dimen/default_space_large_a"
             android:isIndicator="false"
             android:numStars="5"
-            android:rating="0"
+            android:rating="5"
             android:stepSize="1"/>
 
         <TextView
@@ -238,8 +240,8 @@
         android:background="@null"
         android:gravity="top"
         android:hint="写一下，你对Ta的评价吧"
-        android:lines="5"
         android:lineSpacingExtra="@dimen/default_space_little"
+        android:lines="5"
         android:paddingBottom="@dimen/default_space_small"
         android:paddingLeft="@dimen/default_space_large"
         android:paddingRight="@dimen/default_space_large"

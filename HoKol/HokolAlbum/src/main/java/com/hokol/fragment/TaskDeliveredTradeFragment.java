@@ -73,12 +73,6 @@ public class TaskDeliveredTradeFragment extends BaseFragment
 			{
 				return R.drawable.widget_solid_graylight_size_medium;
 			}
-
-			@Override
-			protected boolean isDivideLastLine()
-			{
-				return true;
-			}
 		});
 
 		deliveredTradeAdapter = new TaskDeliveredAdapter();
@@ -93,13 +87,13 @@ public class TaskDeliveredTradeFragment extends BaseFragment
 		deliveredTradeAdapter.setOnDeliveredTradeCallback(new TaskDeliveredAdapter.OnTaskDeliveredTradeCallback()
 		{
 			@Override
-			public void onTradeFailedClick(View view)
+			public void onTradeFailedClick(View view, String taskId)
 			{
 				SDKManager.toast("任务未完成");
 			}
 
 			@Override
-			public void onTradeFinishedClick(View view)
+			public void onTradeFinishedClick(View view, String taskId)
 			{
 				SDKManager.toast("任务完成");
 			}

@@ -162,6 +162,9 @@ public class HttpConstant
 	// 删除任务
 	public static final String url_task_action_delete = url_head + "ApiTask/del_task";
 
+	// 雇员 评价 雇主
+	public static final String url_task_action_staff_comment = url_head + "ApiTask/task_comment_employee";
+
 	/* --------------------------- 主页 --------------------------- */
 	// 请求主页动态数据
 	public static final String url_home_main = url_head + "ApiIndex/index";

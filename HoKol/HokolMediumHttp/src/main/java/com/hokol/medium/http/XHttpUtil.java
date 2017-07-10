@@ -654,6 +654,22 @@ public class XHttpUtil
 	}
 
 	/**
+	 * 雇员确认交易
+	 */
+	public static void doTaskActionStaffComment(WTaskActionStaffCommentBean wTaskActionStaffCommentBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_task_action_staff_comment;
+		new XTextHttp<String>(adapter)
+		{
+			@Override
+			protected boolean isResponseParse()
+			{
+				return false;
+			}
+		}.doPost(httpUrl, wTaskActionStaffCommentBean, String.class);
+	}
+
+	/**
 	 * 删除任务，仅仅有删除记录的功能
 	 */
 	public static void doTaskDelete(WTaskDeleteBean taskDeleteBean, XHttpAdapter<String> adapter)

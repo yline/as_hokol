@@ -2,6 +2,10 @@ package com.hokol.medium.http.bean;
 
 public class WTaskActionStaffConfirmBean
 {
+	public static final int ActionAccept = 1;
+
+	public static final int ActionRefuse = 0;
+
 	/* 用户ID */
 	private String user_id;
 

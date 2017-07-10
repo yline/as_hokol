@@ -74,12 +74,6 @@ public class TaskDeliveredEvaluateFragment extends BaseFragment
 			{
 				return R.drawable.widget_solid_graylight_size_medium;
 			}
-
-			@Override
-			protected boolean isDivideLastLine()
-			{
-				return true;
-			}
 		});
 
 		deliveredEvaluateAdapter = new TaskDeliveredAdapter();
@@ -94,19 +88,19 @@ public class TaskDeliveredEvaluateFragment extends BaseFragment
 		deliveredEvaluateAdapter.setOnDeliveredEvaluateCallback(new TaskDeliveredAdapter.OnTaskDeliveredEvaluateCallback()
 		{
 			@Override
-			public void onEvaluateDeleteClick(View view)
+			public void onEvaluateDeleteClick(View view, String taskId)
 			{
 				SDKManager.toast("删除任务");
 			}
 
 			@Override
-			public void onEvaluateAppealClick(View view)
+			public void onEvaluateAppealClick(View view, String taskId)
 			{
 				SDKManager.toast("维权申诉");
 			}
 
 			@Override
-			public void onEvaluateClick(View view)
+			public void onEvaluateClick(View view, String taskId)
 			{
 				TaskDeliveredEvaluateActivity.actionStart(getContext());
 			}
