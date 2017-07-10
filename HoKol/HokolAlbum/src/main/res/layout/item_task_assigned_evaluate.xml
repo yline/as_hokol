@@ -11,14 +11,15 @@
         android:orientation="horizontal">
 
         <com.hokol.medium.viewcustom.CircleView
+            android:id="@+id/circle_task_evaluate_avatar"
             android:layout_width="@dimen/default_space_super"
             android:layout_height="@dimen/default_space_super"
             android:layout_marginBottom="@dimen/default_space_little"
             android:layout_marginLeft="@dimen/default_space_large"
-            android:layout_marginTop="@dimen/default_space_little"
-            android:src="@drawable/global_load_failed"/>
+            android:layout_marginTop="@dimen/default_space_little"/>
 
         <TextView
+            android:id="@+id/tv_task_evaluate_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -50,6 +51,7 @@
             android:textSize="@dimen/default_text_size_medium"/>
 
         <android.support.v7.widget.AppCompatRatingBar
+            android:id="@+id/rating_task_evaluate_conformity"
             style="@style/Widget.ProgressBar.Evaluate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,6 +63,7 @@
             android:stepSize="1"/>
 
         <TextView
+            android:id="@+id/tv_task_evaluate_conformity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -85,6 +88,7 @@
             android:textSize="@dimen/default_text_size_medium"/>
 
         <android.support.v7.widget.AppCompatRatingBar
+            android:id="@+id/rating_task_evaluate_action"
             style="@style/Widget.ProgressBar.Evaluate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -96,6 +100,7 @@
             android:stepSize="1"/>
 
         <TextView
+            android:id="@+id/tv_task_evaluate_action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -121,6 +126,7 @@
             android:textSize="@dimen/default_text_size_medium"/>
 
         <android.support.v7.widget.AppCompatRatingBar
+            android:id="@+id/rating_task_evaluate_attitude"
             style="@style/Widget.ProgressBar.Evaluate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -132,6 +138,7 @@
             android:stepSize="1"/>
 
         <TextView
+            android:id="@+id/tv_task_evaluate_attitude"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -148,6 +155,7 @@
     </View>
 
     <EditText
+        android:id="@+id/et_task_evaluate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null"

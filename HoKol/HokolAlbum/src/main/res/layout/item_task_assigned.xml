@@ -229,5 +229,27 @@
                 android:textColor="@color/hokolGrayHeavy"
                 android:textSize="@dimen/default_text_size_small"/>
         </LinearLayout>
+
+        <!-- 待评价 -->
+        <LinearLayout
+            android:id="@+id/ll_task_assigned_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:visibility="invisible">
+
+            <TextView
+                android:id="@+id/tv_item_task_assigned_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/widget_shape_radiusall_stroke_gray_solid_null"
+                android:paddingBottom="@dimen/default_space_small"
+                android:paddingLeft="@dimen/default_space_large"
+                android:paddingRight="@dimen/default_space_large"
+                android:paddingTop="@dimen/default_space_small"
+                android:text="删除任务"
+                android:textColor="@color/hokolGrayHeavy"
+                android:textSize="@dimen/default_text_size_small"/>
+        </LinearLayout>
     </FrameLayout>
 </LinearLayout>

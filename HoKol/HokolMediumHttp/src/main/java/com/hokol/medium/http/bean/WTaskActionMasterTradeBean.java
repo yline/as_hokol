@@ -4,6 +4,10 @@ import java.util.List;
 
 public class WTaskActionMasterTradeBean
 {
+	public static final int ActionFinished = 1;
+
+	public static final int ActionFailed = 0;
+
 	/* 任务唯一标识 */
 	private String task_id;
 
@@ -17,6 +21,36 @@ public class WTaskActionMasterTradeBean
 	{
 		this.task_id = task_id;
 		this.user_id = user_id;
+		this.info = info;
+	}
+
+	public String getTask_id()
+	{
+		return task_id;
+	}
+
+	public void setTask_id(String task_id)
+	{
+		this.task_id = task_id;
+	}
+
+	public String getUser_id()
+	{
+		return user_id;
+	}
+
+	public void setUser_id(String user_id)
+	{
+		this.user_id = user_id;
+	}
+
+	public List<WTaskActionMasterTradeInfoBean> getInfo()
+	{
+		return info;
+	}
+
+	public void setInfo(List<WTaskActionMasterTradeInfoBean> info)
+	{
 		this.info = info;
 	}
 
@@ -53,35 +87,5 @@ public class WTaskActionMasterTradeBean
 		{
 			this.confirm_status = confirm_status;
 		}
-	}
-
-	public String getTask_id()
-	{
-		return task_id;
-	}
-
-	public void setTask_id(String task_id)
-	{
-		this.task_id = task_id;
-	}
-
-	public String getUser_id()
-	{
-		return user_id;
-	}
-
-	public void setUser_id(String user_id)
-	{
-		this.user_id = user_id;
-	}
-
-	public List<WTaskActionMasterTradeInfoBean> getInfo()
-	{
-		return info;
-	}
-
-	public void setInfo(List<WTaskActionMasterTradeInfoBean> info)
-	{
-		this.info = info;
 	}
 }

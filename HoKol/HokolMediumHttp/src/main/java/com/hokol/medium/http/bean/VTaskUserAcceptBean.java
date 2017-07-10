@@ -31,7 +31,16 @@ public class VTaskUserAcceptBean
 		private String user_sign;
 
 		/* 用户标签 */
-		private String user_tag;
+		private List<String> user_tag;
+
+		/* 用户性别 */
+		private String user_sex;
+
+		/* 用户等级 */
+		private int user_level;
+
+		/* 用户等级图片 */
+		private String level_url;
 
 		public String getUser_id()
 		{
@@ -73,14 +82,44 @@ public class VTaskUserAcceptBean
 			this.user_sign = user_sign;
 		}
 
-		public String getUser_tag()
+		public List<String> getUser_tag()
 		{
 			return user_tag;
 		}
 
-		public void setUser_tag(String user_tag)
+		public void setUser_tag(List<String> user_tag)
 		{
 			this.user_tag = user_tag;
+		}
+
+		public String getUser_sex()
+		{
+			return user_sex;
+		}
+
+		public void setUser_sex(String user_sex)
+		{
+			this.user_sex = user_sex;
+		}
+
+		public int getUser_level()
+		{
+			return user_level;
+		}
+
+		public void setUser_level(int user_level)
+		{
+			this.user_level = user_level;
+		}
+
+		public String getLevel_url()
+		{
+			return level_url;
+		}
+
+		public void setLevel_url(String level_url)
+		{
+			this.level_url = level_url;
 		}
 	}
 }

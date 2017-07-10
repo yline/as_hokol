@@ -136,9 +136,9 @@ public class TaskAssignedEvaluateFragment extends BaseFragment implements TaskAs
 		taskAssignedEvaluateAdapter.setOnAssignedEvaluateCallback(new TaskAssignedAdapter.OnTaskAssignedEvaluateCallback()
 		{
 			@Override
-			public void onEvaluateClick(View view)
+			public void onEvaluateClick(View view, String taskId)
 			{
-				TaskAssignedEvaluateActivity.actionStart(getContext());
+				TaskAssignedEvaluateActivity.actionStart(getContext(), taskId);
 			}
 		});
 	}

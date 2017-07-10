@@ -4,7 +4,6 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
@@ -13,10 +12,7 @@ import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.bean.VTaskUserPublishedBean;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.hokol.util.HokolTimeConvertUtil;
-import com.yline.view.pop.WidgetDeleteMenu;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
-
-import java.util.Arrays;
 
 /**
  * 已发任务
@@ -90,35 +86,7 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		// 初始状态
 		int status = taskBean.getStatus();
 		HttpEnum.AssignedStatus assignedStatus = HttpEnum.getAssignedStatus(status);
-		onBindViewClick(viewHolder, sList.get(position), assignedStatus);
-
-		// 依据状态，判断是否能够删除记录
-		if (status == HttpEnum.AssignedStatus.Finished.getIndex() || status == HttpEnum.AssignedStatus.Canceled.getIndex() || status == HttpEnum.AssignedStatus.Passed.getIndex())
-		{
-			// 长按点击事件【只有过期的任务 才能删除】
-			WidgetDeleteMenu widgetDeleteMenu = new WidgetDeleteMenu(sContext);
-			widgetDeleteMenu.setOnWidgetListener(new WidgetDeleteMenu.OnWidgetListener()
-			{
-				@Override
-				public void onDismiss(PopupWindow popupWindow)
-				{
-
-				}
-
-				@Override
-				public void onOptionSelected(View view, int index, String content)
-				{
-					if (content.equals("删除"))
-					{
-						if (null != onRecyclerDeleteCallback)
-						{
-							onRecyclerDeleteCallback.onDelete(viewHolder, sList.get(position), position);
-						}
-					}
-				}
-			});
-			widgetDeleteMenu.showAtLocation(Arrays.asList("删除"), viewHolder.getItemView());
-		}
+		onBindViewClick(viewHolder, sList.get(position), assignedStatus, position);
 	}
 
 	@Override
@@ -135,7 +103,7 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		viewHolder.getItemView().setVisibility(View.GONE);
 	}
 
-	private void onBindViewClick(RecyclerViewHolder viewHolder, final VTaskUserPublishedBean.VTaskUserPublishedOneBean bean, final HttpEnum.AssignedStatus assignedStatus)
+	private void onBindViewClick(final RecyclerViewHolder viewHolder, final VTaskUserPublishedBean.VTaskUserPublishedOneBean bean, final HttpEnum.AssignedStatus assignedStatus, final int position)
 	{
 		// 待报名
 		if (assignedStatus.equals(HttpEnum.AssignedStatus.ToBeSign))
@@ -184,7 +152,7 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		}
 		else
 		{
-			viewHolder.get(R.id.ll_task_assigned_start).setVisibility(View.GONE);
+			viewHolder.get(R.id.ll_task_assigned_start).setVisibility(View.INVISIBLE);
 		}
 
 		// 待交易
@@ -198,7 +166,7 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 				{
 					if (null != assignedTradeCallback)
 					{
-						assignedTradeCallback.onTradeCancelClick(v);
+						assignedTradeCallback.onTradeCancelClick(v, bean.getTask_id());
 					}
 				}
 			});
@@ -209,7 +177,7 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 				{
 					if (null != assignedTradeCallback)
 					{
-						assignedTradeCallback.onTradeDetailClick(v);
+						assignedTradeCallback.onTradeDetailClick(v, bean.getTask_id());
 					}
 				}
 			});
@@ -220,14 +188,14 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 				{
 					if (null != assignedTradeCallback)
 					{
-						assignedTradeCallback.onTradeConfirmClick(v);
+						assignedTradeCallback.onTradeConfirmClick(v, bean.getTask_id());
 					}
 				}
 			});
 		}
 		else
 		{
-			viewHolder.get(R.id.ll_task_assigned_trade).setVisibility(View.GONE);
+			viewHolder.get(R.id.ll_task_assigned_trade).setVisibility(View.INVISIBLE);
 		}
 
 		// 评论
@@ -241,14 +209,35 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 				{
 					if (null != assignedEvaluateCallback)
 					{
-						assignedEvaluateCallback.onEvaluateClick(v);
+						assignedEvaluateCallback.onEvaluateClick(v, bean.getTask_id());
 					}
 				}
 			});
 		}
 		else
 		{
-			viewHolder.get(R.id.ll_task_assigned_finish).setVisibility(View.GONE);
+			viewHolder.get(R.id.ll_task_assigned_finish).setVisibility(View.INVISIBLE);
+		}
+
+		// 删除任务
+		if (assignedStatus == HttpEnum.AssignedStatus.Finished || assignedStatus == HttpEnum.AssignedStatus.Canceled || assignedStatus == HttpEnum.AssignedStatus.Passed)
+		{
+			viewHolder.get(R.id.ll_task_assigned_delete).setVisibility(View.VISIBLE);
+			viewHolder.setOnClickListener(R.id.tv_item_task_assigned_delete, new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					if (null != onRecyclerDeleteCallback)
+					{
+						onRecyclerDeleteCallback.onDelete(viewHolder, bean, position);
+					}
+				}
+			});
+		}
+		else
+		{
+			viewHolder.get(R.id.ll_task_assigned_delete).setVisibility(View.INVISIBLE);
 		}
 	}
 
@@ -321,21 +310,21 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		 *
 		 * @param view
 		 */
-		void onTradeCancelClick(View view);
+		void onTradeCancelClick(View view, String taskId);
 
 		/**
 		 * 交易详情
 		 *
 		 * @param view
 		 */
-		void onTradeDetailClick(View view);
+		void onTradeDetailClick(View view, String taskId);
 
 		/**
 		 * 确认交易
 		 *
 		 * @param view
 		 */
-		void onTradeConfirmClick(View view);
+		void onTradeConfirmClick(View view, String taskId);
 	}
 
 	/**
@@ -348,7 +337,7 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		 *
 		 * @param view
 		 */
-		void onEvaluateClick(View view);
+		void onEvaluateClick(View view, String taskId);
 	}
 
 	/**

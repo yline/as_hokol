@@ -138,21 +138,21 @@ public class TaskAssignedTradeFragment extends BaseFragment implements TaskAssig
 		taskAssignedTradeAdapter.setOnAssignedTradeCallback(new TaskAssignedAdapter.OnTaskAssignedTradeCallback()
 		{
 			@Override
-			public void onTradeCancelClick(View view)
+			public void onTradeCancelClick(View view, String taskId)
 			{
 				SDKManager.toast("取消交易");
 			}
 
 			@Override
-			public void onTradeDetailClick(View view)
+			public void onTradeDetailClick(View view, String taskId)
 			{
-				TaskAssignedTradeDetailActivity.actionStart(getContext());
+				TaskAssignedTradeDetailActivity.actionStart(getContext(), taskId);
 			}
 
 			@Override
-			public void onTradeConfirmClick(View view)
+			public void onTradeConfirmClick(View view, String taskId)
 			{
-				TaskAssignedTradeSureDetailActivity.actionStart(getContext());
+				TaskAssignedTradeSureDetailActivity.actionStart(getContext(), taskId);
 			}
 		});
 	}
