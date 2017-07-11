@@ -164,7 +164,7 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 				{
 					if (null != deliveredEvaluateCallback)
 					{
-						deliveredEvaluateCallback.onEvaluateClick(v, bean.getTask_id());
+						deliveredEvaluateCallback.onEvaluateClick(v, bean);
 					}
 				}
 			});
@@ -261,6 +261,6 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 		 *
 		 * @param view
 		 */
-		void onEvaluateClick(View view, String taskId);
+		void onEvaluateClick(View view, VTaskUserDeliveredBean.VTaskUserDeliveredOneBean bean);
 	}
 }

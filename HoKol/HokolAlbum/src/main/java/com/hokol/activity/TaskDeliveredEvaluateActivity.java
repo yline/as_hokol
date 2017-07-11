@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -12,6 +13,7 @@ import com.hokol.R;
 import com.hokol.application.AppStateManager;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.WTaskActionStaffCommentBean;
+import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
@@ -74,13 +76,35 @@ public class TaskDeliveredEvaluateActivity extends BaseAppCompatActivity
 					@Override
 					public void onSuccess(String s)
 					{
+						// 活动相符
+						RatingBar outlookRatingBar = viewHolder.get(R.id.rating_task_evaluate_outlook);
+						commentBean.setConformity_score((int) outlookRatingBar.getRating());
 
+						// 交流态度
+						RatingBar attitudeRatingBar = viewHolder.get(R.id.rating_task_evaluate_attitude);
+						commentBean.setCommunion_score((int) attitudeRatingBar.getRating());
+
+						// 服务态度
+						RatingBar sincerityRatingBar = viewHolder.get(R.id.rating_task_evaluate_sincerity);
+						commentBean.setCredibility_score((int) sincerityRatingBar.getRating());
+
+						// 评价
+						String evaluateContent = viewHolder.getText(R.id.et_delivered_evaluate);
+						commentBean.setUser_comment(evaluateContent);
+						XHttpUtil.doTaskActionStaffComment(commentBean, new XHttpAdapter<String>()
+						{
+							@Override
+							public void onSuccess(String s)
+							{
+								SDKManager.toast("评价成功");
+							}
+						});
 					}
 				});
 			}
 		});
 	}
-
+	
 	private void initData()
 	{
 		String taskId = getIntent().getStringExtra(KeyTaskId);
@@ -98,64 +122,37 @@ public class TaskDeliveredEvaluateActivity extends BaseAppCompatActivity
 		viewHolder.setText(R.id.tv_task_delivered_evaluate_nickname, masterNickName);
 
 		// 外貌相符
-		/*RatingBar conformityRatingBar = holder.get(R.id.rating_task_evaluate_conformity);
-		conformityRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener()
+		RatingBar outlookRatingBar = viewHolder.get(R.id.rating_task_evaluate_outlook);
+		outlookRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener()
 		{
 			@Override
 			public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser)
 			{
-				requestArrays[position].setConformity_score((int) rating);
+				updateStarHint((TextView) viewHolder.get(R.id.tv_task_evaluate_outlook), rating);
 			}
 		});
 
-		// 活动能力
-		RatingBar actionRatingBar = holder.get(R.id.rating_task_evaluate_action);
-		updateStarHint((TextView) holder.get(R.id.tv_task_evaluate_conformity), requestArrays[position].getConformity_score());
-		actionRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener()
-		{
-			@Override
-			public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser)
-			{
-				requestArrays[position].setAction_capacity_score((int) rating);
-			}
-		});
-
-		// 服务态度
-		RatingBar attitudeRatingBar = holder.get(R.id.rating_task_evaluate_attitude);
-		updateStarHint((TextView) holder.get(R.id.tv_task_evaluate_action), requestArrays[position].getConformity_score());
+		// 交流态度
+		RatingBar attitudeRatingBar = viewHolder.get(R.id.rating_task_evaluate_attitude);
 		attitudeRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener()
 		{
 			@Override
 			public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser)
 			{
-				requestArrays[position].setAttitude_score((int) rating);
+				updateStarHint((TextView) viewHolder.get(R.id.tv_task_evaluate_attitude), rating);
 			}
 		});
 
-		// 评价内容
-		EditText evaluateEditText = holder.get(R.id.et_task_evaluate);
-		updateStarHint((TextView) holder.get(R.id.tv_task_evaluate_attitude), requestArrays[position].getConformity_score());
-		evaluateEditText.addTextChangedListener(new TextWatcher()
+		// 服务态度
+		RatingBar sincerityRatingBar = viewHolder.get(R.id.rating_task_evaluate_sincerity);
+		sincerityRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener()
 		{
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
+			public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser)
 			{
-
+				updateStarHint((TextView) viewHolder.get(R.id.tv_task_evaluate_sincerity), rating);
 			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
-			{
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s)
-			{
-				LogFileUtil.v("content = " + s.toString());
-				requestArrays[position].setUser_comment(s.toString());
-			}
-		});*/
+		});
 	}
 
 	private void updateStarHint(TextView textView, float rating)

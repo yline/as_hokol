@@ -100,9 +100,9 @@ public class TaskDeliveredEvaluateFragment extends BaseFragment
 			}
 
 			@Override
-			public void onEvaluateClick(View view, String taskId)
+			public void onEvaluateClick(View view, VTaskUserDeliveredBean.VTaskUserDeliveredOneBean bean)
 			{
-				TaskDeliveredEvaluateActivity.actionStart(getContext());
+				TaskDeliveredEvaluateActivity.actionStart(getContext(), bean.getTask_id(), bean.getTask_user_id(), bean.getUser_logo(), bean.getUser_nickname());
 			}
 		});
 		recyclerView.setAdapter(deliveredEvaluateAdapter);

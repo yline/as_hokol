@@ -10,9 +10,9 @@ public class WTaskActionStaffCommentBean
 
 	/* 符合度评分 */private int conformity_score;
 
-	/* 活动能力评分 */private int action_capacity_score;
+	/* 交流态度评分 */private int communion_score;
 
-	/* 工作态度 */private int attitude_score;
+	/* 诚信经营 */private int credibility_score;
 
 	/* 文字评价 */private String user_comment;
 
@@ -63,24 +63,24 @@ public class WTaskActionStaffCommentBean
 		this.conformity_score = conformity_score;
 	}
 
-	public int getAction_capacity_score()
+	public int getCommunion_score()
 	{
-		return action_capacity_score;
+		return communion_score;
 	}
 
-	public void setAction_capacity_score(int action_capacity_score)
+	public void setCommunion_score(int communion_score)
 	{
-		this.action_capacity_score = action_capacity_score;
+		this.communion_score = communion_score;
 	}
 
-	public int getAttitude_score()
+	public int getCredibility_score()
 	{
-		return attitude_score;
+		return credibility_score;
 	}
 
-	public void setAttitude_score(int attitude_score)
+	public void setCredibility_score(int credibility_score)
 	{
-		this.attitude_score = attitude_score;
+		this.credibility_score = credibility_score;
 	}
 
 	public String getUser_comment()

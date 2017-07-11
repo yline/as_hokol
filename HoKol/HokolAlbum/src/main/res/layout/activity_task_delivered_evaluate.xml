@@ -132,11 +132,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/default_space_large"
-            android:text="外貌相符"
+            android:text="活动相符"
             android:textColor="@color/hokolGrayDrak"
             android:textSize="@dimen/default_text_size_medium"/>
 
         <android.support.v7.widget.AppCompatRatingBar
+            android:id="@+id/rating_task_evaluate_outlook"
             style="@style/Widget.ProgressBar.Evaluate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -148,6 +149,7 @@
             android:stepSize="1"/>
 
         <TextView
+            android:id="@+id/tv_task_evaluate_outlook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -167,11 +169,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/default_space_large"
-            android:text="活动能力"
+            android:text="交流态度"
             android:textColor="@color/hokolGrayDrak"
             android:textSize="@dimen/default_text_size_medium"/>
 
         <android.support.v7.widget.AppCompatRatingBar
+            android:id="@+id/rating_task_evaluate_attitude"
             style="@style/Widget.ProgressBar.Evaluate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -183,6 +186,7 @@
             android:stepSize="1"/>
 
         <TextView
+            android:id="@+id/tv_task_evaluate_attitude"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -203,11 +207,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/default_space_large"
-            android:text="服务态度"
+            android:text="诚信经营"
             android:textColor="@color/hokolGrayDrak"
             android:textSize="@dimen/default_text_size_medium"/>
 
         <android.support.v7.widget.AppCompatRatingBar
+            android:id="@+id/rating_task_evaluate_sincerity"
             style="@style/Widget.ProgressBar.Evaluate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -219,6 +224,7 @@
             android:stepSize="1"/>
 
         <TextView
+            android:id="@+id/tv_task_evaluate_sincerity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -235,6 +241,7 @@
     </View>
 
     <EditText
+        android:id="@+id/et_delivered_evaluate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null"
