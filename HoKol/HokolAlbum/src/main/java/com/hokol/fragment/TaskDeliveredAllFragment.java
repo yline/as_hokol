@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.hokol.R;
 import com.hokol.activity.TaskDeliveredEvaluateActivity;
 import com.hokol.activity.TaskDetailActivity;
+import com.hokol.adapter.TaskAssignedAdapter;
 import com.hokol.adapter.TaskDeliveredAdapter;
 import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
@@ -32,7 +33,7 @@ import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.List;
 
-public class TaskDeliveredAllFragment extends BaseFragment
+public class TaskDeliveredAllFragment extends BaseFragment implements TaskAssignedAdapter.OnTaskAssignedRefreshListener
 {
 	private static final String KeyUserId = "UserId";
 
@@ -82,7 +83,7 @@ public class TaskDeliveredAllFragment extends BaseFragment
 			}
 		});
 
-		deliveredAllAdapter = new TaskDeliveredAdapter();
+		deliveredAllAdapter = new TaskDeliveredAdapter(getContext());
 		deliveredAllAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VTaskUserDeliveredBean.VTaskUserDeliveredOneBean>()
 		{
 			@Override
@@ -220,21 +221,27 @@ public class TaskDeliveredAllFragment extends BaseFragment
 		userId = getArguments().getString(KeyUserId);
 		if (!TextUtils.isEmpty(userId))
 		{
-			deliveredAllAdapter.setShowEmpty(false);
-			deliveredAllBean = new WTaskUserDeliveredBean(userId, WTaskUserDeliveredBean.TypeAll, 0, DeleteConstant.defaultNumberSuper);
-			XHttpUtil.doTaskUserDelivered(deliveredAllBean, new XHttpAdapter<VTaskUserDeliveredBean>()
-			{
-				@Override
-				public void onSuccess(VTaskUserDeliveredBean vTaskUserDeliveredBean)
-				{
-					deliveredAllAdapter.setShowEmpty(true);
-					List<VTaskUserDeliveredBean.VTaskUserDeliveredOneBean> resultList = vTaskUserDeliveredBean.getList();
-					if (null != resultList)
-					{
-						deliveredAllAdapter.setDataList(resultList);
-					}
-				}
-			});
+			onRefreshData(userId, 0, DeleteConstant.defaultNumberSuper);
 		}
+	}
+
+	@Override
+	public void onRefreshData(String userId, int start, int length)
+	{
+		deliveredAllAdapter.setShowEmpty(false);
+		deliveredAllBean = new WTaskUserDeliveredBean(userId, WTaskUserDeliveredBean.TypeAll, start, length);
+		XHttpUtil.doTaskUserDelivered(deliveredAllBean, new XHttpAdapter<VTaskUserDeliveredBean>()
+		{
+			@Override
+			public void onSuccess(VTaskUserDeliveredBean vTaskUserDeliveredBean)
+			{
+				deliveredAllAdapter.setShowEmpty(true);
+				List<VTaskUserDeliveredBean.VTaskUserDeliveredOneBean> resultList = vTaskUserDeliveredBean.getList();
+				if (null != resultList)
+				{
+					deliveredAllAdapter.setDataList(resultList);
+				}
+			}
+		});
 	}
 }

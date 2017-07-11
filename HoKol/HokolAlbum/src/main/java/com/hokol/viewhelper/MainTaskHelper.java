@@ -309,7 +309,7 @@ public class MainTaskHelper
 			VTaskMainAllBean.TaskMainAllOne taskBean = sList.get(position);
 
 			// 价格 + 人数
-			viewHolder.setText(R.id.tv_item_main_task_price, String.format("￥%d × %d", taskBean.getTask_fee(), taskBean.getEmployee_num()));
+			viewHolder.setText(R.id.tv_item_main_task_price, String.format("￥%d × %d", taskBean.getTask_fee(), taskBean.getTask_peo_num()));
 
 			// 标题
 			viewHolder.setText(R.id.tv_item_main_task_title, taskBean.getTask_title());

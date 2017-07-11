@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.activity.StarInfoActivity;
 import com.hokol.application.AppStateManager;
+import com.hokol.application.DeleteConstant;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskUserSignUpDetailBean;
@@ -98,7 +99,7 @@ public class TaskAssignedSignDetailUnFragment extends BaseFragment
 		signDetailUnAdapter.setOnTaskEmployCallback(new OnTaskEmployCallback()
 		{
 			@Override
-			public void onEmployClick(RecyclerViewHolder viewHolder, VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean taskBean, int position)
+			public void onEmployClick(RecyclerViewHolder viewHolder, VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean taskBean, final int position)
 			{
 				String userId = AppStateManager.getInstance().getUserLoginId(getContext());
 				String otherUserId = taskBean.getUser_id();
@@ -110,7 +111,11 @@ public class TaskAssignedSignDetailUnFragment extends BaseFragment
 						@Override
 						public void onSuccess(String s)
 						{
-							SDKManager.toast("录用成功");
+							if (getActivity() instanceof OnAssignedDetailRefreshListener)
+							{
+								((OnAssignedDetailRefreshListener) getActivity()).onRefresh(0, DeleteConstant.defaultNumberSuper);
+							}
+
 						}
 					});
 				}
@@ -124,10 +129,10 @@ public class TaskAssignedSignDetailUnFragment extends BaseFragment
 
 	private void initData()
 	{
-		updateData();
+		onRefreshData();
 	}
 
-	private void updateData()
+	private void onRefreshData()
 	{
 		Bundle arg = getArguments();
 		if (null != arg)
@@ -136,7 +141,7 @@ public class TaskAssignedSignDetailUnFragment extends BaseFragment
 		}
 	}
 
-	public void updateData(ArrayList<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean> beanList)
+	public void onRefreshData(ArrayList<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean> beanList)
 	{
 		if (null != signDetailUnAdapter)
 		{
@@ -153,6 +158,20 @@ public class TaskAssignedSignDetailUnFragment extends BaseFragment
 	public interface OnTaskEmployCallback
 	{
 		void onEmployClick(RecyclerViewHolder viewHolder, VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean taskBean, int position);
+	}
+
+	/**
+	 * 刷新数据
+	 */
+	public interface OnAssignedDetailRefreshListener
+	{
+		/**
+		 * 刷新数据
+		 *
+		 * @param start
+		 * @param length
+		 */
+		void onRefresh(int start, int length);
 	}
 
 	private class SignDetailUnAdapter extends WidgetRecyclerAdapter<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean>

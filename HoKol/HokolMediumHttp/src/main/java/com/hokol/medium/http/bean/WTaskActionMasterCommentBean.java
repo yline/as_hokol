@@ -67,6 +67,10 @@ public class WTaskActionMasterCommentBean
 		/* 文字评价 */
 		private String user_comment;
 
+		public MasterCommentContentBean()
+		{
+		}
+
 		public MasterCommentContentBean(String comment_user_id, int conformity_score, int action_capacity_score, int attitude_score)
 		{
 			this.comment_user_id = comment_user_id;

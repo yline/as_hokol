@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.hokol.R;
@@ -31,7 +32,7 @@ import java.util.List;
  * @author yline 2017/6/2 -- 16:37
  * @version 1.0.0
  */
-public class TaskAssignedSignDetailActivity extends BaseAppCompatActivity
+public class TaskAssignedSignDetailActivity extends BaseAppCompatActivity implements TaskAssignedSignDetailUnFragment.OnAssignedDetailRefreshListener
 {
 	private static final String KeyTaskId = "TaskId";
 
@@ -125,38 +126,47 @@ public class TaskAssignedSignDetailActivity extends BaseAppCompatActivity
 
 	private void initData()
 	{
-		XHttpUtil.doTaskUserSignUpDetail(new WTaskUserSignUpDetailBean(taskId, 0, DeleteConstant.defaultNumberLarge), new XHttpAdapter<VTaskUserSignUpDetailBean>()
+		onRefresh(0, DeleteConstant.defaultNumberLarge);
+	}
+
+	@Override
+	public void onRefresh(int start, int length)
+	{
+		if (!TextUtils.isEmpty(taskId))
 		{
-			@Override
-			public void onSuccess(VTaskUserSignUpDetailBean signUpDetailBean)
+			XHttpUtil.doTaskUserSignUpDetail(new WTaskUserSignUpDetailBean(taskId, start, length), new XHttpAdapter<VTaskUserSignUpDetailBean>()
 			{
-				List<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean> resultList = signUpDetailBean.getList();
-
-				ArrayList<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean> unList = new ArrayList<>();
-				ArrayList<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean> edList = new ArrayList<>();
-
-				if (null != resultList)
+				@Override
+				public void onSuccess(VTaskUserSignUpDetailBean signUpDetailBean)
 				{
-					for (VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean bean : resultList)
+					List<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean> resultList = signUpDetailBean.getList();
+
+					ArrayList<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean> unList = new ArrayList<>();
+					ArrayList<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean> edList = new ArrayList<>();
+
+					if (null != resultList)
 					{
-						if (bean.getIs_employe() == VTaskUserSignUpDetailBean.EmployUn)
+						for (VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean bean : resultList)
 						{
-							unList.add(bean);
-						}
-						else
-						{
-							edList.add(bean);
+							if (bean.getIs_employe() == VTaskUserSignUpDetailBean.EmployUn)
+							{
+								unList.add(bean);
+							}
+							else
+							{
+								edList.add(bean);
+							}
 						}
 					}
-				}
-				else
-				{
-					LogFileUtil.v("Task Assigned Sign Detail Data is Null");
-				}
+					else
+					{
+						LogFileUtil.v("Task Assigned Sign Detail Data is Null");
+					}
 
-				unFragment.updateData(unList);
-				edFragment.updateData(edList);
-			}
-		});
+					unFragment.onRefreshData(unList);
+					edFragment.onRefreshData(edList);
+				}
+			});
+		}
 	}
 }

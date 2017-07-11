@@ -27,6 +27,9 @@ public class VTaskMainAllBean
 		/* 任务预算 */
 		private int task_fee;
 
+		/* 任务所需人数 */
+		private int task_peo_num;
+
 		/* 任务标题 */
 		private String task_title;
 
@@ -120,6 +123,16 @@ public class VTaskMainAllBean
 		public void setTask_rem_time(long task_rem_time)
 		{
 			this.task_rem_time = task_rem_time;
+		}
+
+		public int getTask_peo_num()
+		{
+			return task_peo_num;
+		}
+
+		public void setTask_peo_num(int task_peo_num)
+		{
+			this.task_peo_num = task_peo_num;
 		}
 	}
 }

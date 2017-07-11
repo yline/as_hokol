@@ -114,10 +114,10 @@ public class TaskAssignedSignDetailEdFragment extends BaseFragment
 
 	private void initData()
 	{
-		updateData();
+		onRefreshData();
 	}
 
-	private void updateData()
+	private void onRefreshData()
 	{
 		Bundle arg = getArguments();
 		if (null != arg)
@@ -126,7 +126,7 @@ public class TaskAssignedSignDetailEdFragment extends BaseFragment
 		}
 	}
 
-	public void updateData(ArrayList<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean> beanList)
+	public void onRefreshData(ArrayList<VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean> beanList)
 	{
 		if (null != signDetailEdAdapter)
 		{

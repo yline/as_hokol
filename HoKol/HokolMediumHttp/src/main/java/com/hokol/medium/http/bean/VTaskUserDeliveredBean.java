@@ -4,6 +4,8 @@ import java.util.List;
 
 public class VTaskUserDeliveredBean
 {
+	public static final int IsNegotiable = 1; // 面议
+
 	private List<VTaskUserDeliveredOneBean> list;
 
 	public List<VTaskUserDeliveredOneBean> getList()
@@ -33,6 +35,12 @@ public class VTaskUserDeliveredBean
 		/* 任务结束时间(时间戳) */
 		private long task_end_time;
 
+		/* 任务所需人数 */
+		private long task_peo_num;
+
+		/* 录用人数 */
+		private int employee_num;
+
 		/* 任务发布者昵称 */
 		private String user_nickname;
 
@@ -47,6 +55,9 @@ public class VTaskUserDeliveredBean
 
 		/* 任务报名人数 */
 		private int join_num;
+
+		/* 任务付费方式[0:全额担保，1:面议] */
+		private int fee_type;
 
 		public String getTask_user_id()
 		{
@@ -146,6 +157,36 @@ public class VTaskUserDeliveredBean
 		public void setJoin_num(int join_num)
 		{
 			this.join_num = join_num;
+		}
+
+		public long getTask_peo_num()
+		{
+			return task_peo_num;
+		}
+
+		public void setTask_peo_num(long task_peo_num)
+		{
+			this.task_peo_num = task_peo_num;
+		}
+
+		public int getFee_type()
+		{
+			return fee_type;
+		}
+
+		public void setFee_type(int fee_type)
+		{
+			this.fee_type = fee_type;
+		}
+
+		public int getEmployee_num()
+		{
+			return employee_num;
+		}
+
+		public void setEmployee_num(int employee_num)
+		{
+			this.employee_num = employee_num;
 		}
 	}
 }

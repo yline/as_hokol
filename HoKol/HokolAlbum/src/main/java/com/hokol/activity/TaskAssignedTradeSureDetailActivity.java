@@ -113,7 +113,8 @@ public class TaskAssignedTradeSureDetailActivity extends BaseAppCompatActivity
 					@Override
 					public void onSuccess(String s)
 					{
-						SDKManager.toast("提交成功");
+						SDKManager.toast("确认成功");
+						finish();
 					}
 				});
 			}
@@ -148,6 +149,7 @@ public class TaskAssignedTradeSureDetailActivity extends BaseAppCompatActivity
 		public void initRequestList(int count)
 		{
 			requestArrays = new WTaskActionMasterTradeBean.WTaskActionMasterTradeInfoBean[count];
+			Arrays.fill(requestArrays, new WTaskActionMasterTradeBean.WTaskActionMasterTradeInfoBean());
 			for (int i = 0; i < count; i++)
 			{
 				// 初始化请求数据
@@ -233,7 +235,8 @@ public class TaskAssignedTradeSureDetailActivity extends BaseAppCompatActivity
 					int newStatus = isChecked ? WTaskActionMasterTradeBean.ActionFinished : WTaskActionMasterTradeBean.ActionFailed;
 					requestArrays[position].setConfirm_status(newStatus);
 
-					notifyItemChanged(position);
+					// notifyItemChanged(position);
+					notifyDataSetChanged();
 				}
 			});
 		}

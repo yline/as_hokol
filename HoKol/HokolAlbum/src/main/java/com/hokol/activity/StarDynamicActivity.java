@@ -250,7 +250,7 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 
 					// 红豆数目
 					viewHolder.setText(R.id.tv_star_dynamic_coin, vDynamicCareSingleBean.getUser_coin() + "");
-
+					
 					// 点赞数
 					viewHolder.setText(R.id.tv_star_dynamic_laud, vDynamicCareSingleBean.getDt_zan_people_nickname().size() + "");
 
@@ -266,7 +266,7 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 					}
 					else
 					{
-						viewHolder.get(R.id.iv_star_dynamic_care).setVisibility(View.VISIBLE);
+						viewHolder.setImageResource(R.id.iv_star_dynamic_care, R.drawable.star_dynamic_care).setVisibility(View.VISIBLE);
 					}
 
 					// 是否点赞

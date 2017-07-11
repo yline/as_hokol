@@ -125,7 +125,7 @@ public class TaskAssignedEvaluateActivity extends BaseAppCompatActivity
 				if (null != resultList)
 				{
 					assignedEvaluateAdapter.setDataList(resultList);
-					assignedEvaluateAdapter.initRequestArrays();
+					assignedEvaluateAdapter.initRequestArrays(resultList.size());
 				}
 			}
 		});
@@ -137,10 +137,12 @@ public class TaskAssignedEvaluateActivity extends BaseAppCompatActivity
 
 		private WTaskActionMasterCommentBean.MasterCommentContentBean[] requestArrays;
 
-		public void initRequestArrays()
+		public void initRequestArrays(int count)
 		{
-			requestArrays = new WTaskActionMasterCommentBean.MasterCommentContentBean[getItemCount()];
-			for (int i = 0; i < getItemCount(); i++)
+			requestArrays = new WTaskActionMasterCommentBean.MasterCommentContentBean[count];
+			Arrays.fill(requestArrays, new WTaskActionMasterCommentBean.MasterCommentContentBean());
+
+			for (int i = 0; i < count; i++)
 			{
 				requestArrays[i].setComment_user_id(sList.get(i).getUser_id());
 				requestArrays[i].setConformity_score(MaxScore);
@@ -197,7 +199,7 @@ public class TaskAssignedEvaluateActivity extends BaseAppCompatActivity
 
 			// 活动能力
 			RatingBar actionRatingBar = holder.get(R.id.rating_task_evaluate_action);
-			updateStarHint((TextView) holder.get(R.id.tv_task_evaluate_action), requestArrays[position].getConformity_score());
+			updateStarHint((TextView) holder.get(R.id.tv_task_evaluate_action), requestArrays[position].getAction_capacity_score());
 			actionRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener()
 			{
 				@Override
@@ -210,7 +212,7 @@ public class TaskAssignedEvaluateActivity extends BaseAppCompatActivity
 
 			// 服务态度
 			RatingBar attitudeRatingBar = holder.get(R.id.rating_task_evaluate_attitude);
-			updateStarHint((TextView) holder.get(R.id.tv_task_evaluate_attitude), requestArrays[position].getConformity_score());
+			updateStarHint((TextView) holder.get(R.id.tv_task_evaluate_attitude), requestArrays[position].getAttitude_score());
 			attitudeRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener()
 			{
 				@Override

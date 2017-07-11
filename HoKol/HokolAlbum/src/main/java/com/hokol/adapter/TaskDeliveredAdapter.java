@@ -1,11 +1,16 @@
 package com.hokol.adapter;
 
+import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.hokol.R;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.bean.VTaskUserDeliveredBean;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
+import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 /**
@@ -22,6 +27,13 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 
 	private OnTaskDeliveredEvaluateCallback deliveredEvaluateCallback;
 
+	private Context sContext;
+
+	public TaskDeliveredAdapter(Context context)
+	{
+		this.sContext = context;
+	}
+	
 	@Override
 	public int getItemRes()
 	{
@@ -32,6 +44,33 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 	public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
 	{
 		super.onBindViewHolder(viewHolder, position);
+
+		VTaskUserDeliveredBean.VTaskUserDeliveredOneBean taskBean = sList.get(position);
+		// 初始化数据
+		viewHolder.setText(R.id.tv_item_main_task_price, String.format("￥%d × %d", taskBean.getTask_fee(), taskBean.getTask_peo_num()));
+		viewHolder.setText(R.id.tv_item_main_task_title, taskBean.getTask_title());
+
+		// 头像
+		ImageView avatarImageView = viewHolder.get(R.id.iv_item_main_task_avatar);
+		Glide.with(sContext).load(taskBean.getUser_logo()).error(R.drawable.global_load_avatar).into(avatarImageView);
+
+		// 用户名
+		viewHolder.setText(R.id.tv_item_main_task_user, taskBean.getUser_nickname());
+
+		// 报名 状态
+		viewHolder.setText(R.id.tv_item_main_task_user_state, String.format("%d人报名，%d人录用", taskBean.getJoin_num(), taskBean.getEmployee_num()));
+
+		// 截止时间
+		String showTime = HokolTimeConvertUtil.stampToRestFormatTime(taskBean.getTask_end_time() * 1000);
+		if (TextUtils.isEmpty(showTime))
+		{
+			viewHolder.setText(R.id.tv_item_main_task_time, "已到期");
+
+		}
+		else
+		{
+			viewHolder.setText(R.id.tv_item_main_task_time, "剩余" + showTime);
+		}
 
 		int status = sList.get(position).getStatus();
 		HttpEnum.DeliveredStatus deliveredStatus = HttpEnum.getDeliveredStatus(status);
@@ -262,5 +301,39 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 		 * @param view
 		 */
 		void onEvaluateClick(View view, VTaskUserDeliveredBean.VTaskUserDeliveredOneBean bean);
+	}
+
+	/**
+	 * 刷新数据
+	 */
+	public interface OnTaskDeliveredRefreshCallback
+	{
+		/**
+		 * 重新刷新 "全部"中的数据
+		 */
+		void onAllRefresh(int start, int length);
+
+		/**
+		 * 重新刷新 "待报名" 中的数据
+		 */
+		void onSignRefresh(int start, int length);
+
+		/**
+		 * 重新刷新 "待交易" 中的数据
+		 */
+		void onTradeRefresh(int start, int length);
+
+		/**
+		 * 重新刷新 "待评价" 中的数据
+		 */
+		void onEvaluateRefresh(int start, int length);
+	}
+
+	public interface OnTaskDeliveredRefreshListener
+	{
+		/**
+		 * 重新刷新数据
+		 */
+		void onRefreshData(String userId, int start, int length);
 	}
 }

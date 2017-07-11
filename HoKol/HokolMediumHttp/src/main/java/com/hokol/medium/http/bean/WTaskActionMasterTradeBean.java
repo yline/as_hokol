@@ -62,6 +62,10 @@ public class WTaskActionMasterTradeBean
 		/* 完成状态(0-未完成任务, 1-完成任务) */
 		private int confirm_status;
 
+		public WTaskActionMasterTradeInfoBean()
+		{
+		}
+
 		public WTaskActionMasterTradeInfoBean(String confirm_user_id, int confirm_status)
 		{
 			this.confirm_user_id = confirm_user_id;
