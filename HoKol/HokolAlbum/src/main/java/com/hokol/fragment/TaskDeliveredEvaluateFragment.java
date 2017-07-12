@@ -18,6 +18,7 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskUserDeliveredBean;
+import com.hokol.medium.http.bean.WTaskDeleteBean;
 import com.hokol.medium.http.bean.WTaskUserDeliveredBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
@@ -39,6 +40,8 @@ public class TaskDeliveredEvaluateFragment extends BaseFragment implements TaskA
 
 	private WTaskUserDeliveredBean deliveredEvaluateBean;
 
+	private String userId;
+
 	public static TaskDeliveredEvaluateFragment newInstance(String userId)
 	{
 		Bundle args = new Bundle();
@@ -47,19 +50,26 @@ public class TaskDeliveredEvaluateFragment extends BaseFragment implements TaskA
 		fragment.setArguments(args);
 		return fragment;
 	}
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
 		return inflater.inflate(R.layout.fragment_task_delivered_evaluate, container, false);
 	}
-	
+
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
 	{
 		super.onViewCreated(view, savedInstanceState);
 
+		userId = getArguments().getString(KeyUserId);
 		initView(view);
+	}
+
+	@Override
+	public void onStart()
+	{
+		super.onStart();
 		initData();
 	}
 
@@ -91,13 +101,26 @@ public class TaskDeliveredEvaluateFragment extends BaseFragment implements TaskA
 			@Override
 			public void onEvaluateDeleteClick(View view, String taskId)
 			{
-				SDKManager.toast("删除任务");
+				XHttpUtil.doTaskDelete(new WTaskDeleteBean(userId, taskId, WTaskDeleteBean.TypeStaff), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						SDKManager.toast("删除任务成功");
+						if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
+						{
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onEvaluateRefresh(0, DeleteConstant.defaultNumberSuper);
+						}
+					}
+				});
 			}
 
 			@Override
 			public void onEvaluateAppealClick(View view, String taskId)
 			{
-				SDKManager.toast("维权申诉");
+				// 界面上删除了
+				// SDKManager.toast("维权申诉");
 			}
 
 			@Override
@@ -148,7 +171,6 @@ public class TaskDeliveredEvaluateFragment extends BaseFragment implements TaskA
 
 	private void initData()
 	{
-		String userId = getArguments().getString(KeyUserId);
 		if (!TextUtils.isEmpty(userId))
 		{
 			onRefreshData(userId, 0, DeleteConstant.defaultNumberSuper);

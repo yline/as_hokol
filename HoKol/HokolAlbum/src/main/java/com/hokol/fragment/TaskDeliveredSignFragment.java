@@ -17,6 +17,7 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskUserDeliveredBean;
+import com.hokol.medium.http.bean.WTaskActionStaffConfirmBean;
 import com.hokol.medium.http.bean.WTaskUserDeliveredBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
@@ -38,6 +39,8 @@ public class TaskDeliveredSignFragment extends BaseFragment implements TaskAssig
 
 	private WTaskUserDeliveredBean deliveredSignBean;
 
+	private String userId;
+
 	public static TaskDeliveredSignFragment newInstance(String userId)
 	{
 		Bundle args = new Bundle();
@@ -58,7 +61,15 @@ public class TaskDeliveredSignFragment extends BaseFragment implements TaskAssig
 	{
 		super.onViewCreated(view, savedInstanceState);
 
+		userId = getArguments().getString(KeyUserId);
 		initView(view);
+		initData();
+	}
+
+	@Override
+	public void onStart()
+	{
+		super.onStart();
 		initData();
 	}
 
@@ -75,7 +86,7 @@ public class TaskDeliveredSignFragment extends BaseFragment implements TaskAssig
 				return R.drawable.widget_solid_graylight_size_medium;
 			}
 		});
-		
+
 		deliveredSignAdapter = new TaskDeliveredAdapter(getContext());
 		deliveredSignAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener<VTaskUserDeliveredBean.VTaskUserDeliveredOneBean>()
 		{
@@ -90,13 +101,38 @@ public class TaskDeliveredSignFragment extends BaseFragment implements TaskAssig
 			@Override
 			public void onSignCancelClick(View view, String taskId)
 			{
-				SDKManager.toast("取消接单");
+				XHttpUtil.doTaskActionStaffConfirm(new WTaskActionStaffConfirmBean(userId, taskId, WTaskActionStaffConfirmBean.ActionRefuse), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						SDKManager.toast("取消接单成功");
+						if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
+						{
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onSignRefresh(0, DeleteConstant.defaultNumberSuper);
+						}
+					}
+				});
 			}
 
 			@Override
 			public void onSignConfirmClick(View view, String taskId)
 			{
-				SDKManager.toast("确认接单");
+				XHttpUtil.doTaskActionStaffConfirm(new WTaskActionStaffConfirmBean(userId, taskId, WTaskActionStaffConfirmBean.ActionAccept), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						SDKManager.toast("确认接单成功");
+						if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
+						{
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onSignRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onTradeRefresh(0, DeleteConstant.defaultNumberSuper);
+						}
+					}
+				});
 			}
 		});
 		recyclerView.setAdapter(deliveredSignAdapter);
@@ -141,7 +177,6 @@ public class TaskDeliveredSignFragment extends BaseFragment implements TaskAssig
 
 	private void initData()
 	{
-		String userId = getArguments().getString(KeyUserId);
 		if (!TextUtils.isEmpty(userId))
 		{
 			onRefreshData(userId, 0, DeleteConstant.defaultNumberSuper);

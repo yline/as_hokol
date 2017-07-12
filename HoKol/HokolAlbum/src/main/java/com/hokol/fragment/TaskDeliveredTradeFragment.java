@@ -17,6 +17,8 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskUserDeliveredBean;
+import com.hokol.medium.http.bean.WTaskActionMasterTradeBean;
+import com.hokol.medium.http.bean.WTaskActionStaffTradeBean;
 import com.hokol.medium.http.bean.WTaskUserDeliveredBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
@@ -38,6 +40,8 @@ public class TaskDeliveredTradeFragment extends BaseFragment implements TaskAssi
 
 	private WTaskUserDeliveredBean deliveredTradeBean;
 
+	private String userId;
+
 	public static TaskDeliveredTradeFragment newInstance(String userId)
 	{
 		Bundle args = new Bundle();
@@ -58,7 +62,14 @@ public class TaskDeliveredTradeFragment extends BaseFragment implements TaskAssi
 	{
 		super.onViewCreated(view, savedInstanceState);
 
+		userId = getArguments().getString(KeyUserId);
 		initView(view);
+	}
+
+	@Override
+	public void onStart()
+	{
+		super.onStart();
 		initData();
 	}
 
@@ -90,13 +101,38 @@ public class TaskDeliveredTradeFragment extends BaseFragment implements TaskAssi
 			@Override
 			public void onTradeFailedClick(View view, String taskId)
 			{
-				SDKManager.toast("任务未完成");
+				XHttpUtil.doTaskActionStaffTrade(new WTaskActionStaffTradeBean(userId, taskId, WTaskActionMasterTradeBean.ActionFailed), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						SDKManager.toast("任务未完成");
+						if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
+						{
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onTradeRefresh(0, DeleteConstant.defaultNumberSuper);
+						}
+					}
+				});
 			}
 
 			@Override
 			public void onTradeFinishedClick(View view, String taskId)
 			{
-				SDKManager.toast("任务完成");
+				XHttpUtil.doTaskActionStaffTrade(new WTaskActionStaffTradeBean(userId, taskId, WTaskActionMasterTradeBean.ActionFinished), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						SDKManager.toast("任务完成");
+						if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
+						{
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onTradeRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onEvaluateRefresh(0, DeleteConstant.defaultNumberSuper);
+						}
+					}
+				});
 			}
 		});
 		recyclerView.setAdapter(deliveredTradeAdapter);
@@ -141,7 +177,6 @@ public class TaskDeliveredTradeFragment extends BaseFragment implements TaskAssi
 
 	private void initData()
 	{
-		String userId = getArguments().getString(KeyUserId);
 		if (!TextUtils.isEmpty(userId))
 		{
 			onRefreshData(userId, 0, DeleteConstant.defaultNumberSuper);

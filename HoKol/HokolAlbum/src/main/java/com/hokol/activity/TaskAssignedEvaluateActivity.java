@@ -115,11 +115,14 @@ public class TaskAssignedEvaluateActivity extends BaseAppCompatActivity
 	private void initData()
 	{
 		taskId = getIntent().getStringExtra(KeyTaskId);
+
+		assignedEvaluateAdapter.setShowEmpty(false);
 		XHttpUtil.doTaskStaffCommentedInfo(new WTaskStaffCommentedInfoBean(taskId), new XHttpAdapter<VTaskStaffCommentedInfoBean>()
 		{
 			@Override
 			public void onSuccess(VTaskStaffCommentedInfoBean vTaskStaffCommentedInfoBean)
 			{
+				assignedEvaluateAdapter.setShowEmpty(true);
 				List<VTaskStaffCommentedInfoBean.VTaskStaffInfo> resultList = vTaskStaffCommentedInfoBean.getList();
 				if (null != resultList)
 				{
@@ -167,6 +170,12 @@ public class TaskAssignedEvaluateActivity extends BaseAppCompatActivity
 		public int getItemRes()
 		{
 			return R.layout.item_task_assigned_evaluate;
+		}
+
+		@Override
+		public int getEmptyItemRes()
+		{
+			return R.layout.widget_recycler_load_error_text;
 		}
 
 		@Override

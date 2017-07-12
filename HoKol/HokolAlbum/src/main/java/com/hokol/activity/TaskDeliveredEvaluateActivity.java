@@ -172,9 +172,13 @@ public class TaskDeliveredEvaluateActivity extends BaseAppCompatActivity
 			textView.setText("一般");
 
 		}
-		else
+		else if (rating < 4.5)
 		{
 			textView.setText("好");
+		}
+		else
+		{
+			textView.setText("非常好");
 		}
 	}
 }

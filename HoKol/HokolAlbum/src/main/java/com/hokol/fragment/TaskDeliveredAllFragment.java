@@ -65,7 +65,14 @@ public class TaskDeliveredAllFragment extends BaseFragment implements TaskAssign
 	{
 		super.onViewCreated(view, savedInstanceState);
 
+		userId = getArguments().getString(KeyUserId);
 		initView(view);
+	}
+
+	@Override
+	public void onStart()
+	{
+		super.onStart();
 		initData();
 	}
 
@@ -92,6 +99,7 @@ public class TaskDeliveredAllFragment extends BaseFragment implements TaskAssign
 				TaskDetailActivity.actionStart(getContext(), deliveredOneBean.getTask_id(), false);
 			}
 		});
+		// 待报名
 		deliveredAllAdapter.setOnDeliveredSignCallback(new TaskDeliveredAdapter.OnTaskDeliveredSignCallback()
 		{
 			@Override
@@ -103,6 +111,11 @@ public class TaskDeliveredAllFragment extends BaseFragment implements TaskAssign
 					public void onSuccess(String s)
 					{
 						SDKManager.toast("取消接单成功");
+						if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
+						{
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onSignRefresh(0, DeleteConstant.defaultNumberSuper);
+						}
 					}
 				});
 			}
@@ -116,10 +129,17 @@ public class TaskDeliveredAllFragment extends BaseFragment implements TaskAssign
 					public void onSuccess(String s)
 					{
 						SDKManager.toast("确认接单成功");
+						if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
+						{
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onSignRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onTradeRefresh(0, DeleteConstant.defaultNumberSuper);
+						}
 					}
 				});
 			}
 		});
+		// 待报名
 		deliveredAllAdapter.setOnDeliveredTradeCallback(new TaskDeliveredAdapter.OnTaskDeliveredTradeCallback()
 		{
 			@Override
@@ -131,6 +151,11 @@ public class TaskDeliveredAllFragment extends BaseFragment implements TaskAssign
 					public void onSuccess(String s)
 					{
 						SDKManager.toast("任务未完成");
+						if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
+						{
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onTradeRefresh(0, DeleteConstant.defaultNumberSuper);
+						}
 					}
 				});
 			}
@@ -144,6 +169,12 @@ public class TaskDeliveredAllFragment extends BaseFragment implements TaskAssign
 					public void onSuccess(String s)
 					{
 						SDKManager.toast("任务完成");
+						if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
+						{
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onTradeRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onEvaluateRefresh(0, DeleteConstant.defaultNumberSuper);
+						}
 					}
 				});
 			}
@@ -158,7 +189,12 @@ public class TaskDeliveredAllFragment extends BaseFragment implements TaskAssign
 					@Override
 					public void onSuccess(String s)
 					{
-						SDKManager.toast("删除任务");
+						SDKManager.toast("删除任务成功");
+						if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
+						{
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onEvaluateRefresh(0, DeleteConstant.defaultNumberSuper);
+						}
 					}
 				});
 			}
@@ -218,7 +254,6 @@ public class TaskDeliveredAllFragment extends BaseFragment implements TaskAssign
 
 	private void initData()
 	{
-		userId = getArguments().getString(KeyUserId);
 		if (!TextUtils.isEmpty(userId))
 		{
 			onRefreshData(userId, 0, DeleteConstant.defaultNumberSuper);
