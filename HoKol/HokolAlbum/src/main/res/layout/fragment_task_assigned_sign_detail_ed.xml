@@ -19,8 +19,8 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/widget_shape_rectangle_solid_redhokol"
         android:gravity="center_horizontal"
-        android:paddingBottom="@dimen/default_space_normal"
-        android:paddingTop="@dimen/default_space_normal"
+        android:paddingBottom="@dimen/default_space_large"
+        android:paddingTop="@dimen/default_space_large"
         android:text="结束报名"
         android:textColor="@android:color/white"
         android:textSize="@dimen/default_text_size_normal"/>

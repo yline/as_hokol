@@ -225,25 +225,33 @@ public class TaskAssignedSignDetailUnFragment extends BaseFragment
 			holder.setText(R.id.tv_sign_detail_un_brief, taskBean.getUser_sign());
 
 			// 录用按钮
-			holder.get(R.id.tv_detail_un_employ).setVisibility(View.VISIBLE);
+
+			if (taskBean.getIs_employe() == VTaskUserSignUpDetailBean.EmployUn)
+			{
+				holder.get(R.id.tv_detail_waiting_employ).setVisibility(View.GONE);
+				holder.get(R.id.tv_detail_un_employ).setVisibility(View.VISIBLE);
+				holder.setOnClickListener(R.id.tv_detail_un_employ, new View.OnClickListener()
+				{
+					@Override
+					public void onClick(View v)
+					{
+						if (null != onTaskEmployCallback)
+						{
+							onTaskEmployCallback.onEmployClick(holder, taskBean, position);
+						}
+					}
+				});
+			}
+			else
+			{
+				holder.get(R.id.tv_detail_waiting_employ).setVisibility(View.VISIBLE);
+				holder.get(R.id.tv_detail_un_employ).setVisibility(View.GONE);
+			}
 
 			// 标签
 			FlowLayout flowLayout = holder.get(R.id.flow_layout_sign_detail_un);
 			FlowWidget flowWidget = new FlowWidget(getContext(), flowLayout);
 			flowWidget.setDataList(taskBean.getUser_tag());
-
-			// 录用
-			holder.setOnClickListener(R.id.tv_detail_un_employ, new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
-				{
-					if (null != onTaskEmployCallback)
-					{
-						onTaskEmployCallback.onEmployClick(holder, taskBean, position);
-					}
-				}
-			});
 		}
 	}
 }

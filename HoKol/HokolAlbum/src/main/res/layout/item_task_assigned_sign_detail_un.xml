@@ -98,5 +98,18 @@
         android:paddingTop="@dimen/default_space_small"
         android:text="录用"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/default_text_size_medium"/>
+        android:textSize="@dimen/default_text_size_medium"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_detail_waiting_employ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/default_space_normal"
+        android:text="待回复"
+        android:textColor="@color/hokolGray"
+        android:textSize="@dimen/default_text_size_normal"
+        android:visibility="gone"/>
 </RelativeLayout>

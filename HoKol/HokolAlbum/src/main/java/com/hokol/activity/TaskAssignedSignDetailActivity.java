@@ -148,7 +148,7 @@ public class TaskAssignedSignDetailActivity extends BaseAppCompatActivity implem
 					{
 						for (VTaskUserSignUpDetailBean.VTaskUserSignUpDetailOneBean bean : resultList)
 						{
-							if (bean.getIs_employe() == VTaskUserSignUpDetailBean.EmployUn)
+							if (bean.getIs_employe() == VTaskUserSignUpDetailBean.EmployUn || bean.getIs_employe() == VTaskUserSignUpDetailBean.EmployWaiting)
 							{
 								unList.add(bean);
 							}

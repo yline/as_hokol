@@ -14,6 +14,9 @@ public class VTaskUserSignUpDetailBean
 
 	public static final int EmployRefuse = 2;
 
+	// 待回复
+	public static final int EmployWaiting = 3;
+
 	private ArrayList<VTaskUserSignUpDetailOneBean> list;
 
 	public ArrayList<VTaskUserSignUpDetailOneBean> getList()

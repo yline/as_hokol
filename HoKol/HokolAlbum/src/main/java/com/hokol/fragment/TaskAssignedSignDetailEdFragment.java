@@ -20,7 +20,6 @@ import com.hokol.medium.http.bean.WTaskActionMasterFinishBean;
 import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
-import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 import com.yline.view.layout.label.FlowLayout;
@@ -104,7 +103,6 @@ public class TaskAssignedSignDetailEdFragment extends BaseFragment
 					@Override
 					public void onSuccess(String s)
 					{
-						SDKManager.toast("结束报名成功");
 						getActivity().finish(); // 结束该Activity
 					}
 				});
@@ -184,7 +182,14 @@ public class TaskAssignedSignDetailEdFragment extends BaseFragment
 			holder.setText(R.id.tv_sign_detail_ed_brief, taskBean.getUser_sign());
 
 			// 录用按钮
-			holder.get(R.id.tv_detail_ed_employ).setVisibility(View.GONE);
+			if (taskBean.getIs_employe() == VTaskUserSignUpDetailBean.EmployEd)
+			{
+				holder.setText(R.id.tv_detail_ed_employ, "已同意").setVisibility(View.VISIBLE);
+			}
+			else
+			{
+				holder.setText(R.id.tv_detail_ed_employ, "已拒绝").setVisibility(View.VISIBLE);
+			}
 
 			// 标签
 			FlowLayout flowLayout = holder.get(R.id.flow_layout_sign_detail_ed);
