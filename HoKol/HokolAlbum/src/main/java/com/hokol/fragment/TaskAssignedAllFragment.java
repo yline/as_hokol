@@ -66,8 +66,15 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 	{
 		super.onViewCreated(view, savedInstanceState);
 
+		userId = getArguments().getString(KeyUserId);
 		initView(view);
 		initViewClick();
+	}
+
+	@Override
+	public void onStart()
+	{
+		super.onStart();
 		initData();
 	}
 
@@ -142,6 +149,7 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 				TaskDetailActivity.actionStart(getContext(), taskAssignedBean.getTask_id(), true);
 			}
 		});
+		// 待报名
 		taskAssignedAllAdapter.setOnAssignedSignCallback(new TaskAssignedAdapter.OnTaskAssignedSignCallback()
 		{
 			@Override
@@ -154,6 +162,7 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 					{
 						if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
 						{
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onSignRefresh(0, DeleteConstant.defaultNumberSuper);
 							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
 						}
 					}
@@ -171,6 +180,8 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 						if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
 						{
 							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onSignRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onTradeRefresh(0, DeleteConstant.defaultNumberSuper);
 						}
 					}
 				});
@@ -231,7 +242,6 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 
 	private void initData()
 	{
-		userId = getArguments().getString(KeyUserId);
 		onRefreshData(userId, 0, DeleteConstant.defaultNumberSuper);
 	}
 

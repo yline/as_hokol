@@ -1,1 +1,1 @@
-include ':HokolAlbum', ':HokolBase', ':HokolMediumHttp', ':HokolATest', ':HokolMediumWidget'
+include ':HokolAlbum', ':HokolBase', ':HokolMediumHttp', ':HokolATest', ':HokolMediumWidget', ':HokolMediumModule'

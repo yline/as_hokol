@@ -1040,6 +1040,14 @@ public class XHttpUtil
 		}.doPost(httpUrl, null, VAreaAllBean.class);
 	}
 
+	/**
+	 * 获取支付宝签名数据
+	 */
+	public static void doAliPay()
+	{
+
+	}
+
 	private static boolean isDebug()
 	{
 		return XHttpConstant.isDefaultDebug();

@@ -17,10 +17,11 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskUserPublishedBean;
+import com.hokol.medium.http.bean.WTaskActionMasterCancelBean;
+import com.hokol.medium.http.bean.WTaskActionMasterFinishBean;
 import com.hokol.medium.http.bean.WTaskUserPublishedBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
-import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
@@ -37,6 +38,8 @@ public class TaskAssignedSignFragment extends BaseFragment implements TaskAssign
 	private TaskAssignedAdapter taskAssignedSignAdapter;
 
 	private WTaskUserPublishedBean userPublishedBean;
+
+	private String userId;
 
 	public static TaskAssignedSignFragment newInstance(String userId)
 	{
@@ -134,18 +137,42 @@ public class TaskAssignedSignFragment extends BaseFragment implements TaskAssign
 				TaskDetailActivity.actionStart(getContext(), taskAssignedBean.getTask_id(), true);
 			}
 		});
+		// 待报名
 		taskAssignedSignAdapter.setOnAssignedSignCallback(new TaskAssignedAdapter.OnTaskAssignedSignCallback()
 		{
 			@Override
 			public void onSignCancelClick(View view, String taskId)
 			{
-				SDKManager.toast("取消任务");
+				XHttpUtil.doTaskActionMasterCancel(new WTaskActionMasterCancelBean(userId, taskId), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
+						{
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onSignRefresh(0, DeleteConstant.defaultNumberSuper);
+						}
+					}
+				});
 			}
 
 			@Override
 			public void onSignFinishClick(View view, String taskId)
 			{
-				SDKManager.toast("结束报名");
+				XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
+						{
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onSignRefresh(0, DeleteConstant.defaultNumberSuper);
+							((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onTradeRefresh(0, DeleteConstant.defaultNumberSuper);
+						}
+					}
+				});
 			}
 
 			@Override
@@ -158,7 +185,7 @@ public class TaskAssignedSignFragment extends BaseFragment implements TaskAssign
 
 	private void initData()
 	{
-		String userId = getArguments().getString(KeyUserId);
+		userId = getArguments().getString(KeyUserId);
 		if (!TextUtils.isEmpty(userId))
 		{
 			onRefreshData(userId, 0, DeleteConstant.defaultNumberSuper);

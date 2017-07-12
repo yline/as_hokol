@@ -39,4 +39,5 @@ dependencies {
     // third
     compile project(':HokolMediumHttp')
     compile project(':HokolMediumWidget')
+    compile project(':HokolMediumModule')
 }

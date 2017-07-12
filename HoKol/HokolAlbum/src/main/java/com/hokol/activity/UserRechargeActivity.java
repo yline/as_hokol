@@ -9,17 +9,17 @@ import android.view.View;
 
 import com.hokol.R;
 import com.hokol.application.AppStateManager;
+import com.hokol.medium.module.AliPayActivity;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.application.SDKManager;
-import com.yline.base.BaseAppCompatActivity;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.Arrays;
 
-public class UserRechargeActivity extends BaseAppCompatActivity
+public class UserRechargeActivity extends AliPayActivity
 {
 	private static final String KeyRechargeUserId = "UserId";
 
@@ -29,6 +29,11 @@ public class UserRechargeActivity extends BaseAppCompatActivity
 
 	private String userId;
 
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, UserRechargeActivity.class).putExtra(KeyRechargeUserId, userId));
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -52,7 +57,7 @@ public class UserRechargeActivity extends BaseAppCompatActivity
 				return R.drawable.widget_solid_null_size_medium;
 			}
 		});
-		
+
 		rechargeAdapter = new UserRechargeAdapter();
 		recyclerView.setAdapter(rechargeAdapter);
 
@@ -116,6 +121,12 @@ public class UserRechargeActivity extends BaseAppCompatActivity
 		viewHolder.setText(R.id.tv_user_coin_num, String.format("余额：%d红豆", userCoin));
 	}
 
+	@Override
+	public void onPayBack(String memo, String status, String jsonResult)
+	{
+
+	}
+
 	private class UserRechargeAdapter extends WidgetRecyclerAdapter<Integer>
 	{
 		@Override
@@ -132,10 +143,5 @@ public class UserRechargeActivity extends BaseAppCompatActivity
 			holder.setText(R.id.tv_user_recharge_value_top, String.format("%d红豆", sList.get(position)));
 			holder.setText(R.id.tv_user_recharge_value, String.format("￥%d", sList.get(position)));
 		}
-	}
-
-	public static void actionStart(Context context, String userId)
-	{
-		context.startActivity(new Intent(context, UserRechargeActivity.class).putExtra(KeyRechargeUserId, userId));
 	}
 }
