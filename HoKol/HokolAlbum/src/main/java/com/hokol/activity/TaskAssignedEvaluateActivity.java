@@ -25,7 +25,6 @@ import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
-import com.yline.log.LogFileUtil;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.ArrayList;
@@ -99,7 +98,6 @@ public class TaskAssignedEvaluateActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				SDKManager.toast("点击成功");
 				String userId = AppStateManager.getInstance().getUserLoginId(TaskAssignedEvaluateActivity.this);
 				XHttpUtil.doTaskActionMasterComment(new WTaskActionMasterCommentBean(userId, taskId, assignedEvaluateAdapter.getRequestList()), new XHttpAdapter<String>()
 				{
@@ -107,6 +105,7 @@ public class TaskAssignedEvaluateActivity extends BaseAppCompatActivity
 					public void onSuccess(String s)
 					{
 						SDKManager.toast("发布成功");
+						finish();
 					}
 				});
 			}
@@ -148,7 +147,7 @@ public class TaskAssignedEvaluateActivity extends BaseAppCompatActivity
 				requestArrays[i].setConformity_score(MaxScore);
 				requestArrays[i].setAction_capacity_score(MaxScore);
 				requestArrays[i].setAttitude_score(MaxScore);
-				requestArrays[i].setUser_comment("");
+				requestArrays[i].setUser_comment("态度很好，能力满足本次活动需求");
 			}
 		}
 
@@ -171,7 +170,7 @@ public class TaskAssignedEvaluateActivity extends BaseAppCompatActivity
 		}
 
 		@Override
-		public void onBindViewHolder(RecyclerViewHolder holder, final int position)
+		public void onBindViewHolder(final RecyclerViewHolder holder, final int position)
 		{
 			super.onBindViewHolder(holder, position);
 
@@ -193,7 +192,7 @@ public class TaskAssignedEvaluateActivity extends BaseAppCompatActivity
 				public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser)
 				{
 					requestArrays[position].setConformity_score((int) rating);
-					notifyItemChanged(position);
+					updateStarHint((TextView) holder.get(R.id.tv_task_evaluate_conformity), (int) rating);
 				}
 			});
 
@@ -206,7 +205,7 @@ public class TaskAssignedEvaluateActivity extends BaseAppCompatActivity
 				public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser)
 				{
 					requestArrays[position].setAction_capacity_score((int) rating);
-					notifyItemChanged(position);
+					updateStarHint((TextView) holder.get(R.id.tv_task_evaluate_action), (int) rating);
 				}
 			});
 
@@ -219,7 +218,7 @@ public class TaskAssignedEvaluateActivity extends BaseAppCompatActivity
 				public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser)
 				{
 					requestArrays[position].setAttitude_score((int) rating);
-					notifyItemChanged(position);
+					updateStarHint((TextView) holder.get(R.id.tv_task_evaluate_attitude), (int) rating);
 				}
 			});
 
@@ -242,7 +241,6 @@ public class TaskAssignedEvaluateActivity extends BaseAppCompatActivity
 				@Override
 				public void afterTextChanged(Editable s)
 				{
-					LogFileUtil.v("content = " + s.toString());
 					requestArrays[position].setUser_comment(s.toString());
 				}
 			});
@@ -265,9 +263,13 @@ public class TaskAssignedEvaluateActivity extends BaseAppCompatActivity
 				textView.setText("一般");
 
 			}
-			else
+			else if (rating < 4.5)
 			{
 				textView.setText("好");
+			}
+			else
+			{
+				textView.setText("非常好");
 			}
 		}
 	}

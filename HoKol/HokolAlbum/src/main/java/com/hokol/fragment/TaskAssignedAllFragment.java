@@ -25,6 +25,7 @@ import com.hokol.medium.http.bean.WTaskActionMasterFinishBean;
 import com.hokol.medium.http.bean.WTaskDeleteBean;
 import com.hokol.medium.http.bean.WTaskUserPublishedBean;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
+import com.hokol.medium.widget.DialogIosWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
@@ -196,9 +197,59 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 		taskAssignedAllAdapter.setOnAssignedTradeCallback(new TaskAssignedAdapter.OnTaskAssignedTradeCallback()
 		{
 			@Override
-			public void onTradeCancelClick(View view, String taskId)
+			public void onTradeCancelClick(View view, final String taskId, boolean hasEmploy)
 			{
-				SDKManager.toast("取消任务");
+				if (!hasEmploy)
+				{
+					XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new XHttpAdapter<String>()
+					{
+						@Override
+						public void onSuccess(String s)
+						{
+							SDKManager.toast("取消任务成功");
+							if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
+							{
+								((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
+								((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onTradeRefresh(0, DeleteConstant.defaultNumberSuper);
+							}
+						}
+					});
+				}
+				else
+				{
+					DialogIosWidget widgetDialogCenter = new DialogIosWidget(getContext())
+					{
+						@Override
+						protected void initBuilder(Builder builder)
+						{
+							super.initBuilder(builder);
+							builder.setTitle("已录用人员，若取消任务\n将扣除5%的违约金");
+							builder.setNegativeText("再看看");
+							builder.setPositiveText("确认取消");
+							builder.setOnPositiveListener(new View.OnClickListener()
+							{
+								@Override
+								public void onClick(View v)
+								{
+									XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new XHttpAdapter<String>()
+									{
+										@Override
+										public void onSuccess(String s)
+										{
+											SDKManager.toast("取消任务成功");
+											if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
+											{
+												((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
+												((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onTradeRefresh(0, DeleteConstant.defaultNumberSuper);
+											}
+										}
+									});
+								}
+							});
+						}
+					};
+					widgetDialogCenter.show();
+				}
 			}
 
 			@Override

@@ -61,8 +61,15 @@ public class TaskAssignedSignFragment extends BaseFragment implements TaskAssign
 	{
 		super.onViewCreated(view, savedInstanceState);
 
+		userId = getArguments().getString(KeyUserId);
 		initView(view);
 		initViewClick();
+	}
+
+	@Override
+	public void onStart()
+	{
+		super.onStart();
 		initData();
 	}
 
@@ -185,7 +192,6 @@ public class TaskAssignedSignFragment extends BaseFragment implements TaskAssign
 
 	private void initData()
 	{
-		userId = getArguments().getString(KeyUserId);
 		if (!TextUtils.isEmpty(userId))
 		{
 			onRefreshData(userId, 0, DeleteConstant.defaultNumberSuper);

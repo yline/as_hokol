@@ -30,6 +30,7 @@ import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.layout.label.FlowLayout;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
+import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +50,8 @@ public class TaskAssignedTradeSureDetailActivity extends BaseAppCompatActivity
 
 	private String taskId;
 
+	private ViewHolder detailViewHolder;
+
 	public static void actionStart(Context context, String taskId)
 	{
 		context.startActivity(new Intent(context, TaskAssignedTradeSureDetailActivity.class).putExtra(KeyTaskId, taskId));
@@ -60,6 +63,7 @@ public class TaskAssignedTradeSureDetailActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_task_assigned_trade_sure_detail);
 
+		detailViewHolder = new ViewHolder(this);
 		initView();
 		initData();
 
@@ -124,11 +128,17 @@ public class TaskAssignedTradeSureDetailActivity extends BaseAppCompatActivity
 	private void initData()
 	{
 		taskId = getIntent().getStringExtra(KeyTaskId);
+
+		tradeSureDetailAdapter.setShowEmpty(false);
+		detailViewHolder.get(R.id.tv_task_assigned_trade_sure_detail_commit).setVisibility(View.GONE);
 		XHttpUtil.doTaskUserAcceptDetail(new WTaskUserAcceptBean(taskId, 0, DeleteConstant.defaultNumberSuper), new XHttpAdapter<VTaskUserAcceptBean>()
 		{
 			@Override
 			public void onSuccess(VTaskUserAcceptBean vTaskUserAcceptBean)
 			{
+				tradeSureDetailAdapter.setShowEmpty(true);
+				detailViewHolder.get(R.id.tv_task_assigned_trade_sure_detail_commit).setVisibility(View.VISIBLE);
+
 				List<VTaskUserAcceptBean.VTaskUserAcceptOneBean> resultList = vTaskUserAcceptBean.getList();
 				if (null != resultList)
 				{
@@ -138,7 +148,7 @@ public class TaskAssignedTradeSureDetailActivity extends BaseAppCompatActivity
 			}
 		});
 	}
-
+	
 	/**
 	 * 显示信息 + 修改的信息
 	 */
@@ -174,6 +184,19 @@ public class TaskAssignedTradeSureDetailActivity extends BaseAppCompatActivity
 		public int getItemRes()
 		{
 			return R.layout.item_task_assigned_trade_sure_detail;
+		}
+
+		@Override
+		public int getEmptyItemRes()
+		{
+			return R.layout.widget_recycler_load_error_text;
+		}
+
+		@Override
+		public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
+		{
+			super.onBindEmptyViewHolder(viewHolder, position);
+			viewHolder.setText(R.id.tv_loading_cover, "还没有人接单诶");
 		}
 
 		@Override

@@ -45,8 +45,8 @@
         android:layout_alignParentBottom="true"
         android:background="@color/hokolRed"
         android:gravity="center"
-        android:paddingBottom="@dimen/default_space_normal"
-        android:paddingTop="@dimen/default_space_normal"
+        android:paddingBottom="@dimen/default_space_large"
+        android:paddingTop="@dimen/default_space_large"
         android:text="提交"
         android:textColor="@android:color/white"
         android:textSize="@dimen/default_text_size_large"/>

@@ -100,12 +100,13 @@ public class TaskAssignedTradeDetailActivity extends BaseAppCompatActivity
 	private void initData()
 	{
 		String taskId = getIntent().getStringExtra(KeyTaskId);
-
+		tradeDetailAdapter.setShowEmpty(false);
 		XHttpUtil.doTaskUserAcceptDetail(new WTaskUserAcceptBean(taskId, 0, DeleteConstant.defaultNumberLarge), new XHttpAdapter<VTaskUserAcceptBean>()
 		{
 			@Override
 			public void onSuccess(VTaskUserAcceptBean vTaskUserAcceptBean)
 			{
+				tradeDetailAdapter.setShowEmpty(true);
 				List<VTaskUserAcceptBean.VTaskUserAcceptOneBean> resultList = vTaskUserAcceptBean.getList();
 				if (null != resultList)
 				{
@@ -121,6 +122,19 @@ public class TaskAssignedTradeDetailActivity extends BaseAppCompatActivity
 		public int getItemRes()
 		{
 			return R.layout.item_task_assigned_trade_detail;
+		}
+
+		@Override
+		public int getEmptyItemRes()
+		{
+			return R.layout.widget_recycler_load_error_text;
+		}
+
+		@Override
+		public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
+		{
+			super.onBindEmptyViewHolder(viewHolder, position);
+			viewHolder.setText(R.id.tv_loading_cover, "还没有人接单诶");
 		}
 
 		@Override

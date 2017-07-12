@@ -37,6 +37,8 @@ public class TaskAssignedEvaluateFragment extends BaseFragment implements TaskAs
 
 	private WTaskUserPublishedBean userPublishedBean;
 
+	private String userId;
+
 	public static TaskAssignedEvaluateFragment newInstance(String userId)
 	{
 		Bundle args = new Bundle();
@@ -57,8 +59,15 @@ public class TaskAssignedEvaluateFragment extends BaseFragment implements TaskAs
 	{
 		super.onViewCreated(view, savedInstanceState);
 
+		userId = getArguments().getString(KeyUserId);
 		initView(view);
 		initViewClick();
+	}
+
+	@Override
+	public void onStart()
+	{
+		super.onStart();
 		initData();
 	}
 
@@ -145,7 +154,7 @@ public class TaskAssignedEvaluateFragment extends BaseFragment implements TaskAs
 
 	private void initData()
 	{
-		String userId = getArguments().getString(KeyUserId);
+
 		if (!TextUtils.isEmpty(userId))
 		{
 			onRefreshData(userId, 0, DeleteConstant.defaultNumberSuper);

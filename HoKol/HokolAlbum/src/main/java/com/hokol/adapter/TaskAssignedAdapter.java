@@ -166,7 +166,7 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 				{
 					if (null != assignedTradeCallback)
 					{
-						assignedTradeCallback.onTradeCancelClick(v, bean.getTask_id());
+						assignedTradeCallback.onTradeCancelClick(v, bean.getTask_id(), (bean.getEmployee_num() > 0));
 					}
 				}
 			});
@@ -308,9 +308,11 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 		/**
 		 * 取消交易
 		 *
-		 * @param view
+		 * @param view      view
+		 * @param taskId    任务id
+		 * @param hasEmploy 对方是否确认接单
 		 */
-		void onTradeCancelClick(View view, String taskId);
+		void onTradeCancelClick(View view, String taskId, boolean hasEmploy);
 
 		/**
 		 * 交易详情
