@@ -185,12 +185,6 @@ public class MainCareFragment extends BaseFragment
 				{
 					super.onFailure(ex);
 				}
-
-				@Override
-				public void onFailureCode(int code)
-				{
-					super.onFailureCode(code);
-				}
 			});
 		}
 	}

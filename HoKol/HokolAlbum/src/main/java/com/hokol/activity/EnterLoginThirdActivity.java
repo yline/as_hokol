@@ -3,6 +3,7 @@ package com.hokol.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
 import com.hokol.R;
@@ -13,20 +14,30 @@ import com.yline.view.recycler.holder.ViewHolder;
 
 public class EnterLoginThirdActivity extends BaseAppCompatActivity
 {
+	private static final String KeyUserId = "UserId";
+	
 	private ViewHolder viewHolder;
 	
+	private String userId;
+	
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, EnterLoginThirdActivity.class).putExtra(KeyUserId, userId));
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_enter_login_third);
-		
+
 		viewHolder = new ViewHolder(this);
-		
+		userId = getIntent().getStringExtra(KeyUserId);
+
 		initView();
 		initViewClick();
 	}
-	
+
 	private void initView()
 	{
 		EditText editTextPhone = viewHolder.get(R.id.et_enter_login_third_username);
@@ -41,7 +52,7 @@ public class EnterLoginThirdActivity extends BaseAppCompatActivity
 				}
 			}
 		});
-		
+
 		EditText editTextIdentify = viewHolder.get(R.id.et_enter_login_third_identify);
 		TextDecorateUtil.isIdentifyMatch(editTextIdentify, new TextDecorateUtil.OnEditMatchCallback()
 		{
@@ -54,7 +65,7 @@ public class EnterLoginThirdActivity extends BaseAppCompatActivity
 				}
 			}
 		});
-		
+
 		EditText editTextPwd = viewHolder.get(R.id.et_enter_login_third_new_pwd);
 		TextDecorateUtil.isPhonePwdMatch(editTextPwd, new TextDecorateUtil.OnEditMatchCallback()
 		{
@@ -68,13 +79,16 @@ public class EnterLoginThirdActivity extends BaseAppCompatActivity
 			}
 		});
 	}
-	
+
 	private void initViewClick()
 	{
-	}
-	
-	public static void actionStart(Context context)
-	{
-		context.startActivity(new Intent(context, EnterLoginThirdActivity.class));
+		viewHolder.setOnClickListener(R.id.btn_register_phone_action_next, new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				viewHolder.getText(R.id.et_enter_login_third_username);
+			}
+		});
 	}
 }

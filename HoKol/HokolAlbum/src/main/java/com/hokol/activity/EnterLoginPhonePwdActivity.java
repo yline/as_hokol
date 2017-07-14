@@ -32,6 +32,11 @@ public class EnterLoginPhonePwdActivity extends BaseAppCompatActivity
 
 	private boolean isPhoneMatch, isPwdMatch;
 
+	public static void actionStart(Context context)
+	{
+		context.startActivity(new Intent(context, EnterLoginPhonePwdActivity.class));
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -194,10 +199,13 @@ public class EnterLoginPhonePwdActivity extends BaseAppCompatActivity
 			}
 
 			@Override
-			public void onFailureCode(int code)
+			public void onSuccess(int code, String str)
 			{
-				super.onFailureCode(code);
-				SDKManager.toast("用户名或密码错误");
+				super.onSuccess(code, str);
+				if (code != REQUEST_SUCCESS_CODE)
+				{
+					SDKManager.toast("用户名或密码错误");
+				}
 			}
 
 			@Override
@@ -207,10 +215,5 @@ public class EnterLoginPhonePwdActivity extends BaseAppCompatActivity
 				SDKManager.toast("登陆失败");
 			}
 		});
-	}
-
-	public static void actionStart(Context context)
-	{
-		context.startActivity(new Intent(context, EnterLoginPhonePwdActivity.class));
 	}
 }

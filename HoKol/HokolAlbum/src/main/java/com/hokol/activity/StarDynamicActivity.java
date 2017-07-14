@@ -104,13 +104,6 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 						SDKManager.toast("关注成功");
 						viewHolder.get(R.id.iv_star_dynamic_care).setVisibility(View.GONE);
 					}
-
-					@Override
-					public void onFailureCode(int code)
-					{
-						super.onFailureCode(code);
-						SDKManager.toast("code = " + code);
-					}
 				});
 			}
 		});

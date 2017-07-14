@@ -23,6 +23,11 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 
 	private EnterRegisterPhoneHelper registerPhoneHelper;
 
+	public static void actionStart(Context context)
+	{
+		context.startActivity(new Intent(context, EnterRegisterPhoneActivity.class));
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -58,10 +63,13 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 					}
 
 					@Override
-					public void onFailureCode(int code)
+					public void onSuccess(int code, String s)
 					{
-						super.onFailureCode(code);
-						IApplication.toast("填写信息错误");
+						super.onSuccess(code, s);
+						if (code != REQUEST_SUCCESS_CODE)
+						{
+							IApplication.toast("填写信息错误");
+						}
 					}
 				});
 			}
@@ -91,9 +99,9 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 					}
 
 					@Override
-					public void onFailureCode(int code)
+					public void onSuccess(int code, String s)
 					{
-						super.onFailureCode(code);
+						super.onSuccess(code, s);
 						if (3001 == code)
 						{
 							new DialogIosWidget(EnterRegisterPhoneActivity.this)
@@ -111,10 +119,5 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 				});
 			}
 		});
-	}
-
-	public static void actionStart(Context context)
-	{
-		context.startActivity(new Intent(context, EnterRegisterPhoneActivity.class));
 	}
 }

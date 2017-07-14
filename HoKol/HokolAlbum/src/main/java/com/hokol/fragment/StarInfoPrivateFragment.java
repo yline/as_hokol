@@ -173,47 +173,50 @@ public class StarInfoPrivateFragment extends BaseFragment
 				}
 
 				@Override
-				public void onFailureCode(int code)
+				public void onSuccess(int code, String str)
 				{
-					super.onFailureCode(code);
-					lockRelativeLayout.setVisibility(View.VISIBLE);
-
-					lockRelativeLayout.setOnClickListener(new View.OnClickListener()
+					super.onSuccess(code, str);
+					if (code != REQUEST_SUCCESS_CODE)
 					{
-						@Override
-						public void onClick(View v)
+						lockRelativeLayout.setVisibility(View.VISIBLE);
+
+						lockRelativeLayout.setOnClickListener(new View.OnClickListener()
 						{
-							DialogIosWidget dialogIosWidget = new DialogIosWidget(getContext())
+							@Override
+							public void onClick(View v)
 							{
-								@Override
-								protected void initBuilder(Builder builder)
+								DialogIosWidget dialogIosWidget = new DialogIosWidget(getContext())
 								{
-									super.initBuilder(builder);
-									builder.setTitle("会员享有更多优惠哦");
-									builder.setNegativeText("单次购买");
-									builder.setPositiveText("开通会员");
-									builder.setCanceledOnTouchOutside(true);
-									builder.setOnNegativeListener(new View.OnClickListener()
+									@Override
+									protected void initBuilder(Builder builder)
 									{
-										@Override
-										public void onClick(View v)
+										super.initBuilder(builder);
+										builder.setTitle("会员享有更多优惠哦");
+										builder.setNegativeText("单次购买");
+										builder.setPositiveText("开通会员");
+										builder.setCanceledOnTouchOutside(true);
+										builder.setOnNegativeListener(new View.OnClickListener()
 										{
-											VipSinglePrivateActivity.actionStart(getContext());
-										}
-									});
-									builder.setOnPositiveListener(new View.OnClickListener()
-									{
-										@Override
-										public void onClick(View v)
+											@Override
+											public void onClick(View v)
+											{
+												VipSinglePrivateActivity.actionStart(getContext());
+											}
+										});
+										builder.setOnPositiveListener(new View.OnClickListener()
 										{
-											VipHokolActivity.actionStart(getContext());
-										}
-									});
-								}
-							};
-							dialogIosWidget.show();
-						}
-					});
+											@Override
+											public void onClick(View v)
+											{
+												VipHokolActivity.actionStart(getContext());
+											}
+										});
+									}
+								};
+								dialogIosWidget.show();
+							}
+						});
+					}
 				}
 			});
 		}

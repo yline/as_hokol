@@ -221,9 +221,9 @@ public class StarInfoActivity extends BaseAppCompatActivity
 			}
 
 			@Override
-			public void onFailureCode(int code)
+			public void onSuccess(int code, String str)
 			{
-				super.onFailureCode(code);
+				super.onSuccess(code, str);
 				if (code == 2001)
 				{
 					LogFileUtil.v("Star info failed; user do not exist");

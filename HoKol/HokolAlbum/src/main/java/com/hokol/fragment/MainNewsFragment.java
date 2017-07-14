@@ -99,7 +99,6 @@ public class MainNewsFragment extends BaseFragment
 					public void onSuccess(VNewsRecommendBean vNewsRecommendBean)
 					{
 						IApplication.toast("刷新成功");
-						superSwipeRefreshLayout.setRefreshing(false);
 					}
 
 					@Override
@@ -110,10 +109,10 @@ public class MainNewsFragment extends BaseFragment
 					}
 
 					@Override
-					public void onFailureCode(int code)
+					public void onSuccess(int code, String str)
 					{
-						super.onFailureCode(code);
 						superSwipeRefreshLayout.setRefreshing(false);
+						super.onSuccess(code, str);
 					}
 				});
 			}
@@ -127,11 +126,17 @@ public class MainNewsFragment extends BaseFragment
 				XHttpUtil.doNewsMultiplex(loadBean, new XHttpAdapter<VNewsMultiplexBean>()
 				{
 					@Override
+					public void onSuccess(int code, String str)
+					{
+						super.onSuccess(code, str);
+						superSwipeRefreshLayout.setLoadMore(false);
+					}
+
+					@Override
 					public void onSuccess(VNewsMultiplexBean vNewsMultiplexBean)
 					{
 						IApplication.toast("加载结束");
 						loadedNewsNumber += vNewsMultiplexBean.getList().size();
-						superSwipeRefreshLayout.setLoadMore(false);
 
 						mainNewsHelper.addRecyclerData(vNewsMultiplexBean.getList());
 					}
@@ -140,13 +145,6 @@ public class MainNewsFragment extends BaseFragment
 					public void onFailure(Exception ex)
 					{
 						super.onFailure(ex);
-						superSwipeRefreshLayout.setLoadMore(false);
-					}
-
-					@Override
-					public void onFailureCode(int code)
-					{
-						super.onFailureCode(code);
 						superSwipeRefreshLayout.setLoadMore(false);
 					}
 				});

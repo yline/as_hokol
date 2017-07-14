@@ -2,13 +2,25 @@ package com.hokol.wxapi;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.gson.Gson;
+import com.hokol.activity.EnterLoginThirdActivity;
+import com.hokol.activity.MainActivity;
 import com.hokol.application.IApplication;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VWeChatLoginBean;
+import com.hokol.medium.http.bean.VWeChatLoginFirstBean;
+import com.hokol.medium.http.bean.WWeChatLoginBean;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.yline.application.BaseApplication;
+import com.yline.application.SDKManager;
+import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 
 /**
@@ -21,6 +33,11 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler
 {
 	private ProgressDialog progressDialog;
 
+	public static void actionStart(Context context)
+	{
+		context.startActivity(new Intent(context, WXEntryActivity.class));
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -29,7 +46,11 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler
 
 		// 通过WXAPIFactory工厂，获取IWXAPI的实例
 		IApplication.getIwxApi().handleIntent(getIntent(), this);
-		// progressDialog = new ProgressDialog(this);
+		progressDialog = new ProgressDialog(this); // R.style.Widget_Dialog_Default
+		progressDialog.setCancelable(true);
+		progressDialog.setCanceledOnTouchOutside(false);
+		progressDialog.setMessage("正在加载...");
+		progressDialog.show();
 	}
 
 	/**
@@ -53,14 +74,71 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler
 	@Override
 	public void onResp(BaseResp baseResp)
 	{
-		LogFileUtil.v("onResp Type = " + baseResp.getType() + ", errCode = " + baseResp.errCode + ". errStr = " + baseResp.errStr + ", openId = " + baseResp.openId + ", transaction = " + baseResp.transaction);
-		// progressDialog.show();
+		switch (baseResp.errCode)
+		{
+			case 0:
+				final SendAuth.Resp resp = (SendAuth.Resp) baseResp;
+				LogFileUtil.v("onResp resp code = " + resp.code + ", state = " + resp.state + ", lang = " + resp.lang + ", country = " + resp.country);
+				XHttpUtil.doWeChatLogin(new WWeChatLoginBean(resp.code), new XHttpAdapter<VWeChatLoginBean>()
+				{
+					@Override
+					public void onSuccess(VWeChatLoginBean vWeChatLoginBean)
+					{
+						MainActivity.actionStart(WXEntryActivity.this, vWeChatLoginBean);
+						finish();
+					}
+
+					@Override
+					public void onSuccess(int code, String str)
+					{
+						super.onSuccess(code, str);
+						// 是注册的逻辑
+						if (WWeChatLoginBean.TypeRegister == code)
+						{
+							VWeChatLoginFirstBean result = new Gson().fromJson(str, VWeChatLoginFirstBean.class);
+							if (null != result)
+							{
+								EnterLoginThirdActivity.actionStart(WXEntryActivity.this, result.getUser_id());
+							}
+						}
+						dismissDialog();
+					}
+
+					@Override
+					public void onFailure(Exception ex)
+					{
+						super.onFailure(ex);
+						SDKManager.toast("登录失败，请检查网络");
+						dismissDialog();
+					}
+				});
+				break;
+			case -2: // -2 用户取消
+				LogFileUtil.v("onResp Type = -2, canceled");
+				SDKManager.toast("已取消登录");
+				finish();
+				break;
+			case -4: // -4 用户拒绝授权
+				LogFileUtil.v("onResp Type = -4, refused");
+				SDKManager.toast("已拒接授权");
+				finish();
+				break;
+		}
+	}
+
+	private void dismissDialog()
+	{
+		if (null != progressDialog && progressDialog.isShowing())
+		{
+			progressDialog.dismiss();
+		}
 	}
 
 	@Override
 	protected void onDestroy()
 	{
 		super.onDestroy();
+		dismissDialog();
 		BaseApplication.removeActivity(this);
 	}
 }

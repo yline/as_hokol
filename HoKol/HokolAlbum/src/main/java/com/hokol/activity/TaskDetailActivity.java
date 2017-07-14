@@ -263,9 +263,9 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 				}
 
 				@Override
-				public void onFailureCode(int code)
+				public void onSuccess(int code, String str)
 				{
-					super.onFailureCode(code);
+					super.onSuccess(code, str);
 					if (code == 2003)
 					{
 						SDKManager.getHandler().postDelayed(new Runnable()

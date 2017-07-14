@@ -76,8 +76,6 @@ public class EnterChoiceActivity extends BaseAppCompatActivity
 			{
 				boolean isSuccess = doWcRequest();
 				LogFileUtil.v("是否能够拉起来呢 = " + isSuccess);
-				// WXEntryActivity.actionStart(EnterChoiceActivity.this);
-				// EnterLoginThirdActivity.actionStart(EnterChoiceActivity.this);
 			}
 		});
 	}

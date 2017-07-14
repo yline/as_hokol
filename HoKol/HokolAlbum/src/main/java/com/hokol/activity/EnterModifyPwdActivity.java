@@ -29,6 +29,11 @@ public class EnterModifyPwdActivity extends BaseAppCompatActivity
 
 	private String userId;
 
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, EnterModifyPwdActivity.class).putExtra(KeyModifyPwdUserId, userId));
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -160,17 +165,20 @@ public class EnterModifyPwdActivity extends BaseAppCompatActivity
 				XHttpUtil.doSettingResetPwd(new WSettingResetPwdBean(userId, oldPwdStr, newPwdStr), new XHttpAdapter<String>()
 				{
 					@Override
+					public void onSuccess(int code, String s)
+					{
+						super.onSuccess(code, s);
+						if (code != REQUEST_SUCCESS_CODE)
+						{
+							SDKManager.toast("密码错误");
+						}
+					}
+
+					@Override
 					public void onSuccess(String s)
 					{
 						SDKManager.toast("修改密码成功");
 						finish();
-					}
-
-					@Override
-					public void onFailureCode(int code)
-					{
-						super.onFailureCode(code);
-						SDKManager.toast("密码错误");
 					}
 				});
 			}
@@ -189,6 +197,11 @@ public class EnterModifyPwdActivity extends BaseAppCompatActivity
 		private boolean isOldPwdMatch;
 
 		private boolean isNewPwdMatch;
+
+		public boolean isOldPwdMatch()
+		{
+			return isOldPwdMatch;
+		}
 
 		public void setOldPwdMatch(boolean oldPwdMatch)
 		{
@@ -212,6 +225,11 @@ public class EnterModifyPwdActivity extends BaseAppCompatActivity
 			}
 		}
 
+		public boolean isNewPwdMatch()
+		{
+			return isNewPwdMatch;
+		}
+
 		public void setNewPwdMatch(boolean newPwdMatch)
 		{
 			if (this.isNewPwdMatch != newPwdMatch)
@@ -233,20 +251,5 @@ public class EnterModifyPwdActivity extends BaseAppCompatActivity
 				}
 			}
 		}
-
-		public boolean isOldPwdMatch()
-		{
-			return isOldPwdMatch;
-		}
-
-		public boolean isNewPwdMatch()
-		{
-			return isNewPwdMatch;
-		}
-	}
-
-	public static void actionStart(Context context, String userId)
-	{
-		context.startActivity(new Intent(context, EnterModifyPwdActivity.class).putExtra(KeyModifyPwdUserId, userId));
 	}
 }

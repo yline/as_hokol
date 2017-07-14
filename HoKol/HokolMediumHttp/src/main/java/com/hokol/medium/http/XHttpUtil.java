@@ -6,7 +6,6 @@ import com.hokol.medium.http.bean.*;
 import com.yline.http.XHttpAdapter;
 import com.yline.http.XHttpConfig;
 import com.yline.http.XHttpConstant;
-import com.yline.http.helper.HttpCacheAndNetClient;
 import com.yline.http.helper.XTextHttp;
 import com.yline.http.helper.XUploadFileHttp;
 import com.yline.log.LogFileUtil;
@@ -1035,7 +1034,7 @@ public class XHttpUtil
 			@Override
 			protected OkHttpClient getClient()
 			{
-				return HttpCacheAndNetClient.getInstance();
+				return HttpCacheThanNetClient.getInstance();
 			}
 		}.doPost(httpUrl, null, VAreaAllBean.class);
 	}
@@ -1047,6 +1046,24 @@ public class XHttpUtil
 	{
 		String httpUrl = HttpConstant.url_ali_pay_order_info;
 		new XTextHttp<VAliPayOrderInfoBean>(adapter).doPost(httpUrl, infoBean, VAliPayOrderInfoBean.class);
+	}
+
+	/**
+	 * 微信注册/登录
+	 */
+	public static void doWeChatLogin(WWeChatLoginBean loginBean, XHttpAdapter<VWeChatLoginBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_we_chat_login;
+		new XTextHttp<VWeChatLoginBean>(adapter).doPost(httpUrl, loginBean, VWeChatLoginBean.class);
+	}
+
+	/**
+	 * 微信注册 填写信息
+	 */
+	public static void doWeChatRegisterInfo(WWeChatRegisterInfoBean infoBean, XHttpAdapter<VWeChatRegisterInfoBean> adapter)
+	{
+		String httpUrl = HttpConstant.url_we_chat_register;
+		new XTextHttp<VWeChatRegisterInfoBean>(adapter).doPost(httpUrl, infoBean, VWeChatRegisterInfoBean.class);
 	}
 
 	private static boolean isDebug()

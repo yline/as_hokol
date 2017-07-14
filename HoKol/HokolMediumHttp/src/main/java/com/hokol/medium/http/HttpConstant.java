@@ -261,6 +261,12 @@ public class HttpConstant
 	// 获取 支付宝 订单信息
 	public static final String url_ali_pay_order_info = url_head + "ApiPay/alipay";
 
+	// 用户微信登录
+	public static final String url_we_chat_login = url_head + "ApiLogin/wechat_login";
+
+	// 微信登陆后添加号码
+	public static final String url_we_chat_register = url_head + "ApiLogin/add_tel_pwd";
+
 	/* ------------------------------ 控制 -------------------------------- */
 
 	/**
