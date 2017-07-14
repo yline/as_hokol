@@ -28,6 +28,6 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.1.1'
     testCompile 'junit:junit:4.12'
-    compile files('libs/alipaySdk-20170710.jar')
+    compile files('libs/alipaySdk-20170710.jar') // 阿里支付
     compile project(':HokolBase')
 }

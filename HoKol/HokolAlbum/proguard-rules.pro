@@ -101,3 +101,15 @@
 #-keep public class * implements com.yline.http.helper.IHttpResponse
 
 ######################################### 第三方库 ############################################
+
+######################################### 支付宝 ############################################
+#-libraryjars libs/alipaySDK-20170710.jar
+
+-dontwarn com.alipay.**
+-dontwarn android.net.SSLCertificateSocketFactory
+-keep class com.alipay.android.app.IAlixPay{*;}
+-keep class com.alipay.android.app.IAlixPay$Stub{*;}
+-keep class com.alipay.android.app.IRemoteServiceCallback{*;}
+-keep class com.alipay.android.app.IRemoteServiceCallback$Stub{*;}
+-keep class com.alipay.sdk.app.PayTask{ public *;}
+-keep class com.alipay.sdk.app.AuthTask{ public *;}

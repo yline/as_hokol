@@ -257,7 +257,10 @@ public class HttpConstant
 
 	// 获取地区
 	public static final String url_area_all = url_head + "ApiArea/get_area";
-	
+
+	// 获取 支付宝 订单信息
+	public static final String url_ali_pay_order_info = url_head + "ApiPay/alipay";
+
 	/* ------------------------------ 控制 -------------------------------- */
 
 	/**

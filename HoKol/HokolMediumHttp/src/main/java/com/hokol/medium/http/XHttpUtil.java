@@ -1043,9 +1043,10 @@ public class XHttpUtil
 	/**
 	 * 获取支付宝签名数据
 	 */
-	public static void doAliPay()
+	public static void doAliPayOrderInfo(WAliPayOrderInfoBean infoBean, XHttpAdapter<VAliPayOrderInfoBean> adapter)
 	{
-
+		String httpUrl = HttpConstant.url_ali_pay_order_info;
+		new XTextHttp<VAliPayOrderInfoBean>(adapter).doPost(httpUrl, infoBean, VAliPayOrderInfoBean.class);
 	}
 
 	private static boolean isDebug()

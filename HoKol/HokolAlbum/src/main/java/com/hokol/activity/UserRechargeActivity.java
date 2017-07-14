@@ -9,10 +9,17 @@ import android.view.View;
 
 import com.hokol.R;
 import com.hokol.application.AppStateManager;
+import com.hokol.application.DeleteConstant;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VAliPayOrderInfoBean;
+import com.hokol.medium.http.bean.WAliPayOrderInfoBean;
 import com.hokol.medium.module.AliPayActivity;
+import com.hokol.medium.widget.DialogIosWidget;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.application.SDKManager;
+import com.yline.http.XHttpAdapter;
+import com.yline.log.LogFileUtil;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 import com.yline.view.recycler.holder.ViewHolder;
@@ -61,7 +68,7 @@ public class UserRechargeActivity extends AliPayActivity
 		rechargeAdapter = new UserRechargeAdapter();
 		recyclerView.setAdapter(rechargeAdapter);
 
-		rechargeAdapter.setDataList(Arrays.asList(100, 680, 1280, 2680, 5180, 9980));
+		rechargeAdapter.setDataList(Arrays.asList(100f, 680f, 1280f, 2680f, 5180f, 9980f));
 
 		viewHolder.setOnClickListener(R.id.iv_user_recharge_cancel, new View.OnClickListener()
 		{
@@ -93,7 +100,21 @@ public class UserRechargeActivity extends AliPayActivity
 			@Override
 			public void onClick(View v)
 			{
-				SDKManager.toast("支付宝充值");
+				XHttpUtil.doAliPayOrderInfo(new WAliPayOrderInfoBean(userId, 0.01f), new XHttpAdapter<VAliPayOrderInfoBean>()
+				{
+					@Override
+					public void onSuccess(VAliPayOrderInfoBean vAliPayOrderInfoBean)
+					{
+						doPay(vAliPayOrderInfoBean.getMess());
+					}
+					
+					@Override
+					public void onFailure(Exception ex)
+					{
+						super.onFailure(ex);
+						SDKManager.toast("网络异常");
+					}
+				});
 			}
 		});
 
@@ -122,13 +143,25 @@ public class UserRechargeActivity extends AliPayActivity
 	}
 
 	@Override
-	public void onPayBack(String memo, String status, String jsonResult)
+	public void onPayBack(final String memo, final String status, final String jsonResult)
 	{
-
+		LogFileUtil.v("memo = " + memo + ", status = " + status + ", jsonResult = " + jsonResult);
+		DialogIosWidget dialogIosWidget = new DialogIosWidget(this)
+		{
+			@Override
+			protected void initBuilder(Builder builder)
+			{
+				super.initBuilder(builder);
+				builder.setTitle("memo = " + memo + "\n" + "status = " + status + "\n" + ", jsonResult = " + jsonResult);
+			}
+		};
+		dialogIosWidget.show();
 	}
 
-	private class UserRechargeAdapter extends WidgetRecyclerAdapter<Integer>
+	private class UserRechargeAdapter extends WidgetRecyclerAdapter<Float>
 	{
+		private int oldPosition = 0;
+
 		@Override
 		public int getItemRes()
 		{
@@ -136,12 +169,39 @@ public class UserRechargeActivity extends AliPayActivity
 		}
 
 		@Override
-		public void onBindViewHolder(RecyclerViewHolder holder, int position)
+		public void onBindViewHolder(final RecyclerViewHolder holder, final int position)
 		{
 			super.onBindViewHolder(holder, position);
 
-			holder.setText(R.id.tv_user_recharge_value_top, String.format("%d红豆", sList.get(position)));
-			holder.setText(R.id.tv_user_recharge_value, String.format("￥%d", sList.get(position)));
+			holder.setText(R.id.tv_user_recharge_value_top, String.format("%.0f红豆", sList.get(position)));
+			holder.setText(R.id.tv_user_recharge_value, String.format("￥%3.2f", sList.get(position) / DeleteConstant.ScaleOfHokolCoin));
+
+			if (position == oldPosition)
+			{
+				holder.getItemView().setSelected(true);
+			}
+			else
+			{
+				holder.getItemView().setSelected(false);
+			}
+
+			holder.getItemView().setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					if (position != oldPosition)
+					{
+						if (-1 != oldPosition)
+						{
+							notifyItemChanged(oldPosition);
+						}
+
+						oldPosition = position;
+						notifyItemChanged(oldPosition);
+					}
+				}
+			});
 		}
 	}
 }
