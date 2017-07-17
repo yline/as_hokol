@@ -30,6 +30,7 @@ import com.yline.base.BaseFragment;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.FileUtil;
 import com.yline.utils.LogUtil;
+import com.yline.view.dialog.ViewDialogFoot;
 import com.yline.view.layout.label.FlowLayout;
 import com.yline.view.recycler.holder.ViewHolder;
 
@@ -154,7 +155,7 @@ public class MainMineFragment extends BaseFragment
 				public void onClick(View v)
 				{
 					DialogFootWidget dialogFootWidget = new DialogFootWidget(getContext(), Arrays.asList("相册", "拍照"));
-					dialogFootWidget.show(new DialogFootWidget.OnSelectedListener()
+					dialogFootWidget.setOnSelectedListener(new ViewDialogFoot.OnSelectedListener()
 					{
 						@Override
 						public void onCancelSelected(DialogInterface dialog)
@@ -170,6 +171,7 @@ public class MainMineFragment extends BaseFragment
 							dialog.dismiss();
 						}
 					});
+					dialogFootWidget.show();
 				}
 			});
 

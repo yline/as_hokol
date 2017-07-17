@@ -1,10 +1,13 @@
 package com.hokol.activity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -66,22 +69,22 @@ public class UserDynamicPublishActivity extends BaseAppCompatActivity
 				DialogIosWidget dialog = new DialogIosWidget(UserDynamicPublishActivity.this)
 				{
 					@Override
-					protected void initBuilder(Builder builder)
+					protected void initXView(TextView tvTitle, TextView tvMsg, Button btnNegative, Button btnPositive, Dialog dialog)
 					{
-						super.initBuilder(builder);
-						builder.setTitle("退出此次编辑?");
-						builder.setNegativeText("取消");
-						builder.setPositiveText("退出");
-						builder.setOnPositiveListener(new View.OnClickListener()
-						{
-							@Override
-							public void onClick(View v)
-							{
-								finish();
-							}
-						});
+						super.initXView(tvTitle, tvMsg, btnNegative, btnPositive, dialog);
+
+						tvTitle.setText("退出此次编辑");
+						btnPositive.setText("退出");
 					}
 				};
+				dialog.setOnPositiveListener(new View.OnClickListener()
+				{
+					@Override
+					public void onClick(View v)
+					{
+						finish();
+					}
+				});
 				dialog.show();
 			}
 		});

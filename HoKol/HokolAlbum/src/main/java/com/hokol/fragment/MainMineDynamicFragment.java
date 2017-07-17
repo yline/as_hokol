@@ -37,7 +37,8 @@ import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.pop.WidgetDeleteMenu;
+import com.yline.view.dialog.ViewDialogFoot;
+import com.yline.view.pop.ViewDeleteMenu;
 import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
@@ -233,7 +234,7 @@ public class MainMineDynamicFragment extends BaseFragment
 				}
 
 				DialogFootWidget dialogFootWidget = new DialogFootWidget(getContext(), Arrays.asList("从手机相册选择", "拍照"));
-				dialogFootWidget.show(new DialogFootWidget.OnSelectedListener()
+				dialogFootWidget.setOnSelectedListener(new ViewDialogFoot.OnSelectedListener()
 				{
 					@Override
 					public void onCancelSelected(DialogInterface dialog)
@@ -255,6 +256,7 @@ public class MainMineDynamicFragment extends BaseFragment
 						dialog.dismiss();
 					}
 				});
+				dialogFootWidget.show();
 			}
 		});
 		wrapperAdapter.addHeadView(cameraView);
@@ -352,8 +354,8 @@ public class MainMineDynamicFragment extends BaseFragment
 				}
 			});
 			// 长按点击事件； 有点击事件，则不会显示
-			WidgetDeleteMenu widgetDeleteMenu = new WidgetDeleteMenu(getContext());
-			widgetDeleteMenu.setOnWidgetListener(new WidgetDeleteMenu.OnWidgetListener()
+			ViewDeleteMenu widgetDeleteMenu = new ViewDeleteMenu(getContext());
+			widgetDeleteMenu.setOnWidgetListener(new ViewDeleteMenu.OnWidgetListener()
 			{
 				@Override
 				public void onDismiss(PopupWindow popupWindow)

@@ -94,7 +94,7 @@ public class MainHomeHelper
 	public void initTabDownMenuView(TabLayout tabLayout)
 	{
 		dropMenuWidget = new DropMenuWidget(context, tabLayout);
-		dropMenuWidget.start(Arrays.asList(headers), contentViewList);
+		dropMenuWidget.show(Arrays.asList(headers), contentViewList);
 	}
 
 	public void updateProvinceTitle(String title)

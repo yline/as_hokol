@@ -1,9 +1,12 @@
 package com.hokol.activity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.hokol.R;
 import com.hokol.application.IApplication;
@@ -15,6 +18,7 @@ import com.hokol.util.TextDecorateUtil;
 import com.hokol.viewhelper.EnterRegisterPhoneHelper;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
+import com.yline.log.LogFileUtil;
 import com.yline.view.recycler.holder.ViewHolder;
 
 public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
@@ -49,16 +53,18 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 		registerPhoneHelper.setOnNextListener(new EnterRegisterPhoneHelper.OnNextButtonClickListener()
 		{
 			@Override
-			public void onClick(View v, String mobile, String identify)
+			public void onClick(final View v, String mobile, String identify)
 			{
 				final String phoneNumber = viewHolder.getText(R.id.et_enter_register_phone_username);
 				String identifyCode = viewHolder.getText(R.id.et_register_phone_password);
+				LogFileUtil.v("phoneNumber = " + phoneNumber + ", identifyCode = " + identifyCode);
 
 				XHttpUtil.doEnterRegister(new WEnterRegisterBean(phoneNumber, identifyCode), new XHttpAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
 					{
+						LogFileUtil.v("success");
 						EnterRegisterCompleteInfoActivity.actionStart(EnterRegisterPhoneActivity.this, phoneNumber);
 					}
 
@@ -107,11 +113,11 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 							new DialogIosWidget(EnterRegisterPhoneActivity.this)
 							{
 								@Override
-								protected void initBuilder(Builder builder)
+								protected void initXView(TextView tvTitle, TextView tvMsg, Button btnNegative, Button btnPositive, Dialog dialog)
 								{
-									super.initBuilder(builder);
-									builder.setTitle("您已经注册过红客了\n请直接登陆吧");
-									builder.setPositiveText("立即登陆");
+									super.initXView(tvTitle, tvMsg, btnNegative, btnPositive, dialog);
+									tvTitle.setText("您已经注册过红客了\n请直接登陆吧");
+									btnPositive.setText("立即登陆");
 								}
 							}.show();
 						}

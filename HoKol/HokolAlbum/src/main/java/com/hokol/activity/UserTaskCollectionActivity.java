@@ -1,5 +1,6 @@
 package com.hokol.activity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -95,29 +97,28 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 					DialogIosWidget dialogIosWidget = new DialogIosWidget(UserTaskCollectionActivity.this)
 					{
 						@Override
-						protected void initBuilder(Builder builder)
+						protected void initXView(TextView tvTitle, TextView tvMsg, Button btnNegative, Button btnPositive, Dialog dialog)
 						{
-							super.initBuilder(builder);
-							builder.setNegativeText("取消");
-							builder.setPositiveText("确认");
-							builder.setTitle("确认立即报名嘛?");
-							builder.setOnPositiveListener(new View.OnClickListener()
+							super.initXView(tvTitle, tvMsg, btnNegative, btnPositive, dialog);
+
+							tvTitle.setText("确认立即报名嘛?");
+						}
+					};
+					dialogIosWidget.setOnPositiveListener(new View.OnClickListener()
+					{
+						@Override
+						public void onClick(View v)
+						{
+							XHttpUtil.doTaskActionStaffSignUp(new WTaskActionStaffSignUpBean(userId, taskId), new XHttpAdapter<String>()
 							{
 								@Override
-								public void onClick(View v)
+								public void onSuccess(String s)
 								{
-									XHttpUtil.doTaskActionStaffSignUp(new WTaskActionStaffSignUpBean(userId, taskId), new XHttpAdapter<String>()
-									{
-										@Override
-										public void onSuccess(String s)
-										{
-											SDKManager.toast("报名成功");
-										}
-									});
+									SDKManager.toast("报名成功");
 								}
 							});
 						}
-					};
+					});
 					dialogIosWidget.show();
 				}
 			}

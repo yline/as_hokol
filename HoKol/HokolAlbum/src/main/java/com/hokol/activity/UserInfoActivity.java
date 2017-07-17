@@ -26,6 +26,7 @@ import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.FileUtil;
+import com.yline.view.dialog.ViewDialogFoot;
 import com.yline.view.layout.label.FlowLayout;
 import com.yline.view.recycler.holder.ViewHolder;
 
@@ -131,12 +132,12 @@ public class UserInfoActivity extends BaseAppCompatActivity
 				DialogFootWidget dialogFootWidget = new DialogFootWidget(UserInfoActivity.this, Arrays.asList("相册", "拍照"))
 				{
 					@Override
-					protected int getResourceId()
+					protected int getXLayoutId()
 					{
 						return R.layout.widget_dialog_foot_rec;
 					}
 				};
-				dialogFootWidget.show(new DialogFootWidget.OnSelectedListener()
+				dialogFootWidget.setOnSelectedListener(new ViewDialogFoot.OnSelectedListener()
 				{
 					@Override
 					public void onCancelSelected(DialogInterface dialog)
@@ -158,6 +159,7 @@ public class UserInfoActivity extends BaseAppCompatActivity
 						dialog.dismiss();
 					}
 				});
+				dialogFootWidget.show();
 			}
 		});
 
@@ -181,12 +183,12 @@ public class UserInfoActivity extends BaseAppCompatActivity
 				DialogFootWidget dialogFootWidget = new DialogFootWidget(UserInfoActivity.this, Arrays.asList("女", "男"))
 				{
 					@Override
-					protected int getResourceId()
+					protected int getXLayoutId()
 					{
 						return R.layout.widget_dialog_foot_rec;
 					}
 				};
-				dialogFootWidget.show(new DialogFootWidget.OnSelectedListener()
+				dialogFootWidget.setOnSelectedListener(new ViewDialogFoot.OnSelectedListener()
 				{
 					@Override
 					public void onCancelSelected(DialogInterface dialog)
@@ -208,6 +210,7 @@ public class UserInfoActivity extends BaseAppCompatActivity
 						dialog.dismiss();
 					}
 				});
+				dialogFootWidget.show();
 			}
 		});
 

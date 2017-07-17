@@ -1,6 +1,7 @@
 package com.hokol.activity;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -203,24 +205,25 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				new DialogIosWidget(TaskPublishActivity.this)
+				DialogIosWidget dialogIosWidget = new DialogIosWidget(TaskPublishActivity.this)
 				{
 					@Override
-					protected void initBuilder(Builder builder)
+					protected void initXView(TextView tvTitle, TextView tvMsg, Button btnNegative, Button btnPositive, Dialog dialog)
 					{
-						super.initBuilder(builder);
-						builder.setTitle("您选择面议将在交流成功后\n提交每个应聘者价格");
-						builder.setPositiveText("确定");
-						builder.setOnPositiveListener(new View.OnClickListener()
-						{
-							@Override
-							public void onClick(View v)
-							{
-								updatePriceState(true);
-							}
-						});
+						super.initXView(tvTitle, tvMsg, btnNegative, btnPositive, dialog);
+
+						tvTitle.setText("您选择面议将在交流成功后\n" + "提交每个应聘者价格");
 					}
-				}.show();
+				};
+				dialogIosWidget.setOnPositiveListener(new View.OnClickListener()
+				{
+					@Override
+					public void onClick(View v)
+					{
+						updatePriceState(true);
+					}
+				});
+				dialogIosWidget.show();
 
 			}
 		});
@@ -344,21 +347,21 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 						DialogIosWidget dialogIosWidget = new DialogIosWidget(TaskPublishActivity.this)
 						{
 							@Override
-							protected void initBuilder(Builder builder)
+							protected void initXView(TextView tvTitle, TextView tvMsg, Button btnNegative, Button btnPositive, Dialog dialog)
 							{
-								super.initBuilder(builder);
-								builder.setTitle("您的余额不足");
-								builder.setPositiveText("立即充值");
-								builder.setOnPositiveListener(new View.OnClickListener()
-								{
-									@Override
-									public void onClick(View v)
-									{
-										UserRechargeActivity.actionStart(TaskPublishActivity.this, userId);
-									}
-								});
+								super.initXView(tvTitle, tvMsg, btnNegative, btnPositive, dialog);
+								tvTitle.setText("您的余额不足");
+								btnPositive.setText("立即充值");
 							}
 						};
+						dialogIosWidget.setOnPositiveListener(new View.OnClickListener()
+						{
+							@Override
+							public void onClick(View v)
+							{
+								UserRechargeActivity.actionStart(TaskPublishActivity.this, userId);
+							}
+						});
 						dialogIosWidget.show();
 						return;
 					}

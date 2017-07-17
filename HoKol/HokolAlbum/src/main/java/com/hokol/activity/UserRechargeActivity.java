@@ -1,11 +1,14 @@
 package com.hokol.activity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.hokol.R;
 import com.hokol.application.AppStateManager;
@@ -149,10 +152,10 @@ public class UserRechargeActivity extends AliPayActivity
 		DialogIosWidget dialogIosWidget = new DialogIosWidget(this)
 		{
 			@Override
-			protected void initBuilder(Builder builder)
+			protected void initXView(TextView tvTitle, TextView tvMsg, Button btnNegative, Button btnPositive, Dialog dialog)
 			{
-				super.initBuilder(builder);
-				builder.setTitle("memo = " + memo + "\n" + "status = " + status + "\n" + ", jsonResult = " + jsonResult);
+				super.initXView(tvTitle, tvMsg, btnNegative, btnPositive, dialog);
+				tvTitle.setText("memo = " + memo + "\n" + "status = " + status + "\n" + ", jsonResult = " + jsonResult);
 			}
 		};
 		dialogIosWidget.show();

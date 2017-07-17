@@ -1,5 +1,6 @@
 package com.hokol.fragment;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.hokol.R;
 import com.hokol.activity.TaskAssignedEvaluateActivity;
@@ -220,34 +223,34 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 					DialogIosWidget widgetDialogCenter = new DialogIosWidget(getContext())
 					{
 						@Override
-						protected void initBuilder(Builder builder)
+						protected void initXView(TextView tvTitle, TextView tvMsg, Button btnNegative, Button btnPositive, Dialog dialog)
 						{
-							super.initBuilder(builder);
-							builder.setTitle("已录用人员，若取消任务\n将扣除5%的违约金");
-							builder.setNegativeText("再看看");
-							builder.setPositiveText("确认取消");
-							builder.setOnPositiveListener(new View.OnClickListener()
+							super.initXView(tvTitle, tvMsg, btnNegative, btnPositive, dialog);
+							tvTitle.setText("已录用人员，若取消任务\n将扣除5%的违约金");
+							btnNegative.setText("再看看");
+							btnPositive.setText("确认取消");
+						}
+					};
+					widgetDialogCenter.setOnPositiveListener(new View.OnClickListener()
+					{
+						@Override
+						public void onClick(View v)
+						{
+							XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new XHttpAdapter<String>()
 							{
 								@Override
-								public void onClick(View v)
+								public void onSuccess(String s)
 								{
-									XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new XHttpAdapter<String>()
+									SDKManager.toast("取消任务成功");
+									if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
 									{
-										@Override
-										public void onSuccess(String s)
-										{
-											SDKManager.toast("取消任务成功");
-											if (getActivity() instanceof TaskAssignedAdapter.OnTaskAssignedRefreshCallback)
-											{
-												((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
-												((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onTradeRefresh(0, DeleteConstant.defaultNumberSuper);
-											}
-										}
-									});
+										((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onAllRefresh(0, DeleteConstant.defaultNumberSuper);
+										((TaskAssignedAdapter.OnTaskAssignedRefreshCallback) getActivity()).onTradeRefresh(0, DeleteConstant.defaultNumberSuper);
+									}
 								}
 							});
 						}
-					};
+					});
 					widgetDialogCenter.show();
 				}
 			}

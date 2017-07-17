@@ -24,7 +24,7 @@ public class KeyClearEditText extends ViewKeyClearEditText
 	}
 
 	@Override
-	protected int getKeyClearDrawable()
+	protected int getXKeyClearDrawable()
 	{
 		return R.drawable.widget_drawable_et_key_clear;
 	}

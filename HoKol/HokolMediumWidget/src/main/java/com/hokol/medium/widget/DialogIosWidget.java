@@ -1,12 +1,14 @@
 package com.hokol.medium.widget;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-import com.yline.view.dialog.WidgetDialogCenter;
+import com.yline.view.dialog.ViewDialogCenter;
 
-public class DialogIosWidget extends WidgetDialogCenter
+public class DialogIosWidget extends ViewDialogCenter
 {
 	public DialogIosWidget(Context context)
 	{
@@ -14,21 +16,21 @@ public class DialogIosWidget extends WidgetDialogCenter
 	}
 
 	@Override
-	protected void initMessageTextView(TextView textView, Builder builder)
+	protected void initXView(TextView tvTitle, TextView tvMsg, Button btnNegative, Button btnPositive, Dialog dialog)
 	{
-		// super.initMessageTextView(textView, builder);
-		textView.setVisibility(View.GONE);
+		super.initXView(tvTitle, tvMsg, btnNegative, btnPositive, dialog);
+		tvMsg.setVisibility(View.GONE);
 	}
 
-	/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&提供重写的数据&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */
-
-	/**
-	 * 最外层资源文件
-	 *
-	 * @return
-	 */
-	protected int getLayoutResourceId()
+	@Override
+	protected int getXLayoutId()
 	{
 		return R.layout.widget_dialog_ios;
+	}
+
+	@Override
+	protected int getXDialogStyle()
+	{
+		return super.getXDialogStyle();
 	}
 }

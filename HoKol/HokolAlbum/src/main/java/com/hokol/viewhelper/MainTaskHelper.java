@@ -75,7 +75,7 @@ public class MainTaskHelper
 
 		initAreaView(contentViewList);
 
-		dropMenuWidget.start(Arrays.asList(headers), contentViewList);
+		dropMenuWidget.show(Arrays.asList(headers), contentViewList);
 	}
 
 	// 分类

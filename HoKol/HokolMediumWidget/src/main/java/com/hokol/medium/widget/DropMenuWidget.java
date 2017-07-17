@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.view.View;
 
-import com.yline.view.pop.WidgetDropMenu;
+import com.yline.view.pop.ViewDropMenu;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @author yline 2017/3/7 --> 15:33
  * @version 1.0.0
  */
-public class DropMenuWidget extends WidgetDropMenu
+public class DropMenuWidget extends ViewDropMenu
 {
 	public DropMenuWidget(Context context, TabLayout tabLayout)
 	{
@@ -22,21 +22,15 @@ public class DropMenuWidget extends WidgetDropMenu
 	}
 
 	@Override
-	public void start(List<String> header, List<View> viewList)
+	public void show(List<String> header, List<View> viewList)
 	{
-		super.start(header, viewList);
+		super.show(header, viewList);
 	}
 
 	@Override
 	public void updateTitle(int index, String title)
 	{
 		super.updateTitle(index, title);
-	}
-
-	@Override
-	public boolean isOpened()
-	{
-		return super.isOpened();
 	}
 
 	@Override
@@ -52,15 +46,15 @@ public class DropMenuWidget extends WidgetDropMenu
 	}
 
 	@Override
-	public int getMaskColor()
+	public int getXMaskColor()
 	{
-		return super.getMaskColor();
+		return super.getXMaskColor();
 	}
 
 	@Override
-	protected int getItemResourceId()
+	protected int getXItemId()
 	{
-		return R.layout.widget_item_drop_menu;
+		return super.getXItemId();
 	}
 }
 

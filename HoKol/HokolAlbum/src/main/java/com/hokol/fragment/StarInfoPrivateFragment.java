@@ -1,5 +1,6 @@
 package com.hokol.fragment;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -8,8 +9,10 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
@@ -188,31 +191,33 @@ public class StarInfoPrivateFragment extends BaseFragment
 								DialogIosWidget dialogIosWidget = new DialogIosWidget(getContext())
 								{
 									@Override
-									protected void initBuilder(Builder builder)
+									protected void initXView(TextView tvTitle, TextView tvMsg, Button btnNegative, Button btnPositive, Dialog dialog)
 									{
-										super.initBuilder(builder);
-										builder.setTitle("会员享有更多优惠哦");
-										builder.setNegativeText("单次购买");
-										builder.setPositiveText("开通会员");
-										builder.setCanceledOnTouchOutside(true);
-										builder.setOnNegativeListener(new View.OnClickListener()
-										{
-											@Override
-											public void onClick(View v)
-											{
-												VipSinglePrivateActivity.actionStart(getContext());
-											}
-										});
-										builder.setOnPositiveListener(new View.OnClickListener()
-										{
-											@Override
-											public void onClick(View v)
-											{
-												VipHokolActivity.actionStart(getContext());
-											}
-										});
+										super.initXView(tvTitle, tvMsg, btnNegative, btnPositive, dialog);
+										tvTitle.setText("会员享有更多优惠哦");
+
+										btnNegative.setText("单次购买");
+										btnPositive.setText("开通会员");
+
+										dialog.setCanceledOnTouchOutside(true);
 									}
 								};
+								dialogIosWidget.setOnPositiveListener(new View.OnClickListener()
+								{
+									@Override
+									public void onClick(View v)
+									{
+										VipHokolActivity.actionStart(getContext());
+									}
+								});
+								dialogIosWidget.setOnNegativeListener(new View.OnClickListener()
+								{
+									@Override
+									public void onClick(View v)
+									{
+										VipSinglePrivateActivity.actionStart(getContext());
+									}
+								});
 								dialogIosWidget.show();
 							}
 						});
