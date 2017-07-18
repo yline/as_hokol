@@ -176,9 +176,9 @@ public class StarInfoPrivateFragment extends BaseFragment
 				}
 
 				@Override
-				public void onSuccess(int code, String str)
+				public void onSuccess(int code, String jsonContent, Class<VDynamicUserPrivateAllBean> defaultClazz) throws Exception
 				{
-					super.onSuccess(code, str);
+					super.onSuccess(code, jsonContent, defaultClazz);
 					if (code != REQUEST_SUCCESS_CODE)
 					{
 						lockRelativeLayout.setVisibility(View.VISIBLE);

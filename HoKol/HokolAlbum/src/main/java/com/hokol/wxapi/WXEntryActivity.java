@@ -89,13 +89,13 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler
 					}
 
 					@Override
-					public void onSuccess(int code, String str)
+					public void onSuccess(int code, String jsonContent, Class<VWeChatLoginBean> defaultClazz) throws Exception
 					{
-						super.onSuccess(code, str);
+						super.onSuccess(code, jsonContent, defaultClazz);
 						// 是注册的逻辑
 						if (WWeChatLoginBean.TypeRegister == code)
 						{
-							VWeChatLoginFirstBean result = new Gson().fromJson(str, VWeChatLoginFirstBean.class);
+							VWeChatLoginFirstBean result = new Gson().fromJson(jsonContent, VWeChatLoginFirstBean.class);
 							if (null != result)
 							{
 								EnterLoginThirdActivity.actionStart(WXEntryActivity.this, result.getUser_id());

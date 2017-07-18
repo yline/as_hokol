@@ -263,9 +263,9 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 				}
 
 				@Override
-				public void onSuccess(int code, String str)
+				public void onSuccess(int code, String jsonContent, Class<VTaskMainDetailBean> defaultClazz) throws Exception
 				{
-					super.onSuccess(code, str);
+					super.onSuccess(code, jsonContent, defaultClazz);
 					if (code == 2003)
 					{
 						SDKManager.getHandler().postDelayed(new Runnable()

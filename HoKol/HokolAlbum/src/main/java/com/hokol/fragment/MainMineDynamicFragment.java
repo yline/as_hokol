@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 
 import com.bumptech.glide.Glide;
 import com.hokol.R;
@@ -357,12 +356,6 @@ public class MainMineDynamicFragment extends BaseFragment
 			ViewDeleteMenu widgetDeleteMenu = new ViewDeleteMenu(getContext());
 			widgetDeleteMenu.setOnWidgetListener(new ViewDeleteMenu.OnWidgetListener()
 			{
-				@Override
-				public void onDismiss(PopupWindow popupWindow)
-				{
-
-				}
-
 				@Override
 				public void onOptionSelected(View view, int index, String content)
 				{

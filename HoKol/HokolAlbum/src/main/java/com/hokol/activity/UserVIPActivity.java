@@ -119,9 +119,9 @@ public class UserVIPActivity extends BaseAppCompatActivity
 		XHttpUtil.doUserVipInfo(new WUserVipInfoBean(userId), new XHttpAdapter<VUserVipInfoBean>()
 		{
 			@Override
-			public void onSuccess(int code, String str)
+			public void onSuccess(int code, String jsonContent, Class<VUserVipInfoBean> defaultClazz) throws Exception
 			{
-				super.onSuccess(code, str);
+				super.onSuccess(code, jsonContent, defaultClazz);
 				if (code == VUserVipInfoBean.CodeVipNone)
 				{
 					updateVipInfoView(VUserVipInfoBean.TypeNull, "至尊VIP特权", "立即开通", 0);

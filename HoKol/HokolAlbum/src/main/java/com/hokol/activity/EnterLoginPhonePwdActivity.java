@@ -199,9 +199,9 @@ public class EnterLoginPhonePwdActivity extends BaseAppCompatActivity
 			}
 
 			@Override
-			public void onSuccess(int code, String str)
+			public void onSuccess(int code, String jsonContent, Class<VEnterLoginPhonePwdBean> defaultClazz) throws Exception
 			{
-				super.onSuccess(code, str);
+				super.onSuccess(code, jsonContent, defaultClazz);
 				if (code != REQUEST_SUCCESS_CODE)
 				{
 					SDKManager.toast("用户名或密码错误");

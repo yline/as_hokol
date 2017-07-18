@@ -165,9 +165,9 @@ public class EnterModifyPwdActivity extends BaseAppCompatActivity
 				XHttpUtil.doSettingResetPwd(new WSettingResetPwdBean(userId, oldPwdStr, newPwdStr), new XHttpAdapter<String>()
 				{
 					@Override
-					public void onSuccess(int code, String s)
+					public void onSuccess(int code, String jsonContent, Class<String> defaultClazz) throws Exception
 					{
-						super.onSuccess(code, s);
+						super.onSuccess(code, jsonContent, defaultClazz);
 						if (code != REQUEST_SUCCESS_CODE)
 						{
 							SDKManager.toast("密码错误");

@@ -109,10 +109,10 @@ public class MainNewsFragment extends BaseFragment
 					}
 
 					@Override
-					public void onSuccess(int code, String str)
+					public void onSuccess(int code, String jsonContent, Class<VNewsRecommendBean> defaultClazz) throws Exception
 					{
 						superSwipeRefreshLayout.setRefreshing(false);
-						super.onSuccess(code, str);
+						super.onSuccess(code, jsonContent, defaultClazz);
 					}
 				});
 			}
@@ -126,9 +126,9 @@ public class MainNewsFragment extends BaseFragment
 				XHttpUtil.doNewsMultiplex(loadBean, new XHttpAdapter<VNewsMultiplexBean>()
 				{
 					@Override
-					public void onSuccess(int code, String str)
+					public void onSuccess(int code, String jsonContent, Class<VNewsMultiplexBean> defaultClazz) throws Exception
 					{
-						super.onSuccess(code, str);
+						super.onSuccess(code, jsonContent, defaultClazz);
 						superSwipeRefreshLayout.setLoadMore(false);
 					}
 

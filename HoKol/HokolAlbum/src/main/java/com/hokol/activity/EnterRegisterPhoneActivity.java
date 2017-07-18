@@ -69,9 +69,9 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 					}
 
 					@Override
-					public void onSuccess(int code, String s)
+					public void onSuccess(int code, String jsonContent, Class<String> defaultClazz) throws Exception
 					{
-						super.onSuccess(code, s);
+						super.onSuccess(code, jsonContent, defaultClazz);
 						if (code != REQUEST_SUCCESS_CODE)
 						{
 							IApplication.toast("填写信息错误");
@@ -105,9 +105,9 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 					}
 
 					@Override
-					public void onSuccess(int code, String s)
+					public void onSuccess(int code, String jsonContent, Class<String> defaultClazz) throws Exception
 					{
-						super.onSuccess(code, s);
+						super.onSuccess(code, jsonContent, defaultClazz);
 						if (3001 == code)
 						{
 							new DialogIosWidget(EnterRegisterPhoneActivity.this)

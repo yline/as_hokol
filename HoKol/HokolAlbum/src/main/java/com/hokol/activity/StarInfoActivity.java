@@ -221,9 +221,9 @@ public class StarInfoActivity extends BaseAppCompatActivity
 			}
 
 			@Override
-			public void onSuccess(int code, String str)
+			public void onSuccess(int code, String jsonContent, Class<VDynamicUserDetailBean> defaultClazz) throws Exception
 			{
-				super.onSuccess(code, str);
+				super.onSuccess(code, jsonContent, defaultClazz);
 				if (code == 2001)
 				{
 					LogFileUtil.v("Star info failed; user do not exist");
