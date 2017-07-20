@@ -3,6 +3,7 @@ package com.hokol.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -13,13 +14,13 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
 import com.hokol.medium.http.bean.WEnterRegisterCompleteInfoBean;
 import com.hokol.medium.widget.FlowAbleWidget;
-import com.hokol.util.TextDecorateUtil;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.view.layout.label.FlowLayout;
 import com.yline.view.layout.label.LabelAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
+import com.yline.view.text.helper.PhonePwdHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,8 +37,15 @@ public class EnterRegisterCompleteInfoActivity extends BaseAppCompatActivity
 
 	private WEnterRegisterCompleteInfoBean completeInfoBean;
 
-	private boolean isNickNameMatch, isPwdMatch;
+	private PhonePwdHelper phonePwdHelper;
 
+	private boolean isPasswordVisible = true;
+
+	public static void actionStart(Context context, String phoneNumber)
+	{
+		context.startActivity(new Intent(context, EnterRegisterCompleteInfoActivity.class).putExtra(KeyPhoneNumber, phoneNumber));
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -114,62 +122,55 @@ public class EnterRegisterCompleteInfoActivity extends BaseAppCompatActivity
 		});
 
 		EditText editTextNickName = viewHolder.get(R.id.et_enter_register_complete_info_name);
-		TextDecorateUtil.isNicknameMatch(editTextNickName, new TextDecorateUtil.OnEditMatchCallback()
+		EditText editTextPwd = viewHolder.get(R.id.et_enter_register_complete_info_new_pwd);
+
+		phonePwdHelper = new PhonePwdHelper(editTextNickName, editTextPwd)
 		{
 			@Override
-			public void onTextChange(boolean isMatch)
+			protected boolean onPhoneTextChanged(String inputString, int start, int before, int count)
 			{
-				if (isMatch == isNickNameMatch)
+				if (inputString.length() > 0 && inputString.length() < 17)
 				{
-					return;
+					return true;
 				}
-
+				return false;
+			}
+		};
+		phonePwdHelper.setOnCheckResultListener(new PhonePwdHelper.OnCheckResultListener()
+		{
+			@Override
+			public void onChecked(boolean isMatch)
+			{
 				if (isMatch)
 				{
-					if (isPwdMatch)
-					{
-						viewHolder.get(R.id.btn_enter_register_complete_info_commit).setBackgroundResource(R.drawable.widget_shape_radiusall_solid_redhokol);
-					}
+					viewHolder.get(R.id.btn_enter_register_complete_info_commit).setBackgroundResource(R.drawable.widget_shape_radiusall_solid_redhokol);
 				}
 				else
 				{
-					if (isPwdMatch)
-					{
-						viewHolder.get(R.id.btn_enter_register_complete_info_commit).setBackgroundResource(R.drawable.widget_shape_radiusall_solid_graysmall);
-					}
+					viewHolder.get(R.id.btn_enter_register_complete_info_commit).setBackgroundResource(R.drawable.widget_shape_radiusall_solid_graysmall);
 				}
-
-				isNickNameMatch = isMatch;
 			}
 		});
 
-		EditText editTextPwd = viewHolder.get(R.id.et_enter_register_complete_info_new_pwd);
-		TextDecorateUtil.isPhonePwdMatch(editTextPwd, new TextDecorateUtil.OnEditMatchCallback()
+		// 眼睛
+		viewHolder.setOnClickListener(R.id.iv_enter_register_complete_info_new_pwd, new View.OnClickListener()
 		{
 			@Override
-			public void onTextChange(boolean isMatch)
+			public void onClick(View v)
 			{
-				if (isMatch == isPwdMatch)
+				EditText editText = viewHolder.get(R.id.et_enter_register_complete_info_new_pwd);
+				if (isPasswordVisible)
 				{
-					return;
-				}
-
-				if (isMatch)
-				{
-					if (isNickNameMatch)
-					{
-						viewHolder.get(R.id.btn_enter_register_complete_info_commit).setBackgroundResource(R.drawable.widget_shape_radiusall_solid_redhokol);
-					}
+					editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+					viewHolder.setImageResource(R.id.iv_enter_register_complete_info_new_pwd, R.drawable.global_ward_close);
+					isPasswordVisible = !isPasswordVisible;
 				}
 				else
 				{
-					if (isNickNameMatch)
-					{
-						viewHolder.get(R.id.btn_enter_register_complete_info_commit).setBackgroundResource(R.drawable.widget_shape_radiusall_solid_graysmall);
-					}
+					editText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+					viewHolder.setImageResource(R.id.iv_enter_register_complete_info_new_pwd, R.drawable.global_ward_open);
+					isPasswordVisible = !isPasswordVisible;
 				}
-
-				isPwdMatch = isMatch;
 			}
 		});
 
@@ -178,9 +179,9 @@ public class EnterRegisterCompleteInfoActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				LogFileUtil.v("isNickNameMatch = " + isNickNameMatch + ", isPwdMatch = " + isPwdMatch + ", complete info = " + completeInfoBean.toString());
+				LogFileUtil.v("isResultMatch = " + phonePwdHelper.isResultMatch() + ", complete info = " + completeInfoBean.toString());
 
-				if (isNickNameMatch && isPwdMatch)
+				if (phonePwdHelper.isResultMatch())
 				{
 					completeInfoBean.setUser_nickname(viewHolder.getText(R.id.et_enter_register_complete_info_name));
 					completeInfoBean.setUser_pwd(viewHolder.getText(R.id.et_enter_register_complete_info_new_pwd));
@@ -195,10 +196,5 @@ public class EnterRegisterCompleteInfoActivity extends BaseAppCompatActivity
 				}
 			}
 		});
-	}
-	
-	public static void actionStart(Context context, String phoneNumber)
-	{
-		context.startActivity(new Intent(context, EnterRegisterCompleteInfoActivity.class).putExtra(KeyPhoneNumber, phoneNumber));
 	}
 }

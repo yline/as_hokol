@@ -2,21 +2,23 @@ package com.hokol.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.hokol.R;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.WEnterCodeUpdatePhoneBean;
 import com.hokol.medium.http.bean.WEnterPhoneUpdateBean;
-import com.hokol.util.TextDecorateUtil;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
+import com.yline.view.text.helper.PhoneICodeHelper;
+import com.yline.view.text.helper.PhonePwdHelper;
+import com.yline.view.text.helper.TextDecorateUtil;
 
 /**
  * 更换手机号
@@ -30,9 +32,16 @@ public class EnterUpdatePhoneActivity extends BaseAppCompatActivity
 
 	private ViewHolder viewHolder;
 
-	private ClassState classState;
-
 	private String userId;
+
+	private PhoneICodeHelper phoneICodeHelper;
+
+	private PhonePwdHelper phonePwdHelper;
+
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, EnterUpdatePhoneActivity.class).putExtra(KeyPhoneUserId, userId));
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -41,8 +50,9 @@ public class EnterUpdatePhoneActivity extends BaseAppCompatActivity
 		setContentView(R.layout.activity_enter_update_phone);
 
 		viewHolder = new ViewHolder(this);
+		userId = getIntent().getStringExtra(KeyPhoneUserId);
+
 		initView();
-		initData();
 	}
 
 	private void initView()
@@ -59,45 +69,73 @@ public class EnterUpdatePhoneActivity extends BaseAppCompatActivity
 
 		// 更换手机号
 		EditText etPhone = viewHolder.get(R.id.et_enter_update_phone_username);
-		TextDecorateUtil.isPhoneMatch(etPhone, new TextDecorateUtil.OnEditMatchCallback()
-		{
-			@Override
-			public void onTextChange(boolean isMatch)
-			{
-				classState.setPhoneMatch(true);
-			}
-		});
-
-		// 密码
 		EditText etPwd = viewHolder.get(R.id.et_register_phone_identify);
-		TextDecorateUtil.isIdentifyMatch(etPwd, new TextDecorateUtil.OnEditMatchCallback()
+		final TextView tvSendCode = viewHolder.get(R.id.tv_register_phone_identify);
+
+		phoneICodeHelper = new PhoneICodeHelper(etPhone, tvSendCode);
+		phoneICodeHelper.setOnIdentifyCodeListener(new PhoneICodeHelper.OnIdentifyCodeListener()
 		{
 			@Override
-			public void onTextChange(boolean isMatch)
+			public void onIdentifyStateChange(TextView tvIdentify, boolean isLegal, boolean isCountDown, int restTime)
 			{
-				classState.setIdentifyMatch(true);
+				if (isCountDown)
+				{
+					if (restTime != -1)
+					{
+						tvSendCode.setTextColor(ContextCompat.getColor(EnterUpdatePhoneActivity.this, R.color.hokolGray));
+						tvSendCode.setText(String.format("重新发送(%d)", restTime));
+					}
+				}
+				else
+				{
+					if (isLegal)
+					{
+						tvSendCode.setTextColor(ContextCompat.getColor(EnterUpdatePhoneActivity.this, R.color.hokolRed));
+						tvSendCode.setText("获取验证码");
+					}
+					else
+					{
+						tvSendCode.setTextColor(ContextCompat.getColor(EnterUpdatePhoneActivity.this, R.color.hokolGray));
+						tvSendCode.setText("获取验证码");
+					}
+				}
+			}
+
+			@Override
+			public void onIdentifyClick(View view, boolean isMatch, boolean isCountDown)
+			{
+				String phoneNumber = viewHolder.getText(R.id.et_enter_update_phone_username);
+				XHttpUtil.doEnterCodeUpdatePhone(new WEnterCodeUpdatePhoneBean(phoneNumber), new XHttpAdapter<String>()
+				{
+					@Override
+					public void onSuccess(String s)
+					{
+						SDKManager.toast("验证码已发送");
+					}
+				});
 			}
 		});
 
-		// 验证码
-		viewHolder.setOnClickListener(R.id.tv_register_phone_identify, new View.OnClickListener()
+		phonePwdHelper = new PhonePwdHelper(etPhone, etPwd)
 		{
 			@Override
-			public void onClick(View v)
+			protected boolean onPwdTextChanged(String inputString, int start, int before, int count)
 			{
-				if (classState.isIdentifyClickable())
+				return TextDecorateUtil.isIdentifyCodeMatch6(inputString);
+			}
+		};
+		phonePwdHelper.setOnCheckResultListener(new PhonePwdHelper.OnCheckResultListener()
+		{
+			@Override
+			public void onChecked(boolean isMatch)
+			{
+				if (isMatch)
 				{
-					new IdentifyCountDownTask().execute();
-
-					String phoneNumber = viewHolder.getText(R.id.et_enter_update_phone_username);
-					XHttpUtil.doEnterCodeUpdatePhone(new WEnterCodeUpdatePhoneBean(phoneNumber), new XHttpAdapter<String>()
-					{
-						@Override
-						public void onSuccess(String s)
-						{
-							SDKManager.toast("验证码已发送");
-						}
-					});
+					viewHolder.setText(R.id.btn_register_phone_action_next, "完成").setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_redhokol);
+				}
+				else
+				{
+					viewHolder.setText(R.id.btn_register_phone_action_next, "完成").setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_pinkhokol);
 				}
 			}
 		});
@@ -108,7 +146,7 @@ public class EnterUpdatePhoneActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				if (classState.isFinishClickable())
+				if (phonePwdHelper.isResultMatch())
 				{
 					String phoneNumber = viewHolder.getText(R.id.et_enter_update_phone_username);
 					String code = viewHolder.getText(R.id.et_register_phone_identify);
@@ -127,158 +165,10 @@ public class EnterUpdatePhoneActivity extends BaseAppCompatActivity
 		});
 	}
 
-	private void initData()
+	@Override
+	protected void onDestroy()
 	{
-		classState = new ClassState();
-
-		userId = getIntent().getStringExtra(KeyPhoneUserId);
-	}
-
-	private class ClassState
-	{
-		private boolean oldPhoneMatch;
-
-		private boolean oldIdentifyMatch;
-
-		private boolean oldIsIdentifyCountDown;
-
-		public void setPhoneMatch(boolean phoneMatch)
-		{
-			if (this.oldPhoneMatch != phoneMatch)
-			{
-				this.oldPhoneMatch = phoneMatch;
-				if (oldPhoneMatch)
-				{
-					if (!oldIsIdentifyCountDown)
-					{
-						viewHolder.setText(R.id.tv_register_phone_identify, "获取验证码").setTextColor(ContextCompat.getColor(EnterUpdatePhoneActivity.this, R.color.hokolRed));
-					}
-
-					if (oldIdentifyMatch)
-					{
-						viewHolder.setText(R.id.btn_register_phone_action_next, "完成").setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_redhokol);
-					}
-				}
-				else
-				{
-					if (!oldIsIdentifyCountDown)
-					{
-						viewHolder.setText(R.id.tv_register_phone_identify, "获取验证码").setTextColor(ContextCompat.getColor(EnterUpdatePhoneActivity.this, R.color.hokolGray));
-					}
-
-					if (oldIdentifyMatch)
-					{
-						viewHolder.setText(R.id.btn_register_phone_action_next, "完成").setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_pinkhokol);
-					}
-				}
-			}
-		}
-
-		public void setIdentifyMatch(boolean pwdMatch)
-		{
-			if (this.oldIdentifyMatch != pwdMatch)
-			{
-				this.oldIdentifyMatch = pwdMatch;
-				if (oldIdentifyMatch)
-				{
-					if (oldPhoneMatch)
-					{
-						viewHolder.setText(R.id.btn_register_phone_action_next, "完成").setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_redhokol);
-					}
-				}
-				else
-				{
-					if (oldPhoneMatch)
-					{
-						viewHolder.setText(R.id.btn_register_phone_action_next, "完成").setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_pinkhokol);
-					}
-				}
-			}
-		}
-
-		public void setIdentifyCountDown(boolean identifyCountDown)
-		{
-			if (this.oldIsIdentifyCountDown != identifyCountDown)
-			{
-				this.oldIsIdentifyCountDown = identifyCountDown;
-				if (oldIsIdentifyCountDown)
-				{
-					if (oldPhoneMatch)
-					{
-						viewHolder.setText(R.id.tv_register_phone_identify, "重新获取(60)").setTextColor(ContextCompat.getColor(EnterUpdatePhoneActivity.this, R.color.hokolGray));
-					}
-				}
-				else
-				{
-					if (oldPhoneMatch)
-					{
-						viewHolder.setText(R.id.tv_register_phone_identify, "获取验证码").setTextColor(ContextCompat.getColor(EnterUpdatePhoneActivity.this, R.color.hokolRed));
-					}
-				}
-			}
-		}
-
-		public boolean isIdentifyClickable()
-		{
-			return (oldPhoneMatch && !oldIsIdentifyCountDown);
-		}
-
-		public boolean isFinishClickable()
-		{
-			return (oldPhoneMatch && oldIdentifyMatch);
-		}
-	}
-
-	private class IdentifyCountDownTask extends AsyncTask<Void, String, Void>
-	{
-		private int maxNumber;
-
-		@Override
-		protected void onPreExecute()
-		{
-			super.onPreExecute();
-			maxNumber = 60;
-			classState.setIdentifyCountDown(true);
-		}
-
-		@Override
-		protected Void doInBackground(Void... params)
-		{
-			try
-			{
-				while (maxNumber > 0)
-				{
-					maxNumber--;
-					publishProgress(String.format("重新发送(%d)", maxNumber));
-					Thread.sleep(1000);
-				}
-			} catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
-
-			return null;
-		}
-
-		@Override
-		protected void onProgressUpdate(String... values)
-		{
-			super.onProgressUpdate(values);
-			viewHolder.setText(R.id.tv_register_phone_identify, values[0]);
-		}
-
-		@Override
-		protected void onPostExecute(Void aVoid)
-		{
-			super.onPostExecute(aVoid);
-
-			maxNumber = 60;
-			classState.setIdentifyCountDown(false);
-		}
-	}
-
-	public static void actionStart(Context context, String userId)
-	{
-		context.startActivity(new Intent(context, EnterUpdatePhoneActivity.class).putExtra(KeyPhoneUserId, userId));
+		phoneICodeHelper.onDestroy();
+		super.onDestroy();
 	}
 }
