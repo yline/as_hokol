@@ -26,8 +26,8 @@
             android:layout_height="52dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/default_space_large"
-            app:circle_border_color="@android:color/darker_gray"
-            app:circle_border_width="1px"/>
+            app:x_border_color="@android:color/darker_gray"
+            app:x_border_width="1px"/>
 
         <!-- 昵称 + 性别 -->
         <TextView

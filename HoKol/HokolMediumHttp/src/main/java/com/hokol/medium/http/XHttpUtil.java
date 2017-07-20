@@ -67,14 +67,7 @@ public class XHttpUtil
 	public static void doEnterCodeRegister(WEnterCodeRegisterBean wEnterCodeRegisterBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_code_register;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wEnterCodeRegisterBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, wEnterCodeRegisterBean, String.class);
 	}
 
 	/**
@@ -83,14 +76,7 @@ public class XHttpUtil
 	public static void doEnterCodeForgetPwd(WEnterCodeRegisterBean codeRegisterBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_code_forget_pwd;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, codeRegisterBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, codeRegisterBean, String.class);
 	}
 
 	/**
@@ -99,14 +85,7 @@ public class XHttpUtil
 	public static void doEnterCodeUpdatePhone(WEnterCodeUpdatePhoneBean codeUpdateBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_code_update_phone;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, codeUpdateBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, codeUpdateBean, String.class);
 	}
 
 	/**
@@ -115,14 +94,7 @@ public class XHttpUtil
 	public static void doEnterPhoneUpdate(WEnterPhoneUpdateBean updateBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_update_phone;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, updateBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, updateBean, String.class);
 	}
 
 	/**
@@ -131,14 +103,7 @@ public class XHttpUtil
 	public static void doEnterRegister(WEnterRegisterBean wEnterRegisterBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_register;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wEnterRegisterBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, wEnterRegisterBean, String.class);
 	}
 
 	/**
@@ -156,14 +121,7 @@ public class XHttpUtil
 	public static void doEnterResetPwd(WEnterResetPwdBean resetPwdBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_reset_pwd;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, resetPwdBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, resetPwdBean, String.class);
 	}
 
 	/**
@@ -306,11 +264,6 @@ public class XHttpUtil
 					bodyBuilder.addFormDataPart("dt_img", file.getName(), RequestBody.create(MediaType.parse("image"), file));
 				}
 
-				@Override
-				protected boolean isResponseParse()
-				{
-					return false;
-				}
 			}.doPost(httpUrl, String.class);
 		}
 		else
@@ -346,12 +299,6 @@ public class XHttpUtil
 					bodyBuilder.addFormDataPart("pri_content", content);
 					bodyBuilder.addFormDataPart("pri_img", file.getName(), RequestBody.create(MediaType.parse("image"), file));
 				}
-
-				@Override
-				protected boolean isResponseParse()
-				{
-					return false;
-				}
 			}.doPost(httpUrl, String.class);
 		}
 		else
@@ -366,14 +313,7 @@ public class XHttpUtil
 	public static void doDynamicDelete(WDynamicDeleteBean deleteBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_delete;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, deleteBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, deleteBean, String.class);
 	}
 
 	/**
@@ -382,14 +322,7 @@ public class XHttpUtil
 	public static void doDynamicPrivateDelete(WDynamicPrivateDeleteBean deleteBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_private_delete;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, deleteBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, deleteBean, String.class);
 	}
 
 	/**
@@ -426,14 +359,7 @@ public class XHttpUtil
 	public static void doTaskMainPublish(WTaskMainPublishBean wTaskMainPublishBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_main_publish;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wTaskMainPublishBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskMainPublishBean, String.class);
 	}
 
 	/**
@@ -442,14 +368,7 @@ public class XHttpUtil
 	public static void doTaskMainCollection(WTaskMainCollectionBean wTaskMainCollectionBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_main_collection;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wTaskMainCollectionBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskMainCollectionBean, String.class);
 	}
 
 	/**
@@ -512,14 +431,7 @@ public class XHttpUtil
 	public static void doTaskActionStaffSignUp(WTaskActionStaffSignUpBean wTaskActionStaffSignUpBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_staff_signup;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wTaskActionStaffSignUpBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskActionStaffSignUpBean, String.class);
 	}
 
 	/**
@@ -528,14 +440,7 @@ public class XHttpUtil
 	public static void doTaskActionMasterTakeOn(WTaskActionMasterTakeOnBean wTaskActionMasterTakeOnBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_master_takeon;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wTaskActionMasterTakeOnBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskActionMasterTakeOnBean, String.class);
 	}
 
 	/**
@@ -544,14 +449,7 @@ public class XHttpUtil
 	public static void doTaskActionMasterComment(WTaskActionMasterCommentBean wTaskActionMasterCommentBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_master_comment;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wTaskActionMasterCommentBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskActionMasterCommentBean, String.class);
 	}
 
 	/**
@@ -569,14 +467,7 @@ public class XHttpUtil
 	public static void doTaskActionMasterFinish(WTaskActionMasterFinishBean wTaskActionMasterFinishBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_master_finish;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wTaskActionMasterFinishBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskActionMasterFinishBean, String.class);
 	}
 
 	/**
@@ -585,14 +476,7 @@ public class XHttpUtil
 	public static void doTaskActionMasterCancel(WTaskActionMasterCancelBean wTaskActionMasterCancelBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_master_cancel;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wTaskActionMasterCancelBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskActionMasterCancelBean, String.class);
 	}
 
 	/**
@@ -601,14 +485,7 @@ public class XHttpUtil
 	public static void doTaskActionMasterTrade(WTaskActionMasterTradeBean wTaskActionMasterTradeBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_master_trade;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wTaskActionMasterTradeBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskActionMasterTradeBean, String.class);
 	}
 
 	/**
@@ -626,14 +503,7 @@ public class XHttpUtil
 	public static void doTaskActionStaffConfirm(WTaskActionStaffConfirmBean wTaskActionStaffConfirmBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_staff_confirm;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wTaskActionStaffConfirmBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskActionStaffConfirmBean, String.class);
 	}
 
 	/**
@@ -642,14 +512,7 @@ public class XHttpUtil
 	public static void doTaskActionStaffTrade(WTaskActionStaffTradeBean wTaskActionStaffTradeBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_staff_trade;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wTaskActionStaffTradeBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskActionStaffTradeBean, String.class);
 	}
 
 	/**
@@ -658,14 +521,7 @@ public class XHttpUtil
 	public static void doTaskActionStaffComment(WTaskActionStaffCommentBean wTaskActionStaffCommentBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_staff_comment;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wTaskActionStaffCommentBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskActionStaffCommentBean, String.class);
 	}
 
 	/**
@@ -674,14 +530,7 @@ public class XHttpUtil
 	public static void doTaskDelete(WTaskDeleteBean taskDeleteBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_delete;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, taskDeleteBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, taskDeleteBean, String.class);
 	}
 
 	/**
@@ -753,14 +602,7 @@ public class XHttpUtil
 	public static void doUserCareOrCancel(WUserCareOrCancelBean wUserCareOrCancelBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_care_or_cancel;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wUserCareOrCancelBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, wUserCareOrCancelBean, String.class);
 	}
 
 	/**
@@ -769,14 +611,7 @@ public class XHttpUtil
 	public static void doUserCoinGift(WUserCoinGiftBean wUserCoinGiftBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_coin_gift;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wUserCoinGiftBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, wUserCoinGiftBean, String.class);
 	}
 
 	/**
@@ -949,14 +784,7 @@ public class XHttpUtil
 	public static void doSettingSubmitProposal(WSettingSubmitProposalBean wSettingSubmitProposalBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_setting_submit_proposal;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wSettingSubmitProposalBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, wSettingSubmitProposalBean, String.class);
 	}
 
 	/**
@@ -965,14 +793,7 @@ public class XHttpUtil
 	public static void doSettingResetPwd(WSettingResetPwdBean wSettingResetPwdBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_setting_reset_pwd;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wSettingResetPwdBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, wSettingResetPwdBean, String.class);
 	}
 
 	/**
@@ -981,14 +802,7 @@ public class XHttpUtil
 	public static void doSettingUpdateInfo(WSettingUpdateInfoBean wSettingUpdateInfoBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_setting_update_info;
-		new XTextHttp<String>(adapter)
-		{
-			@Override
-			protected boolean isResponseParse()
-			{
-				return false;
-			}
-		}.doPost(httpUrl, wSettingUpdateInfoBean, String.class);
+		new XTextHttp<String>(adapter).doPost(httpUrl, wSettingUpdateInfoBean, String.class);
 	}
 
 	/**
