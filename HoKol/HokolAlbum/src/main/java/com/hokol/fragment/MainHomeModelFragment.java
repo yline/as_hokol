@@ -236,7 +236,6 @@ public class MainHomeModelFragment extends BaseFragment implements MainHomeFragm
 		@Override
 		public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
 		{
-			viewHolder.get(R.id.btn_loading_cover).setVisibility(View.INVISIBLE);
 			if (isShowEmpty)
 			{
 				viewHolder.get(R.id.rl_loading_cover).setVisibility(View.VISIBLE);

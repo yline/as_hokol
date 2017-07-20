@@ -98,9 +98,8 @@ public class TaskAssignedAdapter extends WidgetRecyclerAdapter<VTaskUserPublishe
 	@Override
 	public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
 	{
-		viewHolder.setText(R.id.tv_loading_cover, "您还没有发布任务哦");
+		viewHolder.setText(R.id.tv_loading_cover, "还没有任务哦");
 		// viewHolder.setText(R.id.btn_loading_cover, "发布任务");
-		viewHolder.getItemView().setVisibility(View.GONE);
 	}
 
 	private void onBindViewClick(final RecyclerViewHolder viewHolder, final VTaskUserPublishedBean.VTaskUserPublishedOneBean bean, final HttpEnum.AssignedStatus assignedStatus, final int position)

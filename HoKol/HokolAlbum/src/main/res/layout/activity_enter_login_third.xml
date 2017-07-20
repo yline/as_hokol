@@ -107,7 +107,7 @@
             android:paddingRight="@dimen/default_space_normal"
             android:paddingTop="@dimen/default_space_large"
             android:scaleType="centerCrop"
-            android:src="@drawable/global_ward_close"/>
+            android:src="@drawable/global_ward_open"/>
     </LinearLayout>
 
     <Button
@@ -119,7 +119,7 @@
         android:layout_marginLeft="@dimen/default_space_large"
         android:layout_marginRight="@dimen/default_space_large"
         android:layout_marginTop="32dp"
-        android:background="@drawable/widget_shape_radiuall_huge_solid_redhokol"
+        android:background="@drawable/widget_shape_radiuall_huge_solid_pinkhokol"
         android:text="绑定"
         android:textColor="@android:color/white"
         android:textSize="@dimen/default_text_size_large"/>

@@ -35,7 +35,7 @@ public abstract class WidgetRecyclerAdapter<Data> extends HeadFootRecyclerAdapte
 	@Override
 	public int getEmptyItemRes()
 	{
-		return R.layout.widget_recycler_load_error_nomal;
+		return R.layout.widget_recycler_load_error_text;
 	}
 
 	@Override

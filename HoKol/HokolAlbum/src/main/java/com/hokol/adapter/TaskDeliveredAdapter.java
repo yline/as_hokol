@@ -217,8 +217,9 @@ public class TaskDeliveredAdapter extends WidgetRecyclerAdapter<VTaskUserDeliver
 	@Override
 	public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
 	{
+		viewHolder.setText(R.id.tv_loading_cover, "还没有任务哦");
 		// super.onBindEmptyViewHolder(viewHolder, position);
-		viewHolder.getItemView().setVisibility(View.GONE);
+		// viewHolder.getItemView().setVisibility(View.GONE);
 	}
 
 	public void setOnDeliveredSignCallback(OnTaskDeliveredSignCallback deliveredSignCallback)

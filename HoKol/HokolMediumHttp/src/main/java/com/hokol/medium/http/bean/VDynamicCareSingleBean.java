@@ -12,7 +12,7 @@ public class VDynamicCareSingleBean
 	private String user_nickname;
 
 	/* 用户红豆 */
-	private int user_coin;
+	private float user_coin;
 
 	/* 用户头像 */
 	private String user_logo;
@@ -41,16 +41,6 @@ public class VDynamicCareSingleBean
 	/* 是否点赞该评论(0:未点赞，1:已点赞) */
 	private int is_zan;
 
-	public static int getPraised()
-	{
-		return Praised;
-	}
-
-	public static int getCared()
-	{
-		return Cared;
-	}
-
 	public String getUser_nickname()
 	{
 		return user_nickname;
@@ -61,12 +51,12 @@ public class VDynamicCareSingleBean
 		this.user_nickname = user_nickname;
 	}
 
-	public int getUser_coin()
+	public float getUser_coin()
 	{
 		return user_coin;
 	}
 
-	public void setUser_coin(int user_coin)
+	public void setUser_coin(float user_coin)
 	{
 		this.user_coin = user_coin;
 	}

@@ -242,7 +242,7 @@ public class StarDynamicActivity extends BaseAppCompatActivity
 					viewHolder.setText(R.id.tv_star_dynamic_sign, vDynamicCareSingleBean.getDt_content());
 
 					// 红豆数目
-					viewHolder.setText(R.id.tv_star_dynamic_coin, vDynamicCareSingleBean.getUser_coin() + "");
+					viewHolder.setText(R.id.tv_star_dynamic_coin, String.format("%3.2f", vDynamicCareSingleBean.getUser_coin()));
 					
 					// 点赞数
 					viewHolder.setText(R.id.tv_star_dynamic_laud, vDynamicCareSingleBean.getDt_zan_people_nickname().size() + "");
