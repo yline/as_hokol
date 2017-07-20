@@ -24,7 +24,11 @@
 
         <!-- 功能 -->
         <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".activity.NewsInfoActivity"/>
         <activity android:name=".activity.StarDynamicActivity"/>
@@ -57,13 +61,7 @@
         <activity android:name=".activity.EnterRegisterCompleteInfoActivity"/>
         <activity android:name=".activity.UserSettingAccountActivity"/>
         <activity android:name=".activity.UserSettingAccountBindActivity"/>
-        <activity android:name=".activity.EnterModifyPwdActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+        <activity android:name=".activity.EnterModifyPwdActivity"/>
         <activity android:name=".activity.UserSettingFeedbackActivity"/>
         <activity android:name=".activity.UserSettingAccountSafetyActivity"/>
         <activity android:name=".activity.EnterUpdatePhoneActivity"/>

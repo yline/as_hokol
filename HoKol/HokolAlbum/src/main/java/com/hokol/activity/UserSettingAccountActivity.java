@@ -8,7 +8,6 @@ import android.view.View;
 
 import com.hokol.R;
 import com.hokol.application.AppStateManager;
-import com.hokol.util.TextDecorateUtil;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.view.recycler.holder.ViewHolder;
@@ -16,6 +15,11 @@ import com.yline.view.recycler.holder.ViewHolder;
 public class UserSettingAccountActivity extends BaseAppCompatActivity
 {
 	private ViewHolder viewHolder;
+
+	public static void actionStart(Context context)
+	{
+		context.startActivity(new Intent(context, UserSettingAccountActivity.class));
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -46,7 +50,7 @@ public class UserSettingAccountActivity extends BaseAppCompatActivity
 			public void onClick(View v)
 			{
 				String phoneNumber = AppStateManager.getInstance().getUserTel(UserSettingAccountActivity.this);
-				if (TextDecorateUtil.isMobileNumber(phoneNumber))
+				if (com.yline.view.text.helper.TextDecorateUtil.isPhonePwdMatch(phoneNumber))
 				{
 					UserSettingAccountSafetyActivity.actionStart(UserSettingAccountActivity.this, phoneNumber);
 				}
@@ -84,10 +88,5 @@ public class UserSettingAccountActivity extends BaseAppCompatActivity
 				}
 			}
 		});
-	}
-
-	public static void actionStart(Context context)
-	{
-		context.startActivity(new Intent(context, UserSettingAccountActivity.class));
 	}
 }
