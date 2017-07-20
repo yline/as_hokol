@@ -10,12 +10,12 @@ import android.widget.EditText;
 import com.hokol.R;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.WSettingResetPwdBean;
-import com.hokol.util.ArraysUtil;
-import com.hokol.util.TextDecorateUtil;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
+import com.yline.log.LogFileUtil;
 import com.yline.view.recycler.holder.ViewHolder;
+import com.yline.view.text.helper.PhonePwdCodeHelper;
 
 public class EnterModifyPwdActivity extends BaseAppCompatActivity
 {
@@ -23,11 +23,11 @@ public class EnterModifyPwdActivity extends BaseAppCompatActivity
 
 	private ViewHolder viewHolder;
 
-	private ClassState classState;
-
 	private boolean isNewPwdVisible = true, isDoublePwdVisible = true;
 
 	private String userId;
+
+	private PhonePwdCodeHelper phonePwdCodeHelper;
 
 	public static void actionStart(Context context, String userId)
 	{
@@ -41,9 +41,10 @@ public class EnterModifyPwdActivity extends BaseAppCompatActivity
 		setContentView(R.layout.activity_enter_modify_pwd);
 
 		viewHolder = new ViewHolder(this);
+		userId = getIntent().getStringExtra(KeyModifyPwdUserId);
+
 		initView();
 		initViewClick();
-		initData();
 	}
 
 	private void initView()
@@ -91,6 +92,49 @@ public class EnterModifyPwdActivity extends BaseAppCompatActivity
 				}
 			}
 		});
+
+		// 当前密码
+		EditText oldPwdEditText = viewHolder.get(R.id.et_enter_forget_pwd_old);
+		// 新密码
+		final EditText newPwdEditText = viewHolder.get(R.id.et_enter_forget_pwd_new);
+		// 重复密码
+		final EditText doublePwdEditText = viewHolder.get(R.id.et_enter_forget_pwd_new_sure);
+
+		phonePwdCodeHelper = new PhonePwdCodeHelper(oldPwdEditText, newPwdEditText, doublePwdEditText)
+		{
+			@Override
+			protected boolean onPhoneTextChanged(String inputString, int start, int before, int count)
+			{
+				return com.yline.view.text.helper.TextDecorateUtil.isPhonePwdMatch(inputString);
+			}
+
+			@Override
+			protected boolean onCodeTextChanged(String inputString, int start, int before, int count)
+			{
+				return com.yline.view.text.helper.TextDecorateUtil.isPhonePwdMatch(inputString);
+			}
+
+			@Override
+			protected boolean onPwdTextChanged(String inputString, int start, int before, int count)
+			{
+				return com.yline.view.text.helper.TextDecorateUtil.isPhonePwdMatch(inputString);
+			}
+		};
+		phonePwdCodeHelper.setOnCheckResultListener(new PhonePwdCodeHelper.OnCheckResultListener()
+		{
+			@Override
+			public void onChecked(boolean isMatch)
+			{
+				if (isMatch)
+				{
+					viewHolder.get(R.id.btn_register_phone_action_next).setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_redhokol);
+				}
+				else
+				{
+					viewHolder.get(R.id.btn_register_phone_action_next).setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_pinkhokol);
+				}
+			}
+		});
 	}
 
 	private void initViewClick()
@@ -105,151 +149,50 @@ public class EnterModifyPwdActivity extends BaseAppCompatActivity
 			}
 		});
 
-		// 当前密码
-		EditText oldPwdEditText = viewHolder.get(R.id.et_enter_forget_pwd_old);
-		TextDecorateUtil.isPhonePwdMatch(oldPwdEditText, new TextDecorateUtil.OnEditMatchCallback()
-		{
-			@Override
-			public void onTextChange(boolean isMatch)
-			{
-				classState.setOldPwdMatch(isMatch);
-			}
-		});
-
-		// 新密码
-		EditText newPwdEditText = viewHolder.get(R.id.et_enter_forget_pwd_new);
-		TextDecorateUtil.isPhonePwdMatch(newPwdEditText, new TextDecorateUtil.OnEditMatchCallback()
-		{
-			@Override
-			public void onTextChange(boolean isMatch)
-			{
-				classState.setNewPwdMatch(isMatch);
-			}
-		});
-
 		// 提交
 		viewHolder.setOnClickListener(R.id.btn_register_phone_action_next, new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				SDKManager.toast("提交成功");
-				if (!classState.isOldPwdMatch())
-				{
-					SDKManager.toast("旧密码格式错误");
-					return;
-				}
-
-				if (!classState.isNewPwdMatch())
-				{
-					SDKManager.toast("新密码格式错误");
-					return;
-				}
-
 				String oldPwdStr = viewHolder.getText(R.id.et_enter_forget_pwd_old);
 				String newPwdStr = viewHolder.getText(R.id.et_enter_forget_pwd_new);
 				String doublePwdStr = viewHolder.getText(R.id.et_enter_forget_pwd_new_sure);
 
-				if (!ArraysUtil.compare(newPwdStr, doublePwdStr))
+				if (phonePwdCodeHelper.isResultMatch())
 				{
-					SDKManager.toast("两次输入的密码不想同");
-					return;
-				}
-
-				if (!ArraysUtil.compare(oldPwdStr, newPwdStr))
-				{
-					SDKManager.toast("新密码不能与旧密码相同");
-					return;
-				}
-
-				XHttpUtil.doSettingResetPwd(new WSettingResetPwdBean(userId, oldPwdStr, newPwdStr), new XHttpAdapter<String>()
-				{
-					@Override
-					public void onSuccess(int code, String jsonContent, Class<String> defaultClazz) throws Exception
+					if (newPwdStr.equals(doublePwdStr))
 					{
-						super.onSuccess(code, jsonContent, defaultClazz);
-						if (code != REQUEST_SUCCESS_CODE)
+						XHttpUtil.doSettingResetPwd(new WSettingResetPwdBean(userId, oldPwdStr, newPwdStr), new XHttpAdapter<String>()
 						{
-							SDKManager.toast("密码错误");
-						}
-					}
+							@Override
+							public void onSuccess(int code, String jsonContent, Class<String> defaultClazz) throws Exception
+							{
+								super.onSuccess(code, jsonContent, defaultClazz);
+								if (code != REQUEST_SUCCESS_CODE)
+								{
+									SDKManager.toast("密码错误");
+								}
+							}
 
-					@Override
-					public void onSuccess(String s)
-					{
-						SDKManager.toast("修改密码成功");
-						finish();
+							@Override
+							public void onSuccess(String s)
+							{
+								SDKManager.toast("修改密码成功");
+								finish();
+							}
+						});
 					}
-				});
+					else
+					{
+						SDKManager.toast("两次输入的新密码不相同");
+					}
+				}
+				else
+				{
+					LogFileUtil.v("EnterModifyPwdActivity 输入 内容 不正确");
+				}
 			}
 		});
-	}
-
-	private void initData()
-	{
-		userId = getIntent().getStringExtra(KeyModifyPwdUserId);
-
-		classState = new ClassState();
-	}
-
-	private class ClassState
-	{
-		private boolean isOldPwdMatch;
-
-		private boolean isNewPwdMatch;
-
-		public boolean isOldPwdMatch()
-		{
-			return isOldPwdMatch;
-		}
-
-		public void setOldPwdMatch(boolean oldPwdMatch)
-		{
-			if (this.isOldPwdMatch != oldPwdMatch)
-			{
-				this.isOldPwdMatch = oldPwdMatch;
-				if (isOldPwdMatch)
-				{
-					if (isNewPwdMatch)
-					{
-						viewHolder.setText(R.id.btn_register_phone_action_next, "提交").setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_redhokol);
-					}
-				}
-				else
-				{
-					if (isNewPwdMatch)
-					{
-						viewHolder.setText(R.id.btn_register_phone_action_next, "提交").setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_pinkhokol);
-					}
-				}
-			}
-		}
-
-		public boolean isNewPwdMatch()
-		{
-			return isNewPwdMatch;
-		}
-
-		public void setNewPwdMatch(boolean newPwdMatch)
-		{
-			if (this.isNewPwdMatch != newPwdMatch)
-			{
-				this.isNewPwdMatch = newPwdMatch;
-				if (isNewPwdMatch)
-				{
-					if (isOldPwdMatch)
-					{
-						viewHolder.setText(R.id.btn_register_phone_action_next, "提交").setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_redhokol);
-					}
-				}
-				else
-				{
-					if (isOldPwdMatch)
-					{
-						viewHolder.setText(R.id.btn_register_phone_action_next, "提交").setBackgroundResource(R.drawable.widget_shape_radiuall_huge_solid_pinkhokol);
-					}
-				}
-			}
-		}
 	}
 }
