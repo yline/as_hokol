@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
@@ -23,6 +24,8 @@ import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
 import com.yline.view.text.helper.PhoneICodeHelper;
 import com.yline.view.text.helper.PhonePwdHelper;
+
+import org.json.JSONException;
 
 public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 {
@@ -78,9 +81,9 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 						}
 
 						@Override
-						public void onSuccess(int code, String jsonContent, Class<String> defaultClazz) throws Exception
+						public void onSuccess(int code, String data) throws JSONException, JsonParseException
 						{
-							super.onSuccess(code, jsonContent, defaultClazz);
+							super.onSuccess(code, data);
 							if (code != REQUEST_SUCCESS_CODE)
 							{
 								IApplication.toast("填写信息错误");
@@ -169,9 +172,9 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 						}
 
 						@Override
-						public void onSuccess(int code, String jsonContent, Class<String> defaultClazz) throws Exception
+						public void onSuccess(int code, String data) throws JSONException, JsonParseException
 						{
-							super.onSuccess(code, jsonContent, defaultClazz);
+							super.onSuccess(code, data);
 							if (3001 == code)
 							{
 								new DialogIosWidget(EnterRegisterPhoneActivity.this)

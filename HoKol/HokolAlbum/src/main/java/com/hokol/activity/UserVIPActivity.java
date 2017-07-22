@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.application.AppStateManager;
 import com.hokol.medium.http.XHttpUtil;
@@ -18,6 +19,8 @@ import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
+
+import org.json.JSONException;
 
 import java.util.Calendar;
 
@@ -119,9 +122,9 @@ public class UserVIPActivity extends BaseAppCompatActivity
 		XHttpUtil.doUserVipInfo(new WUserVipInfoBean(userId), new XHttpAdapter<VUserVipInfoBean>()
 		{
 			@Override
-			public void onSuccess(int code, String jsonContent, Class<VUserVipInfoBean> defaultClazz) throws Exception
+			public void onSuccess(int code, String data) throws JSONException, JsonParseException
 			{
-				super.onSuccess(code, jsonContent, defaultClazz);
+				super.onSuccess(code, data);
 				if (code == VUserVipInfoBean.CodeVipNone)
 				{
 					updateVipInfoView(VUserVipInfoBean.TypeNull, "至尊VIP特权", "立即开通", 0);

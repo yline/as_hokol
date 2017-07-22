@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
@@ -18,6 +19,8 @@ import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
 import com.yline.view.text.helper.PhonePwdHelper;
+
+import org.json.JSONException;
 
 /**
  * 登入流程，手机号+ 密码登录
@@ -172,9 +175,9 @@ public class EnterLoginPhonePwdActivity extends BaseAppCompatActivity
 			}
 
 			@Override
-			public void onSuccess(int code, String jsonContent, Class<VEnterLoginPhonePwdBean> defaultClazz) throws Exception
+			public void onSuccess(int code, String data) throws JSONException, JsonParseException
 			{
-				super.onSuccess(code, jsonContent, defaultClazz);
+				super.onSuccess(code, data);
 				if (code != REQUEST_SUCCESS_CODE)
 				{
 					SDKManager.toast("用户名或密码错误");
@@ -182,9 +185,9 @@ public class EnterLoginPhonePwdActivity extends BaseAppCompatActivity
 			}
 
 			@Override
-			public void onFailure(Exception ex)
+			public void onFailure(Exception ex, boolean isDebug)
 			{
-				super.onFailure(ex);
+				super.onFailure(ex, isDebug);
 				SDKManager.toast("登陆失败");
 			}
 		});

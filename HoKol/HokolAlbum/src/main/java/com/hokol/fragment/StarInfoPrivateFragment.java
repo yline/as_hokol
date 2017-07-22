@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.activity.StarDynamicPrivateActivity;
 import com.hokol.activity.VipHokolActivity;
@@ -35,6 +36,8 @@ import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
+
+import org.json.JSONException;
 
 import java.util.List;
 
@@ -176,9 +179,9 @@ public class StarInfoPrivateFragment extends BaseFragment
 				}
 
 				@Override
-				public void onSuccess(int code, String jsonContent, Class<VDynamicUserPrivateAllBean> defaultClazz) throws Exception
+				public void onSuccess(int code, String data) throws JSONException, JsonParseException
 				{
-					super.onSuccess(code, jsonContent, defaultClazz);
+					super.onSuccess(code, data);
 					if (code != REQUEST_SUCCESS_CODE)
 					{
 						lockRelativeLayout.setVisibility(View.VISIBLE);

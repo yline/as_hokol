@@ -3,11 +3,10 @@ package com.hokol.medium.http;
 import android.content.Context;
 
 import com.hokol.medium.http.bean.*;
+import com.hokol.medium.http.hokol.HokolHttp;
 import com.yline.http.XHttpAdapter;
 import com.yline.http.XHttpConfig;
-import com.yline.http.XHttpConstant;
-import com.yline.http.helper.XTextHttp;
-import com.yline.http.helper.XUploadFileHttp;
+import com.yline.http.client.HttpCachePriorClient;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.FileUtil;
 
@@ -30,10 +29,7 @@ public class XHttpUtil
 		File cacheDir = FileUtil.getFileExternalDir(context, "Text");
 
 		XHttpConfig config = XHttpConfig.getInstance();
-		config.setCacheDir(cacheDir);
-		config.init(context);
-
-		XHttpConstant.setIsInterceptorDebug(false);
+		config.setCacheDir(cacheDir).init(context);
 	}
 
 	/**
@@ -42,7 +38,7 @@ public class XHttpUtil
 	public static void doInitHokol(WInitHokolBean hokolBean, XHttpAdapter<VInitHokolBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_hokol_init;
-		new XTextHttp<VInitHokolBean>(adapter).doPost(httpUrl, hokolBean, VInitHokolBean.class);
+		new HokolHttp().doPost(httpUrl, hokolBean, VInitHokolBean.class, adapter);
 	}
 
 	/**
@@ -58,7 +54,7 @@ public class XHttpUtil
 	public static void doEnterLoginPhonePwd(final WEnterLoginPhonePwdBean requestBean, XHttpAdapter<VEnterLoginPhonePwdBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_login_pwd;
-		new XTextHttp<VEnterLoginPhonePwdBean>(adapter).doPost(httpUrl, requestBean, VEnterLoginPhonePwdBean.class);
+		new HokolHttp().doPost(httpUrl, requestBean, VEnterLoginPhonePwdBean.class, adapter);
 	}
 
 	/**
@@ -67,7 +63,7 @@ public class XHttpUtil
 	public static void doEnterCodeRegister(WEnterCodeRegisterBean wEnterCodeRegisterBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_code_register;
-		new XTextHttp<String>(adapter).doPost(httpUrl, wEnterCodeRegisterBean, String.class);
+		new HokolHttp().doPost(httpUrl, wEnterCodeRegisterBean, String.class, adapter);
 	}
 
 	/**
@@ -76,7 +72,7 @@ public class XHttpUtil
 	public static void doEnterCodeForgetPwd(WEnterCodeRegisterBean codeRegisterBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_code_forget_pwd;
-		new XTextHttp<String>(adapter).doPost(httpUrl, codeRegisterBean, String.class);
+		new HokolHttp().doPost(httpUrl, codeRegisterBean, String.class, adapter);
 	}
 
 	/**
@@ -85,7 +81,7 @@ public class XHttpUtil
 	public static void doEnterCodeUpdatePhone(WEnterCodeUpdatePhoneBean codeUpdateBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_code_update_phone;
-		new XTextHttp<String>(adapter).doPost(httpUrl, codeUpdateBean, String.class);
+		new HokolHttp().doPost(httpUrl, codeUpdateBean, String.class, adapter);
 	}
 
 	/**
@@ -94,7 +90,7 @@ public class XHttpUtil
 	public static void doEnterPhoneUpdate(WEnterPhoneUpdateBean updateBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_update_phone;
-		new XTextHttp<String>(adapter).doPost(httpUrl, updateBean, String.class);
+		new HokolHttp().doPost(httpUrl, updateBean, String.class, adapter);
 	}
 
 	/**
@@ -103,7 +99,7 @@ public class XHttpUtil
 	public static void doEnterRegister(WEnterRegisterBean wEnterRegisterBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_register;
-		new XTextHttp<String>(adapter).doPost(httpUrl, wEnterRegisterBean, String.class);
+		new HokolHttp().doPost(httpUrl, wEnterRegisterBean, String.class, adapter);
 	}
 
 	/**
@@ -112,7 +108,7 @@ public class XHttpUtil
 	public static void doEnterRegisterCompleteInfo(WEnterRegisterCompleteInfoBean completeInfoBean, XHttpAdapter<VEnterLoginPhonePwdBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_register_complete_info;
-		new XTextHttp<VEnterLoginPhonePwdBean>(adapter).doPost(httpUrl, completeInfoBean, VEnterLoginPhonePwdBean.class);
+		new HokolHttp().doPost(httpUrl, completeInfoBean, VEnterLoginPhonePwdBean.class, adapter);
 	}
 
 	/**
@@ -121,7 +117,7 @@ public class XHttpUtil
 	public static void doEnterResetPwd(WEnterResetPwdBean resetPwdBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_reset_pwd;
-		new XTextHttp<String>(adapter).doPost(httpUrl, resetPwdBean, String.class);
+		new HokolHttp().doPost(httpUrl, resetPwdBean, String.class, adapter);
 	}
 
 	/**
@@ -139,7 +135,7 @@ public class XHttpUtil
 	public static void doNewsRecommend(XHttpAdapter<VNewsRecommendBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_news_recommend;
-		new XTextHttp<VNewsRecommendBean>(adapter).doPost(httpUrl, null, VNewsRecommendBean.class);
+		new HokolHttp().doPost(httpUrl, "", VNewsRecommendBean.class, adapter);
 	}
 
 	/**
@@ -148,7 +144,7 @@ public class XHttpUtil
 	public static void doNewsMultiplex(WNewsMultiplexBean wNewsMultiplexBean, XHttpAdapter<VNewsMultiplexBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_news_multiplex;
-		new XTextHttp<VNewsMultiplexBean>(adapter).doPost(httpUrl, wNewsMultiplexBean, VNewsMultiplexBean.class);
+		new HokolHttp().doPost(httpUrl, wNewsMultiplexBean, VNewsMultiplexBean.class, adapter);
 	}
 
 	/**
@@ -170,7 +166,7 @@ public class XHttpUtil
 	public static void doDynamicCareAll(WDynamicCareAllBean wDynamicCareAllBean, XHttpAdapter<VDynamicCareAllBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_care_all;
-		new XTextHttp<VDynamicCareAllBean>(adapter).doPost(httpUrl, wDynamicCareAllBean, VDynamicCareAllBean.class);
+		new HokolHttp().doPost(httpUrl, wDynamicCareAllBean, VDynamicCareAllBean.class, adapter);
 	}
 
 	/**
@@ -179,7 +175,7 @@ public class XHttpUtil
 	public static void doDynamicUserDetail(WDynamicUserDetailBean wDynamicUserDetailBean, XHttpAdapter<VDynamicUserDetailBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_user_detail;
-		new XTextHttp<VDynamicUserDetailBean>(adapter).doPost(httpUrl, wDynamicUserDetailBean, VDynamicUserDetailBean.class);
+		new HokolHttp().doPost(httpUrl, wDynamicUserDetailBean, VDynamicUserDetailBean.class, adapter);
 	}
 
 	/**
@@ -188,7 +184,7 @@ public class XHttpUtil
 	public static void doDynamicPraiseSingle(WDynamicPraiseSingleBean wDynamicPraiseSingleBean, XHttpAdapter<VDynamicPraiseSingleBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_praise_single;
-		new XTextHttp<VDynamicPraiseSingleBean>(adapter).doPost(httpUrl, wDynamicPraiseSingleBean, VDynamicPraiseSingleBean.class);
+		new HokolHttp().doPost(httpUrl, wDynamicPraiseSingleBean, VDynamicPraiseSingleBean.class, adapter);
 	}
 
 	/**
@@ -197,7 +193,7 @@ public class XHttpUtil
 	public static void doDynamicSingle(WDynamicCareSingleBean wDynamicCareSingleBean, XHttpAdapter<VDynamicCareSingleBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_single;
-		new XTextHttp<VDynamicCareSingleBean>(adapter).doPost(httpUrl, wDynamicCareSingleBean, VDynamicCareSingleBean.class);
+		new HokolHttp().doPost(httpUrl, wDynamicCareSingleBean, VDynamicCareSingleBean.class, adapter);
 	}
 
 	/**
@@ -206,7 +202,7 @@ public class XHttpUtil
 	public static void doDynamicPrivateSingle(WDynamicPrivateSingleBean privateSingleBean, XHttpAdapter<VWDynamicPrivateSingleBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_private_single;
-		new XTextHttp<VWDynamicPrivateSingleBean>(adapter).doPost(httpUrl, privateSingleBean, VWDynamicPrivateSingleBean.class);
+		new HokolHttp().doPost(httpUrl, privateSingleBean, VWDynamicPrivateSingleBean.class, adapter);
 	}
 
 	/**
@@ -215,7 +211,7 @@ public class XHttpUtil
 	public static void doDynamicUserAll(WDynamicUserAllBean wDynamicUserAllBean, XHttpAdapter<VDynamicUserAllBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_user_all;
-		new XTextHttp<VDynamicUserAllBean>(adapter).doPost(httpUrl, wDynamicUserAllBean, VDynamicUserAllBean.class);
+		new HokolHttp().doPost(httpUrl, wDynamicUserAllBean, VDynamicUserAllBean.class, adapter);
 	}
 
 	/**
@@ -224,7 +220,7 @@ public class XHttpUtil
 	public static void doDynamicUserPrivateAll(WDynamicUserPrivateAllBean wDynamicUserPrivateAllBean, XHttpAdapter<VDynamicUserPrivateAllBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_user_private_all;
-		new XTextHttp<VDynamicUserPrivateAllBean>(adapter).doPost(httpUrl, wDynamicUserPrivateAllBean, VDynamicUserPrivateAllBean.class);
+		new HokolHttp().doPost(httpUrl, wDynamicUserPrivateAllBean, VDynamicUserPrivateAllBean.class, adapter);
 	}
 
 	/**
@@ -233,7 +229,7 @@ public class XHttpUtil
 	public static void doUserCareAll(WUserCareAllBean wUserCareAllBean, XHttpAdapter<VUserCareAllBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_care_all;
-		new XTextHttp<VUserCareAllBean>(adapter).doPost(httpUrl, wUserCareAllBean, VUserCareAllBean.class);
+		new HokolHttp().doPost(httpUrl, wUserCareAllBean, VUserCareAllBean.class, adapter);
 	}
 
 	/**
@@ -250,21 +246,18 @@ public class XHttpUtil
 
 		if (null != file || !file.exists())
 		{
-			new XUploadFileHttp<String>(adapter)
-			{
-				@Override
-				protected void initRequestForm(MultipartBody.Builder bodyBuilder)
-				{
-					if (isDebug())
-					{
-						LogFileUtil.v("user_id = " + userId + ", content = " + content + ", user_logo = " + file.getAbsolutePath());
-					}
-					bodyBuilder.addFormDataPart("dt_user_id", userId);
-					bodyBuilder.addFormDataPart("dt_content", content);
-					bodyBuilder.addFormDataPart("dt_img", file.getName(), RequestBody.create(MediaType.parse("image"), file));
-				}
+			HokolHttp hokolHttp = new HokolHttp();
 
-			}.doPost(httpUrl, String.class);
+			MultipartBody.Builder bodyBuilder = new MultipartBody.Builder();
+			if (hokolHttp.isDebug())
+			{
+				LogFileUtil.v("user_id = " + userId + ", content = " + content + ", user_logo = " + file.getAbsolutePath());
+			}
+			bodyBuilder.addFormDataPart("dt_user_id", userId);
+			bodyBuilder.addFormDataPart("dt_content", content);
+			bodyBuilder.addFormDataPart("dt_img", file.getName(), RequestBody.create(MediaType.parse("image"), file));
+
+			hokolHttp.doPost(httpUrl, bodyBuilder, String.class, adapter);
 		}
 		else
 		{
@@ -286,20 +279,18 @@ public class XHttpUtil
 
 		if (null != file || !file.exists())
 		{
-			new XUploadFileHttp<String>(adapter)
+			HokolHttp hokolHttp = new HokolHttp();
+
+			MultipartBody.Builder bodyBuilder = new MultipartBody.Builder();
+			if (hokolHttp.isDebug())
 			{
-				@Override
-				protected void initRequestForm(MultipartBody.Builder bodyBuilder)
-				{
-					if (isDebug())
-					{
-						LogFileUtil.v("user_id = " + userId + ", content = " + content + ", user_logo = " + file.getAbsolutePath());
-					}
-					bodyBuilder.addFormDataPart("pri_user_id", userId);
-					bodyBuilder.addFormDataPart("pri_content", content);
-					bodyBuilder.addFormDataPart("pri_img", file.getName(), RequestBody.create(MediaType.parse("image"), file));
-				}
-			}.doPost(httpUrl, String.class);
+				LogFileUtil.v("user_id = " + userId + ", content = " + content + ", user_logo = " + file.getAbsolutePath());
+			}
+			bodyBuilder.addFormDataPart("pri_user_id", userId);
+			bodyBuilder.addFormDataPart("pri_content", content);
+			bodyBuilder.addFormDataPart("pri_img", file.getName(), RequestBody.create(MediaType.parse("image"), file));
+
+			hokolHttp.doPost(httpUrl, bodyBuilder, String.class, adapter);
 		}
 		else
 		{
@@ -313,7 +304,7 @@ public class XHttpUtil
 	public static void doDynamicDelete(WDynamicDeleteBean deleteBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_delete;
-		new XTextHttp<String>(adapter).doPost(httpUrl, deleteBean, String.class);
+		new HokolHttp().doPost(httpUrl, deleteBean, String.class, adapter);
 	}
 
 	/**
@@ -322,7 +313,7 @@ public class XHttpUtil
 	public static void doDynamicPrivateDelete(WDynamicPrivateDeleteBean deleteBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_private_delete;
-		new XTextHttp<String>(adapter).doPost(httpUrl, deleteBean, String.class);
+		new HokolHttp().doPost(httpUrl, deleteBean, String.class, adapter);
 	}
 
 	/**
@@ -341,7 +332,7 @@ public class XHttpUtil
 	public static void doTaskMainAll(WTaskMainAllBean wTaskMainAll, XHttpAdapter<VTaskMainAllBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_main_all;
-		new XTextHttp<VTaskMainAllBean>(adapter).doPost(httpUrl, wTaskMainAll, VTaskMainAllBean.class);
+		new HokolHttp().doPost(httpUrl, wTaskMainAll, VTaskMainAllBean.class, adapter);
 	}
 
 	/**
@@ -350,7 +341,7 @@ public class XHttpUtil
 	public static void doTaskMainDetail(WTaskMainDetailBean wTaskMainDetailBean, XHttpAdapter<VTaskMainDetailBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_main_detail;
-		new XTextHttp<VTaskMainDetailBean>(adapter).doPost(httpUrl, wTaskMainDetailBean, VTaskMainDetailBean.class);
+		new HokolHttp().doPost(httpUrl, wTaskMainDetailBean, VTaskMainDetailBean.class, adapter);
 	}
 
 	/**
@@ -359,7 +350,7 @@ public class XHttpUtil
 	public static void doTaskMainPublish(WTaskMainPublishBean wTaskMainPublishBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_main_publish;
-		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskMainPublishBean, String.class);
+		new HokolHttp().doPost(httpUrl, wTaskMainPublishBean, String.class, adapter);
 	}
 
 	/**
@@ -368,7 +359,7 @@ public class XHttpUtil
 	public static void doTaskMainCollection(WTaskMainCollectionBean wTaskMainCollectionBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_main_collection;
-		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskMainCollectionBean, String.class);
+		new HokolHttp().doPost(httpUrl, wTaskMainCollectionBean, String.class, adapter);
 	}
 
 	/**
@@ -377,7 +368,7 @@ public class XHttpUtil
 	public static void doTaskUserAcceptDetail(WTaskUserAcceptBean wTaskUserAcceptBean, XHttpAdapter<VTaskUserAcceptBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_user_accept_detail;
-		new XTextHttp<VTaskUserAcceptBean>(adapter).doPost(httpUrl, wTaskUserAcceptBean, VTaskUserAcceptBean.class);
+		new HokolHttp().doPost(httpUrl, wTaskUserAcceptBean, VTaskUserAcceptBean.class, adapter);
 	}
 
 	/**
@@ -386,7 +377,7 @@ public class XHttpUtil
 	public static void doTaskUserSignUpDetail(WTaskUserSignUpDetailBean wTaskUserSignUpBean, XHttpAdapter<VTaskUserSignUpDetailBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_user_signup_detail;
-		new XTextHttp<VTaskUserSignUpDetailBean>(adapter).doPost(httpUrl, wTaskUserSignUpBean, VTaskUserSignUpDetailBean.class);
+		new HokolHttp().doPost(httpUrl, wTaskUserSignUpBean, VTaskUserSignUpDetailBean.class, adapter);
 	}
 
 	/**
@@ -395,7 +386,7 @@ public class XHttpUtil
 	public static void doTaskUserPublishedAll(WTaskUserPublishedBean wTaskUserPublishedBean, XHttpAdapter<VTaskUserPublishedBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_user_published_all;
-		new XTextHttp<VTaskUserPublishedBean>(adapter).doPost(httpUrl, wTaskUserPublishedBean, VTaskUserPublishedBean.class);
+		new HokolHttp().doPost(httpUrl, wTaskUserPublishedBean, VTaskUserPublishedBean.class, adapter);
 	}
 
 	/**
@@ -404,7 +395,7 @@ public class XHttpUtil
 	public static void doTaskUserPublishedSign(WTaskUserPublishedBean wTaskUserPublishedBean, XHttpAdapter<VTaskUserPublishedBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_user_published_sign;
-		new XTextHttp<VTaskUserPublishedBean>(adapter).doPost(httpUrl, wTaskUserPublishedBean, VTaskUserPublishedBean.class);
+		new HokolHttp().doPost(httpUrl, wTaskUserPublishedBean, VTaskUserPublishedBean.class, adapter);
 	}
 
 	/**
@@ -413,7 +404,7 @@ public class XHttpUtil
 	public static void doTaskUserPublishedTrade(WTaskUserPublishedBean wTaskUserPublishedBean, XHttpAdapter<VTaskUserPublishedBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_user_published_trade;
-		new XTextHttp<VTaskUserPublishedBean>(adapter).doPost(httpUrl, wTaskUserPublishedBean, VTaskUserPublishedBean.class);
+		new HokolHttp().doPost(httpUrl, wTaskUserPublishedBean, VTaskUserPublishedBean.class, adapter);
 	}
 
 	/**
@@ -422,7 +413,7 @@ public class XHttpUtil
 	public static void doTaskUserPublishedEvaluate(WTaskUserPublishedBean wTaskUserPublishedBean, XHttpAdapter<VTaskUserPublishedBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_user_published_evaluate;
-		new XTextHttp<VTaskUserPublishedBean>(adapter).doPost(httpUrl, wTaskUserPublishedBean, VTaskUserPublishedBean.class);
+		new HokolHttp().doPost(httpUrl, wTaskUserPublishedBean, VTaskUserPublishedBean.class, adapter);
 	}
 
 	/**
@@ -431,7 +422,7 @@ public class XHttpUtil
 	public static void doTaskActionStaffSignUp(WTaskActionStaffSignUpBean wTaskActionStaffSignUpBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_staff_signup;
-		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskActionStaffSignUpBean, String.class);
+		new HokolHttp().doPost(httpUrl, wTaskActionStaffSignUpBean, String.class, adapter);
 	}
 
 	/**
@@ -440,7 +431,7 @@ public class XHttpUtil
 	public static void doTaskActionMasterTakeOn(WTaskActionMasterTakeOnBean wTaskActionMasterTakeOnBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_master_takeon;
-		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskActionMasterTakeOnBean, String.class);
+		new HokolHttp().doPost(httpUrl, wTaskActionMasterTakeOnBean, String.class, adapter);
 	}
 
 	/**
@@ -449,7 +440,7 @@ public class XHttpUtil
 	public static void doTaskActionMasterComment(WTaskActionMasterCommentBean wTaskActionMasterCommentBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_master_comment;
-		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskActionMasterCommentBean, String.class);
+		new HokolHttp().doPost(httpUrl, wTaskActionMasterCommentBean, String.class, adapter);
 	}
 
 	/**
@@ -458,7 +449,7 @@ public class XHttpUtil
 	public static void doTaskStaffCommentedInfo(WTaskStaffCommentedInfoBean wTaskStaffCommentedInfoBean, XHttpAdapter<VTaskStaffCommentedInfoBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_master_comment_info;
-		new XTextHttp<VTaskStaffCommentedInfoBean>(adapter).doPost(httpUrl, wTaskStaffCommentedInfoBean, VTaskStaffCommentedInfoBean.class);
+		new HokolHttp().doPost(httpUrl, wTaskStaffCommentedInfoBean, VTaskStaffCommentedInfoBean.class, adapter);
 	}
 
 	/**
@@ -467,7 +458,7 @@ public class XHttpUtil
 	public static void doTaskActionMasterFinish(WTaskActionMasterFinishBean wTaskActionMasterFinishBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_master_finish;
-		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskActionMasterFinishBean, String.class);
+		new HokolHttp().doPost(httpUrl, wTaskActionMasterFinishBean, String.class, adapter);
 	}
 
 	/**
@@ -476,7 +467,7 @@ public class XHttpUtil
 	public static void doTaskActionMasterCancel(WTaskActionMasterCancelBean wTaskActionMasterCancelBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_master_cancel;
-		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskActionMasterCancelBean, String.class);
+		new HokolHttp().doPost(httpUrl, wTaskActionMasterCancelBean, String.class, adapter);
 	}
 
 	/**
@@ -485,7 +476,7 @@ public class XHttpUtil
 	public static void doTaskActionMasterTrade(WTaskActionMasterTradeBean wTaskActionMasterTradeBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_master_trade;
-		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskActionMasterTradeBean, String.class);
+		new HokolHttp().doPost(httpUrl, wTaskActionMasterTradeBean, String.class, adapter);
 	}
 
 	/**
@@ -494,7 +485,7 @@ public class XHttpUtil
 	public static void doTaskUserDelivered(WTaskUserDeliveredBean wTaskUserDeliveredBean, XHttpAdapter<VTaskUserDeliveredBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_user_delivered;
-		new XTextHttp<VTaskUserDeliveredBean>(adapter).doPost(httpUrl, wTaskUserDeliveredBean, VTaskUserDeliveredBean.class);
+		new HokolHttp().doPost(httpUrl, wTaskUserDeliveredBean, VTaskUserDeliveredBean.class, adapter);
 	}
 
 	/**
@@ -503,7 +494,7 @@ public class XHttpUtil
 	public static void doTaskActionStaffConfirm(WTaskActionStaffConfirmBean wTaskActionStaffConfirmBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_staff_confirm;
-		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskActionStaffConfirmBean, String.class);
+		new HokolHttp().doPost(httpUrl, wTaskActionStaffConfirmBean, String.class, adapter);
 	}
 
 	/**
@@ -512,7 +503,7 @@ public class XHttpUtil
 	public static void doTaskActionStaffTrade(WTaskActionStaffTradeBean wTaskActionStaffTradeBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_staff_trade;
-		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskActionStaffTradeBean, String.class);
+		new HokolHttp().doPost(httpUrl, wTaskActionStaffTradeBean, String.class, adapter);
 	}
 
 	/**
@@ -521,7 +512,7 @@ public class XHttpUtil
 	public static void doTaskActionStaffComment(WTaskActionStaffCommentBean wTaskActionStaffCommentBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_staff_comment;
-		new XTextHttp<String>(adapter).doPost(httpUrl, wTaskActionStaffCommentBean, String.class);
+		new HokolHttp().doPost(httpUrl, wTaskActionStaffCommentBean, String.class, adapter);
 	}
 
 	/**
@@ -530,7 +521,7 @@ public class XHttpUtil
 	public static void doTaskDelete(WTaskDeleteBean taskDeleteBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_delete;
-		new XTextHttp<String>(adapter).doPost(httpUrl, taskDeleteBean, String.class);
+		new HokolHttp().doPost(httpUrl, taskDeleteBean, String.class, adapter);
 	}
 
 	/**
@@ -547,7 +538,7 @@ public class XHttpUtil
 	public static void doHomeMain(WHomeMainBean wHomeMainBean, XHttpAdapter<VHomeMainBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_home_main;
-		new XTextHttp<VHomeMainBean>(adapter).doPost(httpUrl, wHomeMainBean, VHomeMainBean.class);
+		new HokolHttp().doPost(httpUrl, wHomeMainBean, VHomeMainBean.class, adapter);
 	}
 
 	/**
@@ -556,7 +547,7 @@ public class XHttpUtil
 	public static void doRecommendHome(XHttpAdapter<VRecommendHomeBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_recommend_home;
-		new XTextHttp<VRecommendHomeBean>(adapter).doPost(httpUrl, null, VRecommendHomeBean.class);
+		new HokolHttp().doPost(httpUrl, "", VRecommendHomeBean.class, adapter);
 	}
 
 	/**
@@ -565,7 +556,7 @@ public class XHttpUtil
 	public static void doRecommendTask(XHttpAdapter<VRecommendTaskBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_recommend_task;
-		new XTextHttp<VRecommendTaskBean>(adapter).doPost(httpUrl, null, VRecommendTaskBean.class);
+		new HokolHttp().doPost(httpUrl, "", VRecommendTaskBean.class, adapter);
 	}
 
 	/**
@@ -584,7 +575,7 @@ public class XHttpUtil
 	public static void doUserFansAll(WUserFansAllBean wUserFansAllBean, XHttpAdapter<VUserFansAllBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_fans_all;
-		new XTextHttp<VUserFansAllBean>(adapter).doPost(httpUrl, wUserFansAllBean, VUserFansAllBean.class);
+		new HokolHttp().doPost(httpUrl, wUserFansAllBean, VUserFansAllBean.class, adapter);
 	}
 
 	/**
@@ -593,7 +584,7 @@ public class XHttpUtil
 	public static void doUserCollection(WUserTaskCollectionBean wUserCollectionBean, XHttpAdapter<VUserTaskCollectionBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_collection;
-		new XTextHttp<VUserTaskCollectionBean>(adapter).doPost(httpUrl, wUserCollectionBean, VUserTaskCollectionBean.class);
+		new HokolHttp().doPost(httpUrl, wUserCollectionBean, VUserTaskCollectionBean.class, adapter);
 	}
 
 	/**
@@ -602,7 +593,7 @@ public class XHttpUtil
 	public static void doUserCareOrCancel(WUserCareOrCancelBean wUserCareOrCancelBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_care_or_cancel;
-		new XTextHttp<String>(adapter).doPost(httpUrl, wUserCareOrCancelBean, String.class);
+		new HokolHttp().doPost(httpUrl, wUserCareOrCancelBean, String.class, adapter);
 	}
 
 	/**
@@ -611,7 +602,7 @@ public class XHttpUtil
 	public static void doUserCoinGift(WUserCoinGiftBean wUserCoinGiftBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_coin_gift;
-		new XTextHttp<String>(adapter).doPost(httpUrl, wUserCoinGiftBean, String.class);
+		new HokolHttp().doPost(httpUrl, wUserCoinGiftBean, String.class, adapter);
 	}
 
 	/**
@@ -620,7 +611,7 @@ public class XHttpUtil
 	public static void doUserMessageSystem(WUserMessageSystemBean wUserMessageBean, XHttpAdapter<VUserMessageSystemBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_message;
-		new XTextHttp<VUserMessageSystemBean>(adapter).doPost(httpUrl, wUserMessageBean, VUserMessageSystemBean.class);
+		new HokolHttp().doPost(httpUrl, wUserMessageBean, VUserMessageSystemBean.class, adapter);
 	}
 
 	/**
@@ -629,7 +620,7 @@ public class XHttpUtil
 	public static void doUserSystemMessageOutline(WUserMessageSystemOutlineBean outlineBean, XHttpAdapter<VUserMessageSystemOutlineBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_message_system_all;
-		new XTextHttp<VUserMessageSystemOutlineBean>(adapter).doPost(httpUrl, outlineBean, VUserMessageSystemOutlineBean.class);
+		new HokolHttp().doPost(httpUrl, outlineBean, VUserMessageSystemOutlineBean.class, adapter);
 	}
 
 	/**
@@ -638,7 +629,7 @@ public class XHttpUtil
 	public static void doUserSystemMessageSignRead(WUserSystemMessageSignReadBean signReadBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_message_system_readed;
-		new XTextHttp<String>(adapter).doPost(httpUrl, signReadBean, String.class);
+		new HokolHttp().doPost(httpUrl, signReadBean, String.class, adapter);
 	}
 
 	/**
@@ -647,7 +638,7 @@ public class XHttpUtil
 	public static void doUserSystemMessageSignDelete(WUserSystemMessageSignDeleteBean signDeleteBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_message_system_delete;
-		new XTextHttp<String>(adapter).doPost(httpUrl, signDeleteBean, String.class);
+		new HokolHttp().doPost(httpUrl, signDeleteBean, String.class, adapter);
 	}
 
 	/**
@@ -656,7 +647,7 @@ public class XHttpUtil
 	public static void doUserGiftReceive(WUserGiftReceiveBean receiveBean, XHttpAdapter<VUserGiftReceiveBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_gift_receivve;
-		new XTextHttp<VUserGiftReceiveBean>(adapter).doPost(httpUrl, receiveBean, VUserGiftReceiveBean.class);
+		new HokolHttp().doPost(httpUrl, receiveBean, VUserGiftReceiveBean.class, adapter);
 	}
 	
 	/**
@@ -665,7 +656,7 @@ public class XHttpUtil
 	public static void doUserGiftSend(WUserGiftSendBean sendBean, XHttpAdapter<VUserGiftSendBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_gift_send;
-		new XTextHttp<VUserGiftSendBean>(adapter).doPost(httpUrl, sendBean, VUserGiftSendBean.class);
+		new HokolHttp().doPost(httpUrl, sendBean, VUserGiftSendBean.class, adapter);
 	}
 
 	/**
@@ -674,7 +665,7 @@ public class XHttpUtil
 	public static void doUserRechargeRecord(WUserRechargeRecordBean recordBean, XHttpAdapter<VUserRechargeRecordBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_recharge_record;
-		new XTextHttp<VUserRechargeRecordBean>(adapter).doPost(httpUrl, recordBean, VUserRechargeRecordBean.class);
+		new HokolHttp().doPost(httpUrl, recordBean, VUserRechargeRecordBean.class, adapter);
 	}
 
 	/**
@@ -683,7 +674,7 @@ public class XHttpUtil
 	public static void doUserVipInfo(WUserVipInfoBean vipInfoBean, XHttpAdapter<VUserVipInfoBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_vip_info;
-		new XTextHttp<VUserVipInfoBean>(adapter).doPost(httpUrl, vipInfoBean, VUserVipInfoBean.class);
+		new HokolHttp().doPost(httpUrl, vipInfoBean, VUserVipInfoBean.class, adapter);
 	}
 
 	/**
@@ -692,7 +683,7 @@ public class XHttpUtil
 	public static void doUserVipRechargeRecord(WUserVipRechargeRecordBean recordBean, XHttpAdapter<VUserVipRechargeRecordBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_vip_recharge_record;
-		new XTextHttp<VUserVipRechargeRecordBean>(adapter).doPost(httpUrl, recordBean, VUserVipRechargeRecordBean.class);
+		new HokolHttp().doPost(httpUrl, recordBean, VUserVipRechargeRecordBean.class, adapter);
 	}
 
 	/**
@@ -701,7 +692,7 @@ public class XHttpUtil
 	public static void doUserContactVolumeUnapply(WUserContactVolumeBean bean, XHttpAdapter<VUserContactVolumeBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_contact_volume_unapply;
-		new XTextHttp<VUserContactVolumeBean>(adapter).doPost(httpUrl, bean, VUserContactVolumeBean.class);
+		new HokolHttp().doPost(httpUrl, bean, VUserContactVolumeBean.class, adapter);
 	}
 
 	/**
@@ -710,7 +701,7 @@ public class XHttpUtil
 	public static void doUserContactVolumeApplied(WUserContactVolumeBean bean, XHttpAdapter<VUserContactVolumeBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_vip_recharge_applied;
-		new XTextHttp<VUserContactVolumeBean>(adapter).doPost(httpUrl, bean, VUserContactVolumeBean.class);
+		new HokolHttp().doPost(httpUrl, bean, VUserContactVolumeBean.class, adapter);
 	}
 
 	/**
@@ -719,7 +710,7 @@ public class XHttpUtil
 	public static void doUserContactVolumePassed(WUserContactVolumeBean bean, XHttpAdapter<VUserContactVolumeBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_vip_recharge_expired;
-		new XTextHttp<VUserContactVolumeBean>(adapter).doPost(httpUrl, bean, VUserContactVolumeBean.class);
+		new HokolHttp().doPost(httpUrl, bean, VUserContactVolumeBean.class, adapter);
 	}
 
 	/**
@@ -728,7 +719,7 @@ public class XHttpUtil
 	public static void doUserCredit(WUserCreditBean creditBean, XHttpAdapter<VUserCreditBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_credit;
-		new XTextHttp<VUserCreditBean>(adapter).doPost(httpUrl, creditBean, VUserCreditBean.class);
+		new HokolHttp().doPost(httpUrl, creditBean, VUserCreditBean.class, adapter);
 	}
 	
 	/**
@@ -737,7 +728,7 @@ public class XHttpUtil
 	public static void doUserTaskScoreAssigned(WUserTaskScoreAssignedBean assignedBean, XHttpAdapter<VUserTaskScoreAssignedBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_task_score_assigned;
-		new XTextHttp<VUserTaskScoreAssignedBean>(adapter).doPost(httpUrl, assignedBean, VUserTaskScoreAssignedBean.class);
+		new HokolHttp().doPost(httpUrl, assignedBean, VUserTaskScoreAssignedBean.class, adapter);
 	}
 
 	/**
@@ -746,7 +737,7 @@ public class XHttpUtil
 	public static void doUserTaskScoreDelivered(WUserTaskScoreDeliveredBean deliveredBean, XHttpAdapter<VUserTaskScoreDeliveredBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_task_score_delivered;
-		new XTextHttp<VUserTaskScoreDeliveredBean>(adapter).doPost(httpUrl, deliveredBean, VUserTaskScoreDeliveredBean.class);
+		new HokolHttp().doPost(httpUrl, deliveredBean, VUserTaskScoreDeliveredBean.class, adapter);
 	}
 
 	/**
@@ -755,7 +746,7 @@ public class XHttpUtil
 	public static void doUserTaskCommentAssigned(WUserTaskCommentAssignedBean assignedBean, XHttpAdapter<VUserTaskCommentAssignedBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_task_comment_assigned;
-		new XTextHttp<VUserTaskCommentAssignedBean>(adapter).doPost(httpUrl, assignedBean, VUserTaskCommentAssignedBean.class);
+		new HokolHttp().doPost(httpUrl, assignedBean, VUserTaskCommentAssignedBean.class, adapter);
 	}
 
 	/**
@@ -764,7 +755,7 @@ public class XHttpUtil
 	public static void doUserTaskCommentDelivered(WUserTaskCommentDeliveredBean creditBean, XHttpAdapter<VUserTaskCommentDeliveredBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_task_comment_delivered;
-		new XTextHttp<VUserTaskCommentDeliveredBean>(adapter).doPost(httpUrl, creditBean, VUserTaskCommentDeliveredBean.class);
+		new HokolHttp().doPost(httpUrl, creditBean, VUserTaskCommentDeliveredBean.class, adapter);
 	}
 
 	/**
@@ -784,7 +775,7 @@ public class XHttpUtil
 	public static void doSettingSubmitProposal(WSettingSubmitProposalBean wSettingSubmitProposalBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_setting_submit_proposal;
-		new XTextHttp<String>(adapter).doPost(httpUrl, wSettingSubmitProposalBean, String.class);
+		new HokolHttp().doPost(httpUrl, wSettingSubmitProposalBean, String.class, adapter);
 	}
 
 	/**
@@ -793,7 +784,7 @@ public class XHttpUtil
 	public static void doSettingResetPwd(WSettingResetPwdBean wSettingResetPwdBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_setting_reset_pwd;
-		new XTextHttp<String>(adapter).doPost(httpUrl, wSettingResetPwdBean, String.class);
+		new HokolHttp().doPost(httpUrl, wSettingResetPwdBean, String.class, adapter);
 	}
 
 	/**
@@ -802,7 +793,7 @@ public class XHttpUtil
 	public static void doSettingUpdateInfo(WSettingUpdateInfoBean wSettingUpdateInfoBean, XHttpAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_setting_update_info;
-		new XTextHttp<String>(adapter).doPost(httpUrl, wSettingUpdateInfoBean, String.class);
+		new HokolHttp().doPost(httpUrl, wSettingUpdateInfoBean, String.class, adapter);
 	}
 
 	/**
@@ -814,19 +805,17 @@ public class XHttpUtil
 
 		if (null != file || !file.exists())
 		{
-			new XUploadFileHttp<VUserAvatarBean>(adapter)
+			HokolHttp hokolHttp = new HokolHttp();
+
+			MultipartBody.Builder bodyBuilder = new MultipartBody.Builder();
+			if (hokolHttp.isDebug())
 			{
-				@Override
-				protected void initRequestForm(MultipartBody.Builder bodyBuilder)
-				{
-					if (isDebug())
-					{
-						LogFileUtil.v("user_id = " + userId + ", user_logo = " + file.getAbsolutePath());
-					}
-					bodyBuilder.addFormDataPart("user_id", userId);
-					bodyBuilder.addFormDataPart("user_logo", file.getName(), RequestBody.create(MediaType.parse("image"), file));
-				}
-			}.doPost(httpUrl, VUserAvatarBean.class);
+				LogFileUtil.v("user_id = " + userId + ", user_logo = " + file.getAbsolutePath());
+			}
+			bodyBuilder.addFormDataPart("user_id", userId);
+			bodyBuilder.addFormDataPart("user_logo", file.getName(), RequestBody.create(MediaType.parse("image"), file));
+
+			hokolHttp.doPost(httpUrl, bodyBuilder, VUserAvatarBean.class, adapter);
 		}
 		else
 		{
@@ -843,14 +832,14 @@ public class XHttpUtil
 	public static void doAreaAll(XHttpAdapter<VAreaAllBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_area_all;
-		new XTextHttp<VAreaAllBean>(adapter)
+		new HokolHttp()
 		{
 			@Override
-			protected OkHttpClient getClient()
+			protected OkHttpClient getHttpClient()
 			{
-				return HttpCacheThanNetClient.getInstance();
+				return HttpCachePriorClient.getInstance();
 			}
-		}.doPost(httpUrl, null, VAreaAllBean.class);
+		}.doPost(httpUrl, "", VAreaAllBean.class, adapter);
 	}
 
 	/**
@@ -859,7 +848,7 @@ public class XHttpUtil
 	public static void doAliPayOrderInfo(WAliPayOrderInfoBean infoBean, XHttpAdapter<VAliPayOrderInfoBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_ali_pay_order_info;
-		new XTextHttp<VAliPayOrderInfoBean>(adapter).doPost(httpUrl, infoBean, VAliPayOrderInfoBean.class);
+		new HokolHttp().doPost(httpUrl, infoBean, VAliPayOrderInfoBean.class, adapter);
 	}
 
 	/**
@@ -868,7 +857,7 @@ public class XHttpUtil
 	public static void doWeChatLogin(WWeChatLoginBean loginBean, XHttpAdapter<VWeChatLoginBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_we_chat_login;
-		new XTextHttp<VWeChatLoginBean>(adapter).doPost(httpUrl, loginBean, VWeChatLoginBean.class);
+		new HokolHttp().doPost(httpUrl, loginBean, VWeChatLoginBean.class, adapter);
 	}
 
 	/**
@@ -877,11 +866,6 @@ public class XHttpUtil
 	public static void doWeChatRegisterInfo(WWeChatRegisterInfoBean infoBean, XHttpAdapter<VWeChatRegisterInfoBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_we_chat_register;
-		new XTextHttp<VWeChatRegisterInfoBean>(adapter).doPost(httpUrl, infoBean, VWeChatRegisterInfoBean.class);
-	}
-
-	private static boolean isDebug()
-	{
-		return XHttpConstant.isDefaultDebug();
+		new HokolHttp().doPost(httpUrl, infoBean, VWeChatRegisterInfoBean.class, adapter);
 	}
 }

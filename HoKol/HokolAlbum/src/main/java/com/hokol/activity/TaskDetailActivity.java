@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.application.AppStateManager;
 import com.hokol.medium.http.XHttpUtil;
@@ -21,6 +22,8 @@ import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.view.recycler.holder.ViewHolder;
+
+import org.json.JSONException;
 
 /**
  * 任务详情
@@ -262,10 +265,11 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 					viewHolder.setText(R.id.iv_task_detail_num_boy, vTaskMainDetailBean.getTask_man_num() + "");
 				}
 
+
 				@Override
-				public void onSuccess(int code, String jsonContent, Class<VTaskMainDetailBean> defaultClazz) throws Exception
+				public void onSuccess(int code, String data) throws JSONException, JsonParseException
 				{
-					super.onSuccess(code, jsonContent, defaultClazz);
+					super.onSuccess(code, data);
 					if (code == 2003)
 					{
 						SDKManager.getHandler().postDelayed(new Runnable()

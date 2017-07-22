@@ -110,11 +110,11 @@ public class UserRechargeActivity extends AliPayActivity
 					{
 						doPay(vAliPayOrderInfoBean.getMess());
 					}
-					
+
 					@Override
-					public void onFailure(Exception ex)
+					public void onFailure(Exception ex, boolean isDebug)
 					{
-						super.onFailure(ex);
+						super.onFailure(ex, isDebug);
 						SDKManager.toast("网络异常");
 					}
 				});

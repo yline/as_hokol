@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.activity.NewsInfoActivity;
 import com.hokol.application.DeleteConstant;
@@ -21,6 +22,8 @@ import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
+
+import org.json.JSONException;
 
 import java.util.List;
 
@@ -102,17 +105,17 @@ public class MainNewsFragment extends BaseFragment
 					}
 
 					@Override
-					public void onFailure(Exception ex)
+					public void onFailure(Exception ex, boolean isDebug)
 					{
-						super.onFailure(ex);
+						super.onFailure(ex, isDebug);
 						superSwipeRefreshLayout.setRefreshing(false);
 					}
 
 					@Override
-					public void onSuccess(int code, String jsonContent, Class<VNewsRecommendBean> defaultClazz) throws Exception
+					public void onSuccess(int code, String data) throws JSONException, JsonParseException
 					{
 						superSwipeRefreshLayout.setRefreshing(false);
-						super.onSuccess(code, jsonContent, defaultClazz);
+						super.onSuccess(code, data);
 					}
 				});
 			}
@@ -126,9 +129,9 @@ public class MainNewsFragment extends BaseFragment
 				XHttpUtil.doNewsMultiplex(loadBean, new XHttpAdapter<VNewsMultiplexBean>()
 				{
 					@Override
-					public void onSuccess(int code, String jsonContent, Class<VNewsMultiplexBean> defaultClazz) throws Exception
+					public void onSuccess(int code, String data) throws JSONException, JsonParseException
 					{
-						super.onSuccess(code, jsonContent, defaultClazz);
+						super.onSuccess(code, data);
 						superSwipeRefreshLayout.setLoadMore(false);
 					}
 
@@ -142,9 +145,9 @@ public class MainNewsFragment extends BaseFragment
 					}
 
 					@Override
-					public void onFailure(Exception ex)
+					public void onFailure(Exception ex, boolean isDebug)
 					{
-						super.onFailure(ex);
+						super.onFailure(ex, isDebug);
 						superSwipeRefreshLayout.setLoadMore(false);
 					}
 				});

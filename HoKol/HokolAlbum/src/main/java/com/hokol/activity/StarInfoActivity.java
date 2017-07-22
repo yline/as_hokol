@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 
+import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.application.AppStateManager;
 import com.hokol.application.IApplication;
@@ -29,6 +30,8 @@ import com.yline.base.BaseFragment;
 import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.view.recycler.holder.ViewHolder;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -221,9 +224,9 @@ public class StarInfoActivity extends BaseAppCompatActivity
 			}
 
 			@Override
-			public void onSuccess(int code, String jsonContent, Class<VDynamicUserDetailBean> defaultClazz) throws Exception
+			public void onSuccess(int code, String data) throws JSONException, JsonParseException
 			{
-				super.onSuccess(code, jsonContent, defaultClazz);
+				super.onSuccess(code, data);
 				if (code == 2001)
 				{
 					LogFileUtil.v("Star info failed; user do not exist");

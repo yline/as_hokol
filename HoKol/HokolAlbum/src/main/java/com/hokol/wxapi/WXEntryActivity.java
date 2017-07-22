@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 import com.hokol.activity.EnterLoginThirdActivity;
 import com.hokol.activity.MainActivity;
 import com.hokol.application.IApplication;
@@ -22,6 +23,8 @@ import com.yline.application.BaseApplication;
 import com.yline.application.SDKManager;
 import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
+
+import org.json.JSONException;
 
 /**
  * 05:53:35:28:A5:7A:E6:35:20:F8:B2:99:4F:3D:73:69
@@ -89,13 +92,13 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler
 					}
 
 					@Override
-					public void onSuccess(int code, String jsonContent, Class<VWeChatLoginBean> defaultClazz) throws Exception
+					public void onSuccess(int code, String data) throws JSONException, JsonParseException
 					{
-						super.onSuccess(code, jsonContent, defaultClazz);
+						super.onSuccess(code, data);
 						// 是注册的逻辑
 						if (WWeChatLoginBean.TypeRegister == code)
 						{
-							VWeChatLoginFirstBean result = new Gson().fromJson(jsonContent, VWeChatLoginFirstBean.class);
+							VWeChatLoginFirstBean result = new Gson().fromJson(data, VWeChatLoginFirstBean.class);
 							if (null != result)
 							{
 								EnterLoginThirdActivity.actionStart(WXEntryActivity.this, result.getUser_id());
@@ -105,9 +108,9 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler
 					}
 
 					@Override
-					public void onFailure(Exception ex)
+					public void onFailure(Exception ex, boolean isDebug)
 					{
-						super.onFailure(ex);
+						super.onFailure(ex, isDebug);
 						SDKManager.toast("登录失败，请检查网络");
 						dismissDialog();
 					}

@@ -7,6 +7,7 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.WSettingResetPwdBean;
@@ -16,6 +17,8 @@ import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.view.recycler.holder.ViewHolder;
 import com.yline.view.text.helper.PhonePwdCodeHelper;
+
+import org.json.JSONException;
 
 public class EnterModifyPwdActivity extends BaseAppCompatActivity
 {
@@ -166,20 +169,20 @@ public class EnterModifyPwdActivity extends BaseAppCompatActivity
 						XHttpUtil.doSettingResetPwd(new WSettingResetPwdBean(userId, oldPwdStr, newPwdStr), new XHttpAdapter<String>()
 						{
 							@Override
-							public void onSuccess(int code, String jsonContent, Class<String> defaultClazz) throws Exception
-							{
-								super.onSuccess(code, jsonContent, defaultClazz);
-								if (code != REQUEST_SUCCESS_CODE)
-								{
-									SDKManager.toast("密码错误");
-								}
-							}
-
-							@Override
 							public void onSuccess(String s)
 							{
 								SDKManager.toast("修改密码成功");
 								finish();
+							}
+
+							@Override
+							public void onSuccess(int code, String data) throws JSONException, JsonParseException
+							{
+								super.onSuccess(code, data);
+								if (code != REQUEST_SUCCESS_CODE)
+								{
+									SDKManager.toast("密码错误");
+								}
 							}
 						});
 					}

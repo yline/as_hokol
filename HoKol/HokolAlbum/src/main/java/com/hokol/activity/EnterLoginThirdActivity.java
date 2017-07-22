@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.WEnterCodeRegisterBean;
@@ -18,6 +19,8 @@ import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
 import com.yline.view.text.helper.PhoneICodeHelper;
 import com.yline.view.text.helper.PhonePwdCodeHelper;
+
+import org.json.JSONException;
 
 public class EnterLoginThirdActivity extends BaseAppCompatActivity
 {
@@ -113,15 +116,15 @@ public class EnterLoginThirdActivity extends BaseAppCompatActivity
 					XHttpUtil.doEnterCodeForgetPwd(new WEnterCodeRegisterBean(phoneNumber), new XHttpAdapter<String>()
 					{
 						@Override
-						public void onSuccess(String s) throws Exception
+						public void onSuccess(String s)
 						{
 							SDKManager.toast("获取验证码成功");
 						}
 
 						@Override
-						public void onSuccess(int code, String jsonContent, Class<String> defaultClazz) throws Exception
+						public void onSuccess(int code, String data) throws JSONException, JsonParseException
 						{
-							super.onSuccess(code, jsonContent, defaultClazz);
+							super.onSuccess(code, data);
 							if (code == 2001)
 							{
 								SDKManager.toast("该用户不存在");

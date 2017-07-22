@@ -179,12 +179,6 @@ public class MainCareFragment extends BaseFragment
 						refreshedNumber += result.size();
 					}
 				}
-
-				@Override
-				public void onFailure(Exception ex)
-				{
-					super.onFailure(ex);
-				}
 			});
 		}
 	}
