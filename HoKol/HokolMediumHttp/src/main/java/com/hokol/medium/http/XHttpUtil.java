@@ -101,14 +101,14 @@ public class XHttpUtil
 		String httpUrl = HttpConstant.url_enter_register;
 		new HokolHttp().doPost(httpUrl, wEnterRegisterBean, String.class, adapter);
 	}
-
+	
 	/**
 	 * 用户信息完善
 	 */
-	public static void doEnterRegisterCompleteInfo(WEnterRegisterCompleteInfoBean completeInfoBean, XHttpAdapter<VEnterLoginPhonePwdBean> adapter)
+	public static void doEnterRegisterCompleteInfo(WEnterRegisterCompleteInfoBean completeInfoBean, XHttpAdapter<VEnterRegisterCompleteInfoBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_register_complete_info;
-		new HokolHttp().doPost(httpUrl, completeInfoBean, VEnterLoginPhonePwdBean.class, adapter);
+		new HokolHttp().doPost(httpUrl, completeInfoBean, VEnterRegisterCompleteInfoBean.class, adapter);
 	}
 
 	/**
@@ -867,5 +867,14 @@ public class XHttpUtil
 	{
 		String httpUrl = HttpConstant.url_we_chat_register;
 		new HokolHttp().doPost(httpUrl, infoBean, VWeChatRegisterInfoBean.class, adapter);
+	}
+
+	/**
+	 * 微信注册 填写信息
+	 */
+	public static void doWeChatRegisterICode(WWeChatRegisterICodeBean codeBean, XHttpAdapter<String> adapter)
+	{
+		String httpUrl = HttpConstant.url_we_chat_i_code;
+		new HokolHttp().doPost(httpUrl, codeBean, String.class, adapter);
 	}
 }

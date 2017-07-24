@@ -11,6 +11,14 @@ public class WWeChatRegisterInfoBean
 	/* 用户密码 */
 	private String user_pwd;
 
+	/* 验证码 */
+	private String check_code;
+
+	public WWeChatRegisterInfoBean(String user_id)
+	{
+		this.user_id = user_id;
+	}
+
 	public String getUser_id()
 	{
 		return user_id;
@@ -39,5 +47,15 @@ public class WWeChatRegisterInfoBean
 	public void setUser_pwd(String user_pwd)
 	{
 		this.user_pwd = user_pwd;
+	}
+
+	public String getCheck_code()
+	{
+		return check_code;
+	}
+
+	public void setCheck_code(String check_code)
+	{
+		this.check_code = check_code;
 	}
 }

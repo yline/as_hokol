@@ -267,6 +267,9 @@ public class HttpConstant
 	// 微信登陆后添加号码
 	public static final String url_we_chat_register = url_head + "ApiLogin/add_tel_pwd";
 
+	// 获取验证码
+	public static final String url_we_chat_i_code = url_head + "ApiLogin/get_checkcode";
+
 	/* ------------------------------ 控制 -------------------------------- */
 
 	/**

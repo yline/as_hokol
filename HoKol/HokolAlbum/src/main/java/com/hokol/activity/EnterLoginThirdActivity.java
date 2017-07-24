@@ -12,7 +12,9 @@ import android.widget.TextView;
 import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.medium.http.XHttpUtil;
-import com.hokol.medium.http.bean.WEnterCodeRegisterBean;
+import com.hokol.medium.http.bean.VWeChatRegisterInfoBean;
+import com.hokol.medium.http.bean.WWeChatRegisterICodeBean;
+import com.hokol.medium.http.bean.WWeChatRegisterInfoBean;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.http.XHttpAdapter;
@@ -36,6 +38,8 @@ public class EnterLoginThirdActivity extends BaseAppCompatActivity
 
 	private boolean isPasswordVisible = true;
 	
+	private WWeChatRegisterInfoBean registerInfoBean;
+
 	public static void actionStart(Context context, String userId)
 	{
 		context.startActivity(new Intent(context, EnterLoginThirdActivity.class).putExtra(KeyUserId, userId));
@@ -49,6 +53,7 @@ public class EnterLoginThirdActivity extends BaseAppCompatActivity
 
 		viewHolder = new ViewHolder(this);
 		userId = getIntent().getStringExtra(KeyUserId);
+		registerInfoBean = new WWeChatRegisterInfoBean(userId);
 
 		initView();
 		initViewClick();
@@ -113,7 +118,7 @@ public class EnterLoginThirdActivity extends BaseAppCompatActivity
 				if (isMatch && !isCountDown)
 				{
 					String phoneNumber = etPhone.getText().toString().trim();
-					XHttpUtil.doEnterCodeForgetPwd(new WEnterCodeRegisterBean(phoneNumber), new XHttpAdapter<String>()
+					XHttpUtil.doWeChatRegisterICode(new WWeChatRegisterICodeBean(phoneNumber), new XHttpAdapter<String>()
 					{
 						@Override
 						public void onSuccess(String s)
@@ -164,7 +169,24 @@ public class EnterLoginThirdActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				viewHolder.getText(R.id.et_enter_login_third_username);
+				if (phonePwdCodeHelper.isResultMatch())
+				{
+					String userTel = viewHolder.getText(R.id.et_enter_login_third_username);
+					String userCode = viewHolder.getText(R.id.et_enter_login_third_identify);
+					String userPwd = viewHolder.getText(R.id.et_enter_login_third_new_pwd);
+					registerInfoBean.setUser_tel(userTel);
+					registerInfoBean.setCheck_code(userCode);
+					registerInfoBean.setUser_pwd(userPwd);
+					
+					XHttpUtil.doWeChatRegisterInfo(registerInfoBean, new XHttpAdapter<VWeChatRegisterInfoBean>()
+					{
+						@Override
+						public void onSuccess(VWeChatRegisterInfoBean vWeChatRegisterInfoBean)
+						{
+							MainActivity.actionStart(EnterLoginThirdActivity.this, vWeChatRegisterInfoBean);
+						}
+					});
+				}
 			}
 		});
 	}

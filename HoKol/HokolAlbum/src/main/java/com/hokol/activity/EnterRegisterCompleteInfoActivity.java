@@ -11,7 +11,7 @@ import android.widget.RadioGroup;
 import com.hokol.R;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
-import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
+import com.hokol.medium.http.bean.VEnterRegisterCompleteInfoBean;
 import com.hokol.medium.http.bean.WEnterRegisterCompleteInfoBean;
 import com.hokol.medium.widget.FlowAbleWidget;
 import com.yline.base.BaseAppCompatActivity;
@@ -185,12 +185,12 @@ public class EnterRegisterCompleteInfoActivity extends BaseAppCompatActivity
 				{
 					completeInfoBean.setUser_nickname(viewHolder.getText(R.id.et_enter_register_complete_info_name));
 					completeInfoBean.setUser_pwd(viewHolder.getText(R.id.et_enter_register_complete_info_new_pwd));
-					XHttpUtil.doEnterRegisterCompleteInfo(completeInfoBean, new XHttpAdapter<VEnterLoginPhonePwdBean>()
+					XHttpUtil.doEnterRegisterCompleteInfo(completeInfoBean, new XHttpAdapter<VEnterRegisterCompleteInfoBean>()
 					{
 						@Override
-						public void onSuccess(VEnterLoginPhonePwdBean phonePwdBean)
+						public void onSuccess(VEnterRegisterCompleteInfoBean infoBean)
 						{
-							MainActivity.actionStart(EnterRegisterCompleteInfoActivity.this, phonePwdBean);
+							MainActivity.actionStart(EnterRegisterCompleteInfoActivity.this, infoBean);
 						}
 					});
 				}
