@@ -109,7 +109,7 @@ public class MainActivity extends BaseAppCompatActivity
 	 */
 	private void initShowData()
 	{
-		doSelected(TAB.Task.position);
+		doSelected(TAB.Home.position);
 	}
 	
 	private void initView()
