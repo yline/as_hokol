@@ -19,17 +19,17 @@ public class VUserRechargeRecordBean
 	public static class VUserRechargeRecordOneBean
 	{
 		/* 充值红豆数 */
-		private int recharge_num;
+		private float recharge_num;
 
 		/* 充值时间 */
 		private long add_time;
 
-		public int getRecharge_num()
+		public float getRecharge_num()
 		{
 			return recharge_num;
 		}
 
-		public void setRecharge_num(int recharge_num)
+		public void setRecharge_num(float recharge_num)
 		{
 			this.recharge_num = recharge_num;
 		}

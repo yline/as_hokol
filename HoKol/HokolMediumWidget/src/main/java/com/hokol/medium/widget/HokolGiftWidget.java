@@ -134,12 +134,12 @@ public class HokolGiftWidget
 		return false;
 	}
 
-	public void setPopupWindowBeanNum(int num)
+	public void setPopupWindowBeanNum(float num)
 	{
 		if (null != popupWindow)
 		{
 			TextView textView = (TextView) popupWindow.getContentView().findViewById(R.id.tv_widget_hokol_gift_num);
-			textView.setText(num + "");
+			textView.setText(String.format("%3.2f", num));
 		}
 	}
 

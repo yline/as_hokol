@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/default_space_large"
-    android:paddingTop="@dimen/default_space_large">
+    android:padding="@dimen/default_space_large">
 
     <TextView
         android:id="@+id/tv_user_recharge_record_title"
@@ -30,7 +29,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:paddingRight="@dimen/default_space_large"
         android:text="成功"
         android:textColor="#78c7ff"
         android:textSize="@dimen/default_text_size_large"/>

@@ -47,7 +47,7 @@ public class VEnterLoginPhonePwdBean
 	private int user_zan;
 
 	/* 用户红豆数 */
-	private int user_coin;
+	private float user_coin;
 
 	/* 用户关注数 */
 	private int user_care_num;
@@ -68,7 +68,7 @@ public class VEnterLoginPhonePwdBean
 	private List<Integer> level_area;
 
 	/* 用户充值红豆数 */
-	private int user_recharge_coin;
+	private float user_recharge_coin;
 
 	public String getUser_id()
 	{
@@ -210,12 +210,12 @@ public class VEnterLoginPhonePwdBean
 		this.user_zan = user_zan;
 	}
 
-	public int getUser_coin()
+	public float getUser_coin()
 	{
 		return user_coin;
 	}
 
-	public void setUser_coin(int user_coin)
+	public void setUser_coin(float user_coin)
 	{
 		this.user_coin = user_coin;
 	}
@@ -280,12 +280,12 @@ public class VEnterLoginPhonePwdBean
 		this.level_area = level_area;
 	}
 
-	public int getUser_recharge_coin()
+	public float getUser_recharge_coin()
 	{
 		return user_recharge_coin;
 	}
 
-	public void setUser_recharge_coin(int user_recharge_coin)
+	public void setUser_recharge_coin(float user_recharge_coin)
 	{
 		this.user_recharge_coin = user_recharge_coin;
 	}

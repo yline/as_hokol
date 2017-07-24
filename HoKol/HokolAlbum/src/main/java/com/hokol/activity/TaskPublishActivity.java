@@ -328,7 +328,7 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 				}
 
 				// 余额不足
-				final int oldCoinNum = AppStateManager.getInstance().getUserCoinNum(TaskPublishActivity.this);
+				final float oldCoinNum = AppStateManager.getInstance().getUserCoinNum(TaskPublishActivity.this);
 				final float taskTotalFee = taskPublishBean.getTask_fee() * (taskPublishBean.getTask_man_num() + taskPublishBean.getTask_woman_num()) * DeleteConstant.ScaleOfHokolCoin;
 				if (taskPublishBean.getTask_fee() != WTaskMainPublishBean.ValueNegotiableInt) // 非面议
 				{

@@ -80,7 +80,7 @@ public class AliPayBean
 		private String trade_no;
 
 		/* 该笔订单的资金总额，单位为RMB-Yuan。取值范围为[0.01,100000000.00]，精确到小数点后两位。  9.00 */
-		private String total_amount;
+		private float total_amount;
 
 		/* 收款支付宝账号对应的支付宝唯一用户号。以2088开头的纯16位数字  2088111111116894 */
 		private String seller_id;
@@ -141,12 +141,12 @@ public class AliPayBean
 			this.trade_no = trade_no;
 		}
 
-		public String getTotal_amount()
+		public float getTotal_amount()
 		{
 			return total_amount;
 		}
 
-		public void setTotal_amount(String total_amount)
+		public void setTotal_amount(float total_amount)
 		{
 			this.total_amount = total_amount;
 		}

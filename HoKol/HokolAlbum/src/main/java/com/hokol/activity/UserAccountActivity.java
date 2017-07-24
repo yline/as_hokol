@@ -64,8 +64,8 @@ public class UserAccountActivity extends BaseAppCompatActivity
 			}
 		});
 
-		int coinNum = AppStateManager.getInstance().getUserCoinNum(this);
-		viewHolder.setText(R.id.tv_user_account_value, coinNum + "");
+		float coinNum = AppStateManager.getInstance().getUserCoinNum(this);
+		viewHolder.setText(R.id.tv_user_account_value, String.format("%3.2f", coinNum));
 	}
 	
 	private void initTabView()

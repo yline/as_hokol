@@ -96,6 +96,7 @@
     </View>
 
     <com.hokol.medium.viewcustom.KeyClearEditText
+        android:id="@+id/et_user_recharge_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_enter_register_phone_title"
@@ -111,7 +112,7 @@
         android:textSize="@dimen/default_text_size_normal"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/default_space_large"
         android:paddingRight="@dimen/default_space_large">
@@ -122,8 +123,9 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/default_space_small"
             android:layout_weight="1"
-            android:scaleType="centerCrop"
-            android:src="@drawable/user_recharge_wechat"/>
+            android:scaleType="centerInside"
+            android:src="@drawable/user_recharge_wechat"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/iv_user_recharge_ali_pay"
@@ -131,7 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_space_small"
             android:layout_weight="1"
-            android:scaleType="centerCrop"
+            android:scaleType="centerInside"
             android:src="@drawable/user_recharge_alipay"/>
     </LinearLayout>
 

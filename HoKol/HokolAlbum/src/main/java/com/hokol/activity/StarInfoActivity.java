@@ -57,7 +57,7 @@ public class StarInfoActivity extends BaseAppCompatActivity
 
 	private String starId;
 
-	private int userCoinNum;
+	private float userCoinNum;
 
 	private String userId;
 

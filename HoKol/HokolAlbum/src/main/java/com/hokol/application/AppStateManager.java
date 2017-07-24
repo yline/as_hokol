@@ -174,7 +174,7 @@ public class AppStateManager
 	/**
 	 * 更新用户的coin数目
 	 */
-	public void updateKeyUserCoinNum(Context context, int coinNum)
+	public void updateKeyUserCoinNum(Context context, float coinNum)
 	{
 		SPUtil.put(context, KeyUserCoinNum, coinNum, FileName);
 	}
@@ -343,14 +343,14 @@ public class AppStateManager
 		return (int) object;
 	}
 
-	public int getUserCoinNum(Context context)
+	public float getUserCoinNum(Context context)
 	{
-		Object object = SPUtil.get(context, KeyUserCoinNum, 0, FileName);
+		Object object = SPUtil.get(context, KeyUserCoinNum, 0f, FileName);
 		if (null == object)
 		{
-			return 0;
+			return 0f;
 		}
-		return (int) object;
+		return (float) object;
 	}
 
 	public int getUserVipLevel(Context context)

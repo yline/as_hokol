@@ -47,7 +47,7 @@ public class StarDynamicPrivateActivity extends BaseAppCompatActivity
 	private boolean isPraised;
 
 	// 用户 coin数目
-	private int userCoin;
+	private float userCoin;
 
 	public static void actionStart(Context context, String dynamicPrivateId)
 	{
@@ -199,7 +199,7 @@ public class StarDynamicPrivateActivity extends BaseAppCompatActivity
 				LogFileUtil.v("发送礼物成功");
 				SDKManager.toast("礼物赠送成功");
 
-				int restCoinNum = userCoin - giftCoinNum;
+				float restCoinNum = userCoin - giftCoinNum;
 				AppStateManager.getInstance().updateKeyUserCoinNum(StarDynamicPrivateActivity.this, restCoinNum);
 			}
 		});

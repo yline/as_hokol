@@ -40,7 +40,6 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_user_recharge_record"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="@dimen/default_space_large">
+        android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
 </LinearLayout>
