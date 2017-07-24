@@ -21,12 +21,14 @@ import com.hokol.activity.EnterChoiceActivity;
 import com.hokol.activity.UserDynamicPublishActivity;
 import com.hokol.activity.UserInfoActivity;
 import com.hokol.application.AppStateManager;
-import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
+import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.bean.VUserAvatarBean;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.FlowWidget;
 import com.hokol.util.IntentUtil;
 import com.yline.base.BaseFragment;
+import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.FileUtil;
 import com.yline.utils.LogUtil;
@@ -34,12 +36,14 @@ import com.yline.view.dialog.ViewDialogFoot;
 import com.yline.view.layout.label.FlowLayout;
 import com.yline.view.recycler.holder.ViewHolder;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class MainMineFragment extends BaseFragment
 {
+	// 个人动态
 	public static final String KeyDynamicFileName = "MainMineDynamic_camera_picture.jpg";
 
 	public static final int KeyDynamicCameraCode = 1;
@@ -48,6 +52,7 @@ public class MainMineFragment extends BaseFragment
 
 	public static final int KeyDynamicPictureZoomCode = 3;
 
+	// 私密空间
 	public static final String KeyPrivateFileName = "MainMinePrivate_camera_picture.jpg";
 
 	public static final int KeyPrivateCameraCode = 11;
@@ -56,6 +61,16 @@ public class MainMineFragment extends BaseFragment
 
 	public static final int KeyPrivatePictureZoomCode = 13;
 
+	// 头像
+	public static final String KeyAvatarFileName = "MainMine_avatar_picture.jpg";
+
+	public static final int KeyAvatarCameraCode = 21;
+
+	public static final int KeyAvatarAlbumCode = 22;
+
+	public static final int KeyAvatarPictureZoomCode = 23;
+
+	// 统一裁剪
 	public static final String KeyPictureZoomFileName = "MainMineDynamic_zoom_picture.jpg";
 
 	private static final String[] RES_TITLE = {"动态", "私密空间", "我的主页"};
@@ -63,6 +78,8 @@ public class MainMineFragment extends BaseFragment
 	private List<BaseFragment> fragmentList = new ArrayList<>();
 
 	private ViewHolder viewHolder;
+
+	private AppStateManager appStateManager;
 
 	public static MainMineFragment newInstance()
 	{
@@ -127,7 +144,6 @@ public class MainMineFragment extends BaseFragment
 	public void onStart()
 	{
 		super.onStart();
-
 		// 初始化头部数据
 		initData();
 	}
@@ -135,7 +151,7 @@ public class MainMineFragment extends BaseFragment
 	private void initData()
 	{
 		// 头部数据
-		final AppStateManager appStateManager = AppStateManager.getInstance();
+		appStateManager = AppStateManager.getInstance();
 		boolean isLogin = appStateManager.isUserLogin(getContext());
 		if (isLogin)
 		{
@@ -160,15 +176,19 @@ public class MainMineFragment extends BaseFragment
 						@Override
 						public void onCancelSelected(DialogInterface dialog)
 						{
-							IApplication.toast("DisAppear");
-							dialog.dismiss();
 						}
 
 						@Override
 						public void onOptionSelected(DialogInterface dialog, int position, String content)
 						{
-							IApplication.toast("position = " + position + ", content = " + content);
-							dialog.dismiss();
+							if (content.equals("拍照"))
+							{
+								IntentUtil.openCamera(MainMineFragment.this, KeyAvatarFileName, KeyAvatarCameraCode);
+							}
+							else // 相册
+							{
+								IntentUtil.openAlbum(MainMineFragment.this, KeyAvatarAlbumCode);
+							}
 						}
 					});
 					dialogFootWidget.show();
@@ -256,6 +276,7 @@ public class MainMineFragment extends BaseFragment
 
 		LogUtil.v("requestCode = " + requestCode + ", resultCode = " + resultCode + ", data = " + data);
 		// 调用系统的 应用
+		// 个人动态
 		if (requestCode == KeyDynamicCameraCode)
 		{
 			if (null == data)
@@ -286,6 +307,7 @@ public class MainMineFragment extends BaseFragment
 				UserDynamicPublishActivity.actionStart(getContext(), KeyDynamicPictureZoomCode, KeyPictureZoomFileName);
 			}
 		}
+		// 私密空间
 		else if (requestCode == KeyPrivateCameraCode)
 		{
 			if (null == data)
@@ -314,6 +336,55 @@ public class MainMineFragment extends BaseFragment
 			if (null != data)
 			{
 				UserDynamicPublishActivity.actionStart(getContext(), KeyPrivatePictureZoomCode, KeyPictureZoomFileName);
+			}
+		}
+		// 头像
+		else if (requestCode == KeyAvatarCameraCode)
+		{
+			if (null == data)
+			{
+				Uri cacheUri = Uri.fromFile(FileUtil.create(getActivity().getExternalCacheDir(), KeyAvatarFileName));
+				IntentUtil.openPictureZoom(MainMineFragment.this, cacheUri, KeyAvatarFileName, KeyAvatarPictureZoomCode);
+			}
+			else
+			{
+				LogFileUtil.v("avatar user camera cancel");
+			}
+		}
+		else if (requestCode == KeyAvatarAlbumCode)
+		{
+			if (null != data && null != data.getData())
+			{
+				IntentUtil.openPictureZoom(MainMineFragment.this, data.getData(), KeyAvatarFileName, KeyAvatarPictureZoomCode);
+			}
+			else
+			{
+				LogFileUtil.v("user album choose cancel");
+			}
+		}
+		else if (requestCode == KeyAvatarPictureZoomCode)
+		{
+			LogFileUtil.v("KeyAvatarPictureZoomCode = " + KeyAvatarPictureZoomCode);
+			// 直接更换头像
+			File avatarFile = FileUtil.create(getActivity().getExternalCacheDir(), KeyAvatarFileName);
+			if (null != avatarFile)
+			{
+				// 完成图片上传
+				XHttpUtil.doSettingUpdateAvatar(appStateManager.getUserLoginId(getContext()), avatarFile, new XHttpAdapter<VUserAvatarBean>()
+				{
+					@Override
+					public void onSuccess(VUserAvatarBean vUserAvatarBean)
+					{
+						if (null != vUserAvatarBean && null != vUserAvatarBean.getUser_logo())
+						{
+							LogFileUtil.v("vUserAvatarBean = " + vUserAvatarBean.getUser_logo());
+							AppStateManager.getInstance().updateKeyUserLoginAvatar(getContext(), vUserAvatarBean.getUser_logo());
+
+							ImageView imageView = viewHolder.get(R.id.circle_main_mine_avatar);
+							Glide.with(MainMineFragment.this).load(vUserAvatarBean.getUser_logo()).into(imageView);
+						}
+					}
+				});
 			}
 		}
 	}

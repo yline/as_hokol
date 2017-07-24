@@ -142,7 +142,6 @@ public class UserInfoActivity extends BaseAppCompatActivity
 					@Override
 					public void onCancelSelected(DialogInterface dialog)
 					{
-						dialog.dismiss();
 					}
 
 					@Override
@@ -156,7 +155,6 @@ public class UserInfoActivity extends BaseAppCompatActivity
 						{
 							IntentUtil.openAlbum(UserInfoActivity.this, request_code_album);
 						}
-						dialog.dismiss();
 					}
 				});
 				dialogFootWidget.show();

@@ -19,6 +19,7 @@ import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
 import com.hokol.viewhelper.MainHelper;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
+import com.yline.log.LogFileUtil;
 
 
 /**
@@ -193,7 +194,14 @@ public class MainActivity extends BaseAppCompatActivity
 	{
 		tabLayout.getTabAt(index).select();
 	}
-	
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		super.onActivityResult(requestCode, resultCode, data);
+		LogFileUtil.v("request Code = " + requestCode);
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
