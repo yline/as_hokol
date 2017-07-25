@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.application.AppStateManager;
 import com.hokol.medium.http.XHttpUtil;
@@ -14,16 +13,14 @@ import com.hokol.medium.http.bean.VTaskMainDetailBean;
 import com.hokol.medium.http.bean.WTaskActionStaffSignUpBean;
 import com.hokol.medium.http.bean.WTaskMainCollectionBean;
 import com.hokol.medium.http.bean.WTaskMainDetailBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.SecondaryWidget;
 import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.view.recycler.holder.ViewHolder;
-
-import org.json.JSONException;
 
 /**
  * 任务详情
@@ -89,7 +86,7 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 			{
 				String userId = AppStateManager.getInstance().getUserLoginId(TaskDetailActivity.this);
 				int actionCollect = isCollected ? WTaskMainCollectionBean.actionCollectCancel : WTaskMainCollectionBean.actionCollect;
-				XHttpUtil.doTaskMainCollection(new WTaskMainCollectionBean(userId, taskId, actionCollect), new XHttpAdapter<String>()
+				XHttpUtil.doTaskMainCollection(new WTaskMainCollectionBean(userId, taskId, actionCollect), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -122,7 +119,7 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 
 				if (null != taskDetailBean && VTaskMainDetailBean.StatusAssigning == taskDetailBean.getStatus() && VTaskMainDetailBean.UserAssignNull == taskDetailBean.getUser_is_join())
 				{
-					XHttpUtil.doTaskActionStaffSignUp(new WTaskActionStaffSignUpBean(userId, taskId), new XHttpAdapter<String>()
+					XHttpUtil.doTaskActionStaffSignUp(new WTaskActionStaffSignUpBean(userId, taskId), new HokolAdapter<String>()
 					{
 						@Override
 						public void onSuccess(String s)
@@ -151,7 +148,7 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 				userId = WTaskMainDetailBean.UnLoginState;
 			}
 
-			XHttpUtil.doTaskMainDetail(new WTaskMainDetailBean(userId, taskId), new XHttpAdapter<VTaskMainDetailBean>()
+			XHttpUtil.doTaskMainDetail(new WTaskMainDetailBean(userId, taskId), new HokolAdapter<VTaskMainDetailBean>()
 			{
 				@Override
 				public void onSuccess(VTaskMainDetailBean vTaskMainDetailBean)
@@ -265,11 +262,10 @@ public class TaskDetailActivity extends BaseAppCompatActivity
 					viewHolder.setText(R.id.iv_task_detail_num_boy, vTaskMainDetailBean.getTask_man_num() + "");
 				}
 
-
 				@Override
-				public void onSuccess(int code, String data) throws JSONException, JsonParseException
+				public void onSuccess(int code, VTaskMainDetailBean vTaskMainDetailBean)
 				{
-					super.onSuccess(code, data);
+					super.onSuccess(code, vTaskMainDetailBean);
 					if (code == 2003)
 					{
 						SDKManager.getHandler().postDelayed(new Runnable()

@@ -10,8 +10,8 @@ import com.hokol.application.AppStateManager;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserCreditBean;
 import com.hokol.medium.http.bean.WUserCreditBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
 
 /**
@@ -28,6 +28,11 @@ public class UserInfoCreditActivity extends BaseAppCompatActivity
 
 	private String starId;
 
+	public static void actionStart(Context context, String starId)
+	{
+		context.startActivity(new Intent(context, UserInfoCreditActivity.class).putExtra(KeyUserInfoCreditStarId, starId));
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -39,7 +44,7 @@ public class UserInfoCreditActivity extends BaseAppCompatActivity
 		initView();
 		initData();
 	}
-	
+
 	private void initView()
 	{
 		viewHolder.setOnClickListener(R.id.iv_task_assigned_cancel, new View.OnClickListener()
@@ -73,10 +78,10 @@ public class UserInfoCreditActivity extends BaseAppCompatActivity
 			viewHolder.get(R.id.tv_user_info_credit_datum_improve).setVisibility(View.INVISIBLE);
 		}
 	}
-
+	
 	private void initData()
 	{
-		XHttpUtil.doUserCredit(new WUserCreditBean(starId), new XHttpAdapter<VUserCreditBean>()
+		XHttpUtil.doUserCredit(new WUserCreditBean(starId), new HokolAdapter<VUserCreditBean>()
 		{
 			@Override
 			public void onSuccess(VUserCreditBean vUserCreditBean)
@@ -108,10 +113,5 @@ public class UserInfoCreditActivity extends BaseAppCompatActivity
 				viewHolder.setText(R.id.tv_user_info_credit_host_sincerity, String.format("%3.1f", hostBean.getCredibility_score()));
 			}
 		});
-	}
-	
-	public static void actionStart(Context context, String starId)
-	{
-		context.startActivity(new Intent(context, UserInfoCreditActivity.class).putExtra(KeyUserInfoCreditStarId, starId));
 	}
 }

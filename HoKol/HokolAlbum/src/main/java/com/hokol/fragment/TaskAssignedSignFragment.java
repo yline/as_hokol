@@ -20,10 +20,10 @@ import com.hokol.medium.http.bean.VTaskUserPublishedBean;
 import com.hokol.medium.http.bean.WTaskActionMasterCancelBean;
 import com.hokol.medium.http.bean.WTaskActionMasterFinishBean;
 import com.hokol.medium.http.bean.WTaskUserPublishedBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
@@ -150,7 +150,7 @@ public class TaskAssignedSignFragment extends BaseFragment implements TaskAssign
 			@Override
 			public void onSignCancelClick(View view, String taskId)
 			{
-				XHttpUtil.doTaskActionMasterCancel(new WTaskActionMasterCancelBean(userId, taskId), new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionMasterCancel(new WTaskActionMasterCancelBean(userId, taskId), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -167,7 +167,7 @@ public class TaskAssignedSignFragment extends BaseFragment implements TaskAssign
 			@Override
 			public void onSignFinishClick(View view, String taskId)
 			{
-				XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -202,7 +202,7 @@ public class TaskAssignedSignFragment extends BaseFragment implements TaskAssign
 	public void onRefreshData(String userId, int start, int length)
 	{
 		userPublishedBean = new WTaskUserPublishedBean(userId, start, length);
-		XHttpUtil.doTaskUserPublishedSign(userPublishedBean, new XHttpAdapter<VTaskUserPublishedBean>()
+		XHttpUtil.doTaskUserPublishedSign(userPublishedBean, new HokolAdapter<VTaskUserPublishedBean>()
 		{
 			@Override
 			public void onSuccess(VTaskUserPublishedBean vTaskUserPublishedBean)

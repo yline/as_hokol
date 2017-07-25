@@ -13,9 +13,9 @@ import com.hokol.R;
 import com.hokol.application.AppStateManager;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.WTaskActionStaffCommentBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
 
 public class TaskDeliveredEvaluateActivity extends BaseAppCompatActivity
@@ -71,7 +71,7 @@ public class TaskDeliveredEvaluateActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
-				XHttpUtil.doTaskActionStaffComment(commentBean, new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionStaffComment(commentBean, new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -91,7 +91,7 @@ public class TaskDeliveredEvaluateActivity extends BaseAppCompatActivity
 						// 评价
 						String evaluateContent = viewHolder.getText(R.id.et_delivered_evaluate);
 						commentBean.setUser_comment(evaluateContent);
-						XHttpUtil.doTaskActionStaffComment(commentBean, new XHttpAdapter<String>()
+						XHttpUtil.doTaskActionStaffComment(commentBean, new HokolAdapter<String>()
 						{
 							@Override
 							public void onSuccess(String s)

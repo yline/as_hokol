@@ -18,12 +18,12 @@ import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserAvatarBean;
 import com.hokol.medium.http.bean.WSettingUpdateInfoBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.FlowWidget;
 import com.hokol.util.IntentUtil;
 import com.hokol.viewhelper.UserInfoHelper;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.FileUtil;
 import com.yline.view.dialog.ViewDialogFoot;
@@ -477,7 +477,7 @@ public class UserInfoActivity extends BaseAppCompatActivity
 				LogFileUtil.v("cache file = " + zoomFile);
 
 				// 完成图片上传
-				XHttpUtil.doSettingUpdateAvatar(updateInfoBean.getUser_id(), zoomFile, new XHttpAdapter<VUserAvatarBean>()
+				XHttpUtil.doSettingUpdateAvatar(updateInfoBean.getUser_id(), zoomFile, new HokolAdapter<VUserAvatarBean>()
 				{
 					@Override
 					public void onSuccess(VUserAvatarBean vUserAvatarBean)
@@ -500,7 +500,7 @@ public class UserInfoActivity extends BaseAppCompatActivity
 		{
 			// 更新本地数据
 			AppStateManager.getInstance().updateUserInfo(UserInfoActivity.this, updateInfoBean);
-			XHttpUtil.doSettingUpdateInfo(updateInfoBean, new XHttpAdapter<String>()
+			XHttpUtil.doSettingUpdateInfo(updateInfoBean, new HokolAdapter<String>()
 			{
 				@Override
 				public void onSuccess(String s)

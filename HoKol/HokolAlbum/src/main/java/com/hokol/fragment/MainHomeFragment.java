@@ -15,11 +15,11 @@ import com.hokol.R;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VAreaAllBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.SecondaryWidget;
 import com.hokol.util.ArraysUtil;
 import com.hokol.viewhelper.MainHomeHelper;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 
 import java.util.ArrayList;
@@ -193,7 +193,7 @@ public class MainHomeFragment extends BaseFragment
 
 	private void initData()
 	{
-		XHttpUtil.doAreaAll(new XHttpAdapter<VAreaAllBean>()
+		XHttpUtil.doAreaAll(new HokolAdapter<VAreaAllBean>()
 		{
 			@Override
 			public void onSuccess(VAreaAllBean vAreaAllBean)

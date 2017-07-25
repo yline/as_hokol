@@ -23,12 +23,12 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskUserPublishedBean;
 import com.hokol.medium.http.bean.WTaskActionMasterFinishBean;
 import com.hokol.medium.http.bean.WTaskUserPublishedBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.DialogIosWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
@@ -156,7 +156,7 @@ public class TaskAssignedTradeFragment extends BaseFragment implements TaskAssig
 			{
 				if (!hasEmploy)
 				{
-					XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new XHttpAdapter<String>()
+					XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new HokolAdapter<String>()
 					{
 						@Override
 						public void onSuccess(String s)
@@ -189,7 +189,7 @@ public class TaskAssignedTradeFragment extends BaseFragment implements TaskAssig
 						@Override
 						public void onClick(View v)
 						{
-							XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new XHttpAdapter<String>()
+							XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new HokolAdapter<String>()
 							{
 								@Override
 								public void onSuccess(String s)
@@ -234,7 +234,7 @@ public class TaskAssignedTradeFragment extends BaseFragment implements TaskAssig
 	public void onRefreshData(String userId, int start, int length)
 	{
 		userPublishedBean = new WTaskUserPublishedBean(userId, start, length);
-		XHttpUtil.doTaskUserPublishedTrade(userPublishedBean, new XHttpAdapter<VTaskUserPublishedBean>()
+		XHttpUtil.doTaskUserPublishedTrade(userPublishedBean, new HokolAdapter<VTaskUserPublishedBean>()
 		{
 			@Override
 			public void onSuccess(VTaskUserPublishedBean vTaskUserPublishedBean)

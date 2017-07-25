@@ -27,12 +27,12 @@ import com.hokol.medium.http.bean.WTaskActionMasterCancelBean;
 import com.hokol.medium.http.bean.WTaskActionMasterFinishBean;
 import com.hokol.medium.http.bean.WTaskDeleteBean;
 import com.hokol.medium.http.bean.WTaskUserPublishedBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.DialogIosWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
@@ -159,7 +159,7 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 			@Override
 			public void onSignCancelClick(View view, String taskId)
 			{
-				XHttpUtil.doTaskActionMasterCancel(new WTaskActionMasterCancelBean(userId, taskId), new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionMasterCancel(new WTaskActionMasterCancelBean(userId, taskId), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -176,7 +176,7 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 			@Override
 			public void onSignFinishClick(View view, String taskId)
 			{
-				XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -204,7 +204,7 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 			{
 				if (!hasEmploy)
 				{
-					XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new XHttpAdapter<String>()
+					XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new HokolAdapter<String>()
 					{
 						@Override
 						public void onSuccess(String s)
@@ -236,7 +236,7 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 						@Override
 						public void onClick(View v)
 						{
-							XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new XHttpAdapter<String>()
+							XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new HokolAdapter<String>()
 							{
 								@Override
 								public void onSuccess(String s)
@@ -281,7 +281,7 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 			@Override
 			public void onDelete(RecyclerViewHolder viewHolder, VTaskUserPublishedBean.VTaskUserPublishedOneBean vTaskBean, final int position)
 			{
-				XHttpUtil.doTaskDelete(new WTaskDeleteBean(userId, vTaskBean.getTask_id(), WTaskDeleteBean.TypeStaff), new XHttpAdapter<String>()
+				XHttpUtil.doTaskDelete(new WTaskDeleteBean(userId, vTaskBean.getTask_id(), WTaskDeleteBean.TypeStaff), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -304,7 +304,7 @@ public class TaskAssignedAllFragment extends BaseFragment implements TaskAssigne
 	{
 		taskAssignedAllAdapter.setShowEmpty(false);
 		userPublishedBean = new WTaskUserPublishedBean(userId, 0, DeleteConstant.defaultNumberSuper);
-		XHttpUtil.doTaskUserPublishedAll(userPublishedBean, new XHttpAdapter<VTaskUserPublishedBean>()
+		XHttpUtil.doTaskUserPublishedAll(userPublishedBean, new HokolAdapter<VTaskUserPublishedBean>()
 		{
 			@Override
 			public void onSuccess(VTaskUserPublishedBean vTaskUserPublishedBean)

@@ -17,11 +17,11 @@ import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VDynamicUserAllBean;
 import com.hokol.medium.http.bean.WDynamicUserAllBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
@@ -138,7 +138,7 @@ public class StarInfoDynamicFragment extends BaseFragment
 	{
 		String starId = getArguments().getString(KeyStarId);
 
-		XHttpUtil.doDynamicUserAll(new WDynamicUserAllBean(starId, 0, DeleteConstant.defaultNumberSuper), new XHttpAdapter<VDynamicUserAllBean>()
+		XHttpUtil.doDynamicUserAll(new WDynamicUserAllBean(starId, 0, DeleteConstant.defaultNumberSuper), new HokolAdapter<VDynamicUserAllBean>()
 		{
 			@Override
 			public void onSuccess(VDynamicUserAllBean vDynamicUserAllBean)

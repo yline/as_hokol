@@ -25,13 +25,13 @@ import com.hokol.medium.http.bean.VRecommendHomeBean;
 import com.hokol.medium.http.bean.VRecommendTaskBean;
 import com.hokol.medium.http.bean.VTaskMainAllBean;
 import com.hokol.medium.http.bean.WTaskMainAllBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.ADWidget;
 import com.hokol.util.IntentUtil;
 import com.hokol.viewhelper.MainTaskHelper;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
@@ -143,7 +143,7 @@ public class MainTaskFragment extends BaseFragment implements MainTaskHelper.OnT
 	private void initData()
 	{
 		// AD 广告
-		XHttpUtil.doRecommendTask(new XHttpAdapter<VRecommendTaskBean>()
+		XHttpUtil.doRecommendTask(new HokolAdapter<VRecommendTaskBean>()
 		{
 			@Override
 			public void onSuccess(VRecommendTaskBean vRecommendTaskBean)
@@ -199,7 +199,7 @@ public class MainTaskFragment extends BaseFragment implements MainTaskHelper.OnT
 		});
 
 		// 地区
-		XHttpUtil.doAreaAll(new XHttpAdapter<VAreaAllBean>()
+		XHttpUtil.doAreaAll(new HokolAdapter<VAreaAllBean>()
 		{
 			@Override
 			public void onSuccess(VAreaAllBean vAreaAllBean)
@@ -217,7 +217,7 @@ public class MainTaskFragment extends BaseFragment implements MainTaskHelper.OnT
 	{
 		// Recycler
 		mainTaskHelper.setRecyclerShowEmpty(false);
-		XHttpUtil.doTaskMainAll(taskMainAll, new XHttpAdapter<VTaskMainAllBean>()
+		XHttpUtil.doTaskMainAll(taskMainAll, new HokolAdapter<VTaskMainAllBean>()
 		{
 			@Override
 			public void onSuccess(VTaskMainAllBean vTaskMainAll)

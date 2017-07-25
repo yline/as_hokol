@@ -20,13 +20,13 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserFansAllBean;
 import com.hokol.medium.http.bean.WUserCareOrCancelBean;
 import com.hokol.medium.http.bean.WUserFansAllBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.layout.label.FlowLayout;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
@@ -105,7 +105,7 @@ public class UserFansActivity extends BaseAppCompatActivity
 			{
 				SDKManager.toast("加关注");
 
-				XHttpUtil.doUserCareOrCancel(new WUserCareOrCancelBean(userId, fansBean.getUser_id(), WUserCareOrCancelBean.actionCare), new XHttpAdapter<String>()
+				XHttpUtil.doUserCareOrCancel(new WUserCareOrCancelBean(userId, fansBean.getUser_id(), WUserCareOrCancelBean.actionCare), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -159,7 +159,7 @@ public class UserFansActivity extends BaseAppCompatActivity
 		userId = getIntent().getStringExtra(KeyFansUserId);
 
 		userFansAdapter.setShowEmpty(false);
-		XHttpUtil.doUserFansAll(new WUserFansAllBean(userId, 0, DeleteConstant.defaultNumberSuper), new XHttpAdapter<VUserFansAllBean>()
+		XHttpUtil.doUserFansAll(new WUserFansAllBean(userId, 0, DeleteConstant.defaultNumberSuper), new HokolAdapter<VUserFansAllBean>()
 		{
 			@Override
 			public void onSuccess(VUserFansAllBean vUserFansAllBean)

@@ -7,18 +7,15 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 
-import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.WSettingResetPwdBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.view.recycler.holder.ViewHolder;
 import com.yline.view.text.helper.PhonePwdCodeHelper;
-
-import org.json.JSONException;
 
 public class EnterModifyPwdActivity extends BaseAppCompatActivity
 {
@@ -166,7 +163,7 @@ public class EnterModifyPwdActivity extends BaseAppCompatActivity
 				{
 					if (newPwdStr.equals(doublePwdStr))
 					{
-						XHttpUtil.doSettingResetPwd(new WSettingResetPwdBean(userId, oldPwdStr, newPwdStr), new XHttpAdapter<String>()
+						XHttpUtil.doSettingResetPwd(new WSettingResetPwdBean(userId, oldPwdStr, newPwdStr), new HokolAdapter<String>()
 						{
 							@Override
 							public void onSuccess(String s)
@@ -176,7 +173,7 @@ public class EnterModifyPwdActivity extends BaseAppCompatActivity
 							}
 
 							@Override
-							public void onSuccess(int code, String data) throws JSONException, JsonParseException
+							public void onSuccess(int code, String data)
 							{
 								super.onSuccess(code, data);
 								if (code != REQUEST_SUCCESS_CODE)

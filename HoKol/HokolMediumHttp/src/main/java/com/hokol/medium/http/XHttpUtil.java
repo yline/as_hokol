@@ -3,8 +3,8 @@ package com.hokol.medium.http;
 import android.content.Context;
 
 import com.hokol.medium.http.bean.*;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.http.hokol.HokolHttp;
-import com.yline.http.XHttpAdapter;
 import com.yline.http.XHttpConfig;
 import com.yline.http.client.HttpCachePriorClient;
 import com.yline.log.LogFileUtil;
@@ -35,7 +35,7 @@ public class XHttpUtil
 	/**
 	 * 网络请求，用户初始化
 	 */
-	public static void doInitHokol(WInitHokolBean hokolBean, XHttpAdapter<VInitHokolBean> adapter)
+	public static void doInitHokol(WInitHokolBean hokolBean, HokolAdapter<VInitHokolBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_hokol_init;
 		new HokolHttp().doPost(httpUrl, hokolBean, VInitHokolBean.class, adapter);
@@ -51,7 +51,7 @@ public class XHttpUtil
 	/**
 	 * 手机号 + 密码登陆
 	 */
-	public static void doEnterLoginPhonePwd(final WEnterLoginPhonePwdBean requestBean, XHttpAdapter<VEnterLoginPhonePwdBean> adapter)
+	public static void doEnterLoginPhonePwd(final WEnterLoginPhonePwdBean requestBean, HokolAdapter<VEnterLoginPhonePwdBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_login_pwd;
 		new HokolHttp().doPost(httpUrl, requestBean, VEnterLoginPhonePwdBean.class, adapter);
@@ -60,7 +60,7 @@ public class XHttpUtil
 	/**
 	 * 获取 注册验证码
 	 */
-	public static void doEnterCodeRegister(WEnterCodeRegisterBean wEnterCodeRegisterBean, XHttpAdapter<String> adapter)
+	public static void doEnterCodeRegister(WEnterCodeRegisterBean wEnterCodeRegisterBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_code_register;
 		new HokolHttp().doPost(httpUrl, wEnterCodeRegisterBean, String.class, adapter);
@@ -69,7 +69,7 @@ public class XHttpUtil
 	/**
 	 * 忘记密码之获取验证码
 	 */
-	public static void doEnterCodeForgetPwd(WEnterCodeRegisterBean codeRegisterBean, XHttpAdapter<String> adapter)
+	public static void doEnterCodeForgetPwd(WEnterCodeRegisterBean codeRegisterBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_code_forget_pwd;
 		new HokolHttp().doPost(httpUrl, codeRegisterBean, String.class, adapter);
@@ -78,7 +78,7 @@ public class XHttpUtil
 	/**
 	 * 修改号码 获取验证码
 	 */
-	public static void doEnterCodeUpdatePhone(WEnterCodeUpdatePhoneBean codeUpdateBean, XHttpAdapter<String> adapter)
+	public static void doEnterCodeUpdatePhone(WEnterCodeUpdatePhoneBean codeUpdateBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_code_update_phone;
 		new HokolHttp().doPost(httpUrl, codeUpdateBean, String.class, adapter);
@@ -87,7 +87,7 @@ public class XHttpUtil
 	/**
 	 * 修改号码
 	 */
-	public static void doEnterPhoneUpdate(WEnterPhoneUpdateBean updateBean, XHttpAdapter<String> adapter)
+	public static void doEnterPhoneUpdate(WEnterPhoneUpdateBean updateBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_update_phone;
 		new HokolHttp().doPost(httpUrl, updateBean, String.class, adapter);
@@ -96,7 +96,7 @@ public class XHttpUtil
 	/**
 	 * 用户注册
 	 */
-	public static void doEnterRegister(WEnterRegisterBean wEnterRegisterBean, XHttpAdapter<String> adapter)
+	public static void doEnterRegister(WEnterRegisterBean wEnterRegisterBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_register;
 		new HokolHttp().doPost(httpUrl, wEnterRegisterBean, String.class, adapter);
@@ -105,7 +105,7 @@ public class XHttpUtil
 	/**
 	 * 用户信息完善
 	 */
-	public static void doEnterRegisterCompleteInfo(WEnterRegisterCompleteInfoBean completeInfoBean, XHttpAdapter<VEnterRegisterCompleteInfoBean> adapter)
+	public static void doEnterRegisterCompleteInfo(WEnterRegisterCompleteInfoBean completeInfoBean, HokolAdapter<VEnterRegisterCompleteInfoBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_register_complete_info;
 		new HokolHttp().doPost(httpUrl, completeInfoBean, VEnterRegisterCompleteInfoBean.class, adapter);
@@ -114,7 +114,7 @@ public class XHttpUtil
 	/**
 	 * 忘记密码之重置密码
 	 */
-	public static void doEnterResetPwd(WEnterResetPwdBean resetPwdBean, XHttpAdapter<String> adapter)
+	public static void doEnterResetPwd(WEnterResetPwdBean resetPwdBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_enter_reset_pwd;
 		new HokolHttp().doPost(httpUrl, resetPwdBean, String.class, adapter);
@@ -132,7 +132,7 @@ public class XHttpUtil
 	/**
 	 * 推荐新闻获取
 	 */
-	public static void doNewsRecommend(XHttpAdapter<VNewsRecommendBean> adapter)
+	public static void doNewsRecommend(HokolAdapter<VNewsRecommendBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_news_recommend;
 		new HokolHttp().doPost(httpUrl, "", VNewsRecommendBean.class, adapter);
@@ -141,7 +141,7 @@ public class XHttpUtil
 	/**
 	 * 多条新闻测试
 	 */
-	public static void doNewsMultiplex(WNewsMultiplexBean wNewsMultiplexBean, XHttpAdapter<VNewsMultiplexBean> adapter)
+	public static void doNewsMultiplex(WNewsMultiplexBean wNewsMultiplexBean, HokolAdapter<VNewsMultiplexBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_news_multiplex;
 		new HokolHttp().doPost(httpUrl, wNewsMultiplexBean, VNewsMultiplexBean.class, adapter);
@@ -163,7 +163,7 @@ public class XHttpUtil
 	/**
 	 * 请求关注的人的多条动态
 	 */
-	public static void doDynamicCareAll(WDynamicCareAllBean wDynamicCareAllBean, XHttpAdapter<VDynamicCareAllBean> adapter)
+	public static void doDynamicCareAll(WDynamicCareAllBean wDynamicCareAllBean, HokolAdapter<VDynamicCareAllBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_care_all;
 		new HokolHttp().doPost(httpUrl, wDynamicCareAllBean, VDynamicCareAllBean.class, adapter);
@@ -172,7 +172,7 @@ public class XHttpUtil
 	/**
 	 * 请求用户详情信息
 	 */
-	public static void doDynamicUserDetail(WDynamicUserDetailBean wDynamicUserDetailBean, XHttpAdapter<VDynamicUserDetailBean> adapter)
+	public static void doDynamicUserDetail(WDynamicUserDetailBean wDynamicUserDetailBean, HokolAdapter<VDynamicUserDetailBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_user_detail;
 		new HokolHttp().doPost(httpUrl, wDynamicUserDetailBean, VDynamicUserDetailBean.class, adapter);
@@ -181,7 +181,7 @@ public class XHttpUtil
 	/**
 	 * 单条动态(取消)点赞功能
 	 */
-	public static void doDynamicPraiseSingle(WDynamicPraiseSingleBean wDynamicPraiseSingleBean, XHttpAdapter<VDynamicPraiseSingleBean> adapter)
+	public static void doDynamicPraiseSingle(WDynamicPraiseSingleBean wDynamicPraiseSingleBean, HokolAdapter<VDynamicPraiseSingleBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_praise_single;
 		new HokolHttp().doPost(httpUrl, wDynamicPraiseSingleBean, VDynamicPraiseSingleBean.class, adapter);
@@ -190,7 +190,7 @@ public class XHttpUtil
 	/**
 	 * 请求单条动态的信息
 	 */
-	public static void doDynamicSingle(WDynamicCareSingleBean wDynamicCareSingleBean, XHttpAdapter<VDynamicCareSingleBean> adapter)
+	public static void doDynamicSingle(WDynamicCareSingleBean wDynamicCareSingleBean, HokolAdapter<VDynamicCareSingleBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_single;
 		new HokolHttp().doPost(httpUrl, wDynamicCareSingleBean, VDynamicCareSingleBean.class, adapter);
@@ -199,7 +199,7 @@ public class XHttpUtil
 	/**
 	 * 请求单条 私密动态 的信息
 	 */
-	public static void doDynamicPrivateSingle(WDynamicPrivateSingleBean privateSingleBean, XHttpAdapter<VWDynamicPrivateSingleBean> adapter)
+	public static void doDynamicPrivateSingle(WDynamicPrivateSingleBean privateSingleBean, HokolAdapter<VWDynamicPrivateSingleBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_private_single;
 		new HokolHttp().doPost(httpUrl, privateSingleBean, VWDynamicPrivateSingleBean.class, adapter);
@@ -208,7 +208,7 @@ public class XHttpUtil
 	/**
 	 * 请求用户多条动态信息
 	 */
-	public static void doDynamicUserAll(WDynamicUserAllBean wDynamicUserAllBean, XHttpAdapter<VDynamicUserAllBean> adapter)
+	public static void doDynamicUserAll(WDynamicUserAllBean wDynamicUserAllBean, HokolAdapter<VDynamicUserAllBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_user_all;
 		new HokolHttp().doPost(httpUrl, wDynamicUserAllBean, VDynamicUserAllBean.class, adapter);
@@ -217,7 +217,7 @@ public class XHttpUtil
 	/**
 	 * 请求用户多条私密动态信息
 	 */
-	public static void doDynamicUserPrivateAll(WDynamicUserPrivateAllBean wDynamicUserPrivateAllBean, XHttpAdapter<VDynamicUserPrivateAllBean> adapter)
+	public static void doDynamicUserPrivateAll(WDynamicUserPrivateAllBean wDynamicUserPrivateAllBean, HokolAdapter<VDynamicUserPrivateAllBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_user_private_all;
 		new HokolHttp().doPost(httpUrl, wDynamicUserPrivateAllBean, VDynamicUserPrivateAllBean.class, adapter);
@@ -226,7 +226,7 @@ public class XHttpUtil
 	/**
 	 * 请求关注的人的信息（多条）
 	 */
-	public static void doUserCareAll(WUserCareAllBean wUserCareAllBean, XHttpAdapter<VUserCareAllBean> adapter)
+	public static void doUserCareAll(WUserCareAllBean wUserCareAllBean, HokolAdapter<VUserCareAllBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_care_all;
 		new HokolHttp().doPost(httpUrl, wUserCareAllBean, VUserCareAllBean.class, adapter);
@@ -240,7 +240,7 @@ public class XHttpUtil
 	 * @param file    图片的文件
 	 * @param adapter
 	 */
-	public static void doDynamicPublish(final String userId, final String content, final File file, XHttpAdapter<String> adapter)
+	public static void doDynamicPublish(final String userId, final String content, final File file, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_publish;
 
@@ -273,7 +273,7 @@ public class XHttpUtil
 	 * @param file    图片的文件
 	 * @param adapter
 	 */
-	public static void doDynamicPrivatePublish(final String userId, final String content, final File file, XHttpAdapter<String> adapter)
+	public static void doDynamicPrivatePublish(final String userId, final String content, final File file, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_private_publish;
 
@@ -301,7 +301,7 @@ public class XHttpUtil
 	/**
 	 * 删除动态
 	 */
-	public static void doDynamicDelete(WDynamicDeleteBean deleteBean, XHttpAdapter<String> adapter)
+	public static void doDynamicDelete(WDynamicDeleteBean deleteBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_delete;
 		new HokolHttp().doPost(httpUrl, deleteBean, String.class, adapter);
@@ -310,7 +310,7 @@ public class XHttpUtil
 	/**
 	 * 删除私密动态
 	 */
-	public static void doDynamicPrivateDelete(WDynamicPrivateDeleteBean deleteBean, XHttpAdapter<String> adapter)
+	public static void doDynamicPrivateDelete(WDynamicPrivateDeleteBean deleteBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_dynamic_private_delete;
 		new HokolHttp().doPost(httpUrl, deleteBean, String.class, adapter);
@@ -329,7 +329,7 @@ public class XHttpUtil
 	/**
 	 * 请求关注的人的信息（多条）
 	 */
-	public static void doTaskMainAll(WTaskMainAllBean wTaskMainAll, XHttpAdapter<VTaskMainAllBean> adapter)
+	public static void doTaskMainAll(WTaskMainAllBean wTaskMainAll, HokolAdapter<VTaskMainAllBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_main_all;
 		new HokolHttp().doPost(httpUrl, wTaskMainAll, VTaskMainAllBean.class, adapter);
@@ -338,7 +338,7 @@ public class XHttpUtil
 	/**
 	 * 获取任务详情(单条)
 	 */
-	public static void doTaskMainDetail(WTaskMainDetailBean wTaskMainDetailBean, XHttpAdapter<VTaskMainDetailBean> adapter)
+	public static void doTaskMainDetail(WTaskMainDetailBean wTaskMainDetailBean, HokolAdapter<VTaskMainDetailBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_main_detail;
 		new HokolHttp().doPost(httpUrl, wTaskMainDetailBean, VTaskMainDetailBean.class, adapter);
@@ -347,7 +347,7 @@ public class XHttpUtil
 	/**
 	 * 任务发布
 	 */
-	public static void doTaskMainPublish(WTaskMainPublishBean wTaskMainPublishBean, XHttpAdapter<String> adapter)
+	public static void doTaskMainPublish(WTaskMainPublishBean wTaskMainPublishBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_main_publish;
 		new HokolHttp().doPost(httpUrl, wTaskMainPublishBean, String.class, adapter);
@@ -356,7 +356,7 @@ public class XHttpUtil
 	/**
 	 * 任务收藏/取消收藏
 	 */
-	public static void doTaskMainCollection(WTaskMainCollectionBean wTaskMainCollectionBean, XHttpAdapter<String> adapter)
+	public static void doTaskMainCollection(WTaskMainCollectionBean wTaskMainCollectionBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_main_collection;
 		new HokolHttp().doPost(httpUrl, wTaskMainCollectionBean, String.class, adapter);
@@ -365,7 +365,7 @@ public class XHttpUtil
 	/**
 	 * 任务接单详情
 	 */
-	public static void doTaskUserAcceptDetail(WTaskUserAcceptBean wTaskUserAcceptBean, XHttpAdapter<VTaskUserAcceptBean> adapter)
+	public static void doTaskUserAcceptDetail(WTaskUserAcceptBean wTaskUserAcceptBean, HokolAdapter<VTaskUserAcceptBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_user_accept_detail;
 		new HokolHttp().doPost(httpUrl, wTaskUserAcceptBean, VTaskUserAcceptBean.class, adapter);
@@ -374,7 +374,7 @@ public class XHttpUtil
 	/**
 	 * 任务报名详情
 	 */
-	public static void doTaskUserSignUpDetail(WTaskUserSignUpDetailBean wTaskUserSignUpBean, XHttpAdapter<VTaskUserSignUpDetailBean> adapter)
+	public static void doTaskUserSignUpDetail(WTaskUserSignUpDetailBean wTaskUserSignUpBean, HokolAdapter<VTaskUserSignUpDetailBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_user_signup_detail;
 		new HokolHttp().doPost(httpUrl, wTaskUserSignUpBean, VTaskUserSignUpDetailBean.class, adapter);
@@ -383,7 +383,7 @@ public class XHttpUtil
 	/**
 	 * 用户已发布任务；全部
 	 */
-	public static void doTaskUserPublishedAll(WTaskUserPublishedBean wTaskUserPublishedBean, XHttpAdapter<VTaskUserPublishedBean> adapter)
+	public static void doTaskUserPublishedAll(WTaskUserPublishedBean wTaskUserPublishedBean, HokolAdapter<VTaskUserPublishedBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_user_published_all;
 		new HokolHttp().doPost(httpUrl, wTaskUserPublishedBean, VTaskUserPublishedBean.class, adapter);
@@ -392,7 +392,7 @@ public class XHttpUtil
 	/**
 	 * 用户已发布任务；待报名
 	 */
-	public static void doTaskUserPublishedSign(WTaskUserPublishedBean wTaskUserPublishedBean, XHttpAdapter<VTaskUserPublishedBean> adapter)
+	public static void doTaskUserPublishedSign(WTaskUserPublishedBean wTaskUserPublishedBean, HokolAdapter<VTaskUserPublishedBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_user_published_sign;
 		new HokolHttp().doPost(httpUrl, wTaskUserPublishedBean, VTaskUserPublishedBean.class, adapter);
@@ -401,7 +401,7 @@ public class XHttpUtil
 	/**
 	 * 用户已发布任务；待交易
 	 */
-	public static void doTaskUserPublishedTrade(WTaskUserPublishedBean wTaskUserPublishedBean, XHttpAdapter<VTaskUserPublishedBean> adapter)
+	public static void doTaskUserPublishedTrade(WTaskUserPublishedBean wTaskUserPublishedBean, HokolAdapter<VTaskUserPublishedBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_user_published_trade;
 		new HokolHttp().doPost(httpUrl, wTaskUserPublishedBean, VTaskUserPublishedBean.class, adapter);
@@ -410,7 +410,7 @@ public class XHttpUtil
 	/**
 	 * 用户已发布任务；待评价
 	 */
-	public static void doTaskUserPublishedEvaluate(WTaskUserPublishedBean wTaskUserPublishedBean, XHttpAdapter<VTaskUserPublishedBean> adapter)
+	public static void doTaskUserPublishedEvaluate(WTaskUserPublishedBean wTaskUserPublishedBean, HokolAdapter<VTaskUserPublishedBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_user_published_evaluate;
 		new HokolHttp().doPost(httpUrl, wTaskUserPublishedBean, VTaskUserPublishedBean.class, adapter);
@@ -419,7 +419,7 @@ public class XHttpUtil
 	/**
 	 * 任务报名
 	 */
-	public static void doTaskActionStaffSignUp(WTaskActionStaffSignUpBean wTaskActionStaffSignUpBean, XHttpAdapter<String> adapter)
+	public static void doTaskActionStaffSignUp(WTaskActionStaffSignUpBean wTaskActionStaffSignUpBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_staff_signup;
 		new HokolHttp().doPost(httpUrl, wTaskActionStaffSignUpBean, String.class, adapter);
@@ -428,7 +428,7 @@ public class XHttpUtil
 	/**
 	 * 雇主录用报名者
 	 */
-	public static void doTaskActionMasterTakeOn(WTaskActionMasterTakeOnBean wTaskActionMasterTakeOnBean, XHttpAdapter<String> adapter)
+	public static void doTaskActionMasterTakeOn(WTaskActionMasterTakeOnBean wTaskActionMasterTakeOnBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_master_takeon;
 		new HokolHttp().doPost(httpUrl, wTaskActionMasterTakeOnBean, String.class, adapter);
@@ -437,7 +437,7 @@ public class XHttpUtil
 	/**
 	 * 雇主评价雇员
 	 */
-	public static void doTaskActionMasterComment(WTaskActionMasterCommentBean wTaskActionMasterCommentBean, XHttpAdapter<String> adapter)
+	public static void doTaskActionMasterComment(WTaskActionMasterCommentBean wTaskActionMasterCommentBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_master_comment;
 		new HokolHttp().doPost(httpUrl, wTaskActionMasterCommentBean, String.class, adapter);
@@ -446,7 +446,7 @@ public class XHttpUtil
 	/**
 	 * 获取该任务雇员信息
 	 */
-	public static void doTaskStaffCommentedInfo(WTaskStaffCommentedInfoBean wTaskStaffCommentedInfoBean, XHttpAdapter<VTaskStaffCommentedInfoBean> adapter)
+	public static void doTaskStaffCommentedInfo(WTaskStaffCommentedInfoBean wTaskStaffCommentedInfoBean, HokolAdapter<VTaskStaffCommentedInfoBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_master_comment_info;
 		new HokolHttp().doPost(httpUrl, wTaskStaffCommentedInfoBean, VTaskStaffCommentedInfoBean.class, adapter);
@@ -455,7 +455,7 @@ public class XHttpUtil
 	/**
 	 * 雇主结束任务
 	 */
-	public static void doTaskActionMasterFinish(WTaskActionMasterFinishBean wTaskActionMasterFinishBean, XHttpAdapter<String> adapter)
+	public static void doTaskActionMasterFinish(WTaskActionMasterFinishBean wTaskActionMasterFinishBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_master_finish;
 		new HokolHttp().doPost(httpUrl, wTaskActionMasterFinishBean, String.class, adapter);
@@ -464,7 +464,7 @@ public class XHttpUtil
 	/**
 	 * 雇主结束任务
 	 */
-	public static void doTaskActionMasterCancel(WTaskActionMasterCancelBean wTaskActionMasterCancelBean, XHttpAdapter<String> adapter)
+	public static void doTaskActionMasterCancel(WTaskActionMasterCancelBean wTaskActionMasterCancelBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_master_cancel;
 		new HokolHttp().doPost(httpUrl, wTaskActionMasterCancelBean, String.class, adapter);
@@ -473,7 +473,7 @@ public class XHttpUtil
 	/**
 	 * 雇主确定交易
 	 */
-	public static void doTaskActionMasterTrade(WTaskActionMasterTradeBean wTaskActionMasterTradeBean, XHttpAdapter<String> adapter)
+	public static void doTaskActionMasterTrade(WTaskActionMasterTradeBean wTaskActionMasterTradeBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_master_trade;
 		new HokolHttp().doPost(httpUrl, wTaskActionMasterTradeBean, String.class, adapter);
@@ -482,7 +482,7 @@ public class XHttpUtil
 	/**
 	 * 用户已投递的任务
 	 */
-	public static void doTaskUserDelivered(WTaskUserDeliveredBean wTaskUserDeliveredBean, XHttpAdapter<VTaskUserDeliveredBean> adapter)
+	public static void doTaskUserDelivered(WTaskUserDeliveredBean wTaskUserDeliveredBean, HokolAdapter<VTaskUserDeliveredBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_user_delivered;
 		new HokolHttp().doPost(httpUrl, wTaskUserDeliveredBean, VTaskUserDeliveredBean.class, adapter);
@@ -491,7 +491,7 @@ public class XHttpUtil
 	/**
 	 * 雇员确认、拒绝接单
 	 */
-	public static void doTaskActionStaffConfirm(WTaskActionStaffConfirmBean wTaskActionStaffConfirmBean, XHttpAdapter<String> adapter)
+	public static void doTaskActionStaffConfirm(WTaskActionStaffConfirmBean wTaskActionStaffConfirmBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_staff_confirm;
 		new HokolHttp().doPost(httpUrl, wTaskActionStaffConfirmBean, String.class, adapter);
@@ -500,7 +500,7 @@ public class XHttpUtil
 	/**
 	 * 雇员确认交易
 	 */
-	public static void doTaskActionStaffTrade(WTaskActionStaffTradeBean wTaskActionStaffTradeBean, XHttpAdapter<String> adapter)
+	public static void doTaskActionStaffTrade(WTaskActionStaffTradeBean wTaskActionStaffTradeBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_staff_trade;
 		new HokolHttp().doPost(httpUrl, wTaskActionStaffTradeBean, String.class, adapter);
@@ -509,7 +509,7 @@ public class XHttpUtil
 	/**
 	 * 雇员确认交易
 	 */
-	public static void doTaskActionStaffComment(WTaskActionStaffCommentBean wTaskActionStaffCommentBean, XHttpAdapter<String> adapter)
+	public static void doTaskActionStaffComment(WTaskActionStaffCommentBean wTaskActionStaffCommentBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_staff_comment;
 		new HokolHttp().doPost(httpUrl, wTaskActionStaffCommentBean, String.class, adapter);
@@ -518,7 +518,7 @@ public class XHttpUtil
 	/**
 	 * 删除任务，仅仅有删除记录的功能
 	 */
-	public static void doTaskDelete(WTaskDeleteBean taskDeleteBean, XHttpAdapter<String> adapter)
+	public static void doTaskDelete(WTaskDeleteBean taskDeleteBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_task_action_delete;
 		new HokolHttp().doPost(httpUrl, taskDeleteBean, String.class, adapter);
@@ -535,7 +535,7 @@ public class XHttpUtil
 	 * 进行了数据过滤
 	 * 请求主页动态数据
 	 */
-	public static void doHomeMain(WHomeMainBean wHomeMainBean, XHttpAdapter<VHomeMainBean> adapter)
+	public static void doHomeMain(WHomeMainBean wHomeMainBean, HokolAdapter<VHomeMainBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_home_main;
 		new HokolHttp().doPost(httpUrl, wHomeMainBean, VHomeMainBean.class, adapter);
@@ -544,7 +544,7 @@ public class XHttpUtil
 	/**
 	 * 主页推荐
 	 */
-	public static void doRecommendHome(XHttpAdapter<VRecommendHomeBean> adapter)
+	public static void doRecommendHome(HokolAdapter<VRecommendHomeBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_recommend_home;
 		new HokolHttp().doPost(httpUrl, "", VRecommendHomeBean.class, adapter);
@@ -553,7 +553,7 @@ public class XHttpUtil
 	/**
 	 * 任务推荐
 	 */
-	public static void doRecommendTask(XHttpAdapter<VRecommendTaskBean> adapter)
+	public static void doRecommendTask(HokolAdapter<VRecommendTaskBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_recommend_task;
 		new HokolHttp().doPost(httpUrl, "", VRecommendTaskBean.class, adapter);
@@ -572,7 +572,7 @@ public class XHttpUtil
 	/**
 	 * 请求用户粉丝的信息（多条）
 	 */
-	public static void doUserFansAll(WUserFansAllBean wUserFansAllBean, XHttpAdapter<VUserFansAllBean> adapter)
+	public static void doUserFansAll(WUserFansAllBean wUserFansAllBean, HokolAdapter<VUserFansAllBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_fans_all;
 		new HokolHttp().doPost(httpUrl, wUserFansAllBean, VUserFansAllBean.class, adapter);
@@ -581,7 +581,7 @@ public class XHttpUtil
 	/**
 	 * 请求用户的收藏任务
 	 */
-	public static void doUserCollection(WUserTaskCollectionBean wUserCollectionBean, XHttpAdapter<VUserTaskCollectionBean> adapter)
+	public static void doUserCollection(WUserTaskCollectionBean wUserCollectionBean, HokolAdapter<VUserTaskCollectionBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_collection;
 		new HokolHttp().doPost(httpUrl, wUserCollectionBean, VUserTaskCollectionBean.class, adapter);
@@ -590,7 +590,7 @@ public class XHttpUtil
 	/**
 	 * 关注/取消关注某用户
 	 */
-	public static void doUserCareOrCancel(WUserCareOrCancelBean wUserCareOrCancelBean, XHttpAdapter<String> adapter)
+	public static void doUserCareOrCancel(WUserCareOrCancelBean wUserCareOrCancelBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_care_or_cancel;
 		new HokolHttp().doPost(httpUrl, wUserCareOrCancelBean, String.class, adapter);
@@ -599,7 +599,7 @@ public class XHttpUtil
 	/**
 	 * 用户赠送红豆
 	 */
-	public static void doUserCoinGift(WUserCoinGiftBean wUserCoinGiftBean, XHttpAdapter<String> adapter)
+	public static void doUserCoinGift(WUserCoinGiftBean wUserCoinGiftBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_coin_gift;
 		new HokolHttp().doPost(httpUrl, wUserCoinGiftBean, String.class, adapter);
@@ -608,7 +608,7 @@ public class XHttpUtil
 	/**
 	 * 我的消息，所有
 	 */
-	public static void doUserMessageSystem(WUserMessageSystemBean wUserMessageBean, XHttpAdapter<VUserMessageSystemBean> adapter)
+	public static void doUserMessageSystem(WUserMessageSystemBean wUserMessageBean, HokolAdapter<VUserMessageSystemBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_message;
 		new HokolHttp().doPost(httpUrl, wUserMessageBean, VUserMessageSystemBean.class, adapter);
@@ -617,7 +617,7 @@ public class XHttpUtil
 	/**
 	 * 我的消息，概要
 	 */
-	public static void doUserSystemMessageOutline(WUserMessageSystemOutlineBean outlineBean, XHttpAdapter<VUserMessageSystemOutlineBean> adapter)
+	public static void doUserSystemMessageOutline(WUserMessageSystemOutlineBean outlineBean, HokolAdapter<VUserMessageSystemOutlineBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_message_system_all;
 		new HokolHttp().doPost(httpUrl, outlineBean, VUserMessageSystemOutlineBean.class, adapter);
@@ -626,7 +626,7 @@ public class XHttpUtil
 	/**
 	 * 我的消息，读取
 	 */
-	public static void doUserSystemMessageSignRead(WUserSystemMessageSignReadBean signReadBean, XHttpAdapter<String> adapter)
+	public static void doUserSystemMessageSignRead(WUserSystemMessageSignReadBean signReadBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_message_system_readed;
 		new HokolHttp().doPost(httpUrl, signReadBean, String.class, adapter);
@@ -635,7 +635,7 @@ public class XHttpUtil
 	/**
 	 * 我的消息，删除
 	 */
-	public static void doUserSystemMessageSignDelete(WUserSystemMessageSignDeleteBean signDeleteBean, XHttpAdapter<String> adapter)
+	public static void doUserSystemMessageSignDelete(WUserSystemMessageSignDeleteBean signDeleteBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_message_system_delete;
 		new HokolHttp().doPost(httpUrl, signDeleteBean, String.class, adapter);
@@ -644,7 +644,7 @@ public class XHttpUtil
 	/**
 	 * 接收的礼物
 	 */
-	public static void doUserGiftReceive(WUserGiftReceiveBean receiveBean, XHttpAdapter<VUserGiftReceiveBean> adapter)
+	public static void doUserGiftReceive(WUserGiftReceiveBean receiveBean, HokolAdapter<VUserGiftReceiveBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_gift_receivve;
 		new HokolHttp().doPost(httpUrl, receiveBean, VUserGiftReceiveBean.class, adapter);
@@ -653,7 +653,7 @@ public class XHttpUtil
 	/**
 	 * 送出的红豆
 	 */
-	public static void doUserGiftSend(WUserGiftSendBean sendBean, XHttpAdapter<VUserGiftSendBean> adapter)
+	public static void doUserGiftSend(WUserGiftSendBean sendBean, HokolAdapter<VUserGiftSendBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_gift_send;
 		new HokolHttp().doPost(httpUrl, sendBean, VUserGiftSendBean.class, adapter);
@@ -662,7 +662,7 @@ public class XHttpUtil
 	/**
 	 * 充值记录
 	 */
-	public static void doUserRechargeRecord(WUserRechargeRecordBean recordBean, XHttpAdapter<VUserRechargeRecordBean> adapter)
+	public static void doUserRechargeRecord(WUserRechargeRecordBean recordBean, HokolAdapter<VUserRechargeRecordBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_recharge_record;
 		new HokolHttp().doPost(httpUrl, recordBean, VUserRechargeRecordBean.class, adapter);
@@ -671,7 +671,7 @@ public class XHttpUtil
 	/**
 	 * 我的会员
 	 */
-	public static void doUserVipInfo(WUserVipInfoBean vipInfoBean, XHttpAdapter<VUserVipInfoBean> adapter)
+	public static void doUserVipInfo(WUserVipInfoBean vipInfoBean, HokolAdapter<VUserVipInfoBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_vip_info;
 		new HokolHttp().doPost(httpUrl, vipInfoBean, VUserVipInfoBean.class, adapter);
@@ -680,7 +680,7 @@ public class XHttpUtil
 	/**
 	 * 会员充值记录
 	 */
-	public static void doUserVipRechargeRecord(WUserVipRechargeRecordBean recordBean, XHttpAdapter<VUserVipRechargeRecordBean> adapter)
+	public static void doUserVipRechargeRecord(WUserVipRechargeRecordBean recordBean, HokolAdapter<VUserVipRechargeRecordBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_vip_recharge_record;
 		new HokolHttp().doPost(httpUrl, recordBean, VUserVipRechargeRecordBean.class, adapter);
@@ -689,7 +689,7 @@ public class XHttpUtil
 	/**
 	 * 未使用的交流卷
 	 */
-	public static void doUserContactVolumeUnapply(WUserContactVolumeBean bean, XHttpAdapter<VUserContactVolumeBean> adapter)
+	public static void doUserContactVolumeUnapply(WUserContactVolumeBean bean, HokolAdapter<VUserContactVolumeBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_contact_volume_unapply;
 		new HokolHttp().doPost(httpUrl, bean, VUserContactVolumeBean.class, adapter);
@@ -698,7 +698,7 @@ public class XHttpUtil
 	/**
 	 * 已使用的交流卷
 	 */
-	public static void doUserContactVolumeApplied(WUserContactVolumeBean bean, XHttpAdapter<VUserContactVolumeBean> adapter)
+	public static void doUserContactVolumeApplied(WUserContactVolumeBean bean, HokolAdapter<VUserContactVolumeBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_vip_recharge_applied;
 		new HokolHttp().doPost(httpUrl, bean, VUserContactVolumeBean.class, adapter);
@@ -707,7 +707,7 @@ public class XHttpUtil
 	/**
 	 * 已过期的交流卷
 	 */
-	public static void doUserContactVolumePassed(WUserContactVolumeBean bean, XHttpAdapter<VUserContactVolumeBean> adapter)
+	public static void doUserContactVolumePassed(WUserContactVolumeBean bean, HokolAdapter<VUserContactVolumeBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_vip_recharge_expired;
 		new HokolHttp().doPost(httpUrl, bean, VUserContactVolumeBean.class, adapter);
@@ -716,7 +716,7 @@ public class XHttpUtil
 	/**
 	 * 用户信用
 	 */
-	public static void doUserCredit(WUserCreditBean creditBean, XHttpAdapter<VUserCreditBean> adapter)
+	public static void doUserCredit(WUserCreditBean creditBean, HokolAdapter<VUserCreditBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_credit;
 		new HokolHttp().doPost(httpUrl, creditBean, VUserCreditBean.class, adapter);
@@ -725,7 +725,7 @@ public class XHttpUtil
 	/**
 	 * 我的评分(已发任务)
 	 */
-	public static void doUserTaskScoreAssigned(WUserTaskScoreAssignedBean assignedBean, XHttpAdapter<VUserTaskScoreAssignedBean> adapter)
+	public static void doUserTaskScoreAssigned(WUserTaskScoreAssignedBean assignedBean, HokolAdapter<VUserTaskScoreAssignedBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_task_score_assigned;
 		new HokolHttp().doPost(httpUrl, assignedBean, VUserTaskScoreAssignedBean.class, adapter);
@@ -734,7 +734,7 @@ public class XHttpUtil
 	/**
 	 * 我的评分(已投任务)
 	 */
-	public static void doUserTaskScoreDelivered(WUserTaskScoreDeliveredBean deliveredBean, XHttpAdapter<VUserTaskScoreDeliveredBean> adapter)
+	public static void doUserTaskScoreDelivered(WUserTaskScoreDeliveredBean deliveredBean, HokolAdapter<VUserTaskScoreDeliveredBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_task_score_delivered;
 		new HokolHttp().doPost(httpUrl, deliveredBean, VUserTaskScoreDeliveredBean.class, adapter);
@@ -743,7 +743,7 @@ public class XHttpUtil
 	/**
 	 * 查看评论(已发任务)
 	 */
-	public static void doUserTaskCommentAssigned(WUserTaskCommentAssignedBean assignedBean, XHttpAdapter<VUserTaskCommentAssignedBean> adapter)
+	public static void doUserTaskCommentAssigned(WUserTaskCommentAssignedBean assignedBean, HokolAdapter<VUserTaskCommentAssignedBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_task_comment_assigned;
 		new HokolHttp().doPost(httpUrl, assignedBean, VUserTaskCommentAssignedBean.class, adapter);
@@ -752,7 +752,7 @@ public class XHttpUtil
 	/**
 	 * 查看评论(已投任务)
 	 */
-	public static void doUserTaskCommentDelivered(WUserTaskCommentDeliveredBean creditBean, XHttpAdapter<VUserTaskCommentDeliveredBean> adapter)
+	public static void doUserTaskCommentDelivered(WUserTaskCommentDeliveredBean creditBean, HokolAdapter<VUserTaskCommentDeliveredBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_user_task_comment_delivered;
 		new HokolHttp().doPost(httpUrl, creditBean, VUserTaskCommentDeliveredBean.class, adapter);
@@ -772,7 +772,7 @@ public class XHttpUtil
 	/**
 	 * 用户发表意见
 	 */
-	public static void doSettingSubmitProposal(WSettingSubmitProposalBean wSettingSubmitProposalBean, XHttpAdapter<String> adapter)
+	public static void doSettingSubmitProposal(WSettingSubmitProposalBean wSettingSubmitProposalBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_setting_submit_proposal;
 		new HokolHttp().doPost(httpUrl, wSettingSubmitProposalBean, String.class, adapter);
@@ -781,7 +781,7 @@ public class XHttpUtil
 	/**
 	 * 用户重置密码
 	 */
-	public static void doSettingResetPwd(WSettingResetPwdBean wSettingResetPwdBean, XHttpAdapter<String> adapter)
+	public static void doSettingResetPwd(WSettingResetPwdBean wSettingResetPwdBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_setting_reset_pwd;
 		new HokolHttp().doPost(httpUrl, wSettingResetPwdBean, String.class, adapter);
@@ -790,7 +790,7 @@ public class XHttpUtil
 	/**
 	 * 用户信息修改
 	 */
-	public static void doSettingUpdateInfo(WSettingUpdateInfoBean wSettingUpdateInfoBean, XHttpAdapter<String> adapter)
+	public static void doSettingUpdateInfo(WSettingUpdateInfoBean wSettingUpdateInfoBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_setting_update_info;
 		new HokolHttp().doPost(httpUrl, wSettingUpdateInfoBean, String.class, adapter);
@@ -799,7 +799,7 @@ public class XHttpUtil
 	/**
 	 * 修改用户头像
 	 */
-	public static void doSettingUpdateAvatar(final String userId, final File file, XHttpAdapter<VUserAvatarBean> adapter)
+	public static void doSettingUpdateAvatar(final String userId, final File file, HokolAdapter<VUserAvatarBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_setting_update_avatar;
 
@@ -829,7 +829,7 @@ public class XHttpUtil
 	 * 获取地区 --> get_area --> url_area_all --> null - VAreaAllBean --> ok
 	 */
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 设置页面 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-	public static void doAreaAll(XHttpAdapter<VAreaAllBean> adapter)
+	public static void doAreaAll(HokolAdapter<VAreaAllBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_area_all;
 		new HokolHttp()
@@ -845,7 +845,7 @@ public class XHttpUtil
 	/**
 	 * 获取支付宝签名数据
 	 */
-	public static void doAliPayOrderInfo(WAliPayOrderInfoBean infoBean, XHttpAdapter<VAliPayOrderInfoBean> adapter)
+	public static void doAliPayOrderInfo(WAliPayOrderInfoBean infoBean, HokolAdapter<VAliPayOrderInfoBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_ali_pay_order_info;
 		new HokolHttp().doPost(httpUrl, infoBean, VAliPayOrderInfoBean.class, adapter);
@@ -854,16 +854,16 @@ public class XHttpUtil
 	/**
 	 * 微信注册/登录
 	 */
-	public static void doWeChatLogin(WWeChatLoginBean loginBean, XHttpAdapter<VWeChatLoginBean> adapter)
+	public static void doWeChatLogin(WWeChatLoginBean loginBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_we_chat_login;
-		new HokolHttp().doPost(httpUrl, loginBean, VWeChatLoginBean.class, adapter);
+		new HokolHttp().doPost(httpUrl, loginBean, String.class, adapter);
 	}
 
 	/**
 	 * 微信注册 填写信息
 	 */
-	public static void doWeChatRegisterInfo(WWeChatRegisterInfoBean infoBean, XHttpAdapter<VWeChatRegisterInfoBean> adapter)
+	public static void doWeChatRegisterInfo(WWeChatRegisterInfoBean infoBean, HokolAdapter<VWeChatRegisterInfoBean> adapter)
 	{
 		String httpUrl = HttpConstant.url_we_chat_register;
 		new HokolHttp().doPost(httpUrl, infoBean, VWeChatRegisterInfoBean.class, adapter);
@@ -872,7 +872,7 @@ public class XHttpUtil
 	/**
 	 * 微信注册 填写信息
 	 */
-	public static void doWeChatRegisterICode(WWeChatRegisterICodeBean codeBean, XHttpAdapter<String> adapter)
+	public static void doWeChatRegisterICode(WWeChatRegisterICodeBean codeBean, HokolAdapter<String> adapter)
 	{
 		String httpUrl = HttpConstant.url_we_chat_i_code;
 		new HokolHttp().doPost(httpUrl, codeBean, String.class, adapter);

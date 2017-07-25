@@ -18,9 +18,9 @@ import com.hokol.fragment.TaskAssignedSignDetailUnFragment;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskUserSignUpDetailBean;
 import com.hokol.medium.http.bean.WTaskUserSignUpDetailBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 
 import java.util.ArrayList;
@@ -134,7 +134,7 @@ public class TaskAssignedSignDetailActivity extends BaseAppCompatActivity implem
 	{
 		if (!TextUtils.isEmpty(taskId))
 		{
-			XHttpUtil.doTaskUserSignUpDetail(new WTaskUserSignUpDetailBean(taskId, start, length), new XHttpAdapter<VTaskUserSignUpDetailBean>()
+			XHttpUtil.doTaskUserSignUpDetail(new WTaskUserSignUpDetailBean(taskId, start, length), new HokolAdapter<VTaskUserSignUpDetailBean>()
 			{
 				@Override
 				public void onSuccess(VTaskUserSignUpDetailBean signUpDetailBean)

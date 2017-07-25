@@ -20,11 +20,11 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskStaffCommentedInfoBean;
 import com.hokol.medium.http.bean.WTaskActionMasterCommentBean;
 import com.hokol.medium.http.bean.WTaskStaffCommentedInfoBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.ArrayList;
@@ -99,7 +99,7 @@ public class TaskAssignedEvaluateActivity extends BaseAppCompatActivity
 			public void onClick(View v)
 			{
 				String userId = AppStateManager.getInstance().getUserLoginId(TaskAssignedEvaluateActivity.this);
-				XHttpUtil.doTaskActionMasterComment(new WTaskActionMasterCommentBean(userId, taskId, assignedEvaluateAdapter.getRequestList()), new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionMasterComment(new WTaskActionMasterCommentBean(userId, taskId, assignedEvaluateAdapter.getRequestList()), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -117,7 +117,7 @@ public class TaskAssignedEvaluateActivity extends BaseAppCompatActivity
 		taskId = getIntent().getStringExtra(KeyTaskId);
 
 		assignedEvaluateAdapter.setShowEmpty(false);
-		XHttpUtil.doTaskStaffCommentedInfo(new WTaskStaffCommentedInfoBean(taskId), new XHttpAdapter<VTaskStaffCommentedInfoBean>()
+		XHttpUtil.doTaskStaffCommentedInfo(new WTaskStaffCommentedInfoBean(taskId), new HokolAdapter<VTaskStaffCommentedInfoBean>()
 		{
 			@Override
 			public void onSuccess(VTaskStaffCommentedInfoBean vTaskStaffCommentedInfoBean)

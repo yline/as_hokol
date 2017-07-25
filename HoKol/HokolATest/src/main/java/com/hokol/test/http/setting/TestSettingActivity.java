@@ -12,9 +12,9 @@ import com.hokol.medium.http.bean.VUserAvatarBean;
 import com.hokol.medium.http.bean.WSettingResetPwdBean;
 import com.hokol.medium.http.bean.WSettingSubmitProposalBean;
 import com.hokol.medium.http.bean.WSettingUpdateInfoBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.test.common.BaseTestActivity;
 import com.hokol.test.common.IApplication;
-import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.FileUtil;
 
@@ -74,7 +74,7 @@ public class TestSettingActivity extends BaseTestActivity
 				WSettingUpdateInfoBean wSettingUpdateInfoBean = new WSettingUpdateInfoBean(userId);
 				wSettingUpdateInfoBean.setUser_nickname(user_nickname);
 
-				XHttpUtil.doSettingUpdateInfo(wSettingUpdateInfoBean, new XHttpAdapter<String>()
+				XHttpUtil.doSettingUpdateInfo(wSettingUpdateInfoBean, new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -94,7 +94,7 @@ public class TestSettingActivity extends BaseTestActivity
 			public void onClick(View v)
 			{
 				/*WSettingResetPhoneBean wSettingResetPhoneBean = null;
-				XHttpUtil.doSettingResetPhone(wSettingResetPhoneBean, new XHttpAdapter<String>()
+				XHttpUtil.doSettingResetPhone(wSettingResetPhoneBean, new HokolAdapter<com.hokol.medium.http.bean.VUserAvatarBean>()<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -119,7 +119,7 @@ public class TestSettingActivity extends BaseTestActivity
 				String user_id = editTextOne.getText().toString().trim();
 				String old_pwd = editTextTwo.getText().toString().trim();
 				String new_pwd = editTextThree.getText().toString().trim();
-				XHttpUtil.doSettingResetPwd(new WSettingResetPwdBean(user_id, old_pwd, new_pwd), new XHttpAdapter<String>()
+				XHttpUtil.doSettingResetPwd(new WSettingResetPwdBean(user_id, old_pwd, new_pwd), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -147,7 +147,7 @@ public class TestSettingActivity extends BaseTestActivity
 				String advice_content = editTextThree.getText().toString().trim();
 				String user_connection = editTextFour.getText().toString().trim();
 
-				XHttpUtil.doSettingSubmitProposal(new WSettingSubmitProposalBean(user_id, advice_type, advice_content, user_connection), new XHttpAdapter<String>()
+				XHttpUtil.doSettingSubmitProposal(new WSettingSubmitProposalBean(user_id, advice_type, advice_content, user_connection), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -194,7 +194,7 @@ public class TestSettingActivity extends BaseTestActivity
 				}
 				else
 				{
-					XHttpUtil.doSettingUpdateAvatar(userId, file, new XHttpAdapter<VUserAvatarBean>()
+					XHttpUtil.doSettingUpdateAvatar(userId, file, new HokolAdapter<VUserAvatarBean>()
 					{
 						@Override
 						public void onSuccess(VUserAvatarBean vUserAvatarBean)

@@ -11,9 +11,9 @@ import com.hokol.R;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserTaskCommentDeliveredBean;
 import com.hokol.medium.http.bean.WUserTaskCommentDeliveredBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
 
 public class TaskScoreDeliveredDetailActivity extends BaseAppCompatActivity
@@ -23,6 +23,11 @@ public class TaskScoreDeliveredDetailActivity extends BaseAppCompatActivity
 	private static final String KeyDeliveredTaskId = "taskId";
 
 	private ViewHolder viewHolder;
+
+	public static void actionStart(Context context, String userId, String taskId)
+	{
+		context.startActivity(new Intent(context, TaskScoreDeliveredDetailActivity.class).putExtra(KeyDeliveredUserId, userId).putExtra(KeyDeliveredTaskId, taskId));
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -51,7 +56,7 @@ public class TaskScoreDeliveredDetailActivity extends BaseAppCompatActivity
 	{
 		String userId = getIntent().getStringExtra(KeyDeliveredUserId);
 		String taskId = getIntent().getStringExtra(KeyDeliveredTaskId);
-		XHttpUtil.doUserTaskCommentDelivered(new WUserTaskCommentDeliveredBean(userId, taskId), new XHttpAdapter<VUserTaskCommentDeliveredBean>()
+		XHttpUtil.doUserTaskCommentDelivered(new WUserTaskCommentDeliveredBean(userId, taskId), new HokolAdapter<VUserTaskCommentDeliveredBean>()
 		{
 			@Override
 			public void onSuccess(VUserTaskCommentDeliveredBean vUserTaskCommentDeliveredBean)
@@ -71,10 +76,5 @@ public class TaskScoreDeliveredDetailActivity extends BaseAppCompatActivity
 				viewHolder.setText(R.id.circle_task_score_delivered_content, vUserTaskCommentDeliveredBean.getUser_comment());
 			}
 		});
-	}
-
-	public static void actionStart(Context context, String userId, String taskId)
-	{
-		context.startActivity(new Intent(context, TaskScoreDeliveredDetailActivity.class).putExtra(KeyDeliveredUserId, userId).putExtra(KeyDeliveredTaskId, taskId));
 	}
 }

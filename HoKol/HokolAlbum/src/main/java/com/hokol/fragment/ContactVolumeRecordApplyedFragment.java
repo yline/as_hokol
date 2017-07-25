@@ -15,9 +15,9 @@ import com.hokol.R;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserContactVolumeBean;
 import com.hokol.medium.http.bean.WUserContactVolumeBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
@@ -101,7 +101,7 @@ public class ContactVolumeRecordApplyedFragment extends BaseFragment
 	private void initData()
 	{
 		String userId = getArguments().getString(KeyContactApplyedUserId);
-		XHttpUtil.doUserContactVolumeApplied(new WUserContactVolumeBean(userId), new XHttpAdapter<VUserContactVolumeBean>()
+		XHttpUtil.doUserContactVolumeApplied(new WUserContactVolumeBean(userId), new HokolAdapter<VUserContactVolumeBean>()
 		{
 			@Override
 			public void onSuccess(VUserContactVolumeBean vUserContactVolumeBean)

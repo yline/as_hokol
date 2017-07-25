@@ -35,12 +35,6 @@ public class HokolHttp extends XHttp
 	}
 
 	@Override
-	public boolean isResponseJsonType()
-	{
-		return super.isResponseJsonType();
-	}
-
-	@Override
 	public boolean isResponseCache()
 	{
 		return super.isResponseCache();

@@ -15,9 +15,9 @@ import com.hokol.R;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserTaskCommentAssignedBean;
 import com.hokol.medium.http.bean.WUserTaskCommentAssignedBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
@@ -31,6 +31,11 @@ public class TaskScoreAssignedDetailActivity extends BaseAppCompatActivity
 	private static final String KeyAssignedTaskId = "TaskId";
 
 	private ScoreAssignedDetailAdapter assignedDetailAdapter;
+
+	public static void actionStart(Context context, String userId, String taskId)
+	{
+		context.startActivity(new Intent(context, TaskScoreAssignedDetailActivity.class).putExtra(KeyAssignedUserId, userId).putExtra(KeyAssignedTaskId, taskId));
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -70,7 +75,7 @@ public class TaskScoreAssignedDetailActivity extends BaseAppCompatActivity
 		String userId = getIntent().getStringExtra(KeyAssignedUserId);
 		String taskId = getIntent().getStringExtra(KeyAssignedTaskId);
 
-		XHttpUtil.doUserTaskCommentAssigned(new WUserTaskCommentAssignedBean(userId, taskId), new XHttpAdapter<VUserTaskCommentAssignedBean>()
+		XHttpUtil.doUserTaskCommentAssigned(new WUserTaskCommentAssignedBean(userId, taskId), new HokolAdapter<VUserTaskCommentAssignedBean>()
 		{
 			@Override
 			public void onSuccess(VUserTaskCommentAssignedBean vUserTaskCommentAssignedBean)
@@ -112,10 +117,5 @@ public class TaskScoreAssignedDetailActivity extends BaseAppCompatActivity
 			// 信息
 			holder.setText(R.id.circle_task_score_delivered_content, assignedBean.getUser_comment());
 		}
-	}
-
-	public static void actionStart(Context context, String userId, String taskId)
-	{
-		context.startActivity(new Intent(context, TaskScoreAssignedDetailActivity.class).putExtra(KeyAssignedUserId, userId).putExtra(KeyAssignedTaskId, taskId));
 	}
 }

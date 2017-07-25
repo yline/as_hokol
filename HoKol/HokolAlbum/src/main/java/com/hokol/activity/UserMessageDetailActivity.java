@@ -8,9 +8,9 @@ import android.view.View;
 import com.hokol.R;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.WUserSystemMessageSignReadBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.Calendar;
@@ -82,7 +82,7 @@ public class UserMessageDetailActivity extends BaseAppCompatActivity
 		// id
 		String userId = getIntent().getStringExtra(KeyMsgDetailUserId);
 		String msgId = getIntent().getStringExtra(KeyMsgDetailMsgId);
-		XHttpUtil.doUserSystemMessageSignRead(new WUserSystemMessageSignReadBean(userId, msgId), new XHttpAdapter<String>()
+		XHttpUtil.doUserSystemMessageSignRead(new WUserSystemMessageSignReadBean(userId, msgId), new HokolAdapter<String>()
 		{
 			@Override
 			public void onSuccess(String s)

@@ -21,12 +21,12 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskUserAcceptBean;
 import com.hokol.medium.http.bean.WTaskActionMasterTradeBean;
 import com.hokol.medium.http.bean.WTaskUserAcceptBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.layout.label.FlowLayout;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
@@ -112,7 +112,7 @@ public class TaskAssignedTradeSureDetailActivity extends BaseAppCompatActivity
 			public void onClick(View v)
 			{
 				String userId = AppStateManager.getInstance().getUserLoginId(TaskAssignedTradeSureDetailActivity.this);
-				XHttpUtil.doTaskActionMasterTrade(new WTaskActionMasterTradeBean(taskId, userId, tradeSureDetailAdapter.getRequestList()), new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionMasterTrade(new WTaskActionMasterTradeBean(taskId, userId, tradeSureDetailAdapter.getRequestList()), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -131,7 +131,7 @@ public class TaskAssignedTradeSureDetailActivity extends BaseAppCompatActivity
 
 		tradeSureDetailAdapter.setShowEmpty(false);
 		detailViewHolder.get(R.id.tv_task_assigned_trade_sure_detail_commit).setVisibility(View.GONE);
-		XHttpUtil.doTaskUserAcceptDetail(new WTaskUserAcceptBean(taskId, 0, DeleteConstant.defaultNumberSuper), new XHttpAdapter<VTaskUserAcceptBean>()
+		XHttpUtil.doTaskUserAcceptDetail(new WTaskUserAcceptBean(taskId, 0, DeleteConstant.defaultNumberSuper), new HokolAdapter<VTaskUserAcceptBean>()
 		{
 			@Override
 			public void onSuccess(VTaskUserAcceptBean vTaskUserAcceptBean)

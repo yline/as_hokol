@@ -15,10 +15,10 @@ import com.hokol.R;
 import com.hokol.application.AppStateManager;
 import com.hokol.fragment.MainMineFragment;
 import com.hokol.medium.http.XHttpUtil;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.DialogIosWidget;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.FileUtil;
 import com.yline.view.recycler.holder.ViewHolder;
@@ -105,7 +105,7 @@ public class UserDynamicPublishActivity extends BaseAppCompatActivity
 
 					if (zoomCode == MainMineFragment.KeyDynamicPictureZoomCode)
 					{
-						XHttpUtil.doDynamicPublish(userId, content, zoomFile, new XHttpAdapter<String>()
+						XHttpUtil.doDynamicPublish(userId, content, zoomFile, new HokolAdapter<String>()
 						{
 							@Override
 							public void onSuccess(String str)
@@ -116,7 +116,7 @@ public class UserDynamicPublishActivity extends BaseAppCompatActivity
 					}
 					else if (zoomCode == MainMineFragment.KeyPrivatePictureZoomCode)
 					{
-						XHttpUtil.doDynamicPrivatePublish(userId, content, zoomFile, new XHttpAdapter<String>()
+						XHttpUtil.doDynamicPrivatePublish(userId, content, zoomFile, new HokolAdapter<String>()
 						{
 							@Override
 							public void onSuccess(String s)

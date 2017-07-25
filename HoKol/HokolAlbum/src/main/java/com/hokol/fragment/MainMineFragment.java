@@ -24,11 +24,11 @@ import com.hokol.application.AppStateManager;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserAvatarBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.FlowWidget;
 import com.hokol.util.IntentUtil;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.FileUtil;
 import com.yline.utils.LogUtil;
@@ -370,7 +370,7 @@ public class MainMineFragment extends BaseFragment
 			if (null != avatarFile)
 			{
 				// 完成图片上传
-				XHttpUtil.doSettingUpdateAvatar(appStateManager.getUserLoginId(getContext()), avatarFile, new XHttpAdapter<VUserAvatarBean>()
+				XHttpUtil.doSettingUpdateAvatar(appStateManager.getUserLoginId(getContext()), avatarFile, new HokolAdapter<VUserAvatarBean>()
 				{
 					@Override
 					public void onSuccess(VUserAvatarBean vUserAvatarBean)

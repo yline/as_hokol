@@ -15,10 +15,10 @@ import com.hokol.R;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserContactVolumeBean;
 import com.hokol.medium.http.bean.WUserContactVolumeBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
@@ -107,7 +107,7 @@ public class ContactVolumeRecordUnapplyFragment extends BaseFragment
 		recordUnapplyAdapter.setShowEmpty(false);
 
 		String userId = getArguments().getString(KeyContactUnapplyUserId);
-		XHttpUtil.doUserContactVolumeUnapply(new WUserContactVolumeBean(userId), new XHttpAdapter<VUserContactVolumeBean>()
+		XHttpUtil.doUserContactVolumeUnapply(new WUserContactVolumeBean(userId), new HokolAdapter<VUserContactVolumeBean>()
 		{
 			@Override
 			public void onSuccess(VUserContactVolumeBean vUserContactVolumeBean)
@@ -132,6 +132,15 @@ public class ContactVolumeRecordUnapplyFragment extends BaseFragment
 		});
 	}
 
+	public interface OnLoadRecordFinishCallback
+	{
+		/**
+		 * @param number   加载的个数
+		 * @param position 对应TabLayout的位置
+		 */
+		void onLoadFinish(int number, int position);
+	}
+
 	private class VolumeRecordUnapplyAdapter extends WidgetRecyclerAdapter<VUserContactVolumeBean.VUserContactVolumeOneBean>
 	{
 		@Override
@@ -154,14 +163,5 @@ public class ContactVolumeRecordUnapplyFragment extends BaseFragment
 			long diffTime = expireTime - System.currentTimeMillis() / 1000;
 			holder.setText(R.id.tv_contact_volume_record_unpply_remainder, String.format("(还有%d天到期)", diffTime / 86400));
 		}
-	}
-
-	public interface OnLoadRecordFinishCallback
-	{
-		/**
-		 * @param number   加载的个数
-		 * @param position 对应TabLayout的位置
-		 */
-		void onLoadFinish(int number, int position);
 	}
 }

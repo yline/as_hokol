@@ -24,6 +24,7 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VDynamicUserAllBean;
 import com.hokol.medium.http.bean.WDynamicDeleteBean;
 import com.hokol.medium.http.bean.WDynamicUserAllBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
@@ -33,7 +34,6 @@ import com.hokol.util.IntentUtil;
 import com.hokol.viewhelper.MainCareHelper;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.dialog.ViewDialogFoot;
@@ -132,7 +132,7 @@ public class MainMineDynamicFragment extends BaseFragment
 			@Override
 			public void onDelete(RecyclerViewHolder viewHolder, VDynamicUserAllBean.VDynamicUserAllOneBean dynamicBean, final int position)
 			{
-				XHttpUtil.doDynamicDelete(new WDynamicDeleteBean(dynamicBean.getDt_id(), dynamicBean.getUser_id()), new XHttpAdapter<String>()
+				XHttpUtil.doDynamicDelete(new WDynamicDeleteBean(dynamicBean.getDt_id(), dynamicBean.getUser_id()), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -196,7 +196,7 @@ public class MainMineDynamicFragment extends BaseFragment
 		{
 			wDynamicUserAllBean = new WDynamicUserAllBean(userId, 0, DeleteConstant.defaultNumberNormal);
 			recyclerAdapter.setShowEmpty(false);
-			XHttpUtil.doDynamicUserAll(wDynamicUserAllBean, new XHttpAdapter<VDynamicUserAllBean>()
+			XHttpUtil.doDynamicUserAll(wDynamicUserAllBean, new HokolAdapter<VDynamicUserAllBean>()
 			{
 				@Override
 				public void onSuccess(VDynamicUserAllBean vDynamicUserAllBean)

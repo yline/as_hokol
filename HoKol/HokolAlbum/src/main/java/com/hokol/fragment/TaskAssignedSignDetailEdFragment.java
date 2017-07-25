@@ -17,11 +17,11 @@ import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskUserSignUpDetailBean;
 import com.hokol.medium.http.bean.WTaskActionMasterFinishBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.layout.label.FlowLayout;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
@@ -98,7 +98,7 @@ public class TaskAssignedSignDetailEdFragment extends BaseFragment
 			public void onClick(View v)
 			{
 				String userId = AppStateManager.getInstance().getUserLoginId(getContext());
-				XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionMasterFinish(new WTaskActionMasterFinishBean(userId, taskId), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)

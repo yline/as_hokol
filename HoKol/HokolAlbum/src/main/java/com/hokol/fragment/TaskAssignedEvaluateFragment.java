@@ -18,10 +18,10 @@ import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskUserPublishedBean;
 import com.hokol.medium.http.bean.WTaskUserPublishedBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
@@ -165,7 +165,7 @@ public class TaskAssignedEvaluateFragment extends BaseFragment implements TaskAs
 	public void onRefreshData(String userId, int start, int length)
 	{
 		userPublishedBean = new WTaskUserPublishedBean(userId, start, length);
-		XHttpUtil.doTaskUserPublishedEvaluate(userPublishedBean, new XHttpAdapter<VTaskUserPublishedBean>()
+		XHttpUtil.doTaskUserPublishedEvaluate(userPublishedBean, new HokolAdapter<VTaskUserPublishedBean>()
 		{
 			@Override
 			public void onSuccess(VTaskUserPublishedBean vTaskUserPublishedBean)

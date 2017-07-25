@@ -20,11 +20,11 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskUserDeliveredBean;
 import com.hokol.medium.http.bean.WTaskDeleteBean;
 import com.hokol.medium.http.bean.WTaskUserDeliveredBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
@@ -101,7 +101,7 @@ public class TaskDeliveredEvaluateFragment extends BaseFragment implements TaskA
 			@Override
 			public void onEvaluateDeleteClick(View view, String taskId)
 			{
-				XHttpUtil.doTaskDelete(new WTaskDeleteBean(userId, taskId, WTaskDeleteBean.TypeStaff), new XHttpAdapter<String>()
+				XHttpUtil.doTaskDelete(new WTaskDeleteBean(userId, taskId, WTaskDeleteBean.TypeStaff), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -182,7 +182,7 @@ public class TaskDeliveredEvaluateFragment extends BaseFragment implements TaskA
 	{
 		deliveredEvaluateAdapter.setShowEmpty(false);
 		deliveredEvaluateBean = new WTaskUserDeliveredBean(userId, WTaskUserDeliveredBean.TypeEvaluate, start, length);
-		XHttpUtil.doTaskUserDelivered(deliveredEvaluateBean, new XHttpAdapter<VTaskUserDeliveredBean>()
+		XHttpUtil.doTaskUserDelivered(deliveredEvaluateBean, new HokolAdapter<VTaskUserDeliveredBean>()
 		{
 			@Override
 			public void onSuccess(VTaskUserDeliveredBean vTaskUserDeliveredBean)

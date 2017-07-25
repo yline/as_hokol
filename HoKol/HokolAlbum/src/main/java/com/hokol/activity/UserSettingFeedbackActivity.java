@@ -9,10 +9,10 @@ import android.view.View;
 import com.hokol.R;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.WSettingSubmitProposalBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.RadioGroupNestLinear;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
 
 public class UserSettingFeedbackActivity extends BaseAppCompatActivity
@@ -24,6 +24,11 @@ public class UserSettingFeedbackActivity extends BaseAppCompatActivity
 	private int typeOfAdvice;
 
 	private String userId;
+
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, UserSettingFeedbackActivity.class).putExtra(KeyFeedbackUserId, userId));
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -93,7 +98,7 @@ public class UserSettingFeedbackActivity extends BaseAppCompatActivity
 				}
 
 				String contactWay = viewHolder.getText(R.id.et_user_setting_contact);
-				XHttpUtil.doSettingSubmitProposal(new WSettingSubmitProposalBean(userId, typeOfAdvice, content, contactWay), new XHttpAdapter<String>()
+				XHttpUtil.doSettingSubmitProposal(new WSettingSubmitProposalBean(userId, typeOfAdvice, content, contactWay), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -105,15 +110,10 @@ public class UserSettingFeedbackActivity extends BaseAppCompatActivity
 			}
 		});
 	}
-
+	
 	private void initData()
 	{
 		userId = getIntent().getStringExtra(KeyFeedbackUserId);
 		typeOfAdvice = WSettingSubmitProposalBean.TypeImprove;
-	}
-	
-	public static void actionStart(Context context, String userId)
-	{
-		context.startActivity(new Intent(context, UserSettingFeedbackActivity.class).putExtra(KeyFeedbackUserId, userId));
 	}
 }

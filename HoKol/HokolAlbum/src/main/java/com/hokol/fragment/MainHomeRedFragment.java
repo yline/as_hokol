@@ -21,6 +21,7 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VHomeMainBean;
 import com.hokol.medium.http.bean.VRecommendHomeBean;
 import com.hokol.medium.http.bean.WHomeMainBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.ADWidget;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
@@ -28,7 +29,6 @@ import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.hokol.util.IntentUtil;
 import com.hokol.viewhelper.MainHomeHelper;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
@@ -164,7 +164,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 		doRequest();
 
 		// 请求 头部数据
-		XHttpUtil.doRecommendHome(new XHttpAdapter<VRecommendHomeBean>()
+		XHttpUtil.doRecommendHome(new HokolAdapter<VRecommendHomeBean>()
 		{
 			@Override
 			public void onSuccess(final VRecommendHomeBean vRecommendHomeBean)
@@ -224,7 +224,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 	private void doRequest()
 	{
 		recycleAdapter.setShowEmpty(false);
-		XHttpUtil.doHomeMain(homeRedBean, new XHttpAdapter<VHomeMainBean>()
+		XHttpUtil.doHomeMain(homeRedBean, new HokolAdapter<VHomeMainBean>()
 		{
 			@Override
 			public void onSuccess(VHomeMainBean vHomeMainBean)

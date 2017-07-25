@@ -18,9 +18,9 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserCreditBean;
 import com.hokol.medium.http.bean.VUserTaskScoreDeliveredBean;
 import com.hokol.medium.http.bean.WUserTaskScoreDeliveredBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 import com.yline.view.recycler.holder.ViewHolder;
@@ -107,7 +107,7 @@ public class UserTaskScoreDeliveredFragment extends BaseFragment
 		updateSubCredit();
 
 		userId = AppStateManager.getInstance().getUserLoginId(getContext());
-		XHttpUtil.doUserTaskScoreDelivered(new WUserTaskScoreDeliveredBean(userId), new XHttpAdapter<VUserTaskScoreDeliveredBean>()
+		XHttpUtil.doUserTaskScoreDelivered(new WUserTaskScoreDeliveredBean(userId), new HokolAdapter<VUserTaskScoreDeliveredBean>()
 		{
 			@Override
 			public void onSuccess(VUserTaskScoreDeliveredBean vUserTaskScoreDeliveredBean)

@@ -12,8 +12,8 @@ import com.hokol.R;
 import com.hokol.fragment.UserInfoUpdateAreaFragment;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VAreaAllBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 
 import java.util.ArrayList;
 
@@ -24,6 +24,12 @@ public class UserInfoUpdateAreaActivity extends BaseAppCompatActivity implements
 	private VAreaAllBean areaAllBean;
 
 	private String firstSelectString;
+
+	public static void actionStartForResult(Activity activity, int requestCode)
+	{
+		Intent intent = new Intent(activity, UserInfoUpdateAreaActivity.class);
+		activity.startActivityForResult(intent, requestCode);
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -45,7 +51,7 @@ public class UserInfoUpdateAreaActivity extends BaseAppCompatActivity implements
 		areaFragment.setOnItemClickListener(this);
 		getSupportFragmentManager().beginTransaction().add(R.id.fl_fragment, areaFragment).commit();
 
-		XHttpUtil.doAreaAll(new XHttpAdapter<VAreaAllBean>()
+		XHttpUtil.doAreaAll(new HokolAdapter<VAreaAllBean>()
 		{
 			@Override
 			public void onSuccess(VAreaAllBean vAreaAllBean)
@@ -76,8 +82,7 @@ public class UserInfoUpdateAreaActivity extends BaseAppCompatActivity implements
 			String pCode = areaAllBean.getProvinceCode(firstSelectString);
 			areaFragment.refresh(areaAllBean.getCityNameList(pCode));
 			areaFragment.setOnItemClickListener(this);
-			getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, areaFragment)
-					.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).addToBackStack("second").commit();
+			getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, areaFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).addToBackStack("second").commit();
 		}
 		else if (count == 1) // 第二选择
 		{
@@ -95,11 +100,5 @@ public class UserInfoUpdateAreaActivity extends BaseAppCompatActivity implements
 			UserInfoActivity.actionResultUpdateStrList(UserInfoUpdateAreaActivity.this, areaResultList);
 			this.finish();
 		}
-	}
-
-	public static void actionStartForResult(Activity activity, int requestCode)
-	{
-		Intent intent = new Intent(activity, UserInfoUpdateAreaActivity.class);
-		activity.startActivityForResult(intent, requestCode);
 	}
 }

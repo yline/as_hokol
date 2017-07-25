@@ -8,19 +8,16 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
-import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
 import com.hokol.medium.http.bean.WEnterLoginPhonePwdBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
 import com.yline.view.text.helper.PhonePwdHelper;
-
-import org.json.JSONException;
 
 /**
  * 登入流程，手机号+ 密码登录
@@ -165,7 +162,7 @@ public class EnterLoginPhonePwdActivity extends BaseAppCompatActivity
 	private void doPost(String username, String password)
 	{
 		WEnterLoginPhonePwdBean loginPhonePwdBean = new WEnterLoginPhonePwdBean(username, password);
-		XHttpUtil.doEnterLoginPhonePwd(loginPhonePwdBean, new XHttpAdapter<VEnterLoginPhonePwdBean>()
+		XHttpUtil.doEnterLoginPhonePwd(loginPhonePwdBean, new HokolAdapter<VEnterLoginPhonePwdBean>()
 		{
 			@Override
 			public void onSuccess(VEnterLoginPhonePwdBean vEnterLoginPhonePwdBean)
@@ -175,15 +172,15 @@ public class EnterLoginPhonePwdActivity extends BaseAppCompatActivity
 			}
 
 			@Override
-			public void onSuccess(int code, String data) throws JSONException, JsonParseException
+			public void onSuccess(int code, VEnterLoginPhonePwdBean vEnterLoginPhonePwdBean)
 			{
-				super.onSuccess(code, data);
+				super.onSuccess(code, vEnterLoginPhonePwdBean);
 				if (code != REQUEST_SUCCESS_CODE)
 				{
 					SDKManager.toast("用户名或密码错误");
 				}
 			}
-
+			
 			@Override
 			public void onFailure(Exception ex, boolean isDebug)
 			{

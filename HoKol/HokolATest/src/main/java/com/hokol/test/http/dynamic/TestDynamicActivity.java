@@ -22,11 +22,16 @@ import com.hokol.medium.http.bean.WDynamicUserAllBean;
 import com.hokol.medium.http.bean.WDynamicUserDetailBean;
 import com.hokol.medium.http.bean.WDynamicUserPrivateAllBean;
 import com.hokol.medium.http.bean.WUserCareAllBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.test.common.BaseTestActivity;
-import com.yline.http.XHttpAdapter;
 
 public class TestDynamicActivity extends BaseTestActivity
 {
+	public static void actionStart(Context context)
+	{
+		context.startActivity(new Intent(context, TestDynamicActivity.class));
+	}
+
 	/**
 	 * 发布动态
 	 */
@@ -48,7 +53,7 @@ public class TestDynamicActivity extends BaseTestActivity
 		final EditText editTextTwo = addEditNumber("被查看用户ID", "3");
 		final EditText editTextThree = addEditNumber("开始号", "0");
 		final EditText editTextFour = addEditNumber("请求长度", "0");
-		
+
 		addButton("请求用户多条私密动态信息", new View.OnClickListener()
 		{
 			@Override
@@ -58,7 +63,7 @@ public class TestDynamicActivity extends BaseTestActivity
 				String user_id_find = editTextTwo.getText().toString().trim();
 				int num1 = parseInt(editTextThree, 0);
 				int length = parseInt(editTextFour, 0);
-				XHttpUtil.doDynamicUserPrivateAll(new WDynamicUserPrivateAllBean(user_id, user_id_find, num1, length), new XHttpAdapter<VDynamicUserPrivateAllBean>()
+				XHttpUtil.doDynamicUserPrivateAll(new WDynamicUserPrivateAllBean(user_id, user_id_find, num1, length), new HokolAdapter<VDynamicUserPrivateAllBean>()
 				{
 					@Override
 					public void onSuccess(VDynamicUserPrivateAllBean vDynamicUserPrivateAllBean)
@@ -90,7 +95,7 @@ public class TestDynamicActivity extends BaseTestActivity
 				final String lengthString = editTextThree.getText().toString().trim();
 				final int length = Integer.parseInt(lengthString);
 
-				XHttpUtil.doDynamicUserAll(new WDynamicUserAllBean(user_id, num1, length), new XHttpAdapter<VDynamicUserAllBean>()
+				XHttpUtil.doDynamicUserAll(new WDynamicUserAllBean(user_id, num1, length), new HokolAdapter<VDynamicUserAllBean>()
 				{
 					@Override
 					public void onSuccess(VDynamicUserAllBean vDynamicUserAllBean)
@@ -114,7 +119,7 @@ public class TestDynamicActivity extends BaseTestActivity
 				final String dt_id = editTextOne.getText().toString().trim();
 				final String user_id = editTextTwo.getText().toString().trim();
 
-				XHttpUtil.doDynamicSingle(new WDynamicCareSingleBean(user_id, dt_id), new XHttpAdapter<VDynamicCareSingleBean>()
+				XHttpUtil.doDynamicSingle(new WDynamicCareSingleBean(user_id, dt_id), new HokolAdapter<VDynamicCareSingleBean>()
 				{
 					@Override
 					public void onSuccess(VDynamicCareSingleBean vDynamicCareSingleBean)
@@ -142,7 +147,7 @@ public class TestDynamicActivity extends BaseTestActivity
 				final boolean praiseAction = editPraise3.getText().toString().trim().equals("0") ? true : false;
 				final int dynamicPraise = praiseAction ? 1 : 0;
 
-				XHttpUtil.doDynamicPraiseSingle(new WDynamicPraiseSingleBean(userId, dynamicId, dynamicPraise), new XHttpAdapter<VDynamicPraiseSingleBean>()
+				XHttpUtil.doDynamicPraiseSingle(new WDynamicPraiseSingleBean(userId, dynamicId, dynamicPraise), new HokolAdapter<VDynamicPraiseSingleBean>()
 				{
 					@Override
 					public void onSuccess(VDynamicPraiseSingleBean vDynamicPraiseSingleBean)
@@ -153,7 +158,6 @@ public class TestDynamicActivity extends BaseTestActivity
 			}
 		});
 	}
-
 
 	private void testcare_peo_info()
 	{
@@ -173,7 +177,7 @@ public class TestDynamicActivity extends BaseTestActivity
 				String lengthString = editThree.getText().toString().trim();
 				final int length = Integer.parseInt(lengthString);
 
-				XHttpUtil.doUserCareAll(new WUserCareAllBean(user_id, num1, length), new XHttpAdapter<VUserCareAllBean>()
+				XHttpUtil.doUserCareAll(new WUserCareAllBean(user_id, num1, length), new HokolAdapter<VUserCareAllBean>()
 				{
 					@Override
 					public void onSuccess(VUserCareAllBean vUserCareAllBean)
@@ -198,7 +202,7 @@ public class TestDynamicActivity extends BaseTestActivity
 				final String user_id = editUser1.getText().toString().trim();
 				final String user_id_find = editUser2.getText().toString().trim();
 
-				XHttpUtil.doDynamicUserDetail(new WDynamicUserDetailBean(user_id, user_id_find), new XHttpAdapter<VDynamicUserDetailBean>()
+				XHttpUtil.doDynamicUserDetail(new WDynamicUserDetailBean(user_id, user_id_find), new HokolAdapter<VDynamicUserDetailBean>()
 				{
 					@Override
 					public void onSuccess(VDynamicUserDetailBean vDynamicUserDetailBean)
@@ -224,7 +228,7 @@ public class TestDynamicActivity extends BaseTestActivity
 				final int start = Integer.parseInt(editCare2.getText().toString().trim());
 				final int length = Integer.parseInt(editCare3.getText().toString().trim());
 
-				XHttpUtil.doDynamicCareAll(new WDynamicCareAllBean(userId, start, length), new XHttpAdapter<VDynamicCareAllBean>()
+				XHttpUtil.doDynamicCareAll(new WDynamicCareAllBean(userId, start, length), new HokolAdapter<VDynamicCareAllBean>()
 				{
 					@Override
 					public void onSuccess(VDynamicCareAllBean vDynamicCareAllBean)
@@ -235,7 +239,7 @@ public class TestDynamicActivity extends BaseTestActivity
 			}
 		});
 	}
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -248,10 +252,5 @@ public class TestDynamicActivity extends BaseTestActivity
 		testdt_one();
 		testdt_nums();
 		testdt_private_nums();
-	}
-	
-	public static void actionStart(Context context)
-	{
-		context.startActivity(new Intent(context, TestDynamicActivity.class));
 	}
 }

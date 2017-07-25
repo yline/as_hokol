@@ -17,11 +17,11 @@ import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskUserAcceptBean;
 import com.hokol.medium.http.bean.WTaskUserAcceptBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.layout.label.FlowLayout;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
@@ -101,7 +101,7 @@ public class TaskAssignedTradeDetailActivity extends BaseAppCompatActivity
 	{
 		String taskId = getIntent().getStringExtra(KeyTaskId);
 		tradeDetailAdapter.setShowEmpty(false);
-		XHttpUtil.doTaskUserAcceptDetail(new WTaskUserAcceptBean(taskId, 0, DeleteConstant.defaultNumberLarge), new XHttpAdapter<VTaskUserAcceptBean>()
+		XHttpUtil.doTaskUserAcceptDetail(new WTaskUserAcceptBean(taskId, 0, DeleteConstant.defaultNumberLarge), new HokolAdapter<VTaskUserAcceptBean>()
 		{
 			@Override
 			public void onSuccess(VTaskUserAcceptBean vTaskUserAcceptBean)

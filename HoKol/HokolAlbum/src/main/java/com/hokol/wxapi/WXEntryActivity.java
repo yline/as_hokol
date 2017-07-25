@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
 import com.hokol.activity.EnterLoginThirdActivity;
 import com.hokol.activity.MainActivity;
 import com.hokol.application.IApplication;
@@ -15,16 +14,14 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VWeChatLoginBean;
 import com.hokol.medium.http.bean.VWeChatLoginFirstBean;
 import com.hokol.medium.http.bean.WWeChatLoginBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.yline.application.BaseApplication;
 import com.yline.application.SDKManager;
-import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
-
-import org.json.JSONException;
 
 /**
  * 05:53:35:28:A5:7A:E6:35:20:F8:B2:99:4F:3D:73:69
@@ -82,23 +79,24 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler
 			case 0:
 				final SendAuth.Resp resp = (SendAuth.Resp) baseResp;
 				LogFileUtil.v("onResp resp code = " + resp.code + ", state = " + resp.state + ", lang = " + resp.lang + ", country = " + resp.country);
-				XHttpUtil.doWeChatLogin(new WWeChatLoginBean(resp.code), new XHttpAdapter<VWeChatLoginBean>()
+				XHttpUtil.doWeChatLogin(new WWeChatLoginBean(resp.code), new HokolAdapter<String>()
 				{
 					@Override
-					public void onSuccess(VWeChatLoginBean vWeChatLoginBean)
+					public void onSuccess(String s)
 					{
+						VWeChatLoginBean vWeChatLoginBean = new Gson().fromJson(s, VWeChatLoginBean.class);
 						MainActivity.actionStart(WXEntryActivity.this, vWeChatLoginBean);
 						finish();
 					}
 
 					@Override
-					public void onSuccess(int code, String data) throws JSONException, JsonParseException
+					public void onSuccess(int code, String s)
 					{
-						super.onSuccess(code, data);
+						super.onSuccess(code, s);
 						// 是注册的逻辑
 						if (WWeChatLoginBean.TypeRegister == code)
 						{
-							VWeChatLoginFirstBean result = new Gson().fromJson(data, VWeChatLoginFirstBean.class);
+							VWeChatLoginFirstBean result = new Gson().fromJson(s, VWeChatLoginFirstBean.class);
 							if (null != result)
 							{
 								EnterLoginThirdActivity.actionStart(WXEntryActivity.this, result.getUser_id());

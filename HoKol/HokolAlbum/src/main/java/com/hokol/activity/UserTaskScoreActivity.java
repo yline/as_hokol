@@ -16,9 +16,9 @@ import com.hokol.fragment.UserTaskScoreDeliveredFragment;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserCreditBean;
 import com.hokol.medium.http.bean.WUserCreditBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.ArrayList;
@@ -39,6 +39,11 @@ public class UserTaskScoreActivity extends BaseAppCompatActivity
 	private UserTaskScoreAssignedFragment assignedFragment;
 
 	private UserTaskScoreDeliveredFragment deliveredFragment;
+
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, UserTaskScoreActivity.class).putExtra(KeyUserTaskScoreUserId, userId));
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -104,7 +109,7 @@ public class UserTaskScoreActivity extends BaseAppCompatActivity
 	private void initData()
 	{
 		String userId = getIntent().getStringExtra(KeyUserTaskScoreUserId);
-		XHttpUtil.doUserCredit(new WUserCreditBean(userId), new XHttpAdapter<VUserCreditBean>()
+		XHttpUtil.doUserCredit(new WUserCreditBean(userId), new HokolAdapter<VUserCreditBean>()
 		{
 			@Override
 			public void onSuccess(VUserCreditBean vUserCreditBean)
@@ -118,10 +123,5 @@ public class UserTaskScoreActivity extends BaseAppCompatActivity
 				deliveredFragment.updateSubCredit(subBean);
 			}
 		});
-	}
-
-	public static void actionStart(Context context, String userId)
-	{
-		context.startActivity(new Intent(context, UserTaskScoreActivity.class).putExtra(KeyUserTaskScoreUserId, userId));
 	}
 }

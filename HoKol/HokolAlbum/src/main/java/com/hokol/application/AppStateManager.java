@@ -302,7 +302,7 @@ public class AppStateManager
 		String cName = AppStateManager.getInstance().getUserCityName(context);
 		String pCode = AppStateManager.getInstance().getUserProvinceCode(context);
 		String pName = AppStateManager.getInstance().getUserProvinceName(context);
-
+		
 		String userSign = AppStateManager.getInstance().getUserSign(context);
 		ArrayList<Integer> userTagList = AppStateManager.getInstance().getUserLoginLabelInt(context);
 
@@ -397,7 +397,7 @@ public class AppStateManager
 		SPUtil.put(context, KeyUserFansNum, 0, FileName);
 		SPUtil.put(context, KeyUserCareNum, 0, FileName);
 		SPUtil.put(context, KeyUserPraiseNum, 0, FileName);
-		SPUtil.put(context, KeyUserCoinNum, 0, FileName);
+		SPUtil.put(context, KeyUserCoinNum, 0f, FileName);
 		SPUtil.put(context, KeyUserVipLevel, 0, FileName);
 		SPUtil.put(context, KeyUserVipUrl, "", FileName);
 	}

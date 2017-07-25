@@ -15,8 +15,8 @@ import com.hokol.medium.http.bean.WUserCoinGiftBean;
 import com.hokol.medium.http.bean.WUserFansAllBean;
 import com.hokol.medium.http.bean.WUserMessageSystemBean;
 import com.hokol.medium.http.bean.WUserTaskCollectionBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.test.common.BaseTestActivity;
-import com.yline.http.XHttpAdapter;
 
 public class TestUserActivity extends BaseTestActivity
 {
@@ -41,10 +41,10 @@ public class TestUserActivity extends BaseTestActivity
 				int receiverLength = parseInt(editTextThree, 23);
 
 				WUserMessageSystemBean wUserMessageBean = new WUserMessageSystemBean(userId, receiverNum, receiverLength);
-				XHttpUtil.doUserMessageSystem(wUserMessageBean, new XHttpAdapter<VUserMessageSystemBean>()
+				XHttpUtil.doUserMessageSystem(wUserMessageBean, new HokolAdapter<VUserMessageSystemBean>()
 				{
 					@Override
-					public void onSuccess(VUserMessageSystemBean vUserMessageBean)
+					public void onSuccess(VUserMessageSystemBean vUserMessageSystemBean)
 					{
 
 					}
@@ -68,7 +68,7 @@ public class TestUserActivity extends BaseTestActivity
 				String receiverUserId = editTextTwo.getText().toString().trim();
 				String dynamicId = editTextThree.getText().toString().trim();
 				int coinNum = parseInt(editTextFour, 0);
-				XHttpUtil.doUserCoinGift(new WUserCoinGiftBean(userId, receiverUserId, coinNum), new XHttpAdapter<String>()
+				XHttpUtil.doUserCoinGift(new WUserCoinGiftBean(userId, receiverUserId, coinNum), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -94,7 +94,7 @@ public class TestUserActivity extends BaseTestActivity
 				String user_id_other = editTextTwo.getText().toString().trim();
 				int care = parseInt(editTextThree, 0);
 
-				XHttpUtil.doUserCareOrCancel(new WUserCareOrCancelBean(user_id, user_id_other, care), new XHttpAdapter<String>()
+				XHttpUtil.doUserCareOrCancel(new WUserCareOrCancelBean(user_id, user_id_other, care), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -120,10 +120,10 @@ public class TestUserActivity extends BaseTestActivity
 				int num1 = parseInt(editTextTwo, 0);
 				int length = parseInt(editTextThree, 3);
 
-				XHttpUtil.doUserCollection(new WUserTaskCollectionBean(user_id, num1, length), new XHttpAdapter<VUserTaskCollectionBean>()
+				XHttpUtil.doUserCollection(new WUserTaskCollectionBean(user_id, num1, length), new HokolAdapter<VUserTaskCollectionBean>()
 				{
 					@Override
-					public void onSuccess(VUserTaskCollectionBean vUserCollectionBean)
+					public void onSuccess(VUserTaskCollectionBean vUserTaskCollectionBean)
 					{
 
 					}
@@ -146,7 +146,7 @@ public class TestUserActivity extends BaseTestActivity
 				int num1 = parseInt(editTextTwo, 0);
 				int length = parseInt(editTextThree, 3);
 
-				XHttpUtil.doUserFansAll(new WUserFansAllBean(user_id, num1, length), new XHttpAdapter<VUserFansAllBean>()
+				XHttpUtil.doUserFansAll(new WUserFansAllBean(user_id, num1, length), new HokolAdapter<VUserFansAllBean>()
 				{
 					@Override
 					public void onSuccess(VUserFansAllBean vUserFansAllBean)

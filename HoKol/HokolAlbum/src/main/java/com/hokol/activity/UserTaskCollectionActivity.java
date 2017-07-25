@@ -19,12 +19,12 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserTaskCollectionBean;
 import com.hokol.medium.http.bean.WTaskActionStaffSignUpBean;
 import com.hokol.medium.http.bean.WUserTaskCollectionBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.DialogIosWidget;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
@@ -109,7 +109,7 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 						@Override
 						public void onClick(View v)
 						{
-							XHttpUtil.doTaskActionStaffSignUp(new WTaskActionStaffSignUpBean(userId, taskId), new XHttpAdapter<String>()
+							XHttpUtil.doTaskActionStaffSignUp(new WTaskActionStaffSignUpBean(userId, taskId), new HokolAdapter<String>()
 							{
 								@Override
 								public void onSuccess(String s)
@@ -131,7 +131,7 @@ public class UserTaskCollectionActivity extends BaseAppCompatActivity
 		WUserTaskCollectionBean collectionBean = new WUserTaskCollectionBean(userId, 0, DeleteConstant.defaultNumberLarge);
 
 		collectionAdapter.setShowEmpty(false);
-		XHttpUtil.doUserCollection(collectionBean, new XHttpAdapter<VUserTaskCollectionBean>()
+		XHttpUtil.doUserCollection(collectionBean, new HokolAdapter<VUserTaskCollectionBean>()
 		{
 			@Override
 			public void onSuccess(VUserTaskCollectionBean vUserTaskCollectionBean)

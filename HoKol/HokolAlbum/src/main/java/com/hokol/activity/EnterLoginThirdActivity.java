@@ -9,20 +9,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VWeChatRegisterInfoBean;
 import com.hokol.medium.http.bean.WWeChatRegisterICodeBean;
 import com.hokol.medium.http.bean.WWeChatRegisterInfoBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
 import com.yline.view.text.helper.PhoneICodeHelper;
 import com.yline.view.text.helper.PhonePwdCodeHelper;
-
-import org.json.JSONException;
 
 public class EnterLoginThirdActivity extends BaseAppCompatActivity
 {
@@ -118,7 +115,7 @@ public class EnterLoginThirdActivity extends BaseAppCompatActivity
 				if (isMatch && !isCountDown)
 				{
 					String phoneNumber = etPhone.getText().toString().trim();
-					XHttpUtil.doWeChatRegisterICode(new WWeChatRegisterICodeBean(phoneNumber), new XHttpAdapter<String>()
+					XHttpUtil.doWeChatRegisterICode(new WWeChatRegisterICodeBean(phoneNumber), new HokolAdapter<String>()
 					{
 						@Override
 						public void onSuccess(String s)
@@ -127,7 +124,7 @@ public class EnterLoginThirdActivity extends BaseAppCompatActivity
 						}
 
 						@Override
-						public void onSuccess(int code, String data) throws JSONException, JsonParseException
+						public void onSuccess(int code, String data)
 						{
 							super.onSuccess(code, data);
 							if (code == 2001)
@@ -178,7 +175,7 @@ public class EnterLoginThirdActivity extends BaseAppCompatActivity
 					registerInfoBean.setCheck_code(userCode);
 					registerInfoBean.setUser_pwd(userPwd);
 					
-					XHttpUtil.doWeChatRegisterInfo(registerInfoBean, new XHttpAdapter<VWeChatRegisterInfoBean>()
+					XHttpUtil.doWeChatRegisterInfo(registerInfoBean, new HokolAdapter<VWeChatRegisterInfoBean>()
 					{
 						@Override
 						public void onSuccess(VWeChatRegisterInfoBean vWeChatRegisterInfoBean)

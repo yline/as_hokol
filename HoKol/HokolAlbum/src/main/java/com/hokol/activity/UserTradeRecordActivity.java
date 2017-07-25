@@ -11,10 +11,10 @@ import com.hokol.R;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserVipRechargeRecordBean;
 import com.hokol.medium.http.bean.WUserVipRechargeRecordBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.List;
@@ -24,6 +24,11 @@ public class UserTradeRecordActivity extends BaseAppCompatActivity
 	private static final String KeyTradeRecordUserId = "TradeRecordUserId";
 
 	private TradeRecordAdapter tradeRecordAdapter;
+
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, UserTradeRecordActivity.class).putExtra(KeyTradeRecordUserId, userId));
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -58,7 +63,7 @@ public class UserTradeRecordActivity extends BaseAppCompatActivity
 		tradeRecordAdapter.setShowEmpty(false);
 		String userId = getIntent().getStringExtra(KeyTradeRecordUserId);
 
-		XHttpUtil.doUserVipRechargeRecord(new WUserVipRechargeRecordBean(userId), new XHttpAdapter<VUserVipRechargeRecordBean>()
+		XHttpUtil.doUserVipRechargeRecord(new WUserVipRechargeRecordBean(userId), new HokolAdapter<VUserVipRechargeRecordBean>()
 		{
 			@Override
 			public void onSuccess(VUserVipRechargeRecordBean vUserVipRechargeRecordBean)
@@ -71,7 +76,7 @@ public class UserTradeRecordActivity extends BaseAppCompatActivity
 			}
 		});
 	}
-
+	
 	private class TradeRecordAdapter extends WidgetRecyclerAdapter<VUserVipRechargeRecordBean.VUserVipRechargeRecordOneBean>
 	{
 		@Override
@@ -139,10 +144,5 @@ public class UserTradeRecordActivity extends BaseAppCompatActivity
 			}
 
 		}
-	}
-	
-	public static void actionStart(Context context, String userId)
-	{
-		context.startActivity(new Intent(context, UserTradeRecordActivity.class).putExtra(KeyTradeRecordUserId, userId));
 	}
 }

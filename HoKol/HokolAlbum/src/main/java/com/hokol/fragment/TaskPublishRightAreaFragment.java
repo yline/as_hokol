@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import com.hokol.R;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VAreaAllBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.FlowAbleWidget;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.view.layout.label.FlowLayout;
 import com.yline.view.layout.label.LabelAdapter;
@@ -37,15 +37,17 @@ public class TaskPublishRightAreaFragment extends BaseFragment
 
 	private String pName, cName;
 
+	private OnPublishRightAreaCallback onPublishAreaCallback;
+	
 	public static TaskPublishRightAreaFragment newInstance()
 	{
 		Bundle args = new Bundle();
-		
+
 		TaskPublishRightAreaFragment fragment = new TaskPublishRightAreaFragment();
 		fragment.setArguments(args);
 		return fragment;
 	}
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
@@ -174,7 +176,7 @@ public class TaskPublishRightAreaFragment extends BaseFragment
 
 	private void initData()
 	{
-		XHttpUtil.doAreaAll(new XHttpAdapter<VAreaAllBean>()
+		XHttpUtil.doAreaAll(new HokolAdapter<VAreaAllBean>()
 		{
 			@Override
 			public void onSuccess(VAreaAllBean vAreaAllBean)
@@ -201,8 +203,6 @@ public class TaskPublishRightAreaFragment extends BaseFragment
 			}
 		});
 	}
-
-	private OnPublishRightAreaCallback onPublishAreaCallback;
 
 	public void setOnPublishAreaCallback(OnPublishRightAreaCallback onPublishAreaCallback)
 	{

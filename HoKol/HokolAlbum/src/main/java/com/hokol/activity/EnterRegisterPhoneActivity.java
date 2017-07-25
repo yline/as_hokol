@@ -12,20 +12,17 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.WEnterCodeRegisterBean;
 import com.hokol.medium.http.bean.WEnterRegisterBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.DialogIosWidget;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
 import com.yline.view.text.helper.PhoneICodeHelper;
 import com.yline.view.text.helper.PhonePwdHelper;
-
-import org.json.JSONException;
 
 public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 {
@@ -61,7 +58,7 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 			}
 		});
 
-		// 登录按钮
+		// 注册按钮
 		viewHolder.setOnClickListener(R.id.btn_register_phone_action_next, new View.OnClickListener()
 		{
 			@Override
@@ -72,7 +69,7 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 					final String phoneNumber = viewHolder.getText(R.id.et_enter_register_phone_username);
 					String identifyCode = viewHolder.getText(R.id.et_register_phone_password);
 
-					XHttpUtil.doEnterRegister(new WEnterRegisterBean(phoneNumber, identifyCode), new XHttpAdapter<String>()
+					XHttpUtil.doEnterRegister(new WEnterRegisterBean(phoneNumber, identifyCode), new HokolAdapter<String>()
 					{
 						@Override
 						public void onSuccess(String s)
@@ -81,7 +78,7 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 						}
 
 						@Override
-						public void onSuccess(int code, String data) throws JSONException, JsonParseException
+						public void onSuccess(int code, String data)
 						{
 							super.onSuccess(code, data);
 							if (code != REQUEST_SUCCESS_CODE)
@@ -163,7 +160,7 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 				if (isMatch && !isCountDown)
 				{
 					String phoneNumber = viewHolder.getText(R.id.et_enter_register_phone_username);
-					XHttpUtil.doEnterCodeRegister(new WEnterCodeRegisterBean(phoneNumber), new XHttpAdapter<String>()
+					XHttpUtil.doEnterCodeRegister(new WEnterCodeRegisterBean(phoneNumber), new HokolAdapter<String>()
 					{
 						@Override
 						public void onSuccess(String s)
@@ -172,7 +169,7 @@ public class EnterRegisterPhoneActivity extends BaseAppCompatActivity
 						}
 
 						@Override
-						public void onSuccess(int code, String data) throws JSONException, JsonParseException
+						public void onSuccess(int code, String data)
 						{
 							super.onSuccess(code, data);
 							if (3001 == code)

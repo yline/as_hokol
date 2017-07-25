@@ -12,9 +12,9 @@ import com.hokol.R;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.WEnterCodeUpdatePhoneBean;
 import com.hokol.medium.http.bean.WEnterPhoneUpdateBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
 import com.yline.view.text.helper.PhoneICodeHelper;
 import com.yline.view.text.helper.PhonePwdHelper;
@@ -105,7 +105,7 @@ public class EnterUpdatePhoneActivity extends BaseAppCompatActivity
 			public void onIdentifyClick(View view, boolean isMatch, boolean isCountDown)
 			{
 				String phoneNumber = viewHolder.getText(R.id.et_enter_update_phone_username);
-				XHttpUtil.doEnterCodeUpdatePhone(new WEnterCodeUpdatePhoneBean(phoneNumber), new XHttpAdapter<String>()
+				XHttpUtil.doEnterCodeUpdatePhone(new WEnterCodeUpdatePhoneBean(phoneNumber), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -151,7 +151,7 @@ public class EnterUpdatePhoneActivity extends BaseAppCompatActivity
 					String phoneNumber = viewHolder.getText(R.id.et_enter_update_phone_username);
 					String code = viewHolder.getText(R.id.et_register_phone_identify);
 
-					XHttpUtil.doEnterPhoneUpdate(new WEnterPhoneUpdateBean(userId, phoneNumber, code), new XHttpAdapter<String>()
+					XHttpUtil.doEnterPhoneUpdate(new WEnterPhoneUpdateBean(userId, phoneNumber, code), new HokolAdapter<String>()
 					{
 						@Override
 						public void onSuccess(String s)

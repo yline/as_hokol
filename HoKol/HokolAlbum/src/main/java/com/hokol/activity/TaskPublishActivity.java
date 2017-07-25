@@ -27,10 +27,10 @@ import com.hokol.fragment.TaskPublishRightStyleFragment;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.WTaskMainPublishBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.DialogIosWidget;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.utils.KeyBoardUtil;
 import com.yline.view.recycler.holder.ViewHolder;
 
@@ -360,7 +360,7 @@ public class TaskPublishActivity extends BaseAppCompatActivity
 
 				if (WTaskMainPublishBean.ValueSuccessStr == result)
 				{
-					XHttpUtil.doTaskMainPublish(taskPublishBean, new XHttpAdapter<String>()
+					XHttpUtil.doTaskMainPublish(taskPublishBean, new HokolAdapter<String>()
 					{
 						@Override
 						public void onSuccess(String s)

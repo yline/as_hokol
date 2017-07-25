@@ -14,11 +14,11 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserMessageSystemBean;
 import com.hokol.medium.http.bean.WUserMessageSystemBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
@@ -108,7 +108,7 @@ public class UserMessageSystemActivity extends BaseAppCompatActivity
 		String userId = getIntent().getStringExtra(KeyMessageUserId);
 
 		messageSystemAdapter.setShowEmpty(false);
-		XHttpUtil.doUserMessageSystem(new WUserMessageSystemBean(userId, 0, DeleteConstant.defaultNumberLarge), new XHttpAdapter<VUserMessageSystemBean>()
+		XHttpUtil.doUserMessageSystem(new WUserMessageSystemBean(userId, 0, DeleteConstant.defaultNumberLarge), new HokolAdapter<VUserMessageSystemBean>()
 		{
 			@Override
 			public void onSuccess(VUserMessageSystemBean vUserMessageSystemBean)

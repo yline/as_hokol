@@ -9,24 +9,30 @@ import android.widget.EditText;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VEnterLoginPhonePwdBean;
+import com.hokol.medium.http.bean.VEnterRegisterCompleteInfoBean;
 import com.hokol.medium.http.bean.WEnterCodeRegisterBean;
 import com.hokol.medium.http.bean.WEnterLoginPhonePwdBean;
 import com.hokol.medium.http.bean.WEnterRegisterBean;
 import com.hokol.medium.http.bean.WEnterRegisterCompleteInfoBean;
 import com.hokol.medium.http.bean.WEnterResetPwdBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.test.common.BaseTestActivity;
 import com.hokol.test.httpattach.AvatarActivity;
-import com.yline.http.XHttpAdapter;
 
 import java.util.Arrays;
 
 public class TestLoginActivity extends BaseTestActivity
 {
+	public static void actionStart(Context context)
+	{
+		context.startActivity(new Intent(context, TestLoginActivity.class));
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		
+
 		// 手机号 + 密码登陆
 		final EditText etPhonePwdOne = addEditNumber("手机号", "13656786656");
 		final EditText etPhonePwdTwo = addEditNumber("密码", "lj123456");
@@ -41,7 +47,7 @@ public class TestLoginActivity extends BaseTestActivity
 				final WEnterLoginPhonePwdBean requestBean = new WEnterLoginPhonePwdBean(username, password);
 
 				// 这样的方法,并不会被执行
-				XHttpUtil.doEnterLoginPhonePwd(requestBean, new XHttpAdapter<VEnterLoginPhonePwdBean>()
+				XHttpUtil.doEnterLoginPhonePwd(requestBean, new HokolAdapter<VEnterLoginPhonePwdBean>()
 				{
 					@Override
 					public void onSuccess(VEnterLoginPhonePwdBean vEnterLoginPhonePwdBean)
@@ -60,7 +66,7 @@ public class TestLoginActivity extends BaseTestActivity
 			public void onClick(View v)
 			{
 				String phoneNumber = etRegisterCode.getText().toString().trim();
-				XHttpUtil.doEnterCodeRegister(new WEnterCodeRegisterBean(phoneNumber), new XHttpAdapter<String>()
+				XHttpUtil.doEnterCodeRegister(new WEnterCodeRegisterBean(phoneNumber), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -82,7 +88,7 @@ public class TestLoginActivity extends BaseTestActivity
 				String phoneNumber = etRegisterPhone.getText().toString().trim();
 				String phoneCode = etRegisterIdentify.getText().toString().trim();
 
-				XHttpUtil.doEnterRegister(new WEnterRegisterBean(phoneNumber, phoneCode), new XHttpAdapter<String>()
+				XHttpUtil.doEnterRegister(new WEnterRegisterBean(phoneNumber, phoneCode), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -108,10 +114,10 @@ public class TestLoginActivity extends BaseTestActivity
 
 				WEnterRegisterCompleteInfoBean completeInfoBean = new WEnterRegisterCompleteInfoBean(tel, pwd, sex);
 				completeInfoBean.setUser_tag(Arrays.asList(HttpEnum.UserTag.Other.getIndex()));
-				XHttpUtil.doEnterRegisterCompleteInfo(completeInfoBean, new XHttpAdapter<VEnterLoginPhonePwdBean>()
+				XHttpUtil.doEnterRegisterCompleteInfo(completeInfoBean, new HokolAdapter<VEnterRegisterCompleteInfoBean>()
 				{
 					@Override
-					public void onSuccess(VEnterLoginPhonePwdBean vEnterLoginPhonePwdBean)
+					public void onSuccess(VEnterRegisterCompleteInfoBean infoBean)
 					{
 
 					}
@@ -129,7 +135,7 @@ public class TestLoginActivity extends BaseTestActivity
 				String tel = etForgetPhone.getText().toString().trim();
 
 				WEnterCodeRegisterBean registerBean = new WEnterCodeRegisterBean(tel);
-				XHttpUtil.doEnterCodeForgetPwd(registerBean, new XHttpAdapter<String>()
+				XHttpUtil.doEnterCodeForgetPwd(registerBean, new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -155,7 +161,7 @@ public class TestLoginActivity extends BaseTestActivity
 				String code = etResetSex.getText().toString().trim();
 
 				WEnterResetPwdBean resetPwdBean = new WEnterResetPwdBean(tel, pwd, code);
-				XHttpUtil.doEnterResetPwd(resetPwdBean, new XHttpAdapter<String>()
+				XHttpUtil.doEnterResetPwd(resetPwdBean, new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -165,10 +171,5 @@ public class TestLoginActivity extends BaseTestActivity
 				});
 			}
 		});
-	}
-	
-	public static void actionStart(Context context)
-	{
-		context.startActivity(new Intent(context, TestLoginActivity.class));
 	}
 }

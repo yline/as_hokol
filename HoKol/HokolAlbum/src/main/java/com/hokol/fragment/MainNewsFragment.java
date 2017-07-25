@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.activity.NewsInfoActivity;
 import com.hokol.application.DeleteConstant;
@@ -16,14 +15,12 @@ import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsRecommendBean;
 import com.hokol.medium.http.bean.VNewsSingleBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainNewsHelper;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
-
-import org.json.JSONException;
 
 import java.util.List;
 
@@ -96,7 +93,7 @@ public class MainNewsFragment extends BaseFragment
 			@Override
 			public void onAnimate()
 			{
-				XHttpUtil.doNewsRecommend(new XHttpAdapter<VNewsRecommendBean>()
+				XHttpUtil.doNewsRecommend(new HokolAdapter<VNewsRecommendBean>()
 				{
 					@Override
 					public void onSuccess(VNewsRecommendBean vNewsRecommendBean)
@@ -112,10 +109,10 @@ public class MainNewsFragment extends BaseFragment
 					}
 
 					@Override
-					public void onSuccess(int code, String data) throws JSONException, JsonParseException
+					public void onSuccess(int code, VNewsRecommendBean vNewsRecommendBean)
 					{
 						superSwipeRefreshLayout.setRefreshing(false);
-						super.onSuccess(code, data);
+						super.onSuccess(code, vNewsRecommendBean);
 					}
 				});
 			}
@@ -126,12 +123,12 @@ public class MainNewsFragment extends BaseFragment
 			public void onAnimate()
 			{
 				WNewsMultiplexBean loadBean = new WNewsMultiplexBean(loadedNewsNumber, DeleteConstant.defaultNumberNormal);
-				XHttpUtil.doNewsMultiplex(loadBean, new XHttpAdapter<VNewsMultiplexBean>()
+				XHttpUtil.doNewsMultiplex(loadBean, new HokolAdapter<VNewsMultiplexBean>()
 				{
 					@Override
-					public void onSuccess(int code, String data) throws JSONException, JsonParseException
+					public void onSuccess(int code, VNewsMultiplexBean vNewsMultiplexBean)
 					{
-						super.onSuccess(code, data);
+						super.onSuccess(code, vNewsMultiplexBean);
 						superSwipeRefreshLayout.setLoadMore(false);
 					}
 
@@ -158,7 +155,7 @@ public class MainNewsFragment extends BaseFragment
 	private void initData()
 	{
 		// 推荐
-		XHttpUtil.doNewsRecommend(new XHttpAdapter<VNewsRecommendBean>()
+		XHttpUtil.doNewsRecommend(new HokolAdapter<VNewsRecommendBean>()
 		{
 			@Override
 			public void onSuccess(VNewsRecommendBean vNewsRecommendBean)
@@ -173,7 +170,7 @@ public class MainNewsFragment extends BaseFragment
 		});
 
 		// 多条新闻
-		XHttpUtil.doNewsMultiplex(new WNewsMultiplexBean(0, DeleteConstant.defaultNumberNormal), new XHttpAdapter<VNewsMultiplexBean>()
+		XHttpUtil.doNewsMultiplex(new WNewsMultiplexBean(0, DeleteConstant.defaultNumberNormal), new HokolAdapter<VNewsMultiplexBean>()
 		{
 			@Override
 			public void onSuccess(VNewsMultiplexBean vNewsMultiplexBean)

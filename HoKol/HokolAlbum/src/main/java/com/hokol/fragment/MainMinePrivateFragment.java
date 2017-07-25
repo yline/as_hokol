@@ -24,6 +24,7 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VDynamicUserPrivateAllBean;
 import com.hokol.medium.http.bean.WDynamicPrivateDeleteBean;
 import com.hokol.medium.http.bean.WDynamicUserPrivateAllBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.DialogFootWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
@@ -32,7 +33,6 @@ import com.hokol.util.HokolTimeConvertUtil;
 import com.hokol.util.IntentUtil;
 import com.hokol.viewhelper.MainCareHelper;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.pop.ViewDeleteMenu;
@@ -127,7 +127,7 @@ public class MainMinePrivateFragment extends BaseFragment
 			@Override
 			public void onDelete(RecyclerViewHolder viewHolder, VDynamicUserPrivateAllBean.VDynamicUserPrivateSingleBean dynamicBean, final int position)
 			{
-				XHttpUtil.doDynamicPrivateDelete(new WDynamicPrivateDeleteBean(dynamicBean.getPri_id(), dynamicBean.getUser_id()), new XHttpAdapter<String>()
+				XHttpUtil.doDynamicPrivateDelete(new WDynamicPrivateDeleteBean(dynamicBean.getPri_id(), dynamicBean.getUser_id()), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -190,7 +190,7 @@ public class MainMinePrivateFragment extends BaseFragment
 		{
 			WDynamicUserPrivateAllBean wDynamicUserPrivateAllBean = new WDynamicUserPrivateAllBean(userId, userId, 0, DeleteConstant.defaultNumberNormal);
 			recyclerAdapter.setShowEmpty(false);
-			XHttpUtil.doDynamicUserPrivateAll(wDynamicUserPrivateAllBean, new XHttpAdapter<VDynamicUserPrivateAllBean>()
+			XHttpUtil.doDynamicUserPrivateAll(wDynamicUserPrivateAllBean, new HokolAdapter<VDynamicUserPrivateAllBean>()
 			{
 				@Override
 				public void onSuccess(VDynamicUserPrivateAllBean vDynamicUserPrivateAllBean)

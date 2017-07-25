@@ -10,9 +10,9 @@ import com.hokol.R;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserMessageSystemOutlineBean;
 import com.hokol.medium.http.bean.WUserMessageSystemOutlineBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
 
 public class UserTaskMessageActivity extends BaseAppCompatActivity
@@ -73,7 +73,7 @@ public class UserTaskMessageActivity extends BaseAppCompatActivity
 	private void initData()
 	{
 		userId = getIntent().getStringExtra(KeyMessageUserId);
-		XHttpUtil.doUserSystemMessageOutline(new WUserMessageSystemOutlineBean(userId), new XHttpAdapter<VUserMessageSystemOutlineBean>()
+		XHttpUtil.doUserSystemMessageOutline(new WUserMessageSystemOutlineBean(userId), new HokolAdapter<VUserMessageSystemOutlineBean>()
 		{
 			@Override
 			public void onSuccess(VUserMessageSystemOutlineBean outlineBean)

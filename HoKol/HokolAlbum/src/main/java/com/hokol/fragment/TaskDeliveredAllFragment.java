@@ -23,11 +23,11 @@ import com.hokol.medium.http.bean.WTaskActionStaffConfirmBean;
 import com.hokol.medium.http.bean.WTaskActionStaffTradeBean;
 import com.hokol.medium.http.bean.WTaskDeleteBean;
 import com.hokol.medium.http.bean.WTaskUserDeliveredBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
@@ -105,7 +105,7 @@ public class TaskDeliveredAllFragment extends BaseFragment implements TaskAssign
 			@Override
 			public void onSignCancelClick(View view, String taskId)
 			{
-				XHttpUtil.doTaskActionStaffConfirm(new WTaskActionStaffConfirmBean(userId, taskId, WTaskActionStaffConfirmBean.ActionRefuse), new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionStaffConfirm(new WTaskActionStaffConfirmBean(userId, taskId, WTaskActionStaffConfirmBean.ActionRefuse), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -123,7 +123,7 @@ public class TaskDeliveredAllFragment extends BaseFragment implements TaskAssign
 			@Override
 			public void onSignConfirmClick(View view, String taskId)
 			{
-				XHttpUtil.doTaskActionStaffConfirm(new WTaskActionStaffConfirmBean(userId, taskId, WTaskActionStaffConfirmBean.ActionAccept), new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionStaffConfirm(new WTaskActionStaffConfirmBean(userId, taskId, WTaskActionStaffConfirmBean.ActionAccept), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -145,7 +145,7 @@ public class TaskDeliveredAllFragment extends BaseFragment implements TaskAssign
 			@Override
 			public void onTradeFailedClick(View view, String taskId)
 			{
-				XHttpUtil.doTaskActionStaffTrade(new WTaskActionStaffTradeBean(userId, taskId, WTaskActionMasterTradeBean.ActionFailed), new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionStaffTrade(new WTaskActionStaffTradeBean(userId, taskId, WTaskActionMasterTradeBean.ActionFailed), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -163,7 +163,7 @@ public class TaskDeliveredAllFragment extends BaseFragment implements TaskAssign
 			@Override
 			public void onTradeFinishedClick(View view, String taskId)
 			{
-				XHttpUtil.doTaskActionStaffTrade(new WTaskActionStaffTradeBean(userId, taskId, WTaskActionMasterTradeBean.ActionFinished), new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionStaffTrade(new WTaskActionStaffTradeBean(userId, taskId, WTaskActionMasterTradeBean.ActionFinished), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -184,7 +184,7 @@ public class TaskDeliveredAllFragment extends BaseFragment implements TaskAssign
 			@Override
 			public void onEvaluateDeleteClick(View view, String taskId)
 			{
-				XHttpUtil.doTaskDelete(new WTaskDeleteBean(userId, taskId, WTaskDeleteBean.TypeStaff), new XHttpAdapter<String>()
+				XHttpUtil.doTaskDelete(new WTaskDeleteBean(userId, taskId, WTaskDeleteBean.TypeStaff), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -265,7 +265,7 @@ public class TaskDeliveredAllFragment extends BaseFragment implements TaskAssign
 	{
 		deliveredAllAdapter.setShowEmpty(false);
 		deliveredAllBean = new WTaskUserDeliveredBean(userId, WTaskUserDeliveredBean.TypeAll, start, length);
-		XHttpUtil.doTaskUserDelivered(deliveredAllBean, new XHttpAdapter<VTaskUserDeliveredBean>()
+		XHttpUtil.doTaskUserDelivered(deliveredAllBean, new HokolAdapter<VTaskUserDeliveredBean>()
 		{
 			@Override
 			public void onSuccess(VTaskUserDeliveredBean vTaskUserDeliveredBean)

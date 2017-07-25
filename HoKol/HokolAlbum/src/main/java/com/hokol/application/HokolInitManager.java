@@ -6,7 +6,7 @@ import android.text.TextUtils;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VInitHokolBean;
 import com.hokol.medium.http.bean.WInitHokolBean;
-import com.yline.http.XHttpAdapter;
+import com.hokol.medium.http.hokol.HokolAdapter;
 
 public class HokolInitManager
 {
@@ -20,7 +20,7 @@ public class HokolInitManager
 		String userId = AppStateManager.getInstance().getUserLoginId(context);
 		if (!TextUtils.isEmpty(userId))
 		{
-			XHttpUtil.doInitHokol(new WInitHokolBean(userId), new XHttpAdapter<VInitHokolBean>()
+			XHttpUtil.doInitHokol(new WInitHokolBean(userId), new HokolAdapter<VInitHokolBean>()
 			{
 				@Override
 				public void onSuccess(VInitHokolBean vInitHokolBean)

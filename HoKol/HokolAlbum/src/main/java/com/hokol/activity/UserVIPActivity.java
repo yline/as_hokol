@@ -8,19 +8,16 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.application.AppStateManager;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserVipInfoBean;
 import com.hokol.medium.http.bean.WUserVipInfoBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
-
-import org.json.JSONException;
 
 import java.util.Calendar;
 
@@ -119,12 +116,12 @@ public class UserVIPActivity extends BaseAppCompatActivity
 		viewHolder.setText(R.id.tv_user_setting_account_bind_nickname, userNickname);
 
 		userId = getIntent().getStringExtra(KeyVipUserId);
-		XHttpUtil.doUserVipInfo(new WUserVipInfoBean(userId), new XHttpAdapter<VUserVipInfoBean>()
+		XHttpUtil.doUserVipInfo(new WUserVipInfoBean(userId), new HokolAdapter<VUserVipInfoBean>()
 		{
 			@Override
-			public void onSuccess(int code, String data) throws JSONException, JsonParseException
+			public void onSuccess(int code, VUserVipInfoBean vUserVipInfoBean)
 			{
-				super.onSuccess(code, data);
+				super.onSuccess(code, vUserVipInfoBean);
 				if (code == VUserVipInfoBean.CodeVipNone)
 				{
 					updateVipInfoView(VUserVipInfoBean.TypeNull, "至尊VIP特权", "立即开通", 0);

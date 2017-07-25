@@ -19,12 +19,12 @@ import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserCareAllBean;
 import com.hokol.medium.http.bean.WUserCareAllBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.FlowWidget;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.layout.label.FlowLayout;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
@@ -42,6 +42,11 @@ public class UserCareActivity extends BaseAppCompatActivity
 
 	private SuperSwipeRefreshLayout swipeRefreshLayout;
 
+	public static void actionStart(Context context, String userId)
+	{
+		context.startActivity(new Intent(context, UserCareActivity.class).putExtra(KeyCareUserId, userId));
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -51,7 +56,7 @@ public class UserCareActivity extends BaseAppCompatActivity
 		initView();
 		initData();
 	}
-
+	
 	private void initView()
 	{
 		recyclerView = (RecyclerView) findViewById(R.id.recycle_user_care);
@@ -127,13 +132,13 @@ public class UserCareActivity extends BaseAppCompatActivity
 			}
 		});
 	}
-	
+
 	private void initData()
 	{
 		final String userId = getIntent().getStringExtra(KeyCareUserId);
 
 		userCareAdapter.setShowEmpty(false);
-		XHttpUtil.doUserCareAll(new WUserCareAllBean(userId, 0, DeleteConstant.defaultNumberSuper), new XHttpAdapter<VUserCareAllBean>()
+		XHttpUtil.doUserCareAll(new WUserCareAllBean(userId, 0, DeleteConstant.defaultNumberSuper), new HokolAdapter<VUserCareAllBean>()
 		{
 			@Override
 			public void onSuccess(VUserCareAllBean vUserCareAllBean)
@@ -211,10 +216,5 @@ public class UserCareActivity extends BaseAppCompatActivity
 			};
 			labelWidget.setDataList(careBean.getUser_tag());
 		}
-	}
-
-	public static void actionStart(Context context, String userId)
-	{
-		context.startActivity(new Intent(context, UserCareActivity.class).putExtra(KeyCareUserId, userId));
 	}
 }

@@ -11,7 +11,6 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 
-import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.application.AppStateManager;
 import com.hokol.application.IApplication;
@@ -22,16 +21,14 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VDynamicUserDetailBean;
 import com.hokol.medium.http.bean.WDynamicUserDetailBean;
 import com.hokol.medium.http.bean.WUserCoinGiftBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.HokolGiftWidget;
 import com.hokol.viewhelper.StarInfoHelper;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.view.recycler.holder.ViewHolder;
-
-import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -205,7 +202,7 @@ public class StarInfoActivity extends BaseAppCompatActivity
 		userCoinNum = AppStateManager.getInstance().getUserCoinNum(this);
 		userId = AppStateManager.getInstance().getUserLoginId(this);
 
-		XHttpUtil.doDynamicUserDetail(new WDynamicUserDetailBean(userId, starId), new XHttpAdapter<VDynamicUserDetailBean>()
+		XHttpUtil.doDynamicUserDetail(new WDynamicUserDetailBean(userId, starId), new HokolAdapter<VDynamicUserDetailBean>()
 		{
 			@Override
 			public void onSuccess(VDynamicUserDetailBean vDynamicUserDetailBean)
@@ -224,9 +221,9 @@ public class StarInfoActivity extends BaseAppCompatActivity
 			}
 
 			@Override
-			public void onSuccess(int code, String data) throws JSONException, JsonParseException
+			public void onSuccess(int code, VDynamicUserDetailBean vDynamicUserDetailBean)
 			{
-				super.onSuccess(code, data);
+				super.onSuccess(code, vDynamicUserDetailBean);
 				if (code == 2001)
 				{
 					LogFileUtil.v("Star info failed; user do not exist");
@@ -251,7 +248,7 @@ public class StarInfoActivity extends BaseAppCompatActivity
 			return;
 		}
 
-		XHttpUtil.doUserCoinGift(new WUserCoinGiftBean(userId, starId, giftCoinNum), new XHttpAdapter<String>()
+		XHttpUtil.doUserCoinGift(new WUserCoinGiftBean(userId, starId, giftCoinNum), new HokolAdapter<String>()
 		{
 			@Override
 			public void onSuccess(String s)

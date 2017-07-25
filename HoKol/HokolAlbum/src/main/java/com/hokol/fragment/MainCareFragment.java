@@ -20,10 +20,10 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VDynamicCareAllBean;
 import com.hokol.medium.http.bean.VDynamicCareBean;
 import com.hokol.medium.http.bean.WDynamicCareAllBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.viewhelper.MainCareHelper;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 import com.yline.view.recycler.holder.ViewHolder;
@@ -163,7 +163,7 @@ public class MainCareFragment extends BaseFragment
 			mainCareHelper.updateRecyclerEmptyState(false);
 
 			WDynamicCareAllBean wDynamicCareAllBean = new WDynamicCareAllBean(userId, 0, DeleteConstant.defaultNumberSmall);
-			XHttpUtil.doDynamicCareAll(wDynamicCareAllBean, new XHttpAdapter<VDynamicCareAllBean>()
+			XHttpUtil.doDynamicCareAll(wDynamicCareAllBean, new HokolAdapter<VDynamicCareAllBean>()
 			{
 				@Override
 				public void onSuccess(VDynamicCareAllBean vDynamicCareAllBean)

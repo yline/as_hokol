@@ -18,12 +18,12 @@ import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VHomeMainBean;
 import com.hokol.medium.http.bean.WHomeMainBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.hokol.viewhelper.MainHomeHelper;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
@@ -149,7 +149,7 @@ public class MainHomeSportFragment extends BaseFragment implements MainHomeFragm
 	private void doRequest()
 	{
 		mainHomeSportAdapter.setShowEmpty(false);
-		XHttpUtil.doHomeMain(wHomeMainBean, new XHttpAdapter<VHomeMainBean>()
+		XHttpUtil.doHomeMain(wHomeMainBean, new HokolAdapter<VHomeMainBean>()
 		{
 			@Override
 			public void onSuccess(VHomeMainBean vHomeMainBean)

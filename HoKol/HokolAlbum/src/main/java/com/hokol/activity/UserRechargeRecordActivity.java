@@ -14,10 +14,10 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserRechargeRecordBean;
 import com.hokol.medium.http.bean.WUserRechargeRecordBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.recycler.adapter.CommonRecyclerAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
@@ -77,7 +77,7 @@ public class UserRechargeRecordActivity extends BaseAppCompatActivity
 	private void initData()
 	{
 		String userId = getIntent().getStringExtra(KeyRechargeRecordUserId);
-		XHttpUtil.doUserRechargeRecord(new WUserRechargeRecordBean(userId, 0, DeleteConstant.defaultNumberLarge), new XHttpAdapter<VUserRechargeRecordBean>()
+		XHttpUtil.doUserRechargeRecord(new WUserRechargeRecordBean(userId, 0, DeleteConstant.defaultNumberLarge), new HokolAdapter<VUserRechargeRecordBean>()
 		{
 			@Override
 			public void onSuccess(VUserRechargeRecordBean vUserRechargeRecordBean)

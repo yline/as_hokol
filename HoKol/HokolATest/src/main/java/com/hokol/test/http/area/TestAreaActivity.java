@@ -7,13 +7,18 @@ import android.view.View;
 
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VAreaAllBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.test.common.BaseTestActivity;
-import com.yline.http.XHttpAdapter;
 
 import java.util.List;
 
 public class TestAreaActivity extends BaseTestActivity
 {
+
+	public static void actionStart(Context context)
+	{
+		context.startActivity(new Intent(context, TestAreaActivity.class));
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -25,7 +30,7 @@ public class TestAreaActivity extends BaseTestActivity
 			@Override
 			public void onClick(View v)
 			{
-				XHttpUtil.doAreaAll(new XHttpAdapter<VAreaAllBean>()
+				XHttpUtil.doAreaAll(new HokolAdapter<VAreaAllBean>()
 				{
 					@Override
 					public void onSuccess(VAreaAllBean vAreaAllBean)
@@ -36,16 +41,11 @@ public class TestAreaActivity extends BaseTestActivity
 
 						List<String> cityName = vAreaAllBean.getCityNameList(pCode);
 						String cName = cityName.get(0);
-						
+
 						vAreaAllBean.getCityCode(pName, cName);
 					}
 				});
 			}
 		});
-	}
-
-	public static void actionStart(Context context)
-	{
-		context.startActivity(new Intent(context, TestAreaActivity.class));
 	}
 }

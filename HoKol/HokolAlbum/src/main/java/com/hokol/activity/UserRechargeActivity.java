@@ -20,12 +20,12 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VAliPayOrderInfoBean;
 import com.hokol.medium.http.bean.WAliPayOrderInfoBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.module.AliPayActivity;
 import com.hokol.medium.module.AliPayBean;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.application.SDKManager;
-import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
@@ -188,7 +188,7 @@ public class UserRechargeActivity extends AliPayActivity
 
 				if (payCount != 0)
 				{
-					XHttpUtil.doAliPayOrderInfo(new WAliPayOrderInfoBean(userId, payCount), new XHttpAdapter<VAliPayOrderInfoBean>()
+					XHttpUtil.doAliPayOrderInfo(new WAliPayOrderInfoBean(userId, payCount), new HokolAdapter<VAliPayOrderInfoBean>()
 					{
 						@Override
 						public void onSuccess(VAliPayOrderInfoBean vAliPayOrderInfoBean)

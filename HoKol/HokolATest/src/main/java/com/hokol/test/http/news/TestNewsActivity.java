@@ -10,11 +10,16 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VNewsMultiplexBean;
 import com.hokol.medium.http.bean.VNewsRecommendBean;
 import com.hokol.medium.http.bean.WNewsMultiplexBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.test.common.BaseTestActivity;
-import com.yline.http.XHttpAdapter;
 
 public class TestNewsActivity extends BaseTestActivity
 {
+	public static void actionStart(Context context)
+	{
+		context.startActivity(new Intent(context, TestNewsActivity.class));
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -25,7 +30,7 @@ public class TestNewsActivity extends BaseTestActivity
 			@Override
 			public void onClick(View v)
 			{
-				XHttpUtil.doNewsRecommend(new XHttpAdapter<VNewsRecommendBean>()
+				XHttpUtil.doNewsRecommend(new HokolAdapter<VNewsRecommendBean>()
 				{
 					@Override
 					public void onSuccess(VNewsRecommendBean vNewsRecommendBean)
@@ -46,7 +51,7 @@ public class TestNewsActivity extends BaseTestActivity
 				final int start = Integer.parseInt(editTextMuch1.getText().toString().trim());
 				final int length = Integer.parseInt(editTextMuch2.getText().toString().trim());
 
-				XHttpUtil.doNewsMultiplex(new WNewsMultiplexBean(start, length), new XHttpAdapter<VNewsMultiplexBean>()
+				XHttpUtil.doNewsMultiplex(new WNewsMultiplexBean(start, length), new HokolAdapter<VNewsMultiplexBean>()
 				{
 					@Override
 					public void onSuccess(VNewsMultiplexBean vNewsMultiplexBean)
@@ -56,10 +61,5 @@ public class TestNewsActivity extends BaseTestActivity
 				});
 			}
 		});
-	}
-	
-	public static void actionStart(Context context)
-	{
-		context.startActivity(new Intent(context, TestNewsActivity.class));
 	}
 }

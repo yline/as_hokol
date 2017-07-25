@@ -20,11 +20,11 @@ import com.hokol.medium.http.bean.VTaskUserDeliveredBean;
 import com.hokol.medium.http.bean.WTaskActionMasterTradeBean;
 import com.hokol.medium.http.bean.WTaskActionStaffTradeBean;
 import com.hokol.medium.http.bean.WTaskUserDeliveredBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
@@ -101,7 +101,7 @@ public class TaskDeliveredTradeFragment extends BaseFragment implements TaskAssi
 			@Override
 			public void onTradeFailedClick(View view, String taskId)
 			{
-				XHttpUtil.doTaskActionStaffTrade(new WTaskActionStaffTradeBean(userId, taskId, WTaskActionMasterTradeBean.ActionFailed), new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionStaffTrade(new WTaskActionStaffTradeBean(userId, taskId, WTaskActionMasterTradeBean.ActionFailed), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -119,7 +119,7 @@ public class TaskDeliveredTradeFragment extends BaseFragment implements TaskAssi
 			@Override
 			public void onTradeFinishedClick(View view, String taskId)
 			{
-				XHttpUtil.doTaskActionStaffTrade(new WTaskActionStaffTradeBean(userId, taskId, WTaskActionMasterTradeBean.ActionFinished), new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionStaffTrade(new WTaskActionStaffTradeBean(userId, taskId, WTaskActionMasterTradeBean.ActionFinished), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -188,7 +188,7 @@ public class TaskDeliveredTradeFragment extends BaseFragment implements TaskAssi
 	{
 		deliveredTradeAdapter.setShowEmpty(false);
 		deliveredTradeBean = new WTaskUserDeliveredBean(userId, WTaskUserDeliveredBean.TypeTraded, start, length);
-		XHttpUtil.doTaskUserDelivered(deliveredTradeBean, new XHttpAdapter<VTaskUserDeliveredBean>()
+		XHttpUtil.doTaskUserDelivered(deliveredTradeBean, new HokolAdapter<VTaskUserDeliveredBean>()
 		{
 			@Override
 			public void onSuccess(VTaskUserDeliveredBean vTaskUserDeliveredBean)

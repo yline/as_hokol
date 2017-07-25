@@ -15,11 +15,11 @@ import com.hokol.application.DeleteConstant;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VUserGiftSendBean;
 import com.hokol.medium.http.bean.WUserGiftSendBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.hokol.util.HokolTimeConvertUtil;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
 import java.util.Calendar;
@@ -70,7 +70,7 @@ public class UserAccountSendGiftFragment extends BaseFragment
 		String userId = getArguments().getString(KeyGiftSendUserId);
 
 		sendGiftAdapter.setShowEmpty(false);
-		XHttpUtil.doUserGiftSend(new WUserGiftSendBean(userId, 0, DeleteConstant.defaultNumberLarge), new XHttpAdapter<VUserGiftSendBean>()
+		XHttpUtil.doUserGiftSend(new WUserGiftSendBean(userId, 0, DeleteConstant.defaultNumberLarge), new HokolAdapter<VUserGiftSendBean>()
 		{
 			@Override
 			public void onSuccess(VUserGiftSendBean vUserGiftSend)

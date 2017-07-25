@@ -18,10 +18,10 @@ import com.hokol.medium.http.bean.WDynamicPraiseSingleBean;
 import com.hokol.medium.http.bean.WDynamicPrivateSingleBean;
 import com.hokol.medium.http.bean.WUserCareOrCancelBean;
 import com.hokol.medium.http.bean.WUserCoinGiftBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.HokolGiftWidget;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.TimeConvertUtil;
 import com.yline.utils.UIResizeUtil;
@@ -90,7 +90,7 @@ public class StarDynamicPrivateActivity extends BaseAppCompatActivity
 			public void onClick(View v)
 			{
 				String userId = AppStateManager.getInstance().getUserLoginId(StarDynamicPrivateActivity.this);
-				XHttpUtil.doUserCareOrCancel(new WUserCareOrCancelBean(userId, starId, WUserCareOrCancelBean.actionCare), new XHttpAdapter<String>()
+				XHttpUtil.doUserCareOrCancel(new WUserCareOrCancelBean(userId, starId, WUserCareOrCancelBean.actionCare), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -110,7 +110,7 @@ public class StarDynamicPrivateActivity extends BaseAppCompatActivity
 				String userId = AppStateManager.getInstance().getUserLoginId(StarDynamicPrivateActivity.this);
 				int actionPraise = isPraised ? WDynamicPraiseSingleBean.actionPraiseCancel : WDynamicPraiseSingleBean.actionPraise;
 
-				XHttpUtil.doDynamicPraiseSingle(new WDynamicPraiseSingleBean(userId, dynamicPrivateId, actionPraise), new XHttpAdapter<VDynamicPraiseSingleBean>()
+				XHttpUtil.doDynamicPraiseSingle(new WDynamicPraiseSingleBean(userId, dynamicPrivateId, actionPraise), new HokolAdapter<VDynamicPraiseSingleBean>()
 				{
 					@Override
 					public void onSuccess(VDynamicPraiseSingleBean vDynamicPraiseSingleBean)
@@ -191,7 +191,7 @@ public class StarDynamicPrivateActivity extends BaseAppCompatActivity
 			return;
 		}
 
-		XHttpUtil.doUserCoinGift(new WUserCoinGiftBean(userId, starId, dynamicPrivateId, giftCoinNum, false), new XHttpAdapter<String>()
+		XHttpUtil.doUserCoinGift(new WUserCoinGiftBean(userId, starId, dynamicPrivateId, giftCoinNum, false), new HokolAdapter<String>()
 		{
 			@Override
 			public void onSuccess(String s)
@@ -214,7 +214,7 @@ public class StarDynamicPrivateActivity extends BaseAppCompatActivity
 			WDynamicPrivateSingleBean privateSingleBean = new WDynamicPrivateSingleBean(userId, dynamicPrivateId);
 
 
-			XHttpUtil.doDynamicPrivateSingle(privateSingleBean, new XHttpAdapter<VWDynamicPrivateSingleBean>()
+			XHttpUtil.doDynamicPrivateSingle(privateSingleBean, new HokolAdapter<VWDynamicPrivateSingleBean>()
 			{
 				@Override
 				public void onSuccess(VWDynamicPrivateSingleBean privateSingleBean1)

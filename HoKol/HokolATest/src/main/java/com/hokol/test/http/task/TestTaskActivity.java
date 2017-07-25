@@ -30,8 +30,8 @@ import com.hokol.medium.http.bean.WTaskUserAcceptBean;
 import com.hokol.medium.http.bean.WTaskUserDeliveredBean;
 import com.hokol.medium.http.bean.WTaskUserPublishedBean;
 import com.hokol.medium.http.bean.WTaskUserSignUpDetailBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.test.common.BaseTestActivity;
-import com.yline.http.XHttpAdapter;
 
 import java.util.Arrays;
 
@@ -58,7 +58,7 @@ public class TestTaskActivity extends BaseTestActivity
 				int switchs = parseInt(editTextThree, 1);
 
 				WTaskActionStaffTradeBean wTaskActionStaffTradeBean = new WTaskActionStaffTradeBean(user_id, task_id, switchs);
-				XHttpUtil.doTaskActionStaffTrade(wTaskActionStaffTradeBean, new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionStaffTrade(wTaskActionStaffTradeBean, new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -86,7 +86,7 @@ public class TestTaskActivity extends BaseTestActivity
 				int switchs = parseInt(editTextThree, 1);
 
 				WTaskActionStaffConfirmBean wTaskActionStaffConfirmBean = new WTaskActionStaffConfirmBean(user_id, task_id, switchs);
-				XHttpUtil.doTaskActionStaffConfirm(wTaskActionStaffConfirmBean, new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionStaffConfirm(wTaskActionStaffConfirmBean, new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -116,7 +116,7 @@ public class TestTaskActivity extends BaseTestActivity
 				int length = parseInt(editTextFour, 4);
 
 				WTaskUserDeliveredBean wTaskUserDeliveredBean = new WTaskUserDeliveredBean(user_id, switchs, num1, length);
-				XHttpUtil.doTaskUserDelivered(wTaskUserDeliveredBean, new XHttpAdapter<VTaskUserDeliveredBean>()
+				XHttpUtil.doTaskUserDelivered(wTaskUserDeliveredBean, new HokolAdapter<VTaskUserDeliveredBean>()
 				{
 					@Override
 					public void onSuccess(VTaskUserDeliveredBean vTaskUserDeliveredBean)
@@ -148,7 +148,7 @@ public class TestTaskActivity extends BaseTestActivity
 				WTaskActionMasterTradeBean.WTaskActionMasterTradeInfoBean infoBean = new WTaskActionMasterTradeBean.WTaskActionMasterTradeInfoBean(confirm_user_id, confirm_status);
 
 				WTaskActionMasterTradeBean wTaskActionMasterTradeBean = new WTaskActionMasterTradeBean(user_id, task_id, Arrays.asList(infoBean));
-				XHttpUtil.doTaskActionMasterTrade(wTaskActionMasterTradeBean, new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionMasterTrade(wTaskActionMasterTradeBean, new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -176,7 +176,7 @@ public class TestTaskActivity extends BaseTestActivity
 				int switchs = parseInt(editTextThree, 0);
 
 				WTaskActionMasterFinishBean wTaskActionMasterFinishBean = new WTaskActionMasterFinishBean(user_id, task_id);
-				XHttpUtil.doTaskActionMasterFinish(wTaskActionMasterFinishBean, new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionMasterFinish(wTaskActionMasterFinishBean, new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -198,7 +198,7 @@ public class TestTaskActivity extends BaseTestActivity
 			{
 				String task_id = editTextTwo.getText().toString().trim();
 				WTaskStaffCommentedInfoBean wTaskStaffCommentedInfoBean = new WTaskStaffCommentedInfoBean(task_id);
-				XHttpUtil.doTaskStaffCommentedInfo(wTaskStaffCommentedInfoBean, new XHttpAdapter<VTaskStaffCommentedInfoBean>()
+				XHttpUtil.doTaskStaffCommentedInfo(wTaskStaffCommentedInfoBean, new HokolAdapter<VTaskStaffCommentedInfoBean>()
 				{
 					@Override
 					public void onSuccess(VTaskStaffCommentedInfoBean vTaskStaffCommentedInfoBean)
@@ -227,7 +227,7 @@ public class TestTaskActivity extends BaseTestActivity
 				WTaskActionMasterCommentBean.MasterCommentContentBean bean = new WTaskActionMasterCommentBean.MasterCommentContentBean(commentedUserId, 3, 3, 3);
 
 				WTaskActionMasterCommentBean wTaskActionMasterCommentBean = new WTaskActionMasterCommentBean(user_id, task_id, Arrays.asList(bean));
-				XHttpUtil.doTaskActionMasterComment(wTaskActionMasterCommentBean, new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionMasterComment(wTaskActionMasterCommentBean, new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -255,7 +255,7 @@ public class TestTaskActivity extends BaseTestActivity
 				String user_id = editTextThree.getText().toString().trim();
 
 				WTaskActionMasterTakeOnBean wTaskActionMasterTakeOnBean = new WTaskActionMasterTakeOnBean(task_id, user_id_join, user_id);
-				XHttpUtil.doTaskActionMasterTakeOn(wTaskActionMasterTakeOnBean, new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionMasterTakeOn(wTaskActionMasterTakeOnBean, new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -281,7 +281,7 @@ public class TestTaskActivity extends BaseTestActivity
 				String userId = editTextTwo.getText().toString().trim();
 
 				WTaskActionStaffSignUpBean wTaskActionStaffSignUpBean = new WTaskActionStaffSignUpBean(userId, taskId);
-				XHttpUtil.doTaskActionStaffSignUp(wTaskActionStaffSignUpBean, new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionStaffSignUp(wTaskActionStaffSignUpBean, new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -311,11 +311,12 @@ public class TestTaskActivity extends BaseTestActivity
 				int length = parseInt(editTextFour, 2);
 
 				WTaskUserPublishedBean wTaskUserPublishedBean = new WTaskUserPublishedBean(task_id, num1, length);
-				XHttpUtil.doTaskUserPublishedAll(wTaskUserPublishedBean, new XHttpAdapter<VTaskUserPublishedBean>()
+				XHttpUtil.doTaskUserPublishedAll(wTaskUserPublishedBean, new HokolAdapter<VTaskUserPublishedBean>()
 				{
 					@Override
 					public void onSuccess(VTaskUserPublishedBean vTaskUserPublishedBean)
 					{
+
 					}
 				});
 			}
@@ -337,10 +338,10 @@ public class TestTaskActivity extends BaseTestActivity
 				int length = parseInt(editTextThree, 2);
 
 				WTaskUserSignUpDetailBean wTaskUserSignUpBean = new WTaskUserSignUpDetailBean(task_id, num1, length);
-				XHttpUtil.doTaskUserSignUpDetail(wTaskUserSignUpBean, new XHttpAdapter<VTaskUserSignUpDetailBean>()
+				XHttpUtil.doTaskUserSignUpDetail(wTaskUserSignUpBean, new HokolAdapter<VTaskUserSignUpDetailBean>()
 				{
 					@Override
-					public void onSuccess(VTaskUserSignUpDetailBean vTaskUserSignUpBean)
+					public void onSuccess(VTaskUserSignUpDetailBean signUpDetailBean)
 					{
 
 					}
@@ -365,7 +366,7 @@ public class TestTaskActivity extends BaseTestActivity
 				int length = parseInt(editTextThree, 2);
 
 				WTaskUserAcceptBean wTaskUserAcceptBean = new WTaskUserAcceptBean(task_id, num1, length);
-				XHttpUtil.doTaskUserAcceptDetail(wTaskUserAcceptBean, new XHttpAdapter<VTaskUserAcceptBean>()
+				XHttpUtil.doTaskUserAcceptDetail(wTaskUserAcceptBean, new HokolAdapter<VTaskUserAcceptBean>()
 				{
 					@Override
 					public void onSuccess(VTaskUserAcceptBean vTaskUserAcceptBean)
@@ -393,7 +394,7 @@ public class TestTaskActivity extends BaseTestActivity
 
 				final int collect = parseInt(editTextThree, 0);
 
-				XHttpUtil.doTaskMainCollection(new WTaskMainCollectionBean(user_id, task_id, collect), new XHttpAdapter<String>()
+				XHttpUtil.doTaskMainCollection(new WTaskMainCollectionBean(user_id, task_id, collect), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -425,7 +426,7 @@ public class TestTaskActivity extends BaseTestActivity
 				int task_woman_num = parseInt(editTextFive, 1);
 
 				WTaskMainPublishBean wTaskMainPublishBean = new WTaskMainPublishBean(task_user_id, Arrays.asList(task_type), task_fee, task_man_num, task_woman_num);
-				XHttpUtil.doTaskMainPublish(wTaskMainPublishBean, new XHttpAdapter<String>()
+				XHttpUtil.doTaskMainPublish(wTaskMainPublishBean, new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -447,7 +448,7 @@ public class TestTaskActivity extends BaseTestActivity
 			{
 				final String task_id = editTextOne.getText().toString().trim();
 
-				XHttpUtil.doTaskMainDetail(new WTaskMainDetailBean(task_id, WTaskMainDetailBean.UnLoginState), new XHttpAdapter<VTaskMainDetailBean>()
+				XHttpUtil.doTaskMainDetail(new WTaskMainDetailBean(task_id, WTaskMainDetailBean.UnLoginState), new HokolAdapter<VTaskMainDetailBean>()
 				{
 					@Override
 					public void onSuccess(VTaskMainDetailBean vTaskMainDetailBean)
@@ -475,7 +476,7 @@ public class TestTaskActivity extends BaseTestActivity
 				WTaskMainAllBean wTaskMainAll = new WTaskMainAllBean(num1, length);
 				wTaskMainAll.setP_code("浙江省");
 				wTaskMainAll.setC_code(Arrays.asList("杭州市"));
-				XHttpUtil.doTaskMainAll(wTaskMainAll, new XHttpAdapter<VTaskMainAllBean>()
+				XHttpUtil.doTaskMainAll(wTaskMainAll, new HokolAdapter<VTaskMainAllBean>()
 				{
 					@Override
 					public void onSuccess(VTaskMainAllBean vTaskMainAll)

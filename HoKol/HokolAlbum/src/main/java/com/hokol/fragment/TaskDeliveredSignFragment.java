@@ -19,11 +19,11 @@ import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VTaskUserDeliveredBean;
 import com.hokol.medium.http.bean.WTaskActionStaffConfirmBean;
 import com.hokol.medium.http.bean.WTaskUserDeliveredBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 
@@ -101,7 +101,7 @@ public class TaskDeliveredSignFragment extends BaseFragment implements TaskAssig
 			@Override
 			public void onSignCancelClick(View view, String taskId)
 			{
-				XHttpUtil.doTaskActionStaffConfirm(new WTaskActionStaffConfirmBean(userId, taskId, WTaskActionStaffConfirmBean.ActionRefuse), new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionStaffConfirm(new WTaskActionStaffConfirmBean(userId, taskId, WTaskActionStaffConfirmBean.ActionRefuse), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -119,7 +119,7 @@ public class TaskDeliveredSignFragment extends BaseFragment implements TaskAssig
 			@Override
 			public void onSignConfirmClick(View view, String taskId)
 			{
-				XHttpUtil.doTaskActionStaffConfirm(new WTaskActionStaffConfirmBean(userId, taskId, WTaskActionStaffConfirmBean.ActionAccept), new XHttpAdapter<String>()
+				XHttpUtil.doTaskActionStaffConfirm(new WTaskActionStaffConfirmBean(userId, taskId, WTaskActionStaffConfirmBean.ActionAccept), new HokolAdapter<String>()
 				{
 					@Override
 					public void onSuccess(String s)
@@ -188,7 +188,7 @@ public class TaskDeliveredSignFragment extends BaseFragment implements TaskAssig
 	{
 		deliveredSignAdapter.setShowEmpty(false);
 		deliveredSignBean = new WTaskUserDeliveredBean(userId, WTaskUserDeliveredBean.TypeSigned, start, length);
-		XHttpUtil.doTaskUserDelivered(deliveredSignBean, new XHttpAdapter<VTaskUserDeliveredBean>()
+		XHttpUtil.doTaskUserDelivered(deliveredSignBean, new HokolAdapter<VTaskUserDeliveredBean>()
 		{
 			@Override
 			public void onSuccess(VTaskUserDeliveredBean vTaskUserDeliveredBean)

@@ -13,9 +13,9 @@ import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VEnterRegisterCompleteInfoBean;
 import com.hokol.medium.http.bean.WEnterRegisterCompleteInfoBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.FlowAbleWidget;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.http.XHttpAdapter;
 import com.yline.log.LogFileUtil;
 import com.yline.view.layout.label.FlowLayout;
 import com.yline.view.layout.label.LabelAdapter;
@@ -185,7 +185,7 @@ public class EnterRegisterCompleteInfoActivity extends BaseAppCompatActivity
 				{
 					completeInfoBean.setUser_nickname(viewHolder.getText(R.id.et_enter_register_complete_info_name));
 					completeInfoBean.setUser_pwd(viewHolder.getText(R.id.et_enter_register_complete_info_new_pwd));
-					XHttpUtil.doEnterRegisterCompleteInfo(completeInfoBean, new XHttpAdapter<VEnterRegisterCompleteInfoBean>()
+					XHttpUtil.doEnterRegisterCompleteInfo(completeInfoBean, new HokolAdapter<VEnterRegisterCompleteInfoBean>()
 					{
 						@Override
 						public void onSuccess(VEnterRegisterCompleteInfoBean infoBean)

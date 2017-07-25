@@ -15,7 +15,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.JsonParseException;
 import com.hokol.R;
 import com.hokol.activity.StarDynamicPrivateActivity;
 import com.hokol.activity.VipHokolActivity;
@@ -26,18 +25,16 @@ import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VDynamicUserPrivateAllBean;
 import com.hokol.medium.http.bean.WDynamicUserPrivateAllBean;
+import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.viewcustom.SuperSwipeRefreshLayout;
 import com.hokol.medium.widget.DialogIosWidget;
 import com.hokol.medium.widget.recycler.DefaultGridItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.base.BaseFragment;
-import com.yline.http.XHttpAdapter;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
-
-import org.json.JSONException;
 
 import java.util.List;
 
@@ -164,7 +161,7 @@ public class StarInfoPrivateFragment extends BaseFragment
 		}
 		else
 		{
-			XHttpUtil.doDynamicUserPrivateAll(new WDynamicUserPrivateAllBean(userId, starId, 0, DeleteConstant.defaultNumberSuper), new XHttpAdapter<VDynamicUserPrivateAllBean>()
+			XHttpUtil.doDynamicUserPrivateAll(new WDynamicUserPrivateAllBean(userId, starId, 0, DeleteConstant.defaultNumberSuper), new HokolAdapter<VDynamicUserPrivateAllBean>()
 			{
 				@Override
 				public void onSuccess(VDynamicUserPrivateAllBean vDynamicUserPrivateAllBean)
@@ -179,9 +176,9 @@ public class StarInfoPrivateFragment extends BaseFragment
 				}
 
 				@Override
-				public void onSuccess(int code, String data) throws JSONException, JsonParseException
+				public void onSuccess(int code, VDynamicUserPrivateAllBean vDynamicUserPrivateAllBean)
 				{
-					super.onSuccess(code, data);
+					super.onSuccess(code, vDynamicUserPrivateAllBean);
 					if (code != REQUEST_SUCCESS_CODE)
 					{
 						lockRelativeLayout.setVisibility(View.VISIBLE);
