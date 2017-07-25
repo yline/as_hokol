@@ -86,7 +86,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler
 					{
 						VWeChatLoginBean vWeChatLoginBean = new Gson().fromJson(s, VWeChatLoginBean.class);
 						MainActivity.actionStart(WXEntryActivity.this, vWeChatLoginBean);
-						finish();
+						IApplication.finishActivity();
 					}
 
 					@Override

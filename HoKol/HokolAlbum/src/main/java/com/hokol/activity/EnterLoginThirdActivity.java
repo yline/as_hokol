@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.hokol.R;
+import com.hokol.application.IApplication;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VWeChatRegisterInfoBean;
 import com.hokol.medium.http.bean.WWeChatRegisterICodeBean;
@@ -181,6 +182,7 @@ public class EnterLoginThirdActivity extends BaseAppCompatActivity
 						public void onSuccess(VWeChatRegisterInfoBean vWeChatRegisterInfoBean)
 						{
 							MainActivity.actionStart(EnterLoginThirdActivity.this, vWeChatRegisterInfoBean);
+							IApplication.finishActivity();
 						}
 					});
 				}

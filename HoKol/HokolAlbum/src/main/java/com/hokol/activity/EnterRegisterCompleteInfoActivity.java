@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import com.hokol.R;
+import com.hokol.application.IApplication;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.XHttpUtil;
 import com.hokol.medium.http.bean.VEnterRegisterCompleteInfoBean;
@@ -191,6 +192,7 @@ public class EnterRegisterCompleteInfoActivity extends BaseAppCompatActivity
 						public void onSuccess(VEnterRegisterCompleteInfoBean infoBean)
 						{
 							MainActivity.actionStart(EnterRegisterCompleteInfoActivity.this, infoBean);
+							IApplication.finishActivity();
 						}
 					});
 				}
