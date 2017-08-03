@@ -81,14 +81,14 @@
         android:layout_above="@+id/view_line_bottom"
         android:layout_below="@+id/rl_area_choose_back">
 
-        <com.yline.view.layout.label.LabelFlowLayout
+        <com.yline.view.label.LabelFlowLayout
             android:id="@+id/label_flow_task_publish_area"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginRight="@dimen/default_space_large"
             android:layout_marginTop="@dimen/default_space_small">
-        </com.yline.view.layout.label.LabelFlowLayout>
+        </com.yline.view.label.LabelFlowLayout>
     </ScrollView>
 
     <View

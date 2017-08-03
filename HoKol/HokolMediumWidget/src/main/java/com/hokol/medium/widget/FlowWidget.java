@@ -5,8 +5,8 @@ import android.content.Context;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 
-import com.yline.view.layout.label.FlowLayout;
-import com.yline.view.layout.label.WidgetFlow;
+import com.yline.view.label.FlowLayout;
+import com.yline.view.label.widget.WidgetFlow;
 
 /**
  * 动态添加 控件

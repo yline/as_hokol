@@ -24,7 +24,7 @@ import com.hokol.medium.widget.recycler.DefaultLinearItemDecoration;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseFragment;
-import com.yline.view.layout.label.FlowLayout;
+import com.yline.view.label.FlowLayout;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 

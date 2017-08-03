@@ -30,12 +30,12 @@
         android:text="类目"
         android:textColor="@color/hokolGrayDrak"/>
 
-    <com.yline.view.layout.label.LabelFlowLayout
+    <com.yline.view.label.LabelFlowLayout
         android:id="@+id/label_task_publish_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/default_space_large">
-    </com.yline.view.layout.label.LabelFlowLayout>
+    </com.yline.view.label.LabelFlowLayout>
 
     <View
         android:layout_width="match_parent"

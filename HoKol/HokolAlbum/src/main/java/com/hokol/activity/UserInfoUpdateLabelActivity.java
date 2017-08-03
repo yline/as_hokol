@@ -10,8 +10,8 @@ import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.widget.FlowAbleWidget;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.view.layout.label.FlowLayout;
-import com.yline.view.layout.label.LabelAdapter;
+import com.yline.view.label.FlowLayout;
+import com.yline.view.label.LabelAdapter;
 import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.ArrayList;
@@ -20,13 +20,20 @@ import java.util.List;
 
 public class UserInfoUpdateLabelActivity extends BaseAppCompatActivity
 {
+	private static final String LABEL_TEXT = "已添加(%d/2)";
+
+	private static final String KeyInitData = "InitData";
+
 	private FlowAbleWidget labelClickableWidget;
 
 	private ViewHolder viewHolder;
 
-	private static final String LABEL_TEXT = "已添加(%d/2)";
-
-	private static final String KeyInitData = "InitData";
+	public static void actionStart(Activity activity, int requestCode, ArrayList<Integer> initData)
+	{
+		Intent intent = new Intent(activity, UserInfoUpdateLabelActivity.class);
+		intent.putIntegerArrayListExtra(KeyInitData, initData);
+		activity.startActivityForResult(intent, requestCode);
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -96,7 +103,7 @@ public class UserInfoUpdateLabelActivity extends BaseAppCompatActivity
 			}
 		});
 	}
-
+	
 	private void initData()
 	{
 		List<Integer> initDataList = getIntent().getIntegerArrayListExtra(KeyInitData); // 网络传输中的 对应的 int值
@@ -106,12 +113,5 @@ public class UserInfoUpdateLabelActivity extends BaseAppCompatActivity
 			selectPositionList.add(initDataList.get(i) - 1);
 		}
 		labelClickableWidget.addAllSelectedPosition(selectPositionList); // 设置我们所需要的位置
-	}
-	
-	public static void actionStart(Activity activity, int requestCode, ArrayList<Integer> initData)
-	{
-		Intent intent = new Intent(activity, UserInfoUpdateLabelActivity.class);
-		intent.putIntegerArrayListExtra(KeyInitData, initData);
-		activity.startActivityForResult(intent, requestCode);
 	}
 }

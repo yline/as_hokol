@@ -16,7 +16,7 @@
         android:paddingLeft="@dimen/default_space_normal"
         android:paddingRight="@dimen/default_space_normal"
         android:paddingTop="@dimen/default_space_medium"
-        android:textColor="@drawable/lib_view_selector_color_redgray"
+        android:textColor="@drawable/widget_selector_text_red_gray"
         android:textSize="@dimen/default_text_size_small">
     </TextView>
 </LinearLayout>

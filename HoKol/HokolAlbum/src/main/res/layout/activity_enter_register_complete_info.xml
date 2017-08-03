@@ -168,14 +168,14 @@
             android:textColor="@color/hokolGrayDrak"/>
 
         <!-- 标签 -->
-        <com.yline.view.layout.label.LabelFlowLayout
+        <com.yline.view.label.LabelFlowLayout
             android:id="@+id/label_flow_enter_register_complete_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_enter_register_complete_info_label"
             android:layout_marginLeft="@dimen/default_space_large"
             android:layout_marginRight="@dimen/default_space_large">
-        </com.yline.view.layout.label.LabelFlowLayout>
+        </com.yline.view.label.LabelFlowLayout>
 
         <TextView
             android:id="@+id/tv_enter_register_complete"

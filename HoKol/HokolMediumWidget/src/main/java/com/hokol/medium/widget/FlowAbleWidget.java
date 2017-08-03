@@ -5,8 +5,8 @@ import android.content.Context;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 
-import com.yline.view.layout.label.LabelFlowLayout;
-import com.yline.view.layout.label.WidgetFlowAble;
+import com.yline.view.label.LabelFlowLayout;
+import com.yline.view.label.widget.WidgetFlowAble;
 
 import java.util.ArrayList;
 import java.util.List;

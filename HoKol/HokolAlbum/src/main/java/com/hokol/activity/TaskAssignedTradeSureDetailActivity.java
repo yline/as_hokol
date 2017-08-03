@@ -28,7 +28,7 @@ import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.yline.application.SDKManager;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.layout.label.FlowLayout;
+import com.yline.view.label.FlowLayout;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 import com.yline.view.recycler.holder.ViewHolder;
 

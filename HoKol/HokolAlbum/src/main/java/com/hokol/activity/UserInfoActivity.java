@@ -27,7 +27,7 @@ import com.yline.base.BaseAppCompatActivity;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.FileUtil;
 import com.yline.view.dialog.ViewDialogFoot;
-import com.yline.view.layout.label.FlowLayout;
+import com.yline.view.label.FlowLayout;
 import com.yline.view.recycler.holder.ViewHolder;
 
 import java.io.File;

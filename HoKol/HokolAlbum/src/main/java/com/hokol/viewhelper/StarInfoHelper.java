@@ -10,7 +10,7 @@ import com.hokol.R;
 import com.hokol.medium.http.HttpEnum;
 import com.hokol.medium.http.bean.VDynamicUserDetailBean;
 import com.hokol.medium.widget.FlowWidget;
-import com.yline.view.layout.label.FlowLayout;
+import com.yline.view.label.FlowLayout;
 import com.yline.view.recycler.holder.ViewHolder;
 
 import jp.wasabeef.glide.transformations.ColorFilterTransformation;

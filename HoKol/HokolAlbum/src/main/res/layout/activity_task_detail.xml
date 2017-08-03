@@ -215,13 +215,13 @@
                     android:textColor="@color/hokolBlackSmall"
                     android:textSize="@dimen/default_text_size_normal"/>
 
-                <com.yline.view.layout.label.FlowLayout
+                <com.yline.view.label.FlowLayout
                     android:id="@+id/lable_flow_task_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true">
-                </com.yline.view.layout.label.FlowLayout>
+                </com.yline.view.label.FlowLayout>
             </RelativeLayout>
 
             <View

@@ -5,11 +5,12 @@
     android:layout_height="wrap_content"
     android:paddingRight="@dimen/default_space_medium">
 
+    <!--lib_view_layout_shape_radiusall_stroke_red-->
     <TextView
         android:id="@+id/tv_widget_label_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/lib_view_layout_shape_radiusall_stroke_red"
+        android:background="@drawable/widget_shape_radiuall_huge_solid_null_stroke_red"
         android:duplicateParentState="true"
         android:textColor="@android:color/holo_red_light"
         android:textSize="14dp">

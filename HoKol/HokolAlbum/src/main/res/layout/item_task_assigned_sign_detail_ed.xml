@@ -75,14 +75,14 @@
             android:textColor="@color/hokolGray"
             android:textSize="@dimen/default_text_size_small"/>
 
-        <com.yline.view.layout.label.FlowLayout
+        <com.yline.view.label.FlowLayout
             android:id="@+id/flow_layout_sign_detail_ed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/circle_sign_detail_ed_avatar"
             android:layout_toLeftOf="@+id/fl_sign_detail_ed_right"
             android:layout_toRightOf="@+id/circle_sign_detail_ed_avatar">
-        </com.yline.view.layout.label.FlowLayout>
+        </com.yline.view.label.FlowLayout>
     </LinearLayout>
 
     <TextView

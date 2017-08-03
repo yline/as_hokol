@@ -64,14 +64,14 @@
         android:textColor="@color/hokolGray"
         android:textSize="@dimen/default_text_size_small"/>
 
-    <com.yline.view.layout.label.FlowLayout
+    <com.yline.view.label.FlowLayout
         android:id="@+id/flow_layout_user_fans"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/circle_user_fans_avatar"
         android:layout_toLeftOf="@+id/fl_user_fans_right"
         android:layout_toRightOf="@+id/circle_user_fans_avatar">
-    </com.yline.view.layout.label.FlowLayout>
+    </com.yline.view.label.FlowLayout>
 
     <FrameLayout
         android:id="@+id/fl_user_fans_right"

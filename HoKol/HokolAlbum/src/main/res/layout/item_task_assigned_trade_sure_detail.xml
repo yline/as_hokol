@@ -74,14 +74,14 @@
             android:textColor="@color/hokolGray"
             android:textSize="@dimen/default_text_size_small"/>
 
-        <com.yline.view.layout.label.FlowLayout
+        <com.yline.view.label.FlowLayout
             android:id="@+id/flow_layout_trade_sure_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/circle_trade_sure_detail_avatar"
             android:layout_toLeftOf="@+id/fl_trade_sure_detail_right"
             android:layout_toRightOf="@+id/circle_trade_sure_detail_avatar">
-        </com.yline.view.layout.label.FlowLayout>
+        </com.yline.view.label.FlowLayout>
     </LinearLayout>
 
     <TextView

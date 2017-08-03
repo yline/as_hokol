@@ -22,8 +22,8 @@ import com.hokol.medium.widget.FlowAbleWidget;
 import com.hokol.medium.widget.SecondaryWidget;
 import com.hokol.medium.widget.recycler.WidgetRecyclerAdapter;
 import com.hokol.util.HokolTimeConvertUtil;
-import com.yline.view.layout.label.FlowLayout;
-import com.yline.view.layout.label.LabelFlowLayout;
+import com.yline.view.label.FlowLayout;
+import com.yline.view.label.LabelFlowLayout;
 import com.yline.view.recycler.callback.OnRecyclerItemClickListener;
 import com.yline.view.recycler.holder.RecyclerViewHolder;
 

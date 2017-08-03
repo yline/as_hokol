@@ -9,7 +9,7 @@ import com.hokol.R;
 import com.hokol.medium.widget.DropMenuWidget;
 import com.hokol.medium.widget.FlowAbleWidget;
 import com.hokol.medium.widget.SecondaryWidget;
-import com.yline.view.layout.label.LabelFlowLayout;
+import com.yline.view.label.LabelFlowLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;

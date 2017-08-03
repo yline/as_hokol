@@ -7,8 +7,8 @@
     android:layout_marginBottom="@dimen/default_space_little"
     android:layout_marginRight="@dimen/default_space_large"
     android:layout_marginTop="@dimen/default_space_little"
-    android:background="@drawable/lib_view_selector_radiuall_stroke_redgray"
-    android:textColor="@drawable/lib_view_selector_color_redgray">
+    android:background="@drawable/lib_view_label_selector_radiuall_stroke_redgray"
+    android:textColor="@drawable/widget_selector_text_red_gray">
 </TextView>
 
 

@@ -14,9 +14,9 @@ import com.hokol.medium.http.hokol.HokolAdapter;
 import com.hokol.medium.widget.FlowAbleWidget;
 import com.yline.base.BaseFragment;
 import com.yline.log.LogFileUtil;
-import com.yline.view.layout.label.FlowLayout;
-import com.yline.view.layout.label.LabelAdapter;
-import com.yline.view.layout.label.LabelFlowLayout;
+import com.yline.view.label.FlowLayout;
+import com.yline.view.label.LabelAdapter;
+import com.yline.view.label.LabelFlowLayout;
 import com.yline.view.recycler.holder.ViewHolder;
 
 import java.util.ArrayList;
