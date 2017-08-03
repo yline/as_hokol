@@ -5,19 +5,19 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.recycler.simple.SimpleLinearItemDecoration;
+import com.yline.view.recycler.adapter.HeadFootRecyclerAdapter;
+import com.yline.view.recycler.decoration.CommonLinearDecoration;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class FloatLinearItemDecoration extends SimpleLinearItemDecoration
+public class FloatLinearItemDecoration extends CommonLinearDecoration
 {
 	private Map<Integer, String> keys = new HashMap<>();
 
@@ -45,6 +45,12 @@ public class FloatLinearItemDecoration extends SimpleLinearItemDecoration
 	@Override
 	public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state)
 	{
+		int headCount = 0;
+		if (parent.getAdapter() instanceof HeadFootRecyclerAdapter)
+		{
+			headCount = ((HeadFootRecyclerAdapter) parent.getAdapter()).getHeadersCount();
+		}
+
 		super.onDrawOver(c, parent, state);
 		if (!isShowHeadFloating())
 		{
@@ -52,7 +58,7 @@ public class FloatLinearItemDecoration extends SimpleLinearItemDecoration
 		}
 
 		int firstVisiblePos = ((LinearLayoutManager) parent.getLayoutManager()).findFirstVisibleItemPosition();
-		int realPosition = firstVisiblePos - getHeadNumber();
+		int realPosition = firstVisiblePos - headCount;
 		if (realPosition == RecyclerView.NO_POSITION)
 		{
 			return;
@@ -86,8 +92,7 @@ public class FloatLinearItemDecoration extends SimpleLinearItemDecoration
 		int parentBottom = parent.getBottom() - parent.getPaddingBottom();
 		c.drawRect(parentLeft, parentTop, parentRight, parentTop + getTitleHeight(), mBackgroundPaint);
 		Rect bgRect = new Rect(parentLeft, parentTop, parentRight, parentTop + getTitleHeight());
-		c.drawText(title, bgRect.left + getTextMarginLeft(),
-				bgRect.centerY() + ((int) mTextPaint.getTextSize() >> 1), mTextPaint);
+		c.drawText(title, bgRect.left + getTextMarginLeft(), bgRect.centerY() + ((int) mTextPaint.getTextSize() >> 1), mTextPaint);
 
 		if (flag) // 还原画布为初始状态
 		{
@@ -96,36 +101,47 @@ public class FloatLinearItemDecoration extends SimpleLinearItemDecoration
 	}
 
 	@Override
-	public void setVerticalOffsets(Rect outRect, Drawable divider, int currentPosition)
+	protected void setVerticalOffsets(Rect outRect, RecyclerView parent, int currentPosition)
 	{
-		if (keys.containsKey(currentPosition - getHeadNumber()))
+		int headCount = 0;
+		if (parent.getAdapter() instanceof HeadFootRecyclerAdapter)
 		{
-			outRect.set(0, getTitleHeight() + divider.getIntrinsicHeight(), 0, divider.getIntrinsicHeight());
+			headCount = ((HeadFootRecyclerAdapter) parent.getAdapter()).getHeadersCount();
+		}
+
+		if (keys.containsKey(currentPosition - headCount))
+		{
+			outRect.set(0, getTitleHeight() + sDivider.getIntrinsicHeight(), 0, sDivider.getIntrinsicHeight());
 		}
 		else
 		{
-			super.setVerticalOffsets(outRect, divider, currentPosition);
+			super.setVerticalOffsets(outRect, parent, currentPosition);
 		}
 	}
 
 	@Override
-	public void drawVerticalDivider(Canvas c, Drawable divide, int currentPosition, int childLeft, int childTop, int childRight, int childBottom)
+	protected void drawVerticalDivider(Canvas c, RecyclerView parent, int currentPosition, int childLeft, int childTop, int childRight, int childBottom)
 	{
-		if (keys.containsKey(currentPosition - getHeadNumber()))
+		int headCount = 0;
+		if (parent.getAdapter() instanceof HeadFootRecyclerAdapter)
 		{
-			Rect bgRect = new Rect(childLeft, childTop - getTitleHeight() - divide.getIntrinsicHeight(), childRight, childTop - divide.getIntrinsicHeight());
+			headCount = ((HeadFootRecyclerAdapter) parent.getAdapter()).getHeadersCount();
+		}
+
+		if (keys.containsKey(currentPosition - headCount))
+		{
+			Rect bgRect = new Rect(childLeft, childTop - getTitleHeight() - sDivider.getIntrinsicHeight(), childRight, childTop - sDivider.getIntrinsicHeight());
 
 			int textLeft = bgRect.left + getTextMarginLeft();
 			int textBottom = bgRect.centerY() + ((int) mTextPaint.getTextSize() >> 1);
 			c.drawRect(bgRect, mBackgroundPaint);
 			c.drawText(keys.get(currentPosition), textLeft, textBottom, mTextPaint);
 
-			divide.setBounds(childLeft, childTop - divide.getIntrinsicHeight(), childRight, childTop);
-			divide.draw(c);
+			sDivider.setBounds(childLeft, childTop - sDivider.getIntrinsicHeight(), childRight, childTop);
+			sDivider.draw(c);
 		}
-		super.drawVerticalDivider(c, divide, currentPosition, childLeft, childTop, childRight, childBottom);
+		super.drawVerticalDivider(c, parent, currentPosition, childLeft, childTop, childRight, childBottom);
 	}
-
 
 	/**
 	 * *如果该位置没有，则往前循环去查找标题，找到说明该位置属于该分组

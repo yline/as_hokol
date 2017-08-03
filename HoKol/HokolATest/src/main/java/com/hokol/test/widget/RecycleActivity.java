@@ -28,24 +28,29 @@ import java.util.List;
 public class RecycleActivity extends BaseAppCompatActivity
 {
 	
+	public static void actionStart(Context context)
+	{
+		context.startActivity(new Intent(context, RecycleActivity.class));
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_recycle);
-		
+
 		final List<BaseFragment> fragmentList = new ArrayList<>();
 		final List<String> titleList = new ArrayList<>();
-		
+
 		fragmentList.add(new RecycleOneFragment());
 		titleList.add("Linear 分割");
-		
+
 		fragmentList.add(new RecycleTwoFragment());
 		titleList.add("Grid 分割");
-		
+
 		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout_recycle);
 		ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager_recycle);
-		
+
 		viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager())
 		{
 			@Override
@@ -53,13 +58,13 @@ public class RecycleActivity extends BaseAppCompatActivity
 			{
 				return fragmentList.get(position);
 			}
-			
+
 			@Override
 			public int getCount()
 			{
 				return fragmentList.size();
 			}
-			
+
 			@Override
 			public CharSequence getPageTitle(int position)
 			{
@@ -84,7 +89,7 @@ public class RecycleActivity extends BaseAppCompatActivity
 			recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 			recyclerView.addItemDecoration(new DefaultLinearItemDecoration(getContext())
 			{
-				@Override
+				/*@Override
 				protected int getDivideResourceId()
 				{
 					return R.drawable.widget_solid_graylight_size_medium;
@@ -94,7 +99,7 @@ public class RecycleActivity extends BaseAppCompatActivity
 				protected int getHeadNumber()
 				{
 					return 2;
-				}
+				}*/
 			});
 			HeadFootRecyclerAdapter recyclerAdapter = getRecycleAdapter();
 			recyclerView.setAdapter(recyclerAdapter);
@@ -165,10 +170,5 @@ public class RecycleActivity extends BaseAppCompatActivity
 			redView.setBackgroundResource(android.R.color.holo_red_light);
 			recyclerAdapter.addHeadView(redView);
 		}
-	}
-
-	public static void actionStart(Context context)
-	{
-		context.startActivity(new Intent(context, RecycleActivity.class));
 	}
 }

@@ -70,12 +70,6 @@ public class TaskAssignedTradeDetailActivity extends BaseAppCompatActivity
 			{
 				return true;
 			}
-
-			@Override
-			protected int getHeadNumber()
-			{
-				return 1;
-			}
 		});
 
 		tradeDetailAdapter = new TradeDetailAdapter();

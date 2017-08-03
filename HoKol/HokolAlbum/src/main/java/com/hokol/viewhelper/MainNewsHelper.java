@@ -2,7 +2,6 @@ package com.hokol.viewhelper;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -33,13 +32,16 @@ public class MainNewsHelper
 {
 	private Context context;
 
+	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% RecyclerView 主布局 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+	private CommonNewsAdapter recyclerAdapter;
+
+	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 头布局 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+	private ViewHolder recommendViewHolder;
+
 	public MainNewsHelper(Context context)
 	{
 		this.context = context;
 	}
-
-	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% RecyclerView 主布局 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-	private CommonNewsAdapter recyclerAdapter;
 
 	/**
 	 * 初始化Recycle控件
@@ -52,17 +54,16 @@ public class MainNewsHelper
 		recyclerView.setLayoutManager(new LinearLayoutManager(context));
 		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(context)
 		{
-
 			@Override
-			public void drawVerticalDivider(Canvas c, Drawable divide, int currentPosition, int childLeft, int childTop, int childRight, int childBottom)
+			protected void drawVerticalDivider(Canvas c, RecyclerView parent, int currentPosition, int childLeft, int childTop, int childRight, int childBottom)
 			{
 				childLeft = childLeft + UIScreenUtil.dp2px(context, 10);
-				super.drawVerticalDivider(c, divide, currentPosition, childLeft, childTop, childRight, childBottom);
+				super.drawVerticalDivider(c, parent, currentPosition, childLeft, childTop, childRight, childBottom);
 			}
 		});
 
 		recyclerAdapter = new CommonNewsAdapter();
-		
+
 		recyclerView.setAdapter(recyclerAdapter);
 	}
 
@@ -89,6 +90,29 @@ public class MainNewsHelper
 	public void setOnRecommendClickListener(View.OnClickListener listener)
 	{
 		recommendViewHolder.get(R.id.rl_main_news_recommend).setOnClickListener(listener);
+	}
+
+	/**
+	 * 初始化推···荐控件
+	 *
+	 * @param recommendView
+	 */
+	public void initRecommendView(View recommendView)
+	{
+		recommendViewHolder = new ViewHolder(recommendView);
+
+		recyclerAdapter.addHeadView(recommendView);
+	}
+
+	/**
+	 * 更新推荐显示内容
+	 *
+	 * @param recommendBean
+	 */
+	public void updateRecommendData(VNewsRecommendBean recommendBean)
+	{
+		ImageView imageView = recommendViewHolder.get(R.id.iv_main_news_recommend);
+		Glide.with(context).load(recommendBean.getBanner_img()).placeholder(R.drawable.global_load_failed).priority(Priority.HIGH).into(imageView);
 	}
 
 	private class CommonNewsAdapter extends HeadFootRecyclerAdapter<VNewsSingleBean>
@@ -138,32 +162,6 @@ public class MainNewsHelper
 		{
 			// super.onBindEmptyViewHolder(viewHolder, position);
 		}
-	}
-
-	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 头布局 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-	private ViewHolder recommendViewHolder;
-
-	/**
-	 * 初始化推···荐控件
-	 *
-	 * @param recommendView
-	 */
-	public void initRecommendView(View recommendView)
-	{
-		recommendViewHolder = new ViewHolder(recommendView);
-
-		recyclerAdapter.addHeadView(recommendView);
-	}
-
-	/**
-	 * 更新推荐显示内容
-	 *
-	 * @param recommendBean
-	 */
-	public void updateRecommendData(VNewsRecommendBean recommendBean)
-	{
-		ImageView imageView = recommendViewHolder.get(R.id.iv_main_news_recommend);
-		Glide.with(context).load(recommendBean.getBanner_img()).placeholder(R.drawable.global_load_failed).priority(Priority.HIGH).into(imageView);
 	}
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 刷新布局 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 }

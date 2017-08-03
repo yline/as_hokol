@@ -81,12 +81,6 @@ public class MainHomePerformerFragment extends BaseFragment implements MainHomeF
 		recycleView.addItemDecoration(new DefaultGridItemDecoration(getContext())
 		{
 			@Override
-			protected int getHeadNumber()
-			{
-				return 1;
-			}
-
-			@Override
 			protected int getDivideResourceId()
 			{
 				return R.drawable.widget_solid_null_size_little;
@@ -180,7 +174,7 @@ public class MainHomePerformerFragment extends BaseFragment implements MainHomeF
 
 				mainHomePerformerAdapter.setDataList(vHomeMainBean.getList());
 
-				refreshedNumber = mainHomePerformerAdapter.dataSize();
+				refreshedNumber = mainHomePerformerAdapter.getDataSize();
 				LogFileUtil.v("vHomeMainBean size = " + refreshedNumber);
 			}
 		});

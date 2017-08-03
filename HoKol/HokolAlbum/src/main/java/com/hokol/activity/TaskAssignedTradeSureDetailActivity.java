@@ -88,12 +88,6 @@ public class TaskAssignedTradeSureDetailActivity extends BaseAppCompatActivity
 			{
 				return true;
 			}
-
-			@Override
-			protected int getHeadNumber()
-			{
-				return 1;
-			}
 		});
 
 		tradeSureDetailAdapter = new TradeSureDetailAdapter();

@@ -94,12 +94,6 @@ public class MainMineDynamicFragment extends BaseFragment
 		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(getContext())
 		{
 			@Override
-			protected int getHeadNumber()
-			{
-				return 1;
-			}
-
-			@Override
 			protected int getDivideResourceId()
 			{
 				return R.drawable.widget_solid_graylight_size_medium;

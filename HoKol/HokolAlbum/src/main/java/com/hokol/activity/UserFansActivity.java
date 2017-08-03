@@ -3,7 +3,6 @@ package com.hokol.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -71,9 +70,10 @@ public class UserFansActivity extends BaseAppCompatActivity
 		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(this)
 		{
 			@Override
-			public void drawVerticalDivider(Canvas c, Drawable divide, int currentPosition, int childLeft, int childTop, int childRight, int childBottom)
+			protected void drawVerticalDivider(Canvas c, RecyclerView parent, int currentPosition, int childLeft, int childTop, int childRight, int childBottom)
 			{
-				super.drawVerticalDivider(c, divide, currentPosition, childLeft + UIScreenUtil.dp2px(UserFansActivity.this, 10), childTop, childRight, childBottom);
+				childLeft += UIScreenUtil.dp2px(UserFansActivity.this, 10);
+				super.drawVerticalDivider(c, parent, currentPosition, childLeft, childTop, childRight, childBottom);
 			}
 		});
 

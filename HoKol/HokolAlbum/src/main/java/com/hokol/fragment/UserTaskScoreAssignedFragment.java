@@ -88,12 +88,6 @@ public class UserTaskScoreAssignedFragment extends BaseFragment
 			{
 				return true;
 			}
-
-			@Override
-			protected int getHeadNumber()
-			{
-				return 1;
-			}
 		});
 
 		taskScoreAssignedAdapter = new UserTaskScoreAssignedAdapter();

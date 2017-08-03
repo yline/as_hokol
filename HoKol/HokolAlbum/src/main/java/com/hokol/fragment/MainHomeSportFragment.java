@@ -73,12 +73,6 @@ public class MainHomeSportFragment extends BaseFragment implements MainHomeFragm
 		recyclerView.addItemDecoration(new DefaultLinearItemDecoration(getContext())
 		{
 			@Override
-			protected int getHeadNumber()
-			{
-				return 1;
-			}
-
-			@Override
 			protected int getDivideResourceId()
 			{
 				return R.drawable.widget_solid_null_size_little;
@@ -163,7 +157,7 @@ public class MainHomeSportFragment extends BaseFragment implements MainHomeFragm
 
 				mainHomeSportAdapter.setDataList(vHomeMainBean.getList());
 
-				refreshedNumber = mainHomeSportAdapter.dataSize();
+				refreshedNumber = mainHomeSportAdapter.getDataSize();
 				LogFileUtil.v("vHomeMainBean size = " + refreshedNumber);
 			}
 		});

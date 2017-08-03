@@ -25,7 +25,9 @@ dependencies {
     compile 'com.yline.lib:LibViewDialog:1.0.5'
     compile 'com.yline.lib:LibViewAD:1.0.3'
     compile 'com.yline.lib:LibViewLabel:1.0.0'
-    compile 'com.yline.lib:LibViewRecycler:1.0.1'
+    compile 'com.yline.lib:LibViewRecycler:1.0.3'
+    compile 'com.yline.lib:LibViewMenuSecondary:1.0.0'
+    compile 'com.yline.lib:LibViewSwipeRefresh:1.0.0'
     compile 'com.yline.lib:LibViewText:1.0.4'
     compile 'com.yline.lib:LibViewCircle:1.0.2'
 }

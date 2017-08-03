@@ -98,12 +98,6 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 			{
 				return R.drawable.widget_solid_null_size_little;
 			}
-
-			@Override
-			protected int getHeadNumber()
-			{
-				return 2;
-			}
 		});
 
 		recycleAdapter = new MainHomeRedAdapter();
@@ -247,7 +241,7 @@ public class MainHomeRedFragment extends BaseFragment implements MainHomeFragmen
 				}
 
 				recycleAdapter.setDataList(resultList);
-				refreshedNumber = recycleAdapter.dataSize();
+				refreshedNumber = recycleAdapter.getDataSize();
 				LogFileUtil.v("vHomeMainBean size = " + refreshedNumber);
 			}
 		});

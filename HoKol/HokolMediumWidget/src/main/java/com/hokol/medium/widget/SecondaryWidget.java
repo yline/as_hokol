@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.yline.view.recycler.z.secondary.WidgetSecondary;
+import com.yline.view.menu.secondary.WidgetSecondary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +18,7 @@ public class SecondaryWidget extends WidgetSecondary
 	public static final String DefaultTitle = "地区";
 
 	private Map<String, List<String>> dataMap;
+
 
 	public SecondaryWidget(Context context, List<View> viewList)
 	{
@@ -126,6 +127,7 @@ public class SecondaryWidget extends WidgetSecondary
 			return String.format("%s(%d)", first, second.size());
 		}
 	}
+
 
 	@Override
 	protected int getFirstItemResource()

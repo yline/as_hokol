@@ -66,18 +66,6 @@ public class ContactVolumeRecordApplyedFragment extends BaseFragment
 			{
 				return R.drawable.widget_solid_null_size_medium;
 			}
-
-			@Override
-			protected int getHeadNumber()
-			{
-				return 1;
-			}
-
-			@Override
-			protected int getFootNumber()
-			{
-				return 1;
-			}
 		});
 
 		recordApplyedAdapter = new VolumeRecordApplyedAdapter();

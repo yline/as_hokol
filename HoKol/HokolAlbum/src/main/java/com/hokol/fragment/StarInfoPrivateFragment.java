@@ -80,12 +80,6 @@ public class StarInfoPrivateFragment extends BaseFragment
 		recyclerView.addItemDecoration(new DefaultGridItemDecoration(getContext())
 		{
 			@Override
-			protected int getHeadNumber()
-			{
-				return 1;
-			}
-
-			@Override
 			protected int getDivideResourceId()
 			{
 				return R.drawable.widget_solid_null_size_little;
