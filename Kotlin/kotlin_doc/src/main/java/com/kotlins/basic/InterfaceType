@@ -1,0 +1,42 @@
+// 接口定义
+interface OnItemClickListener {
+    val prop: Int
+    var str: String
+        get() = ""
+        set(value) {
+            "fuck" + value
+        }
+
+    fun onItemClick()
+
+    fun onLongItemClick() {
+        // TODO
+        onItemClick()
+    }
+}
+
+// 接口实现
+class OnItemClickListenerImpl : OnItemClickListener {
+    override val prop: Int
+        get() = TODO("not implemented")
+
+    override fun onItemClick() {
+        TODO("not implemented")
+    }
+}
+
+// 扩展函数
+继承函数：子类能够重写父类，子类 > 父类
+扩展函数：子类不能够重写父类，父类 > 子类
+
+
+
+
+
+
+
+
+
+
+
+
