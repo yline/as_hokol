@@ -35,4 +35,5 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.yline.lib:LibViewRecycler:1.1.1'
     compile 'com.yline.lib:LibSDK:2.1.0'
+    compile 'com.yline.lib:LibHttp:2.2.1'
 }

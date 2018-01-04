@@ -1,30 +1,21 @@
 package com.android.kotlins
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import com.yline.test.StrConstant
-import com.yline.view.recycler.simple.SimpleCommonRecyclerAdapter
+import android.view.View
+import com.android.kotlins.http.OkHttpActivity
+import com.yline.test.BaseTestActivity
 
-class MainActivity : AppCompatActivity() {
-    private val mRecyclerAdapter: MainRecyclerAdapter = MainRecyclerAdapter();
+class MainActivity : BaseTestActivity() {
+    override fun testStart(view: View?, savedInstanceState: Bundle?) {
+        addButton("Http", View.OnClickListener {
+            OkHttpActivity.launcher(this@MainActivity);
+        })
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        initView()
-    }
-
-    private fun initView() {
-        val recycler = findViewById<RecyclerView>(R.id.main_recycler);
-        recycler.layoutManager = LinearLayoutManager(this@MainActivity);
-        recycler.adapter = mRecyclerAdapter;
-
-        mRecyclerAdapter.addAll(StrConstant.getListRandom(20), true);
-    }
-
-    private class MainRecyclerAdapter : SimpleCommonRecyclerAdapter() {
+        // 写全
+        addButton("new", object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                // TODO("not implemented")
+            }
+        })
     }
 }
