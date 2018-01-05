@@ -66,13 +66,13 @@ class OkHttpActivity : AppCompatActivity() {
 
             // 头像
             if (TextUtils.isEmpty(itemModel.avatar)) {
-                itemModel.avatar = UrlConstant.getUrl()
+                itemModel.avatar = UrlConstant.getAvatar()
             }
             holder.get<SimpleDraweeView>(R.id.ok_http_fresco).setImageURI(itemModel.avatar)
 
             // 名字
             if (TextUtils.isEmpty(itemModel.name)) {
-                itemModel.name = StrConstant.getStringByRandom(StrConstant.getStringArrayByRandom())
+                itemModel.name = StrConstant.getStringByRandom()
             }
             holder.setText(R.id.ok_http_tv, itemModel.name)
         }
