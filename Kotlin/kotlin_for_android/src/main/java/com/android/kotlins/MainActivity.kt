@@ -8,7 +8,7 @@ import com.yline.test.BaseTestActivity
 class MainActivity : BaseTestActivity() {
     override fun testStart(view: View?, savedInstanceState: Bundle?) {
         addButton("Http", View.OnClickListener {
-            OkHttpActivity.launcher(this@MainActivity);
+            OkHttpActivity.launcher(this@MainActivity)
         })
 
         // 写全

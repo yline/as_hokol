@@ -36,4 +36,11 @@ dependencies {
     compile 'com.yline.lib:LibViewRecycler:1.1.1'
     compile 'com.yline.lib:LibSDK:2.1.0'
     compile 'com.yline.lib:LibHttp:2.2.1'
+    implementation 'com.google.code.gson:gson:2.2.4'
+
+    compile 'com.facebook.fresco:fresco:1.5.0'
+    compile 'com.facebook.fresco:animated-gif:1.5.0'
+    compile 'com.facebook.fresco:animated-webp:1.5.0'
+    compile 'com.facebook.fresco:webpsupport:1.5.0'
+    compile 'com.facebook.fresco:imagepipeline-okhttp3:1.5.0'
 }
