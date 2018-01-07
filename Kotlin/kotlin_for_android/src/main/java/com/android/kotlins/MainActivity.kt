@@ -2,6 +2,8 @@ package com.android.kotlins
 
 import android.os.Bundle
 import android.view.View
+import com.android.kotlins.collection.CollectionActivity
+import com.android.kotlins.entrust.EntrustActivity
 import com.android.kotlins.http.OkHttpActivity
 import com.yline.test.BaseTestActivity
 
@@ -12,10 +14,14 @@ class MainActivity : BaseTestActivity() {
         })
 
         // 写全
-        addButton("new", object : View.OnClickListener {
+        addButton("Collection", object : View.OnClickListener {
             override fun onClick(v: View?) {
-                // TODO("not implemented")
+                CollectionActivity.launcher(this@MainActivity)
             }
         })
+
+        addButton("Entrust") {
+            EntrustActivity.launcher(this@MainActivity)
+        }
     }
 }

@@ -20,6 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".http.OkHttpActivity" />
+        <activity android:name=".collection.CollectionActivity" />
+        <activity android:name=".entrust.EntrustActivity" />
     </application>
 
 </manifest>
