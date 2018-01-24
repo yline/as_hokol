@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://H:\temp_ffmpeg\WxRecoderVideo\Wx.iml" filepath="H:\temp_ffmpeg\WxRecoderVideo\Wx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WxRecoderVideo.iml" filepath="$PROJECT_DIR$/WxRecoderVideo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://H:\temp_ffmpeg\WxRecoderVideo\app\app.iml" filepath="H:\temp_ffmpeg\WxRecoderVideo\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vitamioRecorderLibrary/vitamioRecorderLibrary.iml" filepath="$PROJECT_DIR$/vitamioRecorderLibrary/vitamioRecorderLibrary.iml" />
+      <module fileurl="file://H:\temp_ffmpeg\WxRecoderVideo\vitamioRecorderLibrary\vitamioRecorderLibrary.iml" filepath="H:\temp_ffmpeg\WxRecoderVideo\vitamioRecorderLibrary\vitamioRecorderLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wechatRecoderVideoLibrary/wechatRecoderVideoLibrary.iml" filepath="$PROJECT_DIR$/wechatRecoderVideoLibrary/wechatRecoderVideoLibrary.iml" />
+      <module fileurl="file://H:\temp_ffmpeg\WxRecoderVideo\wechatRecoderVideoLibrary\wechatRecoderVideoLibrary.iml" filepath="H:\temp_ffmpeg\WxRecoderVideo\wechatRecoderVideoLibrary\wechatRecoderVideoLibrary.iml" />
+    </modules>
+  </component>
+</project>
