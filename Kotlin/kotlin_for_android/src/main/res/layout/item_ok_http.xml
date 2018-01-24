@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="72dp">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/ok_http_fresco"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        app:actualImageScaleType="centerCrop"
+        app:placeholderImage="@android:color/darker_gray"
+        app:roundAsCircle="true" />
+
+    <TextView
+        android:id="@+id/ok_http_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/ok_http_fresco"
+        android:textColor="@android:color/black"
+        android:textSize="15dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:background="#dddddd" />
+</RelativeLayout>
