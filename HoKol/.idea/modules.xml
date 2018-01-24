@@ -3,12 +3,19 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HoKol.iml" filepath="$PROJECT_DIR$/HoKol.iml" />
+      <module fileurl="file://F:\git_space\as_hokol\HoKol\HoKol.iml" filepath="F:\git_space\as_hokol\HoKol\HoKol.iml" />
       <module fileurl="file://$PROJECT_DIR$/HokolATest/HokolATest.iml" filepath="$PROJECT_DIR$/HokolATest/HokolATest.iml" />
+      <module fileurl="file://F:\git_space\as_hokol\HoKol\HokolATest\HokolATest.iml" filepath="F:\git_space\as_hokol\HoKol\HokolATest\HokolATest.iml" />
       <module fileurl="file://$PROJECT_DIR$/HokolAlbum/HokolAlbum.iml" filepath="$PROJECT_DIR$/HokolAlbum/HokolAlbum.iml" />
+      <module fileurl="file://F:\git_space\as_hokol\HoKol\HokolAlbum\HokolAlbum.iml" filepath="F:\git_space\as_hokol\HoKol\HokolAlbum\HokolAlbum.iml" />
       <module fileurl="file://$PROJECT_DIR$/HokolBase/HokolBase.iml" filepath="$PROJECT_DIR$/HokolBase/HokolBase.iml" />
+      <module fileurl="file://F:\git_space\as_hokol\HoKol\HokolBase\HokolBase.iml" filepath="F:\git_space\as_hokol\HoKol\HokolBase\HokolBase.iml" />
       <module fileurl="file://$PROJECT_DIR$/HokolMediumHttp/HokolMediumHttp.iml" filepath="$PROJECT_DIR$/HokolMediumHttp/HokolMediumHttp.iml" />
+      <module fileurl="file://F:\git_space\as_hokol\HoKol\HokolMediumHttp\HokolMediumHttp.iml" filepath="F:\git_space\as_hokol\HoKol\HokolMediumHttp\HokolMediumHttp.iml" />
       <module fileurl="file://$PROJECT_DIR$/HokolMediumModule/HokolMediumModule.iml" filepath="$PROJECT_DIR$/HokolMediumModule/HokolMediumModule.iml" />
+      <module fileurl="file://F:\git_space\as_hokol\HoKol\HokolMediumModule\HokolMediumModule.iml" filepath="F:\git_space\as_hokol\HoKol\HokolMediumModule\HokolMediumModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/HokolMediumWidget/HokolMediumWidget.iml" filepath="$PROJECT_DIR$/HokolMediumWidget/HokolMediumWidget.iml" />
+      <module fileurl="file://F:\git_space\as_hokol\HoKol\HokolMediumWidget\HokolMediumWidget.iml" filepath="F:\git_space\as_hokol\HoKol\HokolMediumWidget\HokolMediumWidget.iml" />
     </modules>
   </component>
 </project>
